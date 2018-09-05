@@ -79,6 +79,11 @@ $(document).ready(function(){
 	$('#C_QnAC').click(function(){
 		location.href="/exhibition/customerService/C_QnAC.do";
 	});
+	//고객센터
+	//
+	$('#C_boardAdd').click(function(){
+		location.href="/exhibition/customerService/C_mainImageboardForm.do";
+	});
 	//소개
 	$('#I_infoForm').click(function(){//소개정보
 		location.href="/exhibition/introduction/I_infoForm.do";
@@ -90,4 +95,5 @@ $(document).ready(function(){
 	$('#I_CEOIntroductionForm').click(function(){//CEO인사말
 		location.href="/exhibition/introduction/I_CEOIntroductionForm.do";
 	});
+	
 });

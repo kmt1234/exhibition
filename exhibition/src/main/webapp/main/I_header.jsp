@@ -155,7 +155,7 @@
 						<div class="item" id="C_contactList">주요시설 연락처</div>
 						<div class="item" id="C_MailConfirm">1:1문의</div>
 						<div class="item" id="C_personalInformation">개인정보</div>
-						<div class="item" id="">게시판 추가</div><!--세션값에 따라 보이게 할 예정-->
+						<div class="item" id="C_boardAdd">게시판 추가</div><!--세션값에 따라 보이게 할 예정-->
 					</div>
 				</div>
 			</div>
