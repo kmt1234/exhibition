@@ -35,9 +35,10 @@
 	</bean>
 	
 	<!-- 파일 업로드 -->
-	<!-- <bean id="multipartResolver"
+	<bean id="multipartResolver"
 		  class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
-		  p:maxUploadSize="5000000" /> -->
+		  p:maxUploadSize="5000000" />
+	
 	<bean id="emailSender"
 		class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="smtp.gmail.com"/>

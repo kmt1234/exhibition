@@ -8,6 +8,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias alias="company" type="company.bean.CompanyDTO" />
 		<typeAlias alias="performance" type="performance.bean.PerformanceDTO" />
 		<typeAlias type="customerService.bean.CustomerServiceDTO" alias="customerService" />
+		<typeAlias type="customerService.bean.ImageboardDTO" alias="imageboard"/>
 		<typeAlias type="rental.bean.ExhibitionDTO" alias="exhibition" />
 	</typeAliases>
 
