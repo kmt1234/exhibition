@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="companySQL">
+ <!-- 회원가입 -->
+ 	<insert id="companyWrite" parameterType="company">
+ 		insert into company values(#{C_businessname},
+	 							   #{C_license},
+	 						       #{C_password},
+	 						       #{C_corporate},
+	 						       #{C_condition},
+	 						       #{C_address1},
+	 						       #{C_address2},
+	 						       #{C_representative},
+	 						       #{C_tel},
+	 						       #{C_email})
+ 	</insert>
+ 	
+ 	<!--로그인-->
+ 	<select id="companyLogin" parameterType="java.util.Map" resultType="company">
+ 		select * from company where C_license = #{C_license} and
+ 									C_password = #{C_password}
+ 	</select>
+</mapper>

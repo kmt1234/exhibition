@@ -1,0 +1,77 @@
+폴더&페키지=메인
+	index=메인화면
+	I_header = 메인의 헤더부분
+폴더&페키지=회원가입(개임)
+	writeForm = 회원가입
+폴더&페키지=사업자가입(사업자)
+	companyForm = 사업자가입
+폴더&페키지=로그인
+	loginForm = 로그인       
+폴더&페키지=고객센터
+	customerService = 고객센터
+		- C_noticeC.jsp
+		  - C_notice.jsp :공지사항
+
+		- C_boardC.jsp
+		  - C_board.jsp :고객의소리
+
+		- C_QnAC.jsp
+		  - C_QnA.jsp :자주묻는 질문
+
+		- C_contactListC.jsp
+		  - C_contactList.jsp :주요시설 연락처
+폴더&페키지=교통
+	traffic = 교통
+		- T_carForm.jsp
+		  - T_car.jsp :자동차이용
+
+		- T_busForm.jsp
+		  - T_bus.jsp :버스이용
+
+		- T_subwayForm.jsp
+		  - T_subway.jsp :전철이용
+폴더&페키지=임대
+	rental = 시설/임대
+		- R_infoForm
+		  - R_info.jsp
+
+		- R_consertForm :전시회
+		  - R_consert.jsp :전시회 홀
+
+		- R_exhibitionForm :공연장
+		  - R_exhibition.jsp :공연장 홀
+
+폴더&페키지=연혁
+	introduction = 소개
+		- I_infoForm
+		  - I_info.jsp
+
+		- I_companyIntroductionForm.jsp
+		  - I_companyIntroduction.jsp :회사소개
+
+		- I_CEOIntroductionForm.jsp
+		  - I_CEOIntroduction.jsp :CEO인사말
+폴더&페키지=공연
+	performance = 공연 / 전시회
+
+		- P_infoForm.jsp : 사용요령 및 탭에대한 내용
+		  - P_info.jsp
+
+		- P_allScheduleForm.jsp
+		  - P_allCalendar.jsp : 전체일정달력
+
+		- P_performanceScheduleForm.jsp
+		  - P_performanceCalendar.jsp : 연극일정달력
+
+		- P_exhibitionScheduleForm.jsp
+		  - P_exhibitionCalendar.jsp : 전시회일정달력
+별개 설정파일
+자바 = 패키지
+	com=데이터 소스
+웹 = 폴더
+	js=자바스크립
+        semantic=폼만들때 사용
+	calendar2=달력만들때사용
+   
+
+

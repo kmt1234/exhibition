@@ -1,0 +1,71 @@
+------------------------------------------------DB------------------------------------------------------------
+//개인회원 DB
+create table memberTable(	
+M_Name varchar2(30) not null,	    --이름
+M_Id varchar2(30) primary key,  --아이디 (기본키, unique, not null, 무결성 제약 조건)
+M_Pwd varchar2(30) not null,    --비밀번호
+M_Email varchar2(50),           --이메일		
+M_Phone varchar2(15),	--핸드폰
+code number default(1)	--코드(1=개인, 2=사업자) : 기본값:1
+);	
+
+//개인회원 샘플
+insert into memberTable (M_Name, M_Id, M_Pwd,M_Email, M_Phone) values('홍길동','hong123','test123','toad001@nate.com','01012341234');
+insert into memberTable (M_Name, M_Id, M_Pwd,M_Email, M_Phone) values('개똥이','gaeddong123','test123','toad001@nate.com','01012341234');
+select * from memberTable;
+drop table memberTable;
+commit;
+rollback;
+
+
+//사업자 DB
+CREATE TABLE company(
+     C_businessname VARCHAR2(100) NOT NULL,  -- 사업자명
+     C_license VARCHAR2(40) primary key,       -- 사업자등록번호
+     C_password VARCHAR2(40) NOT NULL,     -- 암호
+     C_corporate VARCHAR2(40) NOT NULL,     -- 법인번호
+     C_condition VARCHAR2(40) NOT NULL,     -- 업태
+     C_postnumbox VARCHAR2(40) NOT NULL,      -- 우편번호
+     C_address1 VARCHAR2(100) NOT NULL,      -- 주소1
+     C_address2 VARCHAR2(100) NOT NULL,      -- 주소2
+     C_representative VARCHAR2(40) NOT NULL,-- 대표자
+     C_tel VARCHAR2(40) NOT NULL,           -- 전화번호
+     C_email VARCHAR2(50) NOT NULL,          -- 이메일
+     code number default(2)
+ );
+
+//달력(테스트용) =>차후 임대시설 DB로 분류해서 사용
+create table performance10(
+years number(30),		--년도
+months number(30),	--월
+days number(30),		--일
+endDay number(30),	--끝나는 일
+title varchar2(30),		--제목
+code varchar2(30)		--코드
+);
+
+
+//문의하기 DB
+create table customerService(
+email varchar2(50) not null,			--이메일
+classify varchar2(50) not null,			--분류
+name varchar2(30) not null,			--이름
+tel varchar2(15),				--핸드폰
+subject varchar2(100) not null,		--제목
+content varchar2(100) not null,		--내용
+logtime DATE DEFAULT SYSDATE);		--날짜
+
+//부스 예약테이블
+create table exhibitionRental(
+boothName varchar2(40) not null,
+C_license varchar2(40) not null,
+C_tel varchar2(40) not null,
+C_email varchar2(40) not null,
+totalRent number not null,
+code varchar2(30) not null,
+title varchar2(40) not null,
+startDate date not null,
+endDate date not null);
+);
+
+

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="exhibitionSQL">
+ 	<select id="searchRentDay" parameterType="java.util.Map" resultType="exhibition">
+ 		select * from exhibitionRental where boothName=#{boothName} and (#{startDate} between startDate and endDate or #{endDate} between startDate and endDate)
+ 	</select>
+ 	
+ 	<insert id="reservationHoll" parameterType="exhibition">
+ 		insert into exhibitionRental values(#{boothName}, #{C_license}, #{C_tel}, #{C_email}, #{totalRent}, #{code}, #{title}, #{startDate}, #{endDate})
+ 	</insert>
+ 	
+ 	<select id="getCalendar" resultType="exhibition">
+ 		select * from exhibitionRental where boothName=#{booth}
+ 	</select>
+</mapper>
