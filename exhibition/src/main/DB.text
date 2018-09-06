@@ -68,4 +68,13 @@ startDate date not null,
 endDate date not null);
 );
 
+//메인 이미지 보드 DB
+CREATE TABLE customerImageboard(
+     seq NUMBER PRIMARY KEY,               
+     imageName VARCHAR2(40) NOT NULL,
+     image1 varchar2(200),
+postSelect varchar2(30)
+ );
+ 
+ create sequence seq_customerImageboard  nocache nocycle;
 
