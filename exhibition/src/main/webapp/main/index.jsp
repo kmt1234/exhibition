@@ -12,7 +12,7 @@
 </header>
 <section>
 	<div style=" margin-left:400px;margin-top: 20px;">
-	<img src="../img/poster2gg.jpg" width="74%" height="40% " >
+	<jsp:include page="../main/I_body.jsp"/>
 	</div>
 </section>
 <footer>

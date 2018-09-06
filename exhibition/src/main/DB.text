@@ -70,10 +70,13 @@ endDate date not null);
 
 //메인 이미지 보드 DB
 CREATE TABLE customerImageboard(
-     seq NUMBER PRIMARY KEY,               
-     imageName VARCHAR2(40) NOT NULL,
-     image1 varchar2(200),
-postSelect varchar2(30)
+     seq NUMBER PRIMARY KEY,         --시퀀스      
+     postSelect number default(0),   --구분(분류) 메인:0
+     imageName VARCHAR2(40) NOT NULL,--제목
+     image1 varchar2(500),          --이미지명
+     eventDate1 varchar2(20),   --날짜1
+     eventDate2 varchar2(20),   --날짜2
+     eventLink varchar2(200)    --링크 
  );
  
  create sequence seq_customerImageboard  nocache nocycle;

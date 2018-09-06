@@ -6,6 +6,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"><!--달력 ui-->
 
+<!--시간 ui-->
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+
+
 <title></title>
 
 </head>
@@ -54,15 +58,43 @@
 		</tr>
 		
 		<tr>
+			<td class="exhibitionT-td">박람회 시간</td>
+			<td class="playT-td">연극 시간</td>
+			<td class="eventTime">
+				<input type="text" name="eventTime" class="timepicker1">
+				~
+				<input type="text" name="eventTime" class="timepicker2">
+			</td>
+		</tr>
+		
+		<tr>
+			<td class="exhibitionP-td">박람회 장소</td>
+			<td class="playP-td">연극 장소</td>
+			<td class="eventPlace"><input type="text" name="eventPlace"></td>
+		</tr>
+		
+		<tr>
+			<td class="exhibitionPr-td">박람회 가격</td>	
+			<td class="playPr-td">연극 가격</td>
+			<td class="eventPrice"><input type="text" name="eventPrice"></td>
+		</tr>
+		
+		<tr>
+			<td class="playSe-td">관람좌석</td>
+			<td class="eventSeats"><input type="text" name="eventSeats"></td>
+		</tr>
+		
+		<tr>
+			<td class="playR-td">관람등급</td>
+			<td class="eventRate"><input type="text" name="eventRate"></td>
+		</tr>
+		
+				
+		<tr>
 			<td class="eventI-td">행사 정보</td>		<!--메인 선택 시,-->
 			<td class="exhibitionI-td">박람회 정보</td><!--박람회 선택 시,  -->
 			<td class="playI-td">연극 정보</td>		<!--연극 선택 시,-->
 			<td><textarea rows="15" cols="55" id="eventContent" style="resize: none;"></textarea></td>
-		</tr>
-	
-		<tr class="playF-tr"><!--파일 올리기 연극 선택 시,-->
-			<td>첨부 파일</td>
-			<td><input type="file" name="img" id="img2" size="30"></td>
 		</tr>
 		
 		<tr>
@@ -79,7 +111,10 @@
 
 </body>
 
-<!-- <script src="http://code.jquery.com/jquery-3.3.1.min.js" type="text/javascript"></script> -->
-<script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+<script src="//code.jquery.com/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script><!--시간  -->
+<script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script><!--달력-->
+
+
 <script type="text/javascript" src="../js/boardAdd.js"></script>
 </html>

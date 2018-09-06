@@ -21,10 +21,12 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 		sqlSession.insert("customerServiceSQL.C_Inquire", customerServiceDTO);				
 		
 	}
-
+	
+	//고객센터 - 게시판 추가 - 메인 이미지 슬라이드 추가
 	public void imageboardWrite(ImageboardDTO imageboardDTO) {
 		sqlSession.insert("customerServiceSQL.imageboardWrite",imageboardDTO);
 	}
+	
 	public int getImageboardTotalA() {
 		int totalA = sqlSession.selectOne("customerServiceSQL.getImageboardTotalA");
 		return totalA;
@@ -43,5 +45,6 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 		return sqlSession.selectList("customerServiceSQL.getList",list);
 		
 	}
+	
 
 }

@@ -1,5 +1,19 @@
 $(document).ready(function(){
 	
+	//시간
+	$('.timepicker1, .timepicker2').timepicker({
+		timeFormat : 'H:mm',
+	    interval: 60,
+	    minTime: '08',
+	    maxTime: '10:00pm',
+	    defaultTime: '08',
+	    startTime: '08:00am',
+	    dynamic: false,
+	    dropdown: true,
+	    scrollbar: false	
+	});
+		
+	
 	//날짜
 	$(".datepicker1, .datepicker2").datepicker({
 		dateFormat : "yy/mm/dd",
@@ -18,6 +32,8 @@ $(document).ready(function(){
 	$(".datepicker1").datepicker('setDate', new Date());
 	
 	
+	
+	
 	//분류 종류(기본 값 : 0(메인)
 	var index = $('#postSelect option:selected').val();
 	
@@ -28,10 +44,26 @@ $(document).ready(function(){
 	$('.exhibitionL-td').hide();
 	$('.playL-td').hide();
 	
+	$('.playT-td').hide();
+	$('.exhibitionT-td').hide();
+	$('.eventTime').hide();
+	
+	$('.playP-td').hide();
+	$('.exhibitionP-td').hide();
+	$('.eventPlace').hide();
+	
+	$('.playPr-td').hide();
+	$('.exhibitionPr-td').hide();
+	$('.eventPrice').hide();
+	
+	$('.playSe-td').hide();
+	$('.eventSeats').hide();
+	
+	$('.playR-td').hide();
+	$('.eventRate').hide();
+	
 	$('.exhibitionI-td').hide();
 	$('.playI-td').hide();
-	
-	$('.playF-tr').hide();
 	
 	$('#postSelect').change(function(){
 		//분류 값 (0:메인 1:박람회 2:연극)
@@ -62,8 +94,26 @@ $(document).ready(function(){
 			$('.exhibitionI-td').hide();
 			$('.playI-td').hide();
 			
-			$('.playF-tr').hide();
 			
+			$('.playT-td').hide();
+			$('.exhibitionT-td').hide();
+			$('.eventTime').hide();
+			
+			$('.playP-td').hide();
+			$('.exhibitionP-td').hide();
+			$('.eventPlace').hide();
+			
+			$('.playPr-td').hide();
+			$('.exhibitionPr-td').hide();
+			$('.eventPrice').hide();
+			
+			$('.playSe-td').hide();
+				
+			$('.playR-td').hide();
+			
+			$('.eventSeats').hide();
+			$('.eventRate').hide();
+					
 		}else if(index=='1'){//박람회
 			$('.eventS-td').hide();
 			$('.exhibitionS-td').show();
@@ -77,8 +127,26 @@ $(document).ready(function(){
 			$('.exhibitionI-td').show();
 			$('.playI-td').hide();
 			
-			$('.playF-tr').hide();
 			
+			$('.playT-td').hide();
+			$('.exhibitionT-td').show();
+			$('.eventTime').show();
+			
+			$('.playP-td').hide();
+			$('.exhibitionP-td').show();
+			$('.eventPlace').show();
+			
+			$('.playPr-td').hide();
+			$('.exhibitionPr-td').show();
+			$('.eventPrice').show();
+			
+			$('.playSe-td').hide();
+				
+			$('.playR-td').hide();
+	
+			
+			
+					
 		}else if(index=='2'){//연극
 			$('.eventS-td').hide();
 			$('.exhibitionS-td').hide();
@@ -92,16 +160,38 @@ $(document).ready(function(){
 			$('.exhibitionI-td').hide();
 			$('.playI-td').show();
 			
-			$('.playF-tr').show();
+			
+			$('.playT-td').show();
+			$('.exhibitionT-td').hide();
+			$('.eventTime').show();
+			
+			$('.playP-td').show();
+			$('.exhibitionP-td').hide();
+			$('.eventPlace').show();
+			
+			$('.playPr-td').show();
+			$('.exhibitionPr-td').hide();
+			$('.eventPrice').show();
+			
+			$('.playSe-td').show();
+			$('.eventSeats').show();
+			
+			$('.playR-td').show();
+			$('.eventRate').show();
+		
 		}
 	});
-	
+		
 	
 	//이미지 등록
 	$('#checkImageboardWrite').click(function(){
 		$('#imageNameDiv').empty();
 		$('#imgDiv').empty();
-				
+					
+		
+		alert('시간1 : '+$('.timepicker1').val());
+		alert('시간2 : '+$('.timepicker2').val());
+		
 		if($('#imageName').val()=='')
 			$('#imageNameDiv').text('제목을 입력하세요').css('color','red').css('font-size','9pt').css('font-weight','bold');
 		else if($('#img').val()=='') 
@@ -112,6 +202,11 @@ $(document).ready(function(){
 			alert('날짜2 입력해야함');
 		else if($('.datepicker2').datepicker().val() < $('.datepicker1').datepicker().val())
 			alert('날짜2가 날짜1 보다 작음');
+		
+		//유효성 다시 해야함
+		else if($('.timepicker1').val() < $('.timepicker2').val()){
+			alert('시간2가 시간1 보다 작음');
+		}
 		
 		else if(index==0){
 			alert(index);
