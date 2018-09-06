@@ -68,22 +68,26 @@ $(document).ready(function(){
 	});
 	//고객센터
 	//공지사항
-	$('#C_noticeC').click(function(){
-		location.href="/exhibition/customerService/C_noticeC.do";
+	$('#C_infoForm').click(function(){
+		location.href="/exhibition/customerService/C_infoForm.do";
+	});
+	$('#C_noticeForm').click(function(){
+		location.href="/exhibition/customerService/C_noticeForm.do";
 	});
 	//고객의소리
-	$('#C_boardC').click(function(){
-		location.href="/exhibition/customerService/C_boardC.do";
+	$('#C_emailConfirmForm').click(function(){
+		location.href="/exhibition/customerService/C_emailConfirmForm.do";
 	});
 	//자주묻는 질문
-	$('#C_QnAC').click(function(){
-		location.href="/exhibition/customerService/C_QnAC.do";
+	$('#C_QnAForm').click(function(){
+		location.href="/exhibition/customerService/C_QnAForm.do";
 	});
-	//고객센터
-	//
-	$('#C_boardAdd').click(function(){
-		location.href="/exhibition/customerService/C_mainImageboardForm.do";
+	//주요시설 연락처
+	$('#C_contactListForm').click(function(){
+		location.href="/exhibition/customerService/C_contactListForm.do";
 	});
+	
+	
 	//소개
 	$('#I_infoForm').click(function(){//소개정보
 		location.href="/exhibition/introduction/I_infoForm.do";
