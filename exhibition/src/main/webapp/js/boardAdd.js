@@ -115,7 +115,7 @@ $(document).ready(function(){
 		
 		else if(index==0){
 			alert(index);
-		//	$('#imageboardWriteForm').attr({action:'/exhibition/main/index.do', method:'post'}).submit();
+			$('#imageboardWriteForm').attr({action:'/exhibition/customerService/C_imageboardWrite.do', method:'post'}).submit();
 		}else if(index==1){
 			alert(index);
 		//	$('#imageboardWriteForm').attr({action:'/exhibition/main/index.do', method:'post'}).submit();
@@ -123,8 +123,7 @@ $(document).ready(function(){
 			alert(index);
 		//	$('#imageboardWriteForm').attr({action:'/exhibition/main/index.do', method:'post'}).submit();
 		
-		}else
-			alert('submit');
+		}
 	});
 	
 });
