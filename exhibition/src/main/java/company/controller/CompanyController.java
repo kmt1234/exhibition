@@ -1,5 +1,8 @@
 package company.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,12 +38,26 @@ public class CompanyController {
 	
 	//중복체크
 	//아이디 중복 검사
-		@RequestMapping(value="checkNum", method=RequestMethod.POST)
-		public @ResponseBody String checkId(@RequestParam String sNum) {
-			//DB
-			CompanyDTO companyDTO = companyDAO.checkId(sNum);
-			if(companyDTO==null) return "not_exist";
-			else return "exist";
-		}
+	@RequestMapping(value="checkNum", method=RequestMethod.POST)
+	public @ResponseBody String checkId(@RequestParam String sNum) {
+		//DB
+		CompanyDTO companyDTO = companyDAO.checkId(sNum);
+		if(companyDTO==null) return "not_exist";
+		else return "exist";
+	}
+	
+	//비밀번호찾기-이메일 체크
+	@RequestMapping(value="checkEmail", method=RequestMethod.POST)
+	public @ResponseBody String checkEmail(@RequestParam String email, @RequestParam String sNum) {
+		//데이터 싣기
+		Map<String,String> map = new HashMap<String, String>();
+		map.put("C_email", email);
+		map.put("C_license", sNum);
+		
+		//DB
+		CompanyDTO companyDTO = companyDAO.checkEmail(map);
+		if(companyDTO==null) return "not_exist";
+		else return "exist";
+	}
 	
 }

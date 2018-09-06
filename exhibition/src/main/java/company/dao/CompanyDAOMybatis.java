@@ -30,4 +30,14 @@ public class CompanyDAOMybatis implements CompanyDAO {
 	public CompanyDTO checkId(String sNum) {
 		return sqlSession.selectOne("companySQL.companyCheck", sNum);
 	}
+
+	public CompanyDTO checkEmail(Map<String, String> map) {
+		return sqlSession.selectOne("companySQL.companyEmail", map);
+	}
+	
+	//임시 비밀번호저장
+	public int changeCpwd(Map<String, String> map) {
+		return sqlSession.update("companySQL.changeCpwd", map);
+	}
+
 }

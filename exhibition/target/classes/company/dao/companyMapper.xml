@@ -29,4 +29,15 @@
 	<select id="companyCheck" parameterType="java.lang.String" resultType="company">
 		select * from company where C_license = #{sNum}
 	</select>
+	
+	<!--이메일 체크-->
+	<select id="companyEmail" parameterType="java.util.Map" resultType="company">
+		select * from company where C_email = #{C_email} and C_license = #{C_license}
+	</select>
+	
+	<!-- 임시비밀번호로 변경 -->
+	<update id="changeCpwd" parameterType="java.util.Map">
+		update company set C_password = #{C_password} where C_license = #{C_license}
+	</update>
+	
 </mapper>

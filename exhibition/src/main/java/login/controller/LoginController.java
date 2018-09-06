@@ -181,6 +181,21 @@ public class LoginController {
 		return mav;
 	}
 	
+	//임시비밀번호 수령 시, 사업자등록번호의 비밀번호 변경
+		@RequestMapping(value="changeCpwd", method=RequestMethod.POST)
+		public @ResponseBody String changeCpwd(@RequestParam String temPwd2, @RequestParam String C_license) {
+			
+			Map<String,String> map = new HashMap<String,String>();	
+			map.put("C_license", C_license);
+			map.put("C_password", temPwd2);
+			
+			//DB
+			int result = companyDAO.changeCpwd(map);
+			
+			if(result==1) return "1";
+			else return "0";
+		}
+	
 	
 	
 }
