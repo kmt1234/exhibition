@@ -9,7 +9,6 @@
 	integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
 	crossorigin="anonymous"></script>
 <script src="../semantic/semantic.min.js"></script>
-
 <style>
 	.box-container{
 		display: inline-block;
@@ -34,27 +33,25 @@
 	<br>
 	<div class="ui five column grid container">
 		<!-- 사이드바 메뉴 -->
-		<div class="ui compact menu" style="width: 20%; height: 900px; ">
+		<div class="ui compact menu" style="width: 20%; height: 980px; ">
+			
 			<a class="item" href="R_exhibitionForm.jsp">전시회 홀</a> 
 			<a class="item" href="R_consertForm.jsp">공연장 홀</a> 
 		</div>
 		<!-- 메인 화면 -->
-		<div class="ui compact menu" style="width: 80%; height: 900px;" >
+		<div class="ui compact menu" style="width: 80%; height: 980px;" >
 			<!-- 타이틀 -->
 			<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
-				콘서트
+				전시회
 				<span class="h-light">홀</span>
 			</h2>
-			<jsp:include page="R_consert.jsp" ></jsp:include>
+			<jsp:include page="R_exhibitionHollDecision.jsp" ></jsp:include>
 		</div>
 		<!-- footer -->
 		<div class="ui compact menu" style="width: 100%; float: right; ">
 			<jsp:include page="../main/I_footer.jsp" ></jsp:include>
 		</div>
 	</div>
-	<%-- <footer>
-		<jsp:include page="../main/I_footer.jsp"></jsp:include>
-	</footer> --%>
 
 </body>
 </html>

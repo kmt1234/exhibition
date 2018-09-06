@@ -58,7 +58,7 @@ public class RentalController {
 		model.addAttribute("date", sdf.format(date));
 		
 		
-		return "/rental/R_exhibitionHollDecision";
+		return "/rental/R_exhibitionHollDecisionForm";
 	}
 	
 	@RequestMapping(value="searchRentDay", method=RequestMethod.POST)

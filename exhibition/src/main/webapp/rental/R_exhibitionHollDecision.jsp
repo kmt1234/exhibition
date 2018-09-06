@@ -24,7 +24,7 @@
 </form>
 <br><br>
 
-<div id='calendar' style='width: 500px; height: 900px;'></div>
+<div id='calendar' style='width: 90%; height: 500px;'></div>
 
 
 <script src='../calendar2/lib/moment.min.js'></script>
