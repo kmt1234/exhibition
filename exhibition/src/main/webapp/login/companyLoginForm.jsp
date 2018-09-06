@@ -48,7 +48,7 @@
 			    
 			    <div class="inline field">
 			      <div class="C-find-id-pwd" align="center">
-			        <a style="cursor: pointer;">아이디 또는 비밀번호 찾기를 원하시면 클릭하세요</a>
+			        <a style="cursor: pointer;">가입된 사업자등록번호 비밀번호를 잊었으면 클릭하세요</a>
 			      </div>
 			    </div>
 			    

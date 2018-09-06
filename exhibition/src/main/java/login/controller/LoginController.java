@@ -83,7 +83,7 @@ public class LoginController {
 			System.out.println("기업명 : "+companyDTO.getC_businessname()+" 로그인 성공");
 			session.setAttribute("homepageMemberName", companyDTO.getC_license());
 			session.setAttribute("homepageMember", companyDTO);				//회원 전체 정보
-			//session.setAttribute("code", companyDTO.getCode()); 코드 정보 넣어야함(2는 사업자)
+			session.setAttribute("code", companyDTO.getCode());
 			return "exist";
 		}
 	}

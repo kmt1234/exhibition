@@ -25,4 +25,9 @@ public class CompanyDAOMybatis implements CompanyDAO {
 	public CompanyDTO companyLogin(Map<String, String> map) {
 		return sqlSession.selectOne("companySQL.companyLogin", map);
 	}
+	
+	//중복체크
+	public CompanyDTO checkId(String sNum) {
+		return sqlSession.selectOne("companySQL.companyCheck", sNum);
+	}
 }

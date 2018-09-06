@@ -7,10 +7,13 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import company.bean.CompanyDTO;
 import company.dao.CompanyDAO;
+import member.bean.MemberDTO;
 
 @RequestMapping(value="company")
 @Component
@@ -29,5 +32,15 @@ public class CompanyController {
 		
 		return new ModelAndView("redirect:/main/index.do");
 	}
+	
+	//중복체크
+	//아이디 중복 검사
+		@RequestMapping(value="checkNum", method=RequestMethod.POST)
+		public @ResponseBody String checkId(@RequestParam String sNum) {
+			//DB
+			CompanyDTO companyDTO = companyDAO.checkId(sNum);
+			if(companyDTO==null) return "not_exist";
+			else return "exist";
+		}
 	
 }
