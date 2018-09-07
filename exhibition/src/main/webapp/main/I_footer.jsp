@@ -1,13 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Insert title here</title>
-</head>
-<body>
-<div name="footer_main">
+
+<div id="footer_main">
 <br>
 	<div>
 		<img src="../img/logo.jpg" style="width: 150px; height: 50px;" align="left">
@@ -18,7 +12,6 @@
 			문의전화 : 02-6000-0114 팩스 : 02-1234-1111
 			<p> bruno mars - When I wa your man</p>
 		</address>
-		
 	</div>
 	<br>
 	<div style="width: 500px; height: 50px; float: right" align="right">
@@ -29,10 +22,6 @@
 			<il><a href="">이메이무단수집거부</a></il>
 			<il><a href="">사이트맵</a></il>
 	</div>
-
 <br>
 </div>
-
 <br>
-</body>
-</html>

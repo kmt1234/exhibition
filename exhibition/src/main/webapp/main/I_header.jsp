@@ -2,11 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 
-<!DOCTYPE html>
-<html>
-<head>
+
 <link rel="stylesheet" type="text/css" href="../semantic/semantic.min.css">
-<meta charset="UTF-8">
+
 
 <style type="text/css">
 @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
@@ -51,8 +49,8 @@
 }
 
 </style>
-</head>
-<body>
+
+
 	<header>
 		<div id="main" class="ui three column grid container">
 			<div class="column" style="width: 150px; height: 50px;">
@@ -188,5 +186,3 @@
 <script src="../js/member.js" charset="UTF-8"></script> <!--  -->
 <script src="../js/company.js" charset="UTF-8"></script><!--  -->
 <script src="../js/login.js" charset="UTF-8"></script>	<!--  -->
-</body>
-</html>
