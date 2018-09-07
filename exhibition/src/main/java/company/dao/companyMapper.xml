@@ -10,7 +10,7 @@
 	 						       #{C_password},
 	 						       #{C_corporate},
 	 						       #{C_condition},
-	 						       #{C_postnumber},
+	 						       #{C_postnumbox},
 	 						       #{C_address1},
 	 						       #{C_address2},
 	 						       #{C_representative},

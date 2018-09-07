@@ -12,6 +12,7 @@ public class CompanyDTO {
 	private String C_password; //비밀번호
 	private String C_corporate; //법인번호
 	private String C_condition; //업태
+	private String C_postnumbox;//우편번호
 	private String C_address1; //주소1
 	private String C_address2; //주소2
 	private String C_representative; //대표자

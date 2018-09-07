@@ -5,6 +5,9 @@
 .ui.inverted.divider2 {
     margin: 5px 0;
 }
+.ui.left.icon.input{
+	width : 300px;
+}
 </style>
 
 <div class="ui secondary pointing menu">
@@ -27,14 +30,15 @@
 
 <div class="ui segment" id="modify-Div"><a class="ui red left ribbon label">Modify</a>
 	<div align="center">
-		<div class="ui card"><div class="image"><img src="../img/userModify.png"></div>
-		  	<div class="content">
-		    	<a class="header" id="C-modify-license">사업자등록번호 : ${DTO.getC_license()}</a>
-		    	<input type="hidden" id="C-modify-license-hidden" value="${DTO.getC_license()}">
-		    	<div class="meta"><span>가입일자(DB 수정해야함)</span></div>
+		<div class="ui card" style="width: 35%;>
+		  	<div class="content" style="width: 356px;">
+		    	<a class="header" id="C-modify-businessname">사업자명 : ${DTO.getC_businessname()}</a>
+		    	<input type="hidden" id="C-modify-businessname-hidden" value="${DTO.getC_businessname()}">
+		    	<div class="meta"><span id="modify-license">사업자번호 : ${DTO.getC_license()}</span></div>
+		    	<div class="meta"><span id="modify-corporate">법인번호 : ${DTO.getC_corporate()}</span></div>
 		    	
 		    	<div class="description">
-		      		<div class="ui inverted segment">
+		      		<div class="ui inverted segment" style="width:90%;">
 						
 						<div class="ui inverted input">
 							<div class="ui left icon input">
@@ -63,8 +67,46 @@
 					  	</div><!--class="ui inverted input"-->
 					  	<br><span class="C-modify-repwd-Span"></span>
 					  	
+					<div class="ui inverted divider2"></div>	
+					
+						<div class="ui inverted input">
+							<div class="ui left icon input">
+								<input type="text" id="C-modify-condition" value="${DTO.getC_condition()}" >
+								<i class="briefcase icon"></i>
+							</div>
+					  	</div><!--class="ui inverted input"-->
+					  	<br><span class="C-modify-condition-Span"></span>
+					  	
 					<div class="ui inverted divider2"></div>
+					
+					<div>
+						<button class="ui inverted button" style="width:31%;">우편검색</button>
+							<div class="ui input" style="width:51%;margin-left:-1%;">
+  								<input type="text" id="C-modify-postnumber" value="${DTO.getC_postnumbox()}" >
+  							</div>
+					</div>
+					
+					<div class="ui inverted divider2"></div>					
+					
+						<div class="ui inverted input">
+							<div class="ui left icon input">
+								<input type="text" id="C-modify-address1" value="${DTO.getC_address1()}" >
+								<i class="address book icon"></i>
+							</div>
+					  	</div><!--class="ui inverted input"-->
+					  	<br><span class="C-modify-address1-Span"></span>
+					  	
+					<div class="ui inverted divider2"></div>		
 						
+						<div class="ui inverted input">
+							<div class="ui left icon input">
+								<input type="text" id="C-modify-address2" value="${DTO.getC_address2()}" >
+								<i class="address book icon"></i>
+							</div>
+					  	</div><!--class="ui inverted input"-->
+					  	<br><span class="C-modify-address2-Span"></span>
+					  	
+					<div class="ui inverted divider2"></div>				
 						
 						<div class="ui inverted input">
 							<div class="ui left icon input">
