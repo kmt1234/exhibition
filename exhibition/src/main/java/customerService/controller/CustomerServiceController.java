@@ -121,7 +121,7 @@ public class CustomerServiceController {
 									@RequestParam MultipartFile img,
 									Model model
 									) {
-		//경로 바꿔야함
+		//경로 바꿔야함***
 		String filePath ="D:\\morning_project_no_remove\\workspace\\exhibition\\src\\main\\webapp\\storage";
 		String fileName = img.getOriginalFilename();
 		
