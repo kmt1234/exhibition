@@ -37,7 +37,7 @@
 				      <div class="field">
 				      	<label>사업자번호</label>
 				      	<input name="C_license" id="C_license" placeholder="사업자번호" type="text"><br>
-				      </div><span id=""></span><br><!--사업자번호 유효성 검사 확인  -->
+				      </div><span id="C_license-Confirm"></span><br>
 				      <br>	
 				      <div class="field">
 				        <label>비밀번호</label>
@@ -48,13 +48,13 @@
 			    
 			    <div class="inline field">
 			      <div class="C-find-id-pwd" align="center">
-			        <a style="cursor: pointer;">아이디 또는 비밀번호 찾기를 원하시면 클릭하세요</a>
+			        <a style="cursor: pointer;">가입된 사업자번호의 비밀번호를 잊었으면 클릭하세요</a>
 			      </div>
 			    </div>
 			    
 			    <div class="aa" align="center">
 				    <div class="ui submit button" id="Clogin">로그인</div><br>
-				    <span id="C_login-Confirm"></span><!--로그인 실패 시, 문장 추가-->
+				    <span id="C_login-Confirm"></span>
 			    </div>
 			    
 			  </div>

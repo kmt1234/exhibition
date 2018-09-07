@@ -42,21 +42,40 @@ $(document).ready(function(){
 		$('.ui.modal-Find-Member.modal').modal('show');
 	});
 	
-	
 	/*----------법인회원 로그인---------*/
 	$('#Clogin').click(function(){
-		$.ajax({
-			type : 'POST',
-			url : '/exhibition/login/Clogin.do',
-			data : {'C_license': $('#C_license').val(), 'C_password':$('#C_Pwd').val()},
-			dataType : 'text',
-			success : function(data){
-				if(data=='exist')
-					location.href='/exhibition/main/index.do';
-				else if(data=='not_exist')
-					alert('로그인 X');
-			}//success
-		});//ajax
+		var reGex = /^([0-9]{10})$/; //숫자 10자리
+		var C_regPwd = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-]|.*[0-9]).{6,24}$/;	//6-24자리 영문대소문자or숫자or특수기호
+		
+		var gex = $('#C_license');
+		var pwd = $('#C_Pwd');
+		
+		$('#C_license-Confirm').empty();
+		$('#C_pwd-Confirm').empty();
+		$('#C_login-Confirm').empty();
+
+		if(!reGex.test(gex.val())){
+			$('#C_license-Confirm').text("사업자번호는 10자리입니다").css("font-size","12px").css("color","white");
+			$('#C_license').css({'border':'1px solid red','background-color':'#f4d2d2'});
+		}else if(!C_regPwd.test(pwd.val())){
+			$('#C_pwd-Confirm').text("비밀번호는 6-24자리+숫자 또는 특수기호 혼용입니다").css("font-size","12px").css("color","white");
+			$('#C_license').css({'border-color':'transparent','background-color':'white'});
+			$('#C_Pwd').css({'border':'1px solid red', 'background-color':'#f4d2d2'});
+		}else {
+			$.ajax({
+				type : 'POST',
+				url : '/exhibition/login/Clogin.do',
+				data : {'C_license': $('#C_license').val(), 'C_password':$('#C_Pwd').val()},
+				dataType : 'text',
+				success : function(data){
+					if(data=='exist')
+						location.href='/exhibition/main/index.do';
+					else if(data=='not_exist'){
+						$('#C_login-Confirm').text("사업자등록번호 및 비밀번호를 확인하세요").css("font-size","12px").css("color","red");
+					}
+				}//success
+			});//ajax
+		}
 	});
 	
 		
@@ -322,6 +341,140 @@ $(document).ready(function(){
 		}//else	
 	});
 	
+	
+	/*-----------법인회원 비밀번호 찾기-----------*/
+	var C_regNum = /^([0-9]{10})$/; //사업자번호 10자리
+	var C_regEmail = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/; //이메일 양식
+	
+	//아이디 입력 시,
+	var confirmNum = '';
+	$('#verify-C-Id').blur(function(){
+		if(!C_regNum.test($('#verify-C-Id').val())){
+			$('.verify-C-Id-Div').text('사업자번호 10자리를 입력하세요');
+			$('.verify-C-Id-Div').show();
+			$('#verify-C-Id').css({'border':'1px solid red', 'background-color':'#f4d2d2'});
+		}else{
+			$('.verify-C-Id-Div').text('');
+			$('.verify-C-Id-Div').hide();
+			$('#verify-C-Id').css({'border':'1px solid green', 'background-color':'#e3fce6'});
+			$.ajax({
+				type : 'POST',
+				url : '/exhibition/company/checkNum.do',
+				data : {'sNum':$('#verify-C-Id').val()},
+				dataType : 'text',
+				success : function(data){
+					if(data=='exist'){
+						$('#find-C-Result').text('사업자등록번호 확인!').css('color','blue');
+						$('#verify-C-Id').css({'border':'1px solid green', 'background-color':'#e3fce6'});
+						confirmNum = 'exist';
+					}else if(data=='not_exist'){
+						$('#find-C-Result').text('가입된 사업자번호가 없습니다!').css('color','red');
+						$('#verify-C-Id').css({'border':'1px solid red', 'background-color':'#f4d2d2'});
+						confirmNum = 'not_exist';
+					}
+				}//success
+			});//ajax
+		}
+	});
+	
+	//이메일 입력 시,
+	var confirmEmail2 = '';
+	$('#verify-C-Email').blur(function(){
+		if(!findPwd_regEmail.test($('#verify-C-Email').val())){
+			$('.verify-C-Email-Div').text('이메일 형식이 올바르지 않습니다');
+			$('.verify-C-Email-Div').show();
+			$('#verify-C-Email').css({'border':'1px solid red', 'background-color':'#f4d2d2'});
+		}else{
+			$('.verify-C-Email-Div').text('');
+			$('.verify-C-Email-Div').hide();
+			$('#verify-C-Email').css({'border':'1px solid green', 'background-color':'#e3fce6'});
+			$.ajax({
+				type : 'POST',
+				url : '/exhibition/company/checkEmail.do',
+				data : {'email':$('#verify-C-Email').val(),'sNum':$('#verify-C-Id').val()},
+				dataType : 'text',
+				success : function(data){
+					if(data=='exist'){
+						$('#find-C-Result').text('이메일 확인!').css('color','blue');
+						$('#verify-C-Email').css({'border':'1px solid green', 'background-color':'#e3fce6'});
+						confirmEmail = 'exist';
+					}else if(data=='not_exist'){
+						$('#find-C-Result').text('가입된 이메일이 아닙니다').css('color','red');
+						$('#verify-C-Email').css({'border':'1px solid red', 'background-color':'#f4d2d2'});
+						confirmEmail2 = 'not_exist';
+					}
+				}//success
+			});//ajax
+		}
+	});
+	
+	/*-----인증번호 발송-----*/
+	var verifyNum2='';
+	$('#verify-Number2-Send').click(function(){
+		if($('#verify-C-Email').val()==''){
+			$('#find-C-Result').text('이메일을 입력하세요').css('color','red');
+		}else if($('#verify-C-Id').val()==''){
+			$('#find-C-Result').text('사업자등록번호를 입력하세요').css('color','red');
+		}else if(confirmEmail2 == 'not_exist' || confirmNum == 'not_exist'){
+			$('#find-C-Result').text('사업자등록번호 또는 이메일 확인바랍니다').css('color','red');
+		}else{
+			$('#find-C-Result').text('이메일을 발송했습니다').css('color','blue');
+			$.ajax({
+				type : 'POST',
+				url : '/exhibition/customerService/sendEmail.do',
+				data : {'email': $('#verify-C-Email').val()},
+				dataType : 'text',
+				success : function(data){
+				//	alert("인증번호는 "+JSON.stringify(data));
+					verifyNum2 = data;
+					$('.verify-Number2-hidden').val(verifyNum2);
+				}//success
+			});//ajax
+			
+		}//else
+	});
+	
+	//인증번호 확인 
+	var temPwd2 = '';
+	$('#confirm-C-verifyNum-Btn').click(function(){
+		if(verifyNum2 != $('#verify-Number2').val()){
+			$('#find-C-Result').text('인증번호가 일치하지 않습니다. 다시 발송요청 하세요').css('color','red');
+		}else if(verifyNum2==''){
+			$('#find-C-Result').text('메일 인증은 필수입니다').css('color','red');
+		}else if(C_regNum.test($('#verify-C-Id').val()) && C_regEmail.test($('#verify-C-Email').val())){
+			$('#find-C-Result').text('임시 비밀번호를 발송하였습니다').css('color','red');
+			$.ajax({
+				type : 'POST',
+				url : '/exhibition/login/sendEmail.do',
+				data : {'email' : $('#verify-C-Email').val()},
+				dataType : 'text',
+				success : function(data){
+					temPwd2 = data;
+				}//success
+			});//ajax
+		}//else if
+	});
+	
+	//비밀번호 찾은 후 확인 버튼 
+	$('#find-C-login-Btn').click(function(){
+		if(verifyNum2 != $('#verify-Number2').val()){
+			$('#find-C-Result').text('인증번호가 일치하지 않습니다').css('color','red');
+		}else if(verifyNum2==''){
+			$('#find-C-Result').text('메일 인증 먼저 받으세요').css('color','red');
+		}else{
+			$.ajax({
+				 type: "POST",
+		           url: "/exhibition/login/changeCpwd.do",
+		           data: {'temPwd2': temPwd2, 'C_license' : $('#verify-C-Id').val()},
+		           dataType : 'text',
+		           success: function(data){
+		        	//   alert("변경된 건 수 : "+JSON.stringify(data));
+		        	   alert('임시비밀번호로 변경되었습니다.');
+		        	   location.href='/exhibition/main/index.do';
+		           }//success
+			 });//ajax
+		}//else	
+	});
 	
 	
 	

@@ -83,7 +83,7 @@ public class LoginController {
 			System.out.println("기업명 : "+companyDTO.getC_businessname()+" 로그인 성공");
 			session.setAttribute("homepageMemberName", companyDTO.getC_license());
 			session.setAttribute("homepageMember", companyDTO);				//회원 전체 정보
-			//session.setAttribute("code", companyDTO.getCode()); 코드 정보 넣어야함(2는 사업자)
+			session.setAttribute("code", companyDTO.getCode());
 			return "exist";
 		}
 	}
@@ -180,6 +180,21 @@ public class LoginController {
 		
 		return mav;
 	}
+	
+	//임시비밀번호 수령 시, 사업자등록번호의 비밀번호 변경
+		@RequestMapping(value="changeCpwd", method=RequestMethod.POST)
+		public @ResponseBody String changeCpwd(@RequestParam String temPwd2, @RequestParam String C_license) {
+			
+			Map<String,String> map = new HashMap<String,String>();	
+			map.put("C_license", C_license);
+			map.put("C_password", temPwd2);
+			
+			//DB
+			int result = companyDAO.changeCpwd(map);
+			
+			if(result==1) return "1";
+			else return "0";
+		}
 	
 	
 	

@@ -10,11 +10,13 @@
 	 						       #{C_password},
 	 						       #{C_corporate},
 	 						       #{C_condition},
+	 						       #{C_postnumber},
 	 						       #{C_address1},
 	 						       #{C_address2},
 	 						       #{C_representative},
 	 						       #{C_tel},
-	 						       #{C_email})
+	 						       #{C_email},
+	 						       2)
  	</insert>
  	
  	<!--로그인-->
@@ -22,4 +24,20 @@
  		select * from company where C_license = #{C_license} and
  									C_password = #{C_password}
  	</select>
+ 	
+ 	<!--사업자번호 중복체크-->
+	<select id="companyCheck" parameterType="java.lang.String" resultType="company">
+		select * from company where C_license = #{sNum}
+	</select>
+	
+	<!--이메일 체크-->
+	<select id="companyEmail" parameterType="java.util.Map" resultType="company">
+		select * from company where C_email = #{C_email} and C_license = #{C_license}
+	</select>
+	
+	<!-- 임시비밀번호로 변경 -->
+	<update id="changeCpwd" parameterType="java.util.Map">
+		update company set C_password = #{C_password} where C_license = #{C_license}
+	</update>
+	
 </mapper>

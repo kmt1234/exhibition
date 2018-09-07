@@ -83,8 +83,10 @@ public class CustomerServiceController {
 		public String C_contactList() {
 			return "/customerService/C_contactList";
 		}
+		
+		//인증번호 받기 위한 메일 전송
 		@RequestMapping(value="sendEmail", method =  RequestMethod.POST)
-		public @ResponseBody String sendEmail(@RequestParam final String email, Model model) {//인증번호 받기 위한 메일 전송
+		public @ResponseBody String sendEmail(@RequestParam final String email, Model model) {
 			
 			final String authNum = randomNum();
 			

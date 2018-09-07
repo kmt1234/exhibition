@@ -17,4 +17,5 @@ public class CompanyDTO {
 	private String C_representative; //대표자
 	private String C_tel; //전화번호
 	private String C_email; //이메일
+	private int code; //코드번호
 }

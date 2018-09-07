@@ -186,3 +186,5 @@
 <script src="../js/member.js" charset="UTF-8"></script> <!--  -->
 <script src="../js/company.js" charset="UTF-8"></script><!--  -->
 <script src="../js/login.js" charset="UTF-8"></script>	<!--  -->
+<script src="../js/post.js" charset="UTF-8"></script>	<!--  -->
+
