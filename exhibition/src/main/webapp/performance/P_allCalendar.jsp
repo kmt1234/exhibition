@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,9 +25,60 @@ if(day.length == 1){
   day = "0" + day; 
 }
 
+//alert(JASON.stringify('${listView}'));
+
+var dataSet = [
+	<c:forEach var="listView" items="${listView}" varStatus="status">
+		<c:if test="${listView.code == '1'}">
+		<c:if test="${listView.startDate != ''}">
+		    <c:forEach var="i" begin="0" end="${listView.daysSize-1}" step="1" varStatus="dayStatus">
+		   // <c:if test="${listView.days[dayStatus.index] eq listView.days[dayStatus.index]}">
+		    	{"title" : '전시',
+		    	"start" : '<c:out value="${listView.days[dayStatus.index]}"/>',
+		    	"imageurl" : "../img/Ex.png",
+		    	"url" : "/exhibition/main/index.do",
+		    	"color" : "#ffffff",
+		    	"textColor" : "#000000"
+		    	
+		    	} 
+		    	//</c:if>
+		    	<c:if test="${!dayStatus.last}">,</c:if>
+		    </c:forEach>
+		    <c:if test="${!status.last}">,</c:if>
+		 </c:if> 
+		 </c:if> 
+		 
+		 
+		 <c:if test="${listView.code == '2'}">
+			<c:if test="${listView.startDate != ''}">
+			    <c:forEach begin="0" end="${listView.daysSize-1}" step="1" varStatus="dayStatus">
+			    	{"title" : '공연',
+			    	"start" : '<c:out value="${listView.days[dayStatus.index]}"/>',
+			    	"imageurl" : "../img/Ev.png",
+			    	"color" : "#ffffff",
+			    	"textColor" : "#000000"
+			    	} <c:if test="${!dayStatus.last}">,</c:if>
+			    </c:forEach>
+			    <c:if test="${!status.last}">,</c:if>
+			 </c:if> 
+			 </c:if> 
+		</c:forEach>
+	];
+	
+
 
 	$(document).ready(function() {
-		var code="";
+	    	  $.ajax({
+	        	  type : 'GET',
+	        	  url : '/exhibition/performance/getPerformance.do',
+	        	  dataType : 'text',
+	        	  success : function(data){
+	
+	        	  }
+	        	  
+	        	}); 
+
+	    	  
 		$('#calendar').fullCalendar({
 			defaultDate: date,
 			editable: false,
@@ -34,55 +86,14 @@ if(day.length == 1){
 			eventLimit: false, // allow "more" link when too many events
 			eventRender:function(event, eventElement) {
                 if(event.imageurl) {
-                    eventElement.find("span.fc-title").prepend("<img src='" + event.imageurl +	"'width='30px' height='30px'>");
+                    eventElement.find("span.fc-title").prepend("<img src='" + event.imageurl +	"'width='25px' height='25px'  align='absmiddle'> &ensp;");
                 }
-            },
-			events: function(start,end,timezone,callback){
-		    	  $.ajax({
-		        	  type : 'GET',
-		        	  url : '/exhibition/performance/getPerformance.do',
-		        	  dataType : 'json',
-		        	  success : function(data){
-		        		 //alert(JSON.stringify(data.list));
-		        		  var events = [];
-		        		  
-		        		  $.each(data.list,function(index,item){
-		        			  code = item.code;     
-		        			 
-		        			  if(code==1){
-		        				 for(var i =item.days ; i<=item.endDay; i++){
-		        				 var start1 = item.years+"-"+item.months+"-"+i;
-		        				  events.push({title : "박람회", 
-		        				  			imageurl : "../img/logo.jpg",
-		        					  		start : start1,
-		        				   			url : "/exhibition/main/index.do",
-		        				   			color : "#c13a70"
-		        				
-		        			  		    });
-		        				  
-		        				  }
-		        			  }else if(code==2){
-		        				  for(var i =item.days ; i<=item.endDay; i++){
-				        				 var start1 = item.years+"-"+item.months+"-"+i;
-		        				  events.push({title : "연극",
-		        					  	imageurl : "../img/happycrong.jpg",
-	        				  			start :start1,
-	
-	        				   			url : "/exhibition/member/writeForm.do",
-	        			  		    });
-		        				  }//for문
-		        			  }//if문
-		       		  	  });
-		        		  callback(events);
-		        	  }
-		        	  
-		        	}); 
-		      }
-			
+            },        
+			events: dataSet
+   
 		});
 		
-	});
-
+	 });
 </script>
 <style>
 	body {
@@ -100,7 +111,11 @@ if(day.length == 1){
 </head>
 
 <body>
-
+<%-- <div style="height: 350px; border: 1px solid;">
+	<header>
+		<jsp:include page="../main/I_header.jsp"></jsp:include>
+	</header>
+</div>  --%>
 <div style="height: 800px; border: 1px solid ;">
 <section>
 <br>
