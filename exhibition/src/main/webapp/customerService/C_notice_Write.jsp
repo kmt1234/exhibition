@@ -8,13 +8,28 @@
 </head>
 <body>
 <form id="C_notice_WriteForm" method="post" action="/exhibition/customerService/C_notice_Write.do">
-	<div>제목<input type="text" name="subject" id="subject"></div>
-	<div id="subjectDiv"></div>
-	<div class="content">
-		<div>내용</div>
-		<div><textArea name="content" id="content" cols="50" rows="10"></textArea></div>
-		<div id="contentDiv"></div>
-	</div>
+<table style="width:100%;" >
+		<tr>
+			<td  align="center" height="30" style="width:10%; background-color: #f7f6e6; ">제목</td>
+			
+			<td style="width:20%;">
+				<div>
+					<input type="text" name="subject" id="subject" style="float: left;">
+					<div id="subjectDiv"></div>
+				</div>
+			</td>
+		</tr>	
+		<tr>
+			<td  align="center" style="width:10%; background-color: #f7f6e6;">내용</td>
+			
+			<td style="width:20%;">
+				<div>
+					<div><textArea name="content" id="content" cols="50" rows="10" style="float: left;"></textArea></div>
+					<div id="contentDiv"></div>
+				</div>
+			</td>
+		</tr>
+	</table>
 </form>
 <div>
 	<input type="button" id="C_notice_checkWrite" value="등록">

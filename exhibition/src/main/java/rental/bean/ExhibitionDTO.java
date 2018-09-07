@@ -13,4 +13,6 @@ public class ExhibitionDTO {
 	String title;
 	String startDate;
 	String endDate;
+	String[] days;
+	int daysSize;
 }

@@ -55,14 +55,14 @@
 <body>
 	<header>
 		<div id="main" class="ui three column grid container">
-			<div class="column" style="width: 150px; height: 50px;">
+			<div class="column" style="width: 25%; height: 50px;">
 				<img alt="" src="../img/logo.jpg"
 					style="width: 150px; height: 50px;">
 			</div>
-			<div class="column">
-				<div class="ui input">
-					<div class="ui action input"  style="width: 520px; height: 40px;">
-						<input type="text" placeholder="Search...">
+			<div class="column" style="width: 49%; padding-top: 100px;">
+				<div class="ui input" style="width: 100%;">
+					<div class="ui action input" style="width:100%; height: 40px; ">
+						<input type="text"" placeholder="Search..." style="width: 30%;">
 						<button class="ui icon button">
 							<i class="search icon"></i>
 						</button>
@@ -70,7 +70,7 @@
 				</div>
 			</div>
 			
-			<div class="column" style="width: 620px; height: 50px; text-align: right; padding-top: 70px;">
+			<div class="column" style="width: 23%; height: 50px; text-align: right; padding-top: 30px;">
 			
 			<!--회원가입 시, 축하메세지 출력(1분 동안)-->
 				<c:if test="${registerMessage != null}">

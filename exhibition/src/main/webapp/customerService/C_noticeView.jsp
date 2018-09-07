@@ -9,14 +9,45 @@
 </head>
 <body>
 <form id="C_notice_ViewForm" method="post" action="/exhibition/customerService/C_notice_View.do">
-	<div>${customerServiceDTO.seq }</div>
-	<div>${customerServiceDTO.subject }</div>
-	<div><pre>${customerServiceDTO.content }</pre></div>
+	<table style="width:100%;" >
+		<tr>
+			<td  align="center" height="30" style="width:10%; background-color: #f7f6e6; ">글번호</td>
+			
+			<td style="width:20%;">
+				<div>
+					${customerServiceDTO.seq }
+				</div>
+			</td>
+			
+			<td  align="center" style="width:10%; background-color: #f7f6e6;">글제목</td>
+			
+			<td style="width:20%;">
+				<div>
+					${customerServiceDTO.subject }
+				</div>
+			</td>
+		</tr>	
+		
+		<tr>
+			<td width="70" align="center" height="200" style=" background-color: #f7f6e6;">내용</td>
+			<td>
+				<div align="center">
+					${customerServiceDTO.content }
+				</div>
+			</td>
+		</tr>
+		
+	</table>
 	
-	<%-- <c:if test="${memId==boardDTO.id }"> --%><!-- 본인이 쓴 글이 맞는지 확인 -->
-		<input type="button" id="C_notice_modifyBtn" value="글수정">
-		<input type="button" id="C_notice_deleteBtn" value="글삭제">
-	<%-- </c:if> --%>
+	
+	<div>
+		<div style=" padding-top: 50px;" align="center">
+			<button id="C_notice_modifyBtn" value="글수정">글수정</button>
+			<button type="button" id="C_notice_deleteBtn" value="글삭제">글삭제</button>
+		</div>
+	</div>
+	
+	
 </form>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
