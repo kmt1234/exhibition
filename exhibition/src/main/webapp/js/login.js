@@ -309,7 +309,7 @@ $(document).ready(function(){
 			$('#find-M-Result').text('메일 인증 먼저 받으세요').css('color','red');
 		}else{
 			$.ajax({
-				 type: "post",
+				 type: "POST",
 		           url: "/exhibition/login/changeTemPwd.do",
 		           data: {'temPwd': temPwd, 'M_Id' : $('#verify-M-Id').val()},
 		           dataType : 'text',

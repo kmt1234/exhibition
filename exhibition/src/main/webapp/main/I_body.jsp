@@ -2,11 +2,23 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE>
-<link rel="stylesheet" href="../css/slode.css">
+<link rel="stylesheet" href="../css/slide.css">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
+</head>
+<body>
+<section>
+	<div class="slide">
+		<ul>
+		   <c:forEach var="i"  begin="0" end="${listLength}" step="1">
+				<li><img class="pic" src="../storage/${list[i].image1}" width="74%" height="40%"></li>
+			</c:forEach>
+		</ul>	
+	</div>
+</section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js"></script>
 <script>
  $(document).ready(function(){
 	 var current = 0;
@@ -40,16 +52,4 @@
 	 $(document).ready(init);
  });
  </script>
-</head>
-<body>
-<section>
-	<div class="slide">
-		<ul>
-		   <c:forEach var="i"  begin="0" end="${listLength}" step="1">
-				<li><img class="pic" src="../storage/${list[i].image1}" width="74%" height="40%"></li>
-			</c:forEach>
-		</ul>	
-	</div>
-</section>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js"></script>
 </body>

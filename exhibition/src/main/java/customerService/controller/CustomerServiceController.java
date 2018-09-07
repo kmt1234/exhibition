@@ -115,14 +115,16 @@ public class CustomerServiceController {
 	public String imageboardWriteForm() {
 		return "/customerService/C_mainImageboardForm";
 	}
+	
+	
 	//이미지 boardWrite
 	@RequestMapping(value="C_imageboardWrite",method=RequestMethod.POST)
 	public String imageboardWrite(@ModelAttribute ImageboardDTO imageboardDTO,
 									@RequestParam MultipartFile img,
 									Model model
 									) {
-		//경로 바꿔야함
-		String filePath ="D:\\morning_project_no_remove\\workspace\\exhibition\\src\\main\\webapp\\storage";
+		//경로 바꿔야함***
+		String filePath ="C:\\Users\\user\\git\\exhibition\\exhibition\\src\\main\\webapp\\storage";
 		String fileName = img.getOriginalFilename();
 		
 		File file = new File(filePath,fileName);	
@@ -135,8 +137,13 @@ public class CustomerServiceController {
 		}
 		
 		imageboardDTO.setImage1(fileName);			
+		
+		//메인 이미지 슬라이드 정보 담기
+		
+		//DB
 		customerServiceDAO.imageboardWrite(imageboardDTO);
 		model.addAttribute("imageboardDTO",imageboardDTO);
+			
 		return "/customerService/C_imageboardWrite";
 	}
 	
