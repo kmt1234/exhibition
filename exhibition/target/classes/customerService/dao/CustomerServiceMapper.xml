@@ -19,8 +19,8 @@
 											,#{postSelect}
 											,#{imageName}
 											,#{image1}
-											,#{eventDate1}
-											,#{eventDate2}
+											,#{startDate}
+											,#{endDate}
 											,#{eventLink})
 	</insert>
 	
@@ -52,6 +52,29 @@
 		</foreach>
 	</select>
 
+	<!--박람회 정보 넣기-->
+	<insert id="eventInfoWrite" parameterType="eventboard">
+		insert into eventboard values(seq_eventboard.nextval
+						  			  ,#{postSelect}
+									  ,#{imageName}
+									  ,#{image1}
+									  ,#{startDate}
+									  ,#{endDate}
+									  ,#{eventLink}
+									  ,#{startTime}
+									  ,#{endTime}
+									  ,#{eventPlace}
+									  ,#{eventPrice}
+									  ,#{eventSeats}
+									  ,#{eventRate}
+									  ,#{eventContent})
+	</insert>
+
+	
+	<!--메인 슬라이드 용 이미지 불러오기-->
+	<select id="getImageboardSlide" resultType="imageboard">
+		select * from customerImageboard order by seq desc
+	</select>
  </mapper>
  
  

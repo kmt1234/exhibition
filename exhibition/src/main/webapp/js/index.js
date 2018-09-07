@@ -95,5 +95,6 @@ $(document).ready(function(){
 	$('#I_CEOIntroductionForm').click(function(){//CEO인사말
 		location.href="/exhibition/introduction/I_CEOIntroductionForm.do";
 	});
+
 	
 });
