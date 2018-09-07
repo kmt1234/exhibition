@@ -40,4 +40,12 @@
 		update company set C_password = #{C_password} where C_license = #{C_license}
 	</update>
 	
+	<!-- 사업자정보수정 -->
+	<update id="modifyCompany" parameterType="java.util.Map">
+		update company set C_password = #{C_password}, C_condition = #{C_condition},
+						   C_postnumbox = #{C_postnumbox}, C_address1 = #{C_address1},
+						   C_address2 = #{C_address2}, C_tel = #{C_tel},
+						   C_email = #{C_email} where C_license = #{C_license}
+	</update>
+	
 </mapper>
