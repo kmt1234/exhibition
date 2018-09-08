@@ -9,12 +9,19 @@
 <!--시간 ui-->
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 
+<style>
+
+.imageboardList{
+	margin-left: 53%;	
+}
+
+</style>
 
 <title></title>
 
 </head>
 <body>
-<div align="center">
+<div align="center"><div class="imageboardList"><input type="button" value="목록"></div>	
 <form name="imageboardWriteForm" id="imageboardWriteForm" method="post"
 	enctype="multipart/form-data"><!--/exhibition/customerService/C_imageboardWrite.do  --> 
 	<table border="1" cellpadding="3" cellspacing="0">
@@ -99,7 +106,7 @@
 		
 		<tr>
 			<td colspan="2" align="center">
-				<input type="button" id="checkImageboardWrite" value="이미지등록">			
+				<input type="button" id="checkImageboardWrite" value="이미지등록">		
 				<input type="reset" value="다시작성">
  			</td>
 			

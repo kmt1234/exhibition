@@ -56,5 +56,16 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	public List<ImageboardDTO> getImageboardSlide() {
 		return sqlSession.selectList("customerServiceSQL.getImageboardSlide");
 	}
+	
+	//박람회 업로드 리스트 가져오기
+	public List<EventboardDTO> eventboardList(Map<String, Integer> map) {
+		return sqlSession.selectList("customerServiceSQL.eventboardList", map);
+	}
+	
+	//박람회 업로드 리스트 총 글수 가져오기
+	public int getEventboardTotalA() {
+		int totalA = sqlSession.selectOne("customerServiceSQL.getEventboardTotalA"); 
+		return totalA;
+	}
 
 }

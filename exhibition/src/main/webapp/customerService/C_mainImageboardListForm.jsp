@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 
 <style>
@@ -29,27 +29,27 @@
 	<br>
 	<br>
 	<div class="ui five column grid container">
-		<!-- »çÀÌµå¹Ù ¸Þ´º -->
+		<!-- ì‚¬ì´ë“œë°” ë©”ë‰´ -->
 		<div class="ui compact menu" style="width: 20%; height: 977px; ">
-			<a class="item" href="P_allScheduleForm.jsp">ÀüÃ¼ÀÏÁ¤</a> 
-			<a class="item" href="P_performanceScheduleForm.jsp">°ø¿¬ÀÏÁ¤</a> 
-			<a class="item" href="P_exhibitionScheduleForm.jsp">Àü½ÃÈ¸ÀÏÁ¤</a>
+			<a class="item" href="P_allScheduleForm.jsp">ì „ì²´ì¼ì •</a> 
+			<a class="item" href="P_performanceScheduleForm.jsp">ê³µì—°ì¼ì •</a> 
+			<a class="item" href="P_exhibitionScheduleForm.jsp">ì „ì‹œíšŒì¼ì •</a>
 		</div>
-		<!-- ¸ÞÀÎ È­¸é -->
+		<!-- ë©”ì¸ í™”ë©´ -->
 		<div class="ui compact menu" style="width: 80%; height: 900px;" >
-			<!-- Å¸ÀÌÆ² -->
+			<!-- íƒ€ì´í‹€ -->
 			<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
-				ÀÌ¹ÌÁö
-				<span class="h-light">¾÷·Îµå</span>
+				ì´ë¯¸ì§€
+				<span class="h-light">ì—…ë¡œë“œ</span>
 			</h2>
-			<!-- ¹öÆ° -->
-			<!-- <div>
-				<input type="button" value="´Þ·ÂÀ¸·Î º¸±â" 
+			<!-- ë²„íŠ¼ -->
+			 <!-- <div>
+				<input type="button" value="ë‹¬ë ¥ìœ¼ë¡œ ë³´ê¸°" 
 				style="width:150; height:35; background-color:#ffffff;
 				 border:1 solid #f702e7; float: left">
 				
-				<input type="button" value="¸®½ºÆ®·Î º¸±â" 
-				style="width:150; height:35; font-family:µ¸¿ò; background-color:#ffffff;
+				<input type="button" value="ë¦¬ìŠ¤íŠ¸ë¡œ ë³´ê¸°" 
+				style="width:150; height:35; font-family:ë‹ì›€; background-color:#ffffff;
 				 border:1 solid #f702e7; float: left">
 			</div> -->
 			<br>

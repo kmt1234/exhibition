@@ -127,7 +127,7 @@ public class CustomerServiceController {
 									Model model
 									) {
 		//경로 바꿔야함***
-		String filePath ="C:\\Users\\user\\git\\exhibition\\exhibition\\src\\main\\webapp\\storage";
+		String filePath ="D:\\Spring\\git\\exhibition\\exhibition\\src\\main\\webapp\\storage";
 		String fileName = img.getOriginalFilename();
 		
 		File file = new File(filePath,fileName);	
@@ -150,8 +150,7 @@ public class CustomerServiceController {
 	
 	//이미지보드 리스트
 	@RequestMapping(value="C_mainImageboardListForm",method=RequestMethod.GET)
-	public String imageboardListForm(@RequestParam(required=false , defaultValue="1") String pg,
-								Model model) {
+	public String imageboardListForm(@RequestParam(required=false , defaultValue="1") String pg, Model model) {
 		
 		model.addAttribute("pg",pg);
 		return "/customerService/C_mainImageboardListForm";
@@ -205,12 +204,12 @@ public class CustomerServiceController {
 		return "/customerService/C_imageboardDelete";
 	}
 	
-	//박람회 정보 넣는 컨트롤러
+	//박람회,연극 정보 넣는 컨트롤러
 	@RequestMapping(value="C_eventInfoWrite", method=RequestMethod.POST)
 	public ModelAndView C_exhibitionInfoWrite(@ModelAttribute EventboardDTO eventboardDTO,@RequestParam MultipartFile img) {
 		
 		//경로 바꿔야함***
-		String filePath ="C:\\Users\\user\\git\\exhibition\\exhibition\\src\\main\\webapp\\storage";
+		String filePath ="D:\\Spring\\git\\exhibition\\exhibition\\src\\main\\webapp\\storage";
 		String fileName = img.getOriginalFilename();
 		
 		File file = new File(filePath,fileName);	
@@ -241,6 +240,38 @@ public class CustomerServiceController {
 		mav.addObject("list",list);
 		mav.setViewName("jsonView");
 		
+		return mav;
+	}
+	
+	//박람회 업로드 리스트 폼
+	@RequestMapping(value="C_eventboardListForm", method=RequestMethod.GET)
+	public ModelAndView C_exhibitionboardList(@RequestParam(required=false , defaultValue="1") String pg) {
+		
+		int endNum = Integer.parseInt(pg)*3;
+		int startNum = endNum-2;
+		
+		Map<String,Integer> map = new HashMap<String,Integer>();
+		map.put("endNum", endNum);
+		map.put("startNum", startNum);
+		
+		int totalA = customerServiceDAO.getEventboardTotalA();
+
+		imageboardPaging.setCurrentPage(Integer.parseInt(pg));
+		imageboardPaging.setPageBlock(3);
+		imageboardPaging.setPageSize(3);
+		imageboardPaging.setTotalA(totalA);
+
+		imageboardPaging.eventMakePagingHTML();
+		
+		
+		List<EventboardDTO> list = customerServiceDAO.eventboardList(map);
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("pg", pg);
+		mav.addObject("imageboardPaging",imageboardPaging);
+		mav.addObject("list", list);
+		mav.setViewName("/customerService/C_eventboardListForm");
 		return mav;
 	}
 	

@@ -34,9 +34,25 @@ $(document).ready(function(){
 	
 	
 	
+	//목록 버튼
+	$('.imageboardList').click(function(){
+		if(index=='0'){
+			location.href='/exhibition/customerService/C_mainImageboardListForm.do';
+		}else if(index=='1'){
+			alert("exhibition");
+			location.href='/exhibition/customerService/C_eventboardListForm.do';
+		}else if(index=='2'){
+			alert("play");
+		}
+		
+		
+		
+	});
+	
+	
 	//분류 종류(기본 값 : 0(메인)
 	var index = $('#postSelect option:selected').val();
-	
+
 	//메인,박람회,연극 선택
 	$('.exhibitionS-td').hide();
 	$('.playS-td').hide();
@@ -67,6 +83,7 @@ $(document).ready(function(){
 	
 	$('#postSelect').change(function(){
 		//분류 값 (0:메인 1:박람회 2:연극)
+		
 		index = $('#postSelect option:selected').val();
 		
 		//초기화
@@ -112,7 +129,8 @@ $(document).ready(function(){
 			
 			$('.eventSeats').hide();
 			$('.eventRate').hide();
-					
+			
+						
 		}else if(index=='1'){//박람회
 			$('.eventS-td').hide();
 			$('.exhibitionS-td').show();
@@ -144,7 +162,7 @@ $(document).ready(function(){
 				
 			$('.playR-td').hide();
 			$('.eventRate').hide();
-								
+							
 		}else if(index=='2'){//연극
 			$('.eventS-td').hide();
 			$('.exhibitionS-td').hide();
@@ -176,7 +194,7 @@ $(document).ready(function(){
 			
 			$('.playR-td').show();
 			$('.eventRate').show();
-		
+			
 		}
 	});
 		
