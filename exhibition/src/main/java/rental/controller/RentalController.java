@@ -42,9 +42,9 @@ public class RentalController {
 	public String R_exhibitionHollDecision(@RequestParam String booth, Model model, ModelMap modelMap) {
 		double rate = 0;
 		if(booth.equals("Booth1") || booth.equals("Booth2")  || booth.equals("Booth3")  || booth.equals("Booth4")  || booth.equals("Booth7")  || booth.equals("Booth8")  || booth.equals("Booth9")  || booth.equals("Booth10")) {
-			rate = 2350*1.0*1.0*2.592*33;
+			rate = 2350*1.0*1.0*2592;
 		} else if(booth.equals("Booth5") || booth.equals("Booth6")) {
-			rate = 2350*1.0*1.2*6.343;
+			rate = 2350*1.0*1.2*6343;
 		}
 		
 		Date date = new Date();
@@ -54,8 +54,9 @@ public class RentalController {
 		model.addAttribute("rate", rate);
 		model.addAttribute("booth", booth);
 		model.addAttribute("date", sdf.format(date));
-
-		//달력
+		
+		
+		
 		List<ExhibitionDTO> list = exhibitionDAO.getCalendar(booth);
 		for(ExhibitionDTO data : list) {
 			data.setStartDate(data.getStartDate().substring(0, 10));
@@ -74,8 +75,7 @@ public class RentalController {
 		
 		modelMap.addAttribute("listView", list);
 		
-		return "/rental/R_exhibitionHollDecision";
-
+		return "/rental/R_exhibitionHollDecisionForm";
 	}
 	
 	@RequestMapping(value="searchRentDay", method=RequestMethod.POST)
