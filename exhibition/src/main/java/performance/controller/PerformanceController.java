@@ -3,7 +3,9 @@ package performance.controller;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.List;
+import java.util.TreeSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -57,37 +59,29 @@ public class PerformanceController {
 	//전체일정
 	@RequestMapping(value="P_allScheduleForm", method=RequestMethod.GET)
 	public String P_allScheduleForm(ModelMap modelMap) {
-		int ex = 0;
-		int ev= 0;
 			List<PerformanceDTO> list = performanceDAO.getPerformance();
-		
+				 
 			for(PerformanceDTO data : list) {
 				data.setSize(list.size());
 				data.setStartDate(data.getStartDate().substring(0, 10));
 				data.setEndDate(data.getEndDate().substring(0, 10));
 				data.setDays(getDiffDays(data.getStartDate().substring(0, 10).replaceAll("-", "").replaceAll("/",""), data.getEndDate().substring(0, 10).replaceAll("-", "").replaceAll("/","")));
 				String[] strDays = data.getDays();
+				
 				for(int i = 0; i < data.getDays().length; i++) {
 					StringBuffer sb = new StringBuffer(strDays[i]);
 					sb.insert(4, "-");
 					sb.insert(7, "-");
 					strDays[i] = sb.toString();
-					
 				}
+				
 				data.setDays(strDays);
 				data.setDaysSize(strDays.length);
-				if(data.getCode().equals("1")) {
-						ex = data.getCode().length();
 				
-				}else if(data.getCode()=="2") {
-					for(int i = 0 ; i<data.getCode().length();i++) {
-						ev+=1;
-					}
-				}
 			}
+
 		modelMap.addAttribute("listView",list);
-		modelMap.addAttribute("ex", ex);
-		modelMap.addAttribute("ev", ev);
+
 		
 		return "/performance/P_allScheduleForm";
 	}
