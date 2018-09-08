@@ -103,3 +103,50 @@ insert into calendar2 values('1','아아아','20180918','20180922');
 insert into calendar2 values('1','아아아','20180928','20181005');
 insert into calendar2 values('2','거짓말','20180908','20180912');
 
+
+
+//공지사항
+create table C_notice(
+seq number primary key,
+subject varchar2(50) not null,
+content varchar2(500) not null,
+logtime date default sysdate);
+
+create sequence seq_C_notice nocycle nocache;
+
+//자주묻는 질문
+create table C_QnA (
+seq number primary key,
+subject varchar2(200) not null,
+content varchar2(500) not null);
+
+create sequence seq_C_QnA nocycle nocache;
+
+
+
+//고객의 소리
+create table C_inquire(
+seq number primary key,
+email varchar2(50) not null,
+classify varchar2(50) not null,
+name varchar2(50) not null,
+tel varchar2(20),
+subject varchar2(50) not null,
+content varchar2(300) not null,
+logtime DATE DEFAULT sysdate);
+
+
+create sequence seq_C_inquire nocycle nocache;
+
+
+//주요시설 연락처
+create table C_contactList(
+seq number primary key,
+classify varchar2(50) not null,
+agency varchar2(50) not null,
+name varchar2(30) not null,
+contact varchar2(50) not null);
+
+create sequence seq_C_contactList nocycle nocache;
+
+

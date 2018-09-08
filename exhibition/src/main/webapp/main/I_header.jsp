@@ -12,7 +12,6 @@
 	font-family: 'Nanum Gothic';
 }
 .column {
-   /* border: 1px solid gray; */
    align-self: center;
 }
 .item {
@@ -33,25 +32,21 @@
    vertical-align: middle;
    text-align: center;
 }
-/* .in {
-   position: relative;
-   display: inline-block;
-} */
+
 .menu {
    text-align: center;
 }
 </style>
-
 	<header>
 		<div id="main" class="ui three column grid container">
-			<div class="column" style="width: 150px; height: 50px;">
+			<div class="column" style="width: 25%; height: 50px;">
 				<a href="http://localhost:8080/exhibition/main/index.do"><img alt="" src="../img/logo.jpg"
 					style="width: 150px; height: 50px;"></a>
 			</div>
-			<div class="column">
-				<div class="ui input">
-					<div class="ui action input"  style="width: 520px; height: 40px;">
-						<input type="text" placeholder="Search...">
+			<div class="column" style="width: 49%; padding-top: 100px;">
+				<div class="ui input" style="width: 100%;">
+					<div class="ui action input"  style="width: 100%; height: 40px;">
+						<input type="text" placeholder="Search..." style="width: 30%;">
 						<button class="ui icon button">
 							<i class="search icon"></i>
 						</button>
@@ -136,13 +131,12 @@
 			</div>
 			<div class="ui compact menu" style="width: 20%;">
 				<div class="ui simple dropdown item">
-					<span id="sp">고객센터</span>
+					<span id="C_infoForm" >고객센터</span>
 					<div class="menu">
-						<div class="item" id="C_notice">공지사항</div>
-						<div class="item" id="C_board">고객의 소리</div>
-						<div class="item" id="C_QnA">자주묻는 질문</div>
-						<div class="item" id="C_contactList">주요시설 연락처</div>
-						<div class="item" id="C_MailConfirm">1:1문의</div>
+						<div class="item" id="C_noticeForm">공지사항</div>
+						<div class="item" id="C_EmailConfirm">고객의 소리</div>
+						<div class="item" id="C_QnAForm">자주묻는 질문</div>
+						<div class="item" id="C_contactListForm">주요시설 연락처</div>
 						<div class="item" id="C_personalInformation">개인정보</div>
 						<div class="item" id="C_boardAdd">게시판 추가</div><!--세션값에 따라 보이게 할 예정-->
 					</div>

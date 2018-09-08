@@ -6,11 +6,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
-<div style="height: 350px; border: 1px solid;">
-	<header>
-		<jsp:include page="../main/I_header.jsp"></jsp:include>
-	</header>
-</div>
 <form name="C_Inquire" id="C_InquireForm" method="post" action="/exhibition/customerService/C_checkInquire.do">
 <h1>문의하기</h1>
 <div>

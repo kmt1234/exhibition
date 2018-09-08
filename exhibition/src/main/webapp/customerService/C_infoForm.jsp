@@ -30,32 +30,21 @@
 	<br>
 	<div class="ui five column grid container">
 		<!-- 사이드바 메뉴 -->
-		<div class="ui compact menu" style="width: 20%; height: 977px; ">
-			<a class="item" href="P_allScheduleForm.jsp">전체일정</a> 
-			<a class="item" href="P_performanceScheduleForm.jsp">공연일정</a> 
-			<a class="item" href="P_exhibitionScheduleForm.jsp">전시회일정</a>
+		<div class="ui compact menu" style="width: 20%; height: 960px; ">
+			<a class="item" href="C_noticeForm.jsp">공지사항</a> 
+			<a class="item" href="C_emailConfirmForm.jsp">고객의 소리</a> 
+			<a class="item" href="C_QnAForm.jsp">자주묻는 질문</a>
+			<a class="item" href="C_contactListForm.jsp">주요시설 연락처</a>
 		</div>
 		<!-- 메인 화면 -->
 		<div class="ui compact menu" style="width: 80%; height: 900px;" >
 			<!-- 타이틀 -->
 			<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
-				이미지
-				<span class="h-light">업로드</span>
+				고객
+				<span class="h-light">센터</span>
 			</h2>
-			<!-- 버튼 -->
-			<!-- <div>
-				<input type="button" value="달력으로 보기" 
-				style="width:150; height:35; background-color:#ffffff;
-				 border:1 solid #f702e7; float: left">
-				
-				<input type="button" value="리스트로 보기" 
-				style="width:150; height:35; font-family:돋움; background-color:#ffffff;
-				 border:1 solid #f702e7; float: left">
-			</div> -->
-			<br>
-			<br>
 			
-			<jsp:include page="C_imageboardList.jsp" ></jsp:include>
+			<jsp:include page="C_info.jsp" ></jsp:include>
 			
 		</div>
 		<!-- footer -->

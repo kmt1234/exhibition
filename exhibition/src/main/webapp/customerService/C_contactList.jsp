@@ -7,6 +7,56 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<div>
+	<div class="QnA top">
+		<span id="seqA">번호</span>
+		<span id="subjectA">제목</span>
+	</div>
+</div>
+<div>
+	<div>
+		<!-- <select name="C_contactList_SearchMenu" id="C_contactList_SearchMenu">
+			<option value="">
+			<option value="">
+		</select> -->
+		<input type="text" id="keyword">
+		<span id="C_contactList_Search">검색</span>
+	</div>
+</div>
+<div>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script>
+$(document).ready(function(){
+	$.ajax({
+		type : 'POST',
+		url : '/exhibition/customerService/getContactList.do',
+		dataType : 'json',
+		success : function(data){
+			$.each(data.list, function(index, item){
+				$('<div/>').append($('<span/>',{
+					align : 'center',
+					text : item.seq,
+					id : 'seqA'
+				})).append($('<a/>',{
+					align : 'center',
+						id : 'subjectA',
+						class : item.seq+"",
+						href : 'javascript:void(0)',
+						text : item.subject
+				})).appendTo($('#C_QnA_List'));
+			});
+		}
+	});
+	
+	/* $('#C_QnA_List').on('click','#subjectA',function(){
+		var seq = $(this).prev().text();
+		location.href="/exhibition/customerService/C_QnAView.do?seq="+seq;
+	}); */
+});
+</script>
+	<a href="/exhibition/customerService/C_contactList_WriteForm.do">작성</a>
+</div>
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="../js/customerService.js?ver=1"></script>
 </body>
 </html>
