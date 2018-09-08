@@ -39,7 +39,6 @@
 </style>
 
 <!-- 사업자 회원가입 팝업 -->
-
 <div class="ui modal2 modal" id="companyWriteFormPopup">							<i class="close icon"></i>
 	 <div class="header" align="center">법인고객 - 회원가입 </div>
 
@@ -137,13 +136,8 @@ action="/exhibition/company/companyWrite.do">
 	    <div class="ui black deny button" id="companyWriteForm-close">취소</div>
 	    <div class="ui positive right labeled icon button" id="companyWrite">가입<i class="checkmark icon"></i></div>
 	</div>
-
-
-
-</div>
-
 	
-
-</div>
+</div><!-- class="image content2" -->
+</div><!-- class="ui modal2 modal" -->
  
 
