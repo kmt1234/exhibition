@@ -2,7 +2,6 @@
  *	rental 관련 javascript
  * 
  */
-
 $(document).ready(function(){
 	var code = $('#code').val();
 	if(code=='2') {
