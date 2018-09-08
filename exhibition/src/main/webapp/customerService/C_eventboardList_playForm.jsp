@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>박람회 보드 리스트</title>
+<title>연극 보드 리스트</title>
 
 <style>
 .box-container{
@@ -85,7 +85,7 @@
 						</tr>
 								
 							<c:forEach items="${list}" var="list">
-								<c:if test="${list.postSelect eq '1' and list.postSelect ne '2'}">
+								<c:if test="${list.postSelect eq '2' and list.postSelect ne '1'}">
 										<tr>
 											<td><input type="checkbox" name="check" class="check" value="${list.seq}"></td>
 											<td>${list.seq}</td>
@@ -119,7 +119,7 @@
 <script>
 
 function eventboardPaging(pg){
-	location.href="/exhibition/customerService/C_eventboardListForm.do?pg="+pg
+	location.href="/exhibition/customerService/C_eventboardList_playForm.do?pg="+pg
 }
 
 $(document).ready(function(){
@@ -141,7 +141,7 @@ $(document).ready(function(){
 		if(count==0) 
 			alert("항목을 선택해주세요");
 		else
-			$('#eventboardListForm').attr('action','/exhibition/customerService/C_eventboardDelete.do').submit();
+			$('#eventboardListForm').attr('action','/exhibition/customerService/C_eventboardDelete_play.do').submit();
 	});
 	
 });

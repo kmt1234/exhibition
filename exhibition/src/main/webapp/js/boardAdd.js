@@ -43,6 +43,7 @@ $(document).ready(function(){
 			location.href='/exhibition/customerService/C_eventboardListForm.do';
 		}else if(index=='2'){
 			alert("play");
+			location.href='/exhibition/customerService/C_eventboardList_playForm.do';
 		}
 		
 	});

@@ -453,7 +453,67 @@ public class CustomerServiceController {
 		mav.setViewName("/customerService/C_eventboardListForm");
 		return mav;
 	}
+	//박람회 업로드 리스트 삭제
+	@RequestMapping(value="C_eventboardDelete", method=RequestMethod.POST)
+	public ModelAndView C_eventboardDelete(@RequestParam String[] check) {
+		
+		List<Integer> list = new ArrayList<Integer>();
+		for(String seq : check) {
+			list.add(Integer.parseInt(seq));
+		}
+		
+		//DB
+		customerServiceDAO.eventboardDelete(list);
+		
+		return new ModelAndView("redirect:/customerService/C_eventboardListForm.do");
+	}
 	
+	//연극 업로드 리스트 폼
+	@RequestMapping(value="C_eventboardList_playForm", method=RequestMethod.GET)
+	public ModelAndView C_eventboardList_playForm(@RequestParam(required=false , defaultValue="1") String pg) {
+		
+		int endNum = Integer.parseInt(pg)*3;
+		int startNum = endNum-2;
+		
+		Map<String,Integer> map = new HashMap<String,Integer>();
+		map.put("endNum", endNum);
+		map.put("startNum", startNum);
+		
+		int totalA = customerServiceDAO.getEventboardTotalA_play();
+
+		imageboardPaging.setCurrentPage(Integer.parseInt(pg));
+		imageboardPaging.setPageBlock(3);
+		imageboardPaging.setPageSize(3);
+		imageboardPaging.setTotalA(totalA);
+
+		imageboardPaging.eventMakePagingHTML();
+		
+		//DB
+		List<EventboardDTO> list = customerServiceDAO.eventboardList_play(map);
+				
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("pg", pg);
+		mav.addObject("imageboardPaging",imageboardPaging);
+		mav.addObject("list", list);
+		mav.setViewName("/customerService/C_eventboardList_playForm");
+		return mav;
+	}
+	
+	//박람회 업로드 리스트 삭제
+	@RequestMapping(value="C_eventboardDelete_play", method=RequestMethod.POST)
+	public ModelAndView C_eventboardDelete_play(@RequestParam String[] check) {
+		
+		List<Integer> list = new ArrayList<Integer>();
+		for(String seq : check) {
+			list.add(Integer.parseInt(seq));
+		}
+		
+		//DB
+		customerServiceDAO.eventboardDelete(list);
+		
+		return new ModelAndView("redirect:/customerService/C_eventboardList_playForm.do");
+	}
 }
 	
 
