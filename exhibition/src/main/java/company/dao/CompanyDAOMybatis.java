@@ -44,5 +44,10 @@ public class CompanyDAOMybatis implements CompanyDAO {
 		sqlSession.update("companySQL.modifyCompany", map);
 	}
 
+	public int deleteCompany(Map<String, String> map) {
+		return sqlSession.delete("companySQL.deleteCompany", map);
+		
+	}
+
 
 }

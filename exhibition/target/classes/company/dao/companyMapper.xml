@@ -48,4 +48,9 @@
 						   C_email = #{C_email} where C_license = #{C_license}
 	</update>
 	
+	<!-- 사업자 탈퇴 -->
+	<delete id="deleteCompany" parameterType="java.util.Map">
+		delete from company where C_license = #{C_license} and C_password = #{C_password}
+	</delete>
+	
 </mapper>

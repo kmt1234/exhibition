@@ -16,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import company.bean.CompanyDTO;
 import company.dao.CompanyDAO;
-import member.bean.MemberDTO;
 
 @RequestMapping(value="company")
 @Component
@@ -83,4 +82,30 @@ public class CompanyController {
 
 		return "modify";
 	}
+	
+	//사업자 삭제
+	@RequestMapping(value="deleteCompany", method=RequestMethod.POST)
+	public @ResponseBody String deleteCompany(@RequestParam String C_license,@RequestParam String C_password,HttpSession session) {
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("C_license", C_license);
+		map.put("C_password", C_password);
+		
+		//DB
+		int su = companyDAO.deleteCompany(map);
+		if(su==0) return "not_exist";
+		else {
+			session.invalidate();
+			return "exist";
+		}
+	}
+	
+	//탈퇴완료 페이지
+	@RequestMapping(value="outComplete", method=RequestMethod.GET)
+	public ModelAndView outComplete() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/login/outComplete");	//탈퇴완료 페이지
+		return mav;
+	}
+	
+	
 }

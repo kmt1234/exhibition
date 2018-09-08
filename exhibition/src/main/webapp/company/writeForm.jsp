@@ -89,7 +89,7 @@ action="/exhibition/company/companyWrite.do">
 <div id="conditionConfirm"></div>
 
 <div class="ui icon input">
-  <input type="text" name="C_postnumber" id="Cw_postnumber" placeholder="우편번호" style=width:300px readonly>
+  <input type="text" name="C_postnumbox" id="Cw_postnumber" placeholder="우편번호" style=width:300px readonly>
   <i class="inverted circular search link icon" id="Cw_addrB" onclick="Postcode()"></i>
 </div><br>
 

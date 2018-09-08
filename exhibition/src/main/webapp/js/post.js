@@ -25,7 +25,7 @@ function Postcode() {
                 document.getElementById('Cw_postnumber').value = data.zonecode;
                 document.getElementById('Cw_address1').value = fullAddr;
 
-                document.getElementById('Cw_address2').focus();
+                document.getElementById('Cw_address1').focus();
             }
         }).open();
     }

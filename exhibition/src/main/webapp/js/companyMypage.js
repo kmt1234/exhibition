@@ -146,6 +146,40 @@ $(document).ready(function(){
 		location.href="/exhibition/main/index.do";
 	});
 	
+	//회원탈퇴버튼
+	$('.ui.modal3').hide();
+	$('#company-out').click(function(){
+		$('#C-modify-modify').hide();
+		$('.ui.modal3').show();
+	});
+	$('#out-no').click(function(){//아니오 클릭시
+		$('.ui.modal3').hide();
+		$('#C-modify-modify').show();
+	});
+	$('#out-yes').click(function(){//네 클릭시
+		$('.ui.basic.modal').modal('show');
+	});
+	
+	$('#del_OK').click(function(){
+			$.ajax({
+				type : 'POST',
+				url : '/exhibition/company/deleteCompany.do',
+				data : {'C_license':$('#C-modify-license-hidden').val(),'C_password':$('#del_pass').val()},
+				dataType : 'text',
+				success : function(data){
+					if(data=='exist'){
+						location.href='/exhibition/company/outComplete.do';
+					}else if(data=='not_exist'){
+						$('#del_check').text("비밀번호가 틀렸습니다.").css("font-size","12px").css("color","red").css("margin-left","24%").css("margin-top","2%");
+						$('.ui.basic.modal').modal('show');
+					}
+				}//success
+			});
+	});
+	
+	
+	
+	
 	
 	//예매리스트
 	$('#member-ticket-list').click(function(){
