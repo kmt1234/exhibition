@@ -88,6 +88,11 @@ $(document).ready(function(){
 	$('#C_contactListForm').click(function(){
 		location.href="/exhibition/customerService/C_contactListForm.do";
 	});
+	$('#C_boardAdd').click(function(){
+		location.href="/exhibition/customerService/C_mainImageboardForm.do";
+	});
+	
+	
 	
 	
 	//소개

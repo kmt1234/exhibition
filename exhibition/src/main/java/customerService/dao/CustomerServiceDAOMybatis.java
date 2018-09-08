@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import customerService.bean.CustomerServiceDTO;
+import customerService.bean.EventboardDTO;
 import customerService.bean.ImageboardDTO;
 
 @Transactional
@@ -20,7 +21,10 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	public void C_notice_Write(Map<String, String> map) {
 		sqlSession.insert("customerServiceSQL.C_notice_Write", map);		
 	}
-	
+	public void C_notice_Modify(Map<String, String> map) {
+		sqlSession.update("customerServiceSQL.C_notice_Modify", map);
+	}
+
 
 	public void C_inquire(CustomerServiceDTO customerServiceDTO) {
 		sqlSession.insert("customerServiceSQL.C_inquire", customerServiceDTO);
@@ -50,9 +54,6 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	}
 
 
-	public void C_notice_Modify(Map<String, String> map) {
-		sqlSession.update("customerServiceSQL.C_notice_Modify", map);
-	}
 
 
 	public List<CustomerServiceDTO> getInquireList() {
@@ -74,7 +75,7 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 		return sqlSession.selectList("customerServiceSQL.getContactList");
 	}
 
-	public void imageboardWrite(ImageboardDTO imageboardDTO) {
+public void imageboardWrite(ImageboardDTO imageboardDTO) {
 		sqlSession.insert("customerServiceSQL.imageboardWrite",imageboardDTO);
 	}
 	public int getImageboardTotalA() {
@@ -88,12 +89,32 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 
 	public void imageboardDelete(List<Integer> list) {
 		sqlSession.delete("customerServiceSQL.imageboardDelete",list);
-		
 	}
 
 	public List<ImageboardDTO> getList(List<Integer> list) {
 		return sqlSession.selectList("customerServiceSQL.getList",list);
 		
+	}
+		
+	//박람회 정보 등록
+	public void eventInfoWrite(EventboardDTO eventboardDTO) {
+		sqlSession.insert("customerServiceSQL.eventInfoWrite", eventboardDTO);
+	}
+	
+	//메인(슬라이드 이미지 불러오기)
+	public List<ImageboardDTO> getImageboardSlide() {
+		return sqlSession.selectList("customerServiceSQL.getImageboardSlide");
+	}
+	
+	//박람회 업로드 리스트 가져오기
+	public List<EventboardDTO> eventboardList(Map<String, Integer> map) {
+		return sqlSession.selectList("customerServiceSQL.eventboardList", map);
+	}
+	
+	//박람회 업로드 리스트 총 글수 가져오기
+	public int getEventboardTotalA() {
+		int totalA = sqlSession.selectOne("customerServiceSQL.getEventboardTotalA"); 
+		return totalA;
 	}
 
 }

@@ -26,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import customerService.bean.CustomerServiceDTO;
+import customerService.bean.EventboardDTO;
 import customerService.bean.ImageboardDTO;
 import customerService.bean.ImageboardPaging;
 import customerService.dao.CustomerServiceDAO;
@@ -307,7 +308,7 @@ public class CustomerServiceController {
 									Model model
 									) {
 		//경로 바꿔야함
-		String filePath ="D:\\morning_project_no_remove\\workspace\\exhibition\\src\\main\\webapp\\storage";
+			String filePath ="D:\\Spring\\git\\exhibition\\exhibition\\src\\main\\webapp\\storage";
 		String fileName = img.getOriginalFilename();
 		
 		File file = new File(filePath,fileName);	
@@ -319,7 +320,8 @@ public class CustomerServiceController {
 			e.printStackTrace();
 		}
 		
-		imageboardDTO.setImage1(fileName);			
+		imageboardDTO.setImage1(fileName);
+		//DB			
 		customerServiceDAO.imageboardWrite(imageboardDTO);
 		model.addAttribute("imageboardDTO",imageboardDTO);
 		return "/customerService/C_imageboardWrite";
@@ -381,5 +383,77 @@ public class CustomerServiceController {
 		customerServiceDAO.imageboardDelete(list);
 		return "/customerService/C_imageboardDelete";
 	}
+	//박람회,연극 정보 넣는 컨트롤러
+	@RequestMapping(value="C_eventInfoWrite", method=RequestMethod.POST)
+	public ModelAndView C_exhibitionInfoWrite(@ModelAttribute EventboardDTO eventboardDTO,@RequestParam MultipartFile img) {
+		
+		//경로 바꿔야함***
+		String filePath ="D:\\Spring\\git\\exhibition\\exhibition\\src\\main\\webapp\\storage";
+		String fileName = img.getOriginalFilename();
+		
+		File file = new File(filePath,fileName);	
+
+		try {
+			FileCopyUtils.copy(img.getInputStream(), new FileOutputStream(file));
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		eventboardDTO.setImage1(fileName);			
+
+		//DB
+		customerServiceDAO.eventInfoWrite(eventboardDTO);
+		
+		return new ModelAndView("redirect:/main/index.do");
+	}
+	
+	//이미지 슬라이드 가져오는 컨트롤러
+	@RequestMapping(value="getImageboardSlide", method=RequestMethod.GET)
+	public ModelAndView getImageboardSlide() {
+		
+		//DB
+		List<ImageboardDTO> list = customerServiceDAO.getImageboardSlide();
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list",list);
+		mav.setViewName("jsonView");
+		
+		return mav;
+	}
+	
+	//박람회 업로드 리스트 폼
+	@RequestMapping(value="C_eventboardListForm", method=RequestMethod.GET)
+	public ModelAndView C_exhibitionboardList(@RequestParam(required=false , defaultValue="1") String pg) {
+		
+		int endNum = Integer.parseInt(pg)*3;
+		int startNum = endNum-2;
+		
+		Map<String,Integer> map = new HashMap<String,Integer>();
+		map.put("endNum", endNum);
+		map.put("startNum", startNum);
+		
+		int totalA = customerServiceDAO.getEventboardTotalA();
+
+		imageboardPaging.setCurrentPage(Integer.parseInt(pg));
+		imageboardPaging.setPageBlock(3);
+		imageboardPaging.setPageSize(3);
+		imageboardPaging.setTotalA(totalA);
+
+		imageboardPaging.eventMakePagingHTML();
+		
+		
+		List<EventboardDTO> list = customerServiceDAO.eventboardList(map);
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("pg", pg);
+		mav.addObject("imageboardPaging",imageboardPaging);
+		mav.addObject("list", list);
+		mav.setViewName("/customerService/C_eventboardListForm");
+		return mav;
+	}
 	
 }
+	
+

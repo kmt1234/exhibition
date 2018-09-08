@@ -90,6 +90,7 @@ CREATE TABLE eventboard(
  
 create sequence seq_eventboard  nocache nocycle;
 
+<<<<<<< HEAD
 //달력 임시 디비
 create table calendar2(
 code varchar2(5),
@@ -150,3 +151,20 @@ contact varchar2(50) not null);
 create sequence seq_C_contactList nocycle nocache;
 
 
+=======
+
+// 일정 DB 
+create table calendar2(
+code varchar2(5),
+title varchar2(30),
+startDate date,
+endDate date
+);
+
+
+insert into calendar2 values('2','라이어','20180910','20180913');
+insert into calendar2 values('1','아아아','20180918','20180922');
+insert into calendar2 values('1','아아아','20180928','20181005');
+insert into calendar2 values('2','거짓말','20180908','20180912');
+
+commit;

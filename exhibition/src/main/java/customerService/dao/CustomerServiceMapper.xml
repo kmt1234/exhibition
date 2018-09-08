@@ -76,12 +76,15 @@
  		select * from C_contactList
  	</select>
  	
- 	<!-- 이미지작성  -->
+ 		<!-- 이미지작성  -->
 	<insert id="imageboardWrite" parameterType="imageboard">
 		insert into customerImageboard values(seq_customerImageboard.nextval
-									,#{imageName}
-									,#{image1}
-									,#{postSelect})
+											,#{postSelect}
+											,#{imageName}
+											,#{image1}
+											,#{startDate}
+											,#{endDate}
+											,#{eventLink})
 	</insert>
 	<!-- 총글수 -->
 	<select id="getImageboardTotalA" resultType="int">
@@ -109,6 +112,42 @@
 		<foreach collection="list" item="item" open="(" close=")" separator=",">
 			#{item}
 		</foreach>
+	</select>
+		<!--박람회 정보 넣기-->
+	<insert id="eventInfoWrite" parameterType="eventboard">
+		insert into eventboard values(seq_eventboard.nextval
+						  			  ,#{postSelect}
+									  ,#{imageName}
+									  ,#{image1}
+									  ,#{startDate}
+									  ,#{endDate}
+									  ,#{eventLink}
+									  ,#{startTime}
+									  ,#{endTime}
+									  ,#{eventPlace}
+									  ,#{eventPrice}
+									  ,#{eventSeats}
+									  ,#{eventRate}
+									  ,#{eventContent})
+	</insert>
+
+	
+	<!--메인 슬라이드 용 이미지 불러오기-->
+	<select id="getImageboardSlide" resultType="imageboard">
+		select * from customerImageboard order by seq desc
+	</select>
+	
+	<!--박람회 업로드 리스트 가져오기  -->
+	<select id="eventboardList" parameterType="java.util.Map" resultType="eventboard">
+		select * from(
+		select rownum rn, tt.* from(
+		select * from eventboard order by seq desc)tt
+		)where rn <![CDATA[ >= ]]> #{startNum} and rn<![CDATA[<=]]> #{endNum}
+	</select>
+	
+	<!--박람회 업로드 리스트 총 글수 가져오기 -->
+	<select id="getEventboardTotalA" resultType="int">
+		select count(*) from eventboard
 	</select>
 
  </mapper>

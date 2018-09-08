@@ -134,7 +134,7 @@
 					<span id="C_infoForm" >고객센터</span>
 					<div class="menu">
 						<div class="item" id="C_noticeForm">공지사항</div>
-						<div class="item" id="C_EmailConfirm">고객의 소리</div>
+						<div class="item" id="C_emailConfirmForm">고객의 소리</div>
 						<div class="item" id="C_QnAForm">자주묻는 질문</div>
 						<div class="item" id="C_contactListForm">주요시설 연락처</div>
 						<div class="item" id="C_personalInformation">개인정보</div>
