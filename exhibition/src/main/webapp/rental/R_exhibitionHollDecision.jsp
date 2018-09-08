@@ -33,10 +33,7 @@
 <script src='../calendar2/lib/jquery.min.js'></script>
 <script src='../calendar2/fullcalendar.min.js'></script>
 
-<!-- <script src="https://code.jquery.com/jquery-3.1.1.min.js"
-	integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-	crossorigin="anonymous"></script>
-<script src="../semantic/semantic.min.js"></script> -->
+
 <script>
 	var dataset = [
 		<c:forEach var="listView" items="${listView}" varStatus="status">
