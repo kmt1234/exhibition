@@ -66,6 +66,9 @@ $(document).ready(function(){
 	$('#T_subwayForm').click(function(){//전철이용
 		location.href="/exhibition/traffic/T_subwayForm.do";
 	});
+	$('#T_allForm').click(function(){//전철이용
+		location.href="/exhibition/traffic/T_allForm.do";
+	});
 	//고객센터
 	//공지사항
 	$('#C_noticeC').click(function(){

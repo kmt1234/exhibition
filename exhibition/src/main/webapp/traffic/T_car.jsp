@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<br><br>
+<div style="border:1px solid black"><br>
+<span>
+<img src="../img/carMap.jpg">
 </body>
 </html>
