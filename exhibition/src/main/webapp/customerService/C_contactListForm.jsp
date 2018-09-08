@@ -15,7 +15,6 @@
 	}
 	.h-light{
 		color: #ec008c;
-	
 	}
 </style>
 </head>

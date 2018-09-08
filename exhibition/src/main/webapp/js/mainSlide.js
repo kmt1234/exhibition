@@ -1,5 +1,4 @@
  $(document).ready(function(){
-	
 	 //슬라이더 이미지 불러오기
 	 $.ajax({
 		type : 'GET',
@@ -30,7 +29,6 @@
 					
 				//	$('#imageSlide').attr('src','../storage/'+item.image1+'');
 				});//each
-				
 				
 				 var current = 0;
 				 var max = 0;
@@ -63,8 +61,6 @@
 				 $(document).ready(init);
 				
 			}//else
-			
 		}//success
 	 });//ajax
-	 
  });
