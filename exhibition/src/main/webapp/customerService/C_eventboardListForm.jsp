@@ -79,14 +79,12 @@
 						<tr>
 							<th><input type="checkbox" id="checkAll" name="check" class="check"></th>
 							<th width="100">번호</th>
-							<th width="150">이미지</th>
+							<th width="150">이미지</th><td>${list.postSelect}</td>
 							<th width="100">상품명</th>
 							<th width="380">행사 소개</th>
 						</tr>
-						
-						<!--수정하자  -->
-						<c:if test="${list.postSelect==1}">
 							<c:forEach items="${list }" var="list">
+							<c:if test="${list.postSelect==1}">
 							<tr>
 								<td><input type="checkbox" name="check" class="check" value="${list.seq}"></td>
 								<td>${list.seq}</td>
@@ -94,8 +92,9 @@
 								<td>${list.imageName}</td>
 								<td>${list.eventContent}</td>
 							</tr>
+							</c:if>
 							</c:forEach>
-						</c:if>
+						
 						
 						
 						
