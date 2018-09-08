@@ -95,6 +95,9 @@ $(document).ready(function(){
 	$('#I_CEOIntroductionForm').click(function(){//CEO인사말
 		location.href="/exhibition/introduction/I_CEOIntroductionForm.do";
 	});
-
-	
+	//싸이트맵
+	$('#site_map').click(function(){
+		  window.open('/exhibition/main/map.jsp',"","width=900px, height=600px");
+		
+	});
 });

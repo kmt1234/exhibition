@@ -15,41 +15,32 @@
    /* border: 1px solid gray; */
    align-self: center;
 }
-
 .item {
    text-align: center;
 }
-
 #main {
    height: 200px;
 }
-
 #mainMenu {
    float: none;
 }
-
 .ui.compact.menu {
    display: table;
    width: 20%;
 }
-
 .ui.simple.dropdown.item {
    display: table-cell;
    vertical-align: middle;
    text-align: center;
 }
-
 /* .in {
    position: relative;
    display: inline-block;
 } */
-
 .menu {
    text-align: center;
 }
-
 </style>
-
 
 	<header>
 		<div id="main" class="ui three column grid container">

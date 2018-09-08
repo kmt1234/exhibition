@@ -11,7 +11,7 @@
 </header>
 <section>
 	<div style=" margin-left:400px;margin-top: 20px;">
-	<jsp:include page="../main/I_body.jsp"/>
+	<jsp:include page="${display }"/>
 	</div>
 </section>
 

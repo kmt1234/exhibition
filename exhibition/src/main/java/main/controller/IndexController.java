@@ -19,11 +19,16 @@ public class IndexController {
    @Autowired
    private CustomerServiceDAO customerServiceDAO;
    
+   /* 메인페이지 이동~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
    @RequestMapping(value="index", method=RequestMethod.GET)
-   public String index() {
-      return "/main/index";
+   public ModelAndView index() {
+	   ModelAndView mav = new ModelAndView();
+	 
+	   mav.addObject("display", "/main/I_body.jsp");
+	   mav.setViewName("/main/index");
+	   return mav;
    }
-   
+   /* 선택이미지 메인화면으로 전환~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/  
    @RequestMapping(value="I_body", method=RequestMethod.POST)
    public ModelAndView I_body(@RequestParam String[] check) {
       
