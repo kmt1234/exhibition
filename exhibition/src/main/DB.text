@@ -63,10 +63,29 @@ CREATE TABLE customerImageboard(
      postSelect number default(0),   --구분(분류) 메인:0
      imageName VARCHAR2(40) NOT NULL,--제목
      image1 varchar2(500),          --이미지명
-     eventDate1 varchar2(20),   --날짜1
-     eventDate2 varchar2(20),   --날짜2
+     startDate1 date,   --날짜1
+     endDate2 date,   --날짜2
      eventLink varchar2(200)    --링크 
  );
  
  create sequence seq_customerImageboard  nocache nocycle;
 
+//박람회, 연극 등록 보드 DB
+CREATE TABLE eventboard(
+     seq NUMBER PRIMARY KEY,            --시퀀스      
+     postSelect number,               --구분(분류) 박람회 : 1 연극 : 2
+     imageName VARCHAR2(40) NOT NULL,   --제목
+     image1 varchar2(500),              --이미지명
+     startDate date,                   --날짜1
+     endDate date,                     --날짜2
+     eventLink varchar2(200),            --링크
+     startTime varchar2(30),		--시작일
+     endTime varchar2(30),		--종료일
+     eventPlace varchar2(100),	--장소
+     eventPrice varchar2(100),	--가격
+     eventSeats varchar2(100),	--관람좌석
+     eventRate varchar2(100),		--관람등급
+     eventContent varchar2(4000)	--소개 글(간단)
+ );
+ 
+create sequence seq_eventboard  nocache nocycle;

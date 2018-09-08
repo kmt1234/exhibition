@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import customerService.bean.CustomerServiceDTO;
+import customerService.bean.EventboardDTO;
 import customerService.bean.ImageboardDTO;
 
 @Transactional
@@ -22,7 +23,7 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 		
 	}
 	
-	//고객센터 - 게시판 추가 - 메인 이미지 슬라이드 추가
+	//메인 이미지 등록(슬라이드)
 	public void imageboardWrite(ImageboardDTO imageboardDTO) {
 		sqlSession.insert("customerServiceSQL.imageboardWrite",imageboardDTO);
 	}
@@ -46,5 +47,14 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 		
 	}
 	
+	//박람회 정보 등록
+	public void eventInfoWrite(EventboardDTO eventboardDTO) {
+		sqlSession.insert("customerServiceSQL.eventInfoWrite", eventboardDTO);
+	}
+	
+	//메인(슬라이드 이미지 불러오기)
+	public List<ImageboardDTO> getImageboardSlide() {
+		return sqlSession.selectList("customerServiceSQL.getImageboardSlide");
+	}
 
 }

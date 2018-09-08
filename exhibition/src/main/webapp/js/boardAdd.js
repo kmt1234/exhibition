@@ -108,7 +108,6 @@ $(document).ready(function(){
 			$('.eventPrice').hide();
 			
 			$('.playSe-td').hide();
-				
 			$('.playR-td').hide();
 			
 			$('.eventSeats').hide();
@@ -141,12 +140,11 @@ $(document).ready(function(){
 			$('.eventPrice').show();
 			
 			$('.playSe-td').hide();
+			$('.eventSeats').hide();
 				
 			$('.playR-td').hide();
-	
-			
-			
-					
+			$('.eventRate').hide();
+								
 		}else if(index=='2'){//연극
 			$('.eventS-td').hide();
 			$('.exhibitionS-td').hide();
@@ -204,19 +202,16 @@ $(document).ready(function(){
 			alert('날짜2가 날짜1 보다 작음');
 		
 		//유효성 다시 해야함
-		else if($('.timepicker1').val() < $('.timepicker2').val()){
+		/*else if($('.timepicker1').val() < $('.timepicker2').val()){
 			alert('시간2가 시간1 보다 작음');
-		}
+		}*/
 		
-		else if(index==0){
-			alert(index);
+		else if(index==0){	//메인 이미지 슬라이더
 			$('#imageboardWriteForm').attr({action:'/exhibition/customerService/C_imageboardWrite.do', method:'post'}).submit();
-		}else if(index==1){
-			alert(index);
-		//	$('#imageboardWriteForm').attr({action:'/exhibition/main/index.do', method:'post'}).submit();
-		}else if(index==2){
-			alert(index);
-		//	$('#imageboardWriteForm').attr({action:'/exhibition/main/index.do', method:'post'}).submit();
+		}else if(index==1){	//박람회
+			$('#imageboardWriteForm').attr({action:'/exhibition/customerService/C_eventInfoWrite.do', method:'post'}).submit();
+		}else if(index==2){	//연극
+			$('#imageboardWriteForm').attr({action:'/exhibition/customerService/C_eventInfoWrite.do', method:'post'}).submit();
 		
 		}
 	});

@@ -2,6 +2,7 @@ html,body,ul,li,button{
 	margin: 0;
 	padding: 0;
 }
+
 img.pic{
 	display: block;
 	border: 0;
@@ -15,8 +16,9 @@ img.pic{
 	overflow: hidden;
 	margin: 0 auto;
 	position: relative;
+	
 }
-
+    
 .slide ul{
 	width : 2400px;
 	list-style: none;

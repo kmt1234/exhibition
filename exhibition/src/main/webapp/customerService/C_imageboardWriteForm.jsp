@@ -45,9 +45,9 @@
 			<td class="eventS-td">행사 일정</td>		<!--메인 선택 시,-->
 			<td class="exhibitionS-td">박람회 일정</td><!--박람회 선택 시,-->
 			<td class="playS-td">연극 일정</td>		<!--연극 선택 시,-->
-			<td><input type="text" name="eventDate1" class="datepicker1">
+			<td><input type="text" name="startDate" class="datepicker1">
 				 ~
-				<input type="text" name="eventDate2" class="datepicker2"></td>
+				<input type="text" name="endDate" class="datepicker2"></td>
 		</tr>
 		
 		<tr>
@@ -61,9 +61,9 @@
 			<td class="exhibitionT-td">박람회 시간</td>
 			<td class="playT-td">연극 시간</td>
 			<td class="eventTime">
-				<input type="text" name="eventTime" class="timepicker1">
+				<input type="text" name="startTime" class="timepicker1">
 				~
-				<input type="text" name="eventTime" class="timepicker2">
+				<input type="text" name="endTime" class="timepicker2">
 			</td>
 		</tr>
 		
@@ -94,7 +94,7 @@
 			<td class="eventI-td">행사 정보</td>		<!--메인 선택 시,-->
 			<td class="exhibitionI-td">박람회 정보</td><!--박람회 선택 시,  -->
 			<td class="playI-td">연극 정보</td>		<!--연극 선택 시,-->
-			<td><textarea rows="15" cols="55" id="eventContent" style="resize: none;"></textarea></td>
+			<td><textarea rows="15" cols="55" name="eventContent" id="eventContent" style="resize: none;"></textarea></td>
 		</tr>
 		
 		<tr>

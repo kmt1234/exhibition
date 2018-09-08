@@ -27,6 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import customerService.bean.CustomerServiceDTO;
+import customerService.bean.EventboardDTO;
 import customerService.bean.ImageboardDTO;
 import customerService.bean.ImageboardPaging;
 import customerService.dao.CustomerServiceDAO;
@@ -119,7 +120,7 @@ public class CustomerServiceController {
 	}
 	
 	
-	//이미지 boardWrite
+	//이미지 boardWrite(*)
 	@RequestMapping(value="C_imageboardWrite",method=RequestMethod.POST)
 	public String imageboardWrite(@ModelAttribute ImageboardDTO imageboardDTO,
 									@RequestParam MultipartFile img,
@@ -139,8 +140,6 @@ public class CustomerServiceController {
 		}
 		
 		imageboardDTO.setImage1(fileName);			
-		
-		//메인 이미지 슬라이드 정보 담기
 		
 		//DB
 		customerServiceDAO.imageboardWrite(imageboardDTO);
@@ -204,6 +203,45 @@ public class CustomerServiceController {
 		
 		customerServiceDAO.imageboardDelete(list);
 		return "/customerService/C_imageboardDelete";
+	}
+	
+	//박람회 정보 넣는 컨트롤러
+	@RequestMapping(value="C_eventInfoWrite", method=RequestMethod.POST)
+	public ModelAndView C_exhibitionInfoWrite(@ModelAttribute EventboardDTO eventboardDTO,@RequestParam MultipartFile img) {
+		
+		//경로 바꿔야함***
+		String filePath ="C:\\Users\\user\\git\\exhibition\\exhibition\\src\\main\\webapp\\storage";
+		String fileName = img.getOriginalFilename();
+		
+		File file = new File(filePath,fileName);	
+
+		try {
+			FileCopyUtils.copy(img.getInputStream(), new FileOutputStream(file));
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		eventboardDTO.setImage1(fileName);			
+
+		//DB
+		customerServiceDAO.eventInfoWrite(eventboardDTO);
+		
+		return new ModelAndView("redirect:/main/index.do");
+	}
+	
+	//이미지 슬라이드 가져오는 컨트롤러
+	@RequestMapping(value="getImageboardSlide", method=RequestMethod.GET)
+	public ModelAndView getImageboardSlide() {
+		
+		//DB
+		List<ImageboardDTO> list = customerServiceDAO.getImageboardSlide();
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list",list);
+		mav.setViewName("jsonView");
+		
+		return mav;
 	}
 	
 }

@@ -10,6 +10,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias alias="customerService" type="customerService.bean.CustomerServiceDTO" />
 		<typeAlias alias="imageboard" type="customerService.bean.ImageboardDTO" />
 		<typeAlias alias="exhibition" type="rental.bean.ExhibitionDTO"  />
+		<typeAlias alias="eventboard" type="customerService.bean.EventboardDTO"/>
 	</typeAliases>
 
 </configuration>

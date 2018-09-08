@@ -53,9 +53,9 @@
 
 	<header>
 		<div id="main" class="ui three column grid container">
-			<div class="column" style="width: 150px; height: 50px;"id="logo">
-				<img alt="" src="../img/logo.jpg"
-					style="width: 150px; height: 50px;" >
+			<div class="column" style="width: 150px; height: 50px;">
+				<a href="http://localhost:8080/exhibition/main/index.do"><img alt="" src="../img/logo.jpg"
+					style="width: 150px; height: 50px;"></a>
 			</div>
 			<div class="column">
 				<div class="ui input">
