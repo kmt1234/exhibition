@@ -54,9 +54,8 @@ public class RentalController {
 		model.addAttribute("rate", rate);
 		model.addAttribute("booth", booth);
 		model.addAttribute("date", sdf.format(date));
-		
-		
-		
+
+		//달력
 		List<ExhibitionDTO> list = exhibitionDAO.getCalendar(booth);
 		for(ExhibitionDTO data : list) {
 			data.setStartDate(data.getStartDate().substring(0, 10));
@@ -75,7 +74,8 @@ public class RentalController {
 		
 		modelMap.addAttribute("listView", list);
 		
-		return "/rental/R_exhibitionHollDecisionForm";
+		return "/rental/R_exhibitionHollDecision";
+
 	}
 	
 	@RequestMapping(value="searchRentDay", method=RequestMethod.POST)
