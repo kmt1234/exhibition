@@ -149,7 +149,20 @@
 	<select id="getEventboardTotalA" resultType="int">
 		select count(*) from eventboard
 	</select>
+<<<<<<< HEAD
 
+=======
+	
+	
+	<!-- 박람회 업로드 리스트 삭제   -->
+	<delete id="eventboardDelete" parameterType="java.util.List">
+		delete eventboard where seq in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
+	
+>>>>>>> refs/remotes/origin/Kyunggon.Kim
  </mapper>
  
  

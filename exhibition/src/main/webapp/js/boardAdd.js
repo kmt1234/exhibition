@@ -45,10 +45,7 @@ $(document).ready(function(){
 			alert("play");
 		}
 		
-		
-		
 	});
-	
 	
 	//분류 종류(기본 값 : 0(메인)
 	var index = $('#postSelect option:selected').val();

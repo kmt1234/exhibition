@@ -74,31 +74,35 @@
 			
 			<!--리스트  -->
 			<div>
-				<form name="eventboardListForm" id="eventboardListForm"method="post">
+				<form name="eventboardListForm" id="eventboardListForm" method="post">
 					<table id="eventboardListTab" border="1" frame="hsides" rules="rows" cellpadding="3" cellspacing="0">
 						<tr>
-							<th><input type="checkbox" id="" class="check"></th>
+							<th><input type="checkbox" id="checkAll" name="check" class="check"></th>
 							<th width="100">번호</th>
-							<th width="150">이미지</th>
+							<th width="150">이미지</th><td>${list.postSelect}</td>
 							<th width="100">상품명</th>
 							<th width="380">행사 소개</th>
 						</tr>
+							<c:forEach items="${list }" var="list">
+							<c:if test="${list.postSelect==1}">
+							<tr>
+								<td><input type="checkbox" name="check" class="check" value="${list.seq}"></td>
+								<td>${list.seq}</td>
+								<td><img src="../storage/${list.image1}" width="300" height="150"></td>
+								<td>${list.imageName}</td>
+								<td>${list.eventContent}</td>
+							</tr>
+							</c:if>
+							</c:forEach>
 						
-						<c:forEach items="${list }" var="list">
-						<tr>
-							<td><input type="checkbox" id="" class="check"></td>
-							<td>${list.seq}</td>
-							<td><img src="../storage/${list.image1}" width="300" height="150"></td>
-							<td>${list.imageName}</td>
-							<td>${list.eventContent}</td>
-						</tr>
-						</c:forEach>
+						
+						
 						
 					</table>
 					<div style=" float:left; width:500px" align="center" id="eventPaging">${imageboardPaging.pagingHTML}</div><br>
 					
 					<div style="float:left;">
-						<input type="button" value="선택삭제" id="">
+						<input type="button" value="선택삭제" id="eventDeleteBtn">
 					</div>
 					
 				</form>
@@ -119,6 +123,30 @@
 function eventboardPaging(pg){
 	location.href="/exhibition/customerService/C_eventboardListForm.do?pg="+pg
 }
+
+$(document).ready(function(){
+	//전체선택
+	$('#checkAll').click(function(){
+		//alert($('.check').length);		//클래스를 나타낼때는 앞에 .을 찍는다.
+		if($('#checkAll').prop('checked')){
+			$('.check').prop('checked',true);
+		}else{
+			$('.check').prop('checked',false);
+		}
+	});
+	
+	
+	//선택삭제
+	$('#eventDeleteBtn').click(function(){
+		var count=$('.check:checked').length;
+
+		if(count==0) 
+			alert("항목을 선택해주세요");
+		else
+			$('#eventboardListForm').attr('action','/exhibition/customerService/C_eventboardDelete.do').submit();
+	});
+	
+});
 
 </script>
 </html>
