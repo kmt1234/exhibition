@@ -25,7 +25,7 @@
 }
 
 .M_BtnDiv{
-	margin-right: 3%;
+	margin-right: 34%;
 }
 
 .M_registerWrapper{
@@ -88,9 +88,9 @@
 		  	
 		  	<div class="registerConfirm" align="center"></div>
 		  	
-		  	<div align="center" class="termDiv" style="font-size: 12px;">이용약관을 확인하셔야 가입 가능합니다</div>
+		  	<div align="center" class="termDiv" style="font-size: 12px;margin-left: -40%;">이용약관을 확인하셔야 가입 가능합니다</div>
 		  	
-		  	<br><div class="termDiv" align="center"><a class="ui primary button" id="terms_M">이용약관</a></div>
+		  	<br><div class="termDiv" align="center"><a class="ui primary button" id="terms_M" style="margin-left: -42%;">이용약관</a></div>
 		  	
 		  	<!--회원가입 약관 페이지 인클루드  -->
 			<div><jsp:include page="../member/terms.jsp"/></div>

@@ -19,7 +19,6 @@
     background: #fff;
 }
 
-
 #companyWriteFormPopup{
 	/* border: 1px solid red; */
 	background-color: black;
