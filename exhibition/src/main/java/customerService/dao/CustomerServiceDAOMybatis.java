@@ -74,4 +74,15 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 		
 	}
 
+	//연극 업로드 리스트 가져오기
+	public List<EventboardDTO> eventboardList_play(Map<String, Integer> map) {
+		return sqlSession.selectList("customerServiceSQL.eventboardList_play", map);
+	}
+	
+	//연극 업로드 리스트 총 글수 가져오기
+	public int getEventboardTotalA_play() {
+		int totalA = sqlSession.selectOne("customerServiceSQL.getEventboardTotalA_play"); 
+		return totalA;
+	}
+
 }
