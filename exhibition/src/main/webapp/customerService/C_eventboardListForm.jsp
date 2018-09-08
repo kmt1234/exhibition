@@ -84,6 +84,8 @@
 							<th width="380">행사 소개</th>
 						</tr>
 						
+						
+						
 						<c:forEach items="${list }" var="list">
 						<tr>
 							<td><input type="checkbox" id="" class="check"></td>

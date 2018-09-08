@@ -38,7 +38,7 @@ function imageboardPaging(pg){
 <form name="imageboardListForm" id="imageboardListForm"method="post">
 <table id="imageboardListTab" border="1" frame="hsides" rules="rows" cellpadding="3" cellspacing="0">
 <tr>
-	<th width="100"><input type="checkbox" id="checkAll">번호</th>
+	<th width="100"><input type="checkbox" id="checkAll">번 호</th>
 	<th width="150">이미지</th>
 	<th width="100">상품명</th>
 </tr>
