@@ -68,4 +68,10 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 		return totalA;
 	}
 
+	//박람회 업로드 리스트 삭제 
+	public void eventboardDelete(List<Integer> list) {
+		sqlSession.delete("customerServiceSQL.eventboardDelete", list);
+		
+	}
+
 }

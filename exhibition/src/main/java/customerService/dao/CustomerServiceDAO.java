@@ -28,4 +28,6 @@ public interface CustomerServiceDAO {
 
 	public int getEventboardTotalA();	//박람회 업로드 리스트 총 글수 가져오기
 
+	public void eventboardDelete(List<Integer> list);	//박람회 업로드 리스트 삭제 
+
 }

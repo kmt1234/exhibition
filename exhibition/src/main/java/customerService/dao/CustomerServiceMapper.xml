@@ -89,6 +89,15 @@
 		select count(*) from eventboard
 	</select>
 	
+	
+	<!-- 박람회 업로드 리스트 삭제   -->
+	<delete id="eventboardDelete" parameterType="java.util.List">
+		delete eventboard where seq in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
+	
  </mapper>
  
  

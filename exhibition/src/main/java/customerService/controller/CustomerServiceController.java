@@ -275,4 +275,19 @@ public class CustomerServiceController {
 		return mav;
 	}
 	
+	//박람회 업로드 리스트 삭제
+	@RequestMapping(value="C_eventboardDelete", method=RequestMethod.POST)
+	public ModelAndView C_eventboardDelete(@RequestParam String[] check) {
+		
+		List<Integer> list = new ArrayList<Integer>();
+		for(String seq : check) {
+			list.add(Integer.parseInt(seq));
+		}
+		
+		//DB
+		customerServiceDAO.eventboardDelete(list);
+		
+		return new ModelAndView("redirect:/customerService/C_eventboardListForm.do");
+	}
+	
 }
