@@ -40,4 +40,14 @@ public class CompanyDAOMybatis implements CompanyDAO {
 		return sqlSession.update("companySQL.changeCpwd", map);
 	}
 
+	public void modifyCompany(Map<String, String> map) {
+		sqlSession.update("companySQL.modifyCompany", map);
+	}
+
+	public int deleteCompany(Map<String, String> map) {
+		return sqlSession.delete("companySQL.deleteCompany", map);
+		
+	}
+
+
 }

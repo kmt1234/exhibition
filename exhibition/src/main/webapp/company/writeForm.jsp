@@ -19,7 +19,6 @@
     background: #fff;
 }
 
-
 #companyWriteFormPopup{
 	/* border: 1px solid red; */
 	background-color: black;
@@ -40,7 +39,6 @@
 </style>
 
 <!-- 사업자 회원가입 팝업 -->
-
 <div class="ui modal2 modal" id="companyWriteFormPopup">							<i class="close icon"></i>
 	 <div class="header" align="center">법인고객 - 회원가입 </div>
 
@@ -89,7 +87,7 @@ action="/exhibition/company/companyWrite.do">
 <div id="conditionConfirm"></div>
 
 <div class="ui icon input">
-  <input type="text" name="C_postnumber" id="Cw_postnumber" placeholder="우편번호" style=width:300px readonly>
+  <input type="text" name="C_postnumbox" id="Cw_postnumber" placeholder="우편번호" style=width:300px readonly>
   <i class="inverted circular search link icon" id="Cw_addrB" onclick="Postcode()"></i>
 </div><br>
 
@@ -138,13 +136,8 @@ action="/exhibition/company/companyWrite.do">
 	    <div class="ui black deny button" id="companyWriteForm-close">취소</div>
 	    <div class="ui positive right labeled icon button" id="companyWrite">가입<i class="checkmark icon"></i></div>
 	</div>
-
-
-
-</div>
-
 	
-
-</div>
+</div><!-- class="image content2" -->
+</div><!-- class="ui modal2 modal" -->
  
 

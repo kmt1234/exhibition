@@ -16,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import company.bean.CompanyDTO;
 import company.dao.CompanyDAO;
-import member.bean.MemberDTO;
 
 @RequestMapping(value="company")
 @Component
@@ -59,5 +58,54 @@ public class CompanyController {
 		if(companyDTO==null) return "not_exist";
 		else return "exist";
 	}
+	
+	//사업자 정보수정
+	@RequestMapping(value="modifyCompany", method=RequestMethod.POST)
+	public @ResponseBody String modifyCompany(@RequestParam String C_license, @RequestParam String C_password,
+											  @RequestParam String C_condition,@RequestParam String C_postnumbox,
+											  @RequestParam String C_address1,@RequestParam String C_address2,
+											  @RequestParam String C_tel,@RequestParam String C_email,HttpSession session) {
+		
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("C_license", C_license);
+		map.put("C_password", C_password);
+		map.put("C_condition", C_condition);
+		map.put("C_postnumbox", C_postnumbox);
+		map.put("C_address1", C_address1);
+		map.put("C_address2", C_address2);
+		map.put("C_tel", C_tel);
+		map.put("C_email", C_email);
+		
+		//DB
+		companyDAO.modifyCompany(map);
+		session.invalidate();
+
+		return "modify";
+	}
+	
+	//사업자 삭제
+	@RequestMapping(value="deleteCompany", method=RequestMethod.POST)
+	public @ResponseBody String deleteCompany(@RequestParam String C_license,@RequestParam String C_password,HttpSession session) {
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("C_license", C_license);
+		map.put("C_password", C_password);
+		
+		//DB
+		int su = companyDAO.deleteCompany(map);
+		if(su==0) return "not_exist";
+		else {
+			session.invalidate();
+			return "exist";
+		}
+	}
+	
+	//탈퇴완료 페이지
+	@RequestMapping(value="outComplete", method=RequestMethod.GET)
+	public ModelAndView outComplete() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/login/outComplete");	//탈퇴완료 페이지
+		return mav;
+	}
+	
 	
 }

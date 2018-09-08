@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE>
 <html>
 <head>
@@ -29,18 +29,18 @@
 	<br>
 	<br>
 	<div class="ui five column grid container">
-		<!-- ���̵�� �޴� -->
+		<!-- 사이드바 메뉴 -->
 		<div class="ui compact menu" style="width: 20%; height: 977px; ">
-			<a class="item" href="T_carForm.jsp">�ڵ����̿�</a> 
-			<a class="item" href="T_busForm.jsp">�����̿�</a> 
-			<a class="item" href="T_subwayForm.jsp">����ö�̿�</a>
+			<a class="item" href="T_carForm.jsp">자동차이용</a> 
+			<a class="item" href="T_busForm.jsp">버스이용</a> 
+			<a class="item" href="T_subwayForm.jsp">지하철이용</a>
 		</div>
-		<!-- ���� ȭ�� -->
+		<!-- 메인 화면 -->
 		<div class="ui compact menu" style="width: 80%; height: 900px;" >
-			<!-- Ÿ��Ʋ -->
+			<!-- 타이틀 -->
 			<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
-				���±�
-				<span class="h-light">����</span>
+				오는길
+				<span class="h-light">정보</span>
 			</h2>
 			
 			<jsp:include page="T_info.jsp" ></jsp:include>
