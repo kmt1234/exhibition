@@ -54,7 +54,7 @@
 				</div>
 			</div>
 			
-			<div class="column" style="width: 620px; height: 50px; text-align: right; padding-top: 70px;">
+			<div class="column" style="width: 23%; height: 50px; text-align: right; padding-top: 30px;">
 			
 			<!--회원가입 시, 축하메세지 출력(1분 동안)-->
 				<c:if test="${registerMessage != null}">
