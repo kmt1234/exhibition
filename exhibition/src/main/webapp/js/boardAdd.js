@@ -227,7 +227,7 @@ $(document).ready(function(){
 		}else if(index==1){	//박람회
 			$('#imageboardWriteForm').attr({action:'/exhibition/customerService/C_eventInfoWrite.do', method:'post'}).submit();
 		}else if(index==2){	//연극
-			$('#imageboardWriteForm').attr({action:'/exhibition/customerService/C_eventInfoWrite.do', method:'post'}).submit();
+			$('#imageboardWriteForm').attr({action:'/exhibition/customerService/C_eventInfoWrite_play.do', method:'post'}).submit();
 		
 		}
 	});

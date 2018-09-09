@@ -57,4 +57,8 @@ public interface CustomerServiceDAO {
 	public List<EventboardDTO> eventboardList_play(Map<String, Integer> map);	//박람회 업로드 리스트 가져오기
 
 	public int getEventboardTotalA_play();	//연극 업로드 리스트 총 글수 가져오기
+
+	public void eventInfoWrite_play(EventboardDTO eventboardDTO); //연극 정보 등록
+
+	public void eventboardDelete_play(List<Integer> list);	//연극 업로드 리스트 삭제
 }

@@ -308,7 +308,7 @@ public class CustomerServiceController {
 									Model model
 									) {
 		//경로 바꿔야함***
-		String filePath ="D:\\morning_project_no_remove\\repository\\exhibition\\exhibition\\src\\main\\webapp\\storage";
+		String filePath ="C:\\Users\\KTC\\git\\exhibition\\exhibition\\src\\main\\webapp\\storage";
 		String fileName = img.getOriginalFilename();
 		
 		File file = new File(filePath,fileName);	
@@ -388,7 +388,7 @@ public class CustomerServiceController {
 	public ModelAndView C_exhibitionInfoWrite(@ModelAttribute EventboardDTO eventboardDTO,@RequestParam MultipartFile img) {
 		
 		//경로 바꿔야함***
-		String filePath ="D:\\Spring\\git\\exhibition\\exhibition\\src\\main\\webapp\\storage";
+		String filePath ="C:\\Users\\KTC\\git\\exhibition\\exhibition\\src\\main\\webapp\\storage";
 		String fileName = img.getOriginalFilename();
 		
 		File file = new File(filePath,fileName);	
@@ -408,6 +408,33 @@ public class CustomerServiceController {
 		return new ModelAndView("redirect:/main/index.do");
 	}
 	
+	
+	//연극 정보 넣는 컨트롤러
+	@RequestMapping(value="C_eventInfoWrite_play", method=RequestMethod.POST)
+	public ModelAndView C_exhibitionInfoWrite_play(@ModelAttribute EventboardDTO eventboardDTO,@RequestParam MultipartFile img) {
+		
+		//경로 바꿔야함***
+		String filePath ="C:\\Users\\KTC\\git\\exhibition\\exhibition\\src\\main\\webapp\\storage";
+		String fileName = img.getOriginalFilename();
+		
+		File file = new File(filePath,fileName);	
+
+		try {
+			FileCopyUtils.copy(img.getInputStream(), new FileOutputStream(file));
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		eventboardDTO.setImage1(fileName);			
+
+		//DB
+		customerServiceDAO.eventInfoWrite_play(eventboardDTO);
+		
+		return new ModelAndView("redirect:/main/index.do");
+	}
+
+		
 	//이미지 슬라이드 가져오는 컨트롤러
 	@RequestMapping(value="getImageboardSlide", method=RequestMethod.GET)
 	public ModelAndView getImageboardSlide() {
@@ -452,7 +479,8 @@ public class CustomerServiceController {
 		mav.addObject("list", list);
 		mav.setViewName("/customerService/C_eventboardListForm");
 		return mav;
-	}
+	}	
+	
 	//박람회 업로드 리스트 삭제
 	@RequestMapping(value="C_eventboardDelete", method=RequestMethod.POST)
 	public ModelAndView C_eventboardDelete(@RequestParam String[] check) {
@@ -500,7 +528,7 @@ public class CustomerServiceController {
 		return mav;
 	}
 	
-	//박람회 업로드 리스트 삭제
+	//연극 업로드 리스트 삭제
 	@RequestMapping(value="C_eventboardDelete_play", method=RequestMethod.POST)
 	public ModelAndView C_eventboardDelete_play(@RequestParam String[] check) {
 		
@@ -510,7 +538,7 @@ public class CustomerServiceController {
 		}
 		
 		//DB
-		customerServiceDAO.eventboardDelete(list);
+		customerServiceDAO.eventboardDelete_play(list);
 		
 		return new ModelAndView("redirect:/customerService/C_eventboardList_playForm.do");
 	}
