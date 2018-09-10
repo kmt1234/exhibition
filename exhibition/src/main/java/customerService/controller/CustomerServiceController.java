@@ -529,6 +529,7 @@ public class CustomerServiceController {
 		
 		mav.addObject("pg", pg);
 		mav.addObject("imageboardPaging",imageboardPaging);
+		mav.addObject("listSize", list.size()+"");
 		mav.addObject("list", list);
 		mav.setViewName("/customerService/C_eventboardList_playForm");
 		return mav;

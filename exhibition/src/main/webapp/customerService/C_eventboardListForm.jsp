@@ -35,6 +35,10 @@
 	cursor: pointer;
 }
 
+.eventUploadBtn{
+	margin-right: 8%;
+}
+
 </style>
 
 </head>
@@ -56,7 +60,7 @@
 		<div class="ui compact menu" style="width: 80%; height: 900px;" >
 			<!-- 타이틀 -->
 			<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
-				이미지
+				박람회
 				<span class="h-light">업로드</span>
 			</h2>
 			<!-- 버튼 -->
@@ -73,7 +77,8 @@
 			<br>
 			
 			<!--리스트  -->
-			<div>
+			<div align="center">
+				<div align="right"><input type="button" class="eventUploadBtn" value="업로드"></div>
 				<form name="eventboardListForm" id="eventboardListForm" method="post">
 					<table id="eventboardListTab" border="1" frame="hsides" rules="rows" cellpadding="3" cellspacing="0">
 						<tr>
@@ -105,16 +110,6 @@
 								</c:if>
 		
 							</c:forEach>
-							
-								
-							
-							
-								
-						
-	
-							
-							
-							
 								
 					</table>
 					<div style=" float:left; width:500px" align="center" id="eventPaging">${imageboardPaging.pagingHTML}</div><br>
@@ -169,6 +164,11 @@ $(document).ready(function(){
 	if($('#hiddenListSize').val()==0){
 		$('#eventDeleteBtn').hide();
 	}
+	
+	//업로드 버튼
+	$('.eventUploadBtn').click(function(){
+		location.href='/exhibition/customerService/C_mainImageboardForm.do';
+	});
 	
 });
 
