@@ -21,7 +21,6 @@
 
 </head>
 <body>
-<input type="hidden" id="postSelectHidden" value="${postSelect }"><!--분류 값-->
 <div align="center"><div class="imageboardList"><input type="button" value="목록"></div>	
 <form name="imageboardWriteForm" id="imageboardWriteForm" method="post"
 	enctype="multipart/form-data"><!--/exhibition/customerService/C_imageboardWrite.do  --> 

@@ -40,7 +40,7 @@
 			<!-- 타이틀 -->
 			<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
 				이미지
-				<span class="h-light">업로드</span>
+				<span class="h-light">리스트</span>
 			</h2>
 			<!-- 버튼 -->
 			 <!-- <div>

@@ -61,7 +61,7 @@
 			<!-- 타이틀 -->
 			<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
 				연극
-				<span class="h-light">업로드</span>
+				<span class="h-light">리스트</span>
 			</h2>
 			<!-- 버튼 -->
 			 <!-- <div>
@@ -166,7 +166,7 @@ $(document).ready(function(){
 	
 	//업로드 버튼
 	$('.eventUploadBtn').click(function(){
-		location.href='/exhibition/customerService/C_mainImageboardForm.do?postSelect=2';
+		location.href='/exhibition/customerService/C_mainImageboardForm.do';
 	});
 	
 });
