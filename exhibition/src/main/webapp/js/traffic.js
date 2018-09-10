@@ -20,4 +20,11 @@ $(document).ready(function(){
 		$('#subwayMap').hide();
 		$('#carMap').show();
 	});
+	
+	$('#parkingInform').click(function(){
+		$('#T_parkingB1Map').hide();
+		$('#carMap').show();
+	});
+	
+	
 });
