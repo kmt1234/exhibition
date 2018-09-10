@@ -2,8 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!DOCTYPE html>
-<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href='../calendar2/fullcalendar.css' rel='stylesheet' />
@@ -38,51 +36,51 @@
 	<br><br>
 	<div style="width: 35%; float: right;">
 		<h4>
-		예약 시작일 :
-		<span>
-			<input type="date" name="startDate" id="startDate" value="${date}">
-		</span>
+			예약 시작일 :
+			<span>
+				<input type="date" name="startDate" id="startDate" value="${date}">
+			</span>
 		</h4>
-		
 		<h4>
-		예약 종료일 :
-		<span>
-			<input type="date" name="endDate" id="endDate" value="${date}">
-		</span>
+			예약 종료일 :
+			<span>
+				<input type="date" name="endDate" id="endDate" value="${date}">
+			</span>
 		</h4>
-		
 		<input type="hidden" name="C_email" value="${homepageMember.getC_email()}">
 		<input type="hidden" name="C_license" value="${homepageMember.getC_license()}">
 		<input type="hidden" name="C_tel" value="${homepageMember.getC_tel()}">
 		<input type="hidden" id="totalRent" name="totalRent" value="">
 		<input type="hidden" id="booth" name="booth" value="">
-		
 		<h4>
-		행사 이름 : 
-		<input type="text" name="title">
+			행사 이름 : 
+			<input type="text" name="title">
 		</h4>
-		
-		
 		<input type="button" id="rentBtn" value="임대료 계산하기">
 		<input type="button" id="reservationBtn" value="예약하기">
 		<div id="rentDiv"></div>
 	</div>
 	<div id='calendar' style="width: 65%"></div>
-	
 </form>
+<br><br>
 
-
-
-
+<div class="ui mini modal rental">
+  <div class="header">
+  	<i class="huge home icon"></i>
+  </div>
+  <div class="content" style="width: 100%">
+    <span>사업자로 로그인해주세요</span>
+  </div>
+  <div class="actions">
+    <div class="ui approve button">확인</div>
+  </div>
+</div>
+<input type="button" id="code" value="${code}">
 
 <script src='../calendar2/lib/moment.min.js'></script>
 <script src='../calendar2/lib/jquery.min.js'></script>
 <script src='../calendar2/fullcalendar.min.js'></script>
-
-<!-- <script src="https://code.jquery.com/jquery-3.1.1.min.js"
-	integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-	crossorigin="anonymous"></script>
-<script src="../semantic/semantic.min.js"></script> -->
+<script src="../semantic/semantic.min.js"></script>
 <script>
 	var dataset = [
 		<c:forEach var="listView" items="${listView}" varStatus="status">
@@ -96,11 +94,9 @@
 		 </c:if> 
 		</c:forEach>
 	]; 
-
-
+	
+	var code = $('#code').val();
 	$(document).ready(function(){
-		
-		
 		$('#rentBtn').click(function(){
 			var stDate = new Date($('#startDate').val());
 		    var endDate = new Date($('#endDate').val());
@@ -114,9 +110,17 @@
 		    $('#totalRent').val(totalRent);
 			$('#booth').val(booth);
 		});
-		
-
 		$('#reservationBtn').click(function(){
+			if(code==='2') {
+				$('#title').empty();
+			if($('#rentDiv').text()=='') {
+				$('#rentDiv').text('임대료 계산부터 해주세요.');
+				return;
+			}
+			if($('#title').val()=='') {
+				$('#rentDiv').text('행사 이름을 입력해주세요.');
+				return;
+			}
 			$.ajax({
 					type : 'POST',
 					url : '/exhibition/rental/searchRentDay.do',
@@ -132,11 +136,12 @@
 						} 
 					}
 				});
+			} else {
+				$('#rentDiv').empty();
+				$('.ui.mini.modal.rental').modal('show');
+			}
 				
 			});
-		
-		
-		
 		$('#calendar').fullCalendar({
 			header: {
 	            left: 'prev,next today',
@@ -148,15 +153,8 @@
 	        editable: false,
 	        eventLimit: true,
 			events: dataset
-
 		});
-
 	});
-	
-	
-	
 </script>
-
-
 </body>
 </html>
