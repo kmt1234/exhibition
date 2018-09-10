@@ -9,7 +9,6 @@
 	integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
 	crossorigin="anonymous"></script>
 <script src="../semantic/semantic.min.js"></script>
-<script src="../js/trafficParking.js"></script>
 
 <style>
 	.box-container{
@@ -32,13 +31,13 @@
 		border:1 solid #f702e7; 
 		float: left
 	}
-	
-	.parkingBtn{
-	width:70px; 
-	height:25px;
-	background-color:#ffffff;
-	border:1 solid #f702e7;
-	}
+.B:link {color:black; text-decoration: none;}	<!--일반 링크 검정 -->
+.B:visited {color:green; text-decoration: none;}
+.B:hover {color:green; text-decoration: underline;} <!--마우스 올렸을 때 그린색에 언더바 생성. -->
+.B:active {color:black; text-decoration: none;}
+.B{
+ cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -75,25 +74,44 @@
 				
 				<input type="button" value="주차요금" id="parkingPriceBtn" class="mapBtn">
 				 
-			</div><br>
-			<div id="carMap">
-			<jsp:include page="T_car.jsp" />
+				 
 			</div>
-			<div id="T_parkingFormMap">
-			<jsp:include page="T_parkingForm.jsp"/>
+			
+			<br><br><br>
+
+			<div id="carMap" style="border:1px solid black">
+				<img src="../img/carMap.jpg">
 			</div>
+			
+			<div id="parkingDiv" align="left">
+				&ensp;&ensp;주차장 층을 선택 해 주세요
+				<div style="background-color: #e8e8e8;">
+					&ensp;&ensp;<span id="B1" class="B">B1</span>
+					&ensp;&ensp;|
+					&ensp;&ensp;<span id="B2" class="B">B2</span>
+				</div>
+			</div>
+			
+			<div id="T_parkingB1Map">
+				<img src="../img/B1.jpg" width="700px" height="600px">
+			</div>
+			
+			<div id="T_parkingB2Map">
+				<img src="../img/B2.jpg" width="700px" height="600px">
+			</div>
+			
 			<div id="T_parkingPriceMap">
-			<jsp:include page="T_parkingPrice.jsp"/>
+				<img src="../img/Ev.png">
 			</div>
 			
 		</div>
 		<br>
-		</div>	
+		
 		<!-- footer -->
 		<div class="ui compact menu" style="width: 100%; float: right; ">
 			<jsp:include page="../main/I_footer.jsp" ></jsp:include>
 		</div>
-		
-
+	</div>
+<script src="../js/trafficParking.js?ver=1"></script>
 </body>
 </html>
