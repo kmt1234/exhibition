@@ -40,9 +40,9 @@
 	</table>
 	<div>
 		<div style=" padding-top: 50px;" align="center">
-			<button id="C_notice_modifyBtn" >글수정</button>
-			<button id="C_notice_deleteBtn" >글삭제</button>
-			<button id="C_noticeListBtn" >목록가기</button>
+			<button class="middle ui button" id="C_notice_modifyBtn" >글수정</button>
+			<button class="middle ui button" id="C_notice_deleteBtn" >글삭제</button>
+			<button class="middle ui button" id="C_noticeListBtn" >목록가기</button>
 			<input type="hidden" id="putSeq" value="${customerServiceDTO.seq}">
 		</div>
 	</div>
