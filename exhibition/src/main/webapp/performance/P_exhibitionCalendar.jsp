@@ -99,7 +99,7 @@ var dataSet = [
 		<jsp:include page="../main/I_header.jsp"></jsp:include>
 	</header>
 </div>  --%>
-<div style="height: 900px; border: 1px solid ;">
+<div style="height: 800px; border: 1px solid ;">
 <section>
 <br>
 <br>	

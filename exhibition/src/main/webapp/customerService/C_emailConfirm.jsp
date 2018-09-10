@@ -6,6 +6,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
+<table>
+	<tr>
+	</tr>
 	<div>
 		이메일
 		<input id="email" type="text" name="email"> 
@@ -18,9 +21,12 @@
 		<input type="hidden" id="reC_EmailConfirm" value="">
 		<div id="checkEmailDiv"></div>
 	</div>
+	
+	
 	<!-- 관리자모드가 아니면 없애야함 -->
 	<div><input type="button" id="C_email_ListBtn" value="관리자 버튼"></div>
 	<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script src="../js/customerService.js?ver=1"></script>
+</table>
 </body>
 </html>

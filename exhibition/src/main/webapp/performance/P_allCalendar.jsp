@@ -45,7 +45,7 @@ var dataSet = [
 		    </c:forEach>
 		    <c:if test="${!status.last}">,</c:if>
 		 </c:if> 
-		 </c:if> 
+		</c:if> 
 		 
 		 
 		 <c:if test="${listView.code == '2'}">
@@ -60,7 +60,7 @@ var dataSet = [
 			    </c:forEach>
 			    <c:if test="${!status.last}">,</c:if>
 			 </c:if> 
-			 </c:if> 
+			</c:if> 
 		</c:forEach>
 	];
 	

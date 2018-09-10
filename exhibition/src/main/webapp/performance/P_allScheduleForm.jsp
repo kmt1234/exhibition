@@ -30,14 +30,12 @@
 	<br>
 	<div class="ui five column grid container">
 		<!-- 사이드바 메뉴 -->
-		<div class="ui compact menu" style="width: 20%; height: 977px; ">
+		<div class="ui compact menu" style="width: 20%; height: 980px; ">
 			<a class="item" href="P_allScheduleForm.do">전체일정</a> 
 			<a class="item" href="P_performanceScheduleForm.do">공연일정</a> 
 			<a class="item" href="P_exhibitionScheduleForm.do">전시회일정</a>
 		</div>
-			<jsp:include page="P_allCalendar.jsp" ></jsp:include>
-			
-	
+
 		<!-- footer -->
 		<div class="ui compact menu" style="width: 100%; float: right; ">
 			<jsp:include page="../main/I_footer.jsp" ></jsp:include>
