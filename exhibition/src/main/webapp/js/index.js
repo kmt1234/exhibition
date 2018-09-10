@@ -81,11 +81,11 @@ $(document).ready(function(){
 
 	/*고객센터(공지사항&고객의소리&자주묻는질마누&주요시설열락처 분리 되어 있음)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 	//공지사항
-	$('#C_infoForm').click(function(){
-		location.href="/exhibition/customerService/C_infoForm.do";
+	$('#C_customerServiceForm').click(function(){
+		location.href="/exhibition/customerService/C_customerServiceForm.do";
 	});
-	$('#C_noticeForm').click(function(){
-		location.href="/exhibition/customerService/C_noticeForm.do";
+	$('#C_notice').click(function(){
+		location.href="/exhibition/customerService/C_notice.do";
 	});
 	//고객의소린
 	$('#C_emailConfirmForm').click(function(){

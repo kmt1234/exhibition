@@ -34,7 +34,7 @@ public class PerformanceController {
 	public ModelAndView P_performanceForm1() {
 		ModelAndView mav = new ModelAndView();
 		
-		mav.addObject("dispaly","/performance/P_info.jsp");
+		mav.addObject("display","/performance/P_info.jsp");
 		mav.setViewName("/performance/P_performanceForm");
 		
 		return mav;
@@ -67,7 +67,7 @@ public class PerformanceController {
 		
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("dispaly","/performance/P_allCalendar.jsp");
+		mav.addObject("display","/performance/P_allCalendar.jsp");
 		mav.setViewName("/performance/P_performanceForm");
 		return mav ;
 	}

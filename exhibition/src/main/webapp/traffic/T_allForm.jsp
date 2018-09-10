@@ -32,27 +32,29 @@
 		border:1 solid #f702e7; 
 		float: left
 	}
+	
+	#T_map {
+    	padding-bottom: 0px;
+	}
 </style>
 </head>
 <body>
 	<header>
 		<jsp:include page="../main/I_header.jsp"></jsp:include>
 	</header>
+	
 	<br>
 	<br>
 	<div class="ui five column grid container">
 		<!-- 사이드바 메뉴 -->
-		<div class="ui compact menu" style="width: 20%; height: 900px; ">
-		<br><br>
-		<div style="font-size: 22px;">교통/숙박/관광</div><br>
-		<div style="border-bottom: 1px solid black;"></div><br>
-			<div id="T_inform">교통안내</div>
-			<span style="font-size: 7px;">▶</span>
-			<span><a href="T_allForm.do" id="T_Atag">오시는길</a></span><br>
-			<span style="font-size: 7px;">▶</span>
-			<span><a href="T_parkingAllForm.do" id="T_Atag">주차안내</a></span><br><br>
-			<div id="T_inform">숙박안내</div><br>
-			<div id="T_inform">관광안내</div><br>
+		<div class="ui compact menu" style="width: 20%; height: 977px; ">
+			<a class="item" href="T_allForm.do" id="T_map">교통안내</a> 
+			<ul class="ui list" id="T_mapList" style="text-align: center; width: 120px">
+			  <li><a href="T_allForm.do">오시는 길</a></li>
+			  <li><a href="T_parkingAllForm.do">주차 안내</a></li>
+			</ul>
+			<a class="item" href="P_performanceScheduleForm.do">숙박안내</a> 
+			<a class="item" href="P_exhibitionScheduleForm.do">관광안내</a>
 		</div>
 		<!-- 메인 화면 -->
 		<div class="ui compact menu" style="width: 80%; height: 900px;" >
@@ -66,25 +68,35 @@
 				
 				<input type="button" value="버스  이용고객" id="busBtn" class="mapBtn">
 				 
-				 <input type="button" value="승용차 이용고객" id="carBtn" class="mapBtn">
+				 <input type="button" value="승용차 이용고객 " id="carBtn" class="mapBtn">
 				 
-				 
-			</div><br>
+			</div>
+			
+			<br><br><br>
+			
 			<div id="subwayMap">
-			<jsp:include page="T_subway.jsp" />
+				<a href="http://map.naver.com/?menu=subway&amp;region=1000" target="_blank" title="지하철 노선도" class="btn-subway" style="margin:left;">지하철 노선도 보기</a>
+				<div style="border:1px solid black">
+					<img src="../img/metroMap.jpg">
+				</div>
 			</div>
-			<div id="busMap">
-			<jsp:include page="T_bus.jsp" />
+			
+			<br>
+			<div id="carMap" style="border:1px solid black">
+				<img src="../img/busMap.jpg">
 			</div>
-			<div id="carMap">
-			<jsp:include page="T_car.jsp" />
+
+			<div id="busMap" style="border:1px solid black">
+				<img src="../img/carMap.jpg">
 			</div>
 		</div>
 		<br>
+		
 		<!-- footer -->
 		<div class="ui compact menu" style="width: 100%; float: right; ">
 			<jsp:include page="../main/I_footer.jsp" ></jsp:include>
 		</div>
+	</div>
 		
 
 </body>

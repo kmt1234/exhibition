@@ -124,11 +124,11 @@ var dataSet = [
 				style="width:150; height:35; font-family:돋움; background-color:#ffffff;
 			 	border:1 solid #f702e7; float: left">
 			 <span style="float: right;">
-			 <img src="../img/Ex.png" style="width:25; height: 25; " align='absmiddle'> 전시회
+			 <img src="../img/Ex.png" style="width:25px; height: 25px; " align='absmiddle'> 전시회
 			 </span>
 			 
 			 <span style="float: right;">
-			 	<img src="../img/Ev.png" style="width:25; height: 25;" align='absmiddle'> 공연  &ensp;&ensp;
+			 	<img src="../img/Ev.png" style="width:25px; height: 25px;" align='absmiddle'> 공연  &ensp;&ensp;
 			 </span>
 		</div>
 		<br>

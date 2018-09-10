@@ -9,7 +9,6 @@
 	integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
 	crossorigin="anonymous"></script>
 <script src="../semantic/semantic.min.js"></script>
-<script src="../js/trafficParking.js"></script>
 
 <style>
 	.box-container{
@@ -32,12 +31,15 @@
 		border:1 solid #f702e7; 
 		float: left
 	}
-	
-	.parkingBtn{
-	width:70px; 
-	height:25px;
-	background-color:#ffffff;
-	border:1 solid #f702e7;
+.B:link {color:black; text-decoration: none;}	<!--일반 링크 검정 -->
+.B:visited {color:green; text-decoration: none;}
+.B:hover {color:green; text-decoration: underline;} <!--마우스 올렸을 때 그린색에 언더바 생성. -->
+.B:active {color:black; text-decoration: none;}
+.B{
+ cursor: pointer;
+}
+#T_map {
+    	padding-bottom: 0px;
 	}
 </style>
 </head>
@@ -49,17 +51,14 @@
 	<br>
 	<div class="ui five column grid container">
 		<!-- 사이드바 메뉴 -->
-		<div class="ui compact menu" style="width: 20%; height: 900px; ">
-		<br><br>
-		<div style="font-size: 22px;">교통/숙박/관광</div><br>
-		<div style="border-bottom: 1px solid black;"></div><br>
-			<div id="T_inform">교통안내</div>
-			<span style="font-size: 7px;">▶</span>
-			<span><a href="T_allForm.do" id="T_Atag">오시는길</a></span><br>
-			<span style="font-size: 7px;">▶</span>
-			<span><a href="T_parkingAllForm.do" id="T_Atag">주차안내</a></span><br><br>
-			<div id="T_inform">숙박안내</div><br>
-			<div id="T_inform">관광안내</div><br>
+		<div class="ui compact menu" style="width: 20%; height: 977px; ">
+			<a class="item" href="T_allForm.do" id="T_map">교통안내</a> 
+			<ul class="ui list" id="T_mapList" style="text-align: center; width: 120px">
+			  <li><a href="T_allForm.do">오시는 길</a></li>
+			  <li><a href="T_parkingAllForm.do">주차 안내</a></li>
+			</ul>
+			<a class="item" href="P_performanceScheduleForm.do">숙박안내</a> 
+			<a class="item" href="P_exhibitionScheduleForm.do">관광안내</a>
 		</div>
 		<!-- 메인 화면 -->
 		<div class="ui compact menu" style="width: 80%; height: 900px;" >
@@ -75,25 +74,55 @@
 				
 				<input type="button" value="주차요금" id="parkingPriceBtn" class="mapBtn">
 				 
-			</div><br>
-			<div id="carMap">
-			<jsp:include page="T_car.jsp" />
+				 
 			</div>
-			<div id="T_parkingFormMap">
-			<jsp:include page="T_parkingForm.jsp"/>
+			
+			<br><br><br>
+
+			<div id="carMap" style="border:1px solid black">
+				<img src="../img/carMap.jpg">
 			</div>
+			
+			<div id="parkingDiv" align="left">
+				&ensp;&ensp;주차장 층을 선택 해 주세요
+				<div style="background-color: #e8e8e8;">
+					&ensp;&ensp;<span id="B1" class="B">B1</span>
+					&ensp;&ensp;|
+					&ensp;&ensp;<span id="B2" class="B">B2</span>
+				</div>
+			</div>
+			
+			<div id="T_parkingB1Map">
+				<img src="../img/B1.jpg" width="700px" height="600px">
+			</div>
+			
+			<div id="T_parkingB2Map">
+				<img src="../img/B2.jpg" width="700px" height="600px">
+			</div>
+			
 			<div id="T_parkingPriceMap">
-			<jsp:include page="T_parkingPrice.jsp"/>
+					<table class="ui celled table" style="width: 80%;">
+				<!-- <table border="1" cellpadding="8" cellspacing="2"> -->
+					<tr>
+						<td  align="center" height="30" style="width:10%; background-color: #f7f6e6;text-align: center;">승용차</td>
+						
+						<td style="width:20%;text-align: center;" >
+							최초 30분 2,400원 / 15분당 1,200원 / 1일 주차시 4만 8천원
+						</td>
+						
+					</tr>	
+					
+				</table>
 			</div>
 			
 		</div>
 		<br>
-		</div>	
+		
 		<!-- footer -->
 		<div class="ui compact menu" style="width: 100%; float: right; ">
 			<jsp:include page="../main/I_footer.jsp" ></jsp:include>
 		</div>
-		
-
+	</div>
+<script src="../js/trafficParking.js?ver=1"></script>
 </body>
 </html>

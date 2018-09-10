@@ -39,7 +39,7 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	}
 
 
-	public List<CustomerServiceDTO> getNoticeList() {
+	public List<CustomerServiceDTO> getNoticeList(Map<String, Integer> map) {
 		return sqlSession.selectList("customerServiceSQL.getNoticeList");
 	}
 
@@ -142,6 +142,14 @@ public void imageboardWrite(ImageboardDTO imageboardDTO) {
 	//연극 업로드 리스트 삭제
 	public void eventboardDelete_play(List<Integer> list) {
 		sqlSession.delete("customerServiceSQL.eventboardDelete_play", list);
+	}
+	public CustomerServiceDTO getNoticeInfo(String seq) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public int getTotalC_notice() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }
