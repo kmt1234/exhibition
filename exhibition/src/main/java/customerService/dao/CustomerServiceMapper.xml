@@ -4,6 +4,19 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="customerServiceSQL">
  	
+ 	<!-- 공지사항 총글수 -->
+ 	<select id="getTotalC_notice" resultType="int">
+ 		select count(*) from C_notice
+ 	</select>
+ 	
+ 	<!-- 공지사항 리스트 -->
+ 	<select id="getNoticeList" parameterType="java.util.Map" resultType="customerService">
+ 		select * from 
+ 		(select rownum rn, tt.* from 
+ 		(select * from C_notice order by seq desc)tt) 
+ 		where rn between #{startNum} and #{endNum}
+ 	</select>
+ 	
  	<!-- 공지사항 -->
  	<insert id="C_notice_Write" parameterType="java.util.Map">
  		insert into C_notice values(seq_C_notice.nextval
@@ -12,12 +25,8 @@
 		 							,sysdate)
  	</insert>
  	
- 	<!-- 공지사항 리스트 -->
- 	<select id="getNoticeList" resultType="customerService">
- 		select * from C_notice
- 	</select>
  	<!-- 공지사항 내용보기 -->
- 	<select id="getInfo" parameterType="String" resultType="customerService">
+ 	<select id="getNoticeInfo" parameterType="String" resultType="customerService">
  		select * from C_notice where seq=#{seq} 
  	</select>
  	

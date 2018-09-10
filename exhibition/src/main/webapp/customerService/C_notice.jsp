@@ -9,6 +9,13 @@
 </style>
 </head>
 <body>
+
+	<!-- 타이틀 -->
+	<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
+		공지
+		<span class="h-light">사항</span>
+	</h2>
+
 <div style="width: 100%;" align="center">
 	<table style="width: 100%; height: 40px; " align="center" border="1" bordercolor="#ec008c" cellpadding="2" frame="hsides" rules="rows"
 	id="C_notice_List" class="ui striped table" >
@@ -17,29 +24,22 @@
 			<th style="width: 45%; height: 7%; padding-top: 10px; text-align: center;">제목</th>
 			<th style="width: 35%; height: 7%; padding-top: 10px; text-align: center;">등록일</th>
 		</tr>
-	
-	
 	</table>
 	<br><br>
 	
 	<div style="width: 100%; align="center">
-	<select name="C_notice_SearchMenu" id="C_notice_SearchMenu" style="width: 10%;height: 34px; " >
-		<option value="제목">제목
-		<option value="내용">내용
-	</select>
-	 <input type="text" style="width: 45%; height: 34px;">
-	 <input type="button" value="검색" id="C_noticeSearch" style="width: 8%; height: 34px;">
-	  <a href="/exhibition/customerService/C_notice_WriteForm.do"  style="width: 8%; height: 34px;" type="button">작성</a>
+		<select name="C_notice_SearchMenu" id="C_notice_SearchMenu" style="width: 10%;height: 34px; " >
+			<option value="제목">제목
+			<option value="내용">내용
+		</select>
+			 <input type="text" style="width: 45%; height: 34px;">
+			 <input type="button" value="검색" id="C_noticeSearch" style="width: 8%; height: 34px;">
+			 <a href="/exhibition/customerService/C_notice_WriteForm.do"  style="width: 8%; height: 34px;" type="button">작성</a>
 	</div>
 </div>
 
-	
-
-
-
-
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script>
 $(document).ready(function(){
 	$.ajax({
 		 type : 'POST',

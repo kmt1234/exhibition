@@ -1,15 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
+<!DOCTYPE">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
 </head>
+<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
+	공지
+	<span class="h-light">사항</span>
+</h2>
 <body>
 	<table class="ui celled table">
-	<!-- <table border="1" cellpadding="8" cellspacing="2"> -->
 		<tr>
 			<td  align="center" height="30" style="width:10%; background-color: #f7f6e6;text-align: center;">글번호</td>
 			
@@ -18,7 +18,6 @@
 					${customerServiceDTO.seq }
 				</div>
 			</td>
-			
 			<td  align="center" style="width:10%; background-color: #f7f6e6;text-align: center;">글제목</td>
 			
 			<td style="width:20%;text-align: center;">
@@ -38,37 +37,16 @@
 				</div>
 			</td>
 		</tr>
-		
 	</table>
-	
-	
 	<div>
 		<div style=" padding-top: 50px;" align="center">
-			<button id="C_notice_modifyBtn" value="글수정">글수정</button>
-			<button id="C_notice_deleteBtn" value="글삭제">글삭제</button>
-			<button id="C_noticeListBtn" value="목록가기">목록가기</button>
+			<button id="C_notice_modifyBtn" >글수정</button>
+			<button id="C_notice_deleteBtn" >글삭제</button>
+			<button id="C_noticeListBtn" >목록가기</button>
+			<input type="hidden" id="putSeq" value="${customerServiceDTO.seq}">
 		</div>
 	</div>
-	
-	
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script>
-$(document).ready(function(){
-	
-	$('#C_notice_modifyBtn').click(function(){
-		location.href="/exhibition/customerService/C_notice_ModifyForm.do?seq=${customerServiceDTO.seq }";
-	});
-	
-	$('#C_notice_deleteBtn').click(function(){
-		location.href="/exhibition/customerService/C_notice_Delete.do?seq=${customerServiceDTO.seq }";
-	});
-	
-	//공지사항 - 공지사항뷰에서 목록보기
-	$('#C_noticeListBtn').click(function(){
-		location.href="/exhibition/customerService/C_noticeForm.do";
-	});
-
-});
-</script>
+<script src="../js/customerService.js?ver=1"></script>
 </body>
 </html>
