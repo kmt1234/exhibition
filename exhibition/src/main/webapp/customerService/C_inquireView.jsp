@@ -8,6 +8,10 @@
 <title>Insert title here</title>
 </head>
 <body>
+<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
+	고객의
+	<span class="h-light">소리</span>
+</h2>
 <form id="C_inquire_ViewForm" method="post" action="/exhibition/customerService/C_inquire_View.do">
 	<div>${customerServiceDTO.seq }</div>
 	<div>${customerServiceDTO.name }</div>

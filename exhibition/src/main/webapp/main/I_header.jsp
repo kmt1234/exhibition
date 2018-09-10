@@ -146,9 +146,9 @@
 					<span id="C_customerServiceForm" >고객센터</span>
 					<div class="menu">
 						<div class="item" id="C_notice">공지사항</div>
-						<div class="item" id="C_emailConfirmForm">고객의 소리</div>
-						<div class="item" id="C_QnAForm">자주묻는 질문</div>
-						<div class="item" id="C_contactListForm">주요시설 연락처</div>
+						<div class="item" id="C_emailConfirm">고객의 소리</div>
+						<div class="item" id="C_QnA">자주묻는 질문</div>
+						<div class="item" id="C_contactList">주요시설 연락처</div>
 						<div class="item" id="C_personalInformation">개인정보</div>
 						<div class="item" id="C_boardAdd">게시판 추가</div><!--세션값에 따라 보이게 할 예정-->
 					</div>

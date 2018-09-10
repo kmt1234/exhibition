@@ -26,7 +26,7 @@
 		</tr>
 	</table>
 	<br><br>
-	
+	<div id="C_notice_PagingDiv"></div>
 	<div style="width: 100%;">
 		<div class="ui compact selection dropdown">
 			<i class="dropdown icon"></i>
@@ -41,25 +41,25 @@
 		 <input type="text" >
 		</div>
 		
-		 <input class="middle ui button" type="button" value="검색" id="C_noticeSearch">
-		 <input class="middle ui button" href="/exhibition/customerService/C_notice_WriteForm.do" value="작성" type="button">
+		 <input type="button" class="middle ui button"  value="검색" id="C_noticeSearch">
+		 <input type="button" class="middle ui button" id="C_notice_WriteBtn" value="작성" >
 	</div>
 </div>
 
 <script src="../semantic/semantic.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="../js/customerService.js"></script>
 <script>
 $(document).ready(function(){
 	$.ajax({
 		 type : 'POST',
 		url : '/exhibition/customerService/getNoticeList.do',
+		data :  '[pg=${pg}]',
 		dataType : 'json',
-	
 		success : function(data){
 			$.each(data.list, function(index, item){
 				$('<tr/>').append($('<td/>',{
 						align : 'center',
-						/* text-decoration : underline, */
 						style: 'width: 20%; height: 9%; text-align: center;',
 						text : item.seq,
 						id : 'seqA'
@@ -76,13 +76,13 @@ $(document).ready(function(){
 						text : item.logtime,
 						id : 'logtime'
 					})).appendTo($('#C_notice_List'));
-			
 				});
+			$('#C_notice_PagingDiv').html(data.customerServicePaging.pagingHTML);
 		}
 	});
 	$('#C_notice_List').on('click','#subjectA',function(){
 		var seq = $(this).prev().text();
-		location.href="/exhibition/customerService/C_noticeView.do?seq="+seq;
+		location.href="/exhibition/customerService/C_notice_View.do?seq="+seq;
 	});
 	$('.ui.compact.selection.dropdown').dropdown();	
 });

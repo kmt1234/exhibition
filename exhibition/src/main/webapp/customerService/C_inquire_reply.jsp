@@ -6,6 +6,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
+<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
+	문의
+	<span class="h-light">하기</span>
+</h2>
 <form name="C_inquire_replyForm" id="C_inquire_replyForm" method="post" action="/exhibition/customerService/C_Inquire.do">
 <h1>문의하기</h1>
 <div>

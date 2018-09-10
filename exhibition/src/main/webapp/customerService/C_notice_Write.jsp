@@ -7,6 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
+<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
+	공지
+	<span class="h-light">사항</span>
+</h2>
 <form id="C_notice_WriteForm" method="post" action="/exhibition/customerService/C_notice_Write.do">
 <table style="width:100%;" class="ui celled table">
 	<tr>
@@ -31,12 +35,12 @@
 	</tr>
 		
 </table>
-	<div>
+	<tr>
 		<td colspan="2" align="center" style="padding-top: 30px"> 		
 			<input type="button" id="C_notice_checkWrite"  value="등록">
 			<input type="reset" value="다시작성">
 		</td>
-	</div>
+	</tr>
 </form>
 
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>

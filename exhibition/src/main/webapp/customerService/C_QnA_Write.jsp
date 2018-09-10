@@ -7,6 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
+<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
+	자주묻는
+	<span class="h-light">질문 작성</span>
+</h2>
 <form id="C_QnA_WriteForm" method="post" action="/exhibition/customerService/C_QnA_Write.do">
 <table style="width:100%;" >
 	<tr>
@@ -32,7 +36,7 @@
 	
 	<tr>
 		<td colspan="2" align="center" style="padding-top: 30px"> 		
-			<input type="button" id="C_QnA_checkWrite"  value="등록">
+			<input type="button" id="C_QnA_checkWriteBtn"  value="등록">
 			<input type="reset" value="다시작성">
 		</td>
 	</tr>

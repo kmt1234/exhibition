@@ -92,21 +92,21 @@ public class CustomerServiceController {
 		return mav;
 	}
 	// 공지사항 페이지에서 제목을 클리하면 내용을 보여준다.
-	@RequestMapping(value = "C_noticeView", method = RequestMethod.GET)
-	public ModelAndView C_noticeView(@RequestParam String seq, Model model) {
+	@RequestMapping(value = "C_notice_View", method = RequestMethod.GET)
+	public ModelAndView C_notice_View(@RequestParam String seq, Model model) {
 		CustomerServiceDTO customerServiceDTO = customerServiceDAO.getNoticeInfo(seq);
 
 		model.addAttribute("customerServiceDTO", customerServiceDTO);
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("display","/customerService/C_noticeView.jsp");
+		mav.addObject("display","/customerService/C_notice_View.jsp");
 		mav.setViewName("/customerService/C_customerServiceForm");
 		
 		return mav;
 	}
 	//공지사항 내용을 확인후 수정버튼을 클릭하여 수정할수 있게 해준다.
-	@RequestMapping(value= "C_notice_ModifyForm", method = RequestMethod.GET)
-	public ModelAndView C_notice_ModifyForm(@RequestParam String seq, Model model) {
+	@RequestMapping(value= "C_notice_Modify", method = RequestMethod.GET)
+	public ModelAndView C_notice_Modify(@RequestParam String seq, Model model) {
 		CustomerServiceDTO customerServiceDTO = customerServiceDAO.getNoticeInfo(seq);
 
 		model.addAttribute("customerServiceDTO", customerServiceDTO);
@@ -117,8 +117,8 @@ public class CustomerServiceController {
 		return mav;
 	}
 	// 공지사항 수정한내용을 데이터 베이스에 저장하기
-	@RequestMapping(value = "C_notice_Modify", method = RequestMethod.POST)
-	public ModelAndView C_notice_Modify(@RequestParam String seq, @RequestParam String subject,
+	@RequestMapping(value = "C_notice_checkModify", method = RequestMethod.POST)
+	public ModelAndView C_notice_checkModify(@RequestParam String seq, @RequestParam String subject,
 			@RequestParam String content) {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("seq", seq);
@@ -143,9 +143,13 @@ public class CustomerServiceController {
 		return mav;
 	}
 	// 공지사항 - 작성하기
-	@RequestMapping(value = "C_notice_WriteForm", method = RequestMethod.GET)
-	public String C_notice_WriteForm() {
-		return "/customerService/C_notice_WriteForm";
+	@RequestMapping(value = "C_notice_WriteBtn", method = RequestMethod.GET)
+	public ModelAndView C_notice_WriteBtn() {
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("display", "/customerService/C_notice_Write.jsp");
+		mav.setViewName("/customerService/C_customerServiceForm");
+		return mav;
 	}
 
 	// 공지사항 - 작성하기 등록
@@ -165,9 +169,12 @@ public class CustomerServiceController {
 	}
 
 	// 고객의소리(이메일 인증)
-	@RequestMapping(value = "C_emailConfirmForm", method = RequestMethod.GET)
-	public String C_emailConfirmForm() {
-		return "/customerService/C_emailConfirmForm";
+	@RequestMapping(value = "C_emailConfirm", method = RequestMethod.GET)
+	public ModelAndView C_emailConfirm() {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("display", "/customerService/C_emailConfirm.jsp");
+		mav.setViewName("/customerService/C_customerServiceForm");
+		return mav;
 	}
 
 	@RequestMapping(value = "sendEmail", method = RequestMethod.POST)
@@ -203,10 +210,13 @@ public class CustomerServiceController {
 	}
 
 	// 고객의소리(이메일 인증후 문의하기)
-	@RequestMapping(value = "C_inquireForm", method = RequestMethod.GET)
-	public String C_inquire(@RequestParam String email, Model model) {
+	@RequestMapping(value = "C_inquire", method = RequestMethod.GET)
+	public ModelAndView C_inquire(@RequestParam String email, Model model) {
 		model.addAttribute("email", email);
-		return "/customerService/C_inquireForm";
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("display", "/customerService/C_inquire.jsp");
+		mav.setViewName("/customerService/C_customerServiceForm");
+		return mav;
 	}
 
 	// 고객의소리 (이메일 인증 등록)
@@ -222,10 +232,6 @@ public class CustomerServiceController {
 
 		List<CustomerServiceDTO> list = customerServiceDAO.getInquireList();
 
-		for (CustomerServiceDTO dto : list) {
-			System.out.println(dto);
-		}
-
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
 		mav.setViewName("jsonView");
@@ -235,7 +241,6 @@ public class CustomerServiceController {
 	// 고객의소리 내용보기(관리자
 	@RequestMapping(value = "C_inqureView", method = RequestMethod.GET)
 	public String C_inqureView(@RequestParam String seq, Model model) {
-		System.out.println(seq);
 
 		CustomerServiceDTO customerServiceDTO = customerServiceDAO.getInquireInfo(seq);
 
@@ -265,9 +270,12 @@ public class CustomerServiceController {
 //		return authNum;
 //	}
 	// 자주묻는 질문
-	@RequestMapping(value = "C_QnAForm", method = RequestMethod.GET)
-	public String C_QnAForm() {
-		return "/customerService/C_QnAForm";
+	@RequestMapping(value = "C_QnA", method = RequestMethod.GET)
+	public ModelAndView C_QnAForm() {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("display" ,"/customerService/C_QnA.jsp");
+		mav.setViewName("/customerService/C_customerServiceForm");
+		return mav;
 	}
 
 	//
@@ -276,10 +284,6 @@ public class CustomerServiceController {
 
 		List<CustomerServiceDTO> list = customerServiceDAO.getQnAList();
 
-		for (CustomerServiceDTO dto : list) {
-			System.out.println(dto);
-		}
-
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
 		mav.setViewName("jsonView");
@@ -287,36 +291,42 @@ public class CustomerServiceController {
 	}
 
 	// 자주묻는 질문 - 작성
-	@RequestMapping(value = "C_QnA_WriteForm", method = RequestMethod.GET)
-	public String C_QnA_WriteForm() {
-		return "/customerService/C_QnA_WriteForm";
+	@RequestMapping(value = "C_QnA_Write", method = RequestMethod.GET)
+	public ModelAndView C_QnA_Write() {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("display" ,"/customerService/C_QnA_Write.jsp");
+		mav.setViewName("/customerService/C_customerServiceForm");
+		return mav;
 	}
 
 	// 자주묻는 질문 - 작성등록
-	@RequestMapping(value = "C_QnA_Write", method = RequestMethod.POST)
-	public String C_QnA_Write(@RequestParam String subject, @RequestParam String content) {
+	@RequestMapping(value = "C_QnA_checkWrite", method = RequestMethod.POST)
+	public ModelAndView C_QnA_checkWrite(@RequestParam String subject, @RequestParam String content) {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("subject", subject);
 		map.put("content", content);
 		// DB
 		customerServiceDAO.C_QnA_Write(map);
-		return "/customerService/C_QnA_WriteForm";
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("display" ,"/customerService/C_QnA.jsp");
+		mav.setViewName("/customerService/C_customerServiceForm");
+		return mav;
 	}
 
 	// 주요시설 연락처
-	@RequestMapping(value = "C_contactListForm", method = RequestMethod.GET)
-	public String C_contactListForm() {
-		return "/customerService/C_contactListForm";
+	@RequestMapping(value = "C_contactList", method = RequestMethod.GET)
+	public ModelAndView C_contactList() {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("display" ,"/customerService/C_contactList.jsp");
+		mav.setViewName("/customerService/C_customerServiceForm");
+		return mav;
 	}
 
 	@RequestMapping(value = "getContactList", method = RequestMethod.POST)
 	public ModelAndView getContactList() {
 
 		List<CustomerServiceDTO> list = customerServiceDAO.getContactList();
-
-		for (CustomerServiceDTO dto : list) {
-			System.out.println(dto);
-		}
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
@@ -325,28 +335,37 @@ public class CustomerServiceController {
 	}
 
 	// 주요시설 연락처 - 작성
-	@RequestMapping(value = "C_contactList_WriteForm", method = RequestMethod.GET)
-	public String C_contactList_WriteForm() {
-		return "/customerService/C_contactList_WriteForm";
+	@RequestMapping(value = "C_contactList_Write", method = RequestMethod.GET)
+	public ModelAndView C_contactList_Write() {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("display", "/customerService/C_contactList_Write.jsp");
+		mav.setViewName("/customerService/C_customerServiceForm");
+		return mav;
 	}
 
 	// 주요시설 연락처 - 작성등록
-	@RequestMapping(value = "C_contactList_Write", method = RequestMethod.POST)
-	public String C_contactList_Write(@RequestParam String classify, @RequestParam String agency,
+	@RequestMapping(value = "C_contactList_checkWrite", method = RequestMethod.POST)
+	public ModelAndView C_contactList_checkWrite(@RequestParam String classify, @RequestParam String agency,
 			@RequestParam String name, @RequestParam String contact) {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("classify", classify);
 		map.put("agency", agency);
 		map.put("name", name);
 		map.put("contact", contact);
-		// DB
 		customerServiceDAO.C_contactList_Write(map);
-		return "/customerService/C_contactList_WriteForm";
+
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("display", "/customerService/C_contactList.jsp");
+		mav.setViewName("/customerService/C_customerServiceForm");
+		return mav;
 	}
 
 	@RequestMapping(value = "C_inquire_List", method = RequestMethod.GET)
-	public String C_inquire_List() {
-		return "/customerService/C_inquire_ListForm";
+	public ModelAndView C_inquire_List() {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("display", "/customerService/C_inquire_List.jsp");
+		mav.setViewName("/customerService/C_customerServiceForm");
+		return mav;
 	}
 
 	// 이미지 boardWriteForm

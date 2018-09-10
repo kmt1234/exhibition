@@ -7,7 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
+	주요시설
+	<span class="h-light">연락처</span>
+</h2>
 <div style="width: 100%;">
 	<div class="ui compact selection dropdown">
 		<i class="dropdown icon"></i>
@@ -25,11 +28,13 @@
 </div>
 
 <div align="left" style="padding-left: 125px; padding-top: 15px;">
-	<input class="middle ui button" type="button" id="C_email_ListBtn" value="관리자 작성">
-	<!-- 	<a href="/exhibition/customerService/C_contactList_WriteForm.do">작성</a> -->
+	<input class="middle ui button" type="button" id="C_contactList_WriteBtn" value="관리자 작성">
 </div>
 
 <div>
+
+</div>
+<script src="../js/customerService.js?ver=1"></script>
 <script>
 $(document).ready(function(){
 	$.ajax({
@@ -50,13 +55,11 @@ $(document).ready(function(){
 						text : item.subject
 				})).appendTo($('#C_QnA_List'));
 			});
+			
 		}
 	});
 	$('.ui.compact.selection.dropdown').dropdown();	
 });
 </script>
-
-</div>
-<script src="../js/customerService.js?ver=1"></script>
 </body>
 </html>

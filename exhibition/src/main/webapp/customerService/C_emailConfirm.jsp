@@ -6,6 +6,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
+<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
+	이메일
+	<span class="h-light">인증</span>
+</h2>
 <table class="ui celled table">
 	<tr>
 		<td  align="center" height="30" style="background-color: #f7f6e6;text-align: center;">
@@ -13,9 +17,10 @@
 		</td>
 		<td>
 			<input id="email" type="text" name="email"> 
+			<div id="emailDiv"></div>
 		</td>
 		<td>
-			<input type="button" value="인증번호 전송" id="checkCustomerServiceEmailSend"
+			<input type="button" value="인증번호 전송" id="C_emailSendBtn"
 				style="width:100%; height:100%; background-color:#ffffff; float: left;">
 		</td>
 		<!-- 반 -->
@@ -24,12 +29,12 @@
 		</td>
 		<td>
 			<input type="text" name="checkEmail" id="checkEmail">
+			<div id="checkEmailDiv"></div>
 		</td>
 		<td>
-			<input type="button" value="인증 확인" id="checkCustomerServiceEmailConfirm"
+			<input type="button" value="인증 확인" id="C_emailConfirmBtn"
 				style="width:100%; height:100%; background-color:#ffffff; float: left;">
 			<input type="hidden" id="reC_EmailConfirm" value="">
-			<div id="checkEmailDiv"></div>
 		</td>
 		
 	</tr>

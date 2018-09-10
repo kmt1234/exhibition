@@ -30,6 +30,10 @@
 </style>
 </head>
 <body>
+<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
+	문의
+	<span class="h-light">하기</span>
+</h2>
 <div class="inpuire top">
 	<span id="seqA">번호</span>
 	<span id="subjectA">제목</span>
@@ -45,6 +49,9 @@
 	</select>
 	<input type="text" width="100">
 	<input type="button" value="검색" id="C_noticeSearch">
+</div>
+<div>
+	<a href="/exhibition/customerService/C_inquire_Write.do">작성</a>
 </div>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script>
@@ -88,8 +95,6 @@ $(document).ready(function(){
 	});
 });
 </script>
-<div>
-	<a href="/exhibition/customerService/C_inquire_WriteForm.do">작성</a>
-</div>
+
 </body>
 </html>

@@ -17,6 +17,35 @@
 </style>
 </head>
 <body>
+<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
+	자주묻는
+	<span class="h-light">질문</span>
+</h2>
+<div>
+	<input type="button" value="위치/교통" id="C_QnA_location"
+	style="width:16%; height:35; background-color:#ffffff;
+	 border:1 solid #f702e7; ">
+	
+	<input type="button" value="주차" id="C_QnA_parking"
+	style="width:16%; height:35; font-family:돋움; background-color:#ffffff;
+	 border:1 solid #f702e7; ">
+	 
+	 <input type="button" value="전시&공연" id="C_QnA_exhibition"
+	style="width:16%; height:35; font-family:돋움; background-color:#ffffff;
+	 border:1 solid #f702e7; ">
+	 
+	 <input type="button" value="임대" id="C_QnA_rent"
+	style="width:16%; height:35; font-family:돋움; background-color:#ffffff;
+	 border:1 solid #f702e7; ">
+	 
+	 <input type="button" value="시설" id="facility"
+	style="width:16%; height:35; font-family:돋움; background-color:#ffffff;
+	 border:1 solid #f702e7; ">
+	 
+	 <input type="button" value="기타" id="etc"
+	style="width:16%; height:35; font-family:돋움; background-color:#ffffff;
+	 border:1 solid #f702e7; ">
+</div>
 <div class="QnA top" style="padding-top: 15px;">
 	<table style="width: 100%; height: 40px; " align="center" border="1" bordercolor="#ec008c" cellpadding="2" frame="hsides" rules="rows" >
 		<tr>
@@ -28,9 +57,12 @@
 		</tr>
 	</table>
 </div>
-
+<div align="left">
+	<input class="middle ui button" type="button" value="작성" id="C_QnA_writeBtn">
+</div>
 
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="../js/customerService.js"></script>
 <script>
 $(document).ready(function(){
 	$.ajax({
@@ -60,8 +92,6 @@ $(document).ready(function(){
 	}); */
 });
 </script>
-<div align="left">
-	<input class="middle ui button" type="button" value="작성" id="">
-</div>
+
 </body>
 </html>

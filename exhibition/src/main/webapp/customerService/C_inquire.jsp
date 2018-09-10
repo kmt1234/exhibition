@@ -7,7 +7,10 @@
 </head>
 <body>
 <form name="C_Inquire" id="C_InquireForm" method="post" action="/exhibition/customerService/C_checkInquire.do">
-<h1>문의하기</h1>
+<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
+	문의
+	<span class="h-light">하기</span>
+</h2>
 <div>
 	<div>분류
 		<select name="classify" id="classify">
@@ -17,16 +20,20 @@
 		</select>
 	</div>
 	<div>고객명<input type="text" name="name"></div>
-	<div>연락처<input type="text" name="tel"></div>
+	<div id="nameDiv"></div>
+	<div>연락처<input type="text" name="phone"></div>
+	<div id="phoneDiv"></div>
 	<div>제목<input type="text" name="subject"></div>
+	<div id="subjectDiv"></div>
 	<div class="content">
 		<div>내용</div>
 		<div><textArea name="content" cols="50" rows="10"></textArea></div>
+		<div id="contentDiv"></div>
 	</div>
 </div>
 
 <div>
-	<span id="C_checkInquire">등록</span>
+	<span id="C_checkInquireBtn">등록</span>
 </div>
 <input type="hidden" name="email" value="${email}">
 </form>

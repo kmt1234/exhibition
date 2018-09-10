@@ -40,7 +40,7 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 
 
 	public List<CustomerServiceDTO> getNoticeList(Map<String, Integer> map) {
-		return sqlSession.selectList("customerServiceSQL.getNoticeList");
+		return sqlSession.selectList("customerServiceSQL.getNoticeList", map);
 	}
 
 
@@ -75,7 +75,7 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 		return sqlSession.selectList("customerServiceSQL.getContactList");
 	}
 
-public void imageboardWrite(ImageboardDTO imageboardDTO) {
+	public void imageboardWrite(ImageboardDTO imageboardDTO) {
 		sqlSession.insert("customerServiceSQL.imageboardWrite",imageboardDTO);
 	}
 	public int getImageboardTotalA() {
