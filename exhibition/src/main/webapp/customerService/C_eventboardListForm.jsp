@@ -78,7 +78,7 @@
 			
 			<!--리스트  -->
 			<div align="center">
-				<div align="right"><input type="button" class="eventUploadBtn" value="업로드"></div>
+				<div align="left"><input type="button" class="eventUploadBtn" value="업로드"></div>
 				<form name="eventboardListForm" id="eventboardListForm" method="post">
 					<table id="eventboardListTab" border="1" frame="hsides" rules="rows" cellpadding="3" cellspacing="0">
 						<tr>
@@ -167,7 +167,7 @@ $(document).ready(function(){
 	
 	//업로드 버튼
 	$('.eventUploadBtn').click(function(){
-		location.href='/exhibition/customerService/C_mainImageboardForm.do';
+		location.href='/exhibition/customerService/C_mainImageboardForm.do?postSelect=1';
 	});
 	
 });
