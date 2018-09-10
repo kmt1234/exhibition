@@ -308,7 +308,7 @@ public class CustomerServiceController {
 									Model model
 									) {
 		//경로 바꿔야함***
-		String filePath ="C:\\Users\\KTC\\git\\exhibition\\exhibition\\src\\main\\webapp\\storage";
+		String filePath ="D:\\morning_project_no_remove\\repository\\exhibition\\exhibition\\src\\main\\webapp\\storage";
 		String fileName = img.getOriginalFilename();
 		
 		File file = new File(filePath,fileName);	
@@ -381,14 +381,14 @@ public class CustomerServiceController {
 		}
 		
 		customerServiceDAO.imageboardDelete(list);
-		return "/customerService/C_imageboardDelete";
+		return "/customerService/C_mainImageboardListForm";
 	}
-	//박람회,연극 정보 넣는 컨트롤러
+	//박람회 정보 넣는 컨트롤러
 	@RequestMapping(value="C_eventInfoWrite", method=RequestMethod.POST)
 	public ModelAndView C_exhibitionInfoWrite(@ModelAttribute EventboardDTO eventboardDTO,@RequestParam MultipartFile img) {
 		
 		//경로 바꿔야함***
-		String filePath ="C:\\Users\\KTC\\git\\exhibition\\exhibition\\src\\main\\webapp\\storage";
+		String filePath ="D:\\morning_project_no_remove\\repository\\exhibition\\exhibition\\src\\main\\webapp\\storage";
 		String fileName = img.getOriginalFilename();
 		
 		File file = new File(filePath,fileName);	
@@ -414,7 +414,7 @@ public class CustomerServiceController {
 	public ModelAndView C_exhibitionInfoWrite_play(@ModelAttribute EventboardDTO eventboardDTO,@RequestParam MultipartFile img) {
 		
 		//경로 바꿔야함***
-		String filePath ="C:\\Users\\KTC\\git\\exhibition\\exhibition\\src\\main\\webapp\\storage";
+		String filePath ="D:\\morning_project_no_remove\\repository\\exhibition\\exhibition\\src\\main\\webapp\\storage";
 		String fileName = img.getOriginalFilename();
 		
 		File file = new File(filePath,fileName);	
@@ -474,8 +474,14 @@ public class CustomerServiceController {
 		
 		ModelAndView mav = new ModelAndView();
 		
+		
+		for(EventboardDTO dto : list) {
+			System.out.println(dto.getImageName());
+		}
+		
 		mav.addObject("pg", pg);
 		mav.addObject("imageboardPaging",imageboardPaging);
+		mav.addObject("listSize", list.size()+"");
 		mav.addObject("list", list);
 		mav.setViewName("/customerService/C_eventboardListForm");
 		return mav;

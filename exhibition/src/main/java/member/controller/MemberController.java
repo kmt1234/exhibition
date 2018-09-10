@@ -117,6 +117,30 @@ public class MemberController {
 	}
 	
 	
+	//개인회원 삭제
+	@RequestMapping(value="deleteMember", method=RequestMethod.POST)
+	public @ResponseBody String deleteMember(@RequestParam String M_Id,@RequestParam String M_Pwd,HttpSession session) {
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("M_Id", M_Id);
+		map.put("M_Pwd", M_Pwd);
+		
+		//DB
+		int su = memberDAO.deleteMember(map);
+		if(su==0) return "not_exist";
+		else {
+			session.invalidate();
+			return "exist";
+		}
+	}
+	
+	//탈퇴완료 페이지
+	@RequestMapping(value="outComplete", method=RequestMethod.GET)
+	public ModelAndView outComplete() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/login/outComplete");	//탈퇴완료 페이지
+		return mav;
+	}
+	
 	
 	
 	@RequestMapping(value="costomerServiceForm",method=RequestMethod.GET)

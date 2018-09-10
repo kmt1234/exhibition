@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -83,9 +83,18 @@
 							<th width="100">상품명</th>
 							<th width="380">행사 소개</th>
 						</tr>
-								
+							
+						<!--등록된 박람회 정보가 없을 때  -->								
+						<c:if test="${listSize eq '0'}">	
+									<tr>
+										<td colspan="5" align="center">현재 등록된 박람회 정보가 없습니다</td>
+									</tr>
+									<input type="hidden" id="hiddenListSize" value="${listSize }">
+						</c:if>
+							
 							<c:forEach items="${list}" var="list">
-								<c:if test="${list.postSelect eq '1' and list.postSelect ne '2'}">
+								
+								<c:if test="${list ne null}">	
 										<tr>
 											<td><input type="checkbox" name="check" class="check" value="${list.seq}"></td>
 											<td>${list.seq}</td>
@@ -93,8 +102,19 @@
 											<td>${list.imageName}</td>
 											<td>${list.eventContent}</td>
 										</tr>
-								</c:if>	
+								</c:if>
+		
 							</c:forEach>
+							
+								
+							
+							
+								
+						
+	
+							
+							
+							
 								
 					</table>
 					<div style=" float:left; width:500px" align="center" id="eventPaging">${imageboardPaging.pagingHTML}</div><br>
@@ -143,6 +163,12 @@ $(document).ready(function(){
 		else
 			$('#eventboardListForm').attr('action','/exhibition/customerService/C_eventboardDelete.do').submit();
 	});
+	
+	
+	//선택삭제 버튼 숨김
+	if($('#hiddenListSize').val()==0){
+		$('#eventDeleteBtn').hide();
+	}
 	
 });
 
