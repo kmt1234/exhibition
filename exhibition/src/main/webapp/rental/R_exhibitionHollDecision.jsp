@@ -26,13 +26,27 @@
 </form>
 <br><br>
 
-<div id='calendar' style="width: 60%"></div>
+<input type="hidden" id="code" value="${code}">
 
+<div class="ui mini modal">
+  <div class="header">
+  	<i class="huge home icon"></i>
+  </div>
+  <div class="content" style="width: 100%">
+    <span>사업자로 로그인해주세요</span>
+  </div>
+  <div class="actions">
+    <div class="ui approve button">확인</div>
+  </div>
+</div>
+
+
+<div id='calendar' style="width: 60%"></div>
 
 <script src='../calendar2/lib/moment.min.js'></script>
 <script src='../calendar2/lib/jquery.min.js'></script>
 <script src='../calendar2/fullcalendar.min.js'></script>
-
+<script src="../js/exhibition.js"></script>
 
 <script>
 	var dataset = [
@@ -47,10 +61,11 @@
 		 </c:if> 
 		</c:forEach>
 	]; 
+	
+	var code = $('#code').val();
 
 
 	$(document).ready(function(){
-		
 		
 		$('#rentBtn').click(function(){
 			var stDate = new Date($('#startDate').val());
@@ -58,7 +73,7 @@
 		 
 		    var btMs = endDate.getTime() - stDate.getTime();
 		    var btDay = btMs / (1000*60*60*24) + 1;
-		    var totalRent = ${rate} * btDay+1;
+		    var totalRent = ${rate} * btDay + 1;
 		    var booth = '${booth}';
 		    
 		    $('#rentDiv').text(booth + '의 총 임대료 : ' + totalRent.toLocaleString() + '원');
@@ -68,7 +83,9 @@
 		
 
 		$('#reservationBtn').click(function(){
-			$.ajax({
+			
+			if(code=='2') {
+				$.ajax({
 					type : 'POST',
 					url : '/exhibition/rental/searchRentDay.do',
 					data : {'booth': '${booth}',
@@ -83,8 +100,10 @@
 						} 
 					}
 				});
+			} else {
 				
-			});
+			}
+		});
 		
 		
 		
@@ -101,6 +120,7 @@
 			events: dataset
 
 		});
+
 
 	});
 	
