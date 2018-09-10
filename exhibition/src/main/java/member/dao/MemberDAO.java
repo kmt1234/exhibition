@@ -19,6 +19,8 @@ public interface MemberDAO {
 	public MemberDTO checkEmail(String m_Email);	//이메일 중복 체크
 
 	public int memberModify(Map<String, String> map);	//회원정보 수정
+
+	public int deleteMember(Map<String, String> map);	//회원탈퇴
 	
 
 }

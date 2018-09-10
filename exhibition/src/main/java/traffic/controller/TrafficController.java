@@ -27,4 +27,12 @@ public class TrafficController {
 	public String T_subway() {
 		return "/traffic/T_subwayForm";
 	}
+	@RequestMapping(value="T_allForm", method=RequestMethod.GET)
+	public String T_allForm() {
+		return "/traffic/T_allForm";
+	}
+	@RequestMapping(value="T_parkingAllForm", method=RequestMethod.GET)
+	public String T_parkingAllForm() {
+		return "/traffic/T_parkingAllForm";
+	}
 }

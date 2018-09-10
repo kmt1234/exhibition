@@ -42,7 +42,6 @@ $(document).ready(function(){
 		$('.ui.modal-Find-Member.modal').modal('show');
 	});
 	
-	
 	/*----------법인회원 로그인---------*/
 	$('#Clogin').click(function(){
 		var reGex = /^([0-9]{10})$/; //숫자 10자리
