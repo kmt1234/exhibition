@@ -351,14 +351,20 @@ public class CustomerServiceController {
 
 	// 이미지 boardWriteForm
 	@RequestMapping(value = "C_mainImageboardForm", method = RequestMethod.GET)
-	public String imageboardWriteForm() {
-		return "/customerService/C_mainImageboardForm";
+		public ModelAndView imageboardWriteForm() {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("postSelect", "0");
+		mav.setViewName("/customerService/C_mainImageboardForm");
+		return mav; 
 	}
 
 	// 이미지 boardWrite
 	@RequestMapping(value = "C_imageboardWrite", method = RequestMethod.POST)
-	public String imageboardWrite(@ModelAttribute ImageboardDTO imageboardDTO, @RequestParam MultipartFile img,
-			Model model) {
+	public String imageboardWrite(@ModelAttribute ImageboardDTO imageboardDTO,
+									@RequestParam MultipartFile img,
+									Model model	) {
 		// 경로 바꿔야함***
 		String filePath = "D:\\morning_project_no_remove\\repository\\exhibition\\exhibition\\src\\main\\webapp\\storage";
 		String fileName = img.getOriginalFilename();
@@ -435,15 +441,14 @@ public class CustomerServiceController {
 	}
 
 	// 박람회 정보 넣는 컨트롤러
-	@RequestMapping(value = "C_eventInfoWrite", method = RequestMethod.POST)
-	public ModelAndView C_exhibitionInfoWrite(@ModelAttribute EventboardDTO eventboardDTO,
-			@RequestParam MultipartFile img) {
-
-		// 경로 바꿔야함***
-		String filePath = "D:\\morning_project_no_remove\\repository\\exhibition\\exhibition\\src\\main\\webapp\\storage";
+	@RequestMapping(value="C_eventInfoWrite", method=RequestMethod.POST)
+	public ModelAndView C_exhibitionInfoWrite(@ModelAttribute EventboardDTO eventboardDTO,@RequestParam MultipartFile img) {
+		
+		//경로 바꿔야함***
+		String filePath ="D:\\morning_project_no_remove\\repository\\exhibition\\exhibition\\src\\main\\webapp\\storage";
 		String fileName = img.getOriginalFilename();
-
-		File file = new File(filePath, fileName);
+		
+		File file = new File(filePath,fileName);	
 
 		try {
 			FileCopyUtils.copy(img.getInputStream(), new FileOutputStream(file));
@@ -451,66 +456,39 @@ public class CustomerServiceController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		eventboardDTO.setImage1(fileName);			
 
-		eventboardDTO.setImage1(fileName);
-
-		// DB
+		//DB
 		customerServiceDAO.eventInfoWrite(eventboardDTO);
-
-		return new ModelAndView("redirect:/main/index.do");
+		
+		return new ModelAndView("redirect:/customerService/C_eventboardListForm.do");
 	}
 
-	// 연극 정보 넣는 컨트롤러
-	@RequestMapping(value = "C_eventInfoWrite_play", method = RequestMethod.POST)
-	public ModelAndView C_exhibitionInfoWrite_play(@ModelAttribute EventboardDTO eventboardDTO,
-			@RequestParam MultipartFile img) {
-
-		// 경로 바꿔야함***
-		String filePath = "D:\\morning_project_no_remove\\repository\\exhibition\\exhibition\\src\\main\\webapp\\storage";
-		String fileName = img.getOriginalFilename();
-
-		File file = new File(filePath, fileName);
-
-		try {
-			FileCopyUtils.copy(img.getInputStream(), new FileOutputStream(file));
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		eventboardDTO.setImage1(fileName);
-
-		// DB
-		customerServiceDAO.eventInfoWrite_play(eventboardDTO);
-
-		return new ModelAndView("redirect:/main/index.do");
-	}
-
-	// 이미지 슬라이드 가져오는 컨트롤러
-	@RequestMapping(value = "getImageboardSlide", method = RequestMethod.GET)
+	//이미지 슬라이드 가져오는 컨트롤러
+	@RequestMapping(value="getImageboardSlide", method=RequestMethod.GET)
 	public ModelAndView getImageboardSlide() {
-
-		// DB
+		
+		//DB
 		List<ImageboardDTO> list = customerServiceDAO.getImageboardSlide();
-
+		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("list", list);
+		mav.addObject("list",list);
 		mav.setViewName("jsonView");
-
+		
 		return mav;
 	}
-
-	// 박람회 업로드 리스트 폼
-	@RequestMapping(value = "C_eventboardListForm", method = RequestMethod.GET)
-	public ModelAndView C_exhibitionboardList(@RequestParam(required = false, defaultValue = "1") String pg) {
-
-		int endNum = Integer.parseInt(pg) * 3;
-		int startNum = endNum - 2;
-
-		Map<String, Integer> map = new HashMap<String, Integer>();
+    //박람회 업로드 리스트 폼
+	@RequestMapping(value="C_eventboardListForm", method=RequestMethod.GET)
+	public ModelAndView C_exhibitionboardList(@RequestParam(required=false , defaultValue="1") String pg) {
+		
+		int endNum = Integer.parseInt(pg)*3;
+		int startNum = endNum-2;
+		
+		Map<String,Integer> map = new HashMap<String,Integer>();
 		map.put("endNum", endNum);
 		map.put("startNum", startNum);
-
+		
 		int totalA = customerServiceDAO.getEventboardTotalA();
 
 		imageboardPaging.setCurrentPage(Integer.parseInt(pg));
@@ -519,49 +497,51 @@ public class CustomerServiceController {
 		imageboardPaging.setTotalA(totalA);
 
 		imageboardPaging.eventMakePagingHTML();
-
+		
+		
 		List<EventboardDTO> list = customerServiceDAO.eventboardList(map);
-
+		
 		ModelAndView mav = new ModelAndView();
-
-		for (EventboardDTO dto : list) {
+		
+		
+		for(EventboardDTO dto : list) {
 			System.out.println(dto.getImageName());
 		}
-
+		
 		mav.addObject("pg", pg);
-		mav.addObject("imageboardPaging", imageboardPaging);
-		mav.addObject("listSize", list.size() + "");
+		mav.addObject("imageboardPaging",imageboardPaging);
+		mav.addObject("listSize", list.size()+"");
 		mav.addObject("list", list);
 		mav.setViewName("/customerService/C_eventboardListForm");
 		return mav;
-	}
-
-	// 박람회 업로드 리스트 삭제
-	@RequestMapping(value = "C_eventboardDelete", method = RequestMethod.POST)
+	}	
+	
+	//박람회 업로드 리스트 삭제
+	@RequestMapping(value="C_eventboardDelete", method=RequestMethod.POST)
 	public ModelAndView C_eventboardDelete(@RequestParam String[] check) {
-
+		
 		List<Integer> list = new ArrayList<Integer>();
-		for (String seq : check) {
+		for(String seq : check) {
 			list.add(Integer.parseInt(seq));
 		}
-
-		// DB
+		
+		//DB
 		customerServiceDAO.eventboardDelete(list);
-
+		
 		return new ModelAndView("redirect:/customerService/C_eventboardListForm.do");
 	}
-
-	// 연극 업로드 리스트 폼
-	@RequestMapping(value = "C_eventboardList_playForm", method = RequestMethod.GET)
-	public ModelAndView C_eventboardList_playForm(@RequestParam(required = false, defaultValue = "1") String pg) {
-
-		int endNum = Integer.parseInt(pg) * 3;
-		int startNum = endNum - 2;
-
-		Map<String, Integer> map = new HashMap<String, Integer>();
+	
+	//연극 업로드 리스트 폼
+	@RequestMapping(value="C_eventboardList_playForm", method=RequestMethod.GET)
+	public ModelAndView C_eventboardList_playForm(@RequestParam(required=false , defaultValue="1") String pg) {
+		
+		int endNum = Integer.parseInt(pg)*3;
+		int startNum = endNum-2;
+		
+		Map<String,Integer> map = new HashMap<String,Integer>();
 		map.put("endNum", endNum);
 		map.put("startNum", startNum);
-
+		
 		int totalA = customerServiceDAO.getEventboardTotalA_play();
 
 		imageboardPaging.setCurrentPage(Integer.parseInt(pg));
@@ -570,32 +550,34 @@ public class CustomerServiceController {
 		imageboardPaging.setTotalA(totalA);
 
 		imageboardPaging.eventMakePagingHTML();
-
-		// DB
+		
+		//DB
 		List<EventboardDTO> list = customerServiceDAO.eventboardList_play(map);
-
+				
 		ModelAndView mav = new ModelAndView();
-
+		
 		mav.addObject("pg", pg);
-		mav.addObject("imageboardPaging", imageboardPaging);
-		mav.addObject("listSize", list.size() + "");
+		mav.addObject("imageboardPaging",imageboardPaging);
+		mav.addObject("listSize", list.size()+"");
 		mav.addObject("list", list);
 		mav.setViewName("/customerService/C_eventboardList_playForm");
 		return mav;
 	}
-
-	// 연극 업로드 리스트 삭제
-	@RequestMapping(value = "C_eventboardDelete_play", method = RequestMethod.POST)
+	
+	//연극 업로드 리스트 삭제
+	@RequestMapping(value="C_eventboardDelete_play", method=RequestMethod.POST)
 	public ModelAndView C_eventboardDelete_play(@RequestParam String[] check) {
-
+		
 		List<Integer> list = new ArrayList<Integer>();
-		for (String seq : check) {
+		for(String seq : check) {
 			list.add(Integer.parseInt(seq));
 		}
-
-		// DB
+		
+		//DB
 		customerServiceDAO.eventboardDelete_play(list);
-
+		
 		return new ModelAndView("redirect:/customerService/C_eventboardList_playForm.do");
 	}
 }
+	
+
