@@ -2,6 +2,11 @@ $(document).ready(function(){
 	$('#busMap').hide();
 	$('#carMap').hide();
 	
+	$('#T_map').click(function(){
+		$('#T_mapList').show();
+		
+	});
+	
 	$('#subwayBtn').click(function(){
 		$('#busMap').hide();
 		$('#carMap').hide();
