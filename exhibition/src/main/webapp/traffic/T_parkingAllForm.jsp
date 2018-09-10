@@ -106,12 +106,12 @@
 			
 		</div>
 		<br>
-		</div>
+		
 		<!-- footer -->
 		<div class="ui compact menu" style="width: 100%; float: right; ">
 			<jsp:include page="../main/I_footer.jsp" ></jsp:include>
 		</div>
-		
+	</div>
 <script src="../js/trafficParking.js?ver=1"></script>
 </body>
 </html>
