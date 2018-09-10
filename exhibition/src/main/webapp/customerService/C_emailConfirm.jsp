@@ -13,6 +13,7 @@
 		이메일
 		<input id="email" type="text" name="email"> 
 		<input type="button" value="인증번호 전송" id="checkCustomerServiceEmailSend">
+		123
 	</div>
 	<div>
 		인증번호
