@@ -38,6 +38,9 @@
 .B{
  cursor: pointer;
 }
+#T_map {
+    	padding-bottom: 0px;
+	}
 </style>
 </head>
 <body>
@@ -48,17 +51,14 @@
 	<br>
 	<div class="ui five column grid container">
 		<!-- 사이드바 메뉴 -->
-		<div class="ui compact menu" style="width: 20%; height: 900px; ">
-		<br><br>
-		<div style="font-size: 22px;">교통/숙박/관광</div><br>
-		<div style="border-bottom: 1px solid black;"></div><br>
-			<div id="T_inform">교통안내</div>
-			<span style="font-size: 7px;">▶</span>
-			<span><a href="T_allForm.do" id="T_Atag">오시는길</a></span><br>
-			<span style="font-size: 7px;">▶</span>
-			<span><a href="T_parkingAllForm.do" id="T_Atag">주차안내</a></span><br><br>
-			<div id="T_inform">숙박안내</div><br>
-			<div id="T_inform">관광안내</div><br>
+		<div class="ui compact menu" style="width: 20%; height: 977px; ">
+			<a class="item" href="T_allForm.do" id="T_map">교통안내</a> 
+			<ul class="ui list" id="T_mapList" style="text-align: center; width: 120px">
+			  <li><a href="T_allForm.do">오시는 길</a></li>
+			  <li><a href="T_parkingAllForm.do">주차 안내</a></li>
+			</ul>
+			<a class="item" href="P_performanceScheduleForm.do">숙박안내</a> 
+			<a class="item" href="P_exhibitionScheduleForm.do">관광안내</a>
 		</div>
 		<!-- 메인 화면 -->
 		<div class="ui compact menu" style="width: 80%; height: 900px;" >
@@ -101,7 +101,18 @@
 			</div>
 			
 			<div id="T_parkingPriceMap">
-			<!-- 	<img src="../img/Ev.png"> -->
+					<table class="ui celled table" style="width: 80%;">
+				<!-- <table border="1" cellpadding="8" cellspacing="2"> -->
+					<tr>
+						<td  align="center" height="30" style="width:10%; background-color: #f7f6e6;text-align: center;">승용차</td>
+						
+						<td style="width:20%;text-align: center;" >
+							최초 30분 2,400원 / 15분당 1,200원 / 1일 주차시 4만 8천원
+						</td>
+						
+					</tr>	
+					
+				</table>
 			</div>
 			
 		</div>
