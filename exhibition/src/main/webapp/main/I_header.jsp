@@ -102,9 +102,9 @@
 		<div class="ui five column grid container">
 			<div class="ui compact menu">
 				<div class="ui simple dropdown item">
-					<span id="P_infoForm">일정</span>
+					<span id="P_performanceForm">일정</span>
 					<div class="menu">
-						<div class="item" id="P_allScheduleForm">전체일정</div>
+						<div class="item" id="P_allSchedule">전체일정</div>
 						<div class="item" id="P_performanceScheduleForm">공연일정</div>
 						<div class="item" id="P_exhibitionScheduleForm">전시회일정</div>
 					</div>

@@ -9,7 +9,6 @@
 <link href='../calendar2/fullcalendar.print.css' rel='stylesheet' media='print' />
 
 <script src='../calendar2/lib/moment.min.js'></script>
-<!-- <script src='../calendar2/lib/jquery.min.js'></script> -->
 <script src='../calendar2/fullcalendar.min.js'></script>
 
 <script type="text/javascript">
@@ -111,22 +110,36 @@ var dataSet = [
 </head>
 
 <body>
-<%-- <div style="height: 350px; border: 1px solid;">
-	<header>
-		<jsp:include page="../main/I_header.jsp"></jsp:include>
-	</header>
-</div>  --%>
-<div style="height: 800px; border: 1px solid ;">
-<section>
-<br>
-<br>
-	
+<!-- 메인 화면 -->
+	<div class="ui compact menu" style="width: 80%; height: 900px;" ><!-- 차후 발표시 크롬으로 맞추어야 한다. 크롬=width=:80 익스플로로=75-->
+		<!-- 타이틀 -->
+		<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
+			전체
+			<span class="h-light">일정</span>
+		</h2>
+		<!-- 버튼 -->
+		<div>
+			<input type="button" value="달력으로 보기" 
+				style="width:150; height:35; background-color:#ffffff;
+			 border:1 solid #f702e7; float: left">
+			<input type="button" value="리스트로 보기" 
+				style="width:150; height:35; font-family:돋움; background-color:#ffffff;
+			 	border:1 solid #f702e7; float: left">
+			 <span style="float: right;">
+			 <img src="../img/Ex.png" style="width:25; height: 25; " align='absmiddle'> 전시회
+			 </span>
+			 
+			 <span style="float: right;">
+			 	<img src="../img/Ev.png" style="width:25; height: 25;" align='absmiddle'> 공연  &ensp;&ensp;
+			 </span>
+		</div>
+		<br>
+		<br>
+	<div style= "height: 100%;width: 100%; border: 1px solid;">
+		<br>
+		<br>
 		<div  id='calendar'></div>
-	
-</section>
+	</div>
 </div>
-<%-- <footer>
-	<jsp:include page="../main/I_footer.jsp"></jsp:include>
-</footer> --%>
 </body>
 </html>

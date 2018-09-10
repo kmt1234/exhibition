@@ -43,7 +43,7 @@
 				<span class="h-light">Á¤º¸</span>
 			</h2>
 			
-			<jsp:include page="P_info.jsp" ></jsp:include>
+			<jsp:include page="${dispaly}" ></jsp:include>
 			
 		</div>
 		<!-- footer -->

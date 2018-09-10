@@ -23,13 +23,56 @@ import rental.bean.ExhibitionDTO;
 @RequestMapping(value="performance")
 @Component
 public class PerformanceController {
+/*	전역변수 설정*/
 	@Autowired
 	private PerformanceDAO performanceDAO;
 	
+	
+/* 사용메서드*/
+	/*일정정보에 관한 내용이 들어 있는 페이지로 이동~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 	@RequestMapping(value="P_performanceForm", method=RequestMethod.GET)
-	public String P_performanceForm() {
-		return "/performance/performanceForm";
+	public ModelAndView P_performanceForm1() {
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("dispaly","/performance/P_info.jsp");
+		mav.setViewName("/performance/P_performanceForm");
+		
+	return mav;
 	}
+	//전체일정
+	@RequestMapping(value="P_allSchedule", method=RequestMethod.GET)
+	public ModelAndView P_allSchedule(ModelMap modelMap) {
+
+			List<PerformanceDTO> list = performanceDAO.getPerformance();
+				 
+			for(PerformanceDTO data : list) {
+				data.setSize(list.size());
+				data.setStartDate(data.getStartDate().substring(0, 10));
+				data.setEndDate(data.getEndDate().substring(0, 10));
+				data.setDays(getDiffDays(data.getStartDate().substring(0, 10).replaceAll("-", "").replaceAll("/",""), data.getEndDate().substring(0, 10).replaceAll("-", "").replaceAll("/","")));
+				String[] strDays = data.getDays();
+				
+				for(int i = 0; i < data.getDays().length; i++) {
+					StringBuffer sb = new StringBuffer(strDays[i]);
+					sb.insert(4, "-");
+					sb.insert(7, "-");
+					strDays[i] = sb.toString();
+				}
+				
+				data.setDays(strDays);
+				data.setDaysSize(strDays.length);
+				
+			}
+			modelMap.addAttribute("listView",list);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("display", "/performance/P_allCalendar.jsp");
+		mav.setViewName("/performance/P_performanceForm");
+	
+	return mav;
+	}
+
+	
 	@RequestMapping(value="getPerformance", method=RequestMethod.GET)
 	public String getPerformance(ModelMap modelMap) {
 		List<PerformanceDTO> list = performanceDAO.getPerformance();
@@ -52,40 +95,8 @@ public class PerformanceController {
 		modelMap.addAttribute("listView",list);
 		return "/performance/getPerformance";
 	}
-	//일정정보
-	@RequestMapping(value="P_infoForm", method=RequestMethod.GET)
-	public String P_infoForm() {
-		return "/performance/P_infoForm";
-	}
-	//전체일정
-	@RequestMapping(value="P_allScheduleForm", method=RequestMethod.GET)
-	public String P_allScheduleForm(ModelMap modelMap) {
-
-			List<PerformanceDTO> list = performanceDAO.getPerformance();
-				 
-			for(PerformanceDTO data : list) {
-				data.setSize(list.size());
-				data.setStartDate(data.getStartDate().substring(0, 10));
-				data.setEndDate(data.getEndDate().substring(0, 10));
-				data.setDays(getDiffDays(data.getStartDate().substring(0, 10).replaceAll("-", "").replaceAll("/",""), data.getEndDate().substring(0, 10).replaceAll("-", "").replaceAll("/","")));
-				String[] strDays = data.getDays();
-				
-				for(int i = 0; i < data.getDays().length; i++) {
-					StringBuffer sb = new StringBuffer(strDays[i]);
-					sb.insert(4, "-");
-					sb.insert(7, "-");
-					strDays[i] = sb.toString();
-				}
-				
-				data.setDays(strDays);
-				data.setDaysSize(strDays.length);
-				
-			}
-
-		modelMap.addAttribute("listView",list);
-
-		return "/performance/P_allScheduleForm";
-	}
+	
+	
 	//공연일정
 	@RequestMapping(value="P_performanceScheduleForm", method=RequestMethod.GET)
 	public String P_performanceScheduleForm(ModelMap modelMap) {
