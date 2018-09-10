@@ -57,6 +57,7 @@ public class CustomerServiceController {
 	// 공지사항 페이지 오픈과 동시에 getNoticeList 불러온다.
 	@RequestMapping(value = "C_notice", method = RequestMethod.GET)
 	public ModelAndView C_notice(@RequestParam(required=false, defaultValue="1") String pg, Model model) {
+		
 		model.addAttribute("pg", Integer.parseInt(pg));
 		ModelAndView mav = new ModelAndView();
 		
@@ -64,9 +65,11 @@ public class CustomerServiceController {
 		mav.setViewName("/customerService/C_customerServiceForm");
 		return mav;
 	}
+	
 	// 공지사항 리스트 데이터 베이스에서 불러와 notice.jsp로 리스 보내주기
 	@RequestMapping(value="getNoticeList", method=RequestMethod.POST)
 	public ModelAndView getNoticeList(@RequestParam(required=false ,defaultValue="1") String pg) {
+		System.out.println(pg);
 		//DB - 1페이지당 10개씩
 		int endNum = Integer.parseInt(pg)*10;
 		int startNum = endNum-9;
@@ -104,6 +107,7 @@ public class CustomerServiceController {
 		
 		return mav;
 	}
+	
 	//공지사항 내용을 확인후 수정버튼을 클릭하여 수정할수 있게 해준다.
 	@RequestMapping(value= "C_notice_ModifyForm", method = RequestMethod.GET)
 	public ModelAndView C_notice_ModifyForm(@RequestParam String seq, Model model) {

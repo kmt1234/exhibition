@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -26,7 +26,8 @@
 		</tr>
 	</table>
 	<br><br>
-	
+	<div id="C_notice_PagingDiv" align="center"></div>
+	<input type="hidden" name="pg" id="pg" value="1">
 	<div style="width: 100%; align="center">
 		<select name="C_notice_SearchMenu" id="C_notice_SearchMenu" style="width: 10%;height: 34px; " >
 			<option value="제목">제목
@@ -44,9 +45,10 @@ $(document).ready(function(){
 	$.ajax({
 		 type : 'POST',
 		url : '/exhibition/customerService/getNoticeList.do',
+		data : '[pg=${pg}]',
 		dataType : 'json',
-	
 		success : function(data){
+			alert(JSON.stringify(data));
 			$.each(data.list, function(index, item){
 				$('<tr/>').append($('<td/>',{
 						align : 'center',
@@ -67,8 +69,8 @@ $(document).ready(function(){
 						text : item.logtime,
 						id : 'logtime'
 					})).appendTo($('#C_notice_List'));
-			
 				});
+			$('#C_notice_PagingDiv').html(data.customerServicePaging.pagingHTML);
 		}
 	});
 	$('#C_notice_List').on('click','#subjectA',function(){
@@ -77,6 +79,5 @@ $(document).ready(function(){
 	});
 });
 </script>
-
 </body>
 </html>

@@ -12,15 +12,15 @@ public interface CustomerServiceDAO {
 	
 	public CustomerServiceDTO getNoticeInfo(String seq);
 	
-	public void C_notice_Write(Map<String, String> map);
-	
 	public List<CustomerServiceDTO> getNoticeList(Map<String, Integer> map);
 	
 	public int getTotalC_notice();
 	
-	public void C_notice_Delete(String seq);
-
+	public void C_notice_Write(Map<String, String> map);
+	
 	public void C_notice_Modify(Map<String, String> map);
+
+	public void C_notice_Delete(String seq);
 
 	public List<CustomerServiceDTO> getInquireList();
 

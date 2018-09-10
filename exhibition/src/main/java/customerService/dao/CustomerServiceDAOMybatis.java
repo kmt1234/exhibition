@@ -18,13 +18,22 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	public int getTotalC_notice() {
+		return sqlSession.selectOne("customerServiceSQL.getTotalC_notice");
+	}
+	public CustomerServiceDTO getNoticeInfo(String seq) {
+		return sqlSession.selectOne("customerServiceSQL.getNoticeInfo", seq);
+	}
+	public List<CustomerServiceDTO> getNoticeList(Map<String, Integer> map) {
+		return sqlSession.selectList("customerServiceSQL.getNoticeList",map);
+	}
+	
 	public void C_notice_Write(Map<String, String> map) {
 		sqlSession.insert("customerServiceSQL.C_notice_Write", map);		
 	}
 	public void C_notice_Modify(Map<String, String> map) {
 		sqlSession.update("customerServiceSQL.C_notice_Modify", map);
 	}
-
 
 	public void C_inquire(CustomerServiceDTO customerServiceDTO) {
 		sqlSession.insert("customerServiceSQL.C_inquire", customerServiceDTO);
@@ -39,9 +48,6 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	}
 
 
-	public List<CustomerServiceDTO> getNoticeList(Map<String, Integer> map) {
-		return sqlSession.selectList("customerServiceSQL.getNoticeList");
-	}
 
 
 	public CustomerServiceDTO getInfo(String seq) {
@@ -142,14 +148,6 @@ public void imageboardWrite(ImageboardDTO imageboardDTO) {
 	//연극 업로드 리스트 삭제
 	public void eventboardDelete_play(List<Integer> list) {
 		sqlSession.delete("customerServiceSQL.eventboardDelete_play", list);
-	}
-	public CustomerServiceDTO getNoticeInfo(String seq) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	public int getTotalC_notice() {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 }

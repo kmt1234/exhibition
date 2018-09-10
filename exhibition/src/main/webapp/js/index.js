@@ -87,7 +87,7 @@ $(document).ready(function(){
 	$('#C_notice').click(function(){
 		location.href="/exhibition/customerService/C_notice.do";
 	});
-	//고객의소린
+	//고객의소리
 	$('#C_emailConfirmForm').click(function(){
 		location.href="/exhibition/customerService/C_emailConfirmForm.do";
 	});

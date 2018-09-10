@@ -2,6 +2,11 @@ $(document).ready(function(){
 	var C_name = /^[가-힣]+$/;	//한글만 가능 
 	var C_tel =  /^((01[1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})$/;	//휴대폰 번호 양식
 	
+	$('#C_noticeBtn').click(function(){ // 공지사항
+		alert("aaa");
+		$('#C_notice').submit();
+	});
+	
 	//공지사항 - 작성하기
 	$('#C_notice_checkWrite').click(function(){ // 공지사항 - 등록버튼 클릭시
 		$('#subjectDiv').empty();
