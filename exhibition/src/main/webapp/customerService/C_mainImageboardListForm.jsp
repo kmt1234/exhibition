@@ -55,7 +55,7 @@
 			<br>
 			<br>
 			
-		<%-- 	<jsp:include page="C_imageboardList.jsp" ></jsp:include> --%>
+		<jsp:include page="C_imageboardList.jsp"/>
 			
 		</div>
 		<!-- footer -->

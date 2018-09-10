@@ -8,25 +8,71 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href='../calendar2/fullcalendar.css' rel='stylesheet' />
 <link href='../calendar2/fullcalendar.print.css' rel='stylesheet' media='print' />
+<style type="text/css">
+.fc-toolbar {
+	height: 53px;
+}
+</style>
 </head>
 <body>
-<form id="exhibitionHollDecisionForm" method="post" action="/exhibition/rental/reservationHoll.do">
-예약 시작일 : <span><input type="date" name="startDate" id="startDate" value="${date}"></span> &ensp;&ensp;&ensp;
-
-예약 종료일 : <span><input type="date" name="endDate" id="endDate" value="${date}"></span><br><br><br>
-<input type="hidden" name="C_email" value="${homepageMember.getC_email()}">
-<input type="hidden" name="C_license" value="${homepageMember.getC_license()}">
-<input type="hidden" name="C_tel" value="${homepageMember.getC_tel()}">
-<input type="hidden" id="totalRent" name="totalRent" value="">
-<input type="hidden" id="booth" name="booth" value="">
-행사 이름 : <input type="text" name="title"><br><br>
-<input type="button" id="rentBtn" value="임대료 계산하기">
-<input type="button" id="reservationBtn" value="예약하기">
-<div id="rentDiv"></div>
+<form id="exhibitionHollDecisionForm" method="post" action="/exhibition/rental/reservationHoll.do" style="height: 600px;">
+	<table style="border: 1px solid; width: 40%;">
+		<tr>
+			<td>
+				<button style="width: 100%;">
+					1층
+				</button> 
+			</td>
+			<td>
+				<button style="width: 100%;">
+					2층
+				</button> 
+			</td>
+			<td>
+				<button style="width: 100%;">
+					3층
+				</button> 
+			</td>
+		</tr>
+	</table>
+	<br><br>
+	<div style="width: 35%; float: right;">
+		<h4>
+		예약 시작일 :
+		<span>
+			<input type="date" name="startDate" id="startDate" value="${date}">
+		</span>
+		</h4>
+		
+		<h4>
+		예약 종료일 :
+		<span>
+			<input type="date" name="endDate" id="endDate" value="${date}">
+		</span>
+		</h4>
+		
+		<input type="hidden" name="C_email" value="${homepageMember.getC_email()}">
+		<input type="hidden" name="C_license" value="${homepageMember.getC_license()}">
+		<input type="hidden" name="C_tel" value="${homepageMember.getC_tel()}">
+		<input type="hidden" id="totalRent" name="totalRent" value="">
+		<input type="hidden" id="booth" name="booth" value="">
+		
+		<h4>
+		행사 이름 : 
+		<input type="text" name="title">
+		</h4>
+		
+		
+		<input type="button" id="rentBtn" value="임대료 계산하기">
+		<input type="button" id="reservationBtn" value="예약하기">
+		<div id="rentDiv"></div>
+	</div>
+	<div id='calendar' style="width: 65%"></div>
+	
 </form>
-<br><br>
 
-<div id='calendar' style="width: 60%"></div>
+
+
 
 
 <script src='../calendar2/lib/moment.min.js'></script>

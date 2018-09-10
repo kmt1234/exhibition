@@ -114,7 +114,7 @@ $(document).ready(function() {
 			$('.registerConfirm').text('');
 			$('#registerForm').submit();
 		}else{
-			$('.registerConfirm').text('양식이 맞지 않습니다').css("font-size","12px").css("color","white");
+			$('.registerConfirm').text('양식이 맞지 않습니다').css("font-size","12px").css("color","white").css("margin-left","-37%");
 		}
 	
 	});

@@ -30,13 +30,13 @@
 	<br>
 	<div class="ui five column grid container">
 		<!-- 사이드바 메뉴 -->
-		<div class="ui compact menu" style="width: 20%; height: 977px; ">
+		<div class="ui compact menu" style="width: 20%; height: 980px; ">
 			<a class="item" href="P_allScheduleForm.do">전체일정</a> 
 			<a class="item" href="P_performanceScheduleForm.do">공연일정</a> 
 			<a class="item" href="P_exhibitionScheduleForm.do">전시회일정</a>
 		</div>
 		<!-- 메인 화면 -->
-		<div class="ui compact menu" style="width: 80%; height: 900px;" >
+		<div class="ui compact menu" style="width: 80%; height: 980px;" >
 			<!-- 타이틀 -->
 			<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
 				전체

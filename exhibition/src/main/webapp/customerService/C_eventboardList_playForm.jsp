@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>박람회 보드 리스트</title>
+<title>연극 보드 리스트</title>
 
 <style>
 .box-container{
@@ -85,7 +85,7 @@
 						</tr>
 								
 							<c:forEach items="${list}" var="list">
-								<c:if test="${list.postSelect eq '1' and list.postSelect ne '2'}">
+								<c:if test="${list.postSelect eq '2' and list.postSelect ne '1'}">
 										<tr>
 											<td><input type="checkbox" name="check" class="check" value="${list.seq}"></td>
 											<td>${list.seq}</td>
@@ -100,7 +100,7 @@
 					<div style=" float:left; width:500px" align="center" id="eventPaging">${imageboardPaging.pagingHTML}</div><br>
 					
 					<div style="float:left;">
-						<input type="button" value="선택삭제" id="eventDeleteBtn">
+						<input type="button" value="선택삭제" id="eventDeleteBtn_play">
 					</div>
 					
 				</form>
@@ -119,7 +119,7 @@
 <script>
 
 function eventboardPaging(pg){
-	location.href="/exhibition/customerService/C_eventboardListForm.do?pg="+pg
+	location.href="/exhibition/customerService/C_eventboardList_playForm.do?pg="+pg
 }
 
 $(document).ready(function(){
@@ -135,13 +135,13 @@ $(document).ready(function(){
 	
 	
 	//선택삭제
-	$('#eventDeleteBtn').click(function(){
+	$('#eventDeleteBtn_play').click(function(){
 		var count=$('.check:checked').length;
 
 		if(count==0) 
 			alert("항목을 선택해주세요");
 		else
-			$('#eventboardListForm').attr('action','/exhibition/customerService/C_eventboardDelete.do').submit();
+			$('#eventboardListForm').attr('action','/exhibition/customerService/C_eventboardDelete_play.do').submit();
 	});
 	
 });

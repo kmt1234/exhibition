@@ -80,7 +80,6 @@ public class LoginController {
 		if(companyDTO==null) return "not_exist";
 		else {
 			//세션 설정 
-			System.out.println("기업명 : "+companyDTO.getC_businessname()+" 로그인 성공");
 			session.setAttribute("homepageMemberName", companyDTO.getC_license());
 			session.setAttribute("homepageMember", companyDTO);				//회원 전체 정보
 			session.setAttribute("code", companyDTO.getCode());
@@ -165,7 +164,6 @@ public class LoginController {
 	public ModelAndView mypage(HttpSession session) {
 		
 		int code = (Integer) session.getAttribute("code");
-		System.out.println("현재 접속한 회원의 코드 = " + code);
 		
 		Object DTO = session.getAttribute("homepageMember");
 		session.setAttribute("DTO", DTO);
