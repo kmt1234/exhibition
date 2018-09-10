@@ -36,7 +36,7 @@ $(document).ready(function(){
 	});
 	//전체일정(달력&리스트로 분리 되어있음)
 	$('#P_allSchedule').click(function(){
-		location.href="/exhibition/performance/P_allScheduleForm.do";
+		location.href="/exhibition/performance/P_allSchedule.do";
 	});
 	//공연일정(달력&리스트로 분리 되어 있음)
 	$('#P_performanceScheduleForm').click(function(){

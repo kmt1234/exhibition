@@ -37,7 +37,7 @@ public class PerformanceController {
 		mav.addObject("dispaly","/performance/P_info.jsp");
 		mav.setViewName("/performance/P_performanceForm");
 		
-	return mav;
+		return mav;
 	}
 	//전체일정
 	@RequestMapping(value="P_allSchedule", method=RequestMethod.GET)
@@ -63,15 +63,15 @@ public class PerformanceController {
 				data.setDaysSize(strDays.length);
 				
 			}
-			modelMap.addAttribute("listView",list);
+		modelMap.addAttribute("listView",list);
+		
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("display", "/performance/P_allCalendar.jsp");
+		mav.addObject("dispaly","/performance/P_allCalendar.jsp");
 		mav.setViewName("/performance/P_performanceForm");
-	
-	return mav;
+		return mav ;
 	}
-
+	
 	
 	@RequestMapping(value="getPerformance", method=RequestMethod.GET)
 	public String getPerformance(ModelMap modelMap) {

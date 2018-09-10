@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -35,6 +35,10 @@
 	cursor: pointer;
 }
 
+.eventUploadBtn{
+	margin-right: 8%;
+}
+
 </style>
 
 </head>
@@ -56,7 +60,7 @@
 		<div class="ui compact menu" style="width: 80%; height: 900px;" >
 			<!-- 타이틀 -->
 			<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
-				이미지
+				박람회
 				<span class="h-light">업로드</span>
 			</h2>
 			<!-- 버튼 -->
@@ -73,7 +77,8 @@
 			<br>
 			
 			<!--리스트  -->
-			<div>
+			<div align="center">
+				<div align="right"><input type="button" class="eventUploadBtn" value="업로드"></div>
 				<form name="eventboardListForm" id="eventboardListForm" method="post">
 					<table id="eventboardListTab" border="1" frame="hsides" rules="rows" cellpadding="3" cellspacing="0">
 						<tr>
@@ -83,9 +88,18 @@
 							<th width="100">상품명</th>
 							<th width="380">행사 소개</th>
 						</tr>
-								
+							
+						<!--등록된 박람회 정보가 없을 때  -->								
+						<c:if test="${listSize eq '0'}">	
+									<tr>
+										<td colspan="5" align="center">현재 등록된 박람회 정보가 없습니다</td>
+									</tr>
+									<input type="hidden" id="hiddenListSize" value="${listSize }">
+						</c:if>
+							
 							<c:forEach items="${list}" var="list">
-								<c:if test="${list.postSelect eq '1' and list.postSelect ne '2'}">
+								
+								<c:if test="${list ne null}">	
 										<tr>
 											<td><input type="checkbox" name="check" class="check" value="${list.seq}"></td>
 											<td>${list.seq}</td>
@@ -93,7 +107,8 @@
 											<td>${list.imageName}</td>
 											<td>${list.eventContent}</td>
 										</tr>
-								</c:if>	
+								</c:if>
+		
 							</c:forEach>
 								
 					</table>
@@ -142,6 +157,17 @@ $(document).ready(function(){
 			alert("항목을 선택해주세요");
 		else
 			$('#eventboardListForm').attr('action','/exhibition/customerService/C_eventboardDelete.do').submit();
+	});
+	
+	
+	//선택삭제 버튼 숨김
+	if($('#hiddenListSize').val()==0){
+		$('#eventDeleteBtn').hide();
+	}
+	
+	//업로드 버튼
+	$('.eventUploadBtn').click(function(){
+		location.href='/exhibition/customerService/C_mainImageboardForm.do';
 	});
 	
 });

@@ -44,4 +44,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update memberTable set M_Pwd = #{M_Pwd}, M_Phone = #{M_Phone}, M_Email = #{M_Email} where M_Id = #{M_Id}
 	</update>
 	
+	<!-- 회원 탈퇴 -->
+	<delete id="deleteMember" parameterType="java.util.Map">
+		delete from memberTable where M_Id = #{M_Id} and M_Pwd = #{M_Pwd}
+	</delete>
+	
 </mapper>

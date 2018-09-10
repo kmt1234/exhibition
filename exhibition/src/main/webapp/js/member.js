@@ -34,7 +34,7 @@ $(document).ready(function() {
 	//아이디 입력 시, 중복 자동 검사
 	$('#Mw_Id').blur(function(){
 		if(!Mw_regId.test($('#Mw_Id').val())){
-			$('#idConfirm').text('아이디 5~12자(영문) 입니다').css("font-size","11px").css("color","white");
+			$('#idConfirm').text('아이디 5~12자(영문소문자+숫자)입니다').css("font-size","11px").css("color","white");
 			$('#Mw_Id').css({'border':'1px solid red', 'background-color':'#f4d2d2'});
 		}else{
 			$('#idConfirm').text('');

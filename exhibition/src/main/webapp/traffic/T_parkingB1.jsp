@@ -7,14 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div class="ui compact menu" style="width: 80%; height: 900px;" >
-			<!-- 타이틀 -->
-			<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
-				일정
-				<span class="h-light">정보</span>
-			</h2>
-			여기는 정체 일정에 대한 정보를 나열
+<div style="border:1px solid black"><br>
+<span>
+<img src="../img/B1.jpg" width="700px" height="600px">
+</span>
 </div>
-
 </body>
 </html>

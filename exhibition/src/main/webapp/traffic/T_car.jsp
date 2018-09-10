@@ -11,5 +11,7 @@
 <div style="border:1px solid black"><br>
 <span>
 <img src="../img/carMap.jpg">
+</span>
+</div>
 </body>
 </html>

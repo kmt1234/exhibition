@@ -5,16 +5,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script src="../js/trafficParking.js"></script>
 </head>
 <body>
-<div class="ui compact menu" style="width: 80%; height: 900px;" >
-			<!-- 타이틀 -->
-			<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
-				일정
-				<span class="h-light">정보</span>
-			</h2>
-			여기는 정체 일정에 대한 정보를 나열
-</div>
-
+주차요금
 </body>
 </html>

@@ -7,7 +7,6 @@
 <meta charset='UTF-8'/>
 <link href='../calendar2/fullcalendar.css' rel='stylesheet' />
 <link href='../calendar2/fullcalendar.print.css' rel='stylesheet' media='print' />
-
 <script src='../calendar2/lib/moment.min.js'></script>
 <script src='../calendar2/fullcalendar.min.js'></script>
 
@@ -45,7 +44,7 @@ var dataSet = [
 		    </c:forEach>
 		    <c:if test="${!status.last}">,</c:if>
 		 </c:if> 
-		</c:if> 
+		 </c:if> 
 		 
 		 
 		 <c:if test="${listView.code == '2'}">
@@ -97,7 +96,6 @@ var dataSet = [
 <style>
 	body {
 		margin: 40px 10px;
-		padding: 0;
 		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
 		font-size: 14px;
 	}
@@ -111,8 +109,8 @@ var dataSet = [
 
 <body>
 <!-- 메인 화면 -->
-	<div class="ui compact menu" style="width: 80%; height: 900px;" ><!-- 차후 발표시 크롬으로 맞추어야 한다. 크롬=width=:80 익스플로로=75-->
-		<!-- 타이틀 -->
+
+	
 		<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
 			전체
 			<span class="h-light">일정</span>
@@ -135,11 +133,12 @@ var dataSet = [
 		</div>
 		<br>
 		<br>
-	<div style= "height: 100%;width: 100%; border: 1px solid;">
+	<div style= "height: 86%;width: 100%; border: 1px solid;">
 		<br>
 		<br>
 		<div  id='calendar'></div>
 	</div>
-</div>
+
+
 </body>
 </html>
