@@ -38,6 +38,7 @@
 	<header>
 		<jsp:include page="../main/I_header.jsp"></jsp:include>
 	</header>
+	
 	<br>
 	<br>
 	<div class="ui five column grid container">
@@ -66,25 +67,35 @@
 				
 				<input type="button" value="버스  이용고객" id="busBtn" class="mapBtn">
 				 
-				 <input type="button" value="승용차 이용고객" id="carBtn" class="mapBtn">
+				 <input type="button" value="승용차 이용고객 " id="carBtn" class="mapBtn">
 				 
-				 
-			</div><br>
+			</div>
+			
+			<br><br><br>
+			
 			<div id="subwayMap">
-			<jsp:include page="T_subway.jsp" />
+				<a href="http://map.naver.com/?menu=subway&amp;region=1000" target="_blank" title="지하철 노선도" class="btn-subway" style="margin:left;">지하철 노선도 보기</a>
+				<div style="border:1px solid black">
+					<img src="../img/metroMap.jpg">
+				</div>
 			</div>
-			<div id="busMap">
-			<jsp:include page="T_bus.jsp" />
+			
+			<br>
+			<div id="carMap" style="border:1px solid black">
+				<img src="../img/busMap.jpg">
 			</div>
-			<div id="carMap">
-			<jsp:include page="T_car.jsp" />
+
+			<div id="busMap" style="border:1px solid black">
+				<img src="../img/carMap.jpg">
 			</div>
 		</div>
 		<br>
+		
 		<!-- footer -->
 		<div class="ui compact menu" style="width: 100%; float: right; ">
 			<jsp:include page="../main/I_footer.jsp" ></jsp:include>
 		</div>
+	</div>
 		
 
 </body>
