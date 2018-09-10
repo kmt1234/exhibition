@@ -39,7 +39,7 @@
 		<div class="ui compact menu" style="width: 80%; height: 900px;" >
 			<!-- 타이틀 -->
 			<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
-				이미지
+				이벤트
 				<span class="h-light">업로드</span>
 			</h2>
 			<!-- 버튼 -->
@@ -54,7 +54,6 @@
 			</div> -->
 			<br>
 			<br>
-			
 			<jsp:include page="C_imageboardWriteForm.jsp" ></jsp:include>
 			
 		</div>

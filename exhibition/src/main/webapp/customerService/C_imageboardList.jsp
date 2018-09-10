@@ -35,6 +35,7 @@ function imageboardPaging(pg){
 </head>
 <body>
 <div>
+<div align="left"><input type="button" class="eventUploadBtn" value="업로드"></div>
 <form name="imageboardListForm" id="imageboardListForm"method="post">
 <table id="imageboardListTab" border="1" frame="hsides" rules="rows" cellpadding="3" cellspacing="0">
 <tr>
@@ -112,6 +113,11 @@ $(document).ready(function(){
 		else
 			$('#imageboardListForm').attr('action','/exhibition/main/I_body.do').submit();
 			
+	});
+	
+	//업로드 버튼
+	$('.eventUploadBtn').click(function(){
+		location.href='/exhibition/customerService/C_mainImageboardForm.do?postSelect=0';
 	});
 });
 </script>

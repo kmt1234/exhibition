@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	
+
 	//시간
 	$('.timepicker1, .timepicker2').timepicker({
 		timeFormat : 'H:mm',
@@ -48,9 +48,6 @@ $(document).ready(function(){
 		
 	});
 	
-	//분류 종류(기본 값 : 0(메인)
-	var index = $('#postSelect option:selected').val();
-
 	//메인,박람회,연극 선택
 	$('.exhibitionS-td').hide();
 	$('.playS-td').hide();
@@ -79,6 +76,83 @@ $(document).ready(function(){
 	$('.exhibitionI-td').hide();
 	$('.playI-td').hide();
 	
+	//분류 종류(기본 값 : 0(메인)
+	var index = $('#postSelect option:selected').val();
+	
+	
+	//분류 나누기
+	if($('#postSelectHidden').val()=='0'){
+		$('#postSelect').val('0').prop('selected',true);
+	
+	}else if($('#postSelectHidden').val()=='1'){
+		$('#postSelect').val('1').prop('selected',true);
+		
+		$('.eventS-td').hide();
+		$('.exhibitionS-td').show();
+		$('.playS-td').hide();
+		
+		$('.eventL-td').hide();
+		$('.exhibitionL-td').show();
+		$('.playL-td').hide();
+		
+		$('.eventI-td').hide();
+		$('.exhibitionI-td').show();
+		$('.playI-td').hide();
+		
+		
+		$('.playT-td').hide();
+		$('.exhibitionT-td').show();
+		$('.eventTime').show();
+		
+		$('.playP-td').hide();
+		$('.exhibitionP-td').show();
+		$('.eventPlace').show();
+		
+		$('.playPr-td').hide();
+		$('.exhibitionPr-td').show();
+		$('.eventPrice').show();
+		
+		$('.playSe-td').hide();
+		$('.eventSeats').hide();
+			
+		$('.playR-td').hide();
+		$('.eventRate').hide();
+		
+	}else if($('#postSelectHidden').val()=='2'){
+		$('#postSelect').val('2').prop('selected',true);
+		
+		$('.eventS-td').hide();
+		$('.exhibitionS-td').hide();
+		$('.playS-td').show();
+		
+		$('.eventL-td').hide();
+		$('.exhibitionL-td').hide();
+		$('.playL-td').show();
+		
+		$('.eventI-td').hide();
+		$('.exhibitionI-td').hide();
+		$('.playI-td').show();
+		
+		
+		$('.playT-td').show();
+		$('.exhibitionT-td').hide();
+		$('.eventTime').show();
+		
+		$('.playP-td').show();
+		$('.exhibitionP-td').hide();
+		$('.eventPlace').show();
+		
+		$('.playPr-td').show();
+		$('.exhibitionPr-td').hide();
+		$('.eventPrice').show();
+		
+		$('.playSe-td').show();
+		$('.eventSeats').show();
+		
+		$('.playR-td').show();
+		$('.eventRate').show();
+	}
+		
 	$('#postSelect').change(function(){
 		//분류 값 (0:메인 1:박람회 2:연극)
 		

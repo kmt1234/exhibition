@@ -298,10 +298,17 @@ public class CustomerServiceController {
 	
 	//이미지 boardWriteForm
 	@RequestMapping(value="C_mainImageboardForm",method=RequestMethod.GET)
-	public String imageboardWriteForm() {
-		return "/customerService/C_mainImageboardForm";
+	public ModelAndView imageboardWriteForm(@RequestParam(required=false , defaultValue="0") String postSelect) {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("postSelect", postSelect);
+		mav.setViewName("/customerService/C_mainImageboardForm");
+		return mav; 
 	}
-	//이미지 boardWrite
+	
+	
+	//이미지 boardWrite(ajax)
 	@RequestMapping(value="C_imageboardWrite",method=RequestMethod.POST)
 	public String imageboardWrite(@ModelAttribute ImageboardDTO imageboardDTO,
 									@RequestParam MultipartFile img,
@@ -482,6 +489,7 @@ public class CustomerServiceController {
 		mav.addObject("pg", pg);
 		mav.addObject("imageboardPaging",imageboardPaging);
 		mav.addObject("listSize", list.size()+"");
+		mav.addObject("postSelect", "1");
 		mav.addObject("list", list);
 		mav.setViewName("/customerService/C_eventboardListForm");
 		return mav;
@@ -530,6 +538,7 @@ public class CustomerServiceController {
 		mav.addObject("pg", pg);
 		mav.addObject("imageboardPaging",imageboardPaging);
 		mav.addObject("listSize", list.size()+"");
+		mav.addObject("postSelect", "2");
 		mav.addObject("list", list);
 		mav.setViewName("/customerService/C_eventboardList_playForm");
 		return mav;
