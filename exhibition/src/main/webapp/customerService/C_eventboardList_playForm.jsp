@@ -77,7 +77,7 @@
 				<form name="eventboardListForm" id="eventboardListForm" method="post">
 					<table id="eventboardListTab" border="1" frame="hsides" rules="rows" cellpadding="3" cellspacing="0">
 						<tr>
-							<th><input type="checkbox" id="checkAll" name="check" class="check"></th>
+							<th><input type="checkbox" id="checkAll" class="check"></th>
 							<th width="100">번호</th>
 							<th width="150">이미지</th>
 							<th width="100">상품명</th>
@@ -100,7 +100,7 @@
 					<div style=" float:left; width:500px" align="center" id="eventPaging">${imageboardPaging.pagingHTML}</div><br>
 					
 					<div style="float:left;">
-						<input type="button" value="선택삭제" id="eventDeleteBtn">
+						<input type="button" value="선택삭제" id="eventDeleteBtn_play">
 					</div>
 					
 				</form>
@@ -135,7 +135,7 @@ $(document).ready(function(){
 	
 	
 	//선택삭제
-	$('#eventDeleteBtn').click(function(){
+	$('#eventDeleteBtn_play').click(function(){
 		var count=$('.check:checked').length;
 
 		if(count==0) 

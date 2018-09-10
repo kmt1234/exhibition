@@ -133,5 +133,15 @@ public void imageboardWrite(ImageboardDTO imageboardDTO) {
 		int totalA = sqlSession.selectOne("customerServiceSQL.getEventboardTotalA_play"); 
 		return totalA;
 	}
+	
+	//연극 정보 등록
+	public void eventInfoWrite_play(EventboardDTO eventboardDTO) {
+		sqlSession.insert("customerServiceSQL.eventInfoWrite_play", eventboardDTO);
+	}
+	
+	//연극 업로드 리스트 삭제
+	public void eventboardDelete_play(List<Integer> list) {
+		sqlSession.delete("customerServiceSQL.eventboardDelete_play", list);
+	}
 
 }
