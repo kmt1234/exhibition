@@ -101,7 +101,7 @@
 			</div>
 			
 			<div id="T_parkingPriceMap">
-				<img src="../img/Ev.png">
+			<!-- 	<img src="../img/Ev.png"> -->
 			</div>
 			
 		</div>
