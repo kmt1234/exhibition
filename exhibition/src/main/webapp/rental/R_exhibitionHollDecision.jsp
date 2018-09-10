@@ -47,18 +47,19 @@
 				<input type="date" name="endDate" id="endDate" value="${date}">
 			</span>
 		</h4>
-		<input type="hidden" name="C_email" value="${homepageMember.getC_email()}">
-		<input type="hidden" name="C_license" value="${homepageMember.getC_license()}">
-		<input type="hidden" name="C_tel" value="${homepageMember.getC_tel()}">
+		<input type="hidden" name="C_email" value="${C_email}">
+		<input type="hidden" name="C_license" value="${C_license}">
+		<input type="hidden" name="C_tel" value="${C_tel}">
 		<input type="hidden" id="totalRent" name="totalRent" value="">
-		<input type="hidden" id="booth" name="booth" value="">
+		<input type="hidden" id="booth" name="booth" value="${booth}">
 		<h4>
 			행사 이름 : 
-			<input type="text" name="title">
+			<input type="text" id="title" name="title">
 		</h4>
 		<input class="middle ui button" type="button" id="rentBtn" value="임대료 계산하기">
 		<input class="middle ui button" type="button" id="reservationBtn" value="예약하기">
 		<div id="rentDiv"></div>
+		<div id="writeDiv"></div>
 	</div>
 	<div id='calendar' style="width: 63%"></div>
 </form>
@@ -96,52 +97,73 @@
 	]; 
 	
 	var code = $('#code').val();
+	
 	$(document).ready(function(){
+		
 		$('#rentBtn').click(function(){
 			var stDate = new Date($('#startDate').val());
 		    var endDate = new Date($('#endDate').val());
 		 
 		    var btMs = endDate.getTime() - stDate.getTime();
 		    var btDay = btMs / (1000*60*60*24) + 1;
-		    var totalRent = ${rate} * btDay+1;
+		    var totalRent = ${rate} * btDay + 1;
 		    var booth = '${booth}';
 		    
 		    $('#rentDiv').text(booth + '의 총 임대료 : ' + totalRent.toLocaleString() + '원');
 		    $('#totalRent').val(totalRent);
 			$('#booth').val(booth);
+			$('#writeDiv').text('');
 		});
+		
 		$('#reservationBtn').click(function(){
-			if(code==='2') {
-				$('#title').empty();
-			if($('#rentDiv').text()=='') {
-				$('#rentDiv').text('임대료 계산부터 해주세요.');
+			if($('#startDate').val() < '${date}') {
+				$('#writeDiv').text('예약 시작일을 다시 설정해주세요.');
 				return;
 			}
-			if($('#title').val()=='') {
-				$('#rentDiv').text('행사 이름을 입력해주세요.');
+			
+			if($('#startDate').val() > $('#endDate').val()) {
+				$('#writeDiv').text('예약 종료일이 시작일보다 빠릅니다.');
 				return;
 			}
-			$.ajax({
+			
+			if(code=='2') {
+				
+				if($('#rentDiv').text()=='') {
+					$('#writeDiv').text('임대료 계산부터 해주세요.');
+					return;
+				}
+				
+				if($('#title').val()=='') {
+					$('#writeDiv').text('행사 이름을 입력해주세요.');
+					return;
+				}
+				
+				$.ajax({
 					type : 'POST',
 					url : '/exhibition/rental/searchRentDay.do',
 					data : {'booth': '${booth}',
 							'startDate' : $('#startDate').val(),
 							'endDate' : $('#startDate').val()},
+					async: false,
 					dataType: 'text',
 					success : function(data){
+						
 						if(data==='not_exist') {
 							$('#exhibitionHollDecisionForm').submit();
 						} else if(data==='exist') {
-							$('#rentDiv').text('예약불가능');
-						} 
+							$('#writeDiv').text('예약불가능');
+						}  
+						
 					}
 				});
+				
 			} else {
 				$('#rentDiv').empty();
 				$('.ui.mini.modal.rental').modal('show');
 			}
-				
-			});
+			
+		});
+		
 		$('#calendar').fullCalendar({
 			header: {
 	            left: 'prev,next today',
@@ -154,6 +176,7 @@
 	        eventLimit: true,
 			events: dataset
 		});
+
 	});
 </script>
 </body>
