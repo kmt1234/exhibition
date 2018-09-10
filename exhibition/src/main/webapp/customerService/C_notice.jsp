@@ -2,8 +2,18 @@
 	pageEncoding="UTF-8"%>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
 <style type="text/css">
+#subjectA:link{color:black; text-decoration: none;}
+#subjectA:visited{color:black; text-decoration: none;}
+#subjectA:hover{color:green; text-decoration: underline; font-weight: bold; cursor: pointer;}
+#subjectA:active{color:black; text-decoration: none;}
+
+#currentPaging{
+	color: red;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
 </style>
 </head>
 <body>

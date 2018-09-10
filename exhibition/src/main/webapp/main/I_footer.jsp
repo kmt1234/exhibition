@@ -15,12 +15,12 @@
 	</div>
 	<div style="width: 380px; height: 50px; float: right" align="right">
 	<!-- 주요연락처, 개인정보처리방침(1),이메이무단수집거부(2),사이트맵(3) (1,2,3)페이지를 만들어야한다.  -->
-		<div style="border: 1px solid;">
+		<div>
 			<u1 >
-				<il><a href="">주요연락처</a></il>
-				<il><a href="">개인정보처리방침</a></il>
-				<il><a href="">이메이무단수집거부</a></il>
-				<il><a id="site_map">사이트맵</a></il>
+				<il><a href="">주요연락처</a></il>&nbsp;
+				<il><a href="">개인정보처리방침</a></il>&nbsp;
+				<il><a href="">이메이무단수집거부</a></il>&nbsp;
+				<il><a id="site_map">사이트맵</a></il>&nbsp;
 			</u1>
 		</div>
 	</div>
