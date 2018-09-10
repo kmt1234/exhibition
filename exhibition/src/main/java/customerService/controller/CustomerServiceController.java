@@ -298,11 +298,11 @@ public class CustomerServiceController {
 	
 	//이미지 boardWriteForm
 	@RequestMapping(value="C_mainImageboardForm",method=RequestMethod.GET)
-	public ModelAndView imageboardWriteForm(@RequestParam(required=false , defaultValue="0") String postSelect) {
+	public ModelAndView imageboardWriteForm() {
 		
 		ModelAndView mav = new ModelAndView();
 		
-		mav.addObject("postSelect", postSelect);
+		mav.addObject("postSelect", "0");
 		mav.setViewName("/customerService/C_mainImageboardForm");
 		return mav; 
 	}
@@ -331,7 +331,7 @@ public class CustomerServiceController {
 		//DB			
 		customerServiceDAO.imageboardWrite(imageboardDTO);
 		model.addAttribute("imageboardDTO",imageboardDTO);
-		return "/customerService/C_imageboardWrite";
+		return "/customerService/C_mainImageboardListForm";
 	}
 	
 	//이미지보드 리스트
@@ -343,7 +343,7 @@ public class CustomerServiceController {
 		return "/customerService/C_mainImageboardListForm";
 	}
 	
-	//이미지보드 리스트
+	//이미지보드 리스트(ajax)
 	@RequestMapping(value="getImageboardList",method=RequestMethod.POST)
 	public ModelAndView getImageboardList(@RequestParam(required=false , defaultValue="1") String pg) {
 		
@@ -360,8 +360,6 @@ public class CustomerServiceController {
 		imageboardPaging.setPageBlock(3);
 		imageboardPaging.setPageSize(3);
 		imageboardPaging.setTotalA(totalA);
-
-		imageboardPaging.makePagingHTML();
 
 		imageboardPaging.makePagingHTML();
 		
@@ -412,7 +410,7 @@ public class CustomerServiceController {
 		//DB
 		customerServiceDAO.eventInfoWrite(eventboardDTO);
 		
-		return new ModelAndView("redirect:/main/index.do");
+		return new ModelAndView("redirect:/customerService/C_eventboardListForm.do");
 	}
 	
 	
@@ -438,7 +436,7 @@ public class CustomerServiceController {
 		//DB
 		customerServiceDAO.eventInfoWrite_play(eventboardDTO);
 		
-		return new ModelAndView("redirect:/main/index.do");
+		return new ModelAndView("redirect:/customerService/C_eventboardList_playForm.do");
 	}
 
 		
@@ -489,7 +487,6 @@ public class CustomerServiceController {
 		mav.addObject("pg", pg);
 		mav.addObject("imageboardPaging",imageboardPaging);
 		mav.addObject("listSize", list.size()+"");
-		mav.addObject("postSelect", "1");
 		mav.addObject("list", list);
 		mav.setViewName("/customerService/C_eventboardListForm");
 		return mav;
@@ -538,7 +535,6 @@ public class CustomerServiceController {
 		mav.addObject("pg", pg);
 		mav.addObject("imageboardPaging",imageboardPaging);
 		mav.addObject("listSize", list.size()+"");
-		mav.addObject("postSelect", "2");
 		mav.addObject("list", list);
 		mav.setViewName("/customerService/C_eventboardList_playForm");
 		return mav;

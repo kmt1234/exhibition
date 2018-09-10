@@ -21,7 +21,6 @@
 
 </head>
 <body>
-<input type="hidden" id="postSelectHidden" value="${postSelect }"><!--분류 값-->
 <div align="center"><div class="imageboardList"><input type="button" value="목록"></div>	
 <form name="imageboardWriteForm" id="imageboardWriteForm" method="post"
 	enctype="multipart/form-data"><!--/exhibition/customerService/C_imageboardWrite.do  --> 
@@ -64,7 +63,9 @@
 			<td class="exhibitionL-td">박람회 링크</td><!--박람회 선택 시,-->
 			<td class="playL-td">연극 링크</td>		<!--연극 선택 시,-->
 			<td class="hotelL-td">호텔 링크</td>		<!--숙박 선택 시,-->
-			<td><input type="text" name="eventLink" id="eventLink" size="45"></td>
+			<td><input type="text" name="eventLink" id="eventLink" size="45">
+				<div id="hotelDiv"></div>
+			</td>
 		</tr>
 		
 		<tr>
@@ -80,7 +81,10 @@
 		<tr>
 			<td class="exhibitionP-td">박람회 장소</td>
 			<td class="playP-td">연극 장소</td>
-			<td class="eventPlace"><input type="text" name="eventPlace"></td>
+			<td class="hotelP-td">TEL</td>
+			<td class="eventPlace"><input type="text" name="eventPlace" id="telPlace">
+				<div id="telDiv"></div>
+			</td>
 		</tr>
 		
 		<tr>
@@ -99,8 +103,7 @@
 			<td class="eventRate"><input type="text" name="eventRate"></td>
 		</tr>
 		
-				
-		<tr>
+		<tr class="I_tr">
 			<td class="eventI-td">행사 정보</td>		<!--메인 선택 시,-->
 			<td class="exhibitionI-td">박람회 정보</td><!--박람회 선택 시,  -->
 			<td class="playI-td">연극 정보</td>		<!--연극 선택 시,-->

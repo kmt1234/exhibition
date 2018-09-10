@@ -96,6 +96,7 @@ $(document).ready(function(){
 			$('.check').prop('checked',false);
 		}
 	});
+	
 	//선택삭제
 	$('#imageDeleteBtn').click(function(){
 		var count=$('.check:checked').length;
@@ -106,6 +107,7 @@ $(document).ready(function(){
 			$('#imageboardListForm').attr('action','/exhibition/customerService/C_imageboardDelete.do').submit();
 	});
 	
+	//메인등록
 	$('#imageSelectBtn').click(function(){
 		var count=$('.check:checked').length;
 		if(count==0) 
@@ -117,7 +119,7 @@ $(document).ready(function(){
 	
 	//업로드 버튼
 	$('.eventUploadBtn').click(function(){
-		location.href='/exhibition/customerService/C_mainImageboardForm.do?postSelect=0';
+		location.href='/exhibition/customerService/C_mainImageboardForm.do';
 	});
 });
 </script>
