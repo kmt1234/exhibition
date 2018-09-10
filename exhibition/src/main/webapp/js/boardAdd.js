@@ -43,12 +43,10 @@ $(document).ready(function(){
 			location.href='/exhibition/customerService/C_eventboardListForm.do';
 		}else if(index=='2'){
 			alert("play");
+			location.href='/exhibition/customerService/C_eventboardList_playForm.do';
 		}
 		
-		
-		
 	});
-	
 	
 	//분류 종류(기본 값 : 0(메인)
 	var index = $('#postSelect option:selected').val();
@@ -229,7 +227,7 @@ $(document).ready(function(){
 		}else if(index==1){	//박람회
 			$('#imageboardWriteForm').attr({action:'/exhibition/customerService/C_eventInfoWrite.do', method:'post'}).submit();
 		}else if(index==2){	//연극
-			$('#imageboardWriteForm').attr({action:'/exhibition/customerService/C_eventInfoWrite.do', method:'post'}).submit();
+			$('#imageboardWriteForm').attr({action:'/exhibition/customerService/C_eventInfoWrite_play.do', method:'post'}).submit();
 		
 		}
 	});

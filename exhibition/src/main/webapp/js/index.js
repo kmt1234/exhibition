@@ -1,5 +1,5 @@
 $(document).ready(function(){
-		
+	/*회원가입 클릭시 2가지로 분류(개인&사업자)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/	
 	//회원가입 클릭 시,
 	$('#M_member').click(function(){
 		$('.ui.member1.dropdown').dropdown('show');
@@ -9,46 +9,50 @@ $(document).ready(function(){
 	$('#M_individual').click(function(){
 		$('.ui.modal1.modal').modal('show');
 	});
-	
 	//법인 회원가입 클릭 시,
 	$('#C_company').click(function(){
 		$('.ui.modal2.modal').modal('show');
 	});
-	
+	/*로그인 클릭시 2가지로 분류(개인&사업자)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 	//로그인 클릭 시,
 	$('#L_login').click(function(){
 		$('.ui.member2.dropdown').dropdown('show');
 	});
-	
 	//개인회원 로그인 클릭 시,
 	$('#M_individual_L').click(function(){
 		$('.ui.modal-Login-Member.modal').modal('show');
 	});
-	
 	//법인회원 로그인 클릭 시,
 	$('#C_company_L').click(function(){
 		$('.ui.modal-Login-Company.modal').modal('show');
 	});
-	//일정
-	$('#P_infoForm').click(function(){//일정정보
+	/*일정정보(일정설명&전체일정&박람회일정&공연일정)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+	//일정에관한 설명
+	$('#P_infoForm').click(function(){
 		location.href="/exhibition/performance/P_infoForm.do";
 	});
-	$('#P_allScheduleForm').click(function(){//전체일정
+	//전체일정(달력&리스트로 분리 되어있음)
+	$('#P_allScheduleForm').click(function(){
 		location.href="/exhibition/performance/P_allScheduleForm.do";
 	});
-	$('#P_performanceScheduleForm').click(function(){//공연일정
+	//공연일정(달력&리스트로 분리 되어 있음)
+	$('#P_performanceScheduleForm').click(function(){
 		location.href="/exhibition/performance/P_performanceScheduleForm.do";
 	});
-	$('#P_exhibitionScheduleForm').click(function(){//전시회일정
+	//박람회일정(달력&리스트로 분리 되어 있음)
+	$('#P_exhibitionScheduleForm').click(function(){
 		location.href="/exhibition/performance/P_exhibitionScheduleForm.do";
 	});
-	//시설/임대
-	$('#R_infoForm').click(function(){//일정정보
+	/*시설&임대정보(박랍회홀&공연홀로 분리 되어 있음)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+	//시설&임대에 관한 설명
+	$('#R_infoForm').click(function(){
 		location.href="/exhibition/rental/R_infoForm.do";
 	});
-	$('#R_exhibitionForm').click(function(){//전시회 홀
+	//박람회 홀에 대한 정보(부스에 관한 설명과 배치도(클릭시 부스금액 및 일정을 체크 할수 있는 페이지 생성))
+	$('#R_exhibitionForm').click(function(){
 		location.href="/exhibition/rental/R_exhibitionForm.do";
 	});
+	//공연장 위치에 대한 정보(공연장 클릭시 공연장에서 행해지는 공연의 일정 정보 뜸) 
 	$('#R_consertForm').click(function(){//공연장 홀
 		location.href="/exhibition/rental/R_consertForm.do";
 	});

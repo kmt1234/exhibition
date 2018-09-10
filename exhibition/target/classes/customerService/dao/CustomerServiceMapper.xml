@@ -76,7 +76,7 @@
  		select * from C_contactList
  	</select>
  	
- 		<!-- 이미지작성  -->
+ 	<!-- 이미지작성  -->
 	<insert id="imageboardWrite" parameterType="imageboard">
 		insert into customerImageboard values(seq_customerImageboard.nextval
 											,#{postSelect}
@@ -113,9 +113,28 @@
 			#{item}
 		</foreach>
 	</select>
-		<!--박람회 정보 넣기-->
+	
+	<!--박람회 정보 넣기-->
 	<insert id="eventInfoWrite" parameterType="eventboard">
 		insert into eventboard values(seq_eventboard.nextval
+						  			  ,#{postSelect}
+									  ,#{imageName}
+									  ,#{image1}
+									  ,#{startDate}
+									  ,#{endDate}
+									  ,#{eventLink}
+									  ,#{startTime}
+									  ,#{endTime}
+									  ,#{eventPlace}
+									  ,#{eventPrice}
+									  ,#{eventSeats}
+									  ,#{eventRate}
+									  ,#{eventContent})
+	</insert>
+	
+	<!--연극 정보 넣기-->
+	<insert id="eventInfoWrite_play" parameterType="eventboard">
+		insert into eventboard_play values(seq_eventboard_play.nextval
 						  			  ,#{postSelect}
 									  ,#{imageName}
 									  ,#{image1}
@@ -145,11 +164,40 @@
 		)where rn <![CDATA[ >= ]]> #{startNum} and rn<![CDATA[<=]]> #{endNum}
 	</select>
 	
+	<!--연극 업로드 리스트 가져오기  -->
+	<select id="eventboardList_play" parameterType="java.util.Map" resultType="eventboard">
+		select * from(
+		select rownum rn, tt.* from(
+		select * from eventboard_play order by seq desc)tt
+		)where rn <![CDATA[ >= ]]> #{startNum} and rn<![CDATA[<=]]> #{endNum} and postSelect =2
+	</select>
+	
 	<!--박람회 업로드 리스트 총 글수 가져오기 -->
 	<select id="getEventboardTotalA" resultType="int">
-		select count(*) from eventboard
+	select count(*) from eventboard where postSelect = 1
 	</select>
-
+	
+	<!--연극 업로드 리스트 총 글수 가져오기 -->
+	<select id="getEventboardTotalA_play" resultType="int">
+		select count(*) from eventboard_play where postSelect = 2
+	</select>
+	
+	<!-- 박람회  업로드 리스트 삭제   -->
+	<delete id="eventboardDelete" parameterType="java.util.List">
+		delete eventboard where seq in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<!-- 연극  업로드 리스트 삭제   -->
+	<delete id="eventboardDelete_play" parameterType="java.util.List">
+		delete eventboard_play where seq in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
+	
  </mapper>
  
  

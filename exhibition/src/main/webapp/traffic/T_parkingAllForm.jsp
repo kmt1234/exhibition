@@ -9,7 +9,7 @@
 	integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
 	crossorigin="anonymous"></script>
 <script src="../semantic/semantic.min.js"></script>
-<script src="../js/traffic.js"></script>
+<script src="../js/trafficParking.js"></script>
 
 <style>
 	.box-container{
@@ -31,6 +31,13 @@
 		background-color:#ffffff;
 		border:1 solid #f702e7; 
 		float: left
+	}
+	
+	.parkingBtn{
+	width:70px; 
+	height:25px;
+	background-color:#ffffff;
+	border:1 solid #f702e7;
 	}
 </style>
 </head>
@@ -58,29 +65,30 @@
 		<div class="ui compact menu" style="width: 80%; height: 900px;" >
 			<!-- 타이틀 -->
 			<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
-				오시는
-				<span class="h-light">길</span>
+				주차
+				<span class="h-light">안내</span>
 			</h2>
 			<div>
-				<input type="button" value="자히철  이용고객" id="subwayBtn" class="mapBtn">
+				<input type="button" value="주차안내" id="parkingInform" class="mapBtn">
 				
-				<input type="button" value="버스  이용고객" id="busBtn" class="mapBtn">
-				 
-				 <input type="button" value="승용차 이용고객" id="carBtn" class="mapBtn">
-				 
+				<input type="button" value="주차장 층별 정보" id="parkingB" class="mapBtn">
+				
+				<input type="button" value="주차요금" id="parkingPriceBtn" class="mapBtn">
 				 
 			</div><br>
-			<div id="subwayMap">
-			<jsp:include page="T_subway.jsp" />
-			</div>
-			<div id="busMap">
-			<jsp:include page="T_bus.jsp" />
-			</div>
 			<div id="carMap">
 			<jsp:include page="T_car.jsp" />
 			</div>
+			<div id="T_parkingFormMap">
+			<jsp:include page="T_parkingForm.jsp"/>
+			</div>
+			<div id="T_parkingPriceMap">
+			<jsp:include page="T_parkingPrice.jsp"/>
+			</div>
+			
 		</div>
 		<br>
+		</div>	
 		<!-- footer -->
 		<div class="ui compact menu" style="width: 100%; float: right; ">
 			<jsp:include page="../main/I_footer.jsp" ></jsp:include>
