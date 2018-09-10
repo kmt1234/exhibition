@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
@@ -17,28 +15,29 @@
 			<th style="width: 45%; height: 7%; padding-top: 10px; text-align: center;">제목</th>
 			<th style="width: 35%; height: 7%; padding-top: 10px; text-align: center;">등록일</th>
 		</tr>
-	
-	
 	</table>
 	<br><br>
 	
-	<div style="width: 100%; align="center">
-	<select name="C_notice_SearchMenu" id="C_notice_SearchMenu" style="width: 10%;height: 34px; " >
-		<option value="제목">제목
-		<option value="내용">내용
-	</select>
-	 <input type="text" style="width: 45%; height: 34px;">
-	 <input type="button" value="검색" id="C_noticeSearch" style="width: 8%; height: 34px;">
-	  <a href="/exhibition/customerService/C_notice_WriteForm.do"  style="width: 8%; height: 34px;" type="button">작성</a>
+	<div style="width: 100%;">
+		<div class="ui compact selection dropdown">
+			<i class="dropdown icon"></i>
+			<div class="text">선택하세요</div>
+			<div class="menu">
+				<div class="item">목록</div>
+				<div class="item">내용</div>
+			</div>
+		</div>
+		
+		<div class="ui input" style="width: 40%;">
+		 <input type="text" >
+		</div>
+		
+		 <input class="middle ui button" type="button" value="검색" id="C_noticeSearch">
+		 <input class="middle ui button" href="/exhibition/customerService/C_notice_WriteForm.do" value="작성" type="button">
 	</div>
 </div>
 
-	
-
-
-
-
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="../semantic/semantic.min.js"></script>
 	<script>
 $(document).ready(function(){
 	$.ajax({
@@ -75,8 +74,7 @@ $(document).ready(function(){
 		var seq = $(this).prev().text();
 		location.href="/exhibition/customerService/C_noticeView.do?seq="+seq;
 	});
+	
+	$('.ui.compact.selection.dropdown').dropdown();	
 });
 </script>
-
-</body>
-</html>

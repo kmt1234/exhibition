@@ -14,20 +14,20 @@
 </head>
 <body>
 <form id="exhibitionHollDecisionForm" method="post" action="/exhibition/rental/reservationHoll.do" style="height: 600px;">
-	<table style="border: 1px solid; width: 40%;">
+	<table style=" width: 40%;">
 		<tr>
 			<td>
-				<button style="width: 100%;">
+				<button class="middle ui button" style="width: 100%;">
 					1층
 				</button> 
 			</td>
 			<td>
-				<button style="width: 100%;">
+				<button class="middle ui button" style="width: 100%;">
 					2층
 				</button> 
 			</td>
 			<td>
-				<button style="width: 100%;">
+				<button class="middle ui button" style="width: 100%;">
 					3층
 				</button> 
 			</td>
@@ -56,11 +56,11 @@
 			행사 이름 : 
 			<input type="text" name="title">
 		</h4>
-		<input type="button" id="rentBtn" value="임대료 계산하기">
-		<input type="button" id="reservationBtn" value="예약하기">
+		<input class="middle ui button" type="button" id="rentBtn" value="임대료 계산하기">
+		<input class="middle ui button" type="button" id="reservationBtn" value="예약하기">
 		<div id="rentDiv"></div>
 	</div>
-	<div id='calendar' style="width: 65%"></div>
+	<div id='calendar' style="width: 63%"></div>
 </form>
 <br><br>
 
@@ -75,7 +75,7 @@
     <div class="ui approve button">확인</div>
   </div>
 </div>
-<input type="button" id="code" value="${code}">
+<input type="hidden" id="code" value="${code}">
 
 <script src='../calendar2/lib/moment.min.js'></script>
 <script src='../calendar2/lib/jquery.min.js'></script>

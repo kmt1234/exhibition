@@ -41,12 +41,11 @@
 		
 	</table>
 	
-	
 	<div>
-		<div style=" padding-top: 50px;" align="center">
-			<button id="C_notice_modifyBtn" value="글수정">글수정</button>
-			<button id="C_notice_deleteBtn" value="글삭제">글삭제</button>
-			<button id="C_noticeListBtn" value="목록가기">목록가기</button>
+		<div style="padding-top: 30px;" align="center">
+			<button class="middle ui button" id="C_notice_modifyBtn" value="글수정">글수정</button>
+			<button class="middle ui button" id="C_notice_deleteBtn" value="글삭제">글삭제</button>
+			<button class="middle ui button" id="C_noticeListBtn" value="목록가기">목록가기</button>
 		</div>
 	</div>
 	

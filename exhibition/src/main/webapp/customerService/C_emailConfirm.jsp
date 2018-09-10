@@ -6,7 +6,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
-<form>
 <table class="ui celled table">
 	<tr>
 		<td  align="center" height="30" style="background-color: #f7f6e6;text-align: center;">
@@ -37,12 +36,11 @@
 	
 </table>
 <!-- 관리자모드가 아니면 없애야함 -->
-	<div style="width: 20%;float: left;">
-		<input type="button" value="관리자 버튼" id="C_email_ListBtn"
-		 style="width:100%; height:100%; background-color:#ffffff; float: left;">
+	<div align="left">
+		<input class="middle ui button" type="button" id="C_email_ListBtn" value="관리자 버튼" style="">
 	</div>
 	<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script src="../js/customerService.js?ver=1"></script>
-</form>	
+	
 </body>
 </html>

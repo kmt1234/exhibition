@@ -42,9 +42,9 @@
 		
 	</table>
 </form>
-<div>
-	<input type="button" id="C_notice_checkModify" value="수정">
-	<input type="reset" value="다시쓰기">
+<div style="padding-top: 30px;">
+	<input class="middle ui button" type="button" id="C_notice_checkModify" value="수정">
+	<input class="middle ui button" type="reset" value="취소">
 </div>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="../js/customerService.js"></script>
