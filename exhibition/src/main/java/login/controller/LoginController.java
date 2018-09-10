@@ -84,6 +84,9 @@ public class LoginController {
 			session.setAttribute("homepageMemberName", companyDTO.getC_license());
 			session.setAttribute("homepageMember", companyDTO);				//회원 전체 정보
 			session.setAttribute("code", companyDTO.getCode());
+			session.setAttribute("C_license", companyDTO.getC_license());
+			session.setAttribute("C_email", companyDTO.getC_email());
+			session.setAttribute("C_tel", companyDTO.getC_tel());
 			return "exist";
 		}
 	}

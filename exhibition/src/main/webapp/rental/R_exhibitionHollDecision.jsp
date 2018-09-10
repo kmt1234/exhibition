@@ -2,8 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!DOCTYPE html>
-<html>
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href='../calendar2/fullcalendar.css' rel='stylesheet' />
@@ -11,24 +10,28 @@
 </head>
 <body>
 <form id="exhibitionHollDecisionForm" method="post" action="/exhibition/rental/reservationHoll.do">
+
 예약 시작일 : <span><input type="date" name="startDate" id="startDate" value="${date}"></span> &ensp;&ensp;&ensp;
 
 예약 종료일 : <span><input type="date" name="endDate" id="endDate" value="${date}"></span><br><br><br>
-<input type="hidden" name="C_email" value="${homepageMember.getC_email()}">
-<input type="hidden" name="C_license" value="${homepageMember.getC_license()}">
-<input type="hidden" name="C_tel" value="${homepageMember.getC_tel()}">
+
+<input type="hidden" name="C_email" value="${C_email}">
+<input type="hidden" name="C_license" value="${C_license}">
+<input type="hidden" name="C_tel" value="${C_tel}">
 <input type="hidden" id="totalRent" name="totalRent" value="">
-<input type="hidden" id="booth" name="booth" value="">
-행사 이름 : <input type="text" name="title"><br><br>
+<input type="hidden" id="booth" name="booth" value="${booth}">
+
+행사 이름 : <input type="text" id="title" name="title"><br><br>
+
 <input type="button" id="rentBtn" value="임대료 계산하기">
 <input type="button" id="reservationBtn" value="예약하기">
+
 <div id="rentDiv"></div>
+
 </form>
 <br><br>
 
-<input type="hidden" id="code" value="${code}">
-
-<div class="ui mini modal">
+<div class="ui mini modal rental">
   <div class="header">
   	<i class="huge home icon"></i>
   </div>
@@ -40,13 +43,15 @@
   </div>
 </div>
 
+<input type="hidden" id="code" value="${code}">
+
 
 <div id='calendar' style="width: 60%"></div>
 
 <script src='../calendar2/lib/moment.min.js'></script>
 <script src='../calendar2/lib/jquery.min.js'></script>
 <script src='../calendar2/fullcalendar.min.js'></script>
-<script src="../js/exhibition.js"></script>
+<script src="../semantic/semantic.min.js"></script>
 
 <script>
 	var dataset = [
@@ -63,7 +68,7 @@
 	]; 
 	
 	var code = $('#code').val();
-
+	
 
 	$(document).ready(function(){
 		
@@ -84,7 +89,18 @@
 
 		$('#reservationBtn').click(function(){
 			
-			if(code=='2') {
+			if(code==='2') {
+				$('#title').empty();
+				if($('#rentDiv').text()=='') {
+					$('#rentDiv').text('임대료 계산부터 해주세요.');
+					return;
+				}
+				
+				if($('#title').val()=='') {
+					$('#rentDiv').text('행사 이름을 입력해주세요.');
+					return;
+				}
+				
 				$.ajax({
 					type : 'POST',
 					url : '/exhibition/rental/searchRentDay.do',
@@ -97,12 +113,17 @@
 							$('#exhibitionHollDecisionForm').submit();
 						} else if(data==='exist') {
 							$('#rentDiv').text('예약불가능');
-						} 
+						}  
+						
 					}
 				});
-			} else {
 				
+			} else {
+				$('#rentDiv').empty();
+				$('.ui.mini.modal.rental').modal('show');
 			}
+			
+			
 		});
 		
 		
@@ -118,16 +139,9 @@
 	        editable: false,
 	        eventLimit: true,
 			events: dataset
-
 		});
 
 
 	});
-	
-	
-	
 </script>
 
-
-</body>
-</html>

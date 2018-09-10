@@ -4,8 +4,6 @@
  */
 $(document).ready(function(){
 	
-	
-	
 		$('#area1').click(function(){
 			location.href="/exhibition/rental/R_exhibitionHollDecision.do?booth="+$('#Booth1').text();
 		});
@@ -36,13 +34,6 @@ $(document).ready(function(){
 		$('#area10').click(function(){
 			location.href="/exhibition/rental/R_exhibitionHollDecision.do?booth="+$('#Booth10').text();
 		});
-		
-		
-		$('.booth').click(function(){
-			$('.ui.mini.modal').modal('show');
-		});
-		
-		
 		
 	
 });
