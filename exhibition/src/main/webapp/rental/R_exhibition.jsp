@@ -8,7 +8,6 @@
 </head>
 <body>
 
-<input type="hidden" id="code" value="${code}">
 <div style="border: 2px solid; height: 760px; width: 100%; ">
 
    <button class="ui inverted secondary button booth" type="button" id="area1" style="float: left;  height: 150px; width: 15%;
@@ -112,29 +111,7 @@
     </button>
 </div>
 
-<div class="ui mini modal">
-  <div class="header">
-  	<i class="huge home icon"></i>
-  </div>
-  <div class="content" style="width: 100%">
-    <span>사업자로 로그인해주세요</span>
-  </div>
-  <div class="actions">
-    <div class="ui approve button">확인</div>
-  </div>
-</div>
 
-<div class="ui mini modal">
-  <div class="header">
-  	<i class="huge home icon"></i>
-  </div>
-  <div class="content" style="width: 100%">
-    <span>사업자로 로그인해주세요</span>
-  </div>
-  <div class="actions">
-    <div class="ui approve button">확인</div>
-  </div>
-</div>
 
 <script src="../js/exhibition.js"></script>
 </body>
