@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="http://map.naver.com/?menu=subway&amp;region=1000" target="_blank" title="»õÃ¢¿¡¼­ ¿­¸²" class="btn-subway">ÁöÇÏÃ¶ ³ë¼±µµ º¸±â</a><br><br>
+<a href="http://map.naver.com/?menu=subway&amp;region=1000" target="_blank" title="ì§€í•˜ì²  ë…¸ì„ ë„" class="btn-subway">ì§€í•˜ì²  ë…¸ì„ ë„ ë³´ê¸°</a><br><br>
 <div style="border:1px solid black"><br>
 <span>
 <img src="../img/metroMap.jpg">
