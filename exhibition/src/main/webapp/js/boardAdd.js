@@ -154,7 +154,7 @@ $(document).ready(function(){
 	}
 		
 	$('#postSelect').change(function(){
-		//분류 값 (0:메인 1:박람회 2:연극)
+		//분류 값 (0:메인 1:박람회 2:연극 3:숙박)
 		
 		index = $('#postSelect option:selected').val();
 		
@@ -178,6 +178,7 @@ $(document).ready(function(){
 			$('.eventL-td').show();
 			$('.exhibitionL-td').hide();
 			$('.playL-td').hide();
+			$('.hotelL-td').hide();
 			
 			$('.eventI-td').show();
 			$('.exhibitionI-td').hide();
@@ -211,6 +212,7 @@ $(document).ready(function(){
 			$('.eventL-td').hide();
 			$('.exhibitionL-td').show();
 			$('.playL-td').hide();
+			$('.hotelL-td').hide();
 			
 			$('.eventI-td').hide();
 			$('.exhibitionI-td').show();
@@ -243,6 +245,7 @@ $(document).ready(function(){
 			$('.eventL-td').hide();
 			$('.exhibitionL-td').hide();
 			$('.playL-td').show();
+			$('.hotelL-td').hide();
 			
 			$('.eventI-td').hide();
 			$('.exhibitionI-td').hide();
@@ -267,6 +270,40 @@ $(document).ready(function(){
 			$('.playR-td').show();
 			$('.eventRate').show();
 			
+		}else if(index=='3'){//숙박
+			$('#S_td').hide();
+			$('.eventS-td').hide();
+			$('.exhibitionS-td').hide();
+			$('.playS-td').hide();
+			
+			$('.eventL-td').hide();
+			$('.exhibitionL-td').hide();
+			$('.playL-td').hide();
+			$('.hotelL-td').show();
+			
+			$('.I-td').hide();
+			$('.eventI-td').hide();
+			$('.exhibitionI-td').hide();
+			$('.playI-td').hide();
+			$('.eventContent').hide();
+			
+			$('.playT-td').hide();
+			$('.exhibitionT-td').hide();
+			$('.eventTime').hide();
+			
+			$('.playP-td').hide();
+			$('.exhibitionP-td').hide();
+			$('.eventPlace').hide();
+			
+			$('.playPr-td').hide();
+			$('.exhibitionPr-td').hide();
+			$('.eventPrice').hide();
+			
+			$('.playSe-td').hide();
+			$('.playR-td').hide();
+			
+			$('.eventSeats').hide();
+			$('.eventRate').hide();
 		}
 	});
 		

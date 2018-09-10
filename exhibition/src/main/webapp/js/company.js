@@ -197,12 +197,6 @@ $(document).ready(function(){
 		}
 	});
 	
-	//닫기클릭시
-	$('#companyWriteForm-close').click(function(){
-		$('#companyWriteFormPopup').hide(); 
-		$('.ui.modal2.modal').modal("hide");
-	});
-	
 	/*이용약관 보기*/
 	$('#terms_C').click(function(){
 		$('#CtermDiv').hide();
@@ -213,7 +207,6 @@ $(document).ready(function(){
 	/*약관 닫기 클릭 시,*/
 	$('#CtermsForm-close').click(function(){
 		$('#CtermsFormPopup').hide();
-		$('#terms_C').hide();
 		$('#Cterms').remove();
 		$('#companyWriteForm-close').show();
 		$('#companyWrite').show();
