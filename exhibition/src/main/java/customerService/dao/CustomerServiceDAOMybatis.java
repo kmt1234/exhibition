@@ -18,6 +18,9 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	public CustomerServiceDTO getNoticeInfo(String seq) {
+		return sqlSession.selectOne("customerServiceSQL.getNoticeInfo", seq);
+	}
 	public void C_notice_Write(Map<String, String> map) {
 		sqlSession.insert("customerServiceSQL.C_notice_Write", map);		
 	}
@@ -29,9 +32,11 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	public void C_inquire(CustomerServiceDTO customerServiceDTO) {
 		sqlSession.insert("customerServiceSQL.C_inquire", customerServiceDTO);
 	}
-	
-	public void C_QnA_Write(Map<String, String> map) {
-		sqlSession.insert("customerServiceSQL.C_QnA_Write", map);		
+	public List<CustomerServiceDTO> getQnA_Classify(String classify) {
+		return sqlSession.selectList("customerServiceSQL.getQnA_Classify", classify);
+	}
+	public void C_QnA_checkWrite(Map<String, String> map) {
+		sqlSession.insert("customerServiceSQL.C_QnA_checkWrite", map);		
 	}
 
 	public void C_contactList_Write(Map<String, String> map) {
@@ -64,7 +69,10 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	public CustomerServiceDTO getInquireInfo(String seq) {
 		return sqlSession.selectOne("customerServiceSQL.getInquireInfo", seq);
 	}
-
+	
+	public CustomerServiceDTO getReplyInfo(String seq) {
+		return sqlSession.selectOne("customerServiceSQL.getReplyInfo", seq);
+	}
 
 	public List<CustomerServiceDTO> getQnAList() {
 		return sqlSession.selectList("customerServiceSQL.getQnAList");
@@ -142,10 +150,6 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	//연극 업로드 리스트 삭제
 	public void eventboardDelete_play(List<Integer> list) {
 		sqlSession.delete("customerServiceSQL.eventboardDelete_play", list);
-	}
-	public CustomerServiceDTO getNoticeInfo(String seq) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 	public int getTotalC_notice() {
 		// TODO Auto-generated method stub

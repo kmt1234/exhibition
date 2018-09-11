@@ -11,8 +11,15 @@
 	자주묻는
 	<span class="h-light">질문 작성</span>
 </h2>
-<form id="C_QnA_WriteForm" method="post" action="/exhibition/customerService/C_QnA_Write.do">
 <table style="width:100%;" >
+<select name="classify" id="classify">
+		<option  value="위치/교통">위치/교통</option>
+		<option  value="주차">주차</option>
+		<option  value="전시&공연">전시&공연</option>
+		<option  value="임대">임대</option>
+		<option  value="시설">시설</option>
+		<option  value="기타">기타</option>
+</select>
 	<tr>
 		<td  align="center" style="width:8%; height:40px; background-color: #f7f6e6; font-size: 15px" >제 목</td>
 		
@@ -42,11 +49,7 @@
 	</tr>
 		
 </table>
-	
-</form>
-
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="../js/customerService.js"></script>
-
 </body>
 </html>

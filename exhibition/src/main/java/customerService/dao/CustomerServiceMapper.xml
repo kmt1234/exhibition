@@ -60,9 +60,14 @@
  		select * from C_inquire
  	</select>
  	
+ 	<select id="getReplyInfo" parameterType="String" resultType="customerService">
+ 		select * from C_inquire where seq=#{seq}
+ 	</select>
+ 	
  	<!-- 자주묻는 질문 -->
- 	<insert id="C_QnA_Write" parameterType="java.util.Map">
+ 	<insert id="C_QnA_checkWrite" parameterType="java.util.Map">
  		insert into C_QnA values(seq_C_QnA.nextval
+		 							,#{classify}
 		 							,#{subject}
 		 							,#{content})
  	</insert>
@@ -70,6 +75,11 @@
  	<!-- 자주묻는 질문 리스트 -->
  	<select id="getQnAList" resultType="customerService">
  		select * from C_QnA
+ 	</select>
+ 	
+ 	<!-- 자주묻는 질문 분류에 맞는 리스트 불러오기 -->
+ 	<select id="getQnA_Classify" parameterType="String" resultType="customerService">
+ 		select * from C_QnA where classify=#{classify}
  	</select>
  	
  	<!-- 주요시설 연락처 -->

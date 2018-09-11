@@ -25,7 +25,7 @@
 			<td style="width:20%;text-align: center;">
 				<div>
 					${customerServiceDTO.seq }
-					<input type="hidden" name="seq" value="${customerServiceDTO.seq }">
+					<input type="hidden" name="seq" >
 					
 				</div>
 			</td>
@@ -36,12 +36,11 @@
 			<td colspan="3">
 				<div class="ui form" >
 					<div align="center" class="field">
-						<textArea name="content" id="content" style="width: 100%">${customerServiceDTO.content }</textArea>
+						<textArea name="content" id="content" style="width: 100%" >${customerServiceDTO.content }</textArea>
 					</div>
 				</div>
 			</td>
 		</tr>
-		
 	</table>
 </form>
 <div style="padding-top: 30px;">
@@ -49,6 +48,20 @@
 	<input class="middle ui button" type="reset" value="취소">
 </div>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script src="../js/customerService.js?ver=1"></script>
+<script>
+$(document).ready(function(){
+	var seq = ${customerServiceDTO.seq };
+	var subject = ${customerServiceDTO.subject };
+	var content = ${customerServiceDTO.content };
+	$('#C_notice_checkModifyBtn').click(function(){
+		alert("111");
+		$.ajax({
+			type : 'POST',
+			url : '/exhibition/customerService/C_notice_checkModify.do',
+			data : {'seq' : seq, 'subject' : subject , 'content' : content }
+		});
+	});
+});
+</script>
 </body>
 </html>

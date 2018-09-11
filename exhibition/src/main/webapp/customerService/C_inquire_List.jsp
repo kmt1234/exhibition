@@ -68,10 +68,10 @@ $(document).ready(function(){
 					id : 'seqA'
 				})).append($('<a/>',{
 					align : 'center',
-						id : 'subjectA',
-						class : item.seq+"",
-						href : 'javascript:void(0)',
-						text : item.subject
+					id : 'subjectA',
+					class : item.seq+"",
+					href : 'javascript:void(0)',
+					text : item.subject
 				})).append($('<span/>',{
 					align : 'center',
 					text : item.name,
@@ -91,7 +91,7 @@ $(document).ready(function(){
 	
 	$('#C_inquire_ListDiv').on('click','#subjectA',function(){
 		var seq = $(this).prev().text();
-		location.href="/exhibition/customerService/C_inqureView.do?seq="+seq+"emil="+email;
+		location.href="/exhibition/customerService/C_inquire_View.do?seq="+seq;
 	});
 });
 </script>

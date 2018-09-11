@@ -21,42 +21,40 @@
 	자주묻는
 	<span class="h-light">질문</span>
 </h2>
-<div>
+<div >
 	<input type="button" value="위치/교통" id="C_QnA_location"
 	style="width:16%; height:35; background-color:#ffffff;
-	 border:1 solid #f702e7; ">
+	 border:1 solid #f702e7;" class="QnA">
 	
 	<input type="button" value="주차" id="C_QnA_parking"
 	style="width:16%; height:35; font-family:돋움; background-color:#ffffff;
-	 border:1 solid #f702e7; ">
+	 border:1 solid #f702e7; " class="QnA">
 	 
 	 <input type="button" value="전시&공연" id="C_QnA_exhibition"
 	style="width:16%; height:35; font-family:돋움; background-color:#ffffff;
-	 border:1 solid #f702e7; ">
+	 border:1 solid #f702e7; " class="QnA">
 	 
 	 <input type="button" value="임대" id="C_QnA_rent"
 	style="width:16%; height:35; font-family:돋움; background-color:#ffffff;
-	 border:1 solid #f702e7; ">
+	 border:1 solid #f702e7; " class="QnA">
 	 
-	 <input type="button" value="시설" id="facility"
+	 <input type="button" value="시설" id="C_QnA_facility"
 	style="width:16%; height:35; font-family:돋움; background-color:#ffffff;
-	 border:1 solid #f702e7; ">
+	 border:1 solid #f702e7; " class="QnA">
 	 
-	 <input type="button" value="기타" id="etc"
+	 <input type="button" value="기타" id="C_QnA_etc"
 	style="width:16%; height:35; font-family:돋움; background-color:#ffffff;
-	 border:1 solid #f702e7; ">
+	 border:1 solid #f702e7; " class="QnA">
 </div>
-<div class="QnA top" style="padding-top: 15px;">
-	<table style="width: 100%; height: 40px; " align="center" border="1" bordercolor="#ec008c" cellpadding="2" frame="hsides" rules="rows" >
+<div style="padding-top: 15px;">
+	<table style="width: 100%; height: 40px; " align="center" border="1" bordercolor="#ec008c" cellpadding="2" frame="hsides" rules="rows">
 		<tr>
-			<th style="width: 10%; height: 7%; text-align:center;" id="seqA" >번호</th>
-			<th style="width: 40%; height: 7%; " id="subjectA">제목</th>
-		</tr>
-		<tr>
-			<div id="C_QnA_List"></div>
+			<!-- <th style="width: 10%; height: 7%; text-align:center;" id="seqA" >번호</th> -->
+			<th style=" height: 7%; " id="subjectA">제목</th>
 		</tr>
 	</table>
 </div>
+<div id="C_QnA_List" class="ui accordion"></div>
 <div align="left">
 	<input class="middle ui button" type="button" value="작성" id="C_QnA_writeBtn">
 </div>
@@ -65,31 +63,71 @@
 <script src="../js/customerService.js"></script>
 <script>
 $(document).ready(function(){
+	var classify = "위치/교통";
 	$.ajax({
 		type : 'POST',
-		url : '/exhibition/customerService/getQnAList.do',
+		url : '/exhibition/customerService/getQnA_Classify.do',
+		data : {'classify' : classify },
 		dataType : 'json',
 		success : function(data){
 			$.each(data.list, function(index, item){
-				$('<div/>').append($('<span/>',{
+				$('<div/>',{
+					class : 'title'
+				}).append($('<span/>',{
 					align : 'center',
-					text : item.seq,
-					id : 'seqA'
-				})).append($('<a/>',{
+					id : 'subjectA',
+					href : 'javascript:void(0)',
+					text : item.subject
+				})).appendTo($('#C_QnA_List'));
+				
+				$('<div/>',{
+					class : 'content'
+				}).append($('<span/>',{
 					align : 'center',
-						id : 'subjectA',
-						class : item.seq+"",
-						href : 'javascript:void(0)',
-						text : item.subject
+					id : 'contentA',
+					text : item.content
 				})).appendTo($('#C_QnA_List'));
 			});
 		}
 	});
 	
-	/* $('#C_QnA_List').on('click','#subjectA',function(){
-		var seq = $(this).prev().text();
-		location.href="/exhibition/customerService/C_QnAView.do?seq="+seq;
-	}); */
+	
+	$('.QnA').click(function(){
+		var child = $('#C_QnA_List').empty();
+		var classify = $(this).val();
+		$.ajax({
+			type : 'POST',
+			url : '/exhibition/customerService/getQnA_Classify.do',
+			data : {'classify' : classify },
+			dataType : 'json',
+			success : function(data){
+				$.each(data.list, function(index, item){
+					$('<div/>',{
+						class : 'title'
+					}).append($('<span/>',{
+						align : 'center',
+						id : 'subjectA',
+						href : 'javascript:void(0)',
+						text : item.subject
+					})).appendTo($('#C_QnA_List'));
+					
+					$('<div/>',{
+						class : 'content'
+					}).append($('<span/>',{
+						align : 'center',
+						id : 'contentA',
+						text : item.content
+					})).appendTo($('#C_QnA_List'));
+				});
+			}
+		});
+	});
+	
+	$('.accordion').accordion({
+		selector: {
+			trigger: '.title'
+		}
+	});
 });
 </script>
 

@@ -12,21 +12,23 @@ public interface CustomerServiceDAO {
 	
 	public CustomerServiceDTO getNoticeInfo(String seq);
 	
-	public void C_notice_Write(Map<String, String> map);
-	
 	public List<CustomerServiceDTO> getNoticeList(Map<String, Integer> map);
+	
+	public void C_notice_Write(Map<String, String> map);
 	
 	public int getTotalC_notice();
 	
-	public void C_notice_Delete(String seq);
-
 	public void C_notice_Modify(Map<String, String> map);
+
+	public void C_notice_Delete(String seq);
 
 	public List<CustomerServiceDTO> getInquireList();
 
 	public void C_inquire(CustomerServiceDTO customerServiceDTO);
 	
-	public void C_QnA_Write(Map<String, String> map);
+	public CustomerServiceDTO getReplyInfo(String seq);
+	
+	public void C_QnA_checkWrite(Map<String, String> map);
 	
 	public CustomerServiceDTO getInquireInfo(String seq);
 
@@ -35,7 +37,7 @@ public interface CustomerServiceDAO {
 	public void C_contactList_Write(Map<String, String> map);
 
 	public List<CustomerServiceDTO> getContactList();
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////
 	public void imageboardWrite(ImageboardDTO imageboardDTO);
 
 	public int getImageboardTotalA();
@@ -64,4 +66,6 @@ public interface CustomerServiceDAO {
 	public void eventInfoWrite_play(EventboardDTO eventboardDTO); //연극 정보 등록
 
 	public void eventboardDelete_play(List<Integer> list);	//연극 업로드 리스트 삭제
+
+	public List<CustomerServiceDTO> getQnA_Classify(String classify);
 }

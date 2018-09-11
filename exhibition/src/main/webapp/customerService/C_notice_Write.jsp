@@ -11,7 +11,7 @@
 	공지
 	<span class="h-light">사항</span>
 </h2>
-<form id="C_notice_WriteForm" method="post" action="/exhibition/customerService/C_notice_Write.do">
+<form id="C_notice_Write" method="post" action="/exhibition/customerService/C_notice_Write.do">
 <table style="width:100%;" class="ui celled table">
 	<tr>
 		<td style="width:8%; height:40px; background-color: #f7f6e6; font-size: 15px;text-align: center;" >제 목</td>

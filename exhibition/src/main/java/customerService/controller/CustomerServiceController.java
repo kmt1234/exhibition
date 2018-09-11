@@ -225,8 +225,15 @@ public class CustomerServiceController {
 		customerServiceDAO.C_inquire(customerServiceDTO);
 		return "/main/index";
 	}
-
-	// 고객의소리 리스트(관리자)
+	//고객의 소리 - 리스트폼(관리자)
+	@RequestMapping(value = "C_inquire_List", method = RequestMethod.GET)
+	public ModelAndView C_inquire_List() {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("display", "/customerService/C_inquire_List.jsp");
+		mav.setViewName("/customerService/C_customerServiceForm");
+		return mav;
+	}
+	// 고객의소리 리스트불러오기(관리자)
 	@RequestMapping(value = "getInquireList", method = RequestMethod.POST)
 	public ModelAndView getInquireList() {
 
@@ -239,15 +246,28 @@ public class CustomerServiceController {
 	}
 
 	// 고객의소리 내용보기(관리자
-	@RequestMapping(value = "C_inqureView", method = RequestMethod.GET)
-	public String C_inqureView(@RequestParam String seq, Model model) {
+	@RequestMapping(value = "C_inquire_View", method = RequestMethod.GET)
+	public ModelAndView C_inquire_View(@RequestParam String seq, Model model) {
 
 		CustomerServiceDTO customerServiceDTO = customerServiceDAO.getInquireInfo(seq);
 
 		model.addAttribute("customerServiceDTO", customerServiceDTO);
-		return "/customerService/C_inquireViewForm";
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("display", "/customerService/C_inquire_View.jsp");
+		mav.setViewName("/customerService/C_customerServiceForm");
+		return mav;
 	}
-
+	//고객의 소리 - 문의 답하기 폼
+	@RequestMapping(value="C_inquire_Reply", method =  RequestMethod.POST)
+	public ModelAndView C_inquire_Reply(@RequestParam String seq,@RequestParam String email, Model model) {
+		CustomerServiceDTO customerServiceDTO =customerServiceDAO.getReplyInfo(seq);
+		
+		model.addAttribute("customerServiceDTO",customerServiceDTO);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("display", "/customerService/C_inquire_Reply.jsp");
+		mav.setViewName("/customerService/C_customerServiceForm");
+		return mav;
+	}
 	// 고객의 소리 답변(관리자)
 //	@RequestMapping(value="sendEmail", method =  RequestMethod.POST)
 //	public @ResponseBody String sendEmail(@RequestParam  String subject ,@RequestParam String content, @RequestParam String email,Model model) {//인증번호 받기 위한 메일 전송
@@ -289,6 +309,16 @@ public class CustomerServiceController {
 		mav.setViewName("jsonView");
 		return mav;
 	}
+	//자주묻는 질문 - 버튼에 따라 리스트 가져오기
+	@RequestMapping(value="getQnA_Classify", method =  RequestMethod.POST)
+	public ModelAndView getQnA_Classify(@RequestParam String classify) {
+		List<CustomerServiceDTO> list = customerServiceDAO.getQnA_Classify(classify);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.setViewName("jsonView");
+		return mav;
+	}
 
 	// 자주묻는 질문 - 작성
 	@RequestMapping(value = "C_QnA_Write", method = RequestMethod.GET)
@@ -301,12 +331,13 @@ public class CustomerServiceController {
 
 	// 자주묻는 질문 - 작성등록
 	@RequestMapping(value = "C_QnA_checkWrite", method = RequestMethod.POST)
-	public ModelAndView C_QnA_checkWrite(@RequestParam String subject, @RequestParam String content) {
+	public ModelAndView C_QnA_checkWrite(@RequestParam String classify, @RequestParam String subject, @RequestParam String content) {
 		Map<String, String> map = new HashMap<String, String>();
+		map.put("classify", classify);
 		map.put("subject", subject);
 		map.put("content", content);
 		// DB
-		customerServiceDAO.C_QnA_Write(map);
+		customerServiceDAO.C_QnA_checkWrite(map);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("display" ,"/customerService/C_QnA.jsp");
@@ -360,13 +391,7 @@ public class CustomerServiceController {
 		return mav;
 	}
 
-	@RequestMapping(value = "C_inquire_List", method = RequestMethod.GET)
-	public ModelAndView C_inquire_List() {
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("display", "/customerService/C_inquire_List.jsp");
-		mav.setViewName("/customerService/C_customerServiceForm");
-		return mav;
-	}
+	
 
 	// 이미지 boardWriteForm
 	@RequestMapping(value = "C_mainImageboardForm", method = RequestMethod.GET)
