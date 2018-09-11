@@ -100,7 +100,7 @@ var dataSet = [
 		<input type="button" value="달력으로 보기" 
 			style="width:150; height:35; background-color:#ffffff;
 		 border:1 solid #f702e7; float: left">
-		<input type="button" value="리스트로 보기" 
+		<input type="button" id="list_play" value="리스트로 보기" 
 			style="width:150; height:35; font-family:돋움; background-color:#ffffff;
 		 	border:1 solid #f702e7; float: left">
 		 <span style="float: right;">
@@ -119,4 +119,5 @@ var dataSet = [
 	<div  id='calendar'></div>
 </div>
 </body>
+<script src="../js/p_peformanceCalendar.js"></script>
 </html>

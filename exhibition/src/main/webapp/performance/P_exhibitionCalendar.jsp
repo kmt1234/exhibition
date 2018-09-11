@@ -93,22 +93,36 @@ var dataSet = [
 </style>
 </head>
 
-<body>
-<%-- <div style="height: 350px; border: 1px solid;">
-	<header>
-		<jsp:include page="../main/I_header.jsp"></jsp:include>
-	</header>
-</div>  --%>
-<div style="height: 800px; border: 1px solid ;">
-<section>
-<br>
-<br>	
-		<div  id='calendar'></div>
+<body>	
+<!-- 메인 화면 -->
+	<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
+		전시회
+		<span class="h-light">일정</span>
+	</h2>
 	
-</section>
-</div>
-<%-- <footer>
-	<jsp:include page="../main/I_footer.jsp"></jsp:include>
-</footer> --%>
+	<!-- 버튼 -->
+	<div>
+		<input type="button" value="달력으로 보기" 
+			style="width:150; height:35; background-color:#ffffff;
+		 border:1 solid #f702e7; float: left">
+		<input type="button" id="list_exhibition" value="리스트로 보기" 
+			style="width:150; height:35; font-family:돋움; background-color:#ffffff;
+		 	border:1 solid #f702e7; float: left">
+		 <span style="float: right;">
+		 <img src="../img/Ex.png" style="width:25px; height: 25px; " align='absmiddle'> 전시회
+		 </span>
+		 
+		 <span style="float: right;">
+		 	<img src="../img/Ev.png" style="width:25px; height: 25px;" align='absmiddle'> 공연  &ensp;&ensp;
+		 </span>
+	</div>
+		<br>
+		<br>
+<div style="height: 800px; border: 1px solid ;">
+<br>
+<br>
+	<div  id='calendar'></div>
+</div>	
 </body>
+<script src="../js/p_exhibitionCalendar.js"></script>
 </html>
