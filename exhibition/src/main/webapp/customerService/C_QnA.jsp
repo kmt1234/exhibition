@@ -60,8 +60,8 @@ $(document).ready(function(){
 	}); */
 });
 </script>
-<div>
-	<a href="/exhibition/customerService/C_QnA_WriteForm.do">작성</a>
+<div align="left">
+	<input class="middle ui button" type="button" value="작성" id="">
 </div>
 </body>
 </html>

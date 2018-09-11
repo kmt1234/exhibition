@@ -7,6 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<!-- 타이틀 -->
+	<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
+		고객
+		<span class="h-light">센터</span>
+	</h2>
 </body>
 </html>

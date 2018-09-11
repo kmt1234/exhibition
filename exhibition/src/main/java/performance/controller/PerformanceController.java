@@ -34,12 +34,13 @@ public class PerformanceController {
 	public ModelAndView P_performanceForm1() {
 		ModelAndView mav = new ModelAndView();
 		
-		mav.addObject("dispaly","/performance/P_info.jsp");
+		mav.addObject("display","/performance/P_info.jsp");
 		mav.setViewName("/performance/P_performanceForm");
 		
 		return mav;
 	}
-	//전체일정
+	/*전체일정 공연&박람회 데이터 베이스에서 데이터 갑을 받아와야 한다.
+	현제 임시 데이터 베이스 사용중*/
 	@RequestMapping(value="P_allSchedule", method=RequestMethod.GET)
 	public ModelAndView P_allSchedule(ModelMap modelMap) {
 
@@ -67,13 +68,13 @@ public class PerformanceController {
 		
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("dispaly","/performance/P_allCalendar.jsp");
+		mav.addObject("display","/performance/P_allCalendar.jsp");
 		mav.setViewName("/performance/P_performanceForm");
 		return mav ;
 	}
 	
 	
-	@RequestMapping(value="getPerformance", method=RequestMethod.GET)
+	/*@RequestMapping(value="getPerformance", method=RequestMethod.GET)
 	public String getPerformance(ModelMap modelMap) {
 		List<PerformanceDTO> list = performanceDAO.getPerformance();
 		
@@ -94,12 +95,12 @@ public class PerformanceController {
 		
 		modelMap.addAttribute("listView",list);
 		return "/performance/getPerformance";
-	}
+	}*/
 	
 	
-	//공연일정
-	@RequestMapping(value="P_performanceScheduleForm", method=RequestMethod.GET)
-	public String P_performanceScheduleForm(ModelMap modelMap) {
+	//공연일정를 데이터베이스에서 불러와 달력으로 보내준다.
+	@RequestMapping(value="P_performanceSchedule", method=RequestMethod.GET)
+	public ModelAndView P_performanceSchedule(ModelMap modelMap) {
 		List<PerformanceDTO> list = performanceDAO.getPerformance();
 		
 		for(PerformanceDTO data : list) {
@@ -120,15 +121,18 @@ public class PerformanceController {
 		}
 		
 		modelMap.addAttribute("listView",list);
-	
-		return "/performance/P_performanceScheduleForm";
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("display","/performance/P_performanceCalendar.jsp");
+		mav.setViewName("/performance/P_performanceForm");
+		return mav ;
 	}
 	
 	
 	
-	//전시회일정
-	@RequestMapping(value="P_exhibitionScheduleForm", method=RequestMethod.GET)
-	public String P_exhibitionScheduleForm(ModelMap modelMap) {
+	//전시회일정를 데이터베이스에서 불러와 달력으로 보내준다.
+	@RequestMapping(value="P_exhibitionSchedule", method=RequestMethod.GET)
+	public ModelAndView P_exhibitionSchedule(ModelMap modelMap) {
 		List<PerformanceDTO> list = performanceDAO.getPerformance();
 		
 		for(PerformanceDTO data : list) {
@@ -148,12 +152,11 @@ public class PerformanceController {
 		}
 		modelMap.addAttribute("listView",list);
 		
-		return "/performance/P_exhibitionScheduleForm";
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("display","/performance/P_exhibitionCalendar.jsp");
+		mav.setViewName("/performance/P_performanceForm");
+		return mav ;
 	}
-	
-	
-	
-	
 	
 	//달력 메소드
 	public static String[] getDiffDays(String fromDate, String toDate) {

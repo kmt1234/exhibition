@@ -9,12 +9,9 @@
 <link href='../calendar2/fullcalendar.print.css' rel='stylesheet' media='print' />
 
 <script src='../calendar2/lib/moment.min.js'></script>
-<!-- <script src='../calendar2/lib/jquery.min.js'></script> -->
 <script src='../calendar2/fullcalendar.min.js'></script>
-
 <script src='../calendar2/fullcalendar.min.js'></script>
-
-<script type="text/javascript">
+<script>
 var date = new Date(); 
 var year = date.getFullYear(); 
 var month = new String(date.getMonth()+1); 
@@ -49,17 +46,15 @@ var dataSet = [
 	];
 	
 
-
-	$(document).ready(function() {
-	    	  $.ajax({
-	        	  type : 'GET',
-	        	  url : '/exhibition/performance/getPerformance.do',
-	        	  dataType : 'text',
-	        	  success : function(data){
-	
-	        	  }
-	        	  
-	        	}); 
+		//이게 몰 의미 하는 걸까??
+	 	$(document).ready(function() {
+		    	  $.ajax({
+		        	  type : 'GET',
+		        	  url : '/exhibition/performance/getPerformance.do',
+		        	  dataType : 'text',
+		        	  success : function(data){
+		        	  }
+		    	  }); 
 
 	    	  
 		$('#calendar').fullCalendar({
@@ -94,23 +89,34 @@ var dataSet = [
 	}
 </style>
 </head>
-
 <body>
-<%-- <div style="height: 350px; border: 1px solid;">
-	<header>
-		<jsp:include page="../main/I_header.jsp"></jsp:include>
-	</header>
-</div>  --%>
+<!-- 메인 화면 -->
+	<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
+		공연
+		<span class="h-light">일정</span>
+	</h2>
+	<!-- 버튼 -->
+	<div>
+		<input type="button" value="달력으로 보기" 
+			style="width:150; height:35; background-color:#ffffff;
+		 border:1 solid #f702e7; float: left">
+		<input type="button" value="리스트로 보기" 
+			style="width:150; height:35; font-family:돋움; background-color:#ffffff;
+		 	border:1 solid #f702e7; float: left">
+		 <span style="float: right;">
+		 <img src="../img/Ex.png" style="width:25px; height: 25px; " align='absmiddle'> 전시회
+		 </span>
+		 
+		 <span style="float: right;">
+		 	<img src="../img/Ev.png" style="width:25px; height: 25px;" align='absmiddle'> 공연  &ensp;&ensp;
+		 </span>
+	</div>
+		<br>
+		<br>
 <div style="height: 800px; border: 1px solid ;">
-<section>
 <br>
 <br>
-		<div  id='calendar'></div>
-	
-</section>
+	<div  id='calendar'></div>
 </div>
-<%-- <footer>
-	<jsp:include page="../main/I_footer.jsp"></jsp:include>
-</footer> --%>
 </body>
 </html>

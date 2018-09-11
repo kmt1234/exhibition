@@ -39,12 +39,12 @@ $(document).ready(function(){
 		location.href="/exhibition/performance/P_allSchedule.do";
 	});
 	//공연일정(달력&리스트로 분리 되어 있음)
-	$('#P_performanceScheduleForm').click(function(){
-		location.href="/exhibition/performance/P_performanceScheduleForm.do";
+	$('#P_performanceSchedule').click(function(){
+		location.href="/exhibition/performance/P_performanceSchedule.do";
 	});
 	//박람회일정(달력&리스트로 분리 되어 있음)
-	$('#P_exhibitionScheduleForm').click(function(){
-		location.href="/exhibition/performance/P_exhibitionScheduleForm.do";
+	$('#P_exhibitionSchedule').click(function(){
+		location.href="/exhibition/performance/P_exhibitionSchedule.do";
 	});
 	
 	/*시설&임대정보(박랍회홀&공연홀로 분리 되어 있음)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -84,11 +84,11 @@ $(document).ready(function(){
 
 	/*고객센터(공지사항&고객의소리&자주묻는질마누&주요시설열락처 분리 되어 있음)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 	//공지사항
-	$('#C_infoForm').click(function(){
-		location.href="/exhibition/customerService/C_infoForm.do";
+	$('#C_customerServiceForm').click(function(){
+		location.href="/exhibition/customerService/C_customerServiceForm.do";
 	});
-	$('#C_noticeForm').click(function(){
-		location.href="/exhibition/customerService/C_noticeForm.do";
+	$('#C_notice').click(function(){
+		location.href="/exhibition/customerService/C_notice.do";
 	});
 	//고객의소린
 	$('#C_emailConfirmForm').click(function(){

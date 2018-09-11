@@ -11,10 +11,14 @@ import customerService.bean.ImageboardDTO;
 
 public interface CustomerServiceDAO {
 	
+	public CustomerServiceDTO getNoticeInfo(String seq);
+	
 	public void C_notice_Write(Map<String, String> map);
 	
-	public List<CustomerServiceDTO> getNoticeList();
-		
+	public List<CustomerServiceDTO> getNoticeList(Map<String, Integer> map);
+	
+	public int getTotalC_notice();
+	
 	public void C_notice_Delete(String seq);
 
 	public void C_notice_Modify(Map<String, String> map);
@@ -51,7 +55,6 @@ public interface CustomerServiceDAO {
 
 	public int getEventboardTotalA();	//박람회 업로드 리스트 총 글수 가져오기
 	
-	public CustomerServiceDTO getInfo(String seq);
 	
 	public void eventboardDelete(List<Integer> list);	//박람회 업로드 리스트 삭제 
 	

@@ -415,7 +415,7 @@ public class CustomerServiceController {
 	}
 	
 	
-	//연극 정보 넣는 컨트롤러
+	//연극 정보 넣는 컨
 	@RequestMapping(value="C_eventInfoWrite_play", method=RequestMethod.POST)
 	public ModelAndView C_exhibitionInfoWrite_play(@ModelAttribute EventboardDTO eventboardDTO,@RequestParam MultipartFile img) {
 		

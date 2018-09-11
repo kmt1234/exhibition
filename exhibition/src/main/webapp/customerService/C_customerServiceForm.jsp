@@ -4,19 +4,18 @@
 <html>
 <head>
 <style>
-	.box-container{
-		display: inline-block;
-		padding-bottom: 40px;
-		padding-left: 20px;
-		padding-right: 20px;
-		padding-top: 20px;
-		font-weight:normal;
-		font-size: 50px;
-	}
-	.h-light{
-		color: #ec008c;
-	
-	}
+.box-container{
+	display: inline-block;
+	padding-bottom: 40px;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 20px;
+	font-weight:normal;
+	font-size: 50px;
+}
+.h-light{
+	color: #ec008c;
+}
 </style>
 </head>
 <body>
@@ -27,14 +26,15 @@
 	<br>
 	<div class="ui five column grid container">
 		<!-- 사이드바 메뉴 -->
-		<div class="ui compact menu" style="width: 20%; height: 977px; ">
-			<a class="item" href="P_allSchedule.do">전체일정</a> 
-			<a class="item" href="P_performanceSchedule.do">공연일정</a> 
-			<a class="item" href="P_exhibitionSchedule.do">전시회일정</a>
+		<div class="ui compact menu" style="width: 20%; height: 960px; ">
+			<a class="item" href="C_notice.do">공지사항</a> 
+			<a class="item" href="C_emailConfirmForm.jsp">고객의 소리</a> 
+			<a class="item" href="C_QnAForm.jsp">자주묻는 질문</a>
+			<a class="item" href="C_contactListForm.jsp">주요시설 연락처</a>
 		</div>
 		<!-- 메인 화면 -->
 		<div class="ui compact menu" style="width: 80%; height: 900px;" >
-			<jsp:include page="${display}" ></jsp:include>
+			<jsp:include page="${display}"></jsp:include>
 		</div>
 		<!-- footer -->
 		<div class="ui compact menu" style="width: 100%; float: right; ">
