@@ -10,6 +10,7 @@
 	crossorigin="anonymous"></script>
 <script src="../semantic/semantic.min.js"></script>
 <script src="../js/trafficParking.js"></script>
+<script src="../js/traffic.js"></script>
 
 <style>
 	.box-container{
@@ -58,7 +59,7 @@
 			<span><a href="T_allForm.do" id="T_Atag">오시는길</a></span><br>
 			<span style="font-size: 7px;">▶</span>
 			<span><a href="T_parkingAllForm.do" id="T_Atag">주차안내</a></span><br><br>
-			<div id="T_inform">숙박안내</div><br>
+			<div id="T_hotel" style="cursor:pointer; font-size: 18px;">숙박안내</div><br>
 			<div id="T_inform">관광안내</div><br>
 		</div>
 		<!-- 메인 화면 -->

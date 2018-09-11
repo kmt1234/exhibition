@@ -26,5 +26,9 @@ $(document).ready(function(){
 		$('#carMap').show();
 	});
 	
+	$('#T_hotel').click(function(){
+		location.href='/exhibition/traffic/T_hotelList.do';
+	});
+	
 	
 });
