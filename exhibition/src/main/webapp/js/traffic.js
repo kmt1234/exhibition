@@ -34,5 +34,4 @@ $(document).ready(function(){
 		location.href='/exhibition/traffic/T_hotelList.do';
 	});
 	
-	
 });

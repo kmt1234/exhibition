@@ -69,4 +69,8 @@ public interface CustomerServiceDAO {
 	public void hotelInfoWrite(HotelboardDTO hotelboardDTO); //호텔정보등록
 
 	public List<HotelboardDTO> hotelList(); //호텔 숙박에 올려보기
+
+	public void hotelDelete(List<Integer> list);//호텔리스트 삭제
+
+	public List<HotelboardDTO> hotelImageDel(List<Integer> list);//호텔이미지 삭제 하기 위해 리스트 가져오기
 }

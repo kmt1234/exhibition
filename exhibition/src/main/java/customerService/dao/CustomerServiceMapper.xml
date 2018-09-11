@@ -217,9 +217,26 @@
 									  ,#{eventLink}
 									  ,#{eventPlace})
 	</insert>
+	
 	<!-- 호텔리스트 -->
 	<select id="hotelList" resultType="hotelboard">
 		select * from hotel_list
+	</select>
+	
+	<!-- 호텔  업로드 리스트 삭제   -->
+	<delete id="hotelDelete" parameterType="java.util.List">
+		delete hotel_list where seq in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<!-- 호텔이미지 삭제리스트 불러오기 -->
+	<select id="hotelImageDel" parameterType="java.util.List" resultType="hotelboard">
+		select * from hotel_list where seq in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
 	</select>
  </mapper>
  
