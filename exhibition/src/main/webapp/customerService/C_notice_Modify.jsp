@@ -9,7 +9,6 @@
 	공지
 	<span class="h-light">사항</span>
 </h2>
-<form id="C_notice_ModifyForm" method="post" action="/exhibition/customerService/C_notice_Modify.do">
 	<table style="width:100%;" class="ui celled table">
 		<tr>
 			<td height="30" style="width:10%; background-color: #f7f6e6; text-align: center;">글제목</td>
@@ -25,7 +24,7 @@
 			<td style="width:20%;text-align: center;">
 				<div>
 					${customerServiceDTO.seq }
-					<input type="hidden" name="seq" >
+					<input type="hidden" name="seq" id="seq" value="${customerServiceDTO.seq }">
 					
 				</div>
 			</td>
@@ -42,7 +41,6 @@
 			</td>
 		</tr>
 	</table>
-</form>
 <div style="padding-top: 30px;">
 	<input class="middle ui button" type="button" id="C_notice_checkModifyBtn" value="수정">
 	<input class="middle ui button" type="reset" value="취소">
@@ -50,15 +48,15 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
 $(document).ready(function(){
-	var seq = ${customerServiceDTO.seq };
-	var subject = ${customerServiceDTO.subject };
-	var content = ${customerServiceDTO.content };
 	$('#C_notice_checkModifyBtn').click(function(){
-		alert("111");
 		$.ajax({
 			type : 'POST',
 			url : '/exhibition/customerService/C_notice_checkModify.do',
-			data : {'seq' : seq, 'subject' : subject , 'content' : content }
+			data : {'seq' : $('#seq').val() , 'subject' : $('#subject').val() , 'content' : $('#content').val() },
+			success : function(data){
+				//alert(JSON.stringify(data));
+				location.href="/exhibition/customerService/C_notice.do";
+			}
 		});
 	});
 });

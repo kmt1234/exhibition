@@ -41,12 +41,12 @@
  	</update>
  	
  	<!-- 문의하기 -->
- 	<insert id="C_inquire" parameterType="customerService">
+ 	<insert id="C_checkInquire" parameterType="customerService">
  		insert into C_inquire values(seq_C_inquire.nextval
  											,#{email}
 		 									,#{classify}
 		 									,#{name}
-		 									,#{tel}
+		 									,#{phone}
 		 									,#{subject}
 		 									,#{content}
 		 									,sysdate)
@@ -83,12 +83,13 @@
  	</select>
  	
  	<!-- 주요시설 연락처 -->
- 	<insert id="C_contactList_Write" parameterType="java.util.Map">
+ 	<insert id="C_contactList_checkWrite" parameterType="java.util.Map">
  		insert into C_contactList values(seq_C_contactList.nextval
 		 							,#{classify}
-		 							,#{agency}
+		 							,#{facility}
+		 							,#{title}
 		 							,#{name}
-		 							,#{contact})
+		 							,#{phone})
  	</insert>
  	<!-- ????? -->
  	<select id="getContactList" resultType="customerService">

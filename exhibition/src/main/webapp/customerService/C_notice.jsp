@@ -1,20 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
 <style type="text/css">
+#subjectA:link{color:black; text-decoration: none;}
+#subjectA:visited{color:black; text-decoration: none;}
+#subjectA:hover{color:green; text-decoration: underline; font-weight: bold; cursor: pointer;}
+#subjectA:active{color:black; text-decoration: none;}
 </style>
 </head>
 <body>
 
-	<!-- 타이틀 -->
-	<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
-		공지
-		<span class="h-light">사항</span>
-	</h2>
+<!-- 타이틀 -->
+<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
+	공지
+	<span class="h-light">사항</span>
+</h2>
 
 <div style="width: 100%;" align="center">
 	<table style="width: 100%; height: 40px; " align="center" border="1" bordercolor="#ec008c" cellpadding="2" frame="hsides" rules="rows"

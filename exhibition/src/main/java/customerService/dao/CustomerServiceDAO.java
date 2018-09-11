@@ -10,9 +10,9 @@ import customerService.bean.ImageboardDTO;
 
 public interface CustomerServiceDAO {
 	
-	public CustomerServiceDTO getNoticeInfo(String seq);
-	
 	public List<CustomerServiceDTO> getNoticeList(Map<String, Integer> map);
+	
+	public CustomerServiceDTO getNoticeInfo(String seq);
 	
 	public void C_notice_Write(Map<String, String> map);
 	
@@ -24,7 +24,7 @@ public interface CustomerServiceDAO {
 
 	public List<CustomerServiceDTO> getInquireList();
 
-	public void C_inquire(CustomerServiceDTO customerServiceDTO);
+	public void C_checkInquire(CustomerServiceDTO customerServiceDTO);
 	
 	public CustomerServiceDTO getReplyInfo(String seq);
 	
@@ -34,7 +34,7 @@ public interface CustomerServiceDAO {
 
 	public List<CustomerServiceDTO> getQnAList();
 	
-	public void C_contactList_Write(Map<String, String> map);
+	public void C_contactList_checkWrite(Map<String, String> map);
 
 	public List<CustomerServiceDTO> getContactList();
 //////////////////////////////////////////////////////////////////////////////////////////////////////

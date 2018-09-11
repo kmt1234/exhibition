@@ -29,8 +29,8 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	}
 
 
-	public void C_inquire(CustomerServiceDTO customerServiceDTO) {
-		sqlSession.insert("customerServiceSQL.C_inquire", customerServiceDTO);
+	public void C_checkInquire(CustomerServiceDTO customerServiceDTO) {
+		sqlSession.insert("customerServiceSQL.C_checkInquire", customerServiceDTO);
 	}
 	public List<CustomerServiceDTO> getQnA_Classify(String classify) {
 		return sqlSession.selectList("customerServiceSQL.getQnA_Classify", classify);
@@ -39,8 +39,8 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 		sqlSession.insert("customerServiceSQL.C_QnA_checkWrite", map);		
 	}
 
-	public void C_contactList_Write(Map<String, String> map) {
-		sqlSession.insert("customerServiceSQL.C_contactList_Write", map);		
+	public void C_contactList_checkWrite(Map<String, String> map) {
+		sqlSession.insert("customerServiceSQL.C_contactList_checkWrite", map);		
 	}
 
 

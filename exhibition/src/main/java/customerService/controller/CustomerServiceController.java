@@ -219,11 +219,14 @@ public class CustomerServiceController {
 		return mav;
 	}
 
-	// 고객의소리 (이메일 인증 등록)
+	// 고객의소리 문의 하기 등록
 	@RequestMapping(value = "C_checkInquire", method = RequestMethod.POST)
-	public String C_checkInquire(@ModelAttribute CustomerServiceDTO customerServiceDTO) {
-		customerServiceDAO.C_inquire(customerServiceDTO);
-		return "/main/index";
+	public ModelAndView C_checkInquire(@ModelAttribute CustomerServiceDTO customerServiceDTO) {
+		customerServiceDAO.C_checkInquire(customerServiceDTO);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("display", "/customerService/C_emailConfirm.jsp");
+		mav.setViewName("/customerService/C_customerServiceForm");
+		return mav;
 	}
 	//고객의 소리 - 리스트폼(관리자)
 	@RequestMapping(value = "C_inquire_List", method = RequestMethod.GET)
@@ -268,27 +271,30 @@ public class CustomerServiceController {
 		mav.setViewName("/customerService/C_customerServiceForm");
 		return mav;
 	}
-	// 고객의 소리 답변(관리자)
-//	@RequestMapping(value="sendEmail", method =  RequestMethod.POST)
-//	public @ResponseBody String sendEmail(@RequestParam  String subject ,@RequestParam String content, @RequestParam String email,Model model) {//인증번호 받기 위한 메일 전송
-//		
-//		final MimeMessagePreparator preparator = new MimeMessagePreparator() {
-//			public void prepare(MimeMessage mimeMessage) throws Exception {
-//				final MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
-//				
-//				String subject = subject;
-//				String content = content;
-//				
-//				helper.setFrom("jbi8045@gmail.com");
-//				helper.setTo(email);
-//				helper.setSubject("인증번호 메일입니다.");
-//				helper.setText(content, true);
-//			}
-//		};
-//		
-//		emailSender.send(preparator);
-//		return authNum;
-//	}
+	//고객의 소리 답변(관리자)
+	@RequestMapping(value="C_inquire_checkReply", method =  RequestMethod.POST)
+	public @ResponseBody ModelAndView C_inquire_checkReply(@RequestParam  final String email, @RequestParam final String subject ,@RequestParam final String content, Model model) {
+		final MimeMessagePreparator preparator = new MimeMessagePreparator() {
+			public void prepare(MimeMessage mimeMessage) throws Exception {
+				final MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+				
+				String replySubject = subject;
+				String replyContent = content;
+				
+				helper.setFrom("jbi8045@gmail.com");
+				helper.setTo(email);
+				helper.setSubject(replySubject);
+				helper.setText(replyContent, true);
+			}
+		};
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("display", "/customerService/C_inquire_List.jsp");
+		mav.setViewName("/customerService/C_customerServiceForm");
+		
+		
+		emailSender.send(preparator);
+		return mav;
+	}
 	// 자주묻는 질문
 	@RequestMapping(value = "C_QnA", method = RequestMethod.GET)
 	public ModelAndView C_QnAForm() {
@@ -331,9 +337,10 @@ public class CustomerServiceController {
 
 	// 자주묻는 질문 - 작성등록
 	@RequestMapping(value = "C_QnA_checkWrite", method = RequestMethod.POST)
-	public ModelAndView C_QnA_checkWrite(@RequestParam String classify, @RequestParam String subject, @RequestParam String content) {
+	public ModelAndView C_QnA_checkWrite(@RequestParam String qty, @RequestParam String subject, @RequestParam String content) {
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("classify", classify);
+		System.out.println(qty);
+		map.put("classify", qty);
 		map.put("subject", subject);
 		map.put("content", content);
 		// DB
@@ -376,14 +383,15 @@ public class CustomerServiceController {
 
 	// 주요시설 연락처 - 작성등록
 	@RequestMapping(value = "C_contactList_checkWrite", method = RequestMethod.POST)
-	public ModelAndView C_contactList_checkWrite(@RequestParam String classify, @RequestParam String agency,
-			@RequestParam String name, @RequestParam String contact) {
+	public ModelAndView C_contactList_checkWrite(@RequestParam String classify,@RequestParam String facility, @RequestParam String title,
+			@RequestParam String name, @RequestParam String phone) {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("classify", classify);
-		map.put("agency", agency);
+		map.put("facility", facility);
+		map.put("title", title);
 		map.put("name", name);
-		map.put("contact", contact);
-		customerServiceDAO.C_contactList_Write(map);
+		map.put("phone", phone);
+		customerServiceDAO.C_contactList_checkWrite(map);
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("display", "/customerService/C_contactList.jsp");

@@ -37,7 +37,7 @@
 </table>
 	<tr>
 		<td colspan="2" align="center" style="padding-top: 30px"> 		
-			<input type="button" id="C_notice_checkWrite"  value="등록">
+			<input type="button" id="C_notice_checkWriteBtn"  value="등록">
 			<input type="reset" value="다시작성">
 		</td>
 	</tr>

@@ -1,9 +1,5 @@
 package customerService.bean;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.Map;
-
 import org.springframework.stereotype.Component;
 
 import lombok.Data;

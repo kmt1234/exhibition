@@ -34,16 +34,6 @@ CREATE TABLE company(
      code number default(2)
  );
 
-//문의하기 DB
-create table customerService(
-email varchar2(50) not null,			--이메일
-classify varchar2(50) not null,			--분류
-name varchar2(30) not null,			--이름
-tel varchar2(15),				--핸드폰
-subject varchar2(100) not null,		--제목
-content varchar2(100) not null,		--내용
-logtime DATE DEFAULT SYSDATE);		--날짜
-
 //부스 예약테이블
 create table exhibitionRental(
 boothName varchar2(40) not null,
@@ -110,7 +100,6 @@ CREATE TABLE eventboard_play(
  
 create sequence seq_eventboard_play  nocache nocycle;
 
-
 //공지사항
 create table C_notice(
 seq number primary key,
@@ -123,22 +112,21 @@ create sequence seq_C_notice nocycle nocache;
 //자주묻는 질문
 create table C_QnA (
 seq number primary key,
+classify varchar2(100) not null,
 subject varchar2(200) not null,
 content varchar2(500) not null);
 
 create sequence seq_C_QnA nocycle nocache;
 
-
-
 //고객의 소리
 create table C_inquire(
 seq number primary key,
-email varchar2(50) not null,
-classify varchar2(50) not null,
-name varchar2(50) not null,
-tel varchar2(20),
-subject varchar2(50) not null,
-content varchar2(300) not null,
+email varchar2(100) not null,
+classify varchar2(100) not null,
+name varchar2(100) not null,
+phone varchar2(100) not null,
+subject varchar2(100) not null,
+content varchar2(500) not null,
 logtime DATE DEFAULT sysdate);
 
 
@@ -149,12 +137,30 @@ create sequence seq_C_inquire nocycle nocache;
 create table C_contactList(
 seq number primary key,
 classify varchar2(50) not null,
-agency varchar2(50) not null,
+facility varchar2(50) not null,
+title varchar2(50) not null,
 name varchar2(30) not null,
-contact varchar2(50) not null);
+phone varchar2(50) not null);
 
 create sequence seq_C_contactList nocycle nocache;
 
-
+create table calendar2(
+code varchar2(5),
+title varchar2(30),
+startDate date,
+endDate date
+);
 
 commit;
+
+select * from C_inquire;
+select * from C_QnA;
+select * from C_contactList;
+
+drop table C_QnA;
+drop table C_notice;
+drop table C_inquire;
+
+insert into C_QnA values(1, '주차', '제목' ,'내용');
+insert into C_QnA values(2, '기타', '제목' ,'내용');
+

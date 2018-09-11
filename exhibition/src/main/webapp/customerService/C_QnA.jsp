@@ -12,6 +12,12 @@
 #subjectA{
 	margin-left:500px;
 }
+selector    : {
+  accordion : '.accordion',
+  title     : '.title',
+  trigger   : '.title',
+  content   : '.content'
+}
 
 
 </style>
@@ -63,7 +69,7 @@
 <script src="../js/customerService.js"></script>
 <script>
 $(document).ready(function(){
-	var classify = "위치/교통";
+	var classify = $('#classify option:selected').val();
 	$.ajax({
 		type : 'POST',
 		url : '/exhibition/customerService/getQnA_Classify.do',
@@ -90,7 +96,6 @@ $(document).ready(function(){
 			});
 		}
 	});
-	
 	
 	$('.QnA').click(function(){
 		var child = $('#C_QnA_List').empty();
