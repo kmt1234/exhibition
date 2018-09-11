@@ -29,8 +29,8 @@
 		<!-- 사이드바 메뉴 -->
 		<div class="ui compact menu" style="width: 20%; height: 977px; ">
 			<a class="item" href="P_allSchedule.do">전체일정</a> 
-			<a class="item" href="P_performanceScheduleForm.jsp">공연일정</a> 
-			<a class="item" href="P_exhibitionScheduleForm.jsp">전시회일정</a>
+			<a class="item" href="P_performanceSchedule.do">공연일정</a> 
+			<a class="item" href="P_exhibitionSchedule.do">전시회일정</a>
 		</div>
 		<!-- 메인 화면 -->
 		<div class="ui compact menu" style="width: 80%; height: 900px;" >

@@ -39,12 +39,12 @@ $(document).ready(function(){
 		location.href="/exhibition/performance/P_allSchedule.do";
 	});
 	//공연일정(달력&리스트로 분리 되어 있음)
-	$('#P_performanceScheduleForm').click(function(){
-		location.href="/exhibition/performance/P_performanceScheduleForm.do";
+	$('#P_performanceSchedule').click(function(){
+		location.href="/exhibition/performance/P_performanceSchedule.do";
 	});
 	//박람회일정(달력&리스트로 분리 되어 있음)
-	$('#P_exhibitionScheduleForm').click(function(){
-		location.href="/exhibition/performance/P_exhibitionScheduleForm.do";
+	$('#P_exhibitionSchedule').click(function(){
+		location.href="/exhibition/performance/P_exhibitionSchedule.do";
 	});
 	
 	/*시설&임대정보(박랍회홀&공연홀로 분리 되어 있음)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/

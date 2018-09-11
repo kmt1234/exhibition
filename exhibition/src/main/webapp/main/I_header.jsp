@@ -118,8 +118,8 @@
 					<span id="P_performanceForm">일정</span>
 					<div class="menu">
 						<div class="item" id="P_allSchedule">전체일정</div>
-						<div class="item" id="P_performanceScheduleForm">공연일정</div>
-						<div class="item" id="P_exhibitionScheduleForm">전시회일정</div>
+						<div class="item" id="P_performanceSchedule">공연일정</div>
+						<div class="item" id="P_exhibitionSchedule">전시회일정</div>
 					</div>
 				</div>
 			</div>
