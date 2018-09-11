@@ -97,6 +97,7 @@ $(document).ready(function(){
 		$('#telDiv').text('');
 		
 		if(index=='0'){//메인
+			$('#S_td').show();
 			$('.eventS-td').show();
 			$('.exhibitionS-td').hide();
 			$('.playS-td').hide();
@@ -133,6 +134,7 @@ $(document).ready(function(){
 			
 						
 		}else if(index=='1'){//박람회
+			$('#S_td').show();
 			$('.eventS-td').hide();
 			$('.exhibitionS-td').show();
 			$('.playS-td').hide();
@@ -168,6 +170,7 @@ $(document).ready(function(){
 			$('.eventRate').hide();
 							
 		}else if(index=='2'){//연극
+			$('#S_td').show();
 			$('.eventS-td').hide();
 			$('.exhibitionS-td').hide();
 			$('.playS-td').show();
@@ -286,6 +289,8 @@ $(document).ready(function(){
 				$('#hotelDiv').text('호텔 링크를 입력하세요').css('color','red').css('font-size','9pt').css('font-weight','bold');
 			else if($('#telPlace').val()=='')
 				$('#telDiv').text('전화번호를 입력하세요').css('color','red').css('font-size','9pt').css('font-weight','bold');
+			else
+				$('#imageboardWriteForm').attr({action:'/exhibition/customerService/C_hotelInfoWrite.do', method:'post'}).submit();
 		}
 		
 	});

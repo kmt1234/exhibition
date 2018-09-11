@@ -5,6 +5,7 @@ import java.util.Map;
 
 import customerService.bean.CustomerServiceDTO;
 import customerService.bean.EventboardDTO;
+import customerService.bean.HotelboardDTO;
 import customerService.bean.ImageboardDTO;
 
 
@@ -64,4 +65,8 @@ public interface CustomerServiceDAO {
 	public void eventInfoWrite_play(EventboardDTO eventboardDTO); //연극 정보 등록
 
 	public void eventboardDelete_play(List<Integer> list);	//연극 업로드 리스트 삭제
+
+	public void hotelInfoWrite(HotelboardDTO hotelboardDTO); //호텔정보등록
+
+	public List<HotelboardDTO> hotelList(); //호텔 숙박에 올려보기
 }

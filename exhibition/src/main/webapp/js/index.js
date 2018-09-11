@@ -78,6 +78,9 @@ $(document).ready(function(){
 	$('#T_allForm').click(function(){//전철이용
 		location.href="/exhibition/traffic/T_allForm.do";
 	});
+	$('#T_hotelForm').click(function(){//숙박안내클릭
+		location.href="/exhibition/traffic/T_hotelList.do";
+	});
 
 	/*고객센터(공지사항&고객의소리&자주묻는질마누&주요시설열락처 분리 되어 있음)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 	//공지사항

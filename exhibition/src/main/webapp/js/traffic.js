@@ -25,5 +25,14 @@ $(document).ready(function(){
 		$('#carMap').show();
 	});
 	
+	$('#parkingInform').click(function(){
+		$('#T_parkingB1Map').hide();
+		$('#carMap').show();
+	});
+	
+	$('#T_hotel').click(function(){
+		location.href='/exhibition/traffic/T_hotelList.do';
+	});
+	
 	
 });

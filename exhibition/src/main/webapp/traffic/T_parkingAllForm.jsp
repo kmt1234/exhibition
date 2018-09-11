@@ -9,6 +9,11 @@
 	integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
 	crossorigin="anonymous"></script>
 <script src="../semantic/semantic.min.js"></script>
+<<<<<<< HEAD
+<script src="../js/trafficParking.js"></script>
+<script src="../js/traffic.js"></script>
+=======
+>>>>>>> refs/remotes/origin/shinwork
 
 <style>
 	.box-container{
@@ -51,6 +56,19 @@
 	<br>
 	<div class="ui five column grid container">
 		<!-- 사이드바 메뉴 -->
+<<<<<<< HEAD
+		<div class="ui compact menu" style="width: 20%; height: 900px; ">
+		<br><br>
+		<div style="font-size: 22px;">교통/숙박/관광</div><br>
+		<div style="border-bottom: 1px solid black;"></div><br>
+			<div id="T_inform">교통안내</div>
+			<span style="font-size: 7px;">▶</span>
+			<span><a href="T_allForm.do" id="T_Atag">오시는길</a></span><br>
+			<span style="font-size: 7px;">▶</span>
+			<span><a href="T_parkingAllForm.do" id="T_Atag">주차안내</a></span><br><br>
+			<div id="T_hotel" style="cursor:pointer; font-size: 18px;">숙박안내</div><br>
+			<div id="T_inform">관광안내</div><br>
+=======
 		<div class="ui compact menu" style="width: 20%; height: 977px; ">
 			<a class="item" href="T_allForm.do" id="T_map">교통안내</a> 
 			<ul class="ui list" id="T_mapList" style="text-align: center; width: 120px">
@@ -59,6 +77,7 @@
 			</ul>
 			<a class="item" href="P_performanceScheduleForm.do">숙박안내</a> 
 			<a class="item" href="P_exhibitionScheduleForm.do">관광안내</a>
+>>>>>>> refs/remotes/origin/shinwork
 		</div>
 		<!-- 메인 화면 -->
 		<div class="ui compact menu" style="width: 80%; height: 900px;" >

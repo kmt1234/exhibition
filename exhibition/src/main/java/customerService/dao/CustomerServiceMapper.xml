@@ -207,6 +207,20 @@
 		</foreach>
 	</delete>
 	
+	
+	<!-- 호텔정보 넣기 -->
+	<insert id="hotelInfoWrite" parameterType="hotelboard">
+		insert into hotel_list values(seq_hotel_list.nextval
+						  			  ,#{postSelect}
+									  ,#{imageName}
+									  ,#{image1}
+									  ,#{eventLink}
+									  ,#{eventPlace})
+	</insert>
+	<!-- 호텔리스트 -->
+	<select id="hotelList" resultType="hotelboard">
+		select * from hotel_list
+	</select>
  </mapper>
  
  
