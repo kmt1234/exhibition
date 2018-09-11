@@ -120,6 +120,40 @@ $(document).ready(function(){
 	});
 	
 	
+	//회원탈퇴버튼
+	$('.ui.modal3').hide();
+	$('#member-out').click(function(){
+		$('#M-modify-modify').hide();
+		$('.ui.modal3').show();
+	});
+	$('#out-no').click(function(){//아니오 클릭시
+		$('.ui.modal3').hide();
+		$('#M-modify-modify').show();
+	});
+	$('#out-yes').click(function(){//네 클릭시
+		$('.ui.basic.modal').modal('show');
+	});
+	
+	$('#del_OK').click(function(){
+		$.ajax({
+				type : 'POST',
+				url : '/exhibition/member/deleteMember.do',
+				data : {'M_Id':$('#M-modify-id-hidden').val(),'M_Pwd':$('#del_pass').val()},
+				dataType : 'text',
+				success : function(data){
+					if(data=='exist'){
+						location.href='/exhibition/member/outComplete.do';
+					}else if(data=='not_exist'){
+						$('#del_check').text("비밀번호가 틀렸습니다.").css("font-size","12px").css("color","red").css("margin-left","24%").css("margin-top","2%");
+						$('.ui.basic.modal').modal('show');
+					}
+				}//success
+		});
+	});
+	
+	
+	
+	
 	//예매리스트
 	$('#member-ticket-list').click(function(){
 		$('#member-info-modify').removeClass('active');

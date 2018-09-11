@@ -12,55 +12,54 @@
 	font-family: 'Nanum Gothic';
 }
 .column {
-   /* border: 1px solid gray; */
    align-self: center;
 }
-
 .item {
    text-align: center;
 }
-
 #main {
    height: 200px;
 }
-
 #mainMenu {
    float: none;
 }
-
 .ui.compact.menu {
    display: table;
    width: 20%;
 }
-
 .ui.simple.dropdown.item {
    display: table-cell;
    vertical-align: middle;
    text-align: center;
 }
 
-/* .in {
-   position: relative;
-   display: inline-block;
-} */
-
 .menu {
    text-align: center;
 }
+#T_inform{
+ font-size: 18px;
+}
+
+
+#T_Atag:link {color:black; text-decoration: none;}	<!--일반 링크 검정 -->
+#T_Atag:visited {color:black; text-decoration: none;}
+#T_Atag:hover {color:black; text-decoration: underline;} <!--마우스 올렸을 때 그린색에 언더바 생성. -->
+#T_Atag:active {color:black; text-decoration: none;}
+#T_Atag{
+ font-color:black;
+}
 
 </style>
-
-
 	<header>
 		<div id="main" class="ui three column grid container">
-			<div class="column" style="width: 150px; height: 50px;">
+			<div class="column" style="width: 25%; height: 50px;">
 				<a href="http://localhost:8080/exhibition/main/index.do"><img alt="" src="../img/logo.jpg"
 					style="width: 150px; height: 50px;"></a>
 			</div>
-			<div class="column">
-				<div class="ui input">
-					<div class="ui action input"  style="width: 520px; height: 40px;">
-						<input type="text" placeholder="Search...">
+			<div class="column" style="width: 49%; padding-top: 100px;">
+				<div class="ui input" style="width: 100%;">
+					<div class="ui action input"  style="width: 100%; height: 40px;">
+						<input type="text" placeholder="Search..." style="width: 30%;">
 						<button class="ui icon button">
 							<i class="search icon"></i>
 						</button>
@@ -68,7 +67,7 @@
 				</div>
 			</div>
 			
-			<div class="column" style="width: 620px; height: 50px; text-align: right; padding-top: 70px;">
+			<div class="column" style="width: 23%; height: 50px; text-align: right; padding-top: 30px;">
 			
 			<!--회원가입 시, 축하메세지 출력(1분 동안)-->
 				<c:if test="${registerMessage != null}">
@@ -116,17 +115,17 @@
 		<div class="ui five column grid container">
 			<div class="ui compact menu">
 				<div class="ui simple dropdown item">
-					<span id="P_infoForm">일정</span>
+					<span id="P_performanceForm">일정</span>
 					<div class="menu">
-						<div class="item" id="P_allScheduleForm">전체일정</div>
-						<div class="item" id="P_performanceScheduleForm">공연일정</div>
-						<div class="item" id="P_exhibitionScheduleForm">전시회일정</div>
+						<div class="item" id="P_allSchedule">전체일정</div>
+						<div class="item" id="P_performanceSchedule">공연일정</div>
+						<div class="item" id="P_exhibitionSchedule">전시회일정</div>
 					</div>
 				</div>
 			</div>
 			<div class="ui compact menu" style="width: 20%;">
 				<div class="ui simple dropdown item">
-					<span id="R_infoForm">시설/임대</span>
+					<span id="R_rentalForm">시설/임대</span>
 					<div class="menu">
 						<div class="item" id="R_exhibitionForm">전시회 홀</div>
 						<div class="item" id="R_consertForm">공연장 홀</div>
@@ -137,21 +136,19 @@
 				<div class="ui simple dropdown item">
 					<span id="T_infoForm">교통/숙박/관광</span>
 					<div class="menu">
-						<div class="item" id="T_carForm">자동차이용고객</div>
-						<div class="item" id="T_busForm">버스이용고객</div>
-						<div class="item" id="T_subwayForm">전철이용고객</div>
+						<div class="item" id="T_allForm">교통안내</div>
+						<div class="item" id="T_hotelForm">숙박안내</div>
 					</div>
 				</div>
 			</div>
 			<div class="ui compact menu" style="width: 20%;">
 				<div class="ui simple dropdown item">
-					<span id="sp">고객센터</span>
+					<span id="C_customerServiceForm" >고객센터</span>
 					<div class="menu">
 						<div class="item" id="C_notice">공지사항</div>
-						<div class="item" id="C_board">고객의 소리</div>
-						<div class="item" id="C_QnA">자주묻는 질문</div>
-						<div class="item" id="C_contactList">주요시설 연락처</div>
-						<div class="item" id="C_MailConfirm">1:1문의</div>
+						<div class="item" id="C_emailConfirmForm">고객의 소리</div>
+						<div class="item" id="C_QnAForm">자주묻는 질문</div>
+						<div class="item" id="C_contactListForm">주요시설 연락처</div>
 						<div class="item" id="C_personalInformation">개인정보</div>
 						<div class="item" id="C_boardAdd">게시판 추가</div><!--세션값에 따라 보이게 할 예정-->
 					</div>

@@ -15,4 +15,8 @@ public interface  CompanyDAO {
 
 	public int changeCpwd(Map<String, String> map);//임시비밀번호 저장
 
+	public void modifyCompany(Map<String, String> map);//사업자정보수정
+
+	public int deleteCompany(Map<String, String> map);//사업자 삭제
+
 }

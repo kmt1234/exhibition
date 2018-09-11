@@ -15,7 +15,7 @@
 }
 </style>
 
-<div id="terms-content" align="center">
+<div id="terms-content" align="center" style="margin-left: -17%;">
 <p>[제1장 총 칙]</p>
 <p>제1조(목적)</p> 
 이 약관은 국제원(이하 "홈페이지"이라 한다)에서 제공하는 이메일 및 홈페이지구축서비스(이하 "서비스"라 한다)의 이용조건 및 절차에 관한 사항을 규정함을 목적으로 합니다.<p>

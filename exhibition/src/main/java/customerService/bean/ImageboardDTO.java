@@ -9,10 +9,11 @@ import lombok.Data;
 @Component
 public class ImageboardDTO {
 	private int seq;
-	private String postSelect;	//분류
-	private String imageName;	//제목
-	private String image1;		//이미지 파일명
-	private String startDate;	//날짜1
-	private String endDate;		//날짜2
-	private String eventLink;	//링크
+	private String imageName;
+	private String image1;
+	private String postSelect;
+	private String startDate;			//날짜1(시작일)
+	private String endDate;				//날짜2(종료일)
+	private String eventLink;			//링크
+	private String eventContent;		//소개글(간단한 정보)
 }

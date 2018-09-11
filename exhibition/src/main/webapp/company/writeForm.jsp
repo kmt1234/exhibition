@@ -19,7 +19,6 @@
     background: #fff;
 }
 
-
 #companyWriteFormPopup{
 	/* border: 1px solid red; */
 	background-color: black;
@@ -40,7 +39,6 @@
 </style>
 
 <!-- 사업자 회원가입 팝업 -->
-
 <div class="ui modal2 modal" id="companyWriteFormPopup">							<i class="close icon"></i>
 	 <div class="header" align="center">법인고객 - 회원가입 </div>
 
@@ -89,7 +87,7 @@ action="/exhibition/company/companyWrite.do">
 <div id="conditionConfirm"></div>
 
 <div class="ui icon input">
-  <input type="text" name="C_postnumber" id="Cw_postnumber" placeholder="우편번호" style=width:300px readonly>
+  <input type="text" name="C_postnumbox" id="Cw_postnumber" placeholder="우편번호" style=width:300px readonly>
   <i class="inverted circular search link icon" id="Cw_addrB" onclick="Postcode()"></i>
 </div><br>
 
@@ -128,8 +126,8 @@ action="/exhibition/company/companyWrite.do">
 </div>
 
 <div align="center" id="CtermDiv" style="font-size: 12px; margin-left: -40%;">이용약관을 확인하셔야 가입 가능합니다</div>
-
-<br><div class="termDiv" align="center"><a class="ui primary button" id="terms_C" style="margin-left: -42%;">이용약관</a></div>
+<br>
+<div class="CtermDiv" align="center"><a class="ui primary button" id="terms_C" style="margin-left: -42%;">이용약관</a></div>
 
 	<!--회원가입 약관 페이지 인클루드  -->
 	<div><jsp:include page="../company/Cterms.jsp"/></div>
@@ -138,13 +136,8 @@ action="/exhibition/company/companyWrite.do">
 	    <div class="ui black deny button" id="companyWriteForm-close">취소</div>
 	    <div class="ui positive right labeled icon button" id="companyWrite">가입<i class="checkmark icon"></i></div>
 	</div>
-
-
-
-</div>
-
 	
-
-</div>
+</div><!-- class="image content2" -->
+</div><!-- class="ui modal2 modal" -->
  
 

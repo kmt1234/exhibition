@@ -2,6 +2,7 @@ package rental.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -10,16 +11,14 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import company.bean.CompanyDTO;
-import performance.bean.PerformanceDTO;
 import rental.bean.ExhibitionDTO;
-import rental.bean.RentalPerformanceDTO;
 import rental.dao.ExhibitionDAO;
 
 @RequestMapping(value="rental")
@@ -30,18 +29,23 @@ public class RentalController {
 	ExhibitionDAO exhibitionDAO;
 	
 	//렌털 정보
-	@RequestMapping(value="R_infoForm", method=RequestMethod.GET)
-	public String R_infoForm() {
-		return "/rental/R_infoForm";
+	@RequestMapping(value="R_rentalForm", method=RequestMethod.GET)
+	public ModelAndView R_infoForm() {
+
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("display","/rental/R_info.jsp");
+		mav.setViewName("/rental/R_rentalForm");
+		
+		return mav;
 	}
 	//전시회
 	@RequestMapping(value="R_exhibitionForm", method=RequestMethod.GET)
 	public String R_exhibitionHoll() {
-		return "/rental/R_exhibitionForm";
+		return null;
 	}
 	//콘서트
 	@RequestMapping(value="R_exhibitionHollDecision", method=RequestMethod.GET)
-	public String R_exhibitionHollDecision(@RequestParam String booth, Model model) {
+	public String R_exhibitionHollDecision(@RequestParam String booth, Model model, ModelMap modelMap) {
 		double rate = 0;
 		if(booth.equals("Booth1") || booth.equals("Booth2")  || booth.equals("Booth3")  || booth.equals("Booth4")  || booth.equals("Booth7")  || booth.equals("Booth8")  || booth.equals("Booth9")  || booth.equals("Booth10")) {
 			rate = 2350*1.0*1.0*2592;
@@ -58,7 +62,26 @@ public class RentalController {
 		model.addAttribute("date", sdf.format(date));
 		
 		
-		return "/rental/R_exhibitionHollDecision";
+		
+		List<ExhibitionDTO> list = exhibitionDAO.getCalendar(booth);
+		for(ExhibitionDTO data : list) {
+			data.setStartDate(data.getStartDate().substring(0, 10));
+			data.setEndDate(data.getEndDate().substring(0, 10));
+			data.setDays(getDiffDays(data.getStartDate().substring(0, 10).replaceAll("-", ""), data.getEndDate().substring(0, 10).replaceAll("-", "")));
+			String[] strDays = data.getDays();
+			for(int i = 0; i < data.getDays().length; i++) {
+				StringBuffer sb = new StringBuffer(strDays[i]);
+				sb.insert(4, "-");
+				sb.insert(7, "-");
+				strDays[i] = sb.toString();
+			}
+			data.setDays(strDays);
+			data.setDaysSize(strDays.length);
+		}
+		
+		modelMap.addAttribute("listView", list);
+		
+		return "/rental/R_exhibitionHollDecisionForm";
 	}
 	
 	@RequestMapping(value="searchRentDay", method=RequestMethod.POST)
@@ -90,7 +113,68 @@ public class RentalController {
 		return "/rental/R_exhibitionOk";
 	}
 	
-	@RequestMapping(value="getCalendar", method=RequestMethod.POST)
+	
+	/**
+	* 시작일부터 종료일까지 사이의 날짜를 배열에 담아 리턴 ( 시작일과 종료일을 모두 포함한다 )
+	* 
+	* @param fromDate
+	* yyyyMMdd 형식의 시작일
+	* @param toDate
+	* yyyyMMdd 형식의 종료일
+	* @return yyyyMMdd 형식의 날짜가 담긴 배열
+	*/
+	public static String[] getDiffDays(String fromDate, String toDate) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+
+		Calendar cal = Calendar.getInstance();
+
+		try {
+		cal.setTime(sdf.parse(fromDate));
+		} catch (Exception e) {
+		}
+
+		int count = getDiffDayCount(fromDate, toDate);
+
+		// 시작일부터
+		cal.add(Calendar.DATE, -1);
+
+		// 데이터 저장
+		ArrayList<String> list = new ArrayList<String>();
+
+		for (int i = 0; i <= count; i++) {
+		cal.add(Calendar.DATE, 1);
+
+		list.add(sdf.format(cal.getTime()));
+		}
+
+		String[] result = new String[list.size()];
+
+		list.toArray(result);
+
+		return result;
+	}
+	
+	/**
+	* 두날짜 사이의 일수를 리턴
+	* 
+	* @param fromDate
+	* yyyyMMdd 형식의 시작일
+	* @param toDate
+	* yyyyMMdd 형식의 종료일
+	* @return 두날짜 사이의 일수
+	*/
+	public static int getDiffDayCount(String fromDate, String toDate) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+
+		try {
+		return (int) ((sdf.parse(toDate).getTime() - sdf.parse(fromDate)
+		.getTime()) / 1000 / 60 / 60 / 24);
+		} catch (Exception e) {
+		return 0;
+		}
+	}
+	
+	/*@RequestMapping(value="getCalendar", method=RequestMethod.POST)
 	public ModelAndView getCalendar(@RequestParam String booth) {
 		
 		
@@ -108,10 +192,9 @@ public class RentalController {
 		}
 		
 		ModelAndView mav = new ModelAndView();
-		/*List<PerformanceDTO> list = performanceDAO.getPerformance();*/
 		
-		mav.addObject("list", rentalList);
+		mav.addObject("list", list);
 		mav.setViewName("jsonView");
 		return mav;
-	}
+	}*/
 }

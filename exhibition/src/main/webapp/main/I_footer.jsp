@@ -20,10 +20,11 @@
 				<il><a href="">주요연락처</a></il>
 				<il><a href="">개인정보처리방침</a></il>
 				<il><a href="">이메이무단수집거부</a></il>
-				<il><a href="">사이트맵</a></il>
+				<il><a id="site_map">사이트맵</a></il>
 			</u1>
 		</div>
 	</div>
 <br>
+<script src="../js/index.js"></script>
 </div>
 <br>

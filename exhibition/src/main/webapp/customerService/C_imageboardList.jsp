@@ -35,10 +35,11 @@ function imageboardPaging(pg){
 </head>
 <body>
 <div>
+<div align="left"><input type="button" class="eventUploadBtn" value="업로드"></div>
 <form name="imageboardListForm" id="imageboardListForm"method="post">
 <table id="imageboardListTab" border="1" frame="hsides" rules="rows" cellpadding="3" cellspacing="0">
 <tr>
-	<th width="100"><input type="checkbox" id="checkAll">번호</th>
+	<th width="100"><input type="checkbox" id="checkAll">번 호</th>
 	<th width="150">이미지</th>
 	<th width="100">상품명</th>
 </tr>
@@ -95,6 +96,7 @@ $(document).ready(function(){
 			$('.check').prop('checked',false);
 		}
 	});
+	
 	//선택삭제
 	$('#imageDeleteBtn').click(function(){
 		var count=$('.check:checked').length;
@@ -105,6 +107,7 @@ $(document).ready(function(){
 			$('#imageboardListForm').attr('action','/exhibition/customerService/C_imageboardDelete.do').submit();
 	});
 	
+	//메인등록
 	$('#imageSelectBtn').click(function(){
 		var count=$('.check:checked').length;
 		if(count==0) 
@@ -112,6 +115,11 @@ $(document).ready(function(){
 		else
 			$('#imageboardListForm').attr('action','/exhibition/main/I_body.do').submit();
 			
+	});
+	
+	//업로드 버튼
+	$('.eventUploadBtn').click(function(){
+		location.href='/exhibition/customerService/C_mainImageboardForm.do';
 	});
 });
 </script>

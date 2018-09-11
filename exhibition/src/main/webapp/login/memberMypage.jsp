@@ -92,6 +92,34 @@
 					        <div class="ui basic red button" id="M-modify-cancel">취소</div>
 					    </div>
 					    <br><span class="M-modify-result-Span"></span>
+							
+							
+							<div><!-- 회원탈퇴버튼 -->
+								<button class="ui black button" id="member-out" style="margin-right: -340%;">회원탈퇴</button>
+							</div>
+							
+							<div class="ui modal3">
+								  <div class="content">
+								    <p>탈퇴하시겠습니까?</p>
+								  </div>
+								  <div class="actions">
+								    <div class="ui red basic cancel inverted button" id="out-no">
+								      <i class="remove icon"></i>
+								      	아니오
+								    </div>
+								    <div class="ui green submit inverted button" id="out-yes">
+								      <i class="checkmark icon"></i>
+								      	네
+								    </div>
+								  </div>
+							</div>
+							
+							
+							<jsp:include page="memberOut.jsp"/>
+							
+							
+							
+							
 										
 		    		</div><!--class="ui inverted segment"-->
 		    		

@@ -52,6 +52,11 @@ public class MemberDAOMybatis implements MemberDAO {
 		return sqlSession.update("memberSQL.memberModify", map);
 	}
 	
+	//개인회원 탈퇴	
+	public int deleteMember(Map<String, String> map) {
+		return sqlSession.delete("memberSQL.deleteMember", map);
+	}
+	
 	
 	
 }

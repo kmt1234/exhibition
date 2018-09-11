@@ -35,8 +35,8 @@
 	<div class="ui five column grid container">
 		<!-- 사이드바 메뉴 -->
 		<div class="ui compact menu" style="width: 20%; height: 900px; ">
-			<a class="item" href="R_consertForm.jsp">전체일정</a> 
-			<a class="item" href="R_exhibitionForm.jsp">공연일정</a> 
+			<a class="item" href="R_consertForm.jsp">콘서트 홀</a> 
+			<a class="item" href="R_exhibitionForm.jsp">전시회 홀</a> 
 		</div>
 		<!-- 메인 화면 -->
 		<div class="ui compact menu" style="width: 80%; height: 900px;" >

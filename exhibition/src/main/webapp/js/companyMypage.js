@@ -53,6 +53,28 @@ $(document).ready(function(){
 		}
 	});
 	
+	//업태 유효성검사,
+	$('#C-modify-condition').blur(function(){
+		if(C-modify-condition.val()==""){
+			$('.C-modify-condition-Span').text('업태를 종목을 작성해주세요').css('color','white').css('font-size','10px');
+			$('#C-modify-condition').css({'border':'1px solid red', 'background-color':'#f4d2d2'});
+		}else{
+			$('.C-modify-condition-Span').text('');
+			$('#C-modify-condition').css({'border':'1px solid green', 'background-color':'#e3fce6'});
+		}
+	});
+	
+	//상세주소 유효성검사,
+	$('#C-modify-address2').blur(function(){
+		if($('#C-modify-address2').val()==""){
+			$('.C-modify-address2-Span').text('상세주소를 작성해주세요').css('color','white').css('font-size','10px');
+			$('#C-modify-address2').css({'border':'1px solid red', 'background-color':'#f4d2d2'});
+		}else{
+			$('.C-modify-address2-Span').text('');
+			$('#C-modify-address2').css({'border':'1px solid green', 'background-color':'#e3fce6'});
+		}
+	});
+	
 	var phone='success';
 	//핸드폰 입력 시,
 	$('#C-modify-phone').blur(function(){
@@ -81,11 +103,82 @@ $(document).ready(function(){
 		}
 	});
 	
+	//사업자수정
+	$('#C-modify-modify').click(function(){
+		if($('#C-modify-pwd').val()=='' || $('#C-modify-repwd').val()==''){
+			$('.C-modify-result-Span').text('비밀번호를 입력하세요').css('color','white').css('font-size','10px');
+		}else if($('#C-modify-pwd').val() != $('#C-modify-repwd').val()){
+			$('.C-modify-result-Span').text('비밀번호가 일치하지 않습니다').css('color','white').css('font-size','10px');
+		}else if($('#C-modify-condition').val()==''){
+			$('.C-modify-result-Span').text('업태 종목을 입력하세요').css('color','white').css('font-size','10px');	
+		}else if($('#C-modify-address2').val()==''){
+			$('.C-modify-result-Span').text('상세주소를 입력하세요').css('color','white').css('font-size','10px');	
+		}else if($('#C-modify-phone').val()==''){
+			$('.C-modify-result-Span').text('핸드폰 번호 입력하세요').css('color','white').css('font-size','10px');
+		}else if($('#C-modify-email').val()==''){
+			$('.C-modify-result-Span').text('이메일 입력하세요').css('color','white').css('font-size','10px');
+		}else if(pwd=='success' && repwd=='success' && phone=='success' && email=='success'){			
+			$.ajax({
+				type : 'POST',
+				url : '/exhibition/company/modifyCompany.do',
+				data : {'C_license':$('#C-modify-license-hidden').val(), 'C_password':$('#C-modify-pwd').val(),
+						'C_condition':$('#C-modify-condition').val(), 'C_postnumbox':$('#C-modify-postnumber').val(),
+						'C_address1':$('#C-modify-address1').val(), 'C_address2':$('#C-modify-address2').val(),
+						'C_tel':$('#C-modify-phone').val(),'C_email':$('#C-modify-email').val()},
+				dataType : 'text',
+				success : function(data){
+					if(data=='modify'){
+						alert('수정되었습니다 다시 로그인 해주세요');
+						location.href='/exhibition/main/index.do';
+					}else{
+						alert('수정실패');
+						location.href='/exhibition/main/index.do';
+					}
+				}//success
+			});//ajax
+		}//if
+		
+	});
+	
 	
 	//취소 -> 메인으로
 	$('#C-modify-cancel').click(function(){
 		location.href="/exhibition/main/index.do";
 	});
+	
+	//회원탈퇴버튼
+	$('.ui.modal3').hide();
+	$('#company-out').click(function(){
+		$('#C-modify-modify').hide();
+		$('.ui.modal3').show();
+	});
+	$('#out-no').click(function(){//아니오 클릭시
+		$('.ui.modal3').hide();
+		$('#C-modify-modify').show();
+	});
+	$('#out-yes').click(function(){//네 클릭시
+		$('.ui.basic.modal').modal('show');
+	});
+	
+	$('#del_OK').click(function(){
+			$.ajax({
+				type : 'POST',
+				url : '/exhibition/company/deleteCompany.do',
+				data : {'C_license':$('#C-modify-license-hidden').val(),'C_password':$('#del_pass').val()},
+				dataType : 'text',
+				success : function(data){
+					if(data=='exist'){
+						location.href='/exhibition/company/outComplete.do';
+					}else if(data=='not_exist'){
+						$('#del_check').text("비밀번호가 틀렸습니다.").css("font-size","12px").css("color","red").css("margin-left","24%").css("margin-top","2%");
+						$('.ui.basic.modal').modal('show');
+					}
+				}//success
+			});
+	});
+	
+	
+	
 	
 	
 	//예매리스트
