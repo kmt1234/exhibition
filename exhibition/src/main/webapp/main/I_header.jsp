@@ -127,8 +127,8 @@
 				<div class="ui simple dropdown item">
 					<span id="R_rentalForm">시설/임대</span>
 					<div class="menu">
-						<div class="item" id="R_exhibitionForm">전시회 홀</div>
-						<div class="item" id="R_consertForm">공연장 홀</div>
+						<div class="item" id="R_exhibition">전시회 홀</div>
+						<div class="item" id="R_performance">공연장 홀</div>
 					</div>
 				</div>
 			</div>
