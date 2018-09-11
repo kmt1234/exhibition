@@ -41,6 +41,10 @@
 #T_map {
     	padding-bottom: 0px;
 	}
+	
+#houseImg{
+	margin:-3px;
+}	
 </style>
 </head>
 <body>
@@ -67,8 +71,8 @@
 				주차
 				<span class="h-light">안내</span>
 				<div style="font-size:13px; float:right;">
-				<img src="../img/house.png" width="15px" height="16px" align="center">
-				> 교통/숙박/관광 > 교통안내 > 주차 안내
+				<img src="../img/house.png" width="15px" height="16px" id="houseImg">
+				   > 교통/숙박/관광 > 교통안내 > 주차 안내
 				</div>
 				<div class="ui divider"></div>
 			</h2>

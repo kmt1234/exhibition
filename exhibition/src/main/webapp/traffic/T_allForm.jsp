@@ -36,6 +36,9 @@
 	#T_map {
     	padding-bottom: 0px;
 	}
+	#houseImg{
+	margin:-3px;
+}	
 </style>
 </head>
 <body>
@@ -63,7 +66,7 @@
 				오시는
 				<span class="h-light">길</span>
 				<div style="font-size:13px; float:right;">
-				<img src="../img/house.png" width="15px" height="16px" align="center">
+				<img src="../img/house.png" width="15px" height="16px" id="houseImg">
 				> 교통/숙박/관광 > 교통안내 > 오시는 길
 				</div>
 				<div class="ui divider"></div>
