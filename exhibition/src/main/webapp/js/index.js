@@ -63,19 +63,10 @@ $(document).ready(function(){
 	
 	/*교통&숙박(교통&숙박으로 분리 되어 있음)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 	//교통&숙박시설에 관한 내용
-	$('#T_infoForm').click(function(){
-		location.href="/exhibition/traffic/T_infoForm.do";
+	$('#T_allForm').click(function(){
+		location.href="/exhibition/traffic/T_trafficForm.do";
 	});
-	$('#T_carForm').click(function(){//자동차이용
-		location.href="/exhibition/traffic/T_carForm.do";
-	});
-	$('#T_busForm').click(function(){//버스이용
-		location.href="/exhibition/traffic/T_busForm.do";
-	});
-	$('#T_subwayForm').click(function(){//전철이용
-		location.href="/exhibition/traffic/T_subwayForm.do";
-	});
-	$('#T_allForm').click(function(){//전철이용
+	$('#T_allFormS').click(function(){//전철이용
 		location.href="/exhibition/traffic/T_allForm.do";
 	});
 	$('#T_hotelForm').click(function(){//숙박안내클릭

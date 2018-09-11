@@ -134,9 +134,9 @@
 			</div>
 			<div class="ui compact menu" style="width: 20%;">
 				<div class="ui simple dropdown item">
-					<span id="T_infoForm">교통/숙박/관광</span>
+					<span id="T_allForm">교통/숙박/관광</span>
 					<div class="menu">
-						<div class="item" id="T_allForm">교통안내</div>
+						<div class="item" id="T_allFormS">교통안내</div>
 						<div class="item" id="T_hotelForm">숙박안내</div>
 					</div>
 				</div>
