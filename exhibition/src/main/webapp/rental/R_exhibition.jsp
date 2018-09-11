@@ -31,7 +31,7 @@
 		</tr>
 	</table>
 	<br><br>
-<div style="border: 2px solid; height: 760px; width: 100%; ">
+<div style="border: 2px solid; height: 760px; width: 100%; background-image: ../img/cad.jpg">
    <button class="ui inverted secondary button booth" type="button" id="area1" style="float: left;  height: 150px; width: 15%;
       margin-top:20px; margin-left:20px;" >
       <div id="Booth1" style="font-size: 25px;">Booth1</div>
