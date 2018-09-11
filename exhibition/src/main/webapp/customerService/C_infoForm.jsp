@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE>
 <html>
 <head>
@@ -29,19 +29,19 @@
 	<br>
 	<br>
 	<div class="ui five column grid container">
-		<!-- »çÀÌµå¹Ù ¸Þ´º -->
+		<!-- ì‚¬ì´ë“œë°” ë©”ë‰´ -->
 		<div class="ui compact menu" style="width: 20%; height: 960px; ">
-			<a class="item" href="C_noticeForm.jsp">°øÁö»çÇ×</a> 
-			<a class="item" href="C_emailConfirmForm.jsp">°í°´ÀÇ ¼Ò¸®</a> 
-			<a class="item" href="C_QnAForm.jsp">ÀÚÁÖ¹¯´Â Áú¹®</a>
-			<a class="item" href="C_contactListForm.jsp">ÁÖ¿ä½Ã¼³ ¿¬¶ôÃ³</a>
+			<a class="item" href="C_noticeForm.jsp">ê³µì§€ì‚¬í•­</a> 
+			<a class="item" href="C_emailConfirmForm.jsp">ê³ ê°ì˜ ì†Œë¦¬</a> 
+			<a class="item" href="C_QnAForm.jsp">ìžì£¼ë¬»ëŠ” ì§ˆë¬¸</a>
+			<a class="item" href="C_contactListForm.jsp">ì£¼ìš”ì‹œì„¤ ì—°ë½ì²˜</a>
 		</div>
-		<!-- ¸ÞÀÎ È­¸é -->
+		<!-- ë©”ì¸ í™”ë©´ -->
 		<div class="ui compact menu" style="width: 80%; height: 900px;" >
-			<!-- Å¸ÀÌÆ² -->
+			<!-- íƒ€ì´í‹€ -->
 			<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
-				°í°´
-				<span class="h-light">¼¾ÅÍ</span>
+				ê³ ê°
+				<span class="h-light">ì„¼í„°</span>
 			</h2>
 			
 			<jsp:include page="C_info.jsp" ></jsp:include>

@@ -49,19 +49,22 @@
 			숙박
 			<span class="h-light">안내</span>
 		</h2>
-		
+		<table>
 		<c:forEach items="${list}" var="list">				
-			<c:if test="${list ne null}">	
+			<c:if test="${list ne null}">
 					<tr>
-						<td>${list.seq}</td>
-						<td><img src="../storage/${list.image1}" width="200" height="150"></td>
-						<td>${list.imageName}</td>
-						<td>${list.eventLink}</td>
-						<td>${list.eventPlace}</td>
+						<td colspan="2"><img src="../storage/${list.image1}" width="200" height="150"></td>
+					</tr>
+					<tr>
+						<td colspan="2">${list.imageName}</td>
+					</tr>
+					<tr>
+						<td>TEL)${list.eventPlace}</td>
+						<td><i class="home icon" location.href="${list.eventLink}"></i></td>
 					</tr>
 			</c:if>
 		</c:forEach>
-	
+		</table>
 	</div>
 		
 	</div>
