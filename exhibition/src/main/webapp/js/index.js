@@ -49,8 +49,8 @@ $(document).ready(function(){
 	
 	/*시설&임대정보(박랍회홀&공연홀로 분리 되어 있음)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 	//시설&임대에 관한 설명
-	$('#R_infoForm').click(function(){
-		location.href="/exhibition/rental/R_infoForm.do";
+	$('#R_rentalForm').click(function(){
+		location.href="/exhibition/rental/R_rentalForm.do";
 	});
 	//박람회 홀에 대한 정보(부스에 관한 설명과 배치도(클릭시 부스금액 및 일정을 체크 할수 있는 페이지 생성))
 	$('#R_exhibitionForm').click(function(){

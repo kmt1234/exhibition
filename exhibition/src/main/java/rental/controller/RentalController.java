@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import rental.bean.ExhibitionDTO;
 import rental.dao.ExhibitionDAO;
@@ -28,14 +29,19 @@ public class RentalController {
 	ExhibitionDAO exhibitionDAO;
 	
 	//렌털 정보
-	@RequestMapping(value="R_infoForm", method=RequestMethod.GET)
-	public String R_infoForm() {
-		return "/rental/R_infoForm";
+	@RequestMapping(value="R_rentalForm", method=RequestMethod.GET)
+	public ModelAndView R_infoForm() {
+
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("display","/rental/R_info.jsp");
+		mav.setViewName("/rental/R_rentalForm");
+		
+		return mav;
 	}
 	//전시회
 	@RequestMapping(value="R_exhibitionForm", method=RequestMethod.GET)
 	public String R_exhibitionHoll() {
-		return "/rental/R_exhibitionForm";
+		return null;
 	}
 	//콘서트
 	@RequestMapping(value="R_exhibitionHollDecision", method=RequestMethod.GET)

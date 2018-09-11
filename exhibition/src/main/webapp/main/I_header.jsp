@@ -125,7 +125,7 @@
 			</div>
 			<div class="ui compact menu" style="width: 20%;">
 				<div class="ui simple dropdown item">
-					<span id="R_infoForm">시설/임대</span>
+					<span id="R_rentalForm">시설/임대</span>
 					<div class="menu">
 						<div class="item" id="R_exhibitionForm">전시회 홀</div>
 						<div class="item" id="R_consertForm">공연장 홀</div>
