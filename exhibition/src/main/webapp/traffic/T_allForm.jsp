@@ -62,13 +62,18 @@
 			<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
 				오시는
 				<span class="h-light">길</span>
+				<div style="font-size:13px; float:right;">
+				<img src="../img/house.png" width="15px" height="16px" align="center">
+				> 교통/숙박/관광 > 교통안내 > 오시는 길
+				</div>
+				<div class="ui divider"></div>
 			</h2>
-			<div>
-				<input type="button" value="자히철  이용고객" id="subwayBtn" class="mapBtn">
+			<div style="float: left;">
+				<input type="button" value="자히철  이용고객" id="subwayBtn" class="middle ui button">
 				
-				<input type="button" value="버스  이용고객" id="busBtn" class="mapBtn">
+				<input type="button" value="버스  이용고객" id="busBtn" class="middle ui button">
 				 
-				 <input type="button" value="승용차 이용고객 " id="carBtn" class="mapBtn">
+				 <input type="button" value="승용차 이용고객 " id="carBtn" class="middle ui button">
 				 
 			</div>
 			
@@ -83,11 +88,11 @@
 			
 			<br>
 			<div id="carMap" style="border:1px solid black">
-				<img src="../img/busMap.jpg">
+				<img src="../img/carMap.jpg">
 			</div>
 
 			<div id="busMap" style="border:1px solid black">
-				<img src="../img/carMap.jpg">
+				<img src="../img/busMap.jpg">
 			</div>
 		</div>
 		<br>

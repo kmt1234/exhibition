@@ -20,6 +20,9 @@
 		color: #ec008c;
 	
 	}
+	#T_map {
+    	padding-bottom: 0px;
+	}
 </style>
 </head>
 <body>
@@ -31,9 +34,13 @@
 	<div class="ui five column grid container">
 		<!-- 사이드바 메뉴 -->
 		<div class="ui compact menu" style="width: 20%; height: 977px; ">
-			<a class="item" href="T_carForm.jsp">자동차이용</a> 
-			<a class="item" href="T_busForm.jsp">버스이용</a> 
-			<a class="item" href="T_subwayForm.jsp">지하철이용</a>
+			<a class="item" href="T_allForm.do" id="T_map">교통안내</a> 
+			<ul class="ui list" id="T_mapList" style="text-align: center; width: 120px">
+			  <li><a href="T_allForm.do">오시는 길</a></li>
+			  <li><a href="T_parkingAllForm.do">주차 안내</a></li>
+			</ul>
+			<a class="item" href="P_performanceScheduleForm.do">숙박안내</a> 
+			<a class="item" href="P_exhibitionScheduleForm.do">관광안내</a>
 		</div>
 		<!-- 메인 화면 -->
 		<div class="ui compact menu" style="width: 80%; height: 900px;" >
