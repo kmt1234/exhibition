@@ -7,9 +7,31 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
+	박람회 
+	<span class="h-light">홀</span>
+</h2>
+<table style=" width: 40%;">
+		<tr>
+			<td>
+				<button class="middle ui button" style="width: 100%;">
+					1층
+				</button> 
+			</td>
+			<td>
+				<button class="middle ui button" style="width: 100%;">
+					2층
+				</button> 
+			</td>
+			<td>
+				<button class="middle ui button" style="width: 100%;">
+					3층
+				</button> 
+			</td>
+		</tr>
+	</table>
+	<br><br>
 <div style="border: 2px solid; height: 760px; width: 100%; ">
-
    <button class="ui inverted secondary button booth" type="button" id="area1" style="float: left;  height: 150px; width: 15%;
       margin-top:20px; margin-left:20px;" >
       <div id="Booth1" style="font-size: 25px;">Booth1</div>

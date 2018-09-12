@@ -13,27 +13,9 @@
 </style>
 </head>
 <body>
+<br><br>
 <form id="exhibitionHollDecisionForm" method="post" action="/exhibition/rental/reservationHoll.do" style="height: 600px;">
-	<table style=" width: 40%;">
-		<tr>
-			<td>
-				<button class="middle ui button" style="width: 100%;">
-					1층
-				</button> 
-			</td>
-			<td>
-				<button class="middle ui button" style="width: 100%;">
-					2층
-				</button> 
-			</td>
-			<td>
-				<button class="middle ui button" style="width: 100%;">
-					3층
-				</button> 
-			</td>
-		</tr>
-	</table>
-	<br><br>
+	
 	<div style="width: 35%; float: right;">
 		<h4>
 			예약 시작일 :

@@ -17,24 +17,14 @@ public class TrafficController {
 	@Autowired
 	private CustomerServiceDAO customerServiceDAO;
 	//교통정보
-	@RequestMapping(value="T_infoForm", method=RequestMethod.GET)
-	public String T_infoForm() {
-		return "/traffic/T_infoForm";
-	}
-	//자동차
-	@RequestMapping(value="T_carForm", method=RequestMethod.GET)
-	public String T_car() {
-		return "/traffic/T_carForm";
-	}
-	//버스
-	@RequestMapping(value="T_busForm", method=RequestMethod.GET)
-	public String T_bus() {
-		return "/traffic/T_busForm";
-	}
-	//지하철
-	@RequestMapping(value="T_subwayForm", method=RequestMethod.GET)
-	public String T_subway() {
-		return "/traffic/T_subwayForm";
+	@RequestMapping(value="T_trafficForm", method=RequestMethod.GET)
+	public ModelAndView T_infoForm() {
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("display","/traffic/T_allForm.jsp");
+		mav.setViewName("/traffic/T_trafficForm");
+		
+		return mav;
 	}
 	@RequestMapping(value="T_allForm", method=RequestMethod.GET)
 	public String T_allForm() {

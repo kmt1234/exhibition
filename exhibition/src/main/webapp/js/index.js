@@ -53,29 +53,20 @@ $(document).ready(function(){
 		location.href="/exhibition/rental/R_rentalForm.do";
 	});
 	//박람회 홀에 대한 정보(부스에 관한 설명과 배치도(클릭시 부스금액 및 일정을 체크 할수 있는 페이지 생성))
-	$('#R_exhibitionForm').click(function(){
-		location.href="/exhibition/rental/R_exhibitionForm.do";
+	$('#R_exhibition').click(function(){
+		location.href="/exhibition/rental/R_exhibition.do";
 	});
 	//공연장 위치에 대한 정보(공연장 클릭시 공연장에서 행해지는 공연의 일정 정보 뜸) 
-	$('#R_consertForm').click(function(){//공연장 홀
-		location.href="/exhibition/rental/R_consertForm.do";
+	$('#R_performance').click(function(){//공연장 홀
+		location.href="/exhibition/rental/R_performance.do";
 	});
 	
 	/*교통&숙박(교통&숙박으로 분리 되어 있음)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 	//교통&숙박시설에 관한 내용
-	$('#T_infoForm').click(function(){
-		location.href="/exhibition/traffic/T_infoForm.do";
+	$('#T_allForm').click(function(){
+		location.href="/exhibition/traffic/T_trafficForm.do";
 	});
-	$('#T_carForm').click(function(){//자동차이용
-		location.href="/exhibition/traffic/T_carForm.do";
-	});
-	$('#T_busForm').click(function(){//버스이용
-		location.href="/exhibition/traffic/T_busForm.do";
-	});
-	$('#T_subwayForm').click(function(){//전철이용
-		location.href="/exhibition/traffic/T_subwayForm.do";
-	});
-	$('#T_allForm').click(function(){//전철이용
+	$('#T_allFormS').click(function(){//전철이용
 		location.href="/exhibition/traffic/T_allForm.do";
 	});
 	$('#T_hotelForm').click(function(){//숙박안내클릭

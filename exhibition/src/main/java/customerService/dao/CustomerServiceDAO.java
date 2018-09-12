@@ -73,4 +73,5 @@ public interface CustomerServiceDAO {
 	public void hotelDelete(List<Integer> list);//호텔리스트 삭제
 
 	public List<HotelboardDTO> hotelImageDel(List<Integer> list);//호텔이미지 삭제 하기 위해 리스트 가져오기
+
 }
