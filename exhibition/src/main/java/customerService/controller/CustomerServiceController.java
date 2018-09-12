@@ -557,7 +557,7 @@ public class CustomerServiceController {
 
 		// DB
 		List<ImageboardDTO> list = customerServiceDAO.getImageboardSlide();
-
+		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
 		mav.setViewName("jsonView");

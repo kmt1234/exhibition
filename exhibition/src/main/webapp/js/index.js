@@ -64,7 +64,7 @@ $(document).ready(function(){
 	/*교통&숙박(교통&숙박으로 분리 되어 있음)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 	//교통&숙박시설에 관한 내용
 	$('#T_allForm').click(function(){
-		location.href="/exhibition/traffic/T_trafficForm.do";
+		location.href="/exhibition/traffic/T_allForm.do";
 	});
 	$('#T_allFormS').click(function(){//전철이용
 		location.href="/exhibition/traffic/T_allForm.do";

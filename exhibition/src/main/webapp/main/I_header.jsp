@@ -74,7 +74,7 @@
 					<div>${registerMessage}</div>
 				</c:if>
 				
-				<c:if test="${homepageMember == nul}">
+				<c:if test="${homepageMember == null}">
 					<div>&nbsp;</div>
 					<div class="circular ui icon button" id="M_member"><i class="dropdown icon"></i>회원가입
 						<div class="ui member1 dropdown">
@@ -149,8 +149,12 @@
 	                  <div class="item" id="C_emailConfirm">고객의 소리</div>
 	                  <div class="item" id="C_QnA">자주묻는 질문</div>
 	                  <div class="item" id="C_contactList">주요시설 연락처</div>
-	                  <div class="item" id="C_mypage">개인정보</div>
-	                  <div class="item" id="C_boardAdd">게시판 추가</div><!--세션값에 따라 보이게 할 예정-->
+	                  <c:if test="${code!=null }">
+	                  	<div class="item" id="C_mypage">개인정보</div>
+	                  </c:if>
+	                  <c:if test="${code=='3'} ">
+	                 	 <div class="item" id="C_boardAdd">게시판 추가</div><!--세션값에 따라 보이게 할 예정-->
+	               	  </c:if>	
 	               </div>
 	            </div>
 		    </div>
@@ -165,7 +169,7 @@
 			</div>
 		</div>
 	</header>
-	
+	<input type="hidden" value="${code}" id="codeName">
 <!--개인회원 회원가입 양식 페이지 인클루드-->
 <jsp:include page="../member/writeForm.jsp"/>
 <!--기업회원 회원가입 양식 페이지 인클루드  -->
