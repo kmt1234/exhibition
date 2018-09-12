@@ -27,13 +27,13 @@ if(day.length == 1){
 
 var dataSet = [
 	<c:forEach var="listView" items="${listView}" varStatus="status">
-		<c:if test="${listView.code == '1'}">
+		<c:if test="${listView.postSelect == '1'}">
 		<c:if test="${listView.startDate != ''}">
 		    <c:forEach var="i" begin="0" end="${listView.daysSize-1}" step="1" varStatus="dayStatus">
 		   // <c:if test="${listView.days[dayStatus.index] eq listView.days[dayStatus.index]}">
 		    	{"title" : '전시',
 		    	"start" : '<c:out value="${listView.days[dayStatus.index]}"/>',
-		    	"imageurl" : "../img/Ex.png",
+		    	"imageurl" : "../img/Ev.png",
 		    	"url" : "/exhibition/main/index.do",
 		    	"color" : "#ffffff",
 		    	"textColor" : "#000000"
@@ -47,12 +47,12 @@ var dataSet = [
 		 </c:if> 
 		 
 		 
-		 <c:if test="${listView.code == '2'}">
+		 <c:if test="${listView.postSelect == '2'}">
 			<c:if test="${listView.startDate != ''}">
 			    <c:forEach begin="0" end="${listView.daysSize-1}" step="1" varStatus="dayStatus">
 			    	{"title" : '공연',
 			    	"start" : '<c:out value="${listView.days[dayStatus.index]}"/>',
-			    	"imageurl" : "../img/Ev.png",
+			    	"imageurl" : "../img/Ex.png",
 			    	"color" : "#ffffff",
 			    	"textColor" : "#000000"
 			    	} <c:if test="${!dayStatus.last}">,</c:if>
@@ -66,7 +66,7 @@ var dataSet = [
 
 
 	$(document).ready(function() {
-	    	  $.ajax({
+	    	 /*  $.ajax({
 	        	  type : 'GET',
 	        	  url : '/exhibition/performance/getPerformance.do',
 	        	  dataType : 'text',
@@ -74,7 +74,7 @@ var dataSet = [
 	
 	        	  }
 	        	  
-	        	}); 
+	        	});  */
 
 	    	  
 		$('#calendar').fullCalendar({
