@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>박람회 보드 리스트</title>
+<title>전시회 보드 리스트</title>
 
 <style>
 .box-container{
@@ -60,7 +60,7 @@
 		<div class="ui compact menu" style="width: 80%; height: 900px;" >
 			<!-- 타이틀 -->
 			<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
-				박람회
+				전시회
 				<span class="h-light">리스트</span>
 			</h2>
 			<!-- 버튼 -->
