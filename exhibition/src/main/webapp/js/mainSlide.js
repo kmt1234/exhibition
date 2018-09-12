@@ -24,9 +24,6 @@
 									style : 'width : 2400px; list-style: none; font-size: 0'
 								});
 					
-					
-					
-					
 				//	$('#imageSlide').attr('src','../storage/'+item.image1+'');
 				});//each
 				

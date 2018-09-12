@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -8,6 +9,18 @@
 <title>Insert title here</title>
 
 <style>
+
+pre{
+	margin : 2%;
+}
+
+.performanceTh {
+    width: 61%;
+}
+
+.play_img{
+	margin-left: 0%;
+}
 
 #currentPaging{
 	color: red;
@@ -40,26 +53,17 @@
 	<input type="button" id="" value="리스트로 보기" 
 		style="width:150; height:35; font-family:돋움; background-color:#ffffff;
 	 	border:1 solid #f702e7; float: left">
-	 <span style="float: right;">
-	 <img src="../img/Ex.png" style="width:25px; height: 25px; " align='absmiddle'> 전시회
-	 </span>
-	 
-	 <span style="float: right;">
-	 	<img src="../img/Ev.png" style="width:25px; height: 25px;" align='absmiddle'> 공연  &ensp;&ensp;
-	 </span>
 </div>
 	<br>
 	<br>
 	
 	<!--전시회 리스트 -->
-	<div>
+	<div align="center">
 		<form name="performanceList" id="performanceList" method="post">
 			<table border="1" frame="hsides" rules="rows" cellpadding="3" cellspacing="0">
 				<tr>
-					<th>번호</th>
-					<th>이미지</th>
-					<th>전시회명</th>
-					<th>소 개</th>
+					<th class="performanceTh">이미지</th>
+					<th class="performanceTh" colspan="2">전시회  정보</th>
 				</tr>
 				
 				<!--등록된 연극 정보가 없을 때  -->								
@@ -72,15 +76,30 @@
 				
 				<c:forEach items="${list}" var="list">		
 					<tr>
-						<td>${list.seq}</td>
-						<td><img src="../storage/${list.image1}" width="100" height="100"></td>
-						<td>${list.imageName}</td>
-						<td>${list.eventContent}</td>
+						<td rowspan="5"><a target="_blank" href="${list.eventLink}"><img class="play_img" src="../storage/${list.image1}" width="300px" height="350px"></a></td>
+						
+						<td width="200px"><div>제 목</div></td>
+						<td><span class="play_Title_content">${list.imageName}</span></td>
+					</tr>
+					<tr>
+						<td>전시회 정보</td>
+						<td><pre>${list.eventContent}</pre></td>
+					</tr>
+					<tr>
+						<td>일 시</td>
+						<td><span>${list.startDate}</span> ~ <span>${list.endDate}</span></td>
+					</tr>
+					<tr>
+						<td>링 크</td>
+						<td><span><a target="_blank" href="${list.eventLink}">홈페이지 방문</a></span></td>
+					</tr>
+					<tr>
+						<td colspan="2"><div align="center"><input type="button" value="예약하기"></div></td>
 					</tr>
 				</c:forEach>
 				
 			</table>
-			<div style=" float:left; width:500px" align="center" id="">${performancePaging.pagingHTML}</div><br>
+			<div align="center">${performancePaging.pagingHTML}</div><br>
 			
 		</form>
 	</div>	
