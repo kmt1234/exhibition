@@ -10,35 +10,43 @@ import customerService.bean.ImageboardDTO;
 
 public interface CustomerServiceDAO {
 	
-	public List<CustomerServiceDTO> getNoticeList(Map<String, Integer> map);
+	public List<CustomerServiceDTO> getNoticeList(Map<String, Integer> map);		//공지사항 리스트 불러오기
+		
+	public CustomerServiceDTO getNoticeInfo(String seq);							// 공지사항 제목 클릭스 내용 보기
 	
-	public CustomerServiceDTO getNoticeInfo(String seq);
+	public void C_notice_Write(Map<String, String> map);							// 공지사항 관리자가 작성하기
 	
-	public void C_notice_Write(Map<String, String> map);
+	public int getTotalC_notice();													// 공지사항 총 글수
 	
-	public int getTotalC_notice();
+	public int getTotalC_notice_Search(Map<String, String> map);
 	
-	public void C_notice_Modify(Map<String, String> map);
+	public List<CustomerServiceDTO> C_notice_Search(Map<String, String> map);
+	
+	public void C_notice_Modify(Map<String, String> map);							// 공지사항 관리자가 수정하기
 
-	public void C_notice_Delete(String seq);
+	public void C_notice_Delete(String seq);										// 공지사항 관리자가 삭제하기
 
-	public List<CustomerServiceDTO> getInquireList();
+	public List<CustomerServiceDTO> getInquireList();								// 고객의 소리 문의받은 리스트 불러오기
 
-	public void C_checkInquire(CustomerServiceDTO customerServiceDTO);
+	public void C_checkInquire(CustomerServiceDTO customerServiceDTO);				// 고객의 소리 고객이 작성후 등록하기
 	
-	public CustomerServiceDTO getReplyInfo(String seq);
+	public CustomerServiceDTO getInquireInfo(String seq);							// 고객의 소리 묻의 받은 리스트 불러오기
 	
-	public void C_QnA_checkWrite(Map<String, String> map);
+	public CustomerServiceDTO getReplyInfo(String seq);								// 고객의 소리 관리자가 문의 답변 등록하기
 	
-	public CustomerServiceDTO getInquireInfo(String seq);
+	public List<CustomerServiceDTO> getQnA_Classify(String classify);				// 자주묻는 질문 리스트 불러오기 & 버튼마다 리스트 불러오기
 
-	public List<CustomerServiceDTO> getQnA_Classify(String classify);
+	public void C_QnA_checkWrite(Map<String, String> map);							// 자주묻는 질문 관리자가 작성하기
 	
-	public List<CustomerServiceDTO> getQnAList();
-	
-	public void C_contactList_checkWrite(Map<String, String> map);
+	public void C_contactList_checkWrite(Map<String, String> map);					// 주요시설 연락처 관리자가 작성하기
 
-	public List<CustomerServiceDTO> getContactList();
+	public List<CustomerServiceDTO> getContactList(Map<String, Integer> map);		// 주요시설 연락처 리스트 불러오기
+	
+	public int getTotalC_contactList();												// 주요시설 연락처 총 글수
+	
+	public int getTotalC_contactList_Search(Map<String, String> map);
+	
+	public List<CustomerServiceDTO> C_contactList_Search(Map<String, String> map);
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 	public void imageboardWrite(ImageboardDTO imageboardDTO);
 
@@ -68,5 +76,7 @@ public interface CustomerServiceDAO {
 	public void eventInfoWrite_play(EventboardDTO eventboardDTO); //연극 정보 등록
 
 	public void eventboardDelete_play(List<Integer> list);	//연극 업로드 리스트 삭제
+
+	
 
 }

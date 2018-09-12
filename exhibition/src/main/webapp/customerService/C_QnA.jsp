@@ -6,20 +6,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-#seqA{
-	margin-left :100px;
-}
-#subjectA{
-	margin-left:500px;
-}
-selector    : {
-  accordion : '.accordion',
-  title     : '.title',
-  trigger   : '.title',
-  content   : '.content'
-}
-
-
 </style>
 </head>
 <body>
@@ -60,81 +46,12 @@ selector    : {
 		</tr>
 	</table>
 </div>
-<table id="C_QnA_List" class="accordion"></table>
+<table id="C_QnA_List" class="ui styled fluid accordion"></table>
 <div align="left">
 	<input class="middle ui button" type="button" value="작성" id="C_QnA_writeBtn">
 </div>
-
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script src="../js/customerService.js"></script>
-<script>
-$(document).ready(function(){
-	var classify = "위치/교통";
-	$.ajax({
-		type : 'POST',
-		url : '/exhibition/customerService/getQnA_Classify.do',
-		data : {'classify' : classify },
-		dataType : 'json',
-		success : function(data){
-			$.each(data.list, function(index, item){
-				$('<tr/>',{
-					class : 'title'
-				}).append($('<td/>',{
-					align : 'center',
-					id : 'subjectA',
-					href : 'javascript:void(0)',
-					text : item.subject
-				})).appendTo($('#C_QnA_List'));
-				
-				$('<tr/>',{
-					class : 'content'
-				}).append($('<td/>',{
-					align : 'center',
-					id : 'contentA',
-					text : item.content
-				})).appendTo($('#C_QnA_List'));
-			});
-		}
-	});
-	
-	$('.QnA').click(function(){
-		var child = $('#C_QnA_List').empty();
-		var classify = $(this).val();
-		$.ajax({
-			type : 'POST',
-			url : '/exhibition/customerService/getQnA_Classify.do',
-			data : {'classify' : classify },
-			dataType : 'json',
-			success : function(data){
-				$.each(data.list, function(index, item){
-					$('<tr/>',{
-						class : 'title'
-					}).append($('<td/>',{
-						align : 'center',
-						id : 'subjectA',
-						href : 'javascript:void(0)',
-						text : item.subject
-					})).appendTo($('#C_QnA_List'));
-					
-					$('<tr/>',{
-						class : 'content'
-					}).append($('<td/>',{
-						align : 'center',
-						id : 'contentA',
-						text : item.content
-					})).appendTo($('#C_QnA_List'));
-				});
-			}
-		});
-	});
-	
-	$('.accordion').accordion({
-		selector: {
-			trigger: '.title'
-		}
-	});
-});
-</script>
+<script src="../semantic/semantic.min.js"></script>
+<script src="../js/C_QnA_js.js?ver=1"></script>
 
 </body>
 </html>

@@ -76,11 +76,11 @@ public class CustomerServiceController {
 		map.put("endNum", endNum);
 		
 		List<CustomerServiceDTO> list = customerServiceDAO.getNoticeList(map);
-			
+		
 		int totalA = customerServiceDAO.getTotalC_notice();
 		
 		customerServicePaging.setCurrentPage(Integer.parseInt(pg));
-		customerServicePaging.setPageBlock(3);
+		customerServicePaging.setPageBlock(5);
 		customerServicePaging.setPageSize(10);
 		customerServicePaging.setTotalA(totalA);
 		customerServicePaging.C_notice_PagingHTML();
@@ -91,6 +91,35 @@ public class CustomerServiceController {
 		mav.setViewName("jsonView");
 		return mav;
 	}
+	
+	@RequestMapping(value="C_notice_Search", method=RequestMethod.POST)
+	public ModelAndView C_notice_Search(@RequestParam(required=false) Map<String,String> map) {
+		System.out.println(map.get("pg")+","+map.get("searchOption"));
+		int endNum = Integer.parseInt(map.get("pg"))*5;
+		int startNum = endNum-4;
+		
+		map.put("startNum", startNum+"");
+		map.put("endNum", endNum+"");
+		
+		//DB
+		List<CustomerServiceDTO> list = customerServiceDAO.C_notice_Search(map);
+		
+		//페이징처리
+		int totalA = customerServiceDAO.getTotalC_notice_Search(map);
+		
+		customerServicePaging.setCurrentPage(Integer.parseInt(map.get("pg")));
+		customerServicePaging.setPageBlock(5);
+		customerServicePaging.setPageSize(10);
+		customerServicePaging.setTotalA(totalA);
+		customerServicePaging.C_notice_PagingHTML();
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.addObject("customerServicePaging", customerServicePaging);
+		mav.setViewName("jsonView");
+		return mav;
+	}
+	
 	// 공지사항 페이지에서 제목을 클리하면 내용을 보여준다.
 	@RequestMapping(value = "C_notice_View", method = RequestMethod.GET)
 	public ModelAndView C_notice_View(@RequestParam String seq, Model model) {
@@ -104,6 +133,7 @@ public class CustomerServiceController {
 		
 		return mav;
 	}
+	
 	//공지사항 내용을 확인후 수정버튼을 클릭하여 수정할수 있게 해준다.
 	@RequestMapping(value= "C_notice_Modify", method = RequestMethod.GET)
 	public ModelAndView C_notice_Modify(@RequestParam String seq, Model model) {
@@ -136,13 +166,9 @@ public class CustomerServiceController {
 	public ModelAndView C_notice_Delete(@RequestParam String seq) {
 		customerServiceDAO.C_notice_Delete(seq);
 		
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("display", "/customerService/C_notice.jsp");
-		mav.setViewName("/customerService/C_customerServiceForm");
-		
-		return mav;
+		return new ModelAndView("redirect:/customerService/C_notice.do");
 	}
-	// 공지사항 - 작성하기
+	// 공지사항 관리자가 작성할수있는 페이지
 	@RequestMapping(value = "C_notice_WriteBtn", method = RequestMethod.GET)
 	public ModelAndView C_notice_WriteBtn() {
 		ModelAndView mav = new ModelAndView();
@@ -152,7 +178,7 @@ public class CustomerServiceController {
 		return mav;
 	}
 
-	// 공지사항 - 작성하기 등록
+	// 공지사항 관리자가 공지사항 내용 작성후 데이터 베이스에 저장
 	@RequestMapping(value = "C_notice_Write", method = RequestMethod.POST)
 	public ModelAndView C_notice_Write(@RequestParam String subject, @RequestParam String content) {
 		Map<String, String> map = new HashMap<String, String>();
@@ -161,14 +187,10 @@ public class CustomerServiceController {
 		// DB
 		customerServiceDAO.C_notice_Write(map);
 		
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("display", "/customerService/C_notice.jsp");
-		mav.setViewName("/customerService/C_customerServiceForm");
-		
-		return mav;
+		return new ModelAndView("redirect:/customerService/C_notice.do");
 	}
 
-	// 고객의소리(이메일 인증)
+	// 고객의소리 고객 이메일 인증하기
 	@RequestMapping(value = "C_emailConfirm", method = RequestMethod.GET)
 	public ModelAndView C_emailConfirm() {
 		ModelAndView mav = new ModelAndView();
@@ -209,7 +231,7 @@ public class CustomerServiceController {
 		return buffer.toString();
 	}
 
-	// 고객의소리(이메일 인증후 문의하기)
+	// 고객의소리 - 이메일 인증후 문의하기
 	@RequestMapping(value = "C_inquire", method = RequestMethod.GET)
 	public ModelAndView C_inquire(@RequestParam String email, Model model) {
 		model.addAttribute("email", email);
@@ -220,14 +242,12 @@ public class CustomerServiceController {
 	}
 
 	// 고객의소리 문의 하기 등록
-	@RequestMapping(value = "C_checkInquire", method = RequestMethod.POST)
+	@RequestMapping(value="C_checkInquire", method = RequestMethod.POST)
 	public ModelAndView C_checkInquire(@ModelAttribute CustomerServiceDTO customerServiceDTO) {
 		customerServiceDAO.C_checkInquire(customerServiceDTO);
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("display", "/customerService/C_emailConfirm.jsp");
-		mav.setViewName("/customerService/C_customerServiceForm");
-		return mav;
+		return new ModelAndView("redirect:/customerService/C_emailConfirm.do");
 	}
+	
 	//고객의 소리 - 리스트폼(관리자)
 	@RequestMapping(value = "C_inquire_List", method = RequestMethod.GET)
 	public ModelAndView C_inquire_List() {
@@ -287,15 +307,11 @@ public class CustomerServiceController {
 				helper.setText(replyContent, true);
 			}
 		};
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("display", "/customerService/C_inquire_List.jsp");
-		mav.setViewName("/customerService/C_customerServiceForm");
-		
-		
+			
 		emailSender.send(preparator);
-		return mav;
+		return new ModelAndView("redirect:/customerService/C_emailConfirm.do");
 	}
-	// 자주묻는 질문
+	// 자주묻는 질문 리스트
 	@RequestMapping(value = "C_QnA", method = RequestMethod.GET)
 	public ModelAndView C_QnAForm() {
 		ModelAndView mav = new ModelAndView();
@@ -303,18 +319,7 @@ public class CustomerServiceController {
 		mav.setViewName("/customerService/C_customerServiceForm");
 		return mav;
 	}
-
-	//
-	@RequestMapping(value = "getQnAList", method = RequestMethod.POST)
-	public ModelAndView getQnAList() {
-
-		List<CustomerServiceDTO> list = customerServiceDAO.getQnAList();
-
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("list", list);
-		mav.setViewName("jsonView");
-		return mav;
-	}
+	
 	//자주묻는 질문 - 버튼에 따라 리스트 가져오기
 	@RequestMapping(value="getQnA_Classify", method =  RequestMethod.POST)
 	public ModelAndView getQnA_Classify(@RequestParam String classify) {
@@ -325,8 +330,15 @@ public class CustomerServiceController {
 		mav.setViewName("jsonView");
 		return mav;
 	}
+	
+	
+	
+	
+	
+	
+	
 
-	// 자주묻는 질문 - 작성
+	// 자주묻는 질문 - 관리자가 작성
 	@RequestMapping(value = "C_QnA_Write", method = RequestMethod.GET)
 	public ModelAndView C_QnA_Write() {
 		ModelAndView mav = new ModelAndView();
@@ -335,21 +347,17 @@ public class CustomerServiceController {
 		return mav;
 	}
 	
-	// 자주묻는 질문 - 작성등록
+	// 자주묻는 질문 - 관리자가 자주묻는 질문 작성후 작성등록
 	@RequestMapping(value = "C_QnA_checkWrite", method = RequestMethod.POST)
 	public ModelAndView C_QnA_checkWrite(@RequestParam String C_qty, @RequestParam String subject, @RequestParam String content) {
 		Map<String, String> map = new HashMap<String, String>();
-		System.out.println(C_qty);
 		map.put("classify", C_qty);
 		map.put("subject", subject);
 		map.put("content", content);
 		// DB
 		customerServiceDAO.C_QnA_checkWrite(map);
 		
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("display" ,"/customerService/C_QnA.jsp");
-		mav.setViewName("/customerService/C_customerServiceForm");
-		return mav;
+		return new ModelAndView("redirect:/customerService/C_QnA.do");
 	}
 
 	// 주요시설 연락처
@@ -360,19 +368,64 @@ public class CustomerServiceController {
 		mav.setViewName("/customerService/C_customerServiceForm");
 		return mav;
 	}
+	// 주요시설 연락처 리스트 불러오기
+	@RequestMapping(value = "getContactList", method = RequestMethod.GET)
+	public ModelAndView getContactList(@RequestParam(required=false ,defaultValue="1") String pg) {
+		//DB - 1페이지당 10개씩
+		int endNum = Integer.parseInt(pg)*10;
+		int startNum = endNum-9;
+		
+		Map<String,Integer> map = new HashMap<String,Integer>();
+		map.put("startNum", startNum);
+		map.put("endNum", endNum);
+		
+		List<CustomerServiceDTO> list = customerServiceDAO.getContactList(map);
 
-	@RequestMapping(value = "getContactList", method = RequestMethod.POST)
-	public ModelAndView getContactList() {
-
-		List<CustomerServiceDTO> list = customerServiceDAO.getContactList();
-
+		int totalA = customerServiceDAO.getTotalC_contactList();
+		
+		customerServicePaging.setCurrentPage(Integer.parseInt(pg));
+		customerServicePaging.setPageBlock(5);
+		customerServicePaging.setPageSize(10);
+		customerServicePaging.setTotalA(totalA);
+		customerServicePaging.C_contactList_PagingHTML();
+		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
+		mav.addObject("customerServicePaging", customerServicePaging);
 		mav.setViewName("jsonView");
 		return mav;
 	}
+	
+	@RequestMapping(value="C_contactList_Search", method=RequestMethod.POST)
+	public ModelAndView C_contactList_Search(@RequestParam(required=false) Map<String,String> map) {
+		System.out.println(map.get("pg")+","+map.get("searchOption"));
+		int endNum = Integer.parseInt(map.get("pg"))*5;
+		int startNum = endNum-4;
+		
+		map.put("startNum", startNum+"");
+		map.put("endNum", endNum+"");
+		
+		//DB
+		List<CustomerServiceDTO> list = customerServiceDAO.C_contactList_Search(map);
+		
+		//페이징처리
+		int totalA = customerServiceDAO.getTotalC_contactList_Search(map);
+		
+		customerServicePaging.setCurrentPage(Integer.parseInt(map.get("pg")));
+		customerServicePaging.setPageBlock(5);
+		customerServicePaging.setPageSize(10);
+		customerServicePaging.setTotalA(totalA);
+		customerServicePaging.C_notice_PagingHTML();
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.addObject("customerServicePaging", customerServicePaging);
+		mav.setViewName("jsonView");
+		return mav;
+	}
+	
 
-	// 주요시설 연락처 - 작성
+	// 주요시설 연락처  관리자가 작성하는 페이지
 	@RequestMapping(value = "C_contactList_Write", method = RequestMethod.GET)
 	public ModelAndView C_contactList_Write() {
 		ModelAndView mav = new ModelAndView();
@@ -381,7 +434,7 @@ public class CustomerServiceController {
 		return mav;
 	}
 
-	// 주요시설 연락처 - 작성등록
+	// 주요시설 연락처  관리자가 작성후 작성등록
 	@RequestMapping(value = "C_contactList_checkWrite", method = RequestMethod.POST)
 	public ModelAndView C_contactList_checkWrite(@RequestParam String classify,@RequestParam String facility, @RequestParam String title,
 			@RequestParam String name, @RequestParam String phone) {
@@ -393,10 +446,7 @@ public class CustomerServiceController {
 		map.put("phone", phone);
 		customerServiceDAO.C_contactList_checkWrite(map);
 
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("display", "/customerService/C_contactList.jsp");
-		mav.setViewName("/customerService/C_customerServiceForm");
-		return mav;
+		return new ModelAndView("redirect:/customerService/C_contactList.do");
 	}
 
 	
@@ -554,11 +604,6 @@ public class CustomerServiceController {
 		List<EventboardDTO> list = customerServiceDAO.eventboardList(map);
 		
 		ModelAndView mav = new ModelAndView();
-		
-		
-		for(EventboardDTO dto : list) {
-			System.out.println(dto.getImageName());
-		}
 		
 		mav.addObject("pg", pg);
 		mav.addObject("imageboardPaging",imageboardPaging);

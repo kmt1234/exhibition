@@ -44,7 +44,6 @@
 </form>
 
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script src="../js/customerService.js"></script>
-
+<script src="../js/C_notice_js.js?ver=1"></script>
 </body>
 </html>

@@ -16,6 +16,7 @@
 			<td style="width:5px; text-align: left;">
 				<div class="ui input">
 					<input type="text" name="subject" id="subject" value="${customerServiceDTO.subject }">
+					<div id="subjectDiv"></div>
 				</div>	
 			</td>
 			
@@ -36,6 +37,7 @@
 				<div class="ui form" >
 					<div align="center" class="field">
 						<textArea name="content" id="content" style="width: 100%" >${customerServiceDTO.content }</textArea>
+						<div id="contentDiv"></div>
 					</div>
 				</div>
 			</td>
@@ -46,20 +48,5 @@
 	<input class="middle ui button" type="reset" value="취소">
 </div>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script>
-$(document).ready(function(){
-	$('#C_notice_checkModifyBtn').click(function(){
-		$.ajax({
-			type : 'POST',
-			url : '/exhibition/customerService/C_notice_checkModify.do',
-			data : {'seq' : $('#seq').val() , 'subject' : $('#subject').val() , 'content' : $('#content').val() },
-			success : function(data){
-				//alert(JSON.stringify(data));
-				location.href="/exhibition/customerService/C_notice.do";
-			}
-		});
-	});
-});
-</script>
-</body>
+<script src="../js/C_notice_js.js?ver=1"></script></body>
 </html>

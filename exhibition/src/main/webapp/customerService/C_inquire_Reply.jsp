@@ -41,6 +41,6 @@
 </div>
 </form>
 <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="../js/customerService.js?ver=1"></script>
+<script src="../js/C_inquire_js.js?ver=1"></script>
 </body>
 </html>

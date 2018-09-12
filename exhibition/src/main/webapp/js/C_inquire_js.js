@@ -1,47 +1,18 @@
 $(document).ready(function(){
 	var C_name = /^[가-힣]+$/;	//한글만 가능 
 	var C_phone =  /^((01[1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})$/;	//휴대폰 번호 양식
+	var Cw_regEmail = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/; //이메일 양식
+	var classify = "위치/교통";
 	
-	$('#C_notice_WriteBtn').click(function(){ 
-		location.href="/exhibition/customerService/C_notice_WriteBtn.do";
-	});
-	
-	
-	//공지사항 - 작성하기
-	$('#C_notice_checkWriteBtn').click(function(){ // 공지사항 - 등록버튼 클릭시
-		$('#subjectDiv').empty();
-		$('#contentDiv').empty();
-		
-		if($('#subject').val()=='')
-			$('#subjectDiv').text("제목을 입력하세요").css('font-size','9pt').css('color','red')
-		else if($('#content').val()=='')
-			$('#contentDiv').text("내용을 입력하세요").css('font-size','9pt').css('color','red')
-		else
-			$('#C_notice_Write').submit();
-	});
-	
-	//공지사항 내용보기에서 글수정 버튼 눌렀을때 수정하는 폼
-	$('#C_notice_modifyBtn').click(function(){
-		location.href="/exhibition/customerService/C_notice_Modify.do?seq="+$('#putSeq').val();
-	});
-	//공지사항 수정한내용을 데이터 베이스에 저장
-	$('#C_notice_checkModifyBtn').click(function(){
-		$('#C_notice_checkModify').submit();
-	});
-	
-	$('#C_notice_deleteBtn').click(function(){
-		location.href="/exhibition/customerService/C_notice_Delete.do?seq="+$('#putSeq').val();
-	});
-	//공지사항 - 공지사항뷰에서 목록보기
-	$('#C_noticeListBtn').click(function(){
-		location.href="/exhibition/customerService/C_notice.do";
-	});
-
 	//고객의 소리 - 이메일 인증 - 인증번호 전송 버튼 클릭시
 	$('#C_emailSendBtn').click(function() {
+		$('#emailDiv').empty();
+		
 		if($('#email').val()==''){
 			$('#emailDiv').text("이메일을 입력하세요").css('font-size','9pt').css('color','red')
-		} else {
+		} else if(!Cw_regEmail.test($('#email').val())){
+			$('#emailDiv').text("이메일 양식에 맞지 않습니다. ex) XXX@XXX.XXX").css("font-size","9pt").css("color","red");
+		}else {
 			$.ajax({
 			type : 'POST',
 			url : '/exhibition/customerService/sendEmail.do',
@@ -61,10 +32,10 @@ $(document).ready(function(){
 		var email = $('#email').val()
 		if ($('#checkEmail').val()=='')
 			$('#checkEmailDiv').text("인증번호를 입력하세요").css('font-size','9pt').css('color','red')
-			else if ($('#reC_EmailConfirm').val()!=($('#checkEmail').val())) 
-				$('#checkEmailDiv').text('인증번호가 틀렸습니다').css('font-size','9pt').css('color','red')
-				else 
-					location.href = '/exhibition/customerService/C_inquire.do?email='+email;
+		else if ($('#reC_EmailConfirm').val()!=($('#checkEmail').val())) 
+			$('#checkEmailDiv').text('인증번호가 틀렸습니다').css('font-size','9pt').css('color','red')
+		else 
+			location.href = '/exhibition/customerService/C_inquire.do?email='+email;
 	});
 	
 	// 고객의 소리 - 문의하기 -  등록버튼 클릭시
@@ -86,7 +57,7 @@ $(document).ready(function(){
 		else if($('#content').val()=='')
 			$('#contentDiv').text("내용을 입력하세요").css('font-size','9pt').css('color','red')
 		else
-			$('#C_Inquire').submit();
+			$('#C_inquire').submit();
 	});
 
 	//고객의 소리 - 관리자 버튼
@@ -107,40 +78,49 @@ $(document).ready(function(){
 		else
 			$('#C_inquire_checkReply').submit();
 	});
+		
 	
-	//자주 묻는 질문 - 작성하기 폼
-	$('#C_QnA_writeBtn').click(function(){
-		location.href="/exhibition/customerService/C_QnA_Write.do";
+	$.ajax({
+		type : 'POST',
+		url : '/exhibition/customerService/getInquireList.do',
+		dataType : 'json',
+		success : function(data){
+			$.each(data.list, function(index, item){
+				$('<tr/>').append($('<td/>',{
+					align : 'center',
+					style: 'width: 20%; height: 9%; text-align: center;',
+					text : item.seq,
+					id : 'seqA'
+				})).append($('<td/>',{
+					align : 'center',
+					id : 'subjectA',
+					style: 'width: 20%; height: 9%; text-align: center;',
+					class : item.seq+"",
+					href : 'javascript:void(0)',
+					text : item.subject
+				})).append($('<td/>',{
+					align : 'center',
+					style: 'width: 20%; height: 9%; text-align: center;',
+					text : item.name,
+					id : 'nameA'
+				})).append($('<td/>',{
+					align : 'center',
+					style: 'width: 20%; height: 9%; text-align: center;',
+					text : item.email,
+					id : 'emailA'
+				})).append($('<td/>',{
+					align : 'center',
+					style: 'width: 20%; height: 9%; text-align: center;',
+					text : item.logtime,
+					id : 'logtime'
+				})).appendTo($('#C_inquire_List'));
+			});
+		}
 	});
 	
-	
-	//자주 묻는 질문 작성하기 등록버튼
-	$('#C_QnA_checkWriteBtn').click(function(){
-		var classify = $('#classify option:selected').val();
-		alert(classify);
-		$('#subjectDiv').empty();
-		$('#contentDiv').empty();
-		if($('#subject').val()=='')
-			$('#subjectDiv').text("제목을 입력하세요").css('font-size','9pt').css('color','red')
-		else if($('#content').val()=='')
-			$('#contentDiv').text("내용을 입력하세요").css('font-size','9pt').css('color','red')
-		else{
-			$('#C_qty').val(classify);
-			$('#C_QnA_checkWrite').submit();
-		}	
+	$('#C_inquire_List').on('click','#subjectA',function(){
+		var seq = $(this).prev().text();
+		location.href="/exhibition/customerService/C_inquire_View.do?seq="+seq;
 	});
-	
-	//주요시설 연락처 - 작성하기 폼
-	$('#C_contactList_WriteBtn').click(function(){
-		location.href="/exhibition/customerService/C_contactList_Write.do";
-	});
-	
-	$('#C_contactList_checkWriteBtn').click(function(){
-		$('#C_contactList_checkWrite').submit();
-	});
-	
-	
-	
-	
-	
+	$('.ui.compact.selection.dropdown').dropdown();	
 });

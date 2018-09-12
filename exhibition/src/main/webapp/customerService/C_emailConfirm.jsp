@@ -45,7 +45,7 @@
 		<input class="middle ui button" type="button" id="C_email_ListBtn" value="관리자 버튼" style="">
 	</div>
 	<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
-	<script src="../js/customerService.js?ver=1"></script>
+	<script src="../js/C_inquire_js.js?ver=1"></script>
 	
 </body>
 </html>

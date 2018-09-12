@@ -18,7 +18,7 @@
 	<select name="classify" id="classify">
 		<option  value="위치/교통">위치/교통</option>
 		<option  value="주차">주차</option>
-		<option  value="전시 & 공연">전시 & 공연</option>
+		<option  value="전시&공연">전시 & 공연</option>
 		<option  value="임대">임대</option>
 		<option  value="시설">시설</option>
 		<option  value=기타>기타</option>
@@ -56,9 +56,7 @@
 </table>
 </form>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script src="../js/customerService.js"></script>
-<script>
+<script src="../js/C_QnA_js.js?ver=1"></script>
 
-</script>
 </body>
 </html>

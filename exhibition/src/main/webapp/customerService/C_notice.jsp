@@ -10,6 +10,7 @@
 #subjectA:hover{color:green; text-decoration: underline; font-weight: bold; cursor: pointer;}
 #subjectA:active{color:black; text-decoration: none;}
 </style>
+
 </head>
 <body>
 
@@ -29,67 +30,20 @@
 		</tr>
 	</table>
 	<br><br>
-	<div id="C_notice_PagingDiv"></div>
-	<div style="width: 100%;">
-		<div class="ui compact selection dropdown">
-			<i class="dropdown icon"></i>
-			<div class="text">선택하세요</div>
-			<div class="menu">
-				<div class="item">목록</div>
-				<div class="item">내용</div>
-			</div>
-		</div>
-		
-		<div class="ui input" style="width: 40%;">
-		 <input type="text" >
-		</div>
-		
-		 <input type="button" class="middle ui button"  value="검색" id="C_noticeSearch">
-		 <input type="button" class="middle ui button" id="C_notice_WriteBtn" value="작성" >
+	<div id="C_contactList_PagingDiv"></div>
+	<input type="hidden" name="pg" id="pg" value="1">
+	<select class="ui compact selection dropdown" id="searchOption">
+			<option value="subejct">제목</option>
+			<option value="content">내용</option>
+	</select>
+
+	<div class="ui input" style="width: 40%;">
+		<input type="text" name="keyword" id="keyword" value="${keyword }">
 	</div>
+		<input type="button" class="middle ui button"  value="검색" id="C_notice_Search">
+		<input type="button" class="middle ui button" id="C_notice_WriteBtn" value="관리자 작성" >
 </div>
-
 <script src="../semantic/semantic.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script src="../js/customerService.js"></script>
-<script>
-$(document).ready(function(){
-	$.ajax({
-		 type : 'POST',
-		url : '/exhibition/customerService/getNoticeList.do',
-		data :  '[pg=${pg}]',
-		dataType : 'json',
-		success : function(data){
-			$.each(data.list, function(index, item){
-				$('<tr/>').append($('<td/>',{
-						align : 'center',
-						style: 'width: 20%; height: 9%; text-align: center;',
-						text : item.seq,
-						id : 'seqA'
-					})).append($('<td/>',{
-						align : 'center',
-						id : 'subjectA',
-						style: 'width: 45%; height: 7%;text-align: center;',
-						class : item.seq+"",
-						href : 'javascript:void(0)',
-						text : item.subject
-					})).append($('<td/>',{
-						align : 'center',
-						style: 'width: 20%; height: 7%;text-align: center;',
-						text : item.logtime,
-						id : 'logtime'
-					})).appendTo($('#C_notice_List'));
-				});
-			$('#C_notice_PagingDiv').html(data.customerServicePaging.pagingHTML);
-		}
-	});
-	$('#C_notice_List').on('click','#subjectA',function(){
-		var seq = $(this).prev().text();
-		location.href="/exhibition/customerService/C_notice_View.do?seq="+seq;
-	});
-	$('.ui.compact.selection.dropdown').dropdown();	
-});
-</script>
-
+<script src="../js/C_notice_js.js?ver=1"></script>
 </body>
 </html>
