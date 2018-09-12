@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
@@ -718,5 +719,24 @@ public class CustomerServiceController {
 
 		customerServiceDAO.hotelDelete(list); // db삭제
 		return new ModelAndView("redirect:/customerService/C_hotelListForm.do");
+	}
+	// 마이페이지
+	@RequestMapping(value = "mypage", method = RequestMethod.GET)
+	public ModelAndView mypage(HttpSession session) {
+
+		int code = (Integer) session.getAttribute("code");
+
+		Object DTO = session.getAttribute("homepageMember");
+		session.setAttribute("DTO", DTO);
+
+		ModelAndView mav = new ModelAndView();
+
+		if (code == 1) {
+			mav.setViewName("/customerService/C_personalInformationForm"); // 개인마이페이지
+		} else if (code == 2) {
+			mav.setViewName("/customerService/C_companyInformationForm"); // 법인마이페이지
+		}
+
+		return mav;
 	}
 }

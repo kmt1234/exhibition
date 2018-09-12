@@ -175,9 +175,9 @@ public class LoginController {
 		ModelAndView mav = new ModelAndView();
 
 		if (code == 1) {
-			mav.setViewName("/login/memberMypage"); // 개인마이페이지
+			mav.setViewName("/customerService/C_personalInformationForm"); // 개인마이페이지
 		} else if (code == 2) {
-			mav.setViewName("/login/companyMypage"); // 법인마이페이지
+			mav.setViewName("/customerService/C_companyInformationForm"); // 법인마이페이지
 		}
 
 		return mav;

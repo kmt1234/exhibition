@@ -149,7 +149,7 @@
 	                  <div class="item" id="C_emailConfirm">고객의 소리</div>
 	                  <div class="item" id="C_QnA">자주묻는 질문</div>
 	                  <div class="item" id="C_contactList">주요시설 연락처</div>
-	                  <div class="item" id="C_personalInformation">개인정보</div>
+	                  <div class="item" id="C_mypage">개인정보</div>
 	                  <div class="item" id="C_boardAdd">게시판 추가</div><!--세션값에 따라 보이게 할 예정-->
 	               </div>
 	            </div>
@@ -179,7 +179,7 @@
 	integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
 	crossorigin="anonymous"></script>
 <script src="../semantic/semantic.min.js"></script>
-<script src="../js/index.js" charset="UTF-8"></script>  <!--  -->
+<script src="../js/index.js?ver=1" charset="UTF-8"></script>  <!--  -->
 <script src="../js/member.js" charset="UTF-8"></script> <!--  -->
 <script src="../js/company.js" charset="UTF-8"></script><!--  -->
 <script src="../js/login.js" charset="UTF-8"></script>	<!--  -->
