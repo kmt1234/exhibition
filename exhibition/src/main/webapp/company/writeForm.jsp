@@ -126,8 +126,8 @@ action="/exhibition/company/companyWrite.do">
 </div>
 
 <div align="center" id="CtermDiv" style="font-size: 12px; margin-left: -40%;">이용약관을 확인하셔야 가입 가능합니다</div>
-
-<br><div class="termDiv" align="center"><a class="ui primary button" id="terms_C" style="margin-left: -42%;">이용약관</a></div>
+<br>
+<div class="CtermDiv" align="center"><a class="ui primary button" id="terms_C" style="margin-left: -42%;">이용약관</a></div>
 
 	<!--회원가입 약관 페이지 인클루드  -->
 	<div><jsp:include page="../company/Cterms.jsp"/></div>

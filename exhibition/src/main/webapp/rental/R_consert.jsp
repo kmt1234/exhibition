@@ -6,9 +6,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
 </head>
-
+<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
+	공연장 
+	<span class="h-light">홀</span>
+</h2>
 <body>
-<div style="border: 2px solid; height: 900px; width: 1300px; ">
+<div style="border: 2px solid; height: 100%; width: 100%; ">
 
 	<div id="area1" style="float: left; border:1px solid;  height: 200px; width: 200px;
 		margin-top:20px; margin-left:20px; color: blue" >

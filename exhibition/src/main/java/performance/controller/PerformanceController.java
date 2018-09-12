@@ -3,22 +3,21 @@ package performance.controller;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Iterator;
-
+import java.util.HashMap;
 import java.util.List;
-import java.util.TreeSet;
-
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
+import customerService.bean.EventboardDTO;
 import performance.bean.PerformanceDTO;
+import performance.bean.PerformancePaging;
 import performance.dao.PerformanceDAO;
-import rental.bean.ExhibitionDTO;
+
 
 @RequestMapping(value="performance")
 @Component
@@ -26,7 +25,8 @@ public class PerformanceController {
 /*	전역변수 설정*/
 	@Autowired
 	private PerformanceDAO performanceDAO;
-	
+	@Autowired
+	private PerformancePaging performancePaging;
 	
 /* 사용메서드*/
 	/*일정정보에 관한 내용이 들어 있는 페이지로 이동~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -34,12 +34,13 @@ public class PerformanceController {
 	public ModelAndView P_performanceForm1() {
 		ModelAndView mav = new ModelAndView();
 		
-		mav.addObject("dispaly","/performance/P_info.jsp");
+		mav.addObject("display","/performance/P_info.jsp");
 		mav.setViewName("/performance/P_performanceForm");
 		
 		return mav;
 	}
-	//전체일정
+	/*전체일정 공연&박람회 데이터 베이스에서 데이터 갑을 받아와야 한다.
+	현제 임시 데이터 베이스 사용중*/
 	@RequestMapping(value="P_allSchedule", method=RequestMethod.GET)
 	public ModelAndView P_allSchedule(ModelMap modelMap) {
 
@@ -67,13 +68,13 @@ public class PerformanceController {
 		
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("dispaly","/performance/P_allCalendar.jsp");
+		mav.addObject("display","/performance/P_allCalendar.jsp");
 		mav.setViewName("/performance/P_performanceForm");
 		return mav ;
 	}
 	
 	
-	@RequestMapping(value="getPerformance", method=RequestMethod.GET)
+	/*@RequestMapping(value="getPerformance", method=RequestMethod.GET)
 	public String getPerformance(ModelMap modelMap) {
 		List<PerformanceDTO> list = performanceDAO.getPerformance();
 		
@@ -94,12 +95,12 @@ public class PerformanceController {
 		
 		modelMap.addAttribute("listView",list);
 		return "/performance/getPerformance";
-	}
+	}*/
 	
 	
-	//공연일정
-	@RequestMapping(value="P_performanceScheduleForm", method=RequestMethod.GET)
-	public String P_performanceScheduleForm(ModelMap modelMap) {
+	//공연일정를 데이터베이스에서 불러와 달력으로 보내준다.
+	@RequestMapping(value="P_performanceSchedule", method=RequestMethod.GET)
+	public ModelAndView P_performanceSchedule(ModelMap modelMap) {
 		List<PerformanceDTO> list = performanceDAO.getPerformance();
 		
 		for(PerformanceDTO data : list) {
@@ -120,15 +121,53 @@ public class PerformanceController {
 		}
 		
 		modelMap.addAttribute("listView",list);
-	
-		return "/performance/P_performanceScheduleForm";
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("display","/performance/P_performanceCalendar.jsp");
+		mav.setViewName("/performance/P_performanceForm");
+		return mav ;
 	}
 	
+	//공연일정 리스트
+	@RequestMapping(value="P_performanceList", method=RequestMethod.GET)
+	public ModelAndView P_performanceList(@RequestParam(required=false , defaultValue="1") String pg) {
+		
+		//Paging
+		int endNum = Integer.parseInt(pg)*9;
+		int startNum = endNum-8;
+		
+		Map<String,Integer> map = new HashMap<String,Integer>();
+		map.put("endNum", endNum);
+		map.put("startNum", startNum);
+		
+		int totalA = performanceDAO.getPlayListTotalA();
+		
+		//Paging
+		performancePaging.setCurrentPage(Integer.parseInt(pg));
+		performancePaging.setPageBlock(5);
+		performancePaging.setPageSize(9);
+		performancePaging.setTotalA(totalA);
+
+		performancePaging.makePagingHTML();
+		
+		//DB
+		List<EventboardDTO> list = performanceDAO.getPlayList(map);
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("pg", pg);
+		mav.addObject("list", list);
+		mav.addObject("listSize", list.size()+"");
+		mav.addObject("performancePaging", performancePaging);
+		mav.addObject("display", "/performance/P_performanceList.jsp");
+		mav.setViewName("P_performanceForm");
+		return mav;
+		
+	}	
 	
-	
-	//전시회일정
-	@RequestMapping(value="P_exhibitionScheduleForm", method=RequestMethod.GET)
-	public String P_exhibitionScheduleForm(ModelMap modelMap) {
+	//전시회일정를 데이터베이스에서 불러와 달력으로 보내준다.
+	@RequestMapping(value="P_exhibitionSchedule", method=RequestMethod.GET)
+	public ModelAndView P_exhibitionSchedule(ModelMap modelMap) {
 		List<PerformanceDTO> list = performanceDAO.getPerformance();
 		
 		for(PerformanceDTO data : list) {
@@ -148,11 +187,46 @@ public class PerformanceController {
 		}
 		modelMap.addAttribute("listView",list);
 		
-		return "/performance/P_exhibitionScheduleForm";
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("display","/performance/P_exhibitionCalendar.jsp");
+		mav.setViewName("/performance/P_performanceForm");
+		return mav ;
 	}
 	
-	
-	
+	//전시회 일정 리스트
+	@RequestMapping(value="P_exhibitionList", method=RequestMethod.GET)
+	public ModelAndView P_exhibitionList(@RequestParam(required=false , defaultValue="1") String pg) {
+		
+		//Paging
+		int endNum = Integer.parseInt(pg)*9;
+		int startNum = endNum-8;
+		
+		Map<String,Integer> map = new HashMap<String,Integer>();
+		map.put("endNum", endNum);
+		map.put("startNum", startNum);
+		
+		int totalA = performanceDAO.getExhibitionListTotalA();
+		
+		//Paging
+		performancePaging.setCurrentPage(Integer.parseInt(pg));
+		performancePaging.setPageBlock(5);
+		performancePaging.setPageSize(9);
+		performancePaging.setTotalA(totalA);
+
+		performancePaging.makePagingHTML_exhibition();
+		
+		//DB
+		List<EventboardDTO> list = performanceDAO.getExhibitionList(map);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("pg", pg);
+		mav.addObject("list", list);
+		mav.addObject("listSize", list.size()+"");
+		mav.addObject("performancePaging", performancePaging);
+		mav.addObject("display", "/performance/P_exhibitionList.jsp");
+		mav.setViewName("P_performanceForm");
+		return mav;
+	}
 	
 	
 	//달력 메소드

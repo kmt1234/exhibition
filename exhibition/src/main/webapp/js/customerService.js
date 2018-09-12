@@ -15,12 +15,22 @@ $(document).ready(function(){
 			$('#C_notice_WriteForm').submit();
 	});
 	
-	//공지사항 수정
-	$('#C_notice_checkModify').click(function(){
-		
-		/*$('#C_notice_ModifyForm').submit();*/
+	//공지사항 내용보기에서 글수정 버튼 눌렀을때 수정하는 폼
+	$('#C_notice_modifyBtn').click(function(){
+		location.href="/exhibition/customerService/C_notice_ModifyForm.do?seq="+$('#putSeq').val();
 	});
-	
+	//공지사항 수정한내용을 데이터 베이스에 저장
+	$('#C_notice_checkModifyBtn').click(function(){
+		$('#C_notice_ModifyForm').submit()
+	});
+	$('#C_notice_deleteBtn').click(function(){
+		location.href="/exhibition/customerService/C_notice_Delete.do?seq="+$('#putSeq').val();
+	});
+	//공지사항 - 공지사항뷰에서 목록보기
+	$('#C_noticeListBtn').click(function(){
+		location.href="/exhibition/customerService/C_notice.do";
+	});
+
 	
 	
 	$('#C_checkInquire').click(function(){ // 고객의 소리 - 등록버튼 클릭시
@@ -87,6 +97,8 @@ $(document).ready(function(){
 	$('#C_contactList_checkWrite').click(function(){
 		$('#C_contactList_WriteForm').submit();
 	});
+	
+	
 	
 	
 	

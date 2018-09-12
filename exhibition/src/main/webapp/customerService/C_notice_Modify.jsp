@@ -3,10 +3,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
 </head>
 <body>
+<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
+	공지
+	<span class="h-light">사항</span>
+</h2>
 <form id="C_notice_ModifyForm" method="post" action="/exhibition/customerService/C_notice_Modify.do">
 	<table style="width:100%;" class="ui celled table">
 		<tr>
@@ -42,11 +44,11 @@
 		
 	</table>
 </form>
-<div>
-	<input type="button" id="C_notice_checkModify" value="수정">
-	<input type="reset" value="다시쓰기">
+<div style="padding-top: 30px;">
+	<input class="middle ui button" type="button" id="C_notice_checkModifyBtn" value="수정">
+	<input class="middle ui button" type="reset" value="취소">
 </div>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script src="../js/customerService.js"></script>
+<script src="../js/customerService.js?ver=1"></script>
 </body>
 </html>

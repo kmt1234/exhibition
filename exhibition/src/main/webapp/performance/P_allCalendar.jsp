@@ -108,29 +108,27 @@ var dataSet = [
 </head>
 
 <body>
-<!-- 메인 화면 -->
-
-	
-		<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
-			전체
-			<span class="h-light">일정</span>
-		</h2>
-		<!-- 버튼 -->
-		<div>
-			<input type="button" value="달력으로 보기" 
-				style="width:150; height:35; background-color:#ffffff;
-			 border:1 solid #f702e7; float: left">
-			<input type="button" value="리스트로 보기" 
-				style="width:150; height:35; font-family:돋움; background-color:#ffffff;
-			 	border:1 solid #f702e7; float: left">
-			 <span style="float: right;">
-			 <img src="../img/Ex.png" style="width:25; height: 25; " align='absmiddle'> 전시회
-			 </span>
-			 
-			 <span style="float: right;">
-			 	<img src="../img/Ev.png" style="width:25; height: 25;" align='absmiddle'> 공연  &ensp;&ensp;
-			 </span>
-		</div>
+	<!-- 메인 화면 -->
+	<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
+		전체
+		<span class="h-light">일정</span>
+	</h2>
+	<!-- 버튼 -->
+	<div>
+		<input type="button" value="달력으로 보기" 
+			style="width:150; height:35; background-color:#ffffff;
+		 border:1 solid #f702e7; float: left">
+		<input type="button" value="리스트로 보기" 
+			style="width:150; height:35; font-family:돋움; background-color:#ffffff;
+		 	border:1 solid #f702e7; float: left">
+		 <span style="float: right;">
+		 <img src="../img/Ex.png" style="width:25px; height: 25px; " align='absmiddle'> 전시회
+		 </span>
+		 
+		 <span style="float: right;">
+		 	<img src="../img/Ev.png" style="width:25px; height: 25px;" align='absmiddle'> 공연  &ensp;&ensp;
+		 </span>
+	</div>
 		<br>
 		<br>
 	<div style= "height: 86%;width: 100%; border: 1px solid;">

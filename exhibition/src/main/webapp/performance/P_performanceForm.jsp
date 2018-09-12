@@ -1,11 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<!DOCTYPE>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Insert title here</title>
-
 <style>
 	.box-container{
 		display: inline-block;
@@ -29,15 +26,15 @@
 	<br>
 	<br>
 	<div class="ui five column grid container">
-		<!-- »çÀÌµå¹Ù ¸Ş´º -->
+		<!-- ì‚¬ì´ë“œë°” ë©”ë‰´ -->
 		<div class="ui compact menu" style="width: 20%; height: 977px; ">
-			<a class="item" href="P_allSchedule.do">ÀüÃ¼ÀÏÁ¤</a> 
-			<a class="item" href="P_performanceScheduleForm.jsp">°ø¿¬ÀÏÁ¤</a> 
-			<a class="item" href="P_exhibitionScheduleForm.jsp">Àü½ÃÈ¸ÀÏÁ¤</a>
+			<a class="item" href="P_allSchedule.do">ì „ì²´ì¼ì •</a> 
+			<a class="item" href="P_performanceSchedule.do">ê³µì—°ì¼ì •</a> 
+			<a class="item" href="P_exhibitionSchedule.do">ì „ì‹œíšŒì¼ì •</a>
 		</div>
-		<!-- ¸ŞÀÎ È­¸é -->
+		<!-- ë©”ì¸ í™”ë©´ -->
 		<div class="ui compact menu" style="width: 80%; height: 900px;" >
-			<jsp:include page="${dispaly}" ></jsp:include>
+			<jsp:include page="${display}" ></jsp:include>
 		</div>
 		<!-- footer -->
 		<div class="ui compact menu" style="width: 100%; float: right; ">

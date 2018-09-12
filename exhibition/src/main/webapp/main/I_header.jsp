@@ -118,34 +118,34 @@
 					<span id="P_performanceForm">일정</span>
 					<div class="menu">
 						<div class="item" id="P_allSchedule">전체일정</div>
-						<div class="item" id="P_performanceScheduleForm">공연일정</div>
-						<div class="item" id="P_exhibitionScheduleForm">전시회일정</div>
+						<div class="item" id="P_performanceSchedule">공연일정</div>
+						<div class="item" id="P_exhibitionSchedule">전시회일정</div>
 					</div>
 				</div>
 			</div>
 			<div class="ui compact menu" style="width: 20%;">
 				<div class="ui simple dropdown item">
-					<span id="R_infoForm">시설/임대</span>
+					<span id="R_rentalForm">시설/임대</span>
 					<div class="menu">
-						<div class="item" id="R_exhibitionForm">전시회 홀</div>
-						<div class="item" id="R_consertForm">공연장 홀</div>
+						<div class="item" id="R_exhibition">전시회 홀</div>
+						<div class="item" id="R_performance">공연장 홀</div>
 					</div>
 				</div>
 			</div>
 			<div class="ui compact menu" style="width: 20%;">
 				<div class="ui simple dropdown item">
-					<span id="T_infoForm">교통/숙박/관광</span>
+					<span id="T_allForm">교통/숙박/관광</span>
 					<div class="menu">
-						<div class="item" id="T_allForm">교통안내</div>
-
+						<div class="item" id="T_allFormS">교통안내</div>
+						<div class="item" id="T_hotelForm">숙박안내</div>
 					</div>
 				</div>
 			</div>
 			<div class="ui compact menu" style="width: 20%;">
 				<div class="ui simple dropdown item">
-					<span id="C_infoForm" >고객센터</span>
+					<span id="C_customerServiceForm" >고객센터</span>
 					<div class="menu">
-						<div class="item" id="C_noticeForm">공지사항</div>
+						<div class="item" id="C_notice">공지사항</div>
 						<div class="item" id="C_emailConfirmForm">고객의 소리</div>
 						<div class="item" id="C_QnAForm">자주묻는 질문</div>
 						<div class="item" id="C_contactListForm">주요시설 연락처</div>

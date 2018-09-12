@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import rental.bean.ExhibitionDTO;
 import rental.dao.ExhibitionDAO;
@@ -27,24 +28,41 @@ public class RentalController {
 	@Autowired
 	ExhibitionDAO exhibitionDAO;
 	
-	//렌털 정보
-	@RequestMapping(value="R_infoForm", method=RequestMethod.GET)
-	public String R_infoForm() {
-		return "/rental/R_infoForm";
+	//렌탈페이지에 대한 정보를 입력하는 곳을 불러온다
+	@RequestMapping(value="R_rentalForm", method=RequestMethod.GET)
+	public ModelAndView R_infoForm() {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("display","/rental/R_info.jsp");
+		mav.setViewName("/rental/R_rentalForm");
+		
+		return mav;
 	}
-	//전시회
-	@RequestMapping(value="R_exhibitionForm", method=RequestMethod.GET)
-	public String R_exhibitionHoll() {
-		return "/rental/R_exhibitionForm";
+	//전시회&박람회 부스 위치에 대한 페이지를 불러온다.
+	@RequestMapping(value="R_exhibition", method=RequestMethod.GET)
+	public ModelAndView R_exhibitionHoll() {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("display","/rental/R_exhibition.jsp");
+		mav.setViewName("/rental/R_rentalForm");
+		
+		return mav;
 	}
-	//콘서트
+	//공연장의 위치에 대한 페이지를 불러온다.
+	@RequestMapping(value="R_performance", method=RequestMethod.GET)
+	public ModelAndView R_performance() {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("display","/rental/R_consert.jsp");
+		mav.setViewName("/rental/R_rentalForm");
+		
+		return mav;
+	}
+	//진시회&박람회 부스 클릭하면 값을 가지고 다음 페이지로 이동
 	@RequestMapping(value="R_exhibitionHollDecision", method=RequestMethod.GET)
-	public String R_exhibitionHollDecision(@RequestParam String booth, Model model, ModelMap modelMap) {
+	public ModelAndView R_exhibitionHollDecision(@RequestParam String booth, Model model, ModelMap modelMap) {
 		double rate = 0;
 		if(booth.equals("Booth1") || booth.equals("Booth2")  || booth.equals("Booth3")  || booth.equals("Booth4")  || booth.equals("Booth7")  || booth.equals("Booth8")  || booth.equals("Booth9")  || booth.equals("Booth10")) {
-			rate = 2350*1.0*1.0*2592;
+			rate = 2350*1.0*1.0*2.592;
 		} else if(booth.equals("Booth5") || booth.equals("Booth6")) {
-			rate = 2350*1.0*1.2*6343;
+			rate = 2350*1.0*1.2*6.343;
 		}
 		
 		Date date = new Date();
@@ -75,7 +93,11 @@ public class RentalController {
 		
 		modelMap.addAttribute("listView", list);
 		
-		return "/rental/R_exhibitionHollDecisionForm";
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("display","/rental/R_exhibitionHollDecision.jsp");
+		mav.setViewName("/rental/R_rentalForm");
+		
+		return mav;
 	}
 	
 	@RequestMapping(value="searchRentDay", method=RequestMethod.POST)

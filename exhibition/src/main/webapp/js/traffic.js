@@ -1,7 +1,11 @@
 $(document).ready(function(){
 	$('#busMap').hide();
 	$('#carMap').hide();
-
+	
+	$('#T_map').click(function(){
+		$('#T_mapList').show();
+		
+	});
 	
 	$('#subwayBtn').click(function(){
 		$('#busMap').hide();
@@ -24,6 +28,10 @@ $(document).ready(function(){
 	$('#parkingInform').click(function(){
 		$('#T_parkingB1Map').hide();
 		$('#carMap').show();
+	});
+	
+	$('#T_hotel').click(function(){
+		location.href='/exhibition/traffic/T_hotelList.do';
 	});
 	
 	
