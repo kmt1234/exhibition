@@ -33,7 +33,7 @@ var dataSet = [
 		   // <c:if test="${listView.days[dayStatus.index] eq listView.days[dayStatus.index]}">
 		    	{"title" : '전시',
 		    	"start" : '<c:out value="${listView.days[dayStatus.index]}"/>',
-		    	"imageurl" : "../img/Ev.png",
+		    	"imageurl" : "../img/Ex.png",
 		    	"url" : "/exhibition/main/index.do",
 		    	"color" : "#ffffff",
 		    	"textColor" : "#000000"
@@ -52,7 +52,7 @@ var dataSet = [
 			    <c:forEach begin="0" end="${listView.daysSize-1}" step="1" varStatus="dayStatus">
 			    	{"title" : '공연',
 			    	"start" : '<c:out value="${listView.days[dayStatus.index]}"/>',
-			    	"imageurl" : "../img/Ex.png",
+			    	"imageurl" : "../img/Ev.png",
 			    	"color" : "#ffffff",
 			    	"textColor" : "#000000"
 			    	} <c:if test="${!dayStatus.last}">,</c:if>

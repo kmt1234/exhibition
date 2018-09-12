@@ -316,7 +316,7 @@ public class CustomerServiceController {
 									Model model
 									) {
 		//경로 바꿔야함***
-		String filePath ="C:\\Users\\user\\git\\exhibition\\exhibition\\src\\main\\webapp\\storage";
+		String filePath ="C:\\workspace\\projectGit\\exhibition2\\exhibition\\src\\main\\webapp\\storage";
 		String fileName = img.getOriginalFilename();
 		
 		File file = new File(filePath,fileName);	
