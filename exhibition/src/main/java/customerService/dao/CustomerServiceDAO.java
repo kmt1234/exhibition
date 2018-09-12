@@ -70,4 +70,6 @@ public interface CustomerServiceDAO {
 
 	public List<HotelboardDTO> hotelList(); //호텔 숙박에 올려보기
 
+	public EventboardDTO getEventboard(String seq);	//박람회 내용 보기(수정하기 위해)
+
 }

@@ -160,5 +160,10 @@ public void imageboardWrite(ImageboardDTO imageboardDTO) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
+	//박람회 정보 보기(수정하기 위해)
+	public EventboardDTO getEventboard(String seq) {
+		return sqlSession.selectOne("customerServiceSQL.getEventboard", seq);
+	}
 
 }

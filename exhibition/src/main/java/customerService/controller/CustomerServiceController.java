@@ -491,7 +491,23 @@ public class CustomerServiceController {
 		mav.addObject("list", list);
 		mav.setViewName("/customerService/C_eventboardListForm");
 		return mav;
-	}	
+	}
+	
+	//박람회 정보 보기(이미지 클릭 시, -> 수정하기 위해서)***잠시 대기중************************
+	@RequestMapping(value="C_eventDetail", method=RequestMethod.GET)
+	public ModelAndView C_eventDetail(@RequestParam String seq){
+		
+		//DB
+		EventboardDTO eventboardDTO = customerServiceDAO.getEventboard(seq);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("eventboardDTO", eventboardDTO);
+		mav.addObject("postSelect", "1");
+		mav.addObject("modify", "1");
+		mav.setViewName("/customerService/C_mainImageboardForm");
+		
+		return mav;
+	}
 	
 	//박람회 업로드 리스트 삭제
 	@RequestMapping(value="C_eventboardDelete", method=RequestMethod.POST)

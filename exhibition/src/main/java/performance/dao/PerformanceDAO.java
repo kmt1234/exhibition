@@ -18,4 +18,6 @@ public interface PerformanceDAO {
 
 	public List<EventboardDTO> getExhibitionList(Map<String, Integer> map);	// 전시회 일정 리스트 가져오는 메소드
 
+	public EventboardDTO performanceBook(String seq);	//공연 예약하기 폼
+
 }
