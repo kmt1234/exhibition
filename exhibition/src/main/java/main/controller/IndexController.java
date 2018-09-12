@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,14 +22,11 @@ public class IndexController {
    
    /* 메인페이지 이동~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
    @RequestMapping(value="index", method=RequestMethod.GET)
-   public ModelAndView index() {
-	   return new ModelAndView("redirect:/main/I_body.do?code=1");
-   }
-   /* 선택이미지 메인화면으로 전환~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/  
-   @RequestMapping(value="I_body", method=RequestMethod.GET)
-   public ModelAndView I_body(@RequestParam String code) {
-	  
+   public String index(@RequestParam(required=false, defaultValue="1") String code,Model model ) {
 	   
+	   model.addAttribute("code",code);
+	   model.addAttribute("display","/main/I_body.jsp");
 	   
+	   return "/main/index";
    }
 }

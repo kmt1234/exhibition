@@ -43,7 +43,7 @@ public class CustomerServiceController {
 	private JavaMailSenderImpl emailSender;
 	@Autowired
 	private ImageboardPaging imageboardPaging;
-	private String filePath = "C:\\Users\\user\\git\\exhibition\\exhibition\\src\\main\\webapp\\storage\\";
+	private String filePath = "C:\\Users\\Administrator\\git\\exhibition\\exhibition\\src\\main\\webapp\\storage\\";
 	@Autowired
 	private CustomerServicePaging customerServicePaging;
 	@Autowired
@@ -556,6 +556,7 @@ public class CustomerServiceController {
 	public ModelAndView getImageboardSlide(@RequestParam String code) {
 		List<ImageboardDTO> list = new ArrayList<ImageboardDTO>();
 		ModelAndView mav = new ModelAndView();
+		
 		if(code.equals("1")) {
 			imageboardDTO.setImage1("car1.JPG");
 			list.add(imageboardDTO);

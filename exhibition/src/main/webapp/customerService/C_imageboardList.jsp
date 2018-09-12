@@ -53,7 +53,6 @@ function imageboardPaging(pg){
 
 </form>
 </div>
-
 <!-- <script src="http://code.jquery.com/jquery-3.3.1.min.js" type="text/javascript"></script> -->
 <script type="text/javascript">
 $(document).ready(function(){
@@ -113,7 +112,7 @@ $(document).ready(function(){
 		if(count==0) 
 			alert("항목을 선택해주세요");
 		else
-			$('#imageboardListForm').attr('action','/exhibition/main/getImageboardSlide.do').submit();
+			location.href="/exhibition/main/index.do?code=2"
 			
 	});
 	
