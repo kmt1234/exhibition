@@ -16,14 +16,14 @@
 <tr>
 <td>
 	<select name="classify" id="classify">
-		<option  value="0">위치/교통</option>
-		<option  value="1">주차</option>
-		<option  value="2">전시 & 공연</option>
-		<option  value="3">임대</option>
-		<option  value="4">시설</option>
-		<option  value="5">기타</option>
+		<option  value="위치/교통">위치/교통</option>
+		<option  value="주차">주차</option>
+		<option  value="전시 & 공연">전시 & 공연</option>
+		<option  value="임대">임대</option>
+		<option  value="시설">시설</option>
+		<option  value=기타>기타</option>
 	</select>
-	<input type="hidden" name="qty" id="C_qty">
+	<input type="hidden" name="C_qty" id="C_qty">
 </td>
 </tr>
 	<tr>

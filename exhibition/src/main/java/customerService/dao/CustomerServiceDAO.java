@@ -32,6 +32,8 @@ public interface CustomerServiceDAO {
 	
 	public CustomerServiceDTO getInquireInfo(String seq);
 
+	public List<CustomerServiceDTO> getQnA_Classify(String classify);
+	
 	public List<CustomerServiceDTO> getQnAList();
 	
 	public void C_contactList_checkWrite(Map<String, String> map);
@@ -67,5 +69,4 @@ public interface CustomerServiceDAO {
 
 	public void eventboardDelete_play(List<Integer> list);	//연극 업로드 리스트 삭제
 
-	public List<CustomerServiceDTO> getQnA_Classify(String classify);
 }

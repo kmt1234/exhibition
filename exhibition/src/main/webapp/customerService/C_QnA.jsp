@@ -60,7 +60,7 @@ selector    : {
 		</tr>
 	</table>
 </div>
-<div id="C_QnA_List" class="ui accordion"></div>
+<table id="C_QnA_List" class="accordion"></table>
 <div align="left">
 	<input class="middle ui button" type="button" value="작성" id="C_QnA_writeBtn">
 </div>
@@ -69,7 +69,7 @@ selector    : {
 <script src="../js/customerService.js"></script>
 <script>
 $(document).ready(function(){
-	var classify = $('#classify option:selected').val();
+	var classify = "위치/교통";
 	$.ajax({
 		type : 'POST',
 		url : '/exhibition/customerService/getQnA_Classify.do',
@@ -77,18 +77,18 @@ $(document).ready(function(){
 		dataType : 'json',
 		success : function(data){
 			$.each(data.list, function(index, item){
-				$('<div/>',{
+				$('<tr/>',{
 					class : 'title'
-				}).append($('<span/>',{
+				}).append($('<td/>',{
 					align : 'center',
 					id : 'subjectA',
 					href : 'javascript:void(0)',
 					text : item.subject
 				})).appendTo($('#C_QnA_List'));
 				
-				$('<div/>',{
+				$('<tr/>',{
 					class : 'content'
-				}).append($('<span/>',{
+				}).append($('<td/>',{
 					align : 'center',
 					id : 'contentA',
 					text : item.content
@@ -107,18 +107,18 @@ $(document).ready(function(){
 			dataType : 'json',
 			success : function(data){
 				$.each(data.list, function(index, item){
-					$('<div/>',{
+					$('<tr/>',{
 						class : 'title'
-					}).append($('<span/>',{
+					}).append($('<td/>',{
 						align : 'center',
 						id : 'subjectA',
 						href : 'javascript:void(0)',
 						text : item.subject
 					})).appendTo($('#C_QnA_List'));
 					
-					$('<div/>',{
+					$('<tr/>',{
 						class : 'content'
-					}).append($('<span/>',{
+					}).append($('<td/>',{
 						align : 'center',
 						id : 'contentA',
 						text : item.content

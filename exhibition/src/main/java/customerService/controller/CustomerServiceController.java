@@ -334,13 +334,13 @@ public class CustomerServiceController {
 		mav.setViewName("/customerService/C_customerServiceForm");
 		return mav;
 	}
-
+	
 	// 자주묻는 질문 - 작성등록
 	@RequestMapping(value = "C_QnA_checkWrite", method = RequestMethod.POST)
-	public ModelAndView C_QnA_checkWrite(@RequestParam String qty, @RequestParam String subject, @RequestParam String content) {
+	public ModelAndView C_QnA_checkWrite(@RequestParam String C_qty, @RequestParam String subject, @RequestParam String content) {
 		Map<String, String> map = new HashMap<String, String>();
-		System.out.println(qty);
-		map.put("classify", qty);
+		System.out.println(C_qty);
+		map.put("classify", C_qty);
 		map.put("subject", subject);
 		map.put("content", content);
 		// DB
