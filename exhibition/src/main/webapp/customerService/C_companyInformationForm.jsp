@@ -49,7 +49,7 @@
 			<div style="width: 100%; text-align: left;">
 				<div style="height: 100px;">
 					<h2 class="box-container" style="float: center;">
-						마이
+						마이akdlakdl
 						<span class="h-light">페이지</span>
 					</h2>
 				</div>
