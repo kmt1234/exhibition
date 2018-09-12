@@ -52,7 +52,7 @@
 		</div>
 		
 		 <input class="middle ui button" type="button" value="검색" id="C_noticeSearch">
-		 <input class="middle ui button" href="/exhibition/customerService/C_notice_WriteForm.do" value="작성" type="button">
+		 <input class="middle ui button" type="button" value="작성" id="C_notice_Write">
 	</div>
 </div>
 

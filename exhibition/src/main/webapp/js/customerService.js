@@ -3,7 +3,7 @@ $(document).ready(function(){
 	var C_tel =  /^((01[1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})$/;	//휴대폰 번호 양식
 	
 	//공지사항 - 작성하기
-	$('#C_notice_checkWrite').click(function(){ // 공지사항 - 등록버튼 클릭시
+	$('#C_notice_Write').click(function(){ // 공지사항 - 등록버튼 클릭시
 		$('#subjectDiv').empty();
 		$('#contentDiv').empty();
 		
@@ -12,7 +12,7 @@ $(document).ready(function(){
 		else if($('#content').val()=='')
 			$('#contentDiv').text("내용을 입력하세요").css('font-size','9pt').css('color','red')
 		else
-			$('#C_notice_WriteForm').submit();
+			$('#C_notice_Write').submit();
 	});
 	
 	//공지사항 내용보기에서 글수정 버튼 눌렀을때 수정하는 폼

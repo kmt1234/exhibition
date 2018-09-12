@@ -18,6 +18,7 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	//공지사항 작성하기
 	public void C_notice_Write(Map<String, String> map) {
 		sqlSession.insert("customerServiceSQL.C_notice_Write", map);		
 	}

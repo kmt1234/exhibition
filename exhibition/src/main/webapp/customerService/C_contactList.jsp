@@ -24,8 +24,8 @@
 	<input class="middle ui button" type="button" value="검색" id="C_contactList_Search">
 </div>
 
-<div align="left" style="padding-left: 125px; padding-top: 15px;">
-	<input class="middle ui button" type="button" id="C_email_ListBtn" value="관리자 작성">
+<div align="left" style="padding-left: 170px; padding-top: 15px;">
+	<input class="middle ui button" type="button" id="C_contactList_checkWrite" value="관리자 작성">
 	<!-- 	<a href="/exhibition/customerService/C_contactList_WriteForm.do">작성</a> -->
 </div>
 

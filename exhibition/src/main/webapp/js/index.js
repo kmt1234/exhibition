@@ -102,6 +102,11 @@ $(document).ready(function(){
 	$('#C_boardAdd').click(function(){
 		location.href="/exhibition/customerService/C_mainImageboardForm.do";
 	});
+	//마이페이지
+	$('#mypage').click(function(){
+		location.href="/exhibition/customerService/mypage.do";
+	});
+	
 	
 	/*회사관련사항(소개&인사말&연혁??)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 	//회사의 전반적인 설명

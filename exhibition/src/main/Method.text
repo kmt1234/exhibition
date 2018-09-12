@@ -20,6 +20,13 @@
 
 		- C_contactListC.jsp
 		  - C_contactList.jsp :주요시설 연락처
+
+		- C_personalInformationForm.jsp
+		  - C_personalInformation.jsp :마이페이지
+
+
+
+		
 폴더&페키지=교통
 	traffic = 교통
 		- T_carForm.jsp
