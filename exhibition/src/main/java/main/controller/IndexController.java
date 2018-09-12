@@ -22,30 +22,13 @@ public class IndexController {
    /* 메인페이지 이동~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
    @RequestMapping(value="index", method=RequestMethod.GET)
    public ModelAndView index() {
-	   ModelAndView mav = new ModelAndView();
-	 
-	   mav.addObject("display", "/main/I_body.jsp");
-	   mav.setViewName("/main/index");
-	   return mav;
+	   return new ModelAndView("redirect:/main/I_body.do?code=1");
    }
    /* 선택이미지 메인화면으로 전환~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/  
-   @RequestMapping(value="I_body", method=RequestMethod.POST)
-   public ModelAndView I_body(@RequestParam String[] check) {
-      
-      List<Integer> list = new ArrayList<Integer>();
-      for(String seq : check) {
-         list.add(Integer.parseInt(seq));
-      }
-      List<ImageboardDTO> dtoList = customerServiceDAO.getList(list);
-      for(ImageboardDTO imageboardDTO : dtoList) {
-         System.out.println(imageboardDTO.getImage1());
-      }
-      
-      ModelAndView mav = new ModelAndView();
-      
-      mav.addObject("list",dtoList);
-      mav.addObject("listLength",dtoList.size()-1);
-      mav.setViewName("/main/index");
-      return mav;
+   @RequestMapping(value="I_body", method=RequestMethod.GET)
+   public ModelAndView I_body(@RequestParam String code) {
+	  
+	   
+	   
    }
 }

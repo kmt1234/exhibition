@@ -95,5 +95,6 @@
 function hotelboardPaging(pg){
 	location.href="/exhibition/traffic/T_hotelList.do?pg="+pg
 }
+</script>
 </body>
 </html>

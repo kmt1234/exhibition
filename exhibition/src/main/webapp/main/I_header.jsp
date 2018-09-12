@@ -152,7 +152,7 @@
 	                  <c:if test="${code!=null }">
 	                  	<div class="item" id="C_mypage">개인정보</div>
 	                  </c:if>
-	                  <c:if test="${code=='3'} ">
+	                  <c:if test="${code=='1' }">
 	                 	 <div class="item" id="C_boardAdd">게시판 추가</div><!--세션값에 따라 보이게 할 예정-->
 	               	  </c:if>	
 	               </div>

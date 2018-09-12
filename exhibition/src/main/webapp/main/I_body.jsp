@@ -10,13 +10,10 @@
 </head>
 <body>
 <section id="mainSection">
-	
-	
 	<div id="mainSlideDiv" class="slide">
-		<ul id="mainSlideUl"></ul>	
+		<ul id="mainSlideUl"></ul>
+		<input type="hidden" id="code" value="1">	
 	</div>
-
-
 </section>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js"></script>
 <script src="../js/mainSlide.js"></script>

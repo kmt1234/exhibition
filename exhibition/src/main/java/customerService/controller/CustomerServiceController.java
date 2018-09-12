@@ -43,11 +43,11 @@ public class CustomerServiceController {
 	private JavaMailSenderImpl emailSender;
 	@Autowired
 	private ImageboardPaging imageboardPaging;
-	private String filePath = "C:\\Users\\user\\git\\exhibition\\exhibition\\src\\main\\webapp\\storage";
+	private String filePath = "C:\\Users\\user\\git\\exhibition\\exhibition\\src\\main\\webapp\\storage\\";
 	@Autowired
 	private CustomerServicePaging customerServicePaging;
-	
-	
+	@Autowired
+	private ImageboardDTO imageboardDTO;
 	
 	// 고객센터 설명페이지
 	@RequestMapping(value = "C_customerServiceForm", method = RequestMethod.GET)
@@ -553,15 +553,27 @@ public class CustomerServiceController {
 
 	// 이미지 슬라이드 가져오는 컨트롤러
 	@RequestMapping(value = "getImageboardSlide", method = RequestMethod.GET)
-	public ModelAndView getImageboardSlide() {
-
-		// DB
-		List<ImageboardDTO> list = customerServiceDAO.getImageboardSlide();
-		
+	public ModelAndView getImageboardSlide(@RequestParam String code) {
+		List<ImageboardDTO> list = new ArrayList<ImageboardDTO>();
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("list", list);
-		mav.setViewName("jsonView");
-
+		if(code.equals("1")) {
+			imageboardDTO.setImage1("car1.JPG");
+			list.add(imageboardDTO);
+			imageboardDTO.setImage1("car2.JPG");
+			list.add(imageboardDTO);
+			imageboardDTO.setImage1("car1.JPG");
+			list.add(imageboardDTO);
+		
+			mav.addObject("list", list);
+			mav.setViewName("jsonView");
+			
+		}else if(code.equals("2")) {
+			List<ImageboardDTO> list1 = customerServiceDAO.getImageboardSlide();
+			
+			mav.addObject("list", list1);
+			mav.setViewName("jsonView");
+			
+		}
 		return mav;
 	}
 
