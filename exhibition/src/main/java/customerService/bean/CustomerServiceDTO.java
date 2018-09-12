@@ -11,14 +11,16 @@ import lombok.Data;
 @Component
 @Data
 public class CustomerServiceDTO {
-	private int seq;			//seq
-	private String email;		//이메일
-	private String classify;	//분류
-	private String name;		//이름
-	private String tel;			//전화번호
-	private String subject;		//제목
-	private String content;		//내용
-	
+   private int seq;         //seq
+   private String email;      //이메일
+   private String classify;   //분류
+   private String name;      //이름
+   private String phone;         //전화번호
+   private String subject;      //제목
+   private String content;      //내용
+   private String facility;
+   private String title;
+   
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    private Date logtime;		//등록일 
+    private Date logtime;      //등록일 
 }
