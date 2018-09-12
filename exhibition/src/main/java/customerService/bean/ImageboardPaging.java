@@ -25,7 +25,7 @@ public class ImageboardPaging {
 		if(endPage > totalP) endPage = totalP;
 		
 		if(startPage>pageBlock)	
-			pagingHTML.append("[<span id=paging onclick=imageboardPaging("+(startPage-1)+")>다음</span>]");
+			pagingHTML.append("[<span id=paging onclick=imageboardPaging("+(startPage-1)+")>이전</span>]");
 	
 		for(int i = startPage; i<=endPage; i++) {
 			if(i==currentPage) {
@@ -35,7 +35,7 @@ public class ImageboardPaging {
 			}
 		}
 		if(endPage < totalP)
-			pagingHTML.append("[<span id=paging onclick=imageboardPaging("+(endPage+1)+")>이전</span>]");
+			pagingHTML.append("[<span id=paging onclick=imageboardPaging("+(endPage+1)+")>다음</span>]");
 	}
 	
 	//
@@ -51,7 +51,7 @@ public class ImageboardPaging {
 		if(endPage > totalP) endPage = totalP;
 		
 		if(startPage>pageBlock)	
-			pagingHTML.append("[<span id=eventpaging onclick=eventboardPaging("+(startPage-1)+")>다음</span>]");
+			pagingHTML.append("[<span id=eventpaging onclick=eventboardPaging("+(startPage-1)+")>이전</span>]");
 	
 		for(int i = startPage; i<=endPage; i++) {
 			if(i==currentPage) {
@@ -61,7 +61,7 @@ public class ImageboardPaging {
 			}
 		}
 		if(endPage < totalP)
-			pagingHTML.append("[<span id=eventpaging onclick=eventboardPaging("+(endPage+1)+")>이전</span>]");
+			pagingHTML.append("[<span id=eventpaging onclick=eventboardPaging("+(endPage+1)+")>다음</span>]");
 	}
 	
 }

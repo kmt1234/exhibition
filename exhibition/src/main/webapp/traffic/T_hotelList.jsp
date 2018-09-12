@@ -43,7 +43,7 @@
 			<div id="T_inform">관광안내</div><br>
 		</div>
 		<!-- 메인 화면 -->
-	<div class="ui compact menu" style="width: 80%; height: 900px;" >
+		<div class="ui compact menu" style="width: 80%; height: 900px;" >
 		<!-- 타이틀 -->
 		<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
 			숙박

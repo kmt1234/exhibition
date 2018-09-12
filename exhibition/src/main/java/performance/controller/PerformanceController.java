@@ -155,6 +155,12 @@ public class PerformanceController {
 		
 		ModelAndView mav = new ModelAndView();
 		
+		//String 타입 날짜를 Date 형식으로 변환
+		for(int i = 0; i < list.size(); i++) {
+			list.get(i).setStartDate(list.get(i).getStartDate().substring(0, 10));
+			list.get(i).setEndDate(list.get(i).getEndDate().substring(0, 10));
+		}
+		
 		mav.addObject("pg", pg);
 		mav.addObject("list", list);
 		mav.addObject("listSize", list.size()+"");
@@ -219,6 +225,13 @@ public class PerformanceController {
 		List<EventboardDTO> list = performanceDAO.getExhibitionList(map);
 		
 		ModelAndView mav = new ModelAndView();
+		
+		//String 타입 날짜를 Date 형식으로 변환
+		for(int i = 0; i < list.size(); i++) {
+			list.get(i).setStartDate(list.get(i).getStartDate().substring(0, 10));
+			list.get(i).setEndDate(list.get(i).getEndDate().substring(0, 10));
+		}
+		
 		mav.addObject("pg", pg);
 		mav.addObject("list", list);
 		mav.addObject("listSize", list.size()+"");

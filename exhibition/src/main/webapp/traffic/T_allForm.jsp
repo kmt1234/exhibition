@@ -36,6 +36,9 @@
 	#T_map {
     	padding-bottom: 0px;
 	}
+	#houseImg{
+	margin:-3px;
+}	
 </style>
 </head>
 <body>
@@ -47,19 +50,7 @@
 	<br>
 	<div class="ui five column grid container">
 		<!-- 사이드바 메뉴 -->
-<<<<<<< HEAD
-		<div class="ui compact menu" style="width: 20%; height: 900px; ">
-		<br><br>
-		<div style="font-size: 22px;">교통/숙박/관광</div><br>
-		<div style="border-bottom: 1px solid black;"></div><br>
-			<div id="T_inform">교통안내</div>
-			<span style="font-size: 7px;">▶</span>
-			<span><a href="T_allForm.do" id="T_Atag">오시는길</a></span><br>
-			<span style="font-size: 7px;">▶</span>
-			<span><a href="T_parkingAllForm.do" id="T_Atag">주차안내</a></span><br><br>
-			<div id="T_hotel" style="cursor:pointer; font-size: 18px;">숙박안내</div><br>
-			<div id="T_inform">관광안내</div><br>
-=======
+
 		<div class="ui compact menu" style="width: 20%; height: 977px; ">
 			<a class="item" href="T_allForm.do" id="T_map">교통안내</a> 
 			<ul class="ui list" id="T_mapList" style="text-align: center; width: 120px">
@@ -68,7 +59,7 @@
 			</ul>
 			<a class="item" href="P_performanceScheduleForm.do">숙박안내</a> 
 			<a class="item" href="P_exhibitionScheduleForm.do">관광안내</a>
->>>>>>> refs/remotes/origin/shinwork
+
 		</div>
 		<!-- 메인 화면 -->
 		<div class="ui compact menu" style="width: 80%; height: 900px;" >
@@ -76,13 +67,18 @@
 			<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
 				오시는
 				<span class="h-light">길</span>
+				<div style="font-size:13px; float:right;">
+				<img src="../img/house.png" width="15px" height="16px" id="houseImg">
+				> 교통/숙박/관광 > 교통안내 > 오시는 길
+				</div>
+				<div class="ui divider"></div>
 			</h2>
-			<div>
-				<input type="button" value="자히철  이용고객" id="subwayBtn" class="mapBtn">
+			<div style="float: left;">
+				<input type="button" value="자히철  이용고객" id="subwayBtn" class="middle ui button">
 				
-				<input type="button" value="버스  이용고객" id="busBtn" class="mapBtn">
+				<input type="button" value="버스  이용고객" id="busBtn" class="middle ui button">
 				 
-				 <input type="button" value="승용차 이용고객 " id="carBtn" class="mapBtn">
+				 <input type="button" value="승용차 이용고객 " id="carBtn" class="middle ui button">
 				 
 			</div>
 			
@@ -97,11 +93,11 @@
 			
 			<br>
 			<div id="carMap" style="border:1px solid black">
-				<img src="../img/busMap.jpg">
+				<img src="../img/carMap.jpg">
 			</div>
 
 			<div id="busMap" style="border:1px solid black">
-				<img src="../img/carMap.jpg">
+				<img src="../img/busMap.jpg">
 			</div>
 		</div>
 		<br>

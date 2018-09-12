@@ -562,7 +562,7 @@ public class CustomerServiceController {
 	public ModelAndView C_hotelInfoWrite(@ModelAttribute HotelboardDTO hotelboardDTO,@RequestParam MultipartFile img) {
 		
 		//경로 바꿔야함***
-		String filePath ="C:\\Users\\kmtab\\git\\exhibition\\exhibition\\src\\main\\webapp\\storage";
+		String filePath ="C:\\Users\\user\\git\\exhibition\\exhibition\\src\\main\\webapp\\storage";
 		String fileName = img.getOriginalFilename();
 		
 		File file = new File(filePath,fileName);	
