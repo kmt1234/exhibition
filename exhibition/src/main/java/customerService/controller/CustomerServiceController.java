@@ -575,6 +575,40 @@ public class CustomerServiceController {
 		customerServiceDAO.hotelInfoWrite(hotelboardDTO);
 		return new ModelAndView("redirect:/customerService/C_hotelListForm.do");
 	}
+		//호텔 리스트
+	@RequestMapping(value="C_hotelListForm", method=RequestMethod.GET)
+	public ModelAndView C_hotelListForm(@RequestParam(required=false , defaultValue="3")String pg) {	
+		List<HotelboardDTO> list = customerServiceDAO.hotelList();
+		
+		ModelAndView mav = new ModelAndView();
+
+		mav.addObject("listSize", list.size()+"");
+		mav.addObject("list", list);
+		mav.setViewName("/customerService/C_hotelListForm");
+		return mav;
+	}	
+	
+	//호텔 업로드 리스트 삭제
+	@RequestMapping(value="C_hotelDelete", method=RequestMethod.POST)
+	public ModelAndView C_hotelDelete(@RequestParam String[] check) {
+		
+		List<Integer> list = new ArrayList<Integer>();
+		for(String seq : check) {
+			list.add(Integer.parseInt(seq));
+			System.out.println(seq);
+		}
+
+		//DB
+		List<HotelboardDTO> list2 = customerServiceDAO.hotelImageDel(list); //이미지 삭제
+		for(HotelboardDTO hotelboardDTO : list2) {
+			File file = new File(filePath+hotelboardDTO.getImage1());
+			if(file.exists())
+				file.delete();
+		}
+		
+		customerServiceDAO.hotelDelete(list);	//db삭제
+		return new ModelAndView("redirect:/customerService/C_hotelListForm.do");
+	}
 }
 	
 

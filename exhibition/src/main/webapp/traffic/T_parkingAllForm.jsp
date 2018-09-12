@@ -9,6 +9,7 @@
 	integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
 	crossorigin="anonymous"></script>
 <script src="../semantic/semantic.min.js"></script>
+<script src="../js/traffic.js"></script>
 <style>
 	.box-container{
 		display: inline-block;
