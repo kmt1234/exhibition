@@ -23,13 +23,13 @@
 
 }
 
-#currentEventPaging{
+#currentHotelPaging{
 	color: red;
 	text-decoration: underline;
 	cursor: pointer;
 }
 
-#eventpaging{
+#hotelpaging{
 	color: black;
 	text-decoration: none;
 	cursor: pointer;
@@ -105,7 +105,7 @@
 							</c:forEach>
 								
 					</table>
-					
+					<div align="center">${imageboardPaging.pagingHTML }</div>
 					<div style="float:left;">
 						<input type="button" value="선택삭제" id="hotelDeleteBtn">
 					</div>
@@ -124,6 +124,9 @@
 	
 </body>
 <script>
+function hotelboardPaging(pg){
+	location.href="/exhibition/customerService/C_hotelListForm.do?pg="+pg
+}
 $(document).ready(function(){
 	//전체선택
 	$('#checkAll').click(function(){

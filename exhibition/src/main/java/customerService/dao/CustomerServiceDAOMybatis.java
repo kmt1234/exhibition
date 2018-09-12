@@ -149,8 +149,8 @@ public void imageboardWrite(ImageboardDTO imageboardDTO) {
 		sqlSession.insert("customerServiceSQL.hotelInfoWrite", hotelboardDTO);
 	}
 	//호텔리스트
-	public List<HotelboardDTO> hotelList() {
-		return sqlSession.selectList("customerServiceSQL.hotelList");
+	public List<HotelboardDTO> hotelList(Map<String, Integer> map) {
+		return sqlSession.selectList("customerServiceSQL.hotelList", map);
 	}
 	//호텔리스트 삭제
 	public void hotelDelete(List<Integer> list) {
@@ -159,6 +159,11 @@ public void imageboardWrite(ImageboardDTO imageboardDTO) {
 	//호텔이미지 삭제하기 위해 리스트 불러오기
 		public List<HotelboardDTO> hotelImageDel(List<Integer> list) {
 			return sqlSession.selectList("customerServiceSQL.hotelImageDel",list);
+	}
+	//호텔리스트 총글수
+	public int getHotelboardTotalA() {
+		int totalA = sqlSession.selectOne("customerServiceSQL.getHotelboardTotalA"); 
+		return totalA;
 	}
 	public CustomerServiceDTO getNoticeInfo(String seq) {
 		// TODO Auto-generated method stub

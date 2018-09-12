@@ -219,8 +219,16 @@
 	</insert>
 	
 	<!-- 호텔리스트 -->
-	<select id="hotelList" resultType="hotelboard">
-		select * from hotel_list
+	<select id="hotelList" parameterType="java.util.Map" resultType="hotelboard">
+		select * from 
+ 		(select rownum rn, tt.* from 
+ 		(select * from hotel_list order by seq desc)tt) 
+ 		where rn between #{startNum} and #{endNum}
+	</select>
+	
+	<!-- 호텔리스트 총글수 -->
+	<select id="getHotelboardTotalA" resultType="int">
+		select count(*) from hotel_list
 	</select>
 	
 	<!-- 호텔  업로드 리스트 삭제   -->

@@ -575,13 +575,30 @@ public class CustomerServiceController {
 		customerServiceDAO.hotelInfoWrite(hotelboardDTO);
 		return new ModelAndView("redirect:/customerService/C_hotelListForm.do");
 	}
-		//호텔 리스트
+	//호텔 리스트
 	@RequestMapping(value="C_hotelListForm", method=RequestMethod.GET)
-	public ModelAndView C_hotelListForm(@RequestParam(required=false , defaultValue="3")String pg) {	
-		List<HotelboardDTO> list = customerServiceDAO.hotelList();
+	public ModelAndView C_hotelListForm(@RequestParam(required=false , defaultValue="1") String pg) {
+		int endNum = Integer.parseInt(pg)*8;
+		int startNum = endNum-7;
 		
-		ModelAndView mav = new ModelAndView();
+		Map<String,Integer> map = new HashMap<String,Integer>();
+		map.put("endNum", endNum);
+		map.put("startNum", startNum);
+		
+		int totalA = customerServiceDAO.getHotelboardTotalA();
 
+		imageboardPaging.setCurrentPage(Integer.parseInt(pg));
+		imageboardPaging.setPageBlock(3);
+		imageboardPaging.setPageSize(8);
+		imageboardPaging.setTotalA(totalA);
+
+		imageboardPaging.hotelMakePagingHTML();
+
+		List<HotelboardDTO> list = customerServiceDAO.hotelList(map);
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("pg", pg);
+		mav.addObject("imageboardPaging",imageboardPaging);
 		mav.addObject("listSize", list.size()+"");
 		mav.addObject("list", list);
 		mav.setViewName("/customerService/C_hotelListForm");
