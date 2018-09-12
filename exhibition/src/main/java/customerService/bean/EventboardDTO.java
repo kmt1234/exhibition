@@ -21,4 +21,6 @@ public class EventboardDTO {			//박람회,연극  DTO
 	private String eventSeats = null;	//관람좌석(연극)
 	private String eventRate = null;	//관람등급(연극)
 	private String eventContent;		//소개글(간단한 정보)
+	private String[] days;              //시작일과 종료일 사이 날짜
+	private int daysSize;
 }
