@@ -25,7 +25,7 @@ $(document).ready(function(){
 	//1차 비밀번호 입력 시, 
 	$('#M-modify-pwd').blur(function(){
 		if(!Mm_regPwd.test($('#M-modify-pwd').val())){
-			$('.M-modify-pwd-Span').text('비밀번호는 6-24자 영문 대소문자 입니다').css('color','white').css('font-size','10px');
+			$('.M-modify-pwd-Span').text('비밀번호는 6-24자 영문 대소문자 입니다').css('color','red').css('font-size','10px');
 			$('#M-modify-pwd').css({'border':'1px solid red', 'background-color':'#f4d2d2'});
 			pwd1 = 'fail';
 		}else{
@@ -39,7 +39,7 @@ $(document).ready(function(){
 	//2차 비밀번호 입력 시,
 	$('#M-modify-pwd2').blur(function(){
 		if(!Mm_regPwd.test($('#M-modify-pwd2').val())){
-			$('.M-modify-pwd2-Span').text('비밀번호는 6-24자 영문 대소문자 입니다').css('color','white').css('font-size','10px');
+			$('.M-modify-pwd2-Span').text('비밀번호는 6-24자 영문 대소문자 입니다').css('color','red').css('font-size','10px');
 			$('#M-modify-pwd2').css({'border':'1px solid red', 'background-color':'#f4d2d2'});
 			pwd2 = 'fail';
 		}else if($('#M-modify-pwd2').val()!=$('#M-modify-pwd').val()){
@@ -57,7 +57,7 @@ $(document).ready(function(){
 	//핸드폰 입력 시,
 	$('#M-modify-phone').blur(function(){
 		if(!Mm_regPhone.test($('#M-modify-phone').val())){
-			$('.M-modify-phone-Span').text('핸드폰 번호 양식이 맞지 않습니다').css('color','white').css('font-size','10px');
+			$('.M-modify-phone-Span').text('핸드폰 번호 양식이 맞지 않습니다').css('color','red').css('font-size','10px');
 			$('#M-modify-phone').css({'border':'1px solid red', 'background-color':'#f4d2d2'});
 			phone = 'fail';
 		}else{
@@ -71,7 +71,7 @@ $(document).ready(function(){
 	//이메일 입력 시,
 	$('#M-modify-email').blur(function(){
 		if(!Mm_regEmail.test($('#M-modify-email').val())){
-			$('.M-modify-email-Span').text('이메일 양식이 맞지 않습니다').css('color','white').css('font-size','10px');
+			$('.M-modify-email-Span').text('이메일 양식이 맞지 않습니다').css('color','red').css('font-size','10px');
 			$('#M-modify-email').css({'border':'1px solid red', 'background-color':'#f4d2d2'});
 			email = 'fail';
 		}else{
@@ -85,13 +85,13 @@ $(document).ready(function(){
 	//수정
 	$('#M-modify-modify').click(function(){
 		if($('#M-modify-pwd').val()=='' || $('#M-modify-pwd2').val()==''){
-			$('.M-modify-result-Span').text('비밀번호를 입력하세요').css('color','white').css('font-size','10px');
+			$('.M-modify-result-Span').text('비밀번호를 입력하세요').css('color','red').css('font-size','10px');
 		}else if($('#M-modify-pwd').val() != $('#M-modify-pwd2').val()){
-			$('.M-modify-result-Span').text('비밀번호가 일치하지 않습니다').css('color','white').css('font-size','10px');
+			$('.M-modify-result-Span').text('비밀번호가 일치하지 않습니다').css('color','red').css('font-size','10px');
 		}else if($('#M-modify-phone').val()==''){
-			$('.M-modify-result-Span').text('핸드폰 번호 입력하세요').css('color','white').css('font-size','10px');
+			$('.M-modify-result-Span').text('핸드폰 번호 입력하세요').css('color','red').css('font-size','10px');
 		}else if($('#M-modify-email').val()==''){
-			$('.M-modify-result-Span').text('이메일 입력하세요').css('color','white').css('font-size','10px');
+			$('.M-modify-result-Span').text('이메일 입력하세요').css('color','red').css('font-size','10px');
 		}else if(pwd1=='success' && pwd2=='success' && phone=='success' && email=='success'){			
 			$.ajax({
 				type : 'POST',

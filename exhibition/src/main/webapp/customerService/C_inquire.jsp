@@ -6,27 +6,64 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
-<form name="C_Inquire" id="C_InquireForm" method="post" action="/exhibition/customerService/C_checkInquire.do">
-<h1>문의하기</h1>
-<div>
-	<div>분류
-		<select name="classify" id="classify">
-			<option value="전시회 일정 문의">전시회 일정 문의
-			<option value="전시회 임대 문의">전시회 임대 문의
-			<option value="전시회 참가 문의">전시회 참가 문의
-		</select>
-	</div>
-	<div>고객명<input type="text" name="name"></div>
-	<div>연락처<input type="text" name="tel"></div>
-	<div>제목<input type="text" name="subject"></div>
-	<div class="content">
-		<div>내용</div>
-		<div><textArea name="content" cols="50" rows="10"></textArea></div>
-	</div>
-</div>
+<form name="C_Inquire" id="C_inquire" method="post" action="/exhibition/customerService/C_checkInquire.do">
+<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
+   문의
+   <span class="h-light">하기</span>
+</h2>
 
+   <div>분류
+      <select name="classify" id="classify">
+         <option value="전시회 일정 문의">전시회 일정 문의
+         <option value="전시회 임대 문의">전시회 임대 문의
+         <option value="전시회 참가 문의">전시회 참가 문의
+      </select>
+      </div>
+      <table style="width:100%;" class="ui celled table">
+   <tr>
+      <td style="width:8%; height:40px; background-color: #f7f6e6; font-size: 15px;text-align: center;" >작 성 자</td>
+      
+      <td style="width:20%;">
+         <div>
+            <input type="text" name="name" id="name" style="float: left; width:98%; height:40px;">
+            <div id="nameDiv"></div>
+         </div>
+      </td>
+   </tr>   
+   <tr>
+      <td style="width:8%; height:40px; background-color: #f7f6e6; font-size: 15px;text-align: center;" >연 락 처</td>
+      
+      <td style="width:20%;">
+         <div>
+            <input type="text" name="phone" id="phone" style="float: left; width:98%; height:40px;">
+            <div id="phoneDiv"></div>
+         </div>
+      </td>
+   </tr>   
+   <tr>
+      <td style="width:8%; height:40px; background-color: #f7f6e6; font-size: 15px;text-align: center;" >제 목</td>
+      
+      <td style="width:20%;">
+         <div>
+            <input type="text" name="subject" id="subject" style="float: left; width:98%; height:40px;">
+            <div id="subjectDiv"></div>
+         </div>
+      </td>
+   </tr>   
+   <tr>
+      <td  align="center" style="width:8%; background-color: #f7f6e6; font-size: 15px;text-align: center;">내 용</td>
+      
+      <td style="width:20%; height: 15%">
+         <div>
+            <div><textArea name="content" id="content" style="float: left; width:98%; height: 300px;"></textArea></div>
+            <div id="contentDiv"></div>
+         </div>
+      </td>
+   </tr>
+      
+</table>
 <div>
-	<span id="C_checkInquire">등록</span>
+   <input type="button" id="C_checkInquireBtn" value="등록">
 </div>
 <input type="hidden" name="email" value="${email}">
 </form>

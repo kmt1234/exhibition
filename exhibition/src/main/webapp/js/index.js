@@ -82,20 +82,25 @@ $(document).ready(function(){
 		location.href="/exhibition/customerService/C_notice.do";
 	});
 	//고객의소린
-	$('#C_emailConfirmForm').click(function(){
-		location.href="/exhibition/customerService/C_emailConfirmForm.do";
+	$('#C_emailConfirm').click(function(){
+		location.href="/exhibition/customerService/C_emailConfirm.do";
 	});
 	//자주묻는 질문
-	$('#C_QnAForm').click(function(){
-		location.href="/exhibition/customerService/C_QnAForm.do";
+	$('#C_QnA').click(function(){
+		location.href="/exhibition/customerService/C_QnA.do";
 	});
 	//주요시설 연락처
-	$('#C_contactListForm').click(function(){
-		location.href="/exhibition/customerService/C_contactListForm.do";
+	$('#C_contactList').click(function(){
+		location.href="/exhibition/customerService/C_contactList.do";
 	});
 	$('#C_boardAdd').click(function(){
 		location.href="/exhibition/customerService/C_mainImageboardForm.do";
 	});
+	//마이페이지
+	$('#C_mypage').click(function(){
+		location.href="/exhibition/customerService/mypage.do";
+	});
+	
 	
 	/*회사관련사항(소개&인사말&연혁??)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 	//회사의 전반적인 설명

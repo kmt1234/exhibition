@@ -51,7 +51,6 @@ public class PerformanceController {
 			List<EventboardDTO> list = performanceDAO.getPerformance();
 			list.addAll(performanceDAO.getPerformancePlay());
 			
-			
 			for(EventboardDTO data : list) {
 				data.setStartDate(data.getStartDate().substring(0, 10));
 				data.setEndDate(data.getEndDate().substring(0, 10));
