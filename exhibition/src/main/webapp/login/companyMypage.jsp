@@ -12,6 +12,12 @@
 .ui.left.icon.input {
 	width: 300px;
 }
+
+.ui.inverted.input {
+	/* background-color: #e0e1e2; */
+	border: 1px solid;
+	font: bold;
+}
 </style>
 <div style="width: 100%;">
 	<!-- 맨위 메뉴 텝 -->
@@ -34,7 +40,7 @@
 		  				<div style="width: 60%;">
 		  					<br><br>
 		  					<!-- 사업자명 -->
-		  					<div class="ui inverted input" style="width: 100%;">
+		  					<div class="ui inverted input" style="width: 100%; ">
 		  						<div class="ui left icon input" style="width: 100%; height: 50px;">
 									<input type="text" id="C-modify-businessname" disabled="disabled" value="${DTO.getC_businessname()}">
 									<input type="hidden" id="C-modify-businessname-hidden" value="${DTO.getC_businessname()}">

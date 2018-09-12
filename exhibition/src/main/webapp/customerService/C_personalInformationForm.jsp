@@ -47,11 +47,15 @@
 		<!-- 메인 화면 -->
 		<div class="ui compact menu" style="width: 80%; height: 900px;" >
 			<div style="width: 100%; text-align: left;">
-				<h2 class="box-container" style="float: center;">
-					마이
-					<span class="h-light">페이지</span>
-				</h2>
-				<jsp:include page="../login/memberMypage.jsp" ></jsp:include>
+				<div style="height: 80px;">
+					<h2 class="box-container" style="float: center;">
+						마이
+						<span class="h-light">페이지</span>
+					</h2>
+				</div>
+				<div>
+					<jsp:include page="../login/memberMypage.jsp" ></jsp:include>
+				</div>
 			</div>
 				
 		</div>
