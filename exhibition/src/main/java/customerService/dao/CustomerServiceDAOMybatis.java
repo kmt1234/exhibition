@@ -163,8 +163,8 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 		sqlSession.insert("customerServiceSQL.hotelInfoWrite", hotelboardDTO);
 	}
 	//호텔리스트
-	public List<HotelboardDTO> hotelList() {
-		return sqlSession.selectList("customerServiceSQL.hotelList");
+	public List<HotelboardDTO> hotelList(Map<String, Integer> map) {
+		return sqlSession.selectList("customerServiceSQL.hotelList",map);
 	}
 	//호텔리스트 삭제
 	public void hotelDelete(List<Integer> list) {
@@ -174,7 +174,11 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 		public List<HotelboardDTO> hotelImageDel(List<Integer> list) {
 			return sqlSession.selectList("customerServiceSQL.hotelImageDel",list);
 	}
-	
+	//호텔리스트 총글수
+	public int getHotelboardTotalA() {
+		int totalA = sqlSession.selectOne("customerServiceSQL.getHotelboardTotalA"); 
+		return totalA;
+	}
 	
 	
 

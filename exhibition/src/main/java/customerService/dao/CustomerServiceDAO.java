@@ -8,7 +8,6 @@ import customerService.bean.EventboardDTO;
 import customerService.bean.HotelboardDTO;
 import customerService.bean.ImageboardDTO;
 
-
 public interface CustomerServiceDAO {
 	public List<CustomerServiceDTO> getNoticeList(Map<String, Integer> map);
 	 
@@ -73,9 +72,11 @@ public interface CustomerServiceDAO {
 	
 	public void hotelInfoWrite(HotelboardDTO hotelboardDTO); //호텔정보등록
 	
-	public List<HotelboardDTO> hotelList(); //호텔 숙박에 올려보기
+	public List<HotelboardDTO> hotelList(Map<String, Integer> map); //호텔 숙박에 올려보기
 	
 	public void hotelDelete(List<Integer> list);//호텔리스트 삭제
 	
 	public List<HotelboardDTO> hotelImageDel(List<Integer> list);//호텔이미지 삭제 하기 위해 리스트 가져오기
+	
+	public int getHotelboardTotalA();//호텔리스트 총글수
 }

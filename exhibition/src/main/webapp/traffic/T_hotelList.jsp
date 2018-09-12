@@ -22,6 +22,24 @@
 	color: #ec008c;
 
 }
+#currentHotelPaging{
+	color: red;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+#hotelpaging{
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+}
+#hotelPaging3{
+	align:center;
+}
+#image_DIV{
+	height:450px;
+	float:center;
+}
 </style>
 <body>
 	<header>
@@ -47,22 +65,18 @@
 			숙박
 			<span class="h-light">안내</span>
 		</h2>
-		<table>
-		<c:forEach items="${list}" var="list">				
-			<c:if test="${list ne null}">
-					<tr>
-						<td colspan="2"><img src="../storage/${list.image1}" width="200" height="150"></td>
-					</tr>
-					<tr>
-						<td colspan="2">${list.imageName}</td>
-					</tr>
-					<tr>
-						<td>TEL)${list.eventPlace}</td>
-						<td><i class="home icon" onclick="window.open('${list.eventLink }')"></i></td>
-					</tr>
-			</c:if>
-		</c:forEach>
-		</table>
+		<div id="image_DIV">
+			<c:forEach items="${list }" var="list">
+			<div style="float:left; width: 24%;">
+				<img src="../storage/${list.image1}" width="200" height="150"><br>
+				${list.imageName}<br>
+				TEL) ${list.eventPlace}
+				<i class="home icon" style="cursor: pointer;" onclick="window.open('${list.eventLink }')"></i>
+				<br><br>
+			</div>
+			</c:forEach>	
+		</div>
+		<div id="hotelPaging3">${imageboardPaging.pagingHTML }</div>
 	</div>
 		
 	</div>
@@ -77,5 +91,9 @@
 	crossorigin="anonymous"></script>
 <script src="../semantic/semantic.min.js"></script>
 <script src="../js/traffic.js"></script>
+<script type="text/javascript">
+function hotelboardPaging(pg){
+	location.href="/exhibition/traffic/T_hotelList.do?pg="+pg
+}
 </body>
 </html>
