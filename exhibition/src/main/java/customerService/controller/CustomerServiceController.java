@@ -41,7 +41,7 @@ public class CustomerServiceController {
 	private JavaMailSenderImpl emailSender;
 	@Autowired
 	private ImageboardPaging imageboardPaging;
-	
+	private String filePath ="C:\\Users\\kmtab\\git\\exhibition\\exhibition\\src\\main\\webapp\\storage\\";
 	//고객센터
 	@RequestMapping(value="C_infoForm", method =  RequestMethod.GET)
 	public String C_infoForm() {
@@ -316,7 +316,6 @@ public class CustomerServiceController {
 									Model model
 									) {
 		//경로 바꿔야함***
-		String filePath ="C:\\Users\\user\\git\\exhibition\\exhibition\\src\\main\\webapp\\storage";
 		String fileName = img.getOriginalFilename();
 		
 		File file = new File(filePath,fileName);	
@@ -394,7 +393,6 @@ public class CustomerServiceController {
 	public ModelAndView C_exhibitionInfoWrite(@ModelAttribute EventboardDTO eventboardDTO,@RequestParam MultipartFile img) {
 		
 		//경로 바꿔야함***
-		String filePath ="C:\\Users\\user\\git\\exhibition\\exhibition\\src\\main\\webapp\\storage";
 		String fileName = img.getOriginalFilename();
 		
 		File file = new File(filePath,fileName);	
@@ -420,7 +418,6 @@ public class CustomerServiceController {
 	public ModelAndView C_exhibitionInfoWrite_play(@ModelAttribute EventboardDTO eventboardDTO,@RequestParam MultipartFile img) {
 		
 		//경로 바꿔야함***
-		String filePath ="C:\\Users\\user\\git\\exhibition\\exhibition\\src\\main\\webapp\\storage";
 		String fileName = img.getOriginalFilename();
 		
 		File file = new File(filePath,fileName);	
@@ -562,7 +559,6 @@ public class CustomerServiceController {
 	public ModelAndView C_hotelInfoWrite(@ModelAttribute HotelboardDTO hotelboardDTO,@RequestParam MultipartFile img) {
 		
 		//경로 바꿔야함***
-		String filePath ="C:\\Users\\kmtab\\git\\exhibition\\exhibition\\src\\main\\webapp\\storage";
 		String fileName = img.getOriginalFilename();
 		
 		File file = new File(filePath,fileName);	
@@ -577,7 +573,7 @@ public class CustomerServiceController {
 
 		//DB
 		customerServiceDAO.hotelInfoWrite(hotelboardDTO);
-		return new ModelAndView("redirect:/customerService/C_eventboardList_playForm.do");
+		return new ModelAndView("redirect:/customerService/C_hotelListForm.do");
 	}
 }
 	

@@ -60,7 +60,7 @@
 					</tr>
 					<tr>
 						<td>TEL)${list.eventPlace}</td>
-						<td><i class="home icon" location.href="${list.eventLink}"></i></td>
+						<td><i class="home icon" onclick="window.open('${list.eventLink }')"></i></td>
 					</tr>
 			</c:if>
 		</c:forEach>

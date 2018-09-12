@@ -40,8 +40,9 @@ $(document).ready(function(){
 			location.href='/exhibition/customerService/C_eventboardListForm.do';
 		}else if(index=='2'){
 			location.href='/exhibition/customerService/C_eventboardList_playForm.do';
-		}
-		
+		}else if(index=='3'){
+			location.href='/exhibition/customerService/C_hotelListForm.do';
+		}	
 	});
 	
 	//분류 종류(기본 값 : 0(메인)
