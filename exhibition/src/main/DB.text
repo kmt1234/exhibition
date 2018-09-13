@@ -172,13 +172,13 @@ create sequence seq_hotel_list nocycle nocache;
 --공연 예매 DB
 create table eventboard_play_book(
  seq NUMBER PRIMARY KEY,            --시퀀스     
- imageName VARCHAR2(100) NOT NULL,  --공연명
+ imageName VARCHAR2(500) NOT NULL,  --공연명
  playDate date,                     --공연일자(시작/종료)
- playTicket VARCHAR2(40),           --일별 총 티켓 수
- remainTicket VARCHAR2(40),         --일별 잔여 티켓 수
- ticketPrice VARCHAR2(40),          --티켓 가격
- bookTicket VARCHAR2(40),           --예매된 티켓 수
- bookMemberId VARCHAR2(40),         --예매자 아이디
+ playTicket VARCHAR2(100),           --일별 총 티켓 수
+ remainTicket VARCHAR2(100),         --일별 잔여 티켓 수
+ ticketPrice VARCHAR2(100),          --티켓 가격
+ bookTicket VARCHAR2(100),           --예매된 티켓 수
+ bookMemberId VARCHAR2(300),         --등록한 아이디
  bookStatus char(1) CONSTRAINT bookStatus_CK    --예매 상태(0 : 예매X , 1 : 예매완료)
     check(bookStatus IN ('0','1'))
 );
