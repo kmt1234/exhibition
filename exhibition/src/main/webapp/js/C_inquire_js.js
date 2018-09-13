@@ -80,43 +80,7 @@ $(document).ready(function(){
 	});
 		
 	
-	$.ajax({
-		type : 'POST',
-		url : '/exhibition/customerService/getInquireList.do',
-		dataType : 'json',
-		success : function(data){
-			$.each(data.list, function(index, item){
-				$('<tr/>').append($('<td/>',{
-					align : 'center',
-					style: 'width: 20%; height: 9%; text-align: center;',
-					text : item.seq,
-					id : 'seqA'
-				})).append($('<td/>',{
-					align : 'center',
-					id : 'subjectA',
-					style: 'width: 20%; height: 9%; text-align: center;',
-					class : item.seq+"",
-					href : 'javascript:void(0)',
-					text : item.subject
-				})).append($('<td/>',{
-					align : 'center',
-					style: 'width: 20%; height: 9%; text-align: center;',
-					text : item.name,
-					id : 'nameA'
-				})).append($('<td/>',{
-					align : 'center',
-					style: 'width: 20%; height: 9%; text-align: center;',
-					text : item.email,
-					id : 'emailA'
-				})).append($('<td/>',{
-					align : 'center',
-					style: 'width: 20%; height: 9%; text-align: center;',
-					text : item.logtime,
-					id : 'logtime'
-				})).appendTo($('#C_inquire_List'));
-			});
-		}
-	});
+	
 	
 	$('#C_inquire_List').on('click','#subjectA',function(){
 		var seq = $(this).prev().text();

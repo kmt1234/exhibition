@@ -29,11 +29,12 @@
 			<th style="width: 35%; height: 7%; padding-top: 10px; text-align: center;">등록일</th>
 		</tr>
 	</table>
-	<br><br>
-	<div id="C_contactList_PagingDiv"></div>
+	<br>
+	<div id="C_notice_PagingDiv"></div>
 	<input type="hidden" name="pg" id="pg" value="1">
+	<br>
 	<select class="ui compact selection dropdown" id="searchOption">
-			<option value="subejct">제목</option>
+			<option value="subject">제목</option>
 			<option value="content">내용</option>
 	</select>
 
@@ -45,5 +46,82 @@
 </div>
 <script src="../semantic/semantic.min.js"></script>
 <script src="../js/C_notice_js.js?ver=1"></script>
+<script>
+$.ajax({
+	 type : 'POST',
+	url : '/exhibition/customerService/getNoticeList.do',
+	data :  'pg=${pg}',
+	dataType : 'json',
+	success : function(data){
+		$.each(data.list, function(index, item){
+			$('<tr/>').append($('<td/>',{
+					align : 'center',
+					style: 'width: 20%; height: 9%; text-align: center;',
+					text : item.seq,
+					id : 'seqA'
+				})).append($('<td/>',{
+					align : 'center',
+					id : 'subjectA',
+					style: 'width: 45%; height: 7%;text-align: center;',
+					class : item.seq+"",
+					href : 'javascript:void(0)',
+					text : item.subject
+				})).append($('<td/>',{
+					align : 'center',
+					style: 'width: 20%; height: 7%;text-align: center;',
+					text : item.logtime,
+					id : 'logtime'
+				})).appendTo($('#C_notice_List'));
+			});
+		$('#C_notice_PagingDiv').html(data.customerServicePaging.pagingHTML);
+	}
+});
+$('#C_notice_List').on('click','#subjectA',function(){
+	var seq = $(this).prev().text();
+	location.href="/exhibition/customerService/C_notice_View.do?seq="+seq;
+});
+
+
+
+// 공지사항 검색한 값 불러오기
+$('#C_notice_Search').click(function(event, str){
+	if(str!='trigger') $('#pg').val(1);
+	
+	if($('#keyword').val()=='')
+		alert("검색어를 입력하세요");
+	else{
+		$.ajax({
+			type : 'POST',
+			url : '/exhibition/customerService/C_notice_Search.do',
+			data : {'pg':$('#pg').val(),
+					'searchOption':$('#searchOption').val(),
+					'keyword':$('#keyword').val()},
+			dataType : 'json',
+			success : function(data){
+				$('#C_notice_List tr:gt(0)').remove();
+				
+				$.each(data.list, function(index, item){
+					$('<tr/>').append($('<td/>',{
+						align : 'center',
+						style: 'width: 20%; height: 9%; text-align: center;',
+						text : item.seq
+					})).append($('<td/>',{
+						id : 'subjectA',
+						style: 'width: 45%; height: 7%;text-align: center;',
+						href : 'javascript:void(0)',
+						text : item.subject
+					})).append($('<td/>',{
+						align : 'center',
+						style: 'width: 20%; height: 7%;text-align: center;',
+						text : item.logtime
+					})).appendTo($('#C_notice_List'));     
+				});
+				
+				$('#C_notice_PagingDiv').html(data.customerServicePaging.pagingHTML);
+			}
+		});
+	}
+});
+</script>
 </body>
 </html>

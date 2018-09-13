@@ -20,8 +20,8 @@
 			<div id="emailDiv"></div>
 		</td>
 		<td>
-			<input type="button" value="인증번호 전송" id="C_emailSendBtn"
-				style="width:100%; height:100%; background-color:#ffffff; float: left;">
+			<input type="button" value="인증번호 전송" id="C_emailSendBtn" class="middle ui button"
+				style="width:100%; height:100%;  float: left;">
 		</td>
 		<!-- 반 -->
 		<td  align="center" height="30" style="background-color: #f7f6e6;text-align: center;">
@@ -32,8 +32,8 @@
 			<div id="checkEmailDiv"></div>
 		</td>
 		<td>
-			<input type="button" value="인증 확인" id="C_emailConfirmBtn"
-				style="width:100%; height:100%; background-color:#ffffff; float: left;">
+			<input type="button" value="인증 확인" id="C_emailConfirmBtn" class="middle ui button"
+				style="width:100%; height:100%;  float: left;">
 			<input type="hidden" id="reC_EmailConfirm" value="">
 		</td>
 		
@@ -42,10 +42,8 @@
 </table>
 <!-- 관리자모드가 아니면 없애야함 -->
 	<div align="left">
-		<input class="middle ui button" type="button" id="C_email_ListBtn" value="관리자 버튼" style="">
+		<input class="middle ui button" type="button" id="C_email_ListBtn" value="관리자 버튼">
 	</div>
-	<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
-	<script src="../js/C_inquire_js.js?ver=1"></script>
-	
+<script src="../js/C_inquire_js.js?ver=1"></script>
 </body>
 </html>

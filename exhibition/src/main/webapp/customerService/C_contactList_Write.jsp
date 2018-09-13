@@ -63,8 +63,7 @@
 		</td>
 	</tr>
 </table>
-<input type="button" id="C_contactList_checkWriteBtn" value="등록">
+<input type="button" id="C_contactList_checkWriteBtn" class="middle ui button" value="등록">
 </form>
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="../js/C_contactList_js.js?ver=1"></script></body>
 </html>

@@ -23,9 +23,10 @@
 				<th style="width: 20%; height: 7%; padding-top: 10px; text-align: center;">연락처</th>
 			</tr>
 	</table>
-	<br><br>
+	<br>
 	<div id="C_contactList_PagingDiv"></div>
 	<input type="hidden" name="pg" id="pg" value="1">
+	<br>
 	<select class="ui compact selection dropdown" id="searchOption">
 			<option value="facility">기관&시설</option>
 			<option value="name">담당자</option>
@@ -39,6 +40,96 @@
 </div>
 <script src="../semantic/semantic.min.js"></script>
 <script src="../js/C_contactList_js.js?ver=1"></script>
-
+<script  type="text/javascript">
+$(document).ready(function(){
+	$.ajax({
+			type : 'POST',
+			url : '/exhibition/customerService/getContactList.do',
+			data : 'pg=${pg}',
+			dataType : 'json',
+			success : function(data){
+				$.each(data.list, function(index, item){
+					$('<tr/>').append($('<td/>',{
+						align : 'center',
+						style: 'width: 20%; height: 9%; text-align: center;',
+						text : item.classify,
+						id : 'classifyA'
+					})).append($('<td/>',{
+						align : 'center',
+						style: 'width: 20%; height: 9%; text-align: center;',
+						text : item.facility,
+						id : 'facilityA'
+					})).append($('<td/>',{
+						align : 'center',
+						style: 'width: 20%; height: 9%; text-align: center;',
+						text : item.title,
+						id : 'titleA'
+					})).append($('<td/>',{
+						align : 'center',
+						style: 'width: 20%; height: 9%; text-align: center;',
+						text : item.phone,
+						id : 'phoneA'
+					})).append($('<td/>',{
+						align : 'center',
+						style: 'width: 20%; height: 9%; text-align: center;',
+						text : item.name,
+						id : 'nameA'
+					})).appendTo($('#C_contactList_List'));
+				});
+				$('#C_contactList_PagingDiv').html(data.customerServicePaging.pagingHTML);
+			}
+		});
+		$('#C_contactList_Search').click(function(event, str){
+		
+		if(str!='trigger') $('#pg').val(1);
+		
+		if($('#keyword').val()=='')
+			alert("검색어를 입력하세요");
+		else{
+			$.ajax({
+				type : 'POST',
+				url : '/exhibition/customerService/C_contactList_Search.do',
+				data : {'pg':$('#pg').val(),
+						'searchOption':$('#searchOption').val(),
+						'keyword':$('#keyword').val()},
+				dataType : 'json',
+				success : function(data){
+					$('#C_contactList_List tr:gt(0)').remove();
+					
+					$.each(data.list, function(index, item){
+						$('<tr/>').append($('<td/>',{
+							align : 'center',
+							style: 'width: 20%; height: 9%; text-align: center;',
+							text : item.classify,
+							id : 'classifyA'
+						})).append($('<td/>',{
+							align : 'center',
+							style: 'width: 20%; height: 9%; text-align: center;',
+							text : item.facility,
+							id : 'facilityA'
+						})).append($('<td/>',{
+							align : 'center',
+							style: 'width: 20%; height: 9%; text-align: center;',
+							text : item.title,
+							id : 'titleA'
+						})).append($('<td/>',{
+							align : 'center',
+							style: 'width: 20%; height: 9%; text-align: center;',
+							text : item.name,
+							id : 'nameA'
+						})).append($('<td/>',{
+							align : 'center',
+							style: 'width: 20%; height: 9%; text-align: center;',
+							text : item.phone,
+							id : 'phoneA'
+						})).appendTo($('#C_contactList_List'));
+					});
+					$('#C_contactList_PagingDiv').html(data.customerServicePaging.pagingHTML);
+				}
+			});
+		}
+	});
+});
+</script>
 </body>
 </html>

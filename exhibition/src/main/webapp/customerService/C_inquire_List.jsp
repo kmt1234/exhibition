@@ -28,23 +28,118 @@
 			<th style="width: 20%; height: 7%; padding-top: 10px; text-align: center;">등록일</th>
 		</tr>
 	</table>
-	<br><br>
+	<br>
 	<div id="C_inquire_PagingDiv"></div>
+	<input type="hidden" name="pg" id="pg" value="1">
+	<br>
 	<div style="width: 100%;">
-		<select name="searchOption" id="searchOption" style="width:150px;" class="ui compact selection dropdown">
+		<select name="searchOption" id="searchOption"  class="ui compact selection dropdown" style="height: auto; ">
 			<option value="subject" selected>제목</option>
-			<option value="id">아이디</option>
+			<option value="name">작성자</option>
 		</select>
 		
 	<div class="ui input" style="width: 50%;">
-		<input type="text" >
+		<input type="text" name="keyword" id="keyword" value="${keyword }">
 	</div>
-		 <input type="button" class="middle ui button"  value="검색" id="C_inquireSearch">
+		 <input type="button" class="middle ui button"  value="검색" id="C_inquire_Search">
 	</div>
 </div>
 <script src="../semantic/semantic.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="../js/C_inquire_js.js?ver=1"></script>
+<script>
+$.ajax({
+	type : 'POST',
+	url : '/exhibition/customerService/getInquireList.do',
+	data :  'pg=${pg}',
+	dataType : 'json',
+	success : function(data){
+		$.each(data.list, function(index, item){
+			$('<tr/>').append($('<td/>',{
+				align : 'center',
+				style: 'width: 20%; height: 9%; text-align: center;',
+				text : item.seq,
+				id : 'seqA'
+			})).append($('<td/>',{
+				align : 'center',
+				id : 'subjectA',
+				style: 'width: 20%; height: 9%; text-align: center;',
+				class : item.seq+"",
+				href : 'javascript:void(0)',
+				text : item.subject
+			})).append($('<td/>',{
+				align : 'center',
+				style: 'width: 20%; height: 9%; text-align: center;',
+				text : item.name,
+				id : 'nameA'
+			})).append($('<td/>',{
+				align : 'center',
+				style: 'width: 20%; height: 9%; text-align: center;',
+				text : item.email,
+				id : 'emailA'
+			})).append($('<td/>',{
+				align : 'center',
+				style: 'width: 20%; height: 9%; text-align: center;',
+				text : item.logtime,
+				id : 'logtime'
+			})).appendTo($('#C_inquire_List'));
+		});
+		$('#C_inquire_PagingDiv').html(data.customerServicePaging.pagingHTML);
+	}
+});
 
+//고객의소리 리스트 검색한 값 불러오기
+$('#C_inquire_Search').click(function(event, str){
+	
+	if(str!='trigger') $('#pg').val(1);
+	
+	if($('#keyword').val()=='')
+		alert("검색어를 입력하세요");
+	else{
+		$.ajax({
+			type : 'POST',
+			url : '/exhibition/customerService/C_inquire_Search.do',
+			data : {'pg':$('#pg').val(),
+					'searchOption':$('#searchOption').val(),
+					'keyword':$('#keyword').val()},
+			dataType : 'json',
+			success : function(data){
+				$('#C_inquire_List tr:gt(0)').remove();
+				
+				$.each(data.list, function(index, item){
+					$('<tr/>').append($('<td/>',{
+						align : 'center',
+						style: 'width: 20%; height: 9%; text-align: center;',
+						text : item.seq,
+						id : 'seqA'
+					})).append($('<td/>',{
+						align : 'center',
+						id : 'subjectA',
+						style: 'width: 20%; height: 9%; text-align: center;',
+						class : item.seq+"",
+						href : 'javascript:void(0)',
+						text : item.subject
+					})).append($('<td/>',{
+						align : 'center',
+						style: 'width: 20%; height: 9%; text-align: center;',
+						text : item.name,
+						id : 'nameA'
+					})).append($('<td/>',{
+						align : 'center',
+						style: 'width: 20%; height: 9%; text-align: center;',
+						text : item.email,
+						id : 'emailA'
+					})).append($('<td/>',{
+						align : 'center',
+						style: 'width: 20%; height: 9%; text-align: center;',
+						text : item.logtime,
+						id : 'logtime'
+					})).appendTo($('#C_inquire_List'));
+				});
+				$('#C_inquire_PagingDiv').html(data.customerServicePaging.pagingHTML);
+			}
+		});
+	}
+});
+</script>
 </body>
 </html>

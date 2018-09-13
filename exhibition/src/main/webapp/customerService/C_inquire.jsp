@@ -12,20 +12,24 @@
 	<span class="h-light">하기</span>
 </h2>
 
-<div>분류
-	<select name="classify" id="classify" class="classify">
-		<option value="전시회 일정 문의">전시회 일정 문의
-		<option value="전시회 임대 문의">전시회 임대 문의
-		<option value="전시회 참가 문의">전시회 참가 문의
-</select>
-</div>
 <table style="width:100%;" class="ui celled table">
+<tr>
+	<td style="width:8%; height:40px; background-color: #f7f6e6; font-size: 15px;text-align: center;" >분 류</td>
+	
+	<td style="width:20%;">
+		<select name="classify" id="classify" class="classify">
+			<option value="전시회 일정 문의">전시회 일정 문의
+			<option value="전시회 임대 문의">전시회 임대 문의
+			<option value="전시회 참가 문의">전시회 참가 문의
+		</select>
+	</td>
+</tr>
 <tr>
 	<td style="width:8%; height:40px; background-color: #f7f6e6; font-size: 15px;text-align: center;" >작 성 자</td>
 	
 	<td style="width:20%;">
 		<div>
-			<input type="text" name="name" id="name" style="float: left; width:98%; height:40px;">
+			<input type="text" name="name" id="name" style="float: left; width:100%; height:40px;">
 			<div id="nameDiv"></div>
 		</div>
 	</td>
@@ -35,7 +39,7 @@
 	
 	<td style="width:20%;">
 		<div>
-			<input type="text" name="phone" id="phone" style="float: left; width:98%; height:40px;">
+			<input type="text" name="phone" id="phone" style="float: left; width:100%; height:40px;">
 			<div id="phoneDiv"></div>
 		</div>
 	</td>
@@ -45,7 +49,7 @@
 	
 	<td style="width:20%;">
 		<div>
-			<input type="text" name="subject" id="subject" style="float: left; width:98%; height:40px;">
+			<input type="text" name="subject" id="subject" style="float: left; width:100%; height:40px;">
 			<div id="subjectDiv"></div>
 		</div>
 	</td>
@@ -55,14 +59,14 @@
 	
 	<td style="width:20%; height: 15%">
 		<div>
-			<div><textArea name="content" id="content" style="float: left; width:98%; height: 300px;"></textArea></div>
+			<div><textArea name="content" id="content" style="float: left; width:100%; height: 300px;"></textArea></div>
 			<div id="contentDiv"></div>
 		</div>
 	</td>
 </tr>
 </table>
 <div>
-	<input type="button" id="C_checkInquireBtn" value="등록">
+	<input type="button" id="C_checkInquireBtn" class="middle ui button" value="등록">
 </div>
 <input type="hidden" name="email" value="${email}">
 </form>

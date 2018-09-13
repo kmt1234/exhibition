@@ -41,7 +41,6 @@
 <div style="padding-top: 15px;">
 	<table style="width: 100%; height: 40px; " align="center" border="1" bordercolor="#ec008c" cellpadding="2" frame="hsides" rules="rows">
 		<tr>
-			<!-- <th style="width: 10%; height: 7%; text-align:center;" id="seqA" >번호</th> -->
 			<th style=" height: 7%; " id="subjectA">제목</th>
 		</tr>
 	</table>

@@ -21,21 +21,21 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	public int getTotalC_notice() { // 공지사항 총 글수
 		return sqlSession.selectOne("customerServiceSQL.getTotalC_notice");
 	}
-	public CustomerServiceDTO getNoticeInfo(String seq) { // 공지사항 제목 클릭스 내용 보기
-		return sqlSession.selectOne("customerServiceSQL.getNoticeInfo", seq);
-	}
-	public void C_notice_Write(Map<String, String> map) {// 공지사항 관리자가 작성하기
-		sqlSession.insert("customerServiceSQL.C_notice_Write", map);		
-	}
 	public List<CustomerServiceDTO> getNoticeList(Map<String, Integer> map) {//공지사항 리스트 불러오기
 		return sqlSession.selectList("customerServiceSQL.getNoticeList", map);
+	}
+	public int getTotalC_notice_Search(Map<String, String> map) {
+		return sqlSession.selectOne("customerServiceSQL.getTotalC_notice_Search", map);
 	}
 	public List<CustomerServiceDTO> C_notice_Search(Map<String, String> map) {
 		return sqlSession.selectList("customerServiceSQL.C_notice_Search", map);
 	}
 	
-	public int getTotalC_notice_Search(Map<String, String> map) {
-		return sqlSession.selectOne("customerServiceSQL.getTotalC_notice_Search", map);
+	public CustomerServiceDTO getNoticeInfo(String seq) { // 공지사항 제목 클릭시 내용 보기
+		return sqlSession.selectOne("customerServiceSQL.getNoticeInfo", seq);
+	}
+	public void C_notice_Write(Map<String, String> map) {// 공지사항 관리자가 작성하기
+		sqlSession.insert("customerServiceSQL.C_notice_Write", map);		
 	}
 	
 	public void C_notice_Modify(Map<String, String> map) {// 공지사항 관리자가 수정하기
@@ -44,27 +44,35 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	public void C_notice_Delete(String seq) {// 공지사항 관리자가 삭제하기
 		sqlSession.delete("customerServiceSQL.C_notice_Delete", seq);
 	}
+	public int getTotalC_inquire() {
+		return sqlSession.selectOne("customerServiceSQL.getTotalC_inquire");
+	}
+	
+	public List<CustomerServiceDTO> getInquireList(Map<String, Integer> map) {// 고객의 소리 문의받은 리스트 불러오기
+		return sqlSession.selectList("customerServiceSQL.getInquireList");
+	}
+	public int getTotalC_inquire_Search(Map<String, String> map) {
+		return sqlSession.selectOne("customerServiceSQL.getTotalC_inquire_Search", map);
+	}
+	public List<CustomerServiceDTO> C_inquire_Search(Map<String, String> map) {
+		return sqlSession.selectList("customerServiceSQL.C_inquire_Search", map);
+	}
 	public void C_checkInquire(CustomerServiceDTO customerServiceDTO) {// 고객의 소리 고객이 작성후 등록하기
 		sqlSession.insert("customerServiceSQL.C_checkInquire", customerServiceDTO);
 	}
-	
-	public List<CustomerServiceDTO> getQnA_Classify(String classify) {// 자주묻는 질문 리스트 불러오기 & 버튼마다 리스트 불러오기
-		return sqlSession.selectList("customerServiceSQL.getQnA_Classify", classify);
-	}
-	public void C_QnA_checkWrite(Map<String, String> map) {// 자주묻는 질문 관리자가 작성하기
-		sqlSession.insert("customerServiceSQL.C_QnA_checkWrite", map);		
-	}
 
-	public List<CustomerServiceDTO> getInquireList() {// 고객의 소리 문의받은 리스트 불러오기
-		return sqlSession.selectList("customerServiceSQL.getInquireList");
-	}
-
-	public CustomerServiceDTO getInquireInfo(String seq) {// 고객의 소리 묻의 받은 리스트 불러오기
+	public CustomerServiceDTO getInquireInfo(String seq) {// 고객의 소리 제목클릭 후 내용 보기
 		return sqlSession.selectOne("customerServiceSQL.getInquireInfo", seq);
 	}
 	
 	public CustomerServiceDTO getReplyInfo(String seq) {// 고객의 소리 관리자가 문의 답변 등록하기
 		return sqlSession.selectOne("customerServiceSQL.getReplyInfo", seq);
+	}
+	public List<CustomerServiceDTO> getQnA_Classify(String classify) {// 자주묻는 질문 리스트 불러오기 & 버튼마다 리스트 불러오기
+		return sqlSession.selectList("customerServiceSQL.getQnA_Classify", classify);
+	}
+	public void C_QnA_checkWrite(Map<String, String> map) {// 자주묻는 질문 관리자가 작성하기
+		sqlSession.insert("customerServiceSQL.C_QnA_checkWrite", map);		
 	}
 	public void C_contactList_checkWrite(Map<String, String> map) {// 주요시설 연락처 관리자가 작성하기
 		sqlSession.insert("customerServiceSQL.C_contactList_checkWrite", map);		
@@ -154,6 +162,7 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	public void eventboardDelete_play(List<Integer> list) {
 		sqlSession.delete("customerServiceSQL.eventboardDelete_play", list);
 	}
+	
 	
 	
 
