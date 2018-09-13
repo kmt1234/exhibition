@@ -46,8 +46,7 @@ public class CustomerServiceController {
 	private String filePath = "C:\\Users\\user\\git\\exhibition1\\exhibition\\src\\main\\webapp\\storage\\";
 	@Autowired
 	private CustomerServicePaging customerServicePaging;
-	@Autowired
-	private ImageboardDTO imageboardDTO;
+	
 	
 	// 고객센터 설명페이지
 	@RequestMapping(value = "C_customerServiceForm", method = RequestMethod.GET)
@@ -554,27 +553,30 @@ public class CustomerServiceController {
 	// 이미지 슬라이드 가져오는 컨트롤러
 	@RequestMapping(value = "getImageboardSlide", method = RequestMethod.GET)
 	public ModelAndView getImageboardSlide(@RequestParam String code) {
-		List<ImageboardDTO> list = new ArrayList<ImageboardDTO>();
+		ArrayList<ImageboardDTO> list = new ArrayList<ImageboardDTO>();
 		ModelAndView mav = new ModelAndView();
+		String[] str = {"car1.png","car2.JPG","car1.JPG"};
+		System.out.println(str.length);
 		
 		if(code.equals("1")) {
-			imageboardDTO.setImage1("car1.JPG");
-			list.add(imageboardDTO);
-			imageboardDTO.setImage1("car2.JPG");
-			list.add(imageboardDTO);
-			imageboardDTO.setImage1("car1.JPG");
-			list.add(imageboardDTO);
-		
+			for(int i=0; i<3;i++) {
+				ImageboardDTO imageboardDTO = new ImageboardDTO();
+				imageboardDTO.setImage1(str[i]);
+				System.out.println(imageboardDTO.getImage1());
+				list.add(imageboardDTO);
+			}
 			mav.addObject("list", list);
 			mav.setViewName("jsonView");
-			
-		}else if(code.equals("2")) {
+		}
+			/*	
+		}else if(code.equals("null")) {
 			List<ImageboardDTO> list1 = customerServiceDAO.getImageboardSlide();
 			
 			mav.addObject("list", list1);
 			mav.setViewName("jsonView");
 			
-		}
+		}*/
+		
 		return mav;
 	}
 

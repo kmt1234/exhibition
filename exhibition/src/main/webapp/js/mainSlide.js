@@ -6,11 +6,12 @@
 		url : '/exhibition/customerService/getImageboardSlide.do?code='+$("#code").val(),
 		dataType : 'json',
 		success : function(data){
+			alert(data.list)
 			//alert(JSON.stringify(data)); 데이터 확인
 			if(data.list.length==0) alert('메인 이미지 없습니다. 관리자에게 문의하십시오');
 			else{
 				$.each(data.list, function(index,item){
-					//alert(data.list.length); 이미지 개수
+					alert(item.image1); 
 					
 					$('#mainSlideUl').append($('<li/>',{
 												style : 'display: inline-block'
