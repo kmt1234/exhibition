@@ -45,4 +45,9 @@ public class PerformanceDAOmybatis implements PerformanceDAO {
 		return sqlSession.selectList("performanceSQL.getPerformancePlay");
 	}
 	
+	//공연 예약하기 폼
+	public EventboardDTO performanceBook(String seq) {
+		return sqlSession.selectOne("performanceSQL.performanceBook", seq);
+	}
+	
 }

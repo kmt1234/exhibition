@@ -1,11 +1,14 @@
 package performance.controller;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.ModelMap;
@@ -13,11 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
 import customerService.bean.EventboardDTO;
-import performance.bean.PerformanceDTO;
 import performance.bean.PerformancePaging;
 import performance.dao.PerformanceDAO;
-import rental.bean.ExhibitionDTO;
 import rental.dao.ExhibitionDAO;
 
 
@@ -243,6 +245,56 @@ public class PerformanceController {
 		return mav;
 	}
 	
+	//공연 예약하기 폼
+	@RequestMapping(value="performanceBook", method=RequestMethod.GET)
+	public ModelAndView performanceBook(@RequestParam String seq) {
+		
+		//DB
+		EventboardDTO eventboardDTO = performanceDAO.performanceBook(seq);
+		
+		//String 타입 날짜를 Date 형식으로 변환
+		eventboardDTO.setStartDate(eventboardDTO.getStartDate().substring(0, 10));
+		eventboardDTO.setEndDate(eventboardDTO.getEndDate().substring(0, 10));
+		
+		String startDate = eventboardDTO.getStartDate();
+		String endDate = eventboardDTO.getEndDate();
+		
+		SimpleDateFormat formatter = new SimpleDateFormat("yy-MM-dd");
+		
+		long diff = 0;
+		long diffDays = 0;
+		Date startDateF = null;
+		
+		try {
+			startDateF = formatter.parse(startDate);
+			Date endDateF = formatter.parse(endDate);
+			
+			diff = endDateF.getTime() - startDateF.getTime();
+			diffDays = diff / (24*60*60*1000);	//종료일-시작일 = 행사 일 수
+			
+		} catch (ParseException e) {
+			
+			e.printStackTrace();
+		}
+		Calendar calStart = Calendar.getInstance();
+		calStart.setTime(startDateF);
+		
+		List<Date> listDate = new ArrayList<Date>();
+		for(int i=0; i<=diffDays; i++) {
+			
+			listDate.add(calStart.getTime());
+			calStart.add(Calendar.DATE, 1);
+		}
+		
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("eventboardDTO", eventboardDTO);
+		mav.addObject("listDate", listDate);
+		mav.addObject("display", "/performance/P_performanceBook.jsp");
+		mav.setViewName("P_performanceForm");
+		return mav;
+	}
 	
 	//달력 메소드
 	public static String[] getDiffDays(String fromDate, String toDate) {

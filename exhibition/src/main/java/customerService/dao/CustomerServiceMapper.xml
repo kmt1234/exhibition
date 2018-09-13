@@ -257,6 +257,10 @@
 			#{item}
 		</foreach>
 	</select>
+	<!--박람회 정보 보기(수정하기 위해)  -->
+	<select id="getEventboard" parameterType="java.lang.String" resultType="eventboard">
+		select * from eventboard where seq = #{seq}
+	</select>
  </mapper>
  
  

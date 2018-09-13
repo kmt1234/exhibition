@@ -79,4 +79,6 @@ public interface CustomerServiceDAO {
 	public List<HotelboardDTO> hotelImageDel(List<Integer> list);//호텔이미지 삭제 하기 위해 리스트 가져오기
 	
 	public int getHotelboardTotalA();//호텔리스트 총글수
+	
+		public EventboardDTO getEventboard(String seq);	//박람회 내용 보기(수정하기 위해)
 }
