@@ -28,6 +28,11 @@
 					3층
 				</button> 
 			</td>
+			<td>
+				<button id="salesExhibitionBtn" class="middle ui button" style="width: 100%;">
+					매출보기
+				</button> 
+			</td>
 		</tr>
 	</table>
 	<br><br>
@@ -135,6 +140,6 @@
 
 
 
-<script src="../js/exhibition.js"></script>
+<script src="../js/exhibition.js?ver=1"></script>
 </body>
 </html>
