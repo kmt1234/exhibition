@@ -17,6 +17,8 @@ import customerService.bean.EventboardDTO;
 import performance.bean.PerformanceDTO;
 import performance.bean.PerformancePaging;
 import performance.dao.PerformanceDAO;
+import rental.bean.ExhibitionDTO;
+import rental.dao.ExhibitionDAO;
 
 
 @RequestMapping(value="performance")
@@ -27,6 +29,8 @@ public class PerformanceController {
 	private PerformanceDAO performanceDAO;
 	@Autowired
 	private PerformancePaging performancePaging;
+	@Autowired
+	private ExhibitionDAO exhibitionDAO;
 	
 /* 사용메서드*/
 	/*일정정보에 관한 내용이 들어 있는 페이지로 이동~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -44,10 +48,10 @@ public class PerformanceController {
 	@RequestMapping(value="P_allSchedule", method=RequestMethod.GET)
 	public ModelAndView P_allSchedule(ModelMap modelMap) {
 
-			List<PerformanceDTO> list = performanceDAO.getPerformance();
-				 
-			for(PerformanceDTO data : list) {
-				data.setSize(list.size());
+			List<EventboardDTO> list = performanceDAO.getPerformance();
+			list.addAll(performanceDAO.getPerformancePlay());
+			
+			for(EventboardDTO data : list) {
 				data.setStartDate(data.getStartDate().substring(0, 10));
 				data.setEndDate(data.getEndDate().substring(0, 10));
 				data.setDays(getDiffDays(data.getStartDate().substring(0, 10).replaceAll("-", "").replaceAll("/",""), data.getEndDate().substring(0, 10).replaceAll("-", "").replaceAll("/","")));
@@ -101,10 +105,9 @@ public class PerformanceController {
 	//공연일정를 데이터베이스에서 불러와 달력으로 보내준다.
 	@RequestMapping(value="P_performanceSchedule", method=RequestMethod.GET)
 	public ModelAndView P_performanceSchedule(ModelMap modelMap) {
-		List<PerformanceDTO> list = performanceDAO.getPerformance();
+		List<EventboardDTO> list = performanceDAO.getPerformancePlay();
 		
-		for(PerformanceDTO data : list) {
-			data.setSize(list.size());
+		for(EventboardDTO data : list) {
 			data.setStartDate(data.getStartDate().substring(0, 10));
 			data.setEndDate(data.getEndDate().substring(0, 10));
 			data.setDays(getDiffDays(data.getStartDate().substring(0, 10).replaceAll("-", ""), data.getEndDate().substring(0, 10).replaceAll("-", "")));
@@ -160,7 +163,6 @@ public class PerformanceController {
 			list.get(i).setStartDate(list.get(i).getStartDate().substring(0, 10));
 			list.get(i).setEndDate(list.get(i).getEndDate().substring(0, 10));
 		}
-		 
 		
 		mav.addObject("pg", pg);
 		mav.addObject("list", list);
@@ -175,9 +177,9 @@ public class PerformanceController {
 	//전시회일정를 데이터베이스에서 불러와 달력으로 보내준다.
 	@RequestMapping(value="P_exhibitionSchedule", method=RequestMethod.GET)
 	public ModelAndView P_exhibitionSchedule(ModelMap modelMap) {
-		List<PerformanceDTO> list = performanceDAO.getPerformance();
+		List<EventboardDTO> list = performanceDAO.getPerformance();
 		
-		for(PerformanceDTO data : list) {
+		for(EventboardDTO data : list) {
 			data.setStartDate(data.getStartDate().substring(0, 10));
 			data.setEndDate(data.getEndDate().substring(0, 10));
 			data.setDays(getDiffDays(data.getStartDate().substring(0, 10).replaceAll("-", ""), data.getEndDate().substring(0, 10).replaceAll("-", "")));
@@ -226,6 +228,12 @@ public class PerformanceController {
 		List<EventboardDTO> list = performanceDAO.getExhibitionList(map);
 		
 		ModelAndView mav = new ModelAndView();
+		//String 타입 날짜를 Date 형식으로 변환
+		for(int i = 0; i < list.size(); i++) {
+			list.get(i).setStartDate(list.get(i).getStartDate().substring(0, 10));
+			list.get(i).setEndDate(list.get(i).getEndDate().substring(0, 10));
+		}
+			
 		mav.addObject("pg", pg);
 		mav.addObject("list", list);
 		mav.addObject("listSize", list.size()+"");

@@ -12,8 +12,7 @@
 <style>
 
 pre{
-	margin-left: 5em;
-	margin-top: -8%;  
+	margin : 2%;
 }
 
 .performanceTh {
@@ -21,30 +20,7 @@ pre{
 }
 
 .play_img{
-	margin-left: 18%;
-}
-
-.play_Title{
-	margin-left: -21%;
-}
-
-.play_Title_content{
-	margin-left: 10.5em;
-}
-
-.play_startDate{
-	margin-left: 8em;
-}
-
-.play_Title_Link{
-	margin-left:-21%;
-}
-
-.play_Link{
-	display:table;
-	margin-left:auto;
-	margin-right:auto;
-	
+	margin-left: 0%;
 }
 
 #currentPaging{
@@ -84,7 +60,7 @@ pre{
 	<!--공연 리스트 -->
 	<div align="center">
 		<form name="performanceList" id="performanceList" method="post">
-			<table border="1" frame="hsides" rules="rows" cellpadding="3" cellspacing="0">
+			<table border="1"  cellpadding="3" cellspacing="0" frame="hsides" rules="rows">
 				<tr>
 					<th class="performanceTh">이미지</th>
 					<th class="performanceTh" colspan="2">공연 정보</th>
@@ -100,16 +76,28 @@ pre{
 				
 				<c:forEach items="${list}" var="list">	
 					<tr>
-						<td><a target="_blank" href="${list.eventLink}"><img class="play_img" src="../storage/${list.image1}" width="350px" height="350px"></a></td>
-				
-						<td><span class="play_Title">제 목 : </span><span class="play_Title_content">${list.imageName}</span><br><p></p>
-							<div class="play_Title">내 용 : </div><p><pre>${list.eventContent}</pre><br><p></p>
-							<span class="play_Title">일 시 : </span><span class="play_startDate">${list.startDate}</span> ~ <span>${list.endDate}</span><br><p></p>
-							<span class="play_Title_Link">링 크 : </span><span class="play_Link"><a target="_blank" href="${list.eventLink}">${list.eventLink}</a></span><br><p></p>
-							<div align="center"><input type="button" value="예약하기"></div>
-						</td>
+						<td rowspan="5"><a target="_blank" href="${list.eventLink}"><img class="play_img" src="../storage/${list.image1}" width="300px" height="350px"></a></td>
 						
+						<td width="200px"><div>제 목</div></td>
+						<td><span class="play_Title_content">${list.imageName}</span></td>
 					</tr>
+					<tr>
+						<td>공연 정보</td>
+						<td><pre>${list.eventContent}</pre></td>
+					</tr>
+					<tr>
+						<td>일 시</td>
+						<td><span>${list.startDate}</span> ~ <span>${list.endDate}</span></td>
+					</tr>
+					<tr>
+						<td>링 크</td>
+						<td><span><a target="_blank" href="${list.eventLink}">홈페이지 방문</a></span></td>
+					</tr>
+					<tr>
+						<td colspan="2"><div align="center"><input type="button" value="예약하기"></div></td>
+					</tr>
+					
+					
 				</c:forEach>
 				
 			</table>

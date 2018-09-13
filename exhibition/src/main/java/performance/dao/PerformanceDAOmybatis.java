@@ -17,10 +17,8 @@ public class PerformanceDAOmybatis implements PerformanceDAO {
 	@Autowired
 	private SqlSession sqlSession;
 
-	public List<PerformanceDTO> getPerformance() {
-		
+	public List<EventboardDTO> getPerformance() {
 		return sqlSession.selectList("performanceSQL.getPerformance");
-		
 	}
 	
 	//공연일정 리스트 가져오는 메소드
@@ -41,6 +39,10 @@ public class PerformanceDAOmybatis implements PerformanceDAO {
 	//전시회 일정 리스트 가져오는 메소드 
 	public List<EventboardDTO> getExhibitionList(Map<String, Integer> map) {
 		return sqlSession.selectList("performanceSQL.getExhibitionList", map);
+	}
+
+	public List<EventboardDTO> getPerformancePlay() {
+		return sqlSession.selectList("performanceSQL.getPerformancePlay");
 	}
 	
 }

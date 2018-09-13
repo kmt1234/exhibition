@@ -1,8 +1,9 @@
  $(document).ready(function(){
+	
 	 //슬라이더 이미지 불러오기
 	 $.ajax({
 		type : 'GET',
-		url : '/exhibition/customerService/getImageboardSlide.do',
+		url : '/exhibition/customerService/getImageboardSlide.do?code='+$("#code").val(),
 		dataType : 'json',
 		success : function(data){
 			//alert(JSON.stringify(data)); 데이터 확인
@@ -23,9 +24,6 @@
 								}))).appendTo('.slide',{
 									style : 'width : 2400px; list-style: none; font-size: 0'
 								});
-					
-					
-					
 					
 				//	$('#imageSlide').attr('src','../storage/'+item.image1+'');
 				});//each

@@ -29,12 +29,12 @@ if(day.length == 1){
 
 var dataSet = [
 	<c:forEach var="listView" items="${listView}" varStatus="status">
-		<c:if test="${listView.code == '1'}">
+		<c:if test="${listView.postSelect == '1'}">
 		<c:if test="${listView.startDate != ''}">
 		    <c:forEach begin="0" end="${listView.daysSize-1}" step="1" varStatus="dayStatus">
-		    	{"title" : '<c:out value="${listView.title}"/>',
+		    	{"title" : '<c:out value="${listView.imageName}"/>',
 		    	"start" : '<c:out value="${listView.days[dayStatus.index]}"/>',
-		    	"imageurl" : "../img/Ev.png",
+		    	"imageurl" : "../img/Ex.png",
 		    	"url" : "/exhibition/main/index.do",
 		    	"color" : "#ffffff",
 		    	"textColor" : "#000000"
@@ -49,7 +49,7 @@ var dataSet = [
 
 
 	$(document).ready(function() {
-	    	  $.ajax({
+	    	 /*  $.ajax({
 	        	  type : 'GET',
 	        	  url : '/exhibition/performance/getPerformance.do',
 	        	  dataType : 'text',
@@ -57,7 +57,7 @@ var dataSet = [
 	
 	        	  }
 	        	  
-	        	}); 
+	        	});  */
 
 	    	  
 		$('#calendar').fullCalendar({
@@ -96,7 +96,7 @@ var dataSet = [
 <body>	
 <!-- 메인 화면 -->
 	<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
-		전시회
+		박람회
 		<span class="h-light">일정</span>
 	</h2>
 	

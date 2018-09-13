@@ -46,6 +46,17 @@ public class RentalController {
 		
 		return mav;
 	}
+	//전시회&박람회 부스 위치에 대한 페이지를 불러온다.
+	@RequestMapping(value="R_businessRoom", method=RequestMethod.GET)
+	public ModelAndView R_businessRoom() {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("display","/rental/R_businessRoom.jsp");
+		mav.setViewName("/rental/R_rentalForm");
+		
+		return mav;
+	}
+	
+	
 	//공연장의 위치에 대한 페이지를 불러온다.
 	@RequestMapping(value="R_performance", method=RequestMethod.GET)
 	public ModelAndView R_performance() {

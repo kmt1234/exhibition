@@ -42,16 +42,6 @@
 				이미지
 				<span class="h-light">리스트</span>
 			</h2>
-			<!-- 버튼 -->
-			 <!-- <div>
-				<input type="button" value="달력으로 보기" 
-				style="width:150; height:35; background-color:#ffffff;
-				 border:1 solid #f702e7; float: left">
-				
-				<input type="button" value="리스트로 보기" 
-				style="width:150; height:35; font-family:돋움; background-color:#ffffff;
-				 border:1 solid #f702e7; float: left">
-			</div> -->
 			<br>
 			<br>
 			

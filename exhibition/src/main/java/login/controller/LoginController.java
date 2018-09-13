@@ -58,6 +58,7 @@ public class LoginController {
 			session.setAttribute("homepageMember", memberDTO); // 회원 전체 정보
 			session.setAttribute("homepageMemberName", memberDTO.getM_Id()); // 회원 이름
 			session.setAttribute("code", memberDTO.getCode()); // 코드 정보 넣어야함(1은 개인)
+			System.out.println(memberDTO.getCode());
 			return "exist";
 		}
 	}
@@ -173,11 +174,11 @@ public class LoginController {
 		session.setAttribute("DTO", DTO);
 
 		ModelAndView mav = new ModelAndView();
-
+		
 		if (code == 1) {
-			mav.setViewName("/login/memberMypage"); // 개인마이페이지
+			mav.setViewName("/customerService/C_personalInformationForm"); // 개인마이페이지
 		} else if (code == 2) {
-			mav.setViewName("/login/companyMypage"); // 법인마이페이지
+			mav.setViewName("/customerService/C_companyInformationForm"); // 법인마이페이지
 		}
 
 		return mav;
