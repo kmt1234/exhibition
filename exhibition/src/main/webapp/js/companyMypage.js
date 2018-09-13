@@ -25,7 +25,7 @@ $(document).ready(function(){
 	//1차 비밀번호 입력 시, 
 	$('#C-modify-pwd').blur(function(){
 		if(!Mm_regPwd.test($('#C-modify-pwd').val())){
-			$('.C-modify-pwd-Span').text('비밀번호는 6-24자 영문 대소문자 입니다').css('color','white').css('font-size','10px');
+			$('.C-modify-pwd-Span').text('비밀번호는 6-24자 영문 대소문자 입니다').css('color','red').css('font-size','10px');
 			$('#C-modify-pwd').css({'border':'1px solid red', 'background-color':'#f4d2d2'});
 			pwd = 'fail';
 		}else{
@@ -39,11 +39,11 @@ $(document).ready(function(){
 	//2차 비밀번호 입력 시,
 	$('#C-modify-repwd').blur(function(){
 		if(!Mm_regPwd.test($('#C-modify-repwd').val())){
-			$('.C-modify-repwd-Span').text('비밀번호는 6-24자 영문 대소문자 입니다').css('color','white').css('font-size','10px');
+			$('.C-modify-repwd-Span').text('비밀번호는 6-24자 영문 대소문자 입니다').css('color','red').css('font-size','10px');
 			$('#C-modify-repwd').css({'border':'1px solid red', 'background-color':'#f4d2d2'});
 			repwd = 'fail';
 		}else if($('#C-modify-repwd').val()!=$('#C-modify-pwd').val()){
-			$('.C-modify-repwd-Span').text('비밀번호가 일치하지 않습니다').css('color','white').css('font-size','10px');
+			$('.C-modify-repwd-Span').text('비밀번호가 일치하지 않습니다').css('color','red').css('font-size','10px');
 			$('#C-modify-repwd').css({'border':'1px solid red', 'background-color':'#f4d2d2'});
 			repwd = 'fail';
 		}else{
@@ -56,7 +56,7 @@ $(document).ready(function(){
 	//업태 유효성검사,
 	$('#C-modify-condition').blur(function(){
 		if(C-modify-condition.val()==""){
-			$('.C-modify-condition-Span').text('업태를 종목을 작성해주세요').css('color','white').css('font-size','10px');
+			$('.C-modify-condition-Span').text('업태를 종목을 작성해주세요').css('color','red').css('font-size','10px');
 			$('#C-modify-condition').css({'border':'1px solid red', 'background-color':'#f4d2d2'});
 		}else{
 			$('.C-modify-condition-Span').text('');
@@ -67,7 +67,7 @@ $(document).ready(function(){
 	//상세주소 유효성검사,
 	$('#C-modify-address2').blur(function(){
 		if($('#C-modify-address2').val()==""){
-			$('.C-modify-address2-Span').text('상세주소를 작성해주세요').css('color','white').css('font-size','10px');
+			$('.C-modify-address2-Span').text('상세주소를 작성해주세요').css('color','red').css('font-size','10px');
 			$('#C-modify-address2').css({'border':'1px solid red', 'background-color':'#f4d2d2'});
 		}else{
 			$('.C-modify-address2-Span').text('');
@@ -79,7 +79,7 @@ $(document).ready(function(){
 	//핸드폰 입력 시,
 	$('#C-modify-phone').blur(function(){
 		if(!Mm_regPhone.test($('#C-modify-phone').val())){
-			$('.C-modify-phone-Span').text('핸드폰 번호 양식이 맞지 않습니다').css('color','white').css('font-size','10px');
+			$('.C-modify-phone-Span').text('핸드폰 번호 양식이 맞지 않습니다').css('color','red').css('font-size','10px');
 			$('#C-modify-phone').css({'border':'1px solid red', 'background-color':'#f4d2d2'});
 			phone = 'fail';
 		}else{
@@ -93,7 +93,7 @@ $(document).ready(function(){
 	//이메일 입력 시,
 	$('#C-modify-email').blur(function(){
 		if(!Mm_regEmail.test($('#C-modify-email').val())){
-			$('.C-modify-email-Span').text('이메일 양식이 맞지 않습니다').css('color','white').css('font-size','10px');
+			$('.C-modify-email-Span').text('이메일 양식이 맞지 않습니다').css('color','red').css('font-size','10px');
 			$('#C-modify-email').css({'border':'1px solid red', 'background-color':'#f4d2d2'});
 			email = 'fail';
 		}else{
@@ -106,17 +106,17 @@ $(document).ready(function(){
 	//사업자수정
 	$('#C-modify-modify').click(function(){
 		if($('#C-modify-pwd').val()=='' || $('#C-modify-repwd').val()==''){
-			$('.C-modify-result-Span').text('비밀번호를 입력하세요').css('color','white').css('font-size','10px');
+			$('.C-modify-result-Span').text('비밀번호를 입력하세요').css('color','red').css('font-size','10px');
 		}else if($('#C-modify-pwd').val() != $('#C-modify-repwd').val()){
-			$('.C-modify-result-Span').text('비밀번호가 일치하지 않습니다').css('color','white').css('font-size','10px');
+			$('.C-modify-result-Span').text('비밀번호가 일치하지 않습니다').css('color','red').css('font-size','10px');
 		}else if($('#C-modify-condition').val()==''){
-			$('.C-modify-result-Span').text('업태 종목을 입력하세요').css('color','white').css('font-size','10px');	
+			$('.C-modify-result-Span').text('업태 종목을 입력하세요').css('color','red').css('font-size','10px');	
 		}else if($('#C-modify-address2').val()==''){
-			$('.C-modify-result-Span').text('상세주소를 입력하세요').css('color','white').css('font-size','10px');	
+			$('.C-modify-result-Span').text('상세주소를 입력하세요').css('color','red').css('font-size','10px');	
 		}else if($('#C-modify-phone').val()==''){
-			$('.C-modify-result-Span').text('핸드폰 번호 입력하세요').css('color','white').css('font-size','10px');
+			$('.C-modify-result-Span').text('핸드폰 번호 입력하세요').css('color','red').css('font-size','10px');
 		}else if($('#C-modify-email').val()==''){
-			$('.C-modify-result-Span').text('이메일 입력하세요').css('color','white').css('font-size','10px');
+			$('.C-modify-result-Span').text('이메일 입력하세요').css('color','red').css('font-size','10px');
 		}else if(pwd=='success' && repwd=='success' && phone=='success' && email=='success'){			
 			$.ajax({
 				type : 'POST',

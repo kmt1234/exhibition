@@ -3,7 +3,38 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="performanceSQL">
-	<select id="getPerformance" resultType="performance">
-		select * from calendar2
+	<select id="getPerformance" resultType="eventboard">
+		select * from eventboard
+	</select>
+	
+	<select id="getPerformancePlay" resultType="eventboard">
+		select * from eventboard_play
+	</select>
+	
+	<!--공연 일정 리스트 가져오기 -->
+	<select id="getPlayList" parameterType="java.util.Map" resultType="eventboard">
+		select * from(
+		select rownum rn, tt.* from(
+		select * from eventboard_play order by seq desc)tt
+		)where rn <![CDATA[ >= ]]> #{startNum} and rn<![CDATA[<=]]> #{endNum}
+	</select>
+	
+	<!--공연일정 리스트 총 글수 가져오는 메소드 -->
+	<select id="getPlayListTotalA" resultType="Integer">
+		select count(*) from eventboard_play
+	</select>
+	
+	
+	<!--전시회일정 리스트 총 글수 가져오는 메소드  -->
+	<select id="getExhibitionListTotalA" resultType="Integer">
+		select count(*) from eventboard
+	</select>
+	
+	<!--전시회일정 리스트 가져오는 메소드 -->
+	<select id="getExhibitionList" parameterType="java.util.Map" resultType="eventboard">
+		select * from(
+		select rownum rn, tt.* from(
+		select * from eventboard order by seq desc)tt
+		)where rn <![CDATA[ >= ]]> #{startNum} and rn<![CDATA[<=]]> #{endNum}
 	</select>
 </mapper>

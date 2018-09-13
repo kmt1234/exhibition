@@ -3,22 +3,23 @@ package performance.controller;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Iterator;
-
+import java.util.HashMap;
 import java.util.List;
-import java.util.TreeSet;
-
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
+import customerService.bean.EventboardDTO;
 import performance.bean.PerformanceDTO;
+import performance.bean.PerformancePaging;
 import performance.dao.PerformanceDAO;
 import rental.bean.ExhibitionDTO;
+import rental.dao.ExhibitionDAO;
+
 
 @RequestMapping(value="performance")
 @Component
@@ -26,7 +27,10 @@ public class PerformanceController {
 /*	전역변수 설정*/
 	@Autowired
 	private PerformanceDAO performanceDAO;
-	
+	@Autowired
+	private PerformancePaging performancePaging;
+	@Autowired
+	private ExhibitionDAO exhibitionDAO;
 	
 /* 사용메서드*/
 	/*일정정보에 관한 내용이 들어 있는 페이지로 이동~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -44,10 +48,10 @@ public class PerformanceController {
 	@RequestMapping(value="P_allSchedule", method=RequestMethod.GET)
 	public ModelAndView P_allSchedule(ModelMap modelMap) {
 
-			List<PerformanceDTO> list = performanceDAO.getPerformance();
-				 
-			for(PerformanceDTO data : list) {
-				data.setSize(list.size());
+			List<EventboardDTO> list = performanceDAO.getPerformance();
+			list.addAll(performanceDAO.getPerformancePlay());
+			
+			for(EventboardDTO data : list) {
 				data.setStartDate(data.getStartDate().substring(0, 10));
 				data.setEndDate(data.getEndDate().substring(0, 10));
 				data.setDays(getDiffDays(data.getStartDate().substring(0, 10).replaceAll("-", "").replaceAll("/",""), data.getEndDate().substring(0, 10).replaceAll("-", "").replaceAll("/","")));
@@ -101,10 +105,9 @@ public class PerformanceController {
 	//공연일정를 데이터베이스에서 불러와 달력으로 보내준다.
 	@RequestMapping(value="P_performanceSchedule", method=RequestMethod.GET)
 	public ModelAndView P_performanceSchedule(ModelMap modelMap) {
-		List<PerformanceDTO> list = performanceDAO.getPerformance();
+		List<EventboardDTO> list = performanceDAO.getPerformancePlay();
 		
-		for(PerformanceDTO data : list) {
-			data.setSize(list.size());
+		for(EventboardDTO data : list) {
 			data.setStartDate(data.getStartDate().substring(0, 10));
 			data.setEndDate(data.getEndDate().substring(0, 10));
 			data.setDays(getDiffDays(data.getStartDate().substring(0, 10).replaceAll("-", ""), data.getEndDate().substring(0, 10).replaceAll("-", "")));
@@ -128,14 +131,55 @@ public class PerformanceController {
 		return mav ;
 	}
 	
-	
+	//공연일정 리스트
+	@RequestMapping(value="P_performanceList", method=RequestMethod.GET)
+	public ModelAndView P_performanceList(@RequestParam(required=false , defaultValue="1") String pg) {
+		
+		//Paging
+		int endNum = Integer.parseInt(pg)*9;
+		int startNum = endNum-8;
+		
+		Map<String,Integer> map = new HashMap<String,Integer>();
+		map.put("endNum", endNum);
+		map.put("startNum", startNum);
+		
+		int totalA = performanceDAO.getPlayListTotalA();
+		
+		//Paging
+		performancePaging.setCurrentPage(Integer.parseInt(pg));
+		performancePaging.setPageBlock(5);
+		performancePaging.setPageSize(9);
+		performancePaging.setTotalA(totalA);
+
+		performancePaging.makePagingHTML();
+		
+		//DB
+		List<EventboardDTO> list = performanceDAO.getPlayList(map);
+		
+		ModelAndView mav = new ModelAndView();
+		
+		//String 타입 날짜를 Date 형식으로 변환
+		for(int i = 0; i < list.size(); i++) {
+			list.get(i).setStartDate(list.get(i).getStartDate().substring(0, 10));
+			list.get(i).setEndDate(list.get(i).getEndDate().substring(0, 10));
+		}
+		
+		mav.addObject("pg", pg);
+		mav.addObject("list", list);
+		mav.addObject("listSize", list.size()+"");
+		mav.addObject("performancePaging", performancePaging);
+		mav.addObject("display", "/performance/P_performanceList.jsp");
+		mav.setViewName("P_performanceForm");
+		return mav;
+		
+	}	
 	
 	//전시회일정를 데이터베이스에서 불러와 달력으로 보내준다.
 	@RequestMapping(value="P_exhibitionSchedule", method=RequestMethod.GET)
 	public ModelAndView P_exhibitionSchedule(ModelMap modelMap) {
-		List<PerformanceDTO> list = performanceDAO.getPerformance();
+		List<EventboardDTO> list = performanceDAO.getPerformance();
 		
-		for(PerformanceDTO data : list) {
+		for(EventboardDTO data : list) {
 			data.setStartDate(data.getStartDate().substring(0, 10));
 			data.setEndDate(data.getEndDate().substring(0, 10));
 			data.setDays(getDiffDays(data.getStartDate().substring(0, 10).replaceAll("-", ""), data.getEndDate().substring(0, 10).replaceAll("-", "")));
@@ -157,6 +201,48 @@ public class PerformanceController {
 		mav.setViewName("/performance/P_performanceForm");
 		return mav ;
 	}
+	
+	//전시회 일정 리스트
+	@RequestMapping(value="P_exhibitionList", method=RequestMethod.GET)
+	public ModelAndView P_exhibitionList(@RequestParam(required=false , defaultValue="1") String pg) {
+		
+		//Paging
+		int endNum = Integer.parseInt(pg)*9;
+		int startNum = endNum-8;
+		
+		Map<String,Integer> map = new HashMap<String,Integer>();
+		map.put("endNum", endNum);
+		map.put("startNum", startNum);
+		
+		int totalA = performanceDAO.getExhibitionListTotalA();
+		
+		//Paging
+		performancePaging.setCurrentPage(Integer.parseInt(pg));
+		performancePaging.setPageBlock(5);
+		performancePaging.setPageSize(9);
+		performancePaging.setTotalA(totalA);
+
+		performancePaging.makePagingHTML_exhibition();
+		
+		//DB
+		List<EventboardDTO> list = performanceDAO.getExhibitionList(map);
+		
+		ModelAndView mav = new ModelAndView();
+		//String 타입 날짜를 Date 형식으로 변환
+		for(int i = 0; i < list.size(); i++) {
+			list.get(i).setStartDate(list.get(i).getStartDate().substring(0, 10));
+			list.get(i).setEndDate(list.get(i).getEndDate().substring(0, 10));
+		}
+			
+		mav.addObject("pg", pg);
+		mav.addObject("list", list);
+		mav.addObject("listSize", list.size()+"");
+		mav.addObject("performancePaging", performancePaging);
+		mav.addObject("display", "/performance/P_exhibitionList.jsp");
+		mav.setViewName("P_performanceForm");
+		return mav;
+	}
+	
 	
 	//달력 메소드
 	public static String[] getDiffDays(String fromDate, String toDate) {

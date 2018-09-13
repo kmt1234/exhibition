@@ -4,15 +4,23 @@ $(document).ready(function(){
 	$('#T_parkingB1Map').hide();
 	$('#T_parkingB2Map').hide();
 	$('#T_parkingPriceMap').hide();
-	
+	$('#jamwonDiv').hide();
+	$('#sapyungDiv').hide();
+	$('#seochoDiv').hide();
+	$('#banpoStationDiv').hide();
 	
 	//주차안내클릭
 	$('#parkingInform').click(function(){
-		$('#carMap').show();
 		$('#T_parkingPriceMap').hide();
 		$('#T_parkingB2Map').hide();
 		$('#parkingDiv').hide();
 		$('#T_parkingB1Map').hide();
+		$('#jamwonDiv').hide();
+		$('#sapyungDiv').hide();
+		$('#seochoDiv').hide();
+		$('#banpoStationDiv').hide();
+		$('#carMap').show();
+		$('#banpoDiv').show();
 	});
 	
 	
@@ -50,6 +58,61 @@ $(document).ready(function(){
 		$('#parkingDiv').hide();
 		$('#T_parkingB2Map').hide();
 		$('#T_parkingPriceMap').show();
+	});
+	
+	$('#banpoBtn').click(function(){
+		$('#busMap').hide();
+		$('#subwayMap').hide();
+		$('#jamwonDiv').hide();
+		$('#sapyungDiv').hide();
+		$('#seochoDiv').hide();
+		$('#banpoStationDiv').hide();
+		$('#banpoDiv').show();
+		
+	});
+	
+	$('#jamwonBtn').click(function(){
+		$('#busMap').hide();
+		$('#subwayMap').hide();
+		$('#sapyungDiv').hide();
+		$('#seochoDiv').hide();
+		$('#banpoStationDiv').hide();
+		$('#banpoDiv').hide();
+		$('#jamwonDiv').show();
+		
+	});
+	
+	$('#sapyungBtn').click(function(){
+		$('#busMap').hide();
+		$('#subwayMap').hide();
+		$('#seochoDiv').hide();
+		$('#banpoStationDiv').hide();
+		$('#banpoDiv').hide();
+		$('#jamwonDiv').hide();
+		$('#sapyungDiv').show();
+		
+	});
+	
+	$('#seochoBtn').click(function(){
+		$('#busMap').hide();
+		$('#subwayMap').hide();
+		$('#sapyungDiv').hide();
+		$('#banpoStationDiv').hide();
+		$('#banpoDiv').hide();
+		$('#jamwonDiv').hide();
+		$('#seochoDiv').show();
+		
+	});
+	
+	$('#banpoStationBtn').click(function(){
+		$('#busMap').hide();
+		$('#subwayMap').hide();
+		$('#sapyungDiv').hide();
+		$('#seochoDiv').hide();
+		$('#banpoDiv').hide();
+		$('#jamwonDiv').hide();
+		$('#banpoStationDiv').show();
+		
 	});
 	
 

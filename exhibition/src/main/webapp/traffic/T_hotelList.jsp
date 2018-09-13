@@ -30,20 +30,18 @@
 	
 	<div class="ui five column grid container">
 		<!-- 사이드바 메뉴 -->
-		<div class="ui compact menu" style="width: 20%; height: 900px; ">
-		<br><br>
-		<div style="font-size: 22px;">교통/숙박/관광</div><br>
-		<div style="border-bottom: 1px solid black;"></div><br>
-			<div id="T_inform">교통안내</div>
-			<span style="font-size: 7px;">▶</span>
-			<span><a href="T_allForm.do" id="T_Atag">오시는길</a></span><br>
-			<span style="font-size: 7px;">▶</span>
-			<span><a href="T_parkingAllForm.do" id="T_Atag">주차안내</a></span><br><br>
-			<div id="T_hotel" style="cursor:pointer; font-size: 18px;">숙박안내</div><br>
-			<div id="T_inform">관광안내</div><br>
+		<div class="ui compact menu" style="width: 20%; height: 977px; ">
+			<a class="item" href="T_allForm.do" id="T_map">교통안내</a> 
+			<ul class="ui list" id="T_mapList" style="text-align: center; width: 120px">
+			  <li><a href="T_allForm.do">오시는 길</a></li>
+			  <li><a href="T_parkingAllForm.do">주차 안내</a></li>
+			</ul>
+			<a class="item" href="P_performanceScheduleForm.do">숙박안내</a> 
+			<a class="item" href="P_exhibitionScheduleForm.do">관광안내</a>
+
 		</div>
 		<!-- 메인 화면 -->
-	<div class="ui compact menu" style="width: 80%; height: 900px;" >
+		<div class="ui compact menu" style="width: 80%; height: 900px;" >
 		<!-- 타이틀 -->
 		<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
 			숙박
@@ -60,7 +58,7 @@
 					</tr>
 					<tr>
 						<td>TEL)${list.eventPlace}</td>
-						<td><i class="home icon" location.href="${list.eventLink}"></i></td>
+						<td><i class="home icon" onclick="window.open('${list.eventLink }')"></i></td>
 					</tr>
 			</c:if>
 		</c:forEach>

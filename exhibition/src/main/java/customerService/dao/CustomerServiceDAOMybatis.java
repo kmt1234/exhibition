@@ -19,64 +19,78 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	public void C_notice_Write(Map<String, String> map) {
-		sqlSession.insert("customerServiceSQL.C_notice_Write", map);		
+	public CustomerServiceDTO getNoticeInfo(String seq) {
+	      return sqlSession.selectOne("customerServiceSQL.getNoticeInfo", seq);
+   }
+   public void C_notice_Write(Map<String, String> map) {
+      sqlSession.insert("customerServiceSQL.C_notice_Write", map);      
+   }
+   public void C_notice_Modify(Map<String, String> map) {
+      sqlSession.update("customerServiceSQL.C_notice_Modify", map);
+   }
+   public int getTotalC_notice() {
+		return sqlSession.selectOne("customerServiceSQL.getTotalC_notice");
 	}
-	public void C_notice_Modify(Map<String, String> map) {
-		sqlSession.update("customerServiceSQL.C_notice_Modify", map);
-	}
+   public void C_checkInquire(CustomerServiceDTO customerServiceDTO) {
+      sqlSession.insert("customerServiceSQL.C_checkInquire", customerServiceDTO);
+   }
+   public List<CustomerServiceDTO> getQnA_Classify(String classify) {
+      return sqlSession.selectList("customerServiceSQL.getQnA_Classify", classify);
+   }
+   public void C_QnA_checkWrite(Map<String, String> map) {
+      sqlSession.insert("customerServiceSQL.C_QnA_checkWrite", map);      
+   }
+
+   public void C_contactList_checkWrite(Map<String, String> map) {
+      sqlSession.insert("customerServiceSQL.C_contactList_checkWrite", map);      
+   }
 
 
-	public void C_inquire(CustomerServiceDTO customerServiceDTO) {
-		sqlSession.insert("customerServiceSQL.C_inquire", customerServiceDTO);
-	}
+   public List<CustomerServiceDTO> getNoticeList(Map<String, Integer> map) {
+      return sqlSession.selectList("customerServiceSQL.getNoticeList", map);
+   }
+
+
+   public CustomerServiceDTO getInfo(String seq) {
+      return sqlSession.selectOne("customerServiceSQL.getInfo", seq);
+   }
+
+
+   public void C_notice_Delete(String seq) {
+      sqlSession.delete("customerServiceSQL.C_notice_Delete", seq);
+   }
+
+
+
+
+   public List<CustomerServiceDTO> getInquireList() {
+      return sqlSession.selectList("customerServiceSQL.getInquireList");
+   }
+
+
+   public CustomerServiceDTO getInquireInfo(String seq) {
+      return sqlSession.selectOne("customerServiceSQL.getInquireInfo", seq);
+   }
+   
+   public CustomerServiceDTO getReplyInfo(String seq) {
+      return sqlSession.selectOne("customerServiceSQL.getReplyInfo", seq);
+   }
+
+   public List<CustomerServiceDTO> getQnAList() {
+      return sqlSession.selectList("customerServiceSQL.getQnAList");
+   }
+
+
+   public List<CustomerServiceDTO> getContactList() {
+      return sqlSession.selectList("customerServiceSQL.getContactList");
+   }
+
+	/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~```*/
 	
-	public void C_QnA_Write(Map<String, String> map) {
-		sqlSession.insert("customerServiceSQL.C_QnA_Write", map);		
-	}
-
-	public void C_contactList_Write(Map<String, String> map) {
-		sqlSession.insert("customerServiceSQL.C_contactList_Write", map);		
-	}
-
-
-	public List<CustomerServiceDTO> getNoticeList(Map<String, Integer> map) {
-		return sqlSession.selectList("customerServiceSQL.getNoticeList");
-	}
-
-
-	public CustomerServiceDTO getInfo(String seq) {
-		return sqlSession.selectOne("customerServiceSQL.getInfo", seq);
-	}
-
-
-	public void C_notice_Delete(String seq) {
-		sqlSession.delete("customerServiceSQL.C_notice_Delete", seq);
-	}
-
-
-
-
-	public List<CustomerServiceDTO> getInquireList() {
-		return sqlSession.selectList("customerServiceSQL.getInquireList");
-	}
-
-
-	public CustomerServiceDTO getInquireInfo(String seq) {
-		return sqlSession.selectOne("customerServiceSQL.getInquireInfo", seq);
-	}
-
-
-	public List<CustomerServiceDTO> getQnAList() {
-		return sqlSession.selectList("customerServiceSQL.getQnAList");
-	}
-
-
-	public List<CustomerServiceDTO> getContactList() {
-		return sqlSession.selectList("customerServiceSQL.getContactList");
-	}
-
-public void imageboardWrite(ImageboardDTO imageboardDTO) {
+	
+	
+	
+	public void imageboardWrite(ImageboardDTO imageboardDTO) {
 		sqlSession.insert("customerServiceSQL.imageboardWrite",imageboardDTO);
 	}
 	public int getImageboardTotalA() {
@@ -148,17 +162,20 @@ public void imageboardWrite(ImageboardDTO imageboardDTO) {
 	public void hotelInfoWrite(HotelboardDTO hotelboardDTO) {
 		sqlSession.insert("customerServiceSQL.hotelInfoWrite", hotelboardDTO);
 	}
+	//호텔리스트
 	public List<HotelboardDTO> hotelList() {
 		return sqlSession.selectList("customerServiceSQL.hotelList");
 	}
+	//호텔리스트 삭제
+	public void hotelDelete(List<Integer> list) {
+		sqlSession.delete("customerServiceSQL.hotelDelete", list);
+	}
+	//호텔이미지 삭제하기 위해 리스트 불러오기
+		public List<HotelboardDTO> hotelImageDel(List<Integer> list) {
+			return sqlSession.selectList("customerServiceSQL.hotelImageDel",list);
+	}
 	
-	public CustomerServiceDTO getNoticeInfo(String seq) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	public int getTotalC_notice() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	
+	
 
 }

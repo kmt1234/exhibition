@@ -74,7 +74,7 @@
 					<div>${registerMessage}</div>
 				</c:if>
 				
-				<c:if test="${homepageMember == nul}">
+				<c:if test="${homepageMember == null}">
 					<div>&nbsp;</div>
 					<div class="circular ui icon button" id="M_member"><i class="dropdown icon"></i>회원가입
 						<div class="ui member1 dropdown">
@@ -119,7 +119,7 @@
 					<div class="menu">
 						<div class="item" id="P_allSchedule">전체일정</div>
 						<div class="item" id="P_performanceSchedule">공연일정</div>
-						<div class="item" id="P_exhibitionSchedule">전시회일정</div>
+						<div class="item" id="P_exhibitionSchedule">박람회일정</div>
 					</div>
 				</div>
 			</div>
@@ -134,26 +134,30 @@
 			</div>
 			<div class="ui compact menu" style="width: 20%;">
 				<div class="ui simple dropdown item">
-					<span id="T_infoForm">교통/숙박/관광</span>
+					<span id="T_allForm">교통/숙박/관광</span>
 					<div class="menu">
-						<div class="item" id="T_allForm">교통안내</div>
+						<div class="item" id="T_allFormS">교통안내</div>
 						<div class="item" id="T_hotelForm">숙박안내</div>
 					</div>
 				</div>
 			</div>
 			<div class="ui compact menu" style="width: 20%;">
-				<div class="ui simple dropdown item">
-					<span id="C_customerServiceForm" >고객센터</span>
-					<div class="menu">
-						<div class="item" id="C_notice">공지사항</div>
-						<div class="item" id="C_emailConfirmForm">고객의 소리</div>
-						<div class="item" id="C_QnAForm">자주묻는 질문</div>
-						<div class="item" id="C_contactListForm">주요시설 연락처</div>
-						<div class="item" id="C_personalInformation">개인정보</div>
-						<div class="item" id="C_boardAdd">게시판 추가</div><!--세션값에 따라 보이게 할 예정-->
-					</div>
-				</div>
-			</div>
+	            <div class="ui simple dropdown item">
+	               <span id="C_customerServiceForm" >고객센터</span>
+	               <div class="menu">
+	                  <div class="item" id="C_notice">공지사항</div>
+	                  <div class="item" id="C_emailConfirm">고객의 소리</div>
+	                  <div class="item" id="C_QnA">자주묻는 질문</div>
+	                  <div class="item" id="C_contactList">주요시설 연락처</div>
+	                  <c:if test="${code!=null }">
+	                  	<div class="item" id="C_mypage">개인정보</div>
+	                  </c:if>
+	                  <c:if test="${code=='3'} ">
+	                 	 <div class="item" id="C_boardAdd">게시판 추가</div><!--세션값에 따라 보이게 할 예정-->
+	               	  </c:if>	
+	               </div>
+	            </div>
+		    </div>
 			<div class="ui compact menu" style="width: 20%;">
 				<div class="ui simple dropdown item">
 					<span id="I_infoForm">소개</span> 
@@ -165,7 +169,7 @@
 			</div>
 		</div>
 	</header>
-	
+	<input type="hidden" value="${code}" id="codeName">
 <!--개인회원 회원가입 양식 페이지 인클루드-->
 <jsp:include page="../member/writeForm.jsp"/>
 <!--기업회원 회원가입 양식 페이지 인클루드  -->
@@ -179,7 +183,7 @@
 	integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
 	crossorigin="anonymous"></script>
 <script src="../semantic/semantic.min.js"></script>
-<script src="../js/index.js" charset="UTF-8"></script>  <!--  -->
+<script src="../js/index.js?ver=1" charset="UTF-8"></script>  <!--  -->
 <script src="../js/member.js" charset="UTF-8"></script> <!--  -->
 <script src="../js/company.js" charset="UTF-8"></script><!--  -->
 <script src="../js/login.js" charset="UTF-8"></script>	<!--  -->

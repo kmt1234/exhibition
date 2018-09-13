@@ -14,4 +14,7 @@
  	<select id="getCalendar" resultType="exhibition">
  		select boothName, C_license, C_tel, C_email, totalRent, code, title, startDate, endDate+1 endDate from exhibitionRental where boothName=#{booth}
  	</select>
+ 	<select id="getAllCalendar" resultType="exhibition">
+ 		select * from exhibitionRental
+ 	</select>
 </mapper>
