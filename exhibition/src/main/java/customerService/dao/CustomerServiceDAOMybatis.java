@@ -179,7 +179,10 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 		int totalA = sqlSession.selectOne("customerServiceSQL.getHotelboardTotalA"); 
 		return totalA;
 	}
-	
+	//박람회 정보 보기(수정하기 위해)
+	public EventboardDTO getEventboard(String seq) {
+		return sqlSession.selectOne("customerServiceSQL.getEventboard", seq);
+	}
 	
 
 }

@@ -242,7 +242,20 @@ public class PerformanceController {
 		mav.setViewName("P_performanceForm");
 		return mav;
 	}
-	
+	//공연 예약하기 폼
+	@RequestMapping(value="performanceBook", method=RequestMethod.GET)
+	public ModelAndView performanceBook(@RequestParam String seq) {
+		
+		//DB
+		EventboardDTO eventboardDTO = performanceDAO.performanceBook(seq);
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("eventboardDTO", eventboardDTO);
+		mav.addObject("display", "/performance/P_performanceBook.jsp");
+		mav.setViewName("P_performanceForm");
+		return mav;
+	}
 	
 	//달력 메소드
 	public static String[] getDiffDays(String fromDate, String toDate) {
