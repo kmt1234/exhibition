@@ -1,5 +1,6 @@
 package main.controller;
 
+import java.lang.ProcessBuilder.Redirect;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,11 +23,14 @@ public class IndexController {
    
    /* 메인페이지 이동~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
    @RequestMapping(value="index", method=RequestMethod.GET)
-   public String index(@RequestParam(required=false, defaultValue="1") String code,Model model ) {
+   public ModelAndView index() {
+	   return new ModelAndView("redirect:/customerService/C_notice.do");
+   }
+   @RequestMapping(value="I_body", method=RequestMethod.GET)
+   public ModelAndView I_body() {
+	   ModelAndView mav = new ModelAndView();
 	   
-	   model.addAttribute("code",code);
-	   model.addAttribute("display","/main/I_body.jsp");
+	   return mav;
 	   
-	   return "/main/index";
    }
 }

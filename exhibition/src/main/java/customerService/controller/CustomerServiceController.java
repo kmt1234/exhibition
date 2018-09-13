@@ -556,10 +556,9 @@ public class CustomerServiceController {
 		ArrayList<ImageboardDTO> list = new ArrayList<ImageboardDTO>();
 		ModelAndView mav = new ModelAndView();
 		String[] str = {"car1.png","car2.JPG","car1.JPG"};
-		System.out.println(str.length);
 		
 		if(code.equals("1")) {
-			for(int i=0; i<3;i++) {
+			for(int i=0; i<str.length;i++) {
 				ImageboardDTO imageboardDTO = new ImageboardDTO();
 				imageboardDTO.setImage1(str[i]);
 				System.out.println(imageboardDTO.getImage1());

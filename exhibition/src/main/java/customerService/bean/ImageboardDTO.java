@@ -16,4 +16,5 @@ public class ImageboardDTO {
 	private String endDate;				//날짜2(종료일)
 	private String eventLink;			//링크
 	private String eventContent;		//소개글(간단한 정보)
+	private String code;
 }
