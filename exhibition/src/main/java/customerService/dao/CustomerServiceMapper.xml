@@ -172,8 +172,11 @@
 
 	
 	<!--메인 슬라이드 용 이미지 불러오기-->
-	<select id="getImageboardSlide" resultType="imageboard">
-		select * from customerImageboard order by seq desc
+	<select id="getImageboardSlide" parameterType="java.util.List">
+		select * from customerImageboard where seq in 
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			${item}
+		</foreach>
 	</select>
 	
 	<!--박람회 업로드 리스트 가져오기  -->

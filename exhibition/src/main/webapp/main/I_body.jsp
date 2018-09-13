@@ -12,7 +12,8 @@
 <section id="mainSection">
 	<div id="mainSlideDiv" class="slide">
 		<ul id="mainSlideUl"></ul>
-		<input type="hidden" id="code" value="${code }">	
+		<input type="hidden" id="code" value="${code }">
+		<input type="hidden" id="list" value="${list }">
 	</div>
 </section>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js"></script>

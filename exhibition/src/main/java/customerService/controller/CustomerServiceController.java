@@ -43,7 +43,7 @@ public class CustomerServiceController {
 	private JavaMailSenderImpl emailSender;
 	@Autowired
 	private ImageboardPaging imageboardPaging;
-	private String filePath = "C:\\Users\\user\\git\\exhibition1\\exhibition\\src\\main\\webapp\\storage\\";
+	private String filePath = "C:\\Users\\user\\git\\exhibition\\exhibition\\src\\main\\webapp\\storage\\";
 	@Autowired
 	private CustomerServicePaging customerServicePaging;
 	
@@ -555,7 +555,7 @@ public class CustomerServiceController {
 	public ModelAndView getImageboardSlide(@RequestParam String code) {
 		ArrayList<ImageboardDTO> list = new ArrayList<ImageboardDTO>();
 		ModelAndView mav = new ModelAndView();
-		String[] str = {"car1.png","car2.JPG","car1.JPG"};
+		String[] str = {"car2.png","p1.jpg","car1.JPG"};
 		
 		if(code.equals("1")) {
 			for(int i=0; i<str.length;i++) {
@@ -575,6 +575,21 @@ public class CustomerServiceController {
 			mav.setViewName("jsonView");
 			
 		}*/
+		
+		return mav;
+	}
+	@RequestMapping(value = "getImageboardSlide1", method = RequestMethod.POST)
+	public ModelAndView getImageboardSlide1(@RequestParam List<Integer> list) {
+			ModelAndView mav = new ModelAndView();
+			for(Integer data : list) {
+				System.out.println(data);
+			}
+			List<ImageboardDTO> list1 = customerServiceDAO.getImageboardSlide(list);
+			
+			mav.addObject("list", list1);
+			mav.setViewName("jsonView");
+			
+
 		
 		return mav;
 	}
