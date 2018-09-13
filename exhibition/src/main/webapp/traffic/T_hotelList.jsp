@@ -67,10 +67,10 @@
 		</h2>
 		<div id="image_DIV">
 			<c:forEach items="${list }" var="list">
-			<div style="float:left; width: 24%;">
+			<div style="float:left; width: 24%; text-align: left;">
 				<img src="../storage/${list.image1}" width="200" height="150"><br>
 				${list.imageName}<br>
-				TEL) ${list.eventPlace}
+				TEL) ${list.eventPlace} &nbsp;
 				<i class="home icon" style="cursor: pointer;" onclick="window.open('${list.eventLink }')"></i>
 				<br><br>
 			</div>
@@ -95,5 +95,6 @@
 function hotelboardPaging(pg){
 	location.href="/exhibition/traffic/T_hotelList.do?pg="+pg
 }
+</script>
 </body>
 </html>

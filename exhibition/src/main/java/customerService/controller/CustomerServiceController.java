@@ -43,7 +43,8 @@ public class CustomerServiceController {
 	private JavaMailSenderImpl emailSender;
 	@Autowired
 	private ImageboardPaging imageboardPaging;
-	private String filePath = "C:\\Users\\user\\git\\exhibition\\exhibition\\src\\main\\webapp\\storage";
+	//파일경로 끝에 \\ <-이거 필요함
+	private String filePath = "C:\\Users\\kmtab\\git\\exhibition\\exhibition\\src\\main\\webapp\\storage\\";
 	@Autowired
 	private CustomerServicePaging customerServicePaging;
 	
