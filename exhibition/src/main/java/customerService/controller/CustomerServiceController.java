@@ -38,6 +38,7 @@ import customerService.bean.ImageboardDTO;
 import customerService.bean.ImageboardPaging;
 import customerService.bean.PlayBookDTO;
 import customerService.dao.CustomerServiceDAO;
+import member.bean.MemberDTO;
 
 @RequestMapping(value = "customerService")
 @Component
@@ -48,7 +49,7 @@ public class CustomerServiceController {
 	private JavaMailSenderImpl emailSender;
 	@Autowired
 	private ImageboardPaging imageboardPaging;
-	private String filePath = "C:\\Users\\user\\git\\exhibition\\exhibition\\src\\main\\webapp\\storage";
+	private String filePath = "C:\\Users\\KTC\\git\\exhibition\\exhibition\\src\\main\\webapp\\storage";
 	@Autowired
 	private CustomerServicePaging customerServicePaging;
 	@Autowired
@@ -553,7 +554,8 @@ public class CustomerServiceController {
 		eventboardDTO.setImage1(fileName);
 		
 		//세션에서 아이디 얻기
-		Object id = session.getAttribute("homepageMember");
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("homepageMember");
+		String id = memberDTO.getM_Id();
 		
 		//String 타입 날짜를 Date 형식으로 변환(연극 기간 구하기)
 		eventboardDTO.setStartDate(eventboardDTO.getStartDate().substring(0, 10).replaceAll("/", "-"));
@@ -598,7 +600,7 @@ public class CustomerServiceController {
 		List<PlayBookDTO> list = new ArrayList<PlayBookDTO>();
 				
 		//예매DB
-		for(int i=0; i < diffDays; i++) {
+		for(int i=0; i <= diffDays; i++) {
 			playBookDTO.setImageName(eventboardDTO.getImageName());	//공연명 등록
 			playBookDTO.setPlayTicket(Integer.parseInt(eventboardDTO.getEventSeats())); //일별 총 티켓 수 등록
 			playBookDTO.setRemainTicket(0);	//일별 잔여 티켓 수 등록
