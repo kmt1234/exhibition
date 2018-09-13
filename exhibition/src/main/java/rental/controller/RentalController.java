@@ -71,9 +71,9 @@ public class RentalController {
 	public ModelAndView R_exhibitionHollDecision(@RequestParam String booth, Model model, ModelMap modelMap) {
 		double rate = 0;
 		if(booth.equals("Booth1") || booth.equals("Booth2")  || booth.equals("Booth3")  || booth.equals("Booth4")  || booth.equals("Booth7")  || booth.equals("Booth8")  || booth.equals("Booth9")  || booth.equals("Booth10")) {
-			rate = 2350*1.0*1.0*2.592;
+			rate = 2350*1.0*1.0*3/*2.592*/;
 		} else if(booth.equals("Booth5") || booth.equals("Booth6")) {
-			rate = 2350*1.0*1.2*6.343;
+			rate = 2350*1.0*1.2*5/*6.343*/;
 		}
 		
 		Date date = new Date();
@@ -138,6 +138,31 @@ public class RentalController {
 		exhibitionDAO.reservationHoll(exhibitionDTO);
 		
 		return "/rental/R_exhibitionOk";
+	}
+	
+	//부스별 총 매출액 보여주는 페이지로 이동
+	@RequestMapping(value="R_salesExhibitionView", method=RequestMethod.GET)
+	public String R_salesExhibitionView() {
+		return "/rental/R_salesExhibitionView";
+	}
+	
+	//부스별 총 매출액 보여주는 컨트롤
+	@RequestMapping(value="R_salesExhibition", method=RequestMethod.POST)
+	public ModelAndView R_salesExhibition(@RequestParam String year, @RequestParam String month) {
+		String salesMon = year.substring(2)+"-"+month+"-"+"01";
+		
+		//부스명, 예약점유 일수, 총 매출액 가져오는 sql
+		List<ExhibitionDTO> list = exhibitionDAO.getSalesExhibition(salesMon);
+		
+		int salesTotalRent = exhibitionDAO.getSalesTotalRentExhibition(salesMon);
+		String salesTotalRentstr = String.format("%,d", salesTotalRent);   
+
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.addObject("salesTotalRent", salesTotalRentstr);
+		mav.setViewName("jsonView");
+		return mav;
 	}
 	
 	

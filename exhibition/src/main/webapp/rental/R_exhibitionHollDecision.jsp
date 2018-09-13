@@ -83,6 +83,16 @@
 	$(document).ready(function(){
 		
 		$('#rentBtn').click(function(){
+			if($('#startDate').val() < '${date}') {
+				$('#writeDiv').text('예약 시작일을 다시 설정해주세요.');
+				return;
+			}
+			
+			if($('#startDate').val() > $('#endDate').val()) {
+				$('#writeDiv').text('예약 종료일이 시작일보다 빠릅니다.');
+				return;
+			}
+			
 			var stDate = new Date($('#startDate').val());
 		    var endDate = new Date($('#endDate').val());
 		 

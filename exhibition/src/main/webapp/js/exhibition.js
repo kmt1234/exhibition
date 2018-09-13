@@ -101,5 +101,9 @@ $(document).ready(function(){
 			location.href="/exhibition/rental/R_exhibitionHollDecision.do?room="+$('#Room5').text();
 		});
 		
-	
+		//부스 매출 보기 페이지로 이동
+		$('#salesExhibitionBtn').click(function(){
+			location.href= "/exhibition/rental/R_salesExhibitionView.do";
+		});
+		
 });
