@@ -34,6 +34,7 @@
 			<a class="item" href="R_rentalForm.do">시설임대</a>
 			<a class="item" href="R_exhibition.do">전시회홀</a> 
 			<a class="item" href="R_performance.do">공연장홀</a> 
+			<a class="item" href="R_businessRoom.do">비즈니스룸</a> 
 		</div>
 		<!-- 메인 화면 -->
 		<div class="ui compact menu" style="width: 80%; height: 900px;" >

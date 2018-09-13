@@ -28,13 +28,13 @@ if(day.length == 1){
 
 var dataSet = [
 	<c:forEach var="listView" items="${listView}" varStatus="status">
-		<c:if test="${listView.code == '2'}">
+		<c:if test="${listView.postSelect == '2'}">
 		<c:if test="${listView.startDate != ''}">
 		    <c:forEach begin="0" end="${listView.daysSize-1}" step="1" varStatus="dayStatus">
-		    	{"title" : '<c:out value="${listView.title}"/>',
+		    	{"title" : '<c:out value="${listView.imageName}"/>',
 		    	"start" : '<c:out value="${listView.days[dayStatus.index]}"/>',
 		    	"url" : "/exhibition/main/index.do",
-		    	"imageurl" : "../img/Ex.png",
+		    	"imageurl" : "../img/Ev.png",
 		    	"color" : "#ffffff",
 			    "textColor" : "#000000"
 		    	} <c:if test="${!dayStatus.last}">,</c:if>
@@ -48,13 +48,13 @@ var dataSet = [
 
 		//이게 몰 의미 하는 걸까??
 	 	$(document).ready(function() {
-		    	  $.ajax({
+		    	 /*  $.ajax({
 		        	  type : 'GET',
 		        	  url : '/exhibition/performance/getPerformance.do',
 		        	  dataType : 'text',
 		        	  success : function(data){
 		        	  }
-		    	  }); 
+		    	  });  */
 
 	    	  
 		$('#calendar').fullCalendar({

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import performance.bean.PerformanceDTO;
 import rental.bean.ExhibitionDTO;
 
 @Transactional
@@ -33,6 +34,11 @@ public class ExhibitionDAOMybatis implements ExhibitionDAO {
 
 	public List<ExhibitionDTO> getCalendar(String booth) {
 		return sqlSession.selectList("exhibitionSQL.getCalendar", booth);
+	}
+
+	public List<ExhibitionDTO> getAllCalendar() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("exhibitionSQL.getAllCalendar");
 	}
 	
 }

@@ -1,11 +1,14 @@
 package performance.controller;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.ModelMap;
@@ -13,10 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
 import customerService.bean.EventboardDTO;
-import performance.bean.PerformanceDTO;
 import performance.bean.PerformancePaging;
 import performance.dao.PerformanceDAO;
+import rental.dao.ExhibitionDAO;
 
 
 @RequestMapping(value="performance")
@@ -27,6 +31,8 @@ public class PerformanceController {
 	private PerformanceDAO performanceDAO;
 	@Autowired
 	private PerformancePaging performancePaging;
+	@Autowired
+	private ExhibitionDAO exhibitionDAO;
 	
 /* 사용메서드*/
 	/*일정정보에 관한 내용이 들어 있는 페이지로 이동~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -44,10 +50,10 @@ public class PerformanceController {
 	@RequestMapping(value="P_allSchedule", method=RequestMethod.GET)
 	public ModelAndView P_allSchedule(ModelMap modelMap) {
 
-			List<PerformanceDTO> list = performanceDAO.getPerformance();
-				 
-			for(PerformanceDTO data : list) {
-				data.setSize(list.size());
+			List<EventboardDTO> list = performanceDAO.getPerformance();
+			list.addAll(performanceDAO.getPerformancePlay());
+			
+			for(EventboardDTO data : list) {
 				data.setStartDate(data.getStartDate().substring(0, 10));
 				data.setEndDate(data.getEndDate().substring(0, 10));
 				data.setDays(getDiffDays(data.getStartDate().substring(0, 10).replaceAll("-", "").replaceAll("/",""), data.getEndDate().substring(0, 10).replaceAll("-", "").replaceAll("/","")));
@@ -101,10 +107,9 @@ public class PerformanceController {
 	//공연일정를 데이터베이스에서 불러와 달력으로 보내준다.
 	@RequestMapping(value="P_performanceSchedule", method=RequestMethod.GET)
 	public ModelAndView P_performanceSchedule(ModelMap modelMap) {
-		List<PerformanceDTO> list = performanceDAO.getPerformance();
+		List<EventboardDTO> list = performanceDAO.getPerformancePlay();
 		
-		for(PerformanceDTO data : list) {
-			data.setSize(list.size());
+		for(EventboardDTO data : list) {
 			data.setStartDate(data.getStartDate().substring(0, 10));
 			data.setEndDate(data.getEndDate().substring(0, 10));
 			data.setDays(getDiffDays(data.getStartDate().substring(0, 10).replaceAll("-", ""), data.getEndDate().substring(0, 10).replaceAll("-", "")));
@@ -174,9 +179,9 @@ public class PerformanceController {
 	//전시회일정를 데이터베이스에서 불러와 달력으로 보내준다.
 	@RequestMapping(value="P_exhibitionSchedule", method=RequestMethod.GET)
 	public ModelAndView P_exhibitionSchedule(ModelMap modelMap) {
-		List<PerformanceDTO> list = performanceDAO.getPerformance();
+		List<EventboardDTO> list = performanceDAO.getPerformance();
 		
-		for(PerformanceDTO data : list) {
+		for(EventboardDTO data : list) {
 			data.setStartDate(data.getStartDate().substring(0, 10));
 			data.setEndDate(data.getEndDate().substring(0, 10));
 			data.setDays(getDiffDays(data.getStartDate().substring(0, 10).replaceAll("-", ""), data.getEndDate().substring(0, 10).replaceAll("-", "")));
@@ -225,13 +230,12 @@ public class PerformanceController {
 		List<EventboardDTO> list = performanceDAO.getExhibitionList(map);
 		
 		ModelAndView mav = new ModelAndView();
-		
 		//String 타입 날짜를 Date 형식으로 변환
 		for(int i = 0; i < list.size(); i++) {
 			list.get(i).setStartDate(list.get(i).getStartDate().substring(0, 10));
 			list.get(i).setEndDate(list.get(i).getEndDate().substring(0, 10));
 		}
-		
+			
 		mav.addObject("pg", pg);
 		mav.addObject("list", list);
 		mav.addObject("listSize", list.size()+"");
@@ -248,14 +252,53 @@ public class PerformanceController {
 		//DB
 		EventboardDTO eventboardDTO = performanceDAO.performanceBook(seq);
 		
+		//String 타입 날짜를 Date 형식으로 변환
+		eventboardDTO.setStartDate(eventboardDTO.getStartDate().substring(0, 10));
+		eventboardDTO.setEndDate(eventboardDTO.getEndDate().substring(0, 10));
+		
+		System.out.println(eventboardDTO.getStartDate());
+		System.out.println(eventboardDTO.getEndDate());
+		
+		String startDate = eventboardDTO.getStartDate();
+		String endDate = eventboardDTO.getEndDate();
+		
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		
+		long diff = 0;
+		long diffDays = 0;
+		Date startDateF = null;
+		
+		try {
+			startDateF = formatter.parse(startDate);
+			Date endDateF = formatter.parse(endDate);
+			
+			diff = endDateF.getTime() - startDateF.getTime();
+			diffDays = diff / (24*60*60*1000);	//종료일-시작일 = 행사 일 수
+			
+		} catch (ParseException e) {
+			
+			e.printStackTrace();
+		}
+				
+		Calendar calStart = Calendar.getInstance();
+		calStart.setTime(startDateF);
+		
+		List<Date> listDate = new ArrayList<Date>();
+		for(int i=0; i<=diffDays; i++) {
+			
+			listDate.add(calStart.getTime());
+			calStart.add(Calendar.DATE, 1);
+		}
+		
+		
 		ModelAndView mav = new ModelAndView();
 		
 		mav.addObject("eventboardDTO", eventboardDTO);
+		mav.addObject("listDate", listDate);
 		mav.addObject("display", "/performance/P_performanceBook.jsp");
 		mav.setViewName("P_performanceForm");
 		return mav;
 	}
-	
 	
 	//달력 메소드
 	public static String[] getDiffDays(String fromDate, String toDate) {

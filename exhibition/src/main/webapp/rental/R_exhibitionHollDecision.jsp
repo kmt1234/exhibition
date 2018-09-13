@@ -123,6 +123,7 @@
 				$.ajax({
 					type : 'POST',
 					url : '/exhibition/rental/searchRentDay.do',
+					async: false,
 					data : {'booth': '${booth}',
 							'startDate' : $('#startDate').val(),
 							'endDate' : $('#startDate').val()},
