@@ -174,8 +174,8 @@
 	<!--메인 슬라이드 용 이미지 불러오기-->
 	<select id="getImageboardSlide" parameterType="java.util.List" resultType="imageboard">
 		select * from customerImageboard where seq in 
-		<foreach collection="list" item="item" open="(" close=")" separator=",">
-			${item}
+		<foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+			${item.value}
 		</foreach>
 	</select>
 	
