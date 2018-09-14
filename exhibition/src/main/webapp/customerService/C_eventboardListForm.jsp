@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>박람회 보드 리스트</title>
+<title>전시회 보드 리스트</title>
 
 <style>
 .box-container{
@@ -60,7 +60,7 @@
 		<div class="ui compact menu" style="width: 80%; height: 900px;" >
 			<!-- 타이틀 -->
 			<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
-				박람회
+				전시회
 				<span class="h-light">리스트</span>
 			</h2>
 			<!-- 버튼 -->
@@ -103,15 +103,19 @@
 										<tr>
 											<td><input type="checkbox" name="check" class="check" value="${list.seq}"></td>
 											<td>${list.seq}</td>
-											<td><img src="../storage/${list.image1}" width="300" height="150"></td>
+											<td><a class="exhibition_detail"><img src="../storage/${list.image1}" width="300" height="150"></a></td>
 											<td>${list.imageName}</td>
 											<td>${list.eventContent}</td>
 										</tr>
+										<input type="hidden" class="hidden_seq" value="${list.seq}">
 								</c:if>
-		
+								
+								
+								
 							</c:forEach>
 								
 					</table>
+					
 					<div style=" float:left; width:500px" align="center" id="eventPaging">${imageboardPaging.pagingHTML}</div><br>
 					
 					<div style="float:left;">
@@ -168,6 +172,13 @@ $(document).ready(function(){
 	//업로드 버튼
 	$('.eventUploadBtn').click(function(){
 		location.href='/exhibition/customerService/C_mainImageboardForm.do';
+	});
+	
+	//전시회 내용 보기	잠시대기******
+	$('.exhibition_detail').click(function(){
+		var seq = $(this).parent().prev().text();
+		alert(seq); //시퀀스 번호 확인
+		location.href="/exhibition/customerService/C_eventDetail.do?seq="+seq+"";
 	});
 	
 });

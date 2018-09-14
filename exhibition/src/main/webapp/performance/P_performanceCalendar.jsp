@@ -34,7 +34,7 @@ var dataSet = [
 		    	{"title" : '<c:out value="${listView.imageName}"/>',
 		    	"start" : '<c:out value="${listView.days[dayStatus.index]}"/>',
 		    	"url" : "/exhibition/main/index.do",
-		    	"imageurl" : "../img/Ex.png",
+		    	"imageurl" : "../img/Ev.png",
 		    	"color" : "#ffffff",
 			    "textColor" : "#000000"
 		    	} <c:if test="${!dayStatus.last}">,</c:if>

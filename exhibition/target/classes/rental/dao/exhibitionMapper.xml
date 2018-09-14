@@ -17,4 +17,12 @@
  	<select id="getAllCalendar" resultType="exhibition">
  		select * from exhibitionRental
  	</select>
+ 	
+ 	<select id="getSalesExhibition" parameterType="java.lang.String" resultType="exhibition">
+ 		select sum(endDate-startDate+1) as saleDays, sum(totalrent) as totalRent, boothName from EXHIBITIONRENTAL where STARTDATE BETWEEN #{salesMon} and (select last_day(#{salesMon}) from dual) group by BOOTHNAME
+ 	</select>
+ 	
+ 	<select id="getSalesTotalRentExhibition" parameterType="java.lang.String" resultType="int">
+ 		select sum(totalrent) as salesTotalRent from EXHIBITIONRENTAL where STARTDATE BETWEEN #{salesMon} and (select last_day(#{salesMon}) from dual)
+ 	</select>
 </mapper>

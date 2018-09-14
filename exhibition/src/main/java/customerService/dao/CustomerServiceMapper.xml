@@ -4,86 +4,97 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="customerServiceSQL">
  	
- 	<!-- 공지사항 총글수 -->
- 	<select id="getTotalC_notice" resultType="int">
- 		select count(*) from C_notice
- 	</select>
- 	
- 	<!-- 공지사항 리스트 -->
- 	<select id="getNoticeList" parameterType="java.util.Map" resultType="customerService">
- 		select * from 
- 		(select rownum rn, tt.* from 
- 		(select * from C_notice order by seq desc)tt) 
- 		where rn between #{startNum} and #{endNum}
- 	</select>
- 	
- 	<!-- 공지사항 -->
- 	<insert id="C_notice_Write" parameterType="java.util.Map">
- 		insert into C_notice values(seq_C_notice.nextval
-		 							,#{subject}
-		 							,#{content}
-		 							,sysdate)
- 	</insert>
- 	
- 	<!-- 공지사항 내용보기 -->
- 	<select id="getNoticeInfo" parameterType="String" resultType="customerService">
- 		select * from C_notice where seq=#{seq} 
- 	</select>
- 	
- 	<!-- 공지사항 삭제 -->
- 	<delete id="C_notice_Delete" parameterType="String">
- 		delete C_notice where seq=#{seq}
- 	</delete>
- 	
- 	<!-- 공지사항 수정 -->
- 	<update id="C_notice_Modify" parameterType="java.util.Map">
- 		update C_notice set subject=#{subject} , content =#{content} where seq=#{seq}
- 	</update>
- 	
- 	<!-- 문의하기 -->
- 	<insert id="C_inquire" parameterType="customerService">
- 		insert into C_inquire values(seq_C_inquire.nextval
- 											,#{email}
-		 									,#{classify}
-		 									,#{name}
-		 									,#{tel}
-		 									,#{subject}
-		 									,#{content}
-		 									,sysdate)
- 	</insert>
- 	
- 	<select id="getInquireInfo" parameterType="String" resultType="customerService">
- 		select * from C_inquire where seq=#{seq}
- 	</select>
- 	
- 	<select id="getInquireList" resultType="customerService">
- 		select * from C_inquire
- 	</select>
- 	
- 	<!-- 자주묻는 질문 -->
- 	<insert id="C_QnA_Write" parameterType="java.util.Map">
- 		insert into C_QnA values(seq_C_QnA.nextval
-		 							,#{subject}
-		 							,#{content})
- 	</insert>
- 	
- 	<!-- 자주묻는 질문 리스트 -->
- 	<select id="getQnAList" resultType="customerService">
- 		select * from C_QnA
- 	</select>
- 	
- 	<!-- 주요시설 연락처 -->
- 	<insert id="C_contactList_Write" parameterType="java.util.Map">
- 		insert into C_contactList values(seq_C_contactList.nextval
-		 							,#{classify}
-		 							,#{agency}
-		 							,#{name}
-		 							,#{contact})
- 	</insert>
- 	<!-- ????? -->
- 	<select id="getContactList" resultType="customerService">
- 		select * from C_contactList
- 	</select>
+ <!-- 공지사항 총글수 -->
+    <select id="getTotalC_notice" resultType="int">
+       select count(*) from C_notice
+    </select>
+    
+    <!-- 공지사항 리스트 -->
+    <select id="getNoticeList" parameterType="java.util.Map" resultType="customerService">
+       select * from 
+       (select rownum rn, tt.* from 
+       (select * from C_notice order by seq desc)tt) 
+       where rn between #{startNum} and #{endNum}
+    </select>
+    
+    <!-- 공지사항 -->
+    <insert id="C_notice_Write" parameterType="java.util.Map">
+       insert into C_notice values(seq_C_notice.nextval
+                            ,#{subject}
+                            ,#{content}
+                            ,sysdate)
+    </insert>
+    
+    <!-- 공지사항 내용보기 -->
+    <select id="getNoticeInfo" parameterType="String" resultType="customerService">
+       select * from C_notice where seq=#{seq} 
+    </select>
+    
+    <!-- 공지사항 삭제 -->
+    <delete id="C_notice_Delete" parameterType="String">
+       delete C_notice where seq=#{seq}
+    </delete>
+    
+    <!-- 공지사항 수정 -->
+    <update id="C_notice_Modify" parameterType="java.util.Map">
+       update C_notice set subject=#{subject} , content =#{content} where seq=#{seq}
+    </update>
+    
+    <!-- 문의하기 -->
+    <insert id="C_checkInquire" parameterType="customerService">
+       insert into C_inquire values(seq_C_inquire.nextval
+                                  ,#{email}
+                                  ,#{classify}
+                                  ,#{name}
+                                  ,#{phone}
+                                  ,#{subject}
+                                  ,#{content}
+                                  ,sysdate)
+    </insert>
+    
+    <select id="getInquireInfo" parameterType="String" resultType="customerService">
+       select * from C_inquire where seq=#{seq}
+    </select>
+    
+    <select id="getInquireList" resultType="customerService">
+       select * from C_inquire
+    </select>
+    
+    <select id="getReplyInfo" parameterType="String" resultType="customerService">
+       select * from C_inquire where seq=#{seq}
+    </select>
+    
+    <!-- 자주묻는 질문 -->
+    <insert id="C_QnA_checkWrite" parameterType="java.util.Map">
+       insert into C_QnA values(seq_C_QnA.nextval
+                            ,#{classify}
+                            ,#{subject}
+                            ,#{content})
+    </insert>
+    
+    <!-- 자주묻는 질문 리스트 -->
+    <select id="getQnAList" resultType="customerService">
+       select * from C_QnA
+    </select>
+    
+    <!-- 자주묻는 질문 분류에 맞는 리스트 불러오기 -->
+    <select id="getQnA_Classify" parameterType="String" resultType="customerService">
+       select * from C_QnA where classify=#{classify}
+    </select>
+    
+    <!-- 주요시설 연락처 -->
+    <insert id="C_contactList_checkWrite" parameterType="java.util.Map">
+       insert into C_contactList values(seq_C_contactList.nextval
+                            ,#{classify}
+                            ,#{facility}
+                            ,#{title}
+                            ,#{name}
+                            ,#{phone})
+    </insert>
+    <!-- ????? -->
+    <select id="getContactList" resultType="customerService">
+       select * from C_contactList
+    </select>
  	
  	<!-- 이미지작성  -->
 	<insert id="imageboardWrite" parameterType="imageboard">
@@ -161,8 +172,11 @@
 
 	
 	<!--메인 슬라이드 용 이미지 불러오기-->
-	<select id="getImageboardSlide" resultType="imageboard">
-		select * from customerImageboard order by seq desc
+	<select id="getImageboardSlide" parameterType="java.util.List" resultType="imageboard">
+		select * from customerImageboard where seq in 
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			${item}
+		</foreach>
 	</select>
 	
 	<!--박람회 업로드 리스트 가져오기  -->
@@ -217,29 +231,48 @@
 									  ,#{eventLink}
 									  ,#{eventPlace})
 	</insert>
+	
 	<!-- 호텔리스트 -->
-	<select id="hotelList" resultType="hotelboard">
-		select * from hotel_list
+	<select id="hotelList" parameterType="java.util.Map" resultType="hotelboard">
+		select * from 
+ 		(select rownum rn, tt.* from 
+ 		(select * from hotel_list order by seq desc)tt) 
+ 		where rn between #{startNum} and #{endNum}
 	</select>
+	
+	<!-- 호텔리스트 총글수 -->
+	<select id="getHotelboardTotalA" resultType="int">
+		select count(*) from hotel_list
+	</select>
+	
+	<!-- 호텔  업로드 리스트 삭제   -->
+	<delete id="hotelDelete" parameterType="java.util.List">
+		delete hotel_list where seq in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<!-- 호텔이미지 삭제리스트 불러오기 -->
+	<select id="hotelImageDel" parameterType="java.util.List" resultType="hotelboard">
+		select * from hotel_list where seq in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</select>
+	<!--박람회 정보 보기(수정하기 위해)  -->
+	<select id="getEventboard" parameterType="java.lang.String" resultType="eventboard">
+		select * from eventboard where seq = #{seq}
+	</select>
+	
+	<!--연극정보 예매DB에 저장-->
+	<insert id="eventInfoWrite_play_bookDB" parameterType="customerService.bean.PlayBookDTO">
+		      															  										  
+	insert into eventboard_play_book(seq,imageName,playDate,playTicket,remainTicket,ticketPrice,bookTicket,bookMemberId,bookStatus)
+		values (seq_eventboard_play_book.nextval,#{imageName},#{playDate},#{playTicket},#{remainTicket},#{ticketPrice},#{bookTicket},#{bookMemberId},#{bookStatus})
+						
+	</insert>
  </mapper>
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
  
  
  

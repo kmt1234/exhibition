@@ -37,4 +37,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from eventboard order by seq desc)tt
 		)where rn <![CDATA[ >= ]]> #{startNum} and rn<![CDATA[<=]]> #{endNum}
 	</select>
+	
+	<!--공연 예약하기 폼  -->
+	<select id="performanceBook" parameterType="java.lang.String" resultType="eventboard">
+		select * from eventboard_play where seq = #{seq}
+	</select>
 </mapper>
