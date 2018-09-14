@@ -662,7 +662,7 @@ public class CustomerServiceController {
 		return mav;
 	}
 
-	// 박람회 업로드 리스트 폼
+	// 박람회 업로드 리스트 폼  
 	@RequestMapping(value = "C_eventboardListForm", method = RequestMethod.GET)
 	public ModelAndView C_exhibitionboardList(@RequestParam(required = false, defaultValue = "1") String pg) {
 
