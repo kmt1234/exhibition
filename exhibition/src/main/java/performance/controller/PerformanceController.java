@@ -256,10 +256,13 @@ public class PerformanceController {
 		eventboardDTO.setStartDate(eventboardDTO.getStartDate().substring(0, 10));
 		eventboardDTO.setEndDate(eventboardDTO.getEndDate().substring(0, 10));
 		
+		System.out.println(eventboardDTO.getStartDate());
+		System.out.println(eventboardDTO.getEndDate());
+		
 		String startDate = eventboardDTO.getStartDate();
 		String endDate = eventboardDTO.getEndDate();
 		
-		SimpleDateFormat formatter = new SimpleDateFormat("yy-MM-dd");
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		
 		long diff = 0;
 		long diffDays = 0;
@@ -276,6 +279,7 @@ public class PerformanceController {
 			
 			e.printStackTrace();
 		}
+				
 		Calendar calStart = Calendar.getInstance();
 		calStart.setTime(startDateF);
 		

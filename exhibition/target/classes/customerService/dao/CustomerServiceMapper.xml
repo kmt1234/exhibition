@@ -261,25 +261,15 @@
 	<select id="getEventboard" parameterType="java.lang.String" resultType="eventboard">
 		select * from eventboard where seq = #{seq}
 	</select>
+	
+	<!--연극정보 예매DB에 저장-->
+	<insert id="eventInfoWrite_play_bookDB" parameterType="customerService.bean.PlayBookDTO">
+		      															  										  
+	insert into eventboard_play_book(seq,imageName,playDate,playTicket,remainTicket,ticketPrice,bookTicket,bookMemberId,bookStatus)
+		values (seq_eventboard_play_book.nextval,#{imageName},#{playDate},#{playTicket},#{remainTicket},#{ticketPrice},#{bookTicket},#{bookMemberId},#{bookStatus})
+						
+	</insert>
  </mapper>
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
  
  
  

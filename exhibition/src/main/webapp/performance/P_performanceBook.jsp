@@ -61,7 +61,7 @@ img{
 	<div class="ui divider"></div>
 	
 	<div><img src="../storage/${eventboardDTO.image1}"></div>
-	<div>가격 : ${eventboardDTO.eventPrice}</div>
+	<div>가격 : ${eventboardDTO.eventPrice}</div><input type="hidden" id="hiddenTicketPrice" value="${eventboardDTO.eventPrice}">
 	<div>좌석배정 방식: 선착순</div>
 	<div>공연 날짜 :
 				<select id="selectEventDate">
@@ -79,7 +79,7 @@ img{
 				<option value="4">4매</option>
 				<option value="5">5매</option>
 			</select>
-			 / 잔여 매수 : ${eventboardDTO.eventSeats}
+			 / 잔여 매수 : ${eventboardDTO.eventSeats / listDate.size()}
 	</div>
 	
 	<div><button id="BookEventBtn">예매하기</button></div>
@@ -88,7 +88,7 @@ img{
 
 <!--내용 : 예매확인-->
 <div id="Confirm_play_div">
-	예매확인하자
+	<div>결재 금액 : <span id="totalPrice"></span></div>
 </div>
 	
 </body>
@@ -96,7 +96,7 @@ img{
 <script>
 $(document).ready(function(){
 	//페이지 호출 시(기본),
-	$('#Confirm_play_div').hide();
+//	$('#Confirm_play_div').hide();
 	
 	
 	//예매하기 버튼 클릭 시,
@@ -105,6 +105,7 @@ $(document).ready(function(){
 		if(conF){
 			alert($('#selectEventDate :selected').text()); //선택된 일자 호출
 			alert($('#selectPlayTicket :selected').text()); //선택한 티켓 수 호출
+			$('#totalPrice').text($('#hiddenTicketPrice').val() * $('#selectPlayTicket :selected').val());
 			//	$('#Book_play_div').hide();
 			//	$('#Confirm_play_div').show();
 		}else{

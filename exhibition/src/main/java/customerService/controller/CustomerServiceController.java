@@ -3,7 +3,11 @@ package customerService.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +36,9 @@ import customerService.bean.EventboardDTO;
 import customerService.bean.HotelboardDTO;
 import customerService.bean.ImageboardDTO;
 import customerService.bean.ImageboardPaging;
+import customerService.bean.PlayBookDTO;
 import customerService.dao.CustomerServiceDAO;
+import member.bean.MemberDTO;
 
 @RequestMapping(value = "customerService")
 @Component
@@ -43,11 +49,13 @@ public class CustomerServiceController {
 	private JavaMailSenderImpl emailSender;
 	@Autowired
 	private ImageboardPaging imageboardPaging;
-	private String filePath = "C:\\Users\\Administrator\\git\\exhibition\\exhibition\\src\\main\\webapp\\storage\\";
+	private String filePath = "C:\\Users\\KTC\\git\\exhibition\\exhibition\\src\\main\\webapp\\storage";
 	@Autowired
 	private CustomerServicePaging customerServicePaging;
 	@Autowired
 	private ImageboardDTO imageboardDTO;
+	@Autowired
+	private PlayBookDTO playBookDTO;
 	
 	// 고객센터 설명페이지
 	@RequestMapping(value = "C_customerServiceForm", method = RequestMethod.GET)
@@ -529,7 +537,7 @@ public class CustomerServiceController {
 	// 연극 정보 넣는 컨
 	@RequestMapping(value = "C_eventInfoWrite_play", method = RequestMethod.POST)
 	public ModelAndView C_exhibitionInfoWrite_play(@ModelAttribute EventboardDTO eventboardDTO,
-			@RequestParam MultipartFile img) {
+			@RequestParam MultipartFile img, HttpSession session) {
 
 		// 경로 바꿔야함***
 		String fileName = img.getOriginalFilename();
@@ -544,9 +552,78 @@ public class CustomerServiceController {
 		}
 
 		eventboardDTO.setImage1(fileName);
+		
+		//세션에서 아이디 얻기
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("homepageMember");
+		String id = memberDTO.getM_Id();
+		
+		//String 타입 날짜를 Date 형식으로 변환(연극 기간 구하기)
+		eventboardDTO.setStartDate(eventboardDTO.getStartDate().substring(0, 10).replaceAll("/", "-"));
+		eventboardDTO.setEndDate(eventboardDTO.getEndDate().substring(0, 10).replaceAll("/", "-"));
+		
+		System.out.println(eventboardDTO.getStartDate());
+		System.out.println(eventboardDTO.getEndDate());
+		System.out.println(eventboardDTO.getImageName());
+		
+		String startDate = eventboardDTO.getStartDate();
+		String endDate = eventboardDTO.getEndDate();
+		
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		
+		long diff = 0;
+		long diffDays = 0;
+		Date startDateF = null;
+		
+		try {
+			startDateF = formatter.parse(startDate);
+			Date endDateF = formatter.parse(endDate);
+			
+			diff = endDateF.getTime() - startDateF.getTime();
+			diffDays = diff / (24*60*60*1000);	//종료일-시작일 = 행사 일 수(기간)
+			
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		Calendar calStart = Calendar.getInstance();
+		calStart.setTime(startDateF);
+		
+		//공연 기간 리스트 구하기 
+		List<Date> listDate = new ArrayList<Date>();
+		for(int i=0; i<=diffDays; i++) {
+			
+			listDate.add(calStart.getTime());
+			calStart.add(Calendar.DATE, 1);
+		}
+			
+		
+		List<PlayBookDTO> list = new ArrayList<PlayBookDTO>();
+				
+		//예매DB
+		for(int i=0; i <= diffDays; i++) {
+			playBookDTO.setImageName(eventboardDTO.getImageName());	//공연명 등록
+			playBookDTO.setPlayTicket(Integer.parseInt(eventboardDTO.getEventSeats())); //일별 총 티켓 수 등록
+			playBookDTO.setRemainTicket(0);	//일별 잔여 티켓 수 등록
+			playBookDTO.setTicketPrice(Integer.parseInt(eventboardDTO.getEventPrice())); //티켓 가격
+			playBookDTO.setBookTicket(0);		//예매된 티켓 수
+			playBookDTO.setBookMemberId(id+"");	//예매자 아이디(세션값에서)
+			playBookDTO.setBookStatus('0');		//예매 구분자 (0:예매X, 1:예매완료)
+			
+			
+			playBookDTO.setPlayDate(listDate.get(i));
+			
+	
+			list.add(playBookDTO);
+			
+			System.out.println(playBookDTO.getImageName());
 
+			customerServiceDAO.eventInfoWrite_play_bookDB(playBookDTO);		//예매 DB에 연극 정보 넣는 메소드(예매DB)
+		}
+		
+		
 		// DB
-		customerServiceDAO.eventInfoWrite_play(eventboardDTO);
+		customerServiceDAO.eventInfoWrite_play(eventboardDTO);	//연극 정보 넣는 DB(등록DB)
+
 
 		return new ModelAndView("redirect:/customerService/C_eventboardList_playForm.do");
 	}
@@ -578,7 +655,7 @@ public class CustomerServiceController {
 		return mav;
 	}
 
-	// 박람회 업로드 리스트 폼
+	// 박람회 업로드 리스트 폼  
 	@RequestMapping(value = "C_eventboardListForm", method = RequestMethod.GET)
 	public ModelAndView C_exhibitionboardList(@RequestParam(required = false, defaultValue = "1") String pg) {
 
