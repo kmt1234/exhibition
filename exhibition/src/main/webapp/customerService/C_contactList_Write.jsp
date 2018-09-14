@@ -12,52 +12,52 @@
 	주요시설
 	<span class="h-light">연락처 작성</span>
 </h2>
-<table style="width:100%;" >
+<table style="width:100%;" class="ui celled table" >
 	<tr>
-		<td  align="center" style="width:8%; height:40px; background-color: #f7f6e6; font-size: 15px" >분 류</td>
+		<td  align="center" style="width:8%; height:40px; background-color: #f7f6e6; font-size: 15px; text-align: center;" >분 류</td>
 		<td style="width:20%;">
 			<div>
-				<input type="text" name="classify" id="classify" style="float: left; width:98%; height:40px;">
+				<input type="text" name="classify" id="classify" style="float: left; width:100%; height:40px;">
 				<div id="classifyDiv"></div>
 			</div>
 		</td>
 	</tr>
 	<tr>
-		<td  align="center" style="width:8%; background-color: #f7f6e6; font-size: 15px;">기관 & 시설</td>
+		<td  align="center" style="width:8%; background-color: #f7f6e6; font-size: 15px; text-align: center;">기관 & 시설</td>
 		
 		<td style="width:20%; height: 15%">
 			<div>
-				<input type="text" name="facility" id="facility" style="float: left; width:98%; height:40px;">
+				<input type="text" name="facility" id="facility" style="float: left; width:100%; height:40px;">
 				<div id="facilityDiv"></div>
 			</div>
 		</td>
 	</tr>
 	<tr>
-		<td  align="center" style="width:8%; background-color: #f7f6e6; font-size: 15px;">명 칭</td>
+		<td  align="center" style="width:8%; background-color: #f7f6e6; font-size: 15px; text-align: center;">명 칭</td>
 		
 		<td style="width:20%; height: 15%">
 			<div>
-				<input type="text" name="title" id="title" style="float: left; width:98%; height:40px;">
+				<input type="text" name="title" id="title" style="float: left; width:100%; height:40px;">
 				<div id="titleDiv"></div>
 			</div>
 		</td>
 	</tr>
 	<tr>
-		<td  align="center" style="width:8%; background-color: #f7f6e6; font-size: 15px;">담 당 자</td>
+		<td  align="center" style="width:8%; background-color: #f7f6e6; font-size: 15px; text-align: center;">담 당 자</td>
 		
 		<td style="width:20%; height: 15%">
 			<div>
-				<input type="text" name="name" id="name" style="float: left; width:98%; height:40px;">
+				<input type="text" name="name" id="name" style="float: left; width:100%; height:40px;">
 				<div id="nameDiv"></div>
 			</div>
 		</td>
 	</tr>
 	<tr>
-		<td  align="center" style="width:8%; background-color: #f7f6e6; font-size: 15px;">연 락 처</td>
+		<td  align="center" style="width:8%; background-color: #f7f6e6; font-size: 15px; text-align: center;">연 락 처</td>
 		
 		<td style="width:20%; height: 15%">
 			<div>
-				<input type="text" name="phone" id="phone" style="float: left; width:98%; height:40px;">
+				<input type="text" name="phone" id="phone" style="float: left; width:100%; height:40px;">
 				<div id="phoneDiv"></div>
 			</div>
 		</td>

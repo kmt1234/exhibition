@@ -47,6 +47,5 @@
 	<input class="middle ui button" type="button" id="C_notice_checkModifyBtn" value="수정">
 	<input class="middle ui button" type="reset" value="취소">
 </div>
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="../js/C_notice_js.js?ver=1"></script></body>
 </html>

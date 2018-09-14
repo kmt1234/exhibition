@@ -51,9 +51,9 @@ $(document).ready(function(){
 		location.href="/exhibition/customerService/C_notice_Delete.do?seq="+$('#putSeq').val();
 	});
 	
-	//공지사항 리스트 불러오기
-	$('#C_noticeListBtn').click(function(){
-		location.href="/exhibition/customerService/C_notice.do";
+	//공지사항 작성중 돌아가기(뒤로)
+	$('#C_notice_WriteBack').click(function(){
+		location.href="/exhibition/customerService/C_notice.do?pg=${pg}";
 	});
 
 	

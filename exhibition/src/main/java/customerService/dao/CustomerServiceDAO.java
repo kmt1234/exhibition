@@ -28,7 +28,7 @@ public interface CustomerServiceDAO {
 
 	public int getTotalC_inquire();													// 고객의 소리 문의 받은 글 수
 
-	public List<CustomerServiceDTO> getInquireList(Map<String, Integer> map);								// 고객의 소리 문의 받은 리스트 불러오기
+	public List<CustomerServiceDTO> getInquireList(Map<String, Integer> map);		// 고객의 소리 문의 받은 리스트 불러오기
 	
 	public int getTotalC_inquire_Search(Map<String, String> map);					// 고객의 소리 문의 받은 글 중 검색된 글 불러오기
 	

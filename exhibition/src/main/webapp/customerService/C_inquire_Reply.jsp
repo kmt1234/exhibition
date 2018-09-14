@@ -19,7 +19,7 @@
 		
 		<td style="width:20%;">
 			<div>
-				<input type="text" name="subject" id="subject" style="float: left; width:98%; height:40px;">
+				<input type="text" name="subject" id="subject" style="float: left; width:100%; height:40px;">
 				<div id="subjectDiv"></div>
 			</div>
 		</td>
@@ -29,7 +29,7 @@
 		
 		<td style="width:20%; height: 15%">
 			<div>
-				<div><textArea name="content" id="content" style="float: left; width:98%; height: 300px;"></textArea></div>
+				<div><textArea name="content" id="content" style="float: left; width:100%; height: 300px;"></textArea></div>
 				<div id="contentDiv"></div>
 			</div>
 		</td>
@@ -37,10 +37,9 @@
 </table>
 <input type="hidden" name="email" id="email" value="${customerServiceDTO.email}">
 <div>
-	<input type="button" id="C_checkReplyBtn" value="문의 답하기">
+	<input type="button" id="C_checkReplyBtn" class="middle ui button" value="문의 답하기">
 </div>
 </form>
-<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="../js/C_inquire_js.js?ver=1"></script>
 </body>
 </html>

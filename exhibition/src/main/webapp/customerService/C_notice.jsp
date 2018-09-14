@@ -9,6 +9,18 @@
 #subjectA:visited{color:black; text-decoration: none;}
 #subjectA:hover{color:green; text-decoration: underline; font-weight: bold; cursor: pointer;}
 #subjectA:active{color:black; text-decoration: none;}
+
+#currentPaging{
+	color: red;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+#paging{
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+}
 </style>
 
 </head>
@@ -30,9 +42,9 @@
 		</tr>
 	</table>
 	<br>
-	<div id="C_notice_PagingDiv"></div>
+	<div id="C_notice_PagingDiv" class="ui center pagination menu" style="height: " ></div>
 	<input type="hidden" name="pg" id="pg" value="1">
-	<br>
+	<br><br>
 	<select class="ui compact selection dropdown" id="searchOption">
 			<option value="subject">제목</option>
 			<option value="content">내용</option>
@@ -41,12 +53,13 @@
 	<div class="ui input" style="width: 40%;">
 		<input type="text" name="keyword" id="keyword" value="${keyword }">
 	</div>
-		<input type="button" class="middle ui button"  value="검색" id="C_notice_Search">
+		<input type="button" class="middle ui button"  value="검색" id="C_notice_SearchBtn">
 		<input type="button" class="middle ui button" id="C_notice_WriteBtn" value="관리자 작성" >
 </div>
 <script src="../semantic/semantic.min.js"></script>
 <script src="../js/C_notice_js.js?ver=1"></script>
-<script>
+<script type="text/javascript">
+//주요시설 연락처 리스트 불러오기
 $.ajax({
 	 type : 'POST',
 	url : '/exhibition/customerService/getNoticeList.do',
@@ -78,13 +91,13 @@ $.ajax({
 });
 $('#C_notice_List').on('click','#subjectA',function(){
 	var seq = $(this).prev().text();
-	location.href="/exhibition/customerService/C_notice_View.do?seq="+seq;
+	location.href="/exhibition/customerService/C_notice_View.do?seq="+seq+"&pg="+$('#pg').val();
 });
 
 
 
 // 공지사항 검색한 값 불러오기
-$('#C_notice_Search').click(function(event, str){
+$('#C_notice_SearchBtn').click(function(event, str){
 	if(str!='trigger') $('#pg').val(1);
 	
 	if($('#keyword').val()=='')
@@ -122,6 +135,13 @@ $('#C_notice_Search').click(function(event, str){
 		});
 	}
 });
+
+function C_notice_Search(pg){
+	$('#pg').val(pg);
+	$('#C_notice_SearchBtn').trigger('click','trigger');
+	
+}
+
 </script>
 </body>
 </html>

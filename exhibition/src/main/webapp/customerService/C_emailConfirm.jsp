@@ -36,14 +36,12 @@
 				style="width:100%; height:100%;  float: left;">
 			<input type="hidden" id="reC_EmailConfirm" value="">
 		</td>
-		
 	</tr>
-	
 </table>
 <!-- 관리자모드가 아니면 없애야함 -->
-	<div align="left">
-		<input class="middle ui button" type="button" id="C_email_ListBtn" value="관리자 버튼">
-	</div>
+<div align="left">
+	<input class="middle ui button" type="button" id="C_email_ListBtn" value="관리자 버튼">
+</div>
 <script src="../js/C_inquire_js.js?ver=1"></script>
 </body>
 </html>

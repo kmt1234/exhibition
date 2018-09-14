@@ -35,11 +35,7 @@ $(document).ready(function(){
 			$.each(data.list, function(index, item){
 				$('<tr/>',{
 					class : 'title',
-					align : 'center',
-					style: 'width: 100%; height: 9%; align: center;',	
 				}).append($('<td/>',{
-					align : 'center',
-					style: 'width: 100%; height: 9%; align: center;',
 					id : 'subjectA',
 					href : 'javascript:void(0)',
 					text : item.subject
@@ -47,11 +43,7 @@ $(document).ready(function(){
 				
 				$('<tr/>',{
 					class : 'content',
-					align : 'center',
-					style: 'width: 100%; height: 9%; align: center;',
 				}).append($('<td/>',{
-					align : 'center',
-					style: 'width: 100%; height: 9%; align: center;',
 					id : 'contentA',
 					text : item.content
 				})).appendTo($('#C_QnA_List'));
@@ -73,8 +65,6 @@ $(document).ready(function(){
 					$('<tr/>',{
 						class : 'title'
 					}).append($('<td/>',{
-						align : 'center',
-						style: 'width: 100%; height: 9%; text-align: center;',
 						id : 'subjectA',
 						href : 'javascript:void(0)',
 						text : item.subject
@@ -83,8 +73,6 @@ $(document).ready(function(){
 					$('<tr/>',{
 						class : 'content'
 					}).append($('<td/>',{
-						align : 'center',
-						style: 'width: 100%; height: 9%; text-align: center;',
 						id : 'contentA',
 						text : item.content
 					})).appendTo($('#C_QnA_List'));

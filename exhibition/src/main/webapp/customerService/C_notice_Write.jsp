@@ -18,31 +18,40 @@
 		
 		<td style="width:20%;">
 			<div>
-				<input type="text" name="subject" id="subject" style="float: left; width:98%; height:40px;">
+				<input type="text" name="subject" id="subject" style="float: left; width:100%; height:40px;">
 				<div id="subjectDiv"></div>
 			</div>
 		</td>
 	</tr>	
+	<input type="hidden" name="pg" value="${pg}">
 	<tr>
 		<td  align="center" style="width:8%; background-color: #f7f6e6; font-size: 15px;text-align: center;">내 용</td>
 		
 		<td style="width:20%; height: 15%">
 			<div>
-				<div><textArea name="content" id="content" style="float: left; width:98%; height: 300px;"></textArea></div>
+				<div><textArea name="content" id="content" style="float: left; width:100%; height: 300px;"></textArea></div>
 				<div id="contentDiv"></div>
 			</div>
 		</td>
 	</tr>
-		
-</table>
 	<tr>
 		<td colspan="2" align="center" style="padding-top: 30px"> 		
-			<input type="button" id="C_notice_checkWriteBtn"  value="등록">
-			<input type="reset" value="다시작성">
+			<input type="button" id="C_notice_checkWriteBtn" class="middle ui button" value="등록">
+			<input type="reset"  class="middle ui button" value="다시작성">
+			<input type="button" id="C_notice_WriteBack" class="middle ui button" value="목록">
 		</td>
 	</tr>
+</table>
 </form>
 
+<script>
+$(document).ready(function(){
+	$('#C_notice_WriteBack').on('click', function(){
+		alert('dsfdsf');
+		location.href="/exhibition/customerService/C_notice.do?pg=${pg}";
+	});
+});
+</script>
 <script src="../js/C_notice_js.js?ver=1"></script>
 </body>
 </html>

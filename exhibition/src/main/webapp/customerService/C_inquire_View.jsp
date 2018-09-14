@@ -62,9 +62,8 @@
 	<input type="hidden" name="email" id="email" value="${customerServiceDTO.email }">
 	<input type="hidden" id="subject" value="${customerServiceDTO.subject }">
 	<input type="hidden" id="content" value="${customerServiceDTO.content }">
-	<input type="button" id="C_inquire_replyBtn" value="문의 답하기">
+	<input type="button" id="C_inquire_replyBtn" class="middle ui button" value="문의 답하기">
 </form>
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="../js/C_inquire_js.js?ver=1"></script>
 
 </body>

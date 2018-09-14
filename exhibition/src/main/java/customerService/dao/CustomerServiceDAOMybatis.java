@@ -44,17 +44,17 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	public void C_notice_Delete(String seq) {// 공지사항 관리자가 삭제하기
 		sqlSession.delete("customerServiceSQL.C_notice_Delete", seq);
 	}
-	public int getTotalC_inquire() {
+	public int getTotalC_inquire() {	//고객이 소리 문의받은 글수
 		return sqlSession.selectOne("customerServiceSQL.getTotalC_inquire");
 	}
 	
 	public List<CustomerServiceDTO> getInquireList(Map<String, Integer> map) {// 고객의 소리 문의받은 리스트 불러오기
-		return sqlSession.selectList("customerServiceSQL.getInquireList");
+		return sqlSession.selectList("customerServiceSQL.getInquireList", map);
 	}
-	public int getTotalC_inquire_Search(Map<String, String> map) {
+	public int getTotalC_inquire_Search(Map<String, String> map) {	//고객의 소리 검색된 글 수
 		return sqlSession.selectOne("customerServiceSQL.getTotalC_inquire_Search", map);
 	}
-	public List<CustomerServiceDTO> C_inquire_Search(Map<String, String> map) {
+	public List<CustomerServiceDTO> C_inquire_Search(Map<String, String> map) {	//고객의 소리 검색
 		return sqlSession.selectList("customerServiceSQL.C_inquire_Search", map);
 	}
 	public void C_checkInquire(CustomerServiceDTO customerServiceDTO) {// 고객의 소리 고객이 작성후 등록하기

@@ -68,8 +68,8 @@ public class CustomerServiceController {
 	@RequestMapping(value="getNoticeList", method=RequestMethod.POST)
 	public ModelAndView getNoticeList(@RequestParam(required=false ,defaultValue="1") String pg) {
 		//DB - 1페이지당 10개씩
-		int endNum = Integer.parseInt(pg)*10;
-		int startNum = endNum-9;
+		int endNum = Integer.parseInt(pg)*3;
+		int startNum = endNum-2;
 		
 		Map<String,Integer> map = new HashMap<String,Integer>();
 		map.put("startNum", startNum);
@@ -80,8 +80,8 @@ public class CustomerServiceController {
 		int totalA = customerServiceDAO.getTotalC_notice();
 		
 		customerServicePaging.setCurrentPage(Integer.parseInt(pg));
-		customerServicePaging.setPageBlock(5);
-		customerServicePaging.setPageSize(10);
+		customerServicePaging.setPageBlock(2);
+		customerServicePaging.setPageSize(3);
 		customerServicePaging.setTotalA(totalA);
 		customerServicePaging.C_notice_PagingHTML();
 		ModelAndView mav = new ModelAndView();
@@ -95,8 +95,8 @@ public class CustomerServiceController {
 	@RequestMapping(value="C_notice_Search", method=RequestMethod.POST)
 	public ModelAndView C_notice_Search(@RequestParam(required=false) Map<String,String> map) {
 		System.out.println(map.get("pg")+","+map.get("searchOption"));
-		int endNum = Integer.parseInt(map.get("pg"))*5;
-		int startNum = endNum-4;
+		int endNum = Integer.parseInt(map.get("pg"))*3;
+		int startNum = endNum-2;
 		
 		map.put("startNum", startNum+"");
 		map.put("endNum", endNum+"");
@@ -108,8 +108,8 @@ public class CustomerServiceController {
 		int totalA = customerServiceDAO.getTotalC_notice_Search(map);
 		
 		customerServicePaging.setCurrentPage(Integer.parseInt(map.get("pg")));
-		customerServicePaging.setPageBlock(5);
-		customerServicePaging.setPageSize(10);
+		customerServicePaging.setPageBlock(2);
+		customerServicePaging.setPageSize(3);
 		customerServicePaging.setTotalA(totalA);
 		customerServicePaging.C_notice_searchPagingHTML();
 		
@@ -122,10 +122,11 @@ public class CustomerServiceController {
 	
 	// 공지사항 페이지에서 제목을 클리하면 내용을 보여준다.
 	@RequestMapping(value = "C_notice_View", method = RequestMethod.GET)
-	public ModelAndView C_notice_View(@RequestParam String seq, Model model) {
+	public ModelAndView C_notice_View(@RequestParam String seq, @RequestParam String pg, Model model) {
 		CustomerServiceDTO customerServiceDTO = customerServiceDAO.getNoticeInfo(seq);
 
 		model.addAttribute("customerServiceDTO", customerServiceDTO);
+		model.addAttribute("pg", pg);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("display","/customerService/C_notice_View.jsp");
@@ -209,12 +210,12 @@ public class CustomerServiceController {
 				final MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
 
 				String subject = "[IPEC 전시회 이메일 인증 안내 입니다]";
-				String content = "안녕하세요 IPEC 전시회 관계자 입니다./n" + "해당 이메일 인증 번호는 아래와 같습니다./n" + "인증번호 : " + authNum;
+				String content = "안녕하세요 IPEC 전시회 관계자 입니다." + " 해당 이메일 인증 번호는 아래와 같습니다." + "인증번호 : " + authNum;
 
 				helper.setFrom("jbi8045@gmail.com");
 				helper.setTo(email);
 				helper.setSubject("인증번호 메일입니다.");
-				helper.setText(content, true);
+				helper.setText(content+"\n 인증번호 : " + authNum, true);
 			}
 		};
 
@@ -261,8 +262,8 @@ public class CustomerServiceController {
 	@RequestMapping(value = "getInquireList", method = RequestMethod.POST)
 	public ModelAndView getInquireList(@RequestParam(required=false ,defaultValue="1") String pg) {
 		//DB - 1페이지당 10개씩
-		int endNum = Integer.parseInt(pg)*10;
-		int startNum = endNum-9;
+		int endNum = Integer.parseInt(pg)*2;
+		int startNum = endNum-1;
 		
 		Map<String,Integer> map = new HashMap<String,Integer>();
 		map.put("startNum", startNum);
@@ -273,8 +274,8 @@ public class CustomerServiceController {
 		int totalA = customerServiceDAO.getTotalC_inquire();
 		
 		customerServicePaging.setCurrentPage(Integer.parseInt(pg));
-		customerServicePaging.setPageBlock(5);
-		customerServicePaging.setPageSize(10);
+		customerServicePaging.setPageBlock(2);
+		customerServicePaging.setPageSize(2);
 		customerServicePaging.setTotalA(totalA);
 		customerServicePaging.C_inquire_PagingHTML();
 		
@@ -285,11 +286,12 @@ public class CustomerServiceController {
 		return mav;
 	}
 	
+	//고객의 소리 문의받은글 검색 & 페이징
 	@RequestMapping(value="C_inquire_Search", method=RequestMethod.POST)
 	public ModelAndView C_inquire_Search(@RequestParam(required=false) Map<String,String> map) {
 		System.out.println(map.get("pg")+","+map.get("searchOption"));
-		int endNum = Integer.parseInt(map.get("pg"))*5;
-		int startNum = endNum-4;
+		int endNum = Integer.parseInt(map.get("pg"))*2;
+		int startNum = endNum-1;
 		
 		map.put("startNum", startNum+"");
 		map.put("endNum", endNum+"");
@@ -301,8 +303,8 @@ public class CustomerServiceController {
 		int totalA = customerServiceDAO.getTotalC_inquire_Search(map);
 		
 		customerServicePaging.setCurrentPage(Integer.parseInt(map.get("pg")));
-		customerServicePaging.setPageBlock(5);
-		customerServicePaging.setPageSize(10);
+		customerServicePaging.setPageBlock(2);
+		customerServicePaging.setPageSize(2);
 		customerServicePaging.setTotalA(totalA);
 		customerServicePaging.C_inquire_searchPagingHTML();
 		
@@ -315,10 +317,10 @@ public class CustomerServiceController {
 
 	// 고객의소리 내용보기(관리자
 	@RequestMapping(value = "C_inquire_View", method = RequestMethod.GET)
-	public ModelAndView C_inquire_View(@RequestParam String seq, Model model) {
+	public ModelAndView C_inquire_View(@RequestParam String seq,  Model model) {
 
 		CustomerServiceDTO customerServiceDTO = customerServiceDAO.getInquireInfo(seq);
-
+		
 		model.addAttribute("customerServiceDTO", customerServiceDTO);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("display", "/customerService/C_inquire_View.jsp");

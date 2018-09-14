@@ -42,10 +42,19 @@
 		<div style=" padding-top: 50px;" align="center">
 			<button class="middle ui button" id="C_notice_modifyBtn" >글수정</button>
 			<button class="middle ui button" id="C_notice_deleteBtn" >글삭제</button>
-			<button class="middle ui button" id="C_noticeListBtn" >목록가기</button>
+			<button class="middle ui button" id="C_notice_ListBtn" >목록가기</button>
 			<input type="hidden" id="putSeq" value="${customerServiceDTO.seq}">
+			<input type="hidden" id="pg" value="${pg}">
+			
 		</div>
 	</div>
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+$(document).ready(function(){
+	$('#C_notice_ListBtn').on('click', function(){
+		alert($('#pg').val());
+		location.href="/exhibition/customerService/C_notice.do?pg="+$('#pg').val();
+	});
+});
+</script>
 <script src="../js/C_notice_js.js?ver=1"></script></body>
 </html>

@@ -29,6 +29,7 @@ $(document).ready(function(){
 	
 	//인증 확인 버튼 클릭시
 	$('#C_emailConfirmBtn').click(function() {		//인증 확인 버튼 클릭시
+		$('#checkEmailDiv').empty();
 		var email = $('#email').val()
 		if ($('#checkEmail').val()=='')
 			$('#checkEmailDiv').text("인증번호를 입력하세요").css('font-size','9pt').css('color','red')
@@ -71,6 +72,8 @@ $(document).ready(function(){
 	});
 	
 	$('#C_checkReplyBtn').click(function(){
+		$('#subjectDiv').empty();
+		$('#contentDiv').empty();
 		if($('#subject').val()=='')
 			$('#subjectDiv').text("제목을 입력하세요").css('font-size','9pt').css('color','red')
 		else if($('#content').val()=='')

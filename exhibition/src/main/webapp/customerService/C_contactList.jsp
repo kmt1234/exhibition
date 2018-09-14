@@ -5,6 +5,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style type="text/css">
+
+#currentPaging{
+	color: red;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+#paging{
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -35,12 +47,12 @@
 	<div class="ui input" style="width: 40%;">
 		<input type="text" name="keyword" id="keyword" value="${keyword }">
 	</div>
-		<input type="button" class="middle ui button"  value="검색" id="C_contactList_Search">
+		<input type="button" class="middle ui button"  value="검색" id="C_contactList_SearchBtn">
 		<input type="button" class="middle ui button" id="C_contactList_WriteBtn" value="관리자 작성" >
 </div>
 <script src="../semantic/semantic.min.js"></script>
 <script src="../js/C_contactList_js.js?ver=1"></script>
-<script  type="text/javascript">
+<script>
 $(document).ready(function(){
 	$.ajax({
 			type : 'POST',
@@ -79,7 +91,9 @@ $(document).ready(function(){
 				$('#C_contactList_PagingDiv').html(data.customerServicePaging.pagingHTML);
 			}
 		});
-		$('#C_contactList_Search').click(function(event, str){
+	
+	
+	$('#C_contactList_SearchBtn').click(function(event, str){
 		
 		if(str!='trigger') $('#pg').val(1);
 		
@@ -129,6 +143,13 @@ $(document).ready(function(){
 			});
 		}
 	});
+	
+	function C_contactList_Search(pg){
+		$('#pg').val(pg);
+		$('#C_contactList_SearchBtn').trigger('click','trigger');
+		alert("11111");
+	}
+
 });
 </script>
 </body>
