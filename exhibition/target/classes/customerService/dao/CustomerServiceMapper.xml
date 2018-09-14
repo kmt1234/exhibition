@@ -264,6 +264,10 @@
 	<select id="getEventboard" parameterType="java.lang.String" resultType="eventboard">
 		select * from eventboard where seq = #{seq}
 	</select>
+	<!--호텔리스트 정보 보기  -->
+	<select id="getHotelboard" parameterType="java.lang.String" resultType="hotelboard">
+		select * from hotel_list where seq = #{seq}
+	</select>
 	
 	<!--연극정보 예매DB에 저장-->
 	<insert id="eventInfoWrite_play_bookDB" parameterType="customerService.bean.PlayBookDTO">
@@ -273,6 +277,24 @@
 						
 	</insert>
  </mapper>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
  
  
