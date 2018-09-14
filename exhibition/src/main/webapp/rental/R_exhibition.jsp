@@ -65,6 +65,11 @@
 					2층
 				</button> 
 			</td>
+			<td>
+				<button id="salesExhibitionBtn" class="middle ui button" style="width: 100%;">
+					매출보기
+				</button> 
+			</td>
 		</tr>
 	</table>
 	<br><br>

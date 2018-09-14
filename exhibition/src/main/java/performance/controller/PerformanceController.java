@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.ModelMap;
@@ -18,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import customerService.bean.EventboardDTO;
+import member.bean.MemberDTO;
+import performance.bean.Book_performance_membersDTO;
 import performance.bean.PerformancePaging;
 import performance.dao.PerformanceDAO;
 import rental.dao.ExhibitionDAO;
@@ -33,6 +37,8 @@ public class PerformanceController {
 	private PerformancePaging performancePaging;
 	@Autowired
 	private ExhibitionDAO exhibitionDAO;
+	@Autowired
+	Book_performance_membersDTO book_performance_members;
 	
 /* 사용메서드*/
 	/*일정정보에 관한 내용이 들어 있는 페이지로 이동~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -297,6 +303,29 @@ public class PerformanceController {
 		mav.addObject("listDate", listDate);
 		mav.addObject("display", "/performance/P_performanceBook.jsp");
 		mav.setViewName("P_performanceForm");
+		return mav;
+	}
+	
+	//연극 예매
+	@RequestMapping(value="book_performance", method=RequestMethod.POST)
+	public ModelAndView book_performance(@RequestParam String imageName, @RequestParam String playDate, @RequestParam String ticketQty, HttpSession session) {
+		
+		//세션에서 아이디 값 얻기
+		MemberDTO memberDTO = (MemberDTO) session.getAttribute("homepageMember");
+		String id = memberDTO.getM_Id();
+				
+		System.out.println("공연명 : "+imageName);
+		System.out.println("공연 날짜 : "+playDate);
+		System.out.println("예매 아이디 : "+id);
+		System.out.println("티켓 수 : " + ticketQty);
+		
+		//예매자 정보 DTO 담기
+		book_performance_members.setImageName(imageName);
+		book_performance_members.setPlayDate(playDate);
+		book_performance_members.setMemberId(id);
+		book_performance_members.setTicketQty(ticketQty);
+		
+		ModelAndView mav = new ModelAndView();
 		return mav;
 	}
 	

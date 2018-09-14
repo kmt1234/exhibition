@@ -53,7 +53,7 @@ img{
 <!--내용 : 예매하기-->
 <div id="Book_play_div">
 	<div>
-		<h2>${eventboardDTO.imageName}</h2>
+		<h2>${eventboardDTO.imageName}</h2><input type="hidden" id="imageName" value="${eventboardDTO.imageName}">
 		<h5>장소 : ${eventboardDTO.eventPlace}</h5>
 		<h5>기간 : ${eventboardDTO.startDate} ~ ${eventboardDTO.endDate}</h5>
 	</div>
@@ -63,7 +63,7 @@ img{
 	<div><img src="../storage/${eventboardDTO.image1}"></div>
 	<div>가격 : ${eventboardDTO.eventPrice}</div><input type="hidden" id="hiddenTicketPrice" value="${eventboardDTO.eventPrice}">
 	<div>좌석배정 방식: 선착순</div>
-	<div>공연 날짜 :
+	<div>공연 날짜 :<input id="hiddenDate" type="hidden">
 				<select id="selectEventDate">
 					<c:forEach items="${listDate}" var="eventPeriod">
 					<option value="${eventPeriod}"><fmt:formatDate value="${eventPeriod}" pattern="yyyy년-MM월-dd일"/></option>
@@ -71,7 +71,7 @@ img{
 				</select>
 	</div>
 	<div>공연 시간 : ${eventboardDTO.startTime} ~ ${eventboardDTO.endTime}</div>
-	<div>매수 :
+	<div>매수 :<input id="hiddenTicketQty" type="hidden">
 			<select id="selectPlayTicket">
 				<option value="1">1매</option>
 				<option value="2">2매</option>
@@ -105,9 +105,26 @@ $(document).ready(function(){
 		if(conF){
 			alert($('#selectEventDate :selected').text()); //선택된 일자 호출
 			alert($('#selectPlayTicket :selected').text()); //선택한 티켓 수 호출
+			
+			$('#hiddenTicketQty').val($('#selectPlayTicket :selected').val()); //티켓 수 히든에 넣기
+			$('#hiddenDate').val($('#selectEventDate :selected').text()); //공연일자 히든에 넣기 
+			
 			$('#totalPrice').text($('#hiddenTicketPrice').val() * $('#selectPlayTicket :selected').val());
 			//	$('#Book_play_div').hide();
 			//	$('#Confirm_play_div').show();
+			
+			//예매하기 컨트롤러
+			$.ajax({
+				type : 'POST',
+				url : '/exhibition/performance/book_performance.do',
+				data : {'imageName' : $('#imageName').val(), 'playDate' : $('#hiddenDate').val(), 'ticketQty' : $('#hiddenTicketQty').val()},
+				dataType : 'text',
+				success : function(data){
+					
+				}//success
+				
+			});//ajax
+			
 		}else{
 			location.href="javascript:history.back()";	//뒤로가기 
 		}

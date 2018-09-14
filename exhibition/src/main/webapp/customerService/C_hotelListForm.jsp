@@ -23,13 +23,13 @@
 
 }
 
-#currentEventPaging{
+#currentHotelPaging{
 	color: red;
 	text-decoration: underline;
 	cursor: pointer;
 }
 
-#eventpaging{
+#hotelpaging{
 	color: black;
 	text-decoration: none;
 	cursor: pointer;

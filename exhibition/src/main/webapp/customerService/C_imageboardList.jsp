@@ -42,6 +42,7 @@ function imageboardPaging(pg){
 	<th width="100"><input type="checkbox" id="checkAll">번 호</th>
 	<th width="150">이미지</th>
 	<th width="100">상품명</th>
+	
 </tr>
 </table>
 <div style=" float:left; width:500px" align="center" id="imagePaging" name="imagePaging"></div><br>
@@ -50,7 +51,7 @@ function imageboardPaging(pg){
 	<input type="button" value="메인등록" id="imageSelectBtn">
 	<input type="button" value="선택삭제" id="imageDeleteBtn">
 </div>
-
+<input type="hidden" id="code" value="2">
 </form>
 </div>
 <!-- <script src="http://code.jquery.com/jquery-3.3.1.min.js" type="text/javascript"></script> -->
@@ -112,7 +113,7 @@ $(document).ready(function(){
 		if(count==0) 
 			alert("항목을 선택해주세요");
 		else
-			location.href="/exhibition/main/index.do?code=2"
+			$('#imageboardListForm').attr('action','/exhibition/main/I_body.do').submit();
 			
 	});
 	
