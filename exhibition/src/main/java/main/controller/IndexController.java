@@ -33,6 +33,7 @@ public class IndexController {
 		List<Integer> list = new ArrayList<Integer>();
 		for (String seq : check) {
 			list.add(Integer.parseInt(seq));
+			System.out.println(seq);
 		}
 
 		model.addAttribute("list",list);

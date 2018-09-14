@@ -53,8 +53,6 @@ public class CustomerServiceController {
 	@Autowired
 	private CustomerServicePaging customerServicePaging;
 	@Autowired
-	private EventboardDTO eventboardDTO;
-	@Autowired
 	private PlayBookDTO playBookDTO;
 
 	// 고객센터 설명페이지
@@ -651,10 +649,10 @@ public class CustomerServiceController {
 	}
 
 	@RequestMapping(value = "getImageboardSlide1", method = RequestMethod.POST)
-	public ModelAndView getImageboardSlide1(@RequestParam List<Integer> list) {
+	public ModelAndView getImageboardSlide1(@RequestParam List<String> list) {
 		ModelAndView mav = new ModelAndView();
-		for (Integer data : list) {
-			System.out.println(data);
+		for (String data : list) {
+			System.out.println("data=" + data);
 		}
 		List<ImageboardDTO> list1 = customerServiceDAO.getImageboardSlide(list);
 

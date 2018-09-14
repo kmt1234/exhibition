@@ -69,7 +69,7 @@
 		$.ajax({
 		type : 'POST',
 		url : '/exhibition/customerService/getImageboardSlide1.do',
-		data : {'list':$('#list').val()},
+		data : 'list=${list}',
 		dataType : 'json',
 		success : function(data){
 			alert(data.list)
