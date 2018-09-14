@@ -16,4 +16,8 @@ public interface ExhibitionDAO {
 
 	public List<ExhibitionDTO> getAllCalendar();
 
+	public List<ExhibitionDTO> getSalesExhibition(String salesMon);
+
+	public int getSalesTotalRentExhibition(String salesMon);
+
 }

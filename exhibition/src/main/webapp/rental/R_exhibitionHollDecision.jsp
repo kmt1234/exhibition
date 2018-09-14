@@ -13,36 +13,56 @@
 </style>
 </head>
 <body>
-<br><br>
+<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
+	${booth} 
+</h2>
 <form id="exhibitionHollDecisionForm" method="post" action="/exhibition/rental/reservationHoll.do" style="height: 600px;">
 	
+	
+	
+	
+	
+	
+	
 	<div style="width: 35%; float: right;">
-		<h4>
-			예약 시작일 :
-			<span>
-				<input type="date" name="startDate" id="startDate" value="${date}">
-			</span>
-		</h4>
-		<h4>
-			예약 종료일 :
-			<span>
-				<input type="date" name="endDate" id="endDate" value="${date}">
-			</span>
-		</h4>
-		<input type="hidden" name="C_email" value="${C_email}">
-		<input type="hidden" name="C_license" value="${C_license}">
-		<input type="hidden" name="C_tel" value="${C_tel}">
-		<input type="hidden" id="totalRent" name="totalRent" value="">
-		<input type="hidden" id="booth" name="booth" value="${booth}">
-		<h4>
-			행사 이름 : 
-			<input type="text" id="title" name="title">
-		</h4>
-		<input class="middle ui button" type="button" id="rentBtn" value="임대료 계산하기">
-		<input class="middle ui button" type="button" id="reservationBtn" value="예약하기">
-		<div id="rentDiv"></div>
-		<div id="writeDiv"></div>
+		
+		<br><br>
+		<div style="width: 100%; float: right;">
+			<h4 style="text-align: left; padding-left: 35px ">부스 총 면적 : 100㎡</h4>
+			<h4 style="text-align: left; padding-left: 35px ">부스 단위 면적 당 금액 : 1,000원</h4>
+			<h4 style="text-align: left; padding-left: 35px ">1일 기준 이용 시간 : 08:00 ~ 20:00</h4>
+			
+			<h4>
+				예약 시작일 :
+				<span>
+					<input type="date" name="startDate" id="startDate" value="${date}">
+				</span>
+			</h4>
+			<h4>
+				예약 종료일 :
+				<span>
+					<input type="date" name="endDate" id="endDate" value="${date}">
+				</span>
+			</h4>
+			<input type="hidden" name="C_email" value="${C_email}">
+			<input type="hidden" name="C_license" value="${C_license}">
+			<input type="hidden" name="C_tel" value="${C_tel}">
+			<input type="hidden" id="totalRent" name="totalRent" value="">
+			<input type="hidden" id="booth" name="booth" value="${booth}">
+			<h4>
+				행사 이름 : 
+				<input type="text" id="title" name="title">
+			</h4>
+			<input class="middle ui button" type="button" id="rentBtn" value="임대료 계산하기">
+			<input class="middle ui button" type="button" id="reservationBtn" value="예약하기">
+			<div id="rentDiv"></div>
+			<div id="writeDiv"></div>
+		</div>
+	
+	
+	
 	</div>
+	
 	<div id='calendar' style="width: 63%"></div>
 </form>
 <br><br>
@@ -83,6 +103,16 @@
 	$(document).ready(function(){
 		
 		$('#rentBtn').click(function(){
+			if($('#startDate').val() < '${date}') {
+				$('#writeDiv').text('예약 시작일을 다시 설정해주세요.');
+				return;
+			}
+			
+			if($('#startDate').val() > $('#endDate').val()) {
+				$('#writeDiv').text('예약 종료일이 시작일보다 빠릅니다.');
+				return;
+			}
+			
 			var stDate = new Date($('#startDate').val());
 		    var endDate = new Date($('#endDate').val());
 		 

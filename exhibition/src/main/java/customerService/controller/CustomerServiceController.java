@@ -3,8 +3,12 @@ package customerService.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -568,13 +572,13 @@ public class CustomerServiceController {
 			mav.addObject("list", list);
 			mav.setViewName("jsonView");
 			
-		}else if(code.equals("2")) {
+		}/*else if(code.equals("2")) {
 			List<ImageboardDTO> list1 = customerServiceDAO.getImageboardSlide();
 			
 			mav.addObject("list", list1);
 			mav.setViewName("jsonView");
 			
-		}
+		}*/
 		return mav;
 	}
 
