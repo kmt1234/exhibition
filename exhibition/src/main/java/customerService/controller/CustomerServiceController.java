@@ -43,7 +43,7 @@ public class CustomerServiceController {
 	private JavaMailSenderImpl emailSender;
 	@Autowired
 	private ImageboardPaging imageboardPaging;
-	private String filePath = "C:\\Users\\user\\git\\exhibition1\\exhibition\\src\\main\\webapp\\storage\\";
+	private String filePath = "C:\\Users\\kmtab\\git\\exhibition\\exhibition\\src\\main\\webapp\\storage\\";
 	@Autowired
 	private CustomerServicePaging customerServicePaging;
 	@Autowired
@@ -764,6 +764,16 @@ public class CustomerServiceController {
 		customerServiceDAO.hotelDelete(list); // db삭제
 		return new ModelAndView("redirect:/customerService/C_hotelListForm.do");
 	}
+	// 호텔리스트 수정을 클리하면 내용을 보여준다.
+	@RequestMapping(value = "C_hotel_modify", method = RequestMethod.GET)
+	public String C_hotel_modify(@RequestParam String seq,Model model) {
+		HotelboardDTO hotelboardDTO = customerServiceDAO.getHotelInfo(seq);
+		model.addAttribute("hotelboardDTO", hotelboardDTO);
+		return "/customerService/C_hotel_modify";
+		
+	}
+	
+	
 	// 마이페이지
 	@RequestMapping(value = "mypage", method = RequestMethod.GET)
 	public ModelAndView mypage(HttpSession session) {

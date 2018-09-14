@@ -81,4 +81,6 @@ public interface CustomerServiceDAO {
 	public int getHotelboardTotalA();//호텔리스트 총글수
 	
 		public EventboardDTO getEventboard(String seq);	//박람회 내용 보기(수정하기 위해)
+
+		public HotelboardDTO getHotelInfo(String seq);//호텔리스트 수정 클릭시 상세보기
 }
