@@ -2,7 +2,6 @@ $(document).ready(function(){
 	var C_name = /^[가-힣]+$/;	//한글만 가능 
 	var C_phone =  /^((01[1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})$/;	//휴대폰 번호 양식
 	var Cw_regEmail = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/; //이메일 양식
-	var classify = "위치/교통";
 	
 	//고객의 소리 - 이메일 인증 - 인증번호 전송 버튼 클릭시
 	$('#C_emailSendBtn').click(function() {
@@ -19,9 +18,7 @@ $(document).ready(function(){
 			data : {'email':$('#email').val()},
 			dataType: 'text',
 			success : function(data){
-				alert(data);
-				$('#reC_EmailConfirm').val(data);
-				alert('메일을 보냈습니다.')
+				alert($('#email').val()+"메일을 보냈습니다.");
 			}
 		});
 		}
@@ -70,24 +67,6 @@ $(document).ready(function(){
 	$('#C_inquire_replyBtn').click(function(){
 		$('#C_inquire_writeReply').submit();
 	});
-	
-	$('#C_checkReplyBtn').click(function(){
-		$('#subjectDiv').empty();
-		$('#contentDiv').empty();
-		if($('#subject').val()=='')
-			$('#subjectDiv').text("제목을 입력하세요").css('font-size','9pt').css('color','red')
-		else if($('#content').val()=='')
-			$('#contentDiv').text("내용을 입력하세요").css('font-size','9pt').css('color','red')
-		else
-			$('#C_inquire_checkReply').submit();
-	});
-		
-	
-	
-	
-	$('#C_inquire_List').on('click','#subjectA',function(){
-		var seq = $(this).prev().text();
-		location.href="/exhibition/customerService/C_inquire_View.do?seq="+seq;
-	});
+
 	$('.ui.compact.selection.dropdown').dropdown();	
 });

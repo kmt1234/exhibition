@@ -63,8 +63,16 @@
 	<input type="hidden" id="subject" value="${customerServiceDTO.subject }">
 	<input type="hidden" id="content" value="${customerServiceDTO.content }">
 	<input type="button" id="C_inquire_replyBtn" class="middle ui button" value="문의 답하기">
+	<input type="button" class="middle ui button" id="C_inquire_ListBtn" value="목록">
+	<input type="hidden" id="pg" value="${pg}">
 </form>
 <script src="../js/C_inquire_js.js?ver=1"></script>
-
+<script>
+$(document).ready(function(){
+	$('#C_inquire_ListBtn').on('click', function(){
+		location.href="/exhibition/customerService/C_inquire_List.do?pg="+$('#pg').val();
+	});
+});
+</script>
 </body>
 </html>

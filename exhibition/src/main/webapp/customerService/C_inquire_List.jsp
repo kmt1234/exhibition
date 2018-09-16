@@ -10,7 +10,17 @@
 #subjectA:hover{color:green; text-decoration: underline; font-weight: bold; cursor: pointer;}
 #subjectA:active{color:black; text-decoration: none;}
 
+#currentPaging{
+	color: red;
+	text-decoration: underline;
+	cursor: pointer;
+}
 
+#paging{
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -31,24 +41,22 @@
 		</tr>
 	</table>
 	<br>
-	<div id="C_inquire_PagingDiv"></div>
+	<div id="C_inquire_PagingDiv" class="ui center pagination menu"></div>
 	<input type="hidden" name="pg" id="pg" value="1">
-	<br>
-	<div style="width: 100%;">
-		<select name="searchOption" id="searchOption"  class="ui compact selection dropdown" style="height: auto; ">
-			<option value="subject" selected>제목</option>
-			<option value="name">작성자</option>
-		</select>
+	<br><br>
+	<select name="searchOption" id="searchOption"  class="ui compact selection dropdown" style="height: auto; ">
+		<option value="subject" selected>제목</option>
+		<option value="name">작성자</option>
+	</select>
 		
 	<div class="ui input" style="width: 50%;">
 		<input type="text" name="keyword" id="keyword" value="${keyword }">
 	</div>
-		 <input type="button" class="middle ui button"  value="검색" id="C_inquire_Search">
-	</div>
+		 <input type="button" class="middle ui button"  value="검색" id="C_inquire_SearchBtn">
 </div>
 <script src="../semantic/semantic.min.js"></script>
 <script src="../js/C_inquire_js.js?ver=1"></script>
-<script>
+<script type="text/javascript">
 $.ajax({
 	type : 'POST',
 	url : '/exhibition/customerService/getInquireList.do',
@@ -89,8 +97,10 @@ $.ajax({
 	}
 });
 
+
+
 //고객의소리 리스트 검색한 값 불러오기
-$('#C_inquire_Search').click(function(event, str){
+$('#C_inquire_SearchBtn').click(function(event, str){
 	
 	if(str!='trigger') $('#pg').val(1);
 	
@@ -117,7 +127,6 @@ $('#C_inquire_Search').click(function(event, str){
 						align : 'center',
 						id : 'subjectA',
 						style: 'width: 20%; height: 9%; text-align: center;',
-						class : item.seq+"",
 						href : 'javascript:void(0)',
 						text : item.subject
 					})).append($('<td/>',{
@@ -142,6 +151,16 @@ $('#C_inquire_Search').click(function(event, str){
 		});
 	}
 });
+
+$('#C_inquire_List').on('click','#subjectA',function(){
+	var seq = $(this).prev().text();
+	location.href="/exhibition/customerService/C_inquire_View.do?seq="+seq+"&pg=${pg}";
+});
+
+function C_inquire_Search(pg){
+	$('#pg').val(pg);
+	$('#C_inquire_SearchBtn').trigger('click','trigger');
+}
 </script>
 </body>
 </html>

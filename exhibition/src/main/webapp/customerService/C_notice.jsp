@@ -42,7 +42,7 @@
 		</tr>
 	</table>
 	<br>
-	<div id="C_notice_PagingDiv" class="ui center pagination menu" style="height: " ></div>
+	<div id="C_notice_PagingDiv" class="ui center pagination menu"></div>
 	<input type="hidden" name="pg" id="pg" value="1">
 	<br><br>
 	<select class="ui compact selection dropdown" id="searchOption">
@@ -89,12 +89,6 @@ $.ajax({
 		$('#C_notice_PagingDiv').html(data.customerServicePaging.pagingHTML);
 	}
 });
-$('#C_notice_List').on('click','#subjectA',function(){
-	var seq = $(this).prev().text();
-	location.href="/exhibition/customerService/C_notice_View.do?seq="+seq+"&pg="+$('#pg').val();
-});
-
-
 
 // 공지사항 검색한 값 불러오기
 $('#C_notice_SearchBtn').click(function(event, str){
@@ -136,10 +130,14 @@ $('#C_notice_SearchBtn').click(function(event, str){
 	}
 });
 
+$('#C_notice_List').on('click','#subjectA',function(){
+	var seq = $(this).prev().text();
+	location.href="/exhibition/customerService/C_notice_View.do?seq="+seq+"&pg=${pg}";
+});
+
 function C_notice_Search(pg){
 	$('#pg').val(pg);
 	$('#C_notice_SearchBtn').trigger('click','trigger');
-	
 }
 
 </script>

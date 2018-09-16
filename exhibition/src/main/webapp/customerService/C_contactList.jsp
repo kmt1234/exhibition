@@ -5,6 +5,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style type="text/css">
+#subjectA:link{color:black; text-decoration: none;}
+#subjectA:visited{color:black; text-decoration: none;}
+#subjectA:hover{color:green; text-decoration: underline; font-weight: bold; cursor: pointer;}
+#subjectA:active{color:black; text-decoration: none;}
 
 #currentPaging{
 	color: red;
@@ -36,9 +40,9 @@
 			</tr>
 	</table>
 	<br>
-	<div id="C_contactList_PagingDiv"></div>
+	<div id="C_contactList_PagingDiv" class="ui center pagination menu"></div>
 	<input type="hidden" name="pg" id="pg" value="1">
-	<br>
+	<br><br>
 	<select class="ui compact selection dropdown" id="searchOption">
 			<option value="facility">기관&시설</option>
 			<option value="name">담당자</option>
@@ -52,7 +56,7 @@
 </div>
 <script src="../semantic/semantic.min.js"></script>
 <script src="../js/C_contactList_js.js?ver=1"></script>
-<script>
+<script type="text/javascript">
 $(document).ready(function(){
 	$.ajax({
 			type : 'POST',
@@ -144,13 +148,13 @@ $(document).ready(function(){
 		}
 	});
 	
-	function C_contactList_Search(pg){
-		$('#pg').val(pg);
-		$('#C_contactList_SearchBtn').trigger('click','trigger');
-		alert("11111");
-	}
 
 });
+
+function C_contactList_Search(pg){
+	$('#pg').val(pg);
+	$('#C_contactList_SearchBtn').trigger('click','trigger');
+}
 </script>
 </body>
 </html>

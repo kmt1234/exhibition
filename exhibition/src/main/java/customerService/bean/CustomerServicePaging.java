@@ -126,10 +126,8 @@ public class CustomerServicePaging {
 		for(int i=startPage; i<=endPage; i++) {
 			if(i==currentPage)
 				pagingHTML.append("<span class='item' id=currentPaging onclick=C_contactList_Search("+i+")>"+i+"</span>");
-			else	{
+			else
 				pagingHTML.append("<span class='item' id=paging onclick=C_contactList_Search("+i+")>"+i+"</span>");
-			}
-			
 		}
 		if(endPage!=totalP) 
 			pagingHTML.append("<span class='item' id=paging onclick=C_contactList_Search("+(endPage+1)+")>다음</span>");

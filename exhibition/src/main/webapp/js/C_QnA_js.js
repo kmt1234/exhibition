@@ -39,12 +39,17 @@ $(document).ready(function(){
 					id : 'subjectA',
 					href : 'javascript:void(0)',
 					text : item.subject
+				})).append($('<i/>',{
+					class : 'angle double down icon',
+					align : 'right',
+					style : 'width=80%'
 				})).appendTo($('#C_QnA_List'));
 				
 				$('<tr/>',{
 					class : 'content',
 				}).append($('<td/>',{
 					id : 'contentA',
+					style : 'width=20%',
 					text : item.content
 				})).appendTo($('#C_QnA_List'));
 			});

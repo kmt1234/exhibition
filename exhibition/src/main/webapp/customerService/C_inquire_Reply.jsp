@@ -7,7 +7,6 @@
 
 </head>
 <body>
-<form name=C_inquire_checkReply id="C_inquire_checkReply" method="post" action="/exhibition/customerService/C_inquire_checkReply.do">
 <h2 class="box-container" style="float: center; width: 100%; text-align: left;">
 	문의
 	<span class="h-light">하기</span>
@@ -38,8 +37,27 @@
 <input type="hidden" name="email" id="email" value="${customerServiceDTO.email}">
 <div>
 	<input type="button" id="C_checkReplyBtn" class="middle ui button" value="문의 답하기">
+	<input type="button" class="middle ui button" id="C_inquire_ListBtn" value="목록">
+	<input type="hidden" id="pg" value="${pg}">
 </div>
-</form>
 <script src="../js/C_inquire_js.js?ver=1"></script>
+<script>
+$(document).ready(function(){
+	$('#C_inquire_ListBtn').on('click', function(){
+		location.href="/exhibition/customerService/C_inquire_List.do?pg="+$('#pg').val();
+	});
+	
+	$('#C_checkReplyBtn').click(function(){
+		$('#subjectDiv').empty();
+		$('#contentDiv').empty();
+		if($('#subject').val()=='')
+			$('#subjectDiv').text("제목을 입력하세요").css('font-size','9pt').css('color','red')
+		else if($('#content').val()=='')
+			$('#contentDiv').text("내용을 입력하세요").css('font-size','9pt').css('color','red')
+		else
+			location.href="/exhibition/customerService/C_inquire_Reply.do?pg="+$('#pg').val();
+	});
+});
+</script>
 </body>
 </html>

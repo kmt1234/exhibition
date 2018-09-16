@@ -26,6 +26,9 @@ public interface CustomerServiceDAO {
 
 	public void C_notice_Delete(String seq);										// 공지사항 관리자가 삭제하기
 
+	
+	
+	
 	public int getTotalC_inquire();													// 고객의 소리 문의 받은 글 수
 
 	public List<CustomerServiceDTO> getInquireList(Map<String, Integer> map);		// 고객의 소리 문의 받은 리스트 불러오기
@@ -40,9 +43,15 @@ public interface CustomerServiceDAO {
 	
 	public CustomerServiceDTO getReplyInfo(String seq);								// 고객의 소리 관리자가 문의 답변 등록하기
 	
+	
+	
+	
 	public List<CustomerServiceDTO> getQnA_Classify(String classify);				// 자주묻는 질문 리스트 불러오기 & 버튼마다 리스트 불러오기
 
 	public void C_QnA_checkWrite(Map<String, String> map);							// 자주묻는 질문 관리자가 작성하기
+	
+	
+	
 	
 	public void C_contactList_checkWrite(Map<String, String> map);					// 주요시설 연락처 관리자가 작성하기
 
@@ -53,7 +62,16 @@ public interface CustomerServiceDAO {
 	public int getTotalC_contactList_Search(Map<String, String> map);				// 주요시설 연락처 검색된 총 글수
 	
 	public List<CustomerServiceDTO> C_contactList_Search(Map<String, String> map);	// 주요시설 연락처 검색된 글 불러오기
+	
+	
+	
+	
 //////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	
+	
+	
+	
 	public void imageboardWrite(ImageboardDTO imageboardDTO);
 
 	public int getImageboardTotalA();
