@@ -68,7 +68,7 @@
 		<div id="image_DIV">
 			<c:forEach items="${list }" var="list">
 			<div style="float:left; width: 24%; text-align: left;">
-				<img src="../storage/${list.image1}" width="200" height="150"><br>
+				<img id="image_check" src="../storage/${list.image1}" width="200" height="150"><br>
 				${list.imageName}<br>
 				TEL) ${list.eventPlace} &nbsp;
 				<i class="home icon" style="cursor: pointer;" onclick="window.open('${list.eventLink }')"></i>

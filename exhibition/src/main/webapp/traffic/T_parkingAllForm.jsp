@@ -173,18 +173,25 @@
 			<div id="parkingDiv" align="left">
 				&ensp;&ensp;주차장 층을 선택 해 주세요
 				<div style="background-color: #e8e8e8;">
-					&ensp;&ensp;<span id="B1" class="B">B1</span>
+					&ensp;&ensp;<span id="B1" class="B">B2</span>
 					&ensp;&ensp;|
-					&ensp;&ensp;<span id="B2" class="B">B2</span>
+					&ensp;&ensp;<span id="B2" class="B">B3</span>
 				</div>
 			</div>
 			
 			<div id="T_parkingB1Map">
 				<img src="../img/B1.jpg" width="700px" height="600px">
+				<div class="ui divider"></div>
+				<ul>
+					<li></li>
+					<li></li>
+					
+				</ul>
 			</div>
 			
 			<div id="T_parkingB2Map">
 				<img src="../img/B2.jpg" width="700px" height="600px">
+				<div class="ui divider"></div>
 			</div>
 			
 			<div id="T_parkingPriceMap">

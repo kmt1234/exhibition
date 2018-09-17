@@ -10,7 +10,7 @@
 	<jsp:include page="I_header.jsp"></jsp:include>
 </header>
 <section>
-	<div style=" margin-left:400px;margin-top: 20px;">
+	<div style="margin-top: 20px; height:500px;">
 	<jsp:include page="${display }"/>
 	</div>
 </section>

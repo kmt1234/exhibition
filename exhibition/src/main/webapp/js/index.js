@@ -112,7 +112,7 @@ $(document).ready(function(){
 	/*회사관련사항(소개&인사말&연혁??)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 	//회사의 전반적인 설명
 	$('#I_infoForm').click(function(){
-		location.href="/exhibition/introduction/I_infoForm.do";
+		location.href="/exhibition/introduction/I_companyIntroductionForm.do";
 	});
 	$('#I_companyIntroductionForm').click(function(){//회사소개
 		location.href="/exhibition/introduction/I_companyIntroductionForm.do";

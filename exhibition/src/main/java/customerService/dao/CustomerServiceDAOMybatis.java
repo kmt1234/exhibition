@@ -185,6 +185,10 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	public EventboardDTO getEventboard(String seq) {
 		return sqlSession.selectOne("customerServiceSQL.getEventboard", seq);
 	}
+	//호텔리스트 정보 보기(수정하기 위해)
+	public HotelboardDTO getHotelInfo(String seq) {
+		return sqlSession.selectOne("customerServiceSQL.getHotelboard", seq);
+	}
 	
 	//연극정보 예매DB에 저장
 	public void eventInfoWrite_play_bookDB(PlayBookDTO playBookDTO) {
