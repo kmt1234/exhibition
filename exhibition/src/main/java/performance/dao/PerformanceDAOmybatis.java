@@ -57,4 +57,15 @@ public class PerformanceDAOmybatis implements PerformanceDAO {
 		
 	}
 	
+	//연극 잔여좌석 가져오는 메소드
+	public String checkRemainSeats(Map<String, String> map) {
+		return sqlSession.selectOne("performanceSQL.checkRemainSeats", map);
+	}
+
+	//선택일자의  해당 연극 예매된 티켓 수 가져오기
+	public String checkUsedSeats(Map<String, String> map) {
+		return sqlSession.selectOne("performanceSQL.checkUsedSeats", map);
+	}
+
+	
 }

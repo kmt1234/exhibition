@@ -347,15 +347,27 @@ public class PerformanceController {
 		System.out.println("연극 명 : "+ imageName);
 		System.out.println("연극 날짜 : "+playDate);
 		
+		//날짜 형식 변경(년,월,일 제거)
+		playDate=playDate.replace("년", "");
+		playDate=playDate.replace("월", "");
+		playDate=playDate.replace("일", "");
+		
 		//진행중
 		Map<String,String> map = new HashMap<String,String>();
 		map.put("imageName", imageName);
 		map.put("playDate", playDate);
 		
 		//DB
-		//int usedSeats = performanceDAO.checkRemainSeats();
+		String remainSeats = performanceDAO.checkRemainSeats(map);	//선택일자의 해당 연극 잔여좌석 가져오기(기본값:일별 티켓 발행 수)
+		String usedSeats = performanceDAO.checkUsedSeats(map);		//선택일자의  해당 연극 예매된 티켓 수 가져오기
 		
-		return "";
+		System.out.println("잔여석 : "+remainSeats);
+		System.out.println("예매석 : "+usedSeats);
+		
+		//잔여좌석 - 예매된 티켓 수 = 예매 가능한 좌석 수
+		int resultSeats = Integer.parseInt(remainSeats) - Integer.parseInt(usedSeats);
+		//null값이면 ***
+		return resultSeats+"";
 	}
 	
 	
