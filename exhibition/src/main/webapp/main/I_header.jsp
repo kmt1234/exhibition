@@ -154,6 +154,8 @@
 	                  </c:if>
 	                  <c:if test="${code=='1' }">
 	                 	 <div class="item" id="C_boardAdd">게시판 추가</div><!--세션값에 따라 보이게 할 예정-->
+	               	  	 <div class="item" id="C_salesExhibition">메출현황</div><!--세션값에 따라 보이게 할 예정-->
+	               	  	 <div class="item" id="C_memberShib">회원리스트</div><!--세션값에 따라 보이게 할 예정-->
 	               	  </c:if>	
 	               </div>
 	            </div>
@@ -178,14 +180,13 @@
 <jsp:include page="../login/memberLoginForm.jsp"/>
 <!--법인회원 로그인 양식 페이지 인클루드  -->
 <jsp:include page="../login/companyLoginForm.jsp"/>
-
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"
 	integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
 	crossorigin="anonymous"></script>
 <script src="../semantic/semantic.min.js"></script>
-<script src="../js/index.js?ver=1" charset="UTF-8"></script>  <!--  -->
-<script src="../js/member.js" charset="UTF-8"></script> <!--  -->
-<script src="../js/company.js" charset="UTF-8"></script><!--  -->
-<script src="../js/login.js" charset="UTF-8"></script>	<!--  -->
-<script src="../js/post.js" charset="UTF-8"></script>	<!--  -->
+<script src="../js/index.js?ver=1" charset="UTF-8"></script> 
+<script src="../js/member.js" charset="UTF-8"></script> 
+<script src="../js/company.js" charset="UTF-8"></script>
+<script src="../js/login.js" charset="UTF-8"></script>	
+<script src="../js/post.js" charset="UTF-8"></script>	
 

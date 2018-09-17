@@ -67,7 +67,6 @@
 	<br>
 	<div class="ui five column grid container">
 		<!-- 사이드바 메뉴 -->
-
 		<div class="ui compact menu" style="width: 20%; height: 977px; ">
 			<a class="item" href="T_allForm.do" id="T_map">교통안내</a> 
 			<ul class="ui list" id="T_mapList" style="text-align: center; width: 120px">

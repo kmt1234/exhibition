@@ -382,6 +382,14 @@
 									,#{bookStatus})
 						
 	</insert>
+	<!-- 매출현황  -->
+	<select id="getSalesExhibition" parameterType="java.lang.String" resultType="SalesExhigitionDTO">
+ 		select sum(endDate-startDate+1) as saleDays, sum(totalrent) as totalRent, boothName from EXHIBITIONRENTAL where STARTDATE BETWEEN #{salesMon} and (select last_day(#{salesMon}) from dual) group by BOOTHNAME
+ 	</select>
+ 	<!-- 매출현황  -->
+ 	<select id="getSalesTotalRentExhibition" parameterType="java.lang.String" resultType="int">
+ 		select sum(totalrent) as salesTotalRent from EXHIBITIONRENTAL where STARTDATE BETWEEN #{salesMon} and (select last_day(#{salesMon}) from dual)
+ 	</select>
  </mapper>
  
  

@@ -36,7 +36,9 @@
             	<a class="item" href="mypage.do">개인정보</a>
             </c:if>
             <c:if test="${code=='1' }">
-              	<a class="item" href="C_mainImageboardForm.do">게시판 추가</a><!--세션값에 따라 보이게 할 예정-->
+              	<a class="item" href="C_mainImageboardForm.do">게시판 추가</a>
+           		<a class="item" href="C_salesExhibitionView.do">매출 현황</a>
+           		<a class="item" href="C_memberShib.do">회원리스트</a>
            	</c:if>	
 		</div>
 		<!-- 메인 화면 -->

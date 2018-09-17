@@ -38,8 +38,10 @@ import customerService.bean.HotelboardDTO;
 import customerService.bean.ImageboardDTO;
 import customerService.bean.ImageboardPaging;
 import customerService.bean.PlayBookDTO;
+import customerService.bean.SalesExhigitionDTO;
 import customerService.dao.CustomerServiceDAO;
 import member.bean.MemberDTO;
+import rental.bean.ExhibitionDTO;
 
 @RequestMapping(value = "customerService")
 @Component
@@ -974,6 +976,45 @@ public class CustomerServiceController {
 			mav.setViewName("/customerService/C_companyInformationForm"); // 법인마이페이지
 		}
 
+		return mav;
+	}
+	//부스별 총 매출액 보여주는 페이지로 이동
+	@RequestMapping(value="C_salesExhibitionView", method=RequestMethod.GET)
+	public ModelAndView R_salesExhibitionView() {
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("display","/customerService/C_salesExhibitionView.jsp");
+		mav.setViewName("/customerService/C_customerServiceForm");
+		
+		return mav;
+	}
+	
+	//부스별 총 매출액 보여주는 컨트롤
+	@RequestMapping(value="C_salesExhibition", method=RequestMethod.POST)
+	public ModelAndView R_salesExhibition(@RequestParam String year, @RequestParam String month) {
+		String salesMon = year.substring(2)+"-"+month+"-"+"01";
+		
+		//부스명, 예약점유 일수, 총 매출액 가져오는 sql
+		List<SalesExhigitionDTO> list = customerServiceDAO.getSalesExhibition(salesMon);
+		
+		int salesTotalRent = customerServiceDAO.getSalesTotalRentExhibition(salesMon);
+		String salesTotalRentstr = String.format("%,d", salesTotalRent);   
+
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.addObject("salesTotalRent", salesTotalRentstr);
+		mav.setViewName("jsonView");
+		return mav;
+	}
+	
+	@RequestMapping(value="C_memberShib", method=RequestMethod.GET)
+	public ModelAndView C_memberShib() {
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("display","/customerService/C_memberShib.jsp");
+		mav.setViewName("/customerService/C_customerServiceForm");
+		
 		return mav;
 	}
 }
