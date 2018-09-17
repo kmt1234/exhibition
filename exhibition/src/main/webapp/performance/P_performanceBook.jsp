@@ -95,7 +95,10 @@ img{
 				<option value="4">4매</option>
 				<option value="5">5매</option>
 			</select>
-			 / 잔여 매수 : ${eventboardDTO.eventSeats / listDate.size()}
+			
+			<input type="hidden" value="${eventboardDTO.eventSeats}" id="hiddenTotalSeats">
+			<fmt:parseNumber var="remain" value="${eventboardDTO.eventSeats}" integerOnly="true" />
+			 / 잔여 매수 : ${eventboardDTO.eventSeats}
 	</div>
 	
 	<div><button id="BookEventBtn">예매하기</button></div>
@@ -113,6 +116,23 @@ img{
 $(document).ready(function(){
 	//페이지 호출 시(기본),
 //	$('#Confirm_play_div').hide();
+	
+	//날짜 변경 시, 히든 태그에 날짜 값 넣기
+	$("#selectEventDate").change(function() {
+		$('#hiddenDate').val($('#selectEventDate :selected').text());
+		
+		//티켓 잔여 확인
+		$.ajax({
+			type : 'POST',
+			url : '/exhibition/performance/book_performance_remainSeats.do',
+			data : {'totalSeats' : $('#hiddenTotalSeats').val(), 'imageName' : $('#imageName').val(), 'playDate' : $('#selectEventDate :selected').text()},
+			dataType : 'text',
+			success : function(data){
+				
+			}//success
+		});//ajax
+		
+	});//날짜 변경 값 확인	
 	
 	
 	//예매하기 버튼 클릭 시,
@@ -155,7 +175,10 @@ $(document).ready(function(){
 			location.href="javascript:history.back()";	//뒤로가기 
 		}
 		
-	});
+	});//예매하기 버튼 클릭 
+	
+	
+	
 });
 </script>
 </html>

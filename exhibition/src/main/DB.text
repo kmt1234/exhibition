@@ -189,7 +189,7 @@ create sequence seq_eventboard_play_book  nocache nocycle;  --연극 일자별 시퀀스
 
 //예매 DB
 create table book_play_members(
-imageName	VARCHAR2(500) PRIMARY KEY,
+imageName	VARCHAR2(500),
 playDate	DATE NOT NULL,
 memberId	VARCHAR2(100) NOT NULL,
 ticketQty	VARCHAR2(30) NOT NULL

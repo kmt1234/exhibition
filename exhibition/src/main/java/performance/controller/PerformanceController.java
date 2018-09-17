@@ -307,7 +307,7 @@ public class PerformanceController {
 		return mav;
 	}
 	
-	//연극 예매
+	//연극 예매(ajax)
 	@RequestMapping(value="book_performance", method=RequestMethod.POST)
 	public @ResponseBody String book_performance(@RequestParam String imageName, @RequestParam String playDate, @RequestParam String ticketQty, HttpSession session) {
 		
@@ -315,7 +315,7 @@ public class PerformanceController {
 		MemberDTO memberDTO = (MemberDTO) session.getAttribute("homepageMember");
 		String id = memberDTO.getM_Id();
 		
-		//날짜 형식 변경
+		//날짜 형식 변경(년,월,일 제거)
 		playDate=playDate.replace("년", "");
 		playDate=playDate.replace("월", "");
 		playDate=playDate.replace("일", "");
@@ -338,6 +338,25 @@ public class PerformanceController {
 		if(result==0) return "fail";
 		else return "ok";
 	}
+	
+	//잔여좌석 확인하기(ajax)
+	@RequestMapping(value="book_performance_remainSeats", method=RequestMethod.POST)
+	public @ResponseBody String book_performance_remainSeats(@RequestParam int totalSeats, @RequestParam String imageName, @RequestParam String playDate) {
+
+		System.out.println("총 좌석 수 : "+ totalSeats);
+		System.out.println("연극 명 : "+ imageName);
+		System.out.println("연극 날짜 : "+playDate);
+		
+		//진행중
+		Map<String,String> map = new HashMap<String,String>();
+		//map.put("imageName", )
+		
+		//DB
+		//int usedSeats = performanceDAO.checkRemainSeats();
+		
+		return "";
+	}
+	
 	
 	//달력 메소드
 	public static String[] getDiffDays(String fromDate, String toDate) {
