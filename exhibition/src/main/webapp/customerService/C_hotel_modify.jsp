@@ -88,8 +88,8 @@
 						<td align="center">${hotelboardDTO.seq}</td>
 						<td align="center"><span><img src="../storage/${hotelboardDTO.image1}" name="selectimage" id="selectImageFile" width="200" height="150"></span></td>
 						<td align="center"><a class="selectAtag" id="selectImageName">${hotelboardDTO.imageName}</a></td>
-						<td align="center"><a class="selectAtag" id="selectEventLink">${hotelboardDTO.eventLink}</a></td>
-						<td align="center"><a class="selectAtag" id="selectEventPlace">${hotelboardDTO.eventPlace}</a></td>
+						<td align="center"><a class="selectAtag" id="selectEventLink">${hotelboardDTO.eventLink}</a><div id="hotelDiv"></div></td>
+						<td align="center"><a class="selectAtag" id="selectEventPlace">${hotelboardDTO.eventPlace}</a><div id="telDiv"></div></td>
 					</tr>
 					<tr id="imageHotel">
 						<td align="center">이미지</td>
@@ -163,7 +163,18 @@ $(document).ready(function(){
 	
 	//수정완료 클릭시
 	$('#completeHotelBtn').click(function(){
-		$('#hotelboardModForm').attr('action','/exhibition/customerService/C_hotelboardMod.do').submit();
+		var reg = /^https?\:\/\/.+/;
+		var tel = /^((01[1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})|(02|0[3-9]+[0-9])(\d{3,4})(\d{4})$/;
+		if($('#selectEventPlace').text()=='')
+			$('#telDiv').text('전화번호를 입력하세요').css('color','red').css('font-size','9pt').css('font-weight','bold');
+		else if(!tel.test($('#selectEventPlace').text())){
+			$('#telDiv').text('전화번호 양식에 맞지 않습니다').css('color','red').css('font-size','9pt').css('font-weight','bold');
+		}else if($('#selectEventLink').text()=='')
+			$('#hotelDiv').text('호텔 링크를 입력하세요').css('color','red').css('font-size','9pt').css('font-weight','bold');
+		else if(!reg.test($('#selectEventLink').text())){
+			$('#hotelDiv').text('호텔 링크 앞에는 http://가 입력되어야 합니다').css('color','red').css('font-size','9pt').css('font-weight','bold');
+		}else 
+			$('#hotelboardModForm').attr('action','/exhibition/customerService/C_hotelboardMod.do').submit();
 	});
 	
 	
