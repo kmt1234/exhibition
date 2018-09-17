@@ -349,7 +349,8 @@ public class PerformanceController {
 		
 		//진행중
 		Map<String,String> map = new HashMap<String,String>();
-		//map.put("imageName", )
+		map.put("imageName", imageName);
+		map.put("playDate", playDate);
 		
 		//DB
 		//int usedSeats = performanceDAO.checkRemainSeats();
