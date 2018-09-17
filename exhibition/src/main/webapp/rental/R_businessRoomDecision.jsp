@@ -10,63 +10,46 @@
 .fc-toolbar {
 	height: 53px;
 }
+
+td.empty {
+    padding: 50px 0 !important;
+    text-align: center;
+    background-color: #fff !important;
+}
+
 </style>
 </head>
 <body>
 <h2 class="box-container" style="float: center; width: 100%; text-align: left;">
 	${businessRoom} 
 </h2>
-<form id="" method="post" action="" style="height: 600px;">
-	
-	<div style="width: 35%; float: right;">
-		
-		<br><br>
-		<div style="width: 100%; float: right;">
-			<h4 style="text-align: left; padding-left: 35px ">룸 총 면적 : 100㎡</h4>
-			<h4 style="text-align: left; padding-left: 35px ">룸 단위 면적 당 금액 : 1,000원</h4>
-			<h4 style="text-align: left; padding-left: 35px ">1일 기준 이용 시간 : 08:00 ~ 20:00</h4>
-			
-			<h4>
-				예약 시작일 :
-				<span>
-					<input type="date" name="startDate" id="startDate" value="${date}">
-				</span>
-			</h4>
-			<h4>
-				예약 종료일 :
-				<span>
-					<input type="date" name="endDate" id="endDate" value="${date}">
-				</span>
-			</h4>
-			<input type="hidden" name="C_email" value="">
-			<input type="hidden" name="C_license" value="">
-			<input type="hidden" name="C_tel" value="">
-			<input type="hidden" id="totalRent" name="totalRent" value="">
-			<input type="hidden" id="businessRoom" name="businessRoom" value="${businessRoom}">
-			<h4>
-				?? : 
-				<input type="text" id="title" name="title">
-			</h4>
-			<input class="middle ui button" type="button" id="rentBtn" value="임대료 계산하기">
-			<input class="middle ui button" type="button" id="reservationBtn" value="예약하기">
-			<div id="rentDiv"></div>
-			<div id="writeDiv"></div>
-		</div>
-	
-	
-	
-	</div>
 	
 	<div id='calendar' style="width: 63%"></div>
-</form>
 <br><br>
+
+<h3>
+	<span>비즈니스룸 이용 시간 선택</span>
+</h3>
+<div>
+	<table id="time_list" width="100%">
+		<tr>
+			<th style="width: 50px">선택</th>
+			<th >이용시간</th>
+			<th style="width: 150px">금액(원)</th>
+			<th style="width: 150px">상태</th>
+		</tr>
+		<tr>
+			<td class="empty" colspan="4"> 이용 일자를 선택하세요. </td>
+		</tr>
+	</table>
+</div>	
 
 <div class="ui mini modal rental">
   <div class="header">
   	<i class="huge home icon"></i>
   </div>
   <div class="content" style="width: 100%">
-    <span>사업자로 로그인해주세요</span>
+    <span>개인으로 로그인해주세요</span>
   </div>
   <div class="actions">
     <div class="ui approve button">확인</div>
@@ -96,81 +79,6 @@
 	
 	$(document).ready(function(){
 		
-		$('#rentBtn').click(function(){
-			if($('#startDate').val() < '${date}') {
-				$('#writeDiv').text('예약 시작일을 다시 설정해주세요.');
-				return;
-			}
-			
-			if($('#startDate').val() > $('#endDate').val()) {
-				$('#writeDiv').text('예약 종료일이 시작일보다 빠릅니다.');
-				return;
-			}
-			
-			var stDate = new Date($('#startDate').val());
-		    var endDate = new Date($('#endDate').val());
-		 
-		    var btMs = endDate.getTime() - stDate.getTime();
-		    var btDay = btMs / (1000*60*60*24) + 1;
-		    var totalRent = ${rate} * btDay + 1;
-		    var booth = '${booth}';
-		    
-		    $('#rentDiv').text(booth + '의 총 임대료 : ' + totalRent.toLocaleString() + '원');
-		    $('#totalRent').val(totalRent);
-			$('#booth').val(booth);
-			$('#writeDiv').text('');
-		});
-		
-		$('#reservationBtn').click(function(){
-			if($('#startDate').val() < '${date}') {
-				$('#writeDiv').text('예약 시작일을 다시 설정해주세요.');
-				return;
-			}
-			
-			if($('#startDate').val() > $('#endDate').val()) {
-				$('#writeDiv').text('예약 종료일이 시작일보다 빠릅니다.');
-				return;
-			}
-			
-			if(code=='2') {
-				
-				if($('#rentDiv').text()=='') {
-					$('#writeDiv').text('임대료 계산부터 해주세요.');
-					return;
-				}
-				
-				if($('#title').val()=='') {
-					$('#writeDiv').text('행사 이름을 입력해주세요.');
-					return;
-				}
-				
-				$.ajax({
-					type : 'POST',
-					url : '/exhibition/rental/searchRentDay.do',
-					async: false,
-					data : {'booth': '${booth}',
-							'startDate' : $('#startDate').val(),
-							'endDate' : $('#startDate').val()},
-					async: false,
-					dataType: 'text',
-					success : function(data){
-						
-						if(data==='not_exist') {
-							$('#exhibitionHollDecisionForm').submit();
-						} else if(data==='exist') {
-							$('#writeDiv').text('예약불가능');
-						}  
-						
-					}
-				});
-				
-			} else {
-				$('#rentDiv').empty();
-				$('.ui.mini.modal.rental').modal('show');
-			}
-			
-		});
-		
 		$('#calendar').fullCalendar({
 			header: {
 	            left: 'prev,next today',
@@ -181,7 +89,69 @@
 	        navLinks: true, 
 	        editable: false,
 	        eventLimit: true,
-			events: dataset
+			events: dataset,
+			eventClick: function(e) {
+				alert(e.start);
+				$.ajax({
+					type : 'POST',
+					url : '/exhibition/rental/searchBusinessRoom.do',
+					data : {'roomName': '${businessRoom}',
+							'startDate' : start},
+					async: false,
+					dataType: 'json',
+					success : function(data) {
+						
+						$('<tr/>',{
+				               align : 'center'
+				            }).append($('<td/>').append($('<input/>',{
+				               type : 'checkbox'
+				            }))).append($('<td/>',{
+				               text : '09 : 00 ~ 12 : 00'
+				            })).append($('<td/>',{
+				               text : '12,000'
+				            })).append($('<td/>',{
+				               text : '예약가능'
+				            })).appendTo('#time_list');
+						$('<tr/>',{
+				               align : 'center'
+				            }).append($('<td/>').append($('<input/>',{
+				               type : 'checkbox'
+				            }))).append($('<td/>',{
+				               text : '12 : 00 ~ 15 : 00'
+				            })).append($('<td/>',{
+				               text : '12,000'
+				            })).append($('<td/>',{
+				               text : '예약가능'
+				            })).appendTo('#time_list');
+						$('<tr/>',{
+				               align : 'center'
+				            }).append($('<td/>').append($('<input/>',{
+				               type : 'checkbox'
+				            }))).append($('<td/>',{
+				               text : '15 : 00 ~ 18 : 00'
+				            })).append($('<td/>',{
+				               text : '12,000'
+				            })).append($('<td/>',{
+				               text : '예약가능'
+				            })).appendTo('#time_list');
+						$('<tr/>',{
+				               align : 'center'
+				            }).append($('<td/>').append($('<input/>',{
+				               type : 'checkbox'
+				            }))).append($('<td/>',{
+				               text : '18 : 00 ~ 21 : 00'
+				            })).append($('<td/>',{
+				               text : '12,000'
+				            })).append($('<td/>',{
+				               text : '예약가능'
+				            })).appendTo('#time_list');
+					}
+					
+				});
+				
+			}
+	        
+	        
 		});
 
 	});
