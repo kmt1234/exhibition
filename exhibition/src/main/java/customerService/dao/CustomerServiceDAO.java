@@ -66,7 +66,7 @@ public interface CustomerServiceDAO {
 	
 	public List<CustomerServiceDTO> C_contactList_Search(Map<String, String> map);	// 주요시설 연락처 검색된 글 불러오기
 	
-	
+	public void C_contactList_Delete(List<Integer> list);
 	
 	/*	===============================================================*/
 	

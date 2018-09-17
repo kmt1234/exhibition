@@ -102,6 +102,9 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	public List<CustomerServiceDTO> C_contactList_Search(Map<String, String> map) {
 		return sqlSession.selectList("customerServiceSQL.C_contactList_Search", map);
 	}
+		public void C_contactList_Delete(List<Integer> list) {
+		sqlSession.delete("customerServiceSQL.C_contactList_Delete", list);
+	}
 	
 	
 	
