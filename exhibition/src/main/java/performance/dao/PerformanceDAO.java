@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import customerService.bean.EventboardDTO;
+import performance.bean.Book_performance_membersDTO;
 import performance.bean.PerformanceDTO;
 
 public interface PerformanceDAO {
@@ -22,5 +23,7 @@ public interface PerformanceDAO {
 	
 	
 	public EventboardDTO performanceBook(String seq);	//공연 예약하기 폼
+
+	public int bookPlayMembers(Book_performance_membersDTO book_performance_membersDTO);	//예매자 등록 메소드(예매자 DB 넣기)
 
 }

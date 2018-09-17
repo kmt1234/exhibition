@@ -42,4 +42,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="performanceBook" parameterType="java.lang.String" resultType="eventboard">
 		select * from eventboard_play where seq = #{seq}
 	</select>
+	
+	<!--예매자 등록(예매자 DB)-->
+	<insert id="bookPlayMembers" parameterType="bookboard">
+		insert into book_play_members values(#{imageName},#{playDate},#{memberId},#{ticketQty})
+	</insert>
 </mapper>

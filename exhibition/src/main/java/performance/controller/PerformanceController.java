@@ -17,6 +17,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import customerService.bean.EventboardDTO;
@@ -38,7 +39,7 @@ public class PerformanceController {
 	@Autowired
 	private ExhibitionDAO exhibitionDAO;
 	@Autowired
-	Book_performance_membersDTO book_performance_members;
+	Book_performance_membersDTO book_performance_membersDTO;
 	
 /* 사용메서드*/
 	/*일정정보에 관한 내용이 들어 있는 페이지로 이동~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -306,13 +307,19 @@ public class PerformanceController {
 		return mav;
 	}
 	
-	//연극 예매
+	//연극 예매(ajax)
 	@RequestMapping(value="book_performance", method=RequestMethod.POST)
-	public ModelAndView book_performance(@RequestParam String imageName, @RequestParam String playDate, @RequestParam String ticketQty, HttpSession session) {
+	public @ResponseBody String book_performance(@RequestParam String imageName, @RequestParam String playDate, @RequestParam String ticketQty, HttpSession session) {
 		
 		//세션에서 아이디 값 얻기
 		MemberDTO memberDTO = (MemberDTO) session.getAttribute("homepageMember");
 		String id = memberDTO.getM_Id();
+		
+		//날짜 형식 변경(년,월,일 제거)
+		playDate=playDate.replace("년", "");
+		playDate=playDate.replace("월", "");
+		playDate=playDate.replace("일", "");
+		
 				
 		System.out.println("공연명 : "+imageName);
 		System.out.println("공연 날짜 : "+playDate);
@@ -320,14 +327,36 @@ public class PerformanceController {
 		System.out.println("티켓 수 : " + ticketQty);
 		
 		//예매자 정보 DTO 담기
-		book_performance_members.setImageName(imageName);
-		book_performance_members.setPlayDate(playDate);
-		book_performance_members.setMemberId(id);
-		book_performance_members.setTicketQty(ticketQty);
+		book_performance_membersDTO.setImageName(imageName);
+		book_performance_membersDTO.setPlayDate(playDate);
+		book_performance_membersDTO.setMemberId(id);
+		book_performance_membersDTO.setTicketQty(ticketQty);
 		
-		ModelAndView mav = new ModelAndView();
-		return mav;
+		//DB (예매자 등록 DB)
+		int result = performanceDAO.bookPlayMembers(book_performance_membersDTO);
+		
+		if(result==0) return "fail";
+		else return "ok";
 	}
+	
+	//잔여좌석 확인하기(ajax)
+	@RequestMapping(value="book_performance_remainSeats", method=RequestMethod.POST)
+	public @ResponseBody String book_performance_remainSeats(@RequestParam int totalSeats, @RequestParam String imageName, @RequestParam String playDate) {
+
+		System.out.println("총 좌석 수 : "+ totalSeats);
+		System.out.println("연극 명 : "+ imageName);
+		System.out.println("연극 날짜 : "+playDate);
+		
+		//진행중
+		Map<String,String> map = new HashMap<String,String>();
+		//map.put("imageName", )
+		
+		//DB
+		//int usedSeats = performanceDAO.checkRemainSeats();
+		
+		return "";
+	}
+	
 	
 	//달력 메소드
 	public static String[] getDiffDays(String fromDate, String toDate) {
