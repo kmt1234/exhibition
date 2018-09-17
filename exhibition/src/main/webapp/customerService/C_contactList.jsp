@@ -24,6 +24,7 @@
 </style>
 </head>
 <body>
+<form id="C_contactList_delete" method="post" action="exhibition/customerService/C_contactList_delete.do">
 <h2 class="box-container" style="float: center; width: 100%; text-align: left;">
 	주요시설
 	<span class="h-light">연락처</span>
@@ -55,6 +56,7 @@
 		<input type="button" class="middle ui button" id="C_contactList_WriteBtn" value="관리자 작성" >
 		<input type="button" class="middle ui button" id="C_contactList_DeleteBtn" value="삭제" >
 </div>
+</form>
 <script src="../semantic/semantic.min.js"></script>
 <script src="../js/C_contactList_js.js?ver=1"></script>
 <script type="text/javascript">
@@ -162,7 +164,7 @@ $(document).ready(function(){
 	$('#C_contactList_DeleteBtn').click(function(){
 		var count = $('.box:checked').length;
 		if(count==0) alert("항목을 선택하세요");
-		else $('#imageboardListForm').submit();
+		else $('#C_contactList_delete').submit();
 	}); 
 
 });
