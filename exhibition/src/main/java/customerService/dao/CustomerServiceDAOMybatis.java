@@ -1,5 +1,6 @@
 package customerService.dao;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +13,7 @@ import customerService.bean.CustomerServiceDTO;
 import customerService.bean.EventboardDTO;
 import customerService.bean.HotelboardDTO;
 import customerService.bean.ImageboardDTO;
+import customerService.bean.PlayBookDTO;
 
 @Transactional
 @Component
@@ -117,8 +119,8 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	}
 	
 	//메인(슬라이드 이미지 불러오기)
-	public List<ImageboardDTO> getImageboardSlide() {
-		return sqlSession.selectList("customerServiceSQL.getImageboardSlide");
+	public List<ImageboardDTO> getImageboardSlide(List<String> list) {
+		return sqlSession.selectList("customerServiceSQL.getImageboardSlide",list);
 	}
 	
 	//박람회 업로드 리스트 가져오기
@@ -182,6 +184,16 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	//박람회 정보 보기(수정하기 위해)
 	public EventboardDTO getEventboard(String seq) {
 		return sqlSession.selectOne("customerServiceSQL.getEventboard", seq);
+	}
+	//호텔리스트 정보 보기(수정하기 위해)
+	public HotelboardDTO getHotelInfo(String seq) {
+		return sqlSession.selectOne("customerServiceSQL.getHotelboard", seq);
+	}
+	
+	//연극정보 예매DB에 저장
+	public void eventInfoWrite_play_bookDB(PlayBookDTO playBookDTO) {
+		sqlSession.insert("customerServiceSQL.eventInfoWrite_play_bookDB", playBookDTO);
+		
 	}
 	
 

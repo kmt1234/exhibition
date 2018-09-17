@@ -86,7 +86,7 @@
       <div>1일 기준(08:00~20:00)</div> -->
    </div>
    
-   <div id="area6" style="position:absolute; left:470px;top:690px" >
+   <div id="Room6" style="position:absolute; left:470px;top:690px" >
       <div class="absol" id="Room6" style="font-size: 25px; cursor:pointer;">Room6</div>
       <!-- <div>예약하기</div>
       <div>6,343(㎡)</div>
@@ -95,7 +95,7 @@
       <div>1일 기준(08:00~20:00)</div> -->
    </div>
 </div>
-<script src="../js/exhibition.js?ver=1"></script>
+<script src="../js/businessRoom.js?ver=1"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </body>
 </html>
