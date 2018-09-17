@@ -349,6 +349,8 @@ public class PerformanceController {
 		System.out.println("연극 명 : "+ imageName);
 		System.out.println("연극 날짜 : "+playDate);
 		
+		if(playDate.equals("날짜선택")) playDate = "2000년/01월/01일";
+		
 		//날짜 형식 변경(년,월,일 제거)
 		playDate=playDate.replace("년", "");
 		playDate=playDate.replace("월", "");
@@ -366,6 +368,7 @@ public class PerformanceController {
 		System.out.println("전체석 : "+remainSeats);
 		System.out.println("예매석 : "+usedSeats);
 		
+		if(remainSeats==null) remainSeats = 0+"";
 		if(usedSeats==null) usedSeats = 0+"";
 	
 		
@@ -373,7 +376,7 @@ public class PerformanceController {
 		int resultSeats = Integer.parseInt(remainSeats) - Integer.parseInt(usedSeats);
 				
 		//null값이면 ***
-		if(resultSeats==0 && usedSeats.equals("0")) {
+		if(resultSeats==0 && usedSeats.equals("0") && remainSeats.equals("0")) {
 			return "remainSeats";
 		}else if(resultSeats==0) {
 			return "noSeats";
