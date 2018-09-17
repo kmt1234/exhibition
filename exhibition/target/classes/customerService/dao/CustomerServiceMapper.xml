@@ -4,97 +4,188 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="customerServiceSQL">
  	
- <!-- 공지사항 총글수 -->
-    <select id="getTotalC_notice" resultType="int">
-       select count(*) from C_notice
-    </select>
-    
-    <!-- 공지사항 리스트 -->
-    <select id="getNoticeList" parameterType="java.util.Map" resultType="customerService">
-       select * from 
-       (select rownum rn, tt.* from 
-       (select * from C_notice order by seq desc)tt) 
-       where rn between #{startNum} and #{endNum}
-    </select>
-    
-    <!-- 공지사항 -->
-    <insert id="C_notice_Write" parameterType="java.util.Map">
-       insert into C_notice values(seq_C_notice.nextval
-                            ,#{subject}
-                            ,#{content}
-                            ,sysdate)
-    </insert>
-    
-    <!-- 공지사항 내용보기 -->
-    <select id="getNoticeInfo" parameterType="String" resultType="customerService">
-       select * from C_notice where seq=#{seq} 
-    </select>
-    
-    <!-- 공지사항 삭제 -->
-    <delete id="C_notice_Delete" parameterType="String">
-       delete C_notice where seq=#{seq}
-    </delete>
-    
-    <!-- 공지사항 수정 -->
-    <update id="C_notice_Modify" parameterType="java.util.Map">
-       update C_notice set subject=#{subject} , content =#{content} where seq=#{seq}
-    </update>
-    
-    <!-- 문의하기 -->
-    <insert id="C_checkInquire" parameterType="customerService">
-       insert into C_inquire values(seq_C_inquire.nextval
-                                  ,#{email}
-                                  ,#{classify}
-                                  ,#{name}
-                                  ,#{phone}
-                                  ,#{subject}
-                                  ,#{content}
-                                  ,sysdate)
-    </insert>
-    
-    <select id="getInquireInfo" parameterType="String" resultType="customerService">
-       select * from C_inquire where seq=#{seq}
-    </select>
-    
-    <select id="getInquireList" resultType="customerService">
-       select * from C_inquire
-    </select>
-    
-    <select id="getReplyInfo" parameterType="String" resultType="customerService">
-       select * from C_inquire where seq=#{seq}
-    </select>
-    
-    <!-- 자주묻는 질문 -->
-    <insert id="C_QnA_checkWrite" parameterType="java.util.Map">
-       insert into C_QnA values(seq_C_QnA.nextval
-                            ,#{classify}
-                            ,#{subject}
-                            ,#{content})
-    </insert>
-    
-    <!-- 자주묻는 질문 리스트 -->
-    <select id="getQnAList" resultType="customerService">
-       select * from C_QnA
-    </select>
-    
-    <!-- 자주묻는 질문 분류에 맞는 리스트 불러오기 -->
-    <select id="getQnA_Classify" parameterType="String" resultType="customerService">
-       select * from C_QnA where classify=#{classify}
-    </select>
-    
-    <!-- 주요시설 연락처 -->
-    <insert id="C_contactList_checkWrite" parameterType="java.util.Map">
-       insert into C_contactList values(seq_C_contactList.nextval
-                            ,#{classify}
-                            ,#{facility}
-                            ,#{title}
-                            ,#{name}
-                            ,#{phone})
-    </insert>
-    <!-- ????? -->
-    <select id="getContactList" resultType="customerService">
-       select * from C_contactList
-    </select>
+ 	
+ 	<!-- 공지사항 총글수 -->
+ 	<select id="getTotalC_notice" resultType="int">
+ 		select count(*) from C_notice
+ 	</select>
+ 	
+ 	<!-- 공지사항 리스트 -->
+ 	<select id="getNoticeList" parameterType="java.util.Map" resultType="customerService">
+ 		select * from 
+ 		(select rownum rn, tt.* from 
+ 		(select * from C_notice order by seq desc)tt) 
+ 		where rn between #{startNum} and #{endNum}
+ 	</select>
+ 	
+ 	<!-- 공지사항 검색 총글수 -->
+ 	<select id="getTotalC_notice_Search" parameterType="java.util.Map" resultType="int">
+ 		select count(*) from C_notice where ${searchOption} like '%'||#{keyword}||'%'
+ 	</select>
+ 	
+ 	<!-- 공지사항 검색 -->
+ 	<select id="C_notice_Search" parameterType="java.util.Map" resultType="customerService">
+ 		select * from 
+ 		(select rownum rn, tt.* from 
+ 		(select * from C_notice
+ 		 where ${searchOption} like '%'||#{keyword}||'%'
+ 		 order by seq desc)tt) 
+ 		where rn between #{startNum} and #{endNum}
+ 	</select>
+ 	
+ 	<!-- 공지사항 작성 -->
+ 	<insert id="C_notice_Write" parameterType="java.util.Map">
+ 		insert into C_notice values(seq_C_notice.nextval
+		 							,#{subject}
+		 							,#{content}
+		 							,sysdate)
+ 	</insert>
+ 	
+ 	<!-- 공지사항 내용보기 -->
+ 	<select id="getNoticeInfo" parameterType="String" resultType="customerService">
+ 		select * from C_notice where seq=#{seq} 
+ 	</select>
+ 	
+ 	<!-- 공지사항 삭제 -->
+ 	<delete id="C_notice_Delete" parameterType="String">
+ 		delete C_notice where seq=#{seq}
+ 	</delete>
+ 	
+ 	<!-- 공지사항 수정 -->
+ 	<update id="C_notice_Modify" parameterType="java.util.Map">
+ 		update C_notice set subject=#{subject} , content =#{content} where seq=#{seq}
+ 	</update>
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	<!-- 고객의 소리 문의하기 -->
+ 	<insert id="C_checkInquire" parameterType="customerService">
+ 		insert into C_inquire values(seq_C_inquire.nextval
+ 											,#{email}
+		 									,#{classify}
+		 									,#{name}
+		 									,#{phone}
+		 									,#{subject}
+		 									,#{content}
+		 									,sysdate)
+ 	</insert>
+ 	
+ 	<!-- 고객의 소리 문의 받은 글수 -->
+ 	<select id="getTotalC_inquire" resultType="int">
+ 		select count(*) from C_inquire
+ 	</select>
+ 	<!-- 고객의 소리 리스트 불러오기 -->
+ 	<select id="getInquireList" parameterType="java.util.Map" resultType="customerService">
+ 		select * from 
+ 		(select rownum rn, tt.* from 
+ 		(select * from C_inquire order by seq desc)tt) 
+ 		where rn between #{startNum} and #{endNum}
+ 	</select>
+ 	
+ 	<!-- 고객의 소리 문의글 검색된 총글수 -->
+ 	<select id="getTotalC_inquire_Search" parameterType="java.util.Map" resultType="int">
+ 		select count(*) from C_inquire where ${searchOption} like '%'||#{keyword}||'%'
+ 	</select>
+
+ 	<!-- 고객의소리 검색된글 불러오기 -->
+ 	<select id="C_inquire_Search" parameterType="java.util.Map" resultType="customerService">
+ 		select * from 
+ 		(select rownum rn, tt.* from 
+ 		(select * from C_inquire
+ 		 where ${searchOption} like '%'||#{keyword}||'%'
+ 		 order by seq desc)tt) 
+ 		where rn between #{startNum} and #{endNum}
+ 	</select>
+ 	
+ 	<!-- 고객의 소리 문의받은 글 내용 불러오기 -->
+ 	<select id="getInquireInfo" parameterType="String" resultType="customerService">
+ 		select * from C_inquire where seq=#{seq}
+ 	</select>
+ 	
+ 	<!-- 고객의 소리 문의 받은 글 답변하기 -->
+ 	<select id="getReplyInfo" parameterType="String" resultType="customerService">
+ 		select * from C_inquire where seq=#{seq}
+ 	</select>
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	<!-- 자주묻는 질문 -->
+ 	<insert id="C_QnA_checkWrite" parameterType="java.util.Map">
+ 		insert into C_QnA values(seq_C_QnA.nextval
+		 							,#{classify}
+		 							,#{subject}
+		 							,#{content})
+ 	</insert>
+ 	
+ 	<!-- 자주묻는 질문 리스트 -->
+ 	<select id="getQnAList" resultType="customerService">
+ 		select * from C_QnA
+ 	</select>
+ 	
+ 	<!-- 자주묻는 질문 분류에 맞는 리스트 불러오기 -->
+ 	<select id="getQnA_Classify" parameterType="String" resultType="customerService">
+ 		select * from C_QnA where classify=#{classify}
+ 	</select>
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	<!-- 주요시설 연락처 총글수 -->
+ 	<select id="getTotalC_contactList" resultType="int">
+ 		select count(*) from C_contactList
+ 	</select>
+
+ 	<!-- 주요시설 연락처 리스트 불러오기 -->
+ 	<select id="getContactList" parameterType="java.util.Map" resultType="customerService">
+ 		select * from 
+ 		(select rownum rn, tt.* from 
+ 		(select * from C_contactList order by seq desc)tt) 
+ 		where rn between #{startNum} and #{endNum}
+ 	</select>
+ 	
+ 	<!-- 주요시설 연락처 검색 총글수 -->
+ 	<select id="getTotalC_contactList_Search" parameterType="java.util.Map" resultType="int">
+ 		select count(*) from C_contactList where ${searchOption} like '%'||#{keyword}||'%'
+ 	</select>
+ 	
+ 	<!-- 주요시설 연락처 검색 -->
+ 	<select id="C_contactList_Search" parameterType="java.util.Map" resultType="customerService">
+ 		select * from 
+ 		(select rownum rn, tt.* from 
+ 		(select * from C_contactList
+ 		 where ${searchOption} like '%'||#{keyword}||'%'
+ 		 order by seq desc)tt) 
+ 		where rn between #{startNum} and #{endNum}
+ 	</select>
+ 	
+ 	<!-- 주요시설 연락처 관리자가 등록하기 -->
+ 	<insert id="C_contactList_checkWrite" parameterType="java.util.Map">
+ 		insert into C_contactList values(seq_C_contactList.nextval
+		 							,#{classify}
+		 							,#{facility}
+		 							,#{title}
+		 							,#{name}
+		 							,#{phone})
+ 	</insert>
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
  	
  	<!-- 이미지작성  -->
 	<insert id="imageboardWrite" parameterType="imageboard">
@@ -110,8 +201,7 @@
 	<select id="getImageboardTotalA" resultType="int">
 		select count(*) from customerImageboard
 	</select>
-	
-	<!-- 이미지목록 -->
+		<!-- 이미지목록 -->
 	<select id="imageboardList" parameterType="java.util.Map" resultType="imageboard">
 		select * from(
 		select rownum rn, tt.* from(

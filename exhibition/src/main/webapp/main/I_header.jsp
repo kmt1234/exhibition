@@ -141,6 +141,7 @@
 				</div>
 			</div>
 			<div class="ui compact menu" style="width: 20%;">
+<<<<<<< HEAD
 	            <div class="ui simple dropdown item">
 	               <span id="C_customerServiceForm" >고객센터</span>
 	               <div class="menu">
@@ -157,6 +158,20 @@
 	               </div>
 	            </div>
 		    </div>
+=======
+				<div class="ui simple dropdown item">
+					<span id="C_customerServiceForm" >고객센터</span>
+					<div class="menu">
+						<div class="item" id="C_notice">공지사항</div>
+						<div class="item" id="C_emailConfirm">고객의 소리</div>
+						<div class="item" id="C_QnA">자주묻는 질문</div>
+						<div class="item" id="C_contactList">주요시설 연락처</div>
+						<div class="item" id="C_personalInformation">개인정보</div>
+						<div class="item" id="C_boardAdd">게시판 추가</div><!--세션값에 따라 보이게 할 예정-->
+					</div>
+				</div>
+			</div>
+>>>>>>> refs/remotes/origin/kimjunki
 			<div class="ui compact menu" style="width: 20%;">
 				<div class="ui simple dropdown item">
 					<span id="I_infoForm">소개</span> 
