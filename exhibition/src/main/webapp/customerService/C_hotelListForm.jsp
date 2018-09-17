@@ -23,13 +23,13 @@
 
 }
 
-#currentEventPaging{
+#currentHotelPaging{
 	color: red;
 	text-decoration: underline;
 	cursor: pointer;
 }
 
-#eventpaging{
+#hotelpaging{
 	color: black;
 	text-decoration: none;
 	cursor: pointer;
@@ -89,10 +89,11 @@
 							
 							<c:forEach items="${list}" var="list">
 								
-								<c:if test="${list ne null}">	
+								<c:if test="${list ne null}">
 										<tr>
 											<td rowspan="2"><input type="checkbox" name="check" class="check" value="${list.seq}"></td>
-											<td rowspan="2" align="center">${list.seq}</td>
+											<td rowspan="2" align="center">${list.seq}<br>
+											<a href="/exhibition/customerService/C_hotel_modify.do?seq=${list.seq}">수정</a></td>
 											<td rowspan="2" align="center"><img src="../storage/${list.image1}" width="200" height="150"></td>
 											<td rowspan="2" align="center">${list.imageName}</td>	
 											<td>${list.eventLink}</td>
@@ -100,6 +101,7 @@
 										<tr>
 											<td>${list.eventPlace}</td>
 										</tr>
+									
 								</c:if>
 		
 							</c:forEach>

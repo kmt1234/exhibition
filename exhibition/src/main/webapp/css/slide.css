@@ -6,13 +6,13 @@ html,body,ul,li,button{
 img.pic{
 	display: block;
 	border: 0;
-	width: 600px;
-	height: 300px
+	width: 1150px;
+	height: 400px
 }
 
 .slide{
-	width:600px;
-	height: 300px;
+	width:1150px;
+	height: 400px;
 	overflow: hidden;
 	margin: 0 auto;
 	position: relative;
@@ -20,7 +20,7 @@ img.pic{
 }
     
 .slide ul{
-	width : 2400px;
+	width : 10000px;
 	list-style: none;
 	font-size: 0;
 }

@@ -2,6 +2,13 @@ $(document).ready(function(){
 /*HEADER 설명*/	
 	/*회원가입 클릭시 2가지로 분류(개인&사업자)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/	
 	//회원가입 클릭 시,
+//	if($('#codeName').val()=='3') {
+//		$('#C_boardAdd').show();
+//	} else {
+//		$('#C_boardAdd').hide();
+//	}
+	
+	
 	$('#M_member').click(function(){
 		$('.ui.member1.dropdown').dropdown('show');
 	});
@@ -105,7 +112,7 @@ $(document).ready(function(){
 	/*회사관련사항(소개&인사말&연혁??)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 	//회사의 전반적인 설명
 	$('#I_infoForm').click(function(){
-		location.href="/exhibition/introduction/I_infoForm.do";
+		location.href="/exhibition/introduction/I_companyIntroductionForm.do";
 	});
 	$('#I_companyIntroductionForm').click(function(){//회사소개
 		location.href="/exhibition/introduction/I_companyIntroductionForm.do";

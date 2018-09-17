@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import customerService.bean.EventboardDTO;
+import performance.bean.Book_performance_membersDTO;
 import performance.bean.PerformanceDTO;
 
 @Component
@@ -49,5 +50,22 @@ public class PerformanceDAOmybatis implements PerformanceDAO {
 	public EventboardDTO performanceBook(String seq) {
 		return sqlSession.selectOne("performanceSQL.performanceBook", seq);
 	}
+
+	//예매자 등록(예매자 DB)
+	public int bookPlayMembers(Book_performance_membersDTO book_performance_membersDTO) {
+		return sqlSession.insert("performanceSQL.bookPlayMembers", book_performance_membersDTO);
+		
+	}
+	
+	//연극 잔여좌석 가져오는 메소드
+	public String checkRemainSeats(Map<String, String> map) {
+		return sqlSession.selectOne("performanceSQL.checkRemainSeats", map);
+	}
+
+	//선택일자의  해당 연극 예매된 티켓 수 가져오기
+	public String checkUsedSeats(Map<String, String> map) {
+		return sqlSession.selectOne("performanceSQL.checkUsedSeats", map);
+	}
+
 	
 }

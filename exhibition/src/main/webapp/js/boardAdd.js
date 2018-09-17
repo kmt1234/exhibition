@@ -41,7 +41,7 @@ $(document).ready(function(){
 		}else if(index=='2'){
 			location.href='/exhibition/customerService/C_eventboardList_playForm.do';
 		}else if(index=='3'){
-			location.href='/exhibition/customerService/C_hotelListForm.do';
+			location.href='/exhibition/customerService/C_hotelListForm.do';	
 		}	
 	});
 	
@@ -216,6 +216,7 @@ $(document).ready(function(){
 			$('.exhibitionL-td').hide();
 			$('.playL-td').hide();
 			$('.hotelL-td').show();
+			$('#eventLink').val('http://');
 
 			$('.I_tr').hide();
 			
@@ -282,15 +283,21 @@ $(document).ready(function(){
 				$('#imageboardWriteForm').attr({action:'/exhibition/customerService/C_eventInfoWrite_play.do', method:'post'}).submit();
 			}
 		}else if(index=='3'){
+			var reg = /^https?\:\/\/.+/;
+			var tel = /^((01[1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})|(02|0[3-9]+[0-9]{3})[0-9][0-9]{7,8}$/;
 			if($('#imageName').val()=='')
 				$('#imageNameDiv').text('제목을 입력하세요').css('color','red').css('font-size','9pt').css('font-weight','bold');
 			else if($('#img').val()=='') 
 				$('#imgDiv').text('파일을 선택해 주세요').css('color','magenta').css('font-size','9pt').css('font-weight','bold');
 			else if($('#eventLink').val()=='')
 				$('#hotelDiv').text('호텔 링크를 입력하세요').css('color','red').css('font-size','9pt').css('font-weight','bold');
-			else if($('#telPlace').val()=='')
+			else if(!reg.test($('#eventLink').val())){
+				$('#hotelDiv').text('호텔 링크 앞에는 http://가 입력되어야 합니다').css('color','red').css('font-size','9pt').css('font-weight','bold');
+			} else if($('#telPlace').val()=='')
 				$('#telDiv').text('전화번호를 입력하세요').css('color','red').css('font-size','9pt').css('font-weight','bold');
-			else
+			else if(!tel.test($('#telPlace').val())){
+				$('#telDiv').text('전화번호 양식에 맞지 않습니다').css('color','red').css('font-size','9pt').css('font-weight','bold');
+			}else
 				$('#imageboardWriteForm').attr({action:'/exhibition/customerService/C_hotelInfoWrite.do', method:'post'}).submit();
 		}
 		
