@@ -254,7 +254,7 @@ public class PerformanceController {
 	
 	//공연 예약하기 폼
 	@RequestMapping(value="performanceBook", method=RequestMethod.GET)
-	public ModelAndView performanceBook(@RequestParam String seq) {
+	public ModelAndView performanceBook(@RequestParam(required=false , defaultValue="1") String seq) {
 		
 		//DB
 		EventboardDTO eventboardDTO = performanceDAO.performanceBook(seq);
@@ -360,10 +360,10 @@ public class PerformanceController {
 		map.put("playDate", playDate);
 		
 		//DB
-		String remainSeats = performanceDAO.checkRemainSeats(map);	//선택일자의 해당 연극 잔여좌석 가져오기(기본값:일별 티켓 발행 수)
+		String remainSeats = performanceDAO.checkRemainSeats(map);	//선택일자의 해당 연극 전체좌석 가져오기(기본값:일별 티켓 발행 수)
 		String usedSeats = performanceDAO.checkUsedSeats(map);		//선택일자의  해당 연극 예매된 티켓 수 가져오기
 		
-		System.out.println("잔여석 : "+remainSeats);
+		System.out.println("전체석 : "+remainSeats);
 		System.out.println("예매석 : "+usedSeats);
 		
 		if(usedSeats==null) usedSeats = 0+"";
@@ -373,8 +373,10 @@ public class PerformanceController {
 		int resultSeats = Integer.parseInt(remainSeats) - Integer.parseInt(usedSeats);
 				
 		//null값이면 ***
-		if(resultSeats==0) {
+		if(resultSeats==0 && usedSeats.equals("0")) {
 			return "remainSeats";
+		}else if(resultSeats==0) {
+			return "noSeats";
 		}else {
 			return resultSeats+"";
 		} 

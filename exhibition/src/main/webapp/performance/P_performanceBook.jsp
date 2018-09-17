@@ -64,7 +64,7 @@ img{
 	<jsp:useBean id="now" class="java.util.Date"/> 
 	
 	<div><img src="../storage/${eventboardDTO.image1}"></div>
-	<div>가격 : ${eventboardDTO.eventPrice}</div><input type="hidden" id="hiddenTicketPrice" value="${eventboardDTO.eventPrice}">
+	<span>가격 : ${eventboardDTO.eventPrice}</span><input type="hidden" id="hiddenTicketPrice" value="${eventboardDTO.eventPrice}">
 	<div>좌석배정 방식: 선착순</div>
 	<div>공연 날짜 :<input id="hiddenDate" type="hidden">
 				<select id="selectEventDate">
@@ -116,9 +116,11 @@ img{
 $(document).ready(function(){
 	//페이지 호출 시(기본),
 //	$('#Confirm_play_div').hide();
+	$('#BookEventBtn').show();	//매진 시, 버튼 숨기고 아닐 시, 보이기
 	
 	//날짜 변경 시, 히든 태그에 날짜 값 넣기
 	$("#selectEventDate").change(function() {
+		$('#BookEventBtn').show();
 		$('#hiddenDate').val($('#selectEventDate :selected').text());
 		
 		//티켓 잔여 확인
@@ -126,12 +128,16 @@ $(document).ready(function(){
 			type : 'POST',
 			url : '/exhibition/performance/book_performance_remainSeats.do',
 			data : {'totalSeats' : $('#hiddenTotalSeats').val(), 'imageName' : $('#imageName').val(), 'playDate' : $('#selectEventDate :selected').text()},
+			async: true,
 			dataType : 'text',
 			success : function(data){
 				//alert(JSON.stringify(data)); 잔여좌석 확인
 				
 				if(data=='remainSeats'){
 					$('#remainSeats').text(data);
+				}else if(data=='noSeats'){
+					$('#BookEventBtn').hide();
+					$('#remainSeats').text('매진');
 				}else{
 					$('#remainSeats').text(data);	
 				}
@@ -169,10 +175,14 @@ $(document).ready(function(){
 					type : 'POST',
 					url : '/exhibition/performance/book_performance.do',
 					data : {'imageName' : $('#imageName').val(), 'playDate' : $('#hiddenDate').val(), 'ticketQty' : $('#hiddenTicketQty').val()},
+					async: true,
 					dataType : 'text',
 					success : function(data){
 						if(data == 0) alert('예약실패. 관리자에게 문의바람');
-						else alert('예약완료');
+						else{
+							alert('예약완료');
+							location.href="/exhibition/performance/P_performanceList.do";
+						} 
 					}//success
 					
 				});//ajax
