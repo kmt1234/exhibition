@@ -52,8 +52,7 @@
 					<span class="h-light">페이지</span>
 				</h2>
 				<jsp:include page="../login/memberMypage.jsp" ></jsp:include>
-			</div>
-				
+			</div>	
 		</div>
 			
 		

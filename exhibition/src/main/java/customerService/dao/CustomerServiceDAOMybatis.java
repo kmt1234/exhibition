@@ -214,9 +214,11 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	//연극정보 예매DB에 저장
 	public void eventInfoWrite_play_bookDB(PlayBookDTO playBookDTO) {
 		sqlSession.insert("customerServiceSQL.eventInfoWrite_play_bookDB", playBookDTO);
-		
 	}
-	
+	public void C_hotelboardMod(HotelboardDTO hotelboardDTO) {
+		sqlSession.update("customerServiceSQL.C_hotelboardMod", hotelboardDTO);	
+	}
+
 	//매출가져오기
 	public List<SalesExhigitionDTO> getSalesExhibition(String salesMon) {
 		return sqlSession.selectList("customerServiceSQL.getSalesExhibition", salesMon);
@@ -228,9 +230,5 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 		} else {
 			return sqlSession.selectOne("customerServiceSQL.getSalesTotalRentExhibition", salesMon);
 		}
-			
-		
 	}
-	
-
 }

@@ -1027,6 +1027,33 @@ public class CustomerServiceController {
 		customerServiceDAO.hotelDelete(list); // db삭제
 		return new ModelAndView("redirect:/customerService/C_hotelListForm.do");
 	}
+	// 호텔리스트 수정을 클리하면 내용을 보여준다.
+	@RequestMapping(value = "C_hotel_modify", method = RequestMethod.GET)
+	public String C_hotel_modify(@RequestParam String seq,Model model) {
+		HotelboardDTO hotelboardDTO = customerServiceDAO.getHotelInfo(seq);
+		model.addAttribute("hotelboardDTO", hotelboardDTO);
+		return "/customerService/C_hotel_modify";
+	}
+	//호텔 수정완료 클릭시 DB내용 수정
+	@RequestMapping(value = "C_hotelboardMod", method = RequestMethod.POST)
+	public ModelAndView C_hotelboardMod(@ModelAttribute HotelboardDTO hotelboardDTO , @RequestParam MultipartFile img) {
+		if(!img.isEmpty()) {
+			File fileDelete = new File(filePath + hotelboardDTO.getImage1());
+			if (fileDelete.exists())
+				fileDelete.delete();
+			String fileName = img.getOriginalFilename();
+			File file = new File(filePath, fileName);
+			try {
+				FileCopyUtils.copy(img.getInputStream(), new FileOutputStream(file));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			hotelboardDTO.setImage1(fileName);
+		}
+		customerServiceDAO.C_hotelboardMod(hotelboardDTO);
+
+		return new ModelAndView("redirect:/customerService/C_hotelListForm.do");
+	}
 
 	// 마이페이지
 	@RequestMapping(value = "mypage", method = RequestMethod.GET)

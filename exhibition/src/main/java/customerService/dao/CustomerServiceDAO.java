@@ -115,6 +115,8 @@ public interface CustomerServiceDAO {
 	
 	public void eventInfoWrite_play_bookDB(PlayBookDTO playBookDTO);
 	
+	public void C_hotelboardMod(HotelboardDTO hotelboardDTO);//호텔 수정
+	
 	
 	//매출현황
 	public List<SalesExhigitionDTO> getSalesExhibition(String salesMon);
