@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import customerService.bean.EventboardDTO;
+import performance.bean.Book_performance_membersDTO;
 import performance.bean.PerformanceDTO;
 
 public interface PerformanceDAO {
@@ -22,5 +23,14 @@ public interface PerformanceDAO {
 	
 	
 	public EventboardDTO performanceBook(String seq);	//공연 예약하기 폼
+
+	public int bookPlayMembers(Book_performance_membersDTO book_performance_membersDTO);	//예매자 등록 메소드(예매자 DB 넣기)
+	public void bookPlayMembers_calculate(Book_performance_membersDTO book_performance_membersDTO);	//예매 수만큼 잔여티켓 감소
+
+	public String checkRemainSeats(Map<String, String> map);	//선택일자의 해당 연극 잔여좌석 가져오기(기본값:일별 티켓 발행 수)
+
+	public String checkUsedSeats(Map<String, String> map);		//선택일자의  해당 연극 예매된 티켓 수 가져오기
+
+		
 
 }
