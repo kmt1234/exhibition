@@ -120,7 +120,8 @@ $(document).ready(function(){
 				data : {'imageName' : $('#imageName').val(), 'playDate' : $('#hiddenDate').val(), 'ticketQty' : $('#hiddenTicketQty').val()},
 				dataType : 'text',
 				success : function(data){
-					
+					if(data == 0) alert('예약실패. 관리자에게 문의바람');
+					else alert('예약완료');
 				}//success
 				
 			});//ajax
