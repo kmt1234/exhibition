@@ -3,12 +3,8 @@ package customerService.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -774,10 +770,28 @@ public class CustomerServiceController {
 		HotelboardDTO hotelboardDTO = customerServiceDAO.getHotelInfo(seq);
 		model.addAttribute("hotelboardDTO", hotelboardDTO);
 		return "/customerService/C_hotel_modify";
-		
 	}
-	
-	
+	//호텔 수정완료 클릭시 DB내용 수정
+	@RequestMapping(value = "C_hotelboardMod", method = RequestMethod.POST)
+	public ModelAndView C_hotelboardMod(@ModelAttribute HotelboardDTO hotelboardDTO , @RequestParam MultipartFile img) {
+		if(!img.isEmpty()) {
+			File fileDelete = new File(filePath + hotelboardDTO.getImage1());
+			if (fileDelete.exists())
+				fileDelete.delete();
+			String fileName = img.getOriginalFilename();
+			File file = new File(filePath, fileName);
+			try {
+				FileCopyUtils.copy(img.getInputStream(), new FileOutputStream(file));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			hotelboardDTO.setImage1(fileName);
+		}
+		customerServiceDAO.C_hotelboardMod(hotelboardDTO);
+
+		return new ModelAndView("redirect:/customerService/C_hotelListForm.do");
+	}
+
 	// 마이페이지
 	@RequestMapping(value = "mypage", method = RequestMethod.GET)
 	public ModelAndView mypage(HttpSession session) {

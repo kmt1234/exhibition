@@ -87,4 +87,6 @@ public interface CustomerServiceDAO {
 		public HotelboardDTO getHotelInfo(String seq);//호텔리스트 수정 클릭시 상세보기
 		
 		public void eventInfoWrite_play_bookDB(PlayBookDTO playBookDTO);
+
+		public void C_hotelboardMod(HotelboardDTO hotelboardDTO);//호텔 수정
 }
