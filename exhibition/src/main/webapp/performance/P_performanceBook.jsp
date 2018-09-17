@@ -60,6 +60,9 @@ img{
 	
 	<div class="ui divider"></div>
 	
+	<!--날짜 비교(기본 : 오늘날짜)-->
+	<jsp:useBean id="now" class="java.util.Date"/> 
+	
 	<div><img src="../storage/${eventboardDTO.image1}"></div>
 	<div>가격 : ${eventboardDTO.eventPrice}</div><input type="hidden" id="hiddenTicketPrice" value="${eventboardDTO.eventPrice}">
 	<div>좌석배정 방식: 선착순</div>
