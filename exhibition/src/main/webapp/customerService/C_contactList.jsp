@@ -24,7 +24,7 @@
 </style>
 </head>
 <body>
-<form id="C_contactList_delete" method="post" action="exhibition/customerService/C_contactList_delete.do">
+<form id="C_contactList_delete" method="post" action="C_contactList_Delete.do">
 <h2 class="box-container" style="float: center; width: 100%; text-align: left;">
 	주요시설
 	<span class="h-light">연락처</span>
@@ -32,12 +32,16 @@
 <div style="width: 100%;" align="center">
 	<table style="width: 100%; height: 40px; " align="center" border="1" bordercolor="#ec008c" cellpadding="4" frame="hsides" rules="rows"
 		id="C_contactList_List" class="ui striped table" >
+			
 			<tr>
-				<th style="width: 20%; height: 7%; padding-top: 10px; text-align: center;">분류</th>
-				<th style="width: 20%; height: 7%; padding-top: 10px; text-align: center;">기관 & 시설</th>
-				<th style="width: 20%; height: 7%; padding-top: 10px; text-align: center;">명칭</th>
-				<th style="width: 20%; height: 7%; padding-top: 10px; text-align: center;">담당자</th>
-				<th style="width: 20%; height: 7%; padding-top: 10px; text-align: center;">연락처</th>
+				<th style="width: 2%; height: 7%; padding-top: 10px; text-align: center;">
+					<input type="checkbox" id="checkAll">
+				</th>
+				<th style="width: 18%; height: 7%; padding-top: 10px; text-align: center;">분류</th>
+				<th style="width: 18%; height: 7%; padding-top: 10px; text-align: center;">기관 & 시설</th>
+				<th style="width: 18%; height: 7%; padding-top: 10px; text-align: center;">명칭</th>
+				<th style="width: 18%; height: 7%; padding-top: 10px; text-align: center;">담당자</th>
+				<th style="width: 18%; height: 7%; padding-top: 10px; text-align: center;">연락처</th>
 			</tr>
 	</table>
 	<br>
@@ -68,7 +72,12 @@ $(document).ready(function(){
 			dataType : 'json',
 			success : function(data){
 				$.each(data.list, function(index, item){
-					$('<tr/>').append($('<td/>',{
+					$('<tr/>').append($('<td/>').append($('<input/>',{
+						type : 'checkbox',
+						value : item.seq,
+						name : 'box',
+						class : 'box'
+					}))).append($('<td/>',{
 						align : 'center',
 						style: 'width: 20%; height: 9%; text-align: center;',
 						text : item.classify,
@@ -99,7 +108,6 @@ $(document).ready(function(){
 			}
 		});
 	
-	
 	$('#C_contactList_SearchBtn').click(function(event, str){
 		
 		if(str!='trigger') $('#pg').val(1);
@@ -116,35 +124,50 @@ $(document).ready(function(){
 				dataType : 'json',
 				success : function(data){
 					$('#C_contactList_List tr:gt(0)').remove();
-					
-					$.each(data.list, function(index, item){
-						$('<tr/>').append($('<td/>',{
+					if(data.totalA=='0'){
+						$('<tr/>',{
+							align: 'center'
+						}).append($('<td/>',{
+							colspan: '6',
 							align : 'center',
-							style: 'width: 20%; height: 9%; text-align: center;',
-							text : item.classify,
-							id : 'classifyA'
-						})).append($('<td/>',{
-							align : 'center',
-							style: 'width: 20%; height: 9%; text-align: center;',
-							text : item.facility,
-							id : 'facilityA'
-						})).append($('<td/>',{
-							align : 'center',
-							style: 'width: 20%; height: 9%; text-align: center;',
-							text : item.title,
-							id : 'titleA'
-						})).append($('<td/>',{
-							align : 'center',
-							style: 'width: 20%; height: 9%; text-align: center;',
-							text : item.name,
-							id : 'nameA'
-						})).append($('<td/>',{
-							align : 'center',
-							style: 'width: 20%; height: 9%; text-align: center;',
-							text : item.phone,
-							id : 'phoneA'
-						})).appendTo($('#C_contactList_List'));
-					});
+							text : '검색된 결과가 없습니다.'
+						})).appendTo($('#C_contactList_List'));  
+						$('#C_contactList_PagingDiv').remove();
+					}else if(data.tataA!='0'){
+						$.each(data.list, function(index, item){
+							$('<tr/>').append($('<td/>').append($('<input/>',{
+								type : 'checkbox',
+								value : item.seq,
+								name : 'box',
+								class : 'box'
+							}))).append($('<td/>',{
+								align : 'center',
+								style: 'width: 20%; height: 9%; text-align: center;',
+								text : item.classify,
+								id : 'classifyA'
+							})).append($('<td/>',{
+								align : 'center',
+								style: 'width: 20%; height: 9%; text-align: center;',
+								text : item.facility,
+								id : 'facilityA'
+							})).append($('<td/>',{
+								align : 'center',
+								style: 'width: 20%; height: 9%; text-align: center;',
+								text : item.title,
+								id : 'titleA'
+							})).append($('<td/>',{
+								align : 'center',
+								style: 'width: 20%; height: 9%; text-align: center;',
+								text : item.name,
+								id : 'nameA'
+							})).append($('<td/>',{
+								align : 'center',
+								style: 'width: 20%; height: 9%; text-align: center;',
+								text : item.phone,
+								id : 'phoneA'
+							})).appendTo($('#C_contactList_List'));
+						});
+					}
 					$('#C_contactList_PagingDiv').html(data.customerServicePaging.pagingHTML);
 				}
 			});
@@ -152,14 +175,16 @@ $(document).ready(function(){
 	});
 	
 	
-	/* //전체선택
+	//전체선택
 	$('#checkAll').click(function(){
 		if($('#checkAll').prop('checked')){
+			//$('.box')[i].checked = true;
 			$('.box').prop('checked',true);
 		}else {
+			//$('.box').prop('checked',false);
 			$('.box').prop('checked',false);
 		}
-	});*/
+	});
 	//선택 삭제
 	$('#C_contactList_DeleteBtn').click(function(){
 		var count = $('.box:checked').length;

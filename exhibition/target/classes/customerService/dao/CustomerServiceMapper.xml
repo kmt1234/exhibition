@@ -19,7 +19,7 @@
  	
  	<!-- 공지사항 검색 총글수 -->
  	<select id="getTotalC_notice_Search" parameterType="java.util.Map" resultType="int">
- 		select count(*) from C_notice where ${searchOption} like '%'||#{keyword}||'%'
+ 		select count(*) from C_notice where ${subject} like '%'||#{keyword}||'%'
  	</select>
  	
  	<!-- 공지사항 검색 -->
@@ -27,7 +27,7 @@
  		select * from 
  		(select rownum rn, tt.* from 
  		(select * from C_notice
- 		 where ${searchOption} like '%'||#{keyword}||'%'
+ 		 where ${subject} like '%'||#{keyword}||'%'
  		 order by seq desc)tt) 
  		where rn between #{startNum} and #{endNum}
  	</select>
@@ -179,13 +179,21 @@
 		 							,#{phone})
  	</insert>
  	
+ 	<!-- 글삭제 -->
+ 	<delete id="C_contactList_Delete" parameterType="java.util.List">
+ 		delete C_contactList where seq in 
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
  	
  	
  	
- 	
- 	
- 	
- 	
+
+
+
+
+
  	
  	<!-- 이미지작성  -->
 	<insert id="imageboardWrite" parameterType="imageboard">

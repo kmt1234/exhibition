@@ -124,36 +124,46 @@ $('#C_inquire_SearchBtn').click(function(event, str){
 			dataType : 'json',
 			success : function(data){
 				$('#C_inquire_List tr:gt(0)').remove();
-				
-				$.each(data.list, function(index, item){
-					$('<tr/>').append($('<td/>',{
+				if(data.totalA=='0'){
+					$('<tr/>',{
+						align: 'center'
+					}).append($('<td/>',{
+						colspan: '5',
 						align : 'center',
-						style: 'width: 20%; height: 9%; text-align: center;',
-						text : item.seq,
-						id : 'seqA'
-					})).append($('<td/>',{
-						align : 'center',
-						id : 'subjectA',
-						style: 'width: 20%; height: 9%; text-align: center;',
-						href : 'javascript:void(0)',
-						text : item.subject
-					})).append($('<td/>',{
-						align : 'center',
-						style: 'width: 20%; height: 9%; text-align: center;',
-						text : item.name,
-						id : 'nameA'
-					})).append($('<td/>',{
-						align : 'center',
-						style: 'width: 20%; height: 9%; text-align: center;',
-						text : item.email,
-						id : 'emailA'
-					})).append($('<td/>',{
-						align : 'center',
-						style: 'width: 20%; height: 9%; text-align: center;',
-						text : item.logtime,
-						id : 'logtime'
-					})).appendTo($('#C_inquire_List'));
-				});
+						text : '검색된 결과가 없습니다.'
+					})).appendTo($('#C_inquire_List'));  
+					$('#C_inquire_PagingDiv').remove();
+				}else if(data.tataA!='0'){
+					$.each(data.list, function(index, item){
+						$('<tr/>').append($('<td/>',{
+							align : 'center',
+							style: 'width: 20%; height: 9%; text-align: center;',
+							text : item.seq,
+							id : 'seqA'
+						})).append($('<td/>',{
+							align : 'center',
+							id : 'subjectA',
+							style: 'width: 20%; height: 9%; text-align: center;',
+							href : 'javascript:void(0)',
+							text : item.subject
+						})).append($('<td/>',{
+							align : 'center',
+							style: 'width: 20%; height: 9%; text-align: center;',
+							text : item.name,
+							id : 'nameA'
+						})).append($('<td/>',{
+							align : 'center',
+							style: 'width: 20%; height: 9%; text-align: center;',
+							text : item.email,
+							id : 'emailA'
+						})).append($('<td/>',{
+							align : 'center',
+							style: 'width: 20%; height: 9%; text-align: center;',
+							text : item.logtime,
+							id : 'logtime'
+						})).appendTo($('#C_inquire_List'));
+					});
+				}
 				$('#C_inquire_PagingDiv').html(data.customerServicePaging.pagingHTML);
 			}
 		});

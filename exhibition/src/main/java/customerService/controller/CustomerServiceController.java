@@ -96,12 +96,11 @@ public class CustomerServiceController {
 	
 	@RequestMapping(value="C_notice_Search", method=RequestMethod.POST)
 	public ModelAndView C_notice_Search(@RequestParam(required=false) Map<String,String> map) {
-		int endNum = Integer.parseInt(map.get("pg"))*3;
-		int startNum = endNum-2;
+		int endNum = Integer.parseInt(map.get("pg"))*10;
+		int startNum = endNum-9;
 		
 		map.put("startNum", startNum+"");
 		map.put("endNum", endNum+"");
-		
 		//DB
 		List<CustomerServiceDTO> list = customerServiceDAO.C_notice_Search(map);
 		
@@ -109,13 +108,14 @@ public class CustomerServiceController {
 		int totalA = customerServiceDAO.getTotalC_notice_Search(map);
 		
 		customerServicePaging.setCurrentPage(Integer.parseInt(map.get("pg")));
-		customerServicePaging.setPageBlock(2);
-		customerServicePaging.setPageSize(3);
+		customerServicePaging.setPageBlock(10);
+		customerServicePaging.setPageSize(10);
 		customerServicePaging.setTotalA(totalA);
 		customerServicePaging.C_notice_searchPagingHTML();
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
+		mav.addObject("totalA", totalA);
 		mav.addObject("customerServicePaging", customerServicePaging);
 		mav.setViewName("jsonView");
 		return mav;
@@ -292,8 +292,8 @@ public class CustomerServiceController {
 	//고객의 소리 문의받은글 검색 & 페이징
 	@RequestMapping(value="C_inquire_Search", method=RequestMethod.POST)
 	public ModelAndView C_inquire_Search(@RequestParam(required=false) Map<String,String> map) {
-		int endNum = Integer.parseInt(map.get("pg"))*3;
-		int startNum = endNum-2;
+		int endNum = Integer.parseInt(map.get("pg"))*10;
+		int startNum = endNum-9;
 		
 		map.put("startNum", startNum+"");
 		map.put("endNum", endNum+"");
@@ -305,13 +305,14 @@ public class CustomerServiceController {
 		int totalA = customerServiceDAO.getTotalC_inquire_Search(map);
 		
 		customerServicePaging.setCurrentPage(Integer.parseInt(map.get("pg")));
-		customerServicePaging.setPageBlock(2);
-		customerServicePaging.setPageSize(3);
+		customerServicePaging.setPageBlock(10);
+		customerServicePaging.setPageSize(10);
 		customerServicePaging.setTotalA(totalA);
 		customerServicePaging.C_inquire_searchPagingHTML();
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
+		mav.addObject("totalA", totalA);
 		mav.addObject("customerServicePaging", customerServicePaging);
 		mav.setViewName("jsonView");
 		return mav;
@@ -427,8 +428,8 @@ public class CustomerServiceController {
 	@RequestMapping(value = "getContactList", method = RequestMethod.POST)
 	public ModelAndView getContactList(@RequestParam(required=false ,defaultValue="1") String pg) {
 		//DB - 1페이지당 10개씩
-		int endNum = Integer.parseInt(pg)*3;
-		int startNum = endNum-2;
+		int endNum = Integer.parseInt(pg)*10;
+		int startNum = endNum-9;
 		
 		Map<String,Integer> map = new HashMap<String,Integer>();
 		map.put("startNum", startNum);
@@ -440,8 +441,8 @@ public class CustomerServiceController {
 		int totalA = customerServiceDAO.getTotalC_contactList();
 		
 		customerServicePaging.setCurrentPage(Integer.parseInt(pg));
-		customerServicePaging.setPageBlock(2);
-		customerServicePaging.setPageSize(3);
+		customerServicePaging.setPageBlock(10);
+		customerServicePaging.setPageSize(10);
 		customerServicePaging.setTotalA(totalA);
 		customerServicePaging.C_contactList_PagingHTML();
 		
@@ -454,8 +455,8 @@ public class CustomerServiceController {
 	
 	@RequestMapping(value="C_contactList_Search", method=RequestMethod.POST)
 	public ModelAndView C_contactList_Search(@RequestParam(required=false) Map<String,String> map) {
-		int endNum = Integer.parseInt(map.get("pg"))*3;
-		int startNum = endNum-2;
+		int endNum = Integer.parseInt(map.get("pg"))*10;
+		int startNum = endNum-9;
 		
 		map.put("startNum", startNum+"");
 		map.put("endNum", endNum+"");
@@ -467,13 +468,14 @@ public class CustomerServiceController {
 		int totalA = customerServiceDAO.getTotalC_contactList_Search(map);
 		
 		customerServicePaging.setCurrentPage(Integer.parseInt(map.get("pg")));
-		customerServicePaging.setPageBlock(2);
-		customerServicePaging.setPageSize(3);
+		customerServicePaging.setPageBlock(10);
+		customerServicePaging.setPageSize(10);
 		customerServicePaging.setTotalA(totalA);
 		customerServicePaging.C_contactList_searchPagingHTML();
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
+		mav.addObject("totalA", totalA);
 		mav.addObject("customerServicePaging", customerServicePaging);
 		mav.setViewName("jsonView");
 		return mav;
@@ -504,6 +506,20 @@ public class CustomerServiceController {
 		return new ModelAndView("redirect:/customerService/C_contactList.do");
 	}
 
+	@RequestMapping(value = "C_contactList_Delete", method = RequestMethod.POST)
+	public ModelAndView C_contactList_Delete(@RequestParam String[] box, Model model) {
+		
+		
+		List<Integer> list = new ArrayList<Integer>();
+		
+		for(String seq : box) {
+			list.add(Integer.parseInt(seq));
+			System.out.println(seq);
+		}
+		customerServiceDAO.C_contactList_Delete(list);
+		
+		return new ModelAndView("redirect:/customerService/C_contactList.do");
+	}
 	
 
 	// 이미지 boardWriteForm
