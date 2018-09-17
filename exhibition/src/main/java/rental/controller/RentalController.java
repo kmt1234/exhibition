@@ -111,6 +111,25 @@ public class RentalController {
 		return mav;
 	}
 	
+	//비지니스룸 예약하는 페이지로 이동
+	@RequestMapping(value="R_businessRoomDecision", method=RequestMethod.GET)
+	public ModelAndView businessRoomDecision(@RequestParam String businessRoom, Model model) {
+		
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		
+		model.addAttribute("businessRoom", businessRoom);
+		model.addAttribute("date", sdf.format(date));
+		
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("display","/rental/R_businessRoomDecision.jsp");
+		mav.setViewName("/rental/R_rentalForm");
+		
+		return mav;
+	}
+	
+	
 	@RequestMapping(value="searchRentDay", method=RequestMethod.POST)
 	public @ResponseBody String searchRentDay(@RequestParam String booth, @RequestParam String startDate, @RequestParam String endDate) {
 		Map<String, String> map = new HashMap<String, String>();
