@@ -53,6 +53,7 @@
 	</div>
 		<input type="button" class="middle ui button"  value="검색" id="C_contactList_SearchBtn">
 		<input type="button" class="middle ui button" id="C_contactList_WriteBtn" value="관리자 작성" >
+		<input type="button" class="middle ui button" id="C_contactList_DeleteBtn" value="삭제" >
 </div>
 <script src="../semantic/semantic.min.js"></script>
 <script src="../js/C_contactList_js.js?ver=1"></script>
@@ -148,6 +149,21 @@ $(document).ready(function(){
 		}
 	});
 	
+	
+	/* //전체선택
+	$('#checkAll').click(function(){
+		if($('#checkAll').prop('checked')){
+			$('.box').prop('checked',true);
+		}else {
+			$('.box').prop('checked',false);
+		}
+	});
+	//선택 삭제
+	$('#C_contactList_DeleteBtn').click(function(){
+		var count = $('.box:checked').length;
+		if(count==0) alert("항목을 선택하세요");
+		else $('#imageboardListForm').submit();
+	}); */
 
 });
 
