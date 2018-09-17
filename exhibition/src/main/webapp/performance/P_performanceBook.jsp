@@ -68,8 +68,8 @@ img{
 	<div>좌석배정 방식: 선착순</div>
 	<div>공연 날짜 :<input id="hiddenDate" type="hidden">
 				<select id="selectEventDate">
-				<option value="2000-01-01">날짜선택</option>
-				
+					<option value="0">날짜선택</option>
+						
 					<!--오늘날짜와 비교 후, 기간 지났으면 날짜 선택 비활성화  -->
 					<c:forEach items="${listDate}" var="eventPeriod">
 						<c:if test="${eventPeriod < now}">
@@ -119,28 +119,37 @@ $(document).ready(function(){
 	$('#BookEventBtn').click(function(){
 		var conF = confirm("예매하시겠습니까?");
 		if(conF){
-			alert($('#selectEventDate :selected').text()); //선택된 일자 호출
-			alert($('#selectPlayTicket :selected').text()); //선택한 티켓 수 호출
+			//alert($('#selectEventDate :selected').text()); //선택된 일자 호출
+			//alert($('#selectPlayTicket :selected').text()); //선택한 티켓 수 호출
 			
 			$('#hiddenTicketQty').val($('#selectPlayTicket :selected').val()); //티켓 수 히든에 넣기
 			$('#hiddenDate').val($('#selectEventDate :selected').text()); //공연일자 히든에 넣기 
 			
-			$('#totalPrice').text($('#hiddenTicketPrice').val() * $('#selectPlayTicket :selected').val());
-			//	$('#Book_play_div').hide();
-			//	$('#Confirm_play_div').show();
+			//예매 가능한 날짜 있을 때만 결재 금액 나오게 하기
+			if($('#selectEventDate :selected').val()!='0'){
+				$('#totalPrice').text($('#hiddenTicketPrice').val() * $('#selectPlayTicket :selected').val());
+				//	$('#Book_play_div').hide();
+				//	$('#Confirm_play_div').show();
+			}
 			
-			//예매하기 컨트롤러
-			$.ajax({
-				type : 'POST',
-				url : '/exhibition/performance/book_performance.do',
-				data : {'imageName' : $('#imageName').val(), 'playDate' : $('#hiddenDate').val(), 'ticketQty' : $('#hiddenTicketQty').val()},
-				dataType : 'text',
-				success : function(data){
-					if(data == 0) alert('예약실패. 관리자에게 문의바람');
-					else alert('예약완료');
-				}//success
+			//예매 가능한 날짜 없을 시, 예매 컨트롤러 못감
+			if($('#selectEventDate :selected').val()=='0'){
+				alert("예매 가능한 날짜 없음");	
+			}else{
+				//예매하기 컨트롤러
+				$.ajax({
+					type : 'POST',
+					url : '/exhibition/performance/book_performance.do',
+					data : {'imageName' : $('#imageName').val(), 'playDate' : $('#hiddenDate').val(), 'ticketQty' : $('#hiddenTicketQty').val()},
+					dataType : 'text',
+					success : function(data){
+						if(data == 0) alert('예약실패. 관리자에게 문의바람');
+						else alert('예약완료');
+					}//success
+					
+				});//ajax
 				
-			});//ajax
+			}//else
 			
 		}else{
 			location.href="javascript:history.back()";	//뒤로가기 
