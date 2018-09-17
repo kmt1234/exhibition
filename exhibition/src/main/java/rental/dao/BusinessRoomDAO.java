@@ -11,4 +11,6 @@ public interface BusinessRoomDAO {
 
 	List<BusinessRoomDTO> getTimeListBusinessRoom(Map<String, String> map);
 
+	void rentalBusinessRoom(BusinessRoomDTO businessRoomDTO);
+
 }

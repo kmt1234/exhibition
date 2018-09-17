@@ -31,7 +31,13 @@ td.empty {
 	<span>비즈니스룸 이용 시간 선택</span>
 </h3>
 <div>
-<form id="businessRoomForm">
+<form id="businessRoomForm" method="post" onsubmit="return false" action="/exhibition/rental/rentalBusinessRoom.do">
+	이용 인원 : <select name="numberPeople">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+			</select>
 	<table id="time_list" width="100%">
 		<tr>
 			<th style="width: 50px">
@@ -45,6 +51,11 @@ td.empty {
 			<td class="empty" colspan="4"> 이용 일자를 선택하세요. </td>
 		</tr>
 	</table>
+	<input type="hidden" name="M_Id" value="${homepageMember.getM_Id()}">
+	<input type="hidden" name="M_Email" value="${homepageMember.getM_Email()}">
+	<input type="hidden" id="startDate" name="startDate" value="">
+	<input type="hidden" name="roomName" value="${businessRoom}">
+	<input type="button" value="예약하기" id="rentalBusinessRoomBtn">
 </form>
 </div>	
 
@@ -66,7 +77,7 @@ td.empty {
 <script src='../calendar2/fullcalendar.min.js'></script>
 <script src="../semantic/semantic.min.js"></script>
 <script>
-	var dataset = [
+	/* var dataset = [
 		<c:forEach var="listView" items="${listView}" varStatus="status">
 		<c:if test="${listView.startDate != ''}">
 		    <c:forEach begin="0" end="${listView.daysSize-2}" step="1" varStatus="dayStatus">
@@ -77,7 +88,7 @@ td.empty {
 		    <c:if test="${!status.last}">,</c:if>
 		 </c:if> 
 		</c:forEach>
-	]; 
+	];  */
 	
 	var code = $('#code').val();
 	
@@ -93,10 +104,11 @@ td.empty {
 	        navLinks: true, 
 	        editable: false,
 	        eventLimit: true,
-			events: dataset,
+			/* events: dataset, */
 			dayClick: function(date) {
 				var startDate=date.format("YYYY") + '-' + date.format("MM") + '-' + date.format("DD");
 				alert(startDate);
+				$('#startDate').val(startDate);
 				$.ajax({
 					type : 'POST',
 					url : '/exhibition/rental/searchBusinessRoom.do',
@@ -112,7 +124,9 @@ td.empty {
 				               align : 'center'
 				            }).append($('<td/>').append($('<input/>',{
 				               type : 'checkbox',
-				               name: 'checkRow'
+				               name: 'checkRow',
+				               id: 'firstCheck',
+				               value: 'first'
 				            }))).append($('<td/>',{
 				               text : '09 : 00 ~ 12 : 00'
 				            })).append($('<td/>',{
@@ -126,7 +140,9 @@ td.empty {
 				               align : 'center'
 				            }).append($('<td/>').append($('<input/>',{
 				               type : 'checkbox',
-				               name: 'checkRow'
+				               name: 'checkRow',
+				               id: 'secondCheck',
+				               value: 'second'
 				            }))).append($('<td/>',{
 				               text : '12 : 00 ~ 15 : 00'
 				            })).append($('<td/>',{
@@ -140,7 +156,9 @@ td.empty {
 				               align : 'center'
 				            }).append($('<td/>').append($('<input/>',{
 				               type : 'checkbox',
-					           name: 'checkRow'
+					           name: 'checkRow',
+					           id: 'thirdCheck',
+					           value: 'third'
 				            }))).append($('<td/>',{
 				               text : '15 : 00 ~ 18 : 00'
 				            })).append($('<td/>',{
@@ -154,7 +172,9 @@ td.empty {
 				               align : 'center'
 				            }).append($('<td/>').append($('<input/>',{
 				               type : 'checkbox',
-				               name: 'checkRow'
+				               name: 'checkRow',
+				               id: 'fourthCheck',
+				               value: 'fourth'
 				            }))).append($('<td/>',{
 				               text : '18 : 00 ~ 21 : 00'
 				            })).append($('<td/>',{
@@ -170,15 +190,19 @@ td.empty {
 							
 							if(item.first=='Y') {
 								$('#first').text('예약불가능').css('color', 'red');
+								$('#firstCheck').remove();
 							}
 							if(item.second=='Y') {
 								$('#second').text('예약불가능').css('color', 'red');
+								$('#secondCheck').remove();
 							}
 							if(item.third=='Y') {
 								$('#third').text('예약불가능').css('color', 'red');
+								$('#thirdCheck').remove();
 							}
 							if(item.fourth=='Y') {
 								$('#fourth').text('예약불가능').css('color', 'red');
+								$('#fourthCheck').remove();
 							}
 						});
 						
@@ -197,6 +221,11 @@ td.empty {
 			for(var i = 0; i < cbox.length; i++) {
 				cbox[i].checked = $('#checkAll').is(':checked') ;
 			}
+		});
+		
+		$('#rentalBusinessRoomBtn').on('click', function(){
+			$('#businessRoomForm').submit();
+			
 		});
 		
 

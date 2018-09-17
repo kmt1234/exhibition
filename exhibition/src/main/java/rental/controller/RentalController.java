@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -153,6 +154,7 @@ public class RentalController {
 		return result;
 	}
 	
+	//특정 날짜 비지니스룸 예약현황 확인
 	@RequestMapping(value="searchBusinessRoom", method=RequestMethod.POST)
 	public ModelAndView searchBusinessRoom(@RequestParam String roomName, @RequestParam String startDate) {
 		Map<String, String> map = new HashMap<String, String>();
@@ -166,7 +168,29 @@ public class RentalController {
 		mav.addObject("list", list);
 		mav.setViewName("jsonView");
 		return mav;
+	}
+	
+	//비지니스룸 예약
+	@RequestMapping(value="rentalBusinessRoom", method=RequestMethod.POST)
+	public ModelAndView rentalBusinessRoom(@ModelAttribute BusinessRoomDTO businessRoomDTO) {
+		businessRoomDTO.setTotalRent(businessRoomDTO.getNumberPeople()*12000);
 		
+		System.out.println(businessRoomDTO.getM_Id());
+		System.out.println(businessRoomDTO.getRoomName());
+		System.out.println(businessRoomDTO.getStartDate());
+		System.out.println(businessRoomDTO.getNumberPeople());
+		System.out.println(businessRoomDTO.getTotalRent());
+		for(int i = 0; i < businessRoomDTO.getCheckRow().length; i++) {
+			businessRoomDTO.setTime(businessRoomDTO.getCheckRow()[i]);;
+			System.out.println(businessRoomDTO.getTime());
+		}
+		
+		businessRoomDAO.rentalBusinessRoom(businessRoomDTO);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("display","/rental/R_businessRoom.jsp");
+		mav.setViewName("/rental/R_rentalForm");
+		return mav;
 	}
 	
 	@RequestMapping(value="reservationHoll", method=RequestMethod.POST)
