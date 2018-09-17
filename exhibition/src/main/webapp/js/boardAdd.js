@@ -284,7 +284,7 @@ $(document).ready(function(){
 			}
 		}else if(index=='3'){
 			var reg = /^https?\:\/\/.+/;
-			var tel = /^((01[1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})$/;
+			var tel = /^((01[1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})|(02|0[3-9]+[0-9]{3})[0-9][0-9]{7,8}$/;
 			if($('#imageName').val()=='')
 				$('#imageNameDiv').text('제목을 입력하세요').css('color','red').css('font-size','9pt').css('font-weight','bold');
 			else if($('#img').val()=='') 

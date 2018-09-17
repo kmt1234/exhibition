@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -49,11 +50,9 @@ public class CustomerServiceController {
 	private JavaMailSenderImpl emailSender;
 	@Autowired
 	private ImageboardPaging imageboardPaging;
-	private String filePath = "C:\\Users\\user\\git\\exhibition\\exhibition\\src\\main\\webapp\\storage\\";
+	private String filePath = "D:\\hadoop\\workspace\\exhibition\\exhibition\\src\\main\\webapp\\storage\\";
 	@Autowired
 	private CustomerServicePaging customerServicePaging;
-	@Autowired
-	private EventboardDTO eventboardDTO;
 	@Autowired
 	private PlayBookDTO playBookDTO;
 
@@ -626,7 +625,7 @@ public class CustomerServiceController {
 	public ModelAndView getImageboardSlide(@RequestParam String code) {
 		ArrayList<ImageboardDTO> list = new ArrayList<ImageboardDTO>();
 		ModelAndView mav = new ModelAndView();
-		String[] str = { "car2.png", "p1.jpg", "car1.JPG" };
+		String[] str = { "posterMain.jpg", "poster2.jpg", "poster4.jpg", "poster1.jpg", "poster3.jpg"};
 
 		if (code.equals("1")) {
 			for (int i = 0; i < str.length; i++) {
@@ -651,10 +650,10 @@ public class CustomerServiceController {
 	}
 
 	@RequestMapping(value = "getImageboardSlide1", method = RequestMethod.POST)
-	public ModelAndView getImageboardSlide1(@RequestParam List<Integer> list) {
+	public ModelAndView getImageboardSlide1(@RequestParam List<String> list) {
 		ModelAndView mav = new ModelAndView();
-		for (Integer data : list) {
-			System.out.println(data);
+		for (String data : list) {
+			System.out.println("data=" + data);
 		}
 		List<ImageboardDTO> list1 = customerServiceDAO.getImageboardSlide(list);
 
