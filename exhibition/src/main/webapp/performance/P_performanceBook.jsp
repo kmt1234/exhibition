@@ -60,15 +60,31 @@ img{
 	
 	<div class="ui divider"></div>
 	
+	<!--날짜 비교(기본 : 오늘날짜)-->
+	<jsp:useBean id="now" class="java.util.Date"/> 
+	
 	<div><img src="../storage/${eventboardDTO.image1}"></div>
 	<div>가격 : ${eventboardDTO.eventPrice}</div><input type="hidden" id="hiddenTicketPrice" value="${eventboardDTO.eventPrice}">
 	<div>좌석배정 방식: 선착순</div>
 	<div>공연 날짜 :<input id="hiddenDate" type="hidden">
 				<select id="selectEventDate">
+				<option value="2000-01-01">날짜선택</option>
+				
+					<!--오늘날짜와 비교 후, 기간 지났으면 날짜 선택 비활성화  -->
 					<c:forEach items="${listDate}" var="eventPeriod">
-					<option value="${eventPeriod}"><fmt:formatDate value="${eventPeriod}" pattern="yyyy년-MM월-dd일"/></option>
+						<c:if test="${eventPeriod < now}">
+						<option disabled="disabled" value="${eventPeriod}"><fmt:formatDate value="${eventPeriod}" pattern="yyyy년-MM월-dd일"/></option>
+						</c:if>
 					</c:forEach>
+					
+					<c:forEach items="${listDate}" var="eventPeriod">
+						<c:if test="${eventPeriod > now}">
+						<option value="${eventPeriod}"><fmt:formatDate value="${eventPeriod}" pattern="yyyy년-MM월-dd일"/></option>
+						</c:if>
+					</c:forEach>
+					
 				</select>
+				
 	</div>
 	<div>공연 시간 : ${eventboardDTO.startTime} ~ ${eventboardDTO.endTime}</div>
 	<div>매수 :<input id="hiddenTicketQty" type="hidden">
