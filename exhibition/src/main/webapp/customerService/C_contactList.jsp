@@ -157,13 +157,13 @@ $(document).ready(function(){
 		}else {
 			$('.box').prop('checked',false);
 		}
-	});
+	});*/
 	//선택 삭제
 	$('#C_contactList_DeleteBtn').click(function(){
 		var count = $('.box:checked').length;
 		if(count==0) alert("항목을 선택하세요");
 		else $('#imageboardListForm').submit();
-	}); */
+	}); 
 
 });
 
