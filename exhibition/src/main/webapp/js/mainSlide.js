@@ -71,7 +71,7 @@
 		data : {'list':$('#list').val()},
 		dataType : 'json',
 		success : function(data){
-			alert(data.list)
+			//alert(data.list)
 			//alert(JSON.stringify(data)); 데이터 확인
 			if(data.list.length==0) alert('메인 이미지 없습니다. 관리자에게 문의하십시오');
 			else{

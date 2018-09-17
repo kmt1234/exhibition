@@ -98,7 +98,7 @@ img{
 			
 			<input type="hidden" value="${eventboardDTO.eventSeats}" id="hiddenTotalSeats">
 			<fmt:parseNumber var="remain" value="${eventboardDTO.eventSeats}" integerOnly="true" />
-			 / 잔여 매수 : <div id="remainSeats">${eventboardDTO.eventSeats}</div>
+			 / 잔여 매수 : <span id="remainSeats">${eventboardDTO.eventSeats}</span>
 	</div>
 	
 	<div><button id="BookEventBtn">예매하기</button></div>
@@ -128,8 +128,15 @@ $(document).ready(function(){
 			data : {'totalSeats' : $('#hiddenTotalSeats').val(), 'imageName' : $('#imageName').val(), 'playDate' : $('#selectEventDate :selected').text()},
 			dataType : 'text',
 			success : function(data){
-				alert(JSON.stringify(data));
-				$('#remainSeats').text(data);
+				//alert(JSON.stringify(data)); 잔여좌석 확인
+				
+				if(data=='remainSeats'){
+					$('#remainSeats').text(data);
+				}else{
+					$('#remainSeats').text(data);	
+				}
+				
+				
 			}//success
 		});//ajax
 		

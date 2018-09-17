@@ -57,6 +57,12 @@ public class PerformanceDAOmybatis implements PerformanceDAO {
 		
 	}
 	
+	//예매 수만큼 잔여티켓 감소
+	public void bookPlayMembers_calculate(Book_performance_membersDTO book_performance_membersDTO) {
+		sqlSession.update("performanceSQL.bookPlayMembers_calculate", book_performance_membersDTO);
+		
+	}
+	
 	//연극 잔여좌석 가져오는 메소드
 	public String checkRemainSeats(Map<String, String> map) {
 		return sqlSession.selectOne("performanceSQL.checkRemainSeats", map);
@@ -66,6 +72,6 @@ public class PerformanceDAOmybatis implements PerformanceDAO {
 	public String checkUsedSeats(Map<String, String> map) {
 		return sqlSession.selectOne("performanceSQL.checkUsedSeats", map);
 	}
-
 	
+
 }

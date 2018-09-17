@@ -334,6 +334,8 @@ public class PerformanceController {
 		
 		//DB (예매자 등록 DB)
 		int result = performanceDAO.bookPlayMembers(book_performance_membersDTO);
+		performanceDAO.bookPlayMembers_calculate(book_performance_membersDTO);
+		
 		
 		if(result==0) return "fail";
 		else return "ok";
@@ -364,10 +366,18 @@ public class PerformanceController {
 		System.out.println("잔여석 : "+remainSeats);
 		System.out.println("예매석 : "+usedSeats);
 		
+		if(usedSeats==null) usedSeats = 0+"";
+	
+		
 		//잔여좌석 - 예매된 티켓 수 = 예매 가능한 좌석 수
 		int resultSeats = Integer.parseInt(remainSeats) - Integer.parseInt(usedSeats);
+				
 		//null값이면 ***
-		return resultSeats+"";
+		if(resultSeats==0) {
+			return "remainSeats";
+		}else {
+			return resultSeats+"";
+		} 
 	}
 	
 	
