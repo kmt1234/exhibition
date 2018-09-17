@@ -70,8 +70,8 @@ public class CustomerServiceController {
 	@RequestMapping(value="getNoticeList", method=RequestMethod.POST)
 	public ModelAndView getNoticeList(@RequestParam(required=false ,defaultValue="1") String pg) {
 		//DB - 1페이지당 10개씩
-		int endNum = Integer.parseInt(pg)*3;
-		int startNum = endNum-2;
+		int endNum = Integer.parseInt(pg)*10;
+		int startNum = endNum-9;
 		
 		Map<String,Integer> map = new HashMap<String,Integer>();
 		map.put("startNum", startNum);
@@ -82,8 +82,8 @@ public class CustomerServiceController {
 		int totalA = customerServiceDAO.getTotalC_notice();
 		
 		customerServicePaging.setCurrentPage(Integer.parseInt(pg));
-		customerServicePaging.setPageBlock(2);
-		customerServicePaging.setPageSize(3);
+		customerServicePaging.setPageBlock(10);
+		customerServicePaging.setPageSize(10);
 		customerServicePaging.setTotalA(totalA);
 		customerServicePaging.C_notice_PagingHTML();
 		ModelAndView mav = new ModelAndView();
@@ -265,8 +265,8 @@ public class CustomerServiceController {
 	@RequestMapping(value = "getInquireList", method = RequestMethod.POST)
 	public ModelAndView getInquireList(@RequestParam(required=false ,defaultValue="1") String pg) {
 		//DB - 1페이지당 10개씩
-		int endNum = Integer.parseInt(pg)*3;
-		int startNum = endNum-2;
+		int endNum = Integer.parseInt(pg)*10;
+		int startNum = endNum-9;
 		
 		Map<String,Integer> map = new HashMap<String,Integer>();
 		map.put("startNum", startNum);
@@ -277,8 +277,8 @@ public class CustomerServiceController {
 		int totalA = customerServiceDAO.getTotalC_inquire();
 		
 		customerServicePaging.setCurrentPage(Integer.parseInt(pg));
-		customerServicePaging.setPageBlock(2);
-		customerServicePaging.setPageSize(3);
+		customerServicePaging.setPageBlock(10);
+		customerServicePaging.setPageSize(10);
 		customerServicePaging.setTotalA(totalA);
 		customerServicePaging.C_inquire_PagingHTML();
 		
@@ -334,11 +334,12 @@ public class CustomerServiceController {
 	
 	//고객의 소리 - 문의 답하기 폼
 	@RequestMapping(value="C_inquire_Reply", method =  RequestMethod.POST)
-	public ModelAndView C_inquire_Reply(@RequestParam String seq, @RequestParam String email, Model model) {
+	public ModelAndView C_inquire_Reply(@RequestParam String seq, @RequestParam String email, @RequestParam String pseq, @RequestParam int pg, Model model) {
 		CustomerServiceDTO customerServiceDTO =customerServiceDAO.getReplyInfo(seq);
 		
 		model.addAttribute("customerServiceDTO",customerServiceDTO);
-		
+		model.addAttribute("pseq", pseq);
+		model.addAttribute("pg", pg);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("display", "/customerService/C_inquire_Reply.jsp");
 		mav.setViewName("/customerService/C_customerServiceForm");
@@ -346,7 +347,8 @@ public class CustomerServiceController {
 	}
 	//고객의 소리 답변(관리자)
 	@RequestMapping(value="C_inquire_checkReply", method =  RequestMethod.POST)
-	public @ResponseBody ModelAndView C_inquire_checkReply(@RequestParam  final String email, @RequestParam final String subject ,@RequestParam final String content, Model model) {
+	public @ResponseBody ModelAndView C_inquire_checkReply(@RequestParam  final String email, 
+			@RequestParam final String subject ,@RequestParam final String content, Model model) {
 		final MimeMessagePreparator preparator = new MimeMessagePreparator() {
 			public void prepare(MimeMessage mimeMessage) throws Exception {
 				final MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
@@ -509,6 +511,7 @@ public class CustomerServiceController {
 		public ModelAndView imageboardWriteForm() {
 		
 		ModelAndView mav = new ModelAndView();
+		
 		
 		mav.addObject("postSelect", "0");
 		mav.setViewName("/customerService/C_mainImageboardForm");

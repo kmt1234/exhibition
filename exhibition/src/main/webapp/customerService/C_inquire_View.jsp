@@ -64,7 +64,8 @@
 	<input type="hidden" id="content" value="${customerServiceDTO.content }">
 	<input type="button" id="C_inquire_replyBtn" class="middle ui button" value="문의 답하기">
 	<input type="button" class="middle ui button" id="C_inquire_ListBtn" value="목록">
-	<input type="hidden" id="pg" value="${pg}">
+	<input type="hidden" name="pg" id="pg" value="${pg}">
+	<input type="hidden" name="pseq" id="pseq" value="${customerServiceDTO.seq }">
 </form>
 <script src="../js/C_inquire_js.js?ver=1"></script>
 <script>

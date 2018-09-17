@@ -38,20 +38,10 @@
 		<td colspan="2" align="center" style="padding-top: 30px"> 		
 			<input type="button" id="C_notice_checkWriteBtn" class="middle ui button" value="등록">
 			<input type="reset"  class="middle ui button" value="다시작성">
-			<input type="button" id="C_notice_WriteBack" class="middle ui button" value="목록">
 		</td>
 	</tr>
 </table>
 </form>
-
-<script>
-$(document).ready(function(){
-	$('#C_notice_WriteBack').on('click', function(){
-		alert('dsfdsf');
-		location.href="/exhibition/customerService/C_notice.do?pg=${pg}";
-	});
-});
-</script>
 <script src="../js/C_notice_js.js?ver=1"></script>
 </body>
 </html>

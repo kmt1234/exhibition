@@ -64,6 +64,14 @@ $.ajax({
 	dataType : 'json',
 	success : function(data){
 		$.each(data.list, function(index, item){
+			var head = "";
+			for(var i=0; i<item.lev; i++) {
+				head += '&emsp;';
+			}
+			if(item.pseq!=0)
+				head += '<img src="../img/reply.gif">';
+				
+				
 			$('<tr/>').append($('<td/>',{
 				align : 'center',
 				style: 'width: 20%; height: 9%; text-align: center;',

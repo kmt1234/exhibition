@@ -7,6 +7,7 @@
 
 </head>
 <body>
+<form name="C_inquire_Reply" id="C_inquire_Reply" method="post" action="/exhibition/customerService/C_inquire_checkReply.do">
 <h2 class="box-container" style="float: center; width: 100%; text-align: left;">
 	문의
 	<span class="h-light">하기</span>
@@ -39,7 +40,9 @@
 	<input type="button" id="C_checkReplyBtn" class="middle ui button" value="문의 답하기">
 	<input type="button" class="middle ui button" id="C_inquire_ListBtn" value="목록">
 	<input type="hidden" id="pg" value="${pg}">
+	<input type="hidden" name="pseq" id="pseq" value="${pseq}">
 </div>
+</form>
 <script src="../js/C_inquire_js.js?ver=1"></script>
 <script>
 $(document).ready(function(){
@@ -55,7 +58,7 @@ $(document).ready(function(){
 		else if($('#content').val()=='')
 			$('#contentDiv').text("내용을 입력하세요").css('font-size','9pt').css('color','red')
 		else
-			location.href="/exhibition/customerService/C_inquire_Reply.do?pg="+$('#pg').val();
+			$('#C_inquire_Reply').submit();
 	});
 });
 </script>
