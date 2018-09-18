@@ -3,6 +3,7 @@ package rental.dao;
 import java.util.List;
 import java.util.Map;
 
+import customerService.bean.SalesExhigitionDTO;
 import performance.bean.PerformanceDTO;
 import rental.bean.ExhibitionDTO;
 
@@ -15,9 +16,5 @@ public interface ExhibitionDAO {
 	public List<ExhibitionDTO> getCalendar(String booth);
 
 	public List<ExhibitionDTO> getAllCalendar();
-
-	public List<ExhibitionDTO> getSalesExhibition(String salesMon);
-
-	public int getSalesTotalRentExhibition(String salesMon);
 
 }

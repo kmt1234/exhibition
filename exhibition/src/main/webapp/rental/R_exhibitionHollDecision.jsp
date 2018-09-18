@@ -153,7 +153,6 @@
 				$.ajax({
 					type : 'POST',
 					url : '/exhibition/rental/searchRentDay.do',
-					async: false,
 					data : {'booth': '${booth}',
 							'startDate' : $('#startDate').val(),
 							'endDate' : $('#startDate').val()},
@@ -187,7 +186,10 @@
 	        navLinks: true, 
 	        editable: false,
 	        eventLimit: true,
-			events: dataset
+			events: dataset,
+			eventClick: function(event) {
+			}
+	        
 		});
 
 	});
