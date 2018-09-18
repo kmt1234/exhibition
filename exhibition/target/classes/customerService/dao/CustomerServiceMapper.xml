@@ -400,6 +400,16 @@
  	<select id="getSalesTotalRentExhibition" parameterType="java.lang.String" resultType="int">
  		select sum(totalrent) as salesTotalRent from EXHIBITIONRENTAL where STARTDATE BETWEEN #{salesMon} and (select last_day(#{salesMon}) from dual)
  	</select>
+ 	<!-- 회원정보  -->
+ 	<select id="getMemberList" resultType="member">
+ 		select * from membertable 	
+ 	</select>
+ 	<!-- 사업자정보  -->
+ 	<select id="getCompanyList" resultType="company">
+ 		select * from company	
+ 	</select>
+ 	
+ 	
  </mapper>
  
  

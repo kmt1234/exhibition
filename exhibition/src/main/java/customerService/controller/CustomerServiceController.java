@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import company.bean.CompanyDTO;
 import customerService.bean.CustomerServiceDTO;
 import customerService.bean.CustomerServicePaging;
 import customerService.bean.EventboardDTO;
@@ -436,7 +437,8 @@ public class CustomerServiceController {
 		return new ModelAndView("redirect:/customerService/C_QnA.do");
 	}
 
-// 주요시설 연락처~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	// 주요시설
+	// 연락처~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 	// 주요시설 연락처
 	@RequestMapping(value = "C_contactList", method = RequestMethod.GET)
@@ -448,19 +450,18 @@ public class CustomerServiceController {
 		mav.setViewName("/customerService/C_customerServiceForm");
 		return mav;
 	}
-	
+
 	@RequestMapping(value = "C_contactList_Delete", method = RequestMethod.POST)
 	public ModelAndView C_contactList_Delete(@RequestParam String[] box, Model model) {
-		
-		
+
 		List<Integer> list = new ArrayList<Integer>();
-		
-		for(String seq : box) {
+
+		for (String seq : box) {
 			list.add(Integer.parseInt(seq));
 			System.out.println(seq);
 		}
 		customerServiceDAO.C_contactList_Delete(list);
-		
+
 		return new ModelAndView("redirect:/customerService/C_contactList.do");
 	}
 
@@ -518,77 +519,27 @@ public class CustomerServiceController {
 	}
 
 	// 검색
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	@RequestMapping(value="C_contactList_Search", method=RequestMethod.POST)
-	public ModelAndView C_contactList_Search(@RequestParam(required=false) Map<String,String> map) {
-		int endNum = Integer.parseInt(map.get("pg"))*10;
-		int startNum = endNum-9;
-		
-		map.put("startNum", startNum+"");
-		map.put("endNum", endNum+"");
-		
-		//DB
+
+	@RequestMapping(value = "C_contactList_Search", method = RequestMethod.POST)
+	public ModelAndView C_contactList_Search(@RequestParam(required = false) Map<String, String> map) {
+		int endNum = Integer.parseInt(map.get("pg")) * 10;
+		int startNum = endNum - 9;
+
+		map.put("startNum", startNum + "");
+		map.put("endNum", endNum + "");
+
+		// DB
 		List<CustomerServiceDTO> list = customerServiceDAO.C_contactList_Search(map);
-		
-		//페이징처리
+
+		// 페이징처리
 		int totalA = customerServiceDAO.getTotalC_contactList_Search(map);
-		
+
 		customerServicePaging.setCurrentPage(Integer.parseInt(map.get("pg")));
 		customerServicePaging.setPageBlock(10);
 		customerServicePaging.setPageSize(10);
 		customerServicePaging.setTotalA(totalA);
 		customerServicePaging.C_contactList_searchPagingHTML();
-		
+
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
 		mav.addObject("totalA", totalA);
@@ -1027,17 +978,19 @@ public class CustomerServiceController {
 		customerServiceDAO.hotelDelete(list); // db삭제
 		return new ModelAndView("redirect:/customerService/C_hotelListForm.do");
 	}
+
 	// 호텔리스트 수정을 클리하면 내용을 보여준다.
 	@RequestMapping(value = "C_hotel_modify", method = RequestMethod.GET)
-	public String C_hotel_modify(@RequestParam String seq,Model model) {
+	public String C_hotel_modify(@RequestParam String seq, Model model) {
 		HotelboardDTO hotelboardDTO = customerServiceDAO.getHotelInfo(seq);
 		model.addAttribute("hotelboardDTO", hotelboardDTO);
 		return "/customerService/C_hotel_modify";
 	}
-	//호텔 수정완료 클릭시 DB내용 수정
+
+	// 호텔 수정완료 클릭시 DB내용 수정
 	@RequestMapping(value = "C_hotelboardMod", method = RequestMethod.POST)
-	public ModelAndView C_hotelboardMod(@ModelAttribute HotelboardDTO hotelboardDTO , @RequestParam MultipartFile img) {
-		if(!img.isEmpty()) {
+	public ModelAndView C_hotelboardMod(@ModelAttribute HotelboardDTO hotelboardDTO, @RequestParam MultipartFile img) {
+		if (!img.isEmpty()) {
 			File fileDelete = new File(filePath + hotelboardDTO.getImage1());
 			if (fileDelete.exists())
 				fileDelete.delete();
@@ -1074,43 +1027,80 @@ public class CustomerServiceController {
 
 		return mav;
 	}
-	//부스별 총 매출액 보여주는 페이지로 이동
-	@RequestMapping(value="C_salesExhibitionView", method=RequestMethod.GET)
+
+	// 부스별 총 매출액 보여주는 페이지로 이동
+	@RequestMapping(value = "C_salesExhibitionView", method = RequestMethod.GET)
 	public ModelAndView R_salesExhibitionView() {
 		ModelAndView mav = new ModelAndView();
-		
-		mav.addObject("display","/customerService/C_salesExhibitionView.jsp");
+
+		mav.addObject("display", "/customerService/C_salesExhibitionView.jsp");
 		mav.setViewName("/customerService/C_customerServiceForm");
-		
+
 		return mav;
 	}
-	
-	//부스별 총 매출액 보여주는 컨트롤
-	@RequestMapping(value="C_salesExhibition", method=RequestMethod.POST)
-	public ModelAndView R_salesExhibition(@RequestParam String year, @RequestParam String month) {
-		String salesMon = year.substring(2)+"-"+month+"-"+"01";
-		
-		//부스명, 예약점유 일수, 총 매출액 가져오는 sql
-		List<SalesExhigitionDTO> list = customerServiceDAO.getSalesExhibition(salesMon);
-		
-		int salesTotalRent = customerServiceDAO.getSalesTotalRentExhibition(salesMon);
-		String salesTotalRentstr = String.format("%,d", salesTotalRent);   
 
-		
+	// 부스별 총 매출액 보여주는 컨트롤
+	@RequestMapping(value = "C_salesExhibition", method = RequestMethod.POST)
+	public ModelAndView R_salesExhibition(@RequestParam String year, @RequestParam String month) {
+		String salesMon = year.substring(2) + "-" + month + "-" + "01";
+
+		// 부스명, 예약점유 일수, 총 매출액 가져오는 sql
+		List<SalesExhigitionDTO> list = customerServiceDAO.getSalesExhibition(salesMon);
+
+		int salesTotalRent = customerServiceDAO.getSalesTotalRentExhibition(salesMon);
+		String salesTotalRentstr = String.format("%,d", salesTotalRent);
+
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
 		mav.addObject("salesTotalRent", salesTotalRentstr);
 		mav.setViewName("jsonView");
 		return mav;
 	}
-	
-	@RequestMapping(value="C_memberShib", method=RequestMethod.GET)
+
+	// 회원리스트로 이동
+	@RequestMapping(value = "C_memberShib", method = RequestMethod.GET)
 	public ModelAndView C_memberShib() {
 		ModelAndView mav = new ModelAndView();
-		
-		mav.addObject("display","/customerService/C_memberShib.jsp");
+
+		mav.addObject("display", "/customerService/C_memberShib.jsp");
 		mav.setViewName("/customerService/C_customerServiceForm");
-		
+
 		return mav;
 	}
+
+	// 회원리스트 불러오기
+	@RequestMapping(value = "getMemberList", method = RequestMethod.GET)
+	public ModelAndView getMemberList() {
+	
+		List<MemberDTO> list = customerServiceDAO.getMemberList();
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.setViewName("jsonView");
+
+		return mav;
+	}
+	// 사업자리스트 불러오기
+		@RequestMapping(value = "getCompanyList", method = RequestMethod.GET)
+		public ModelAndView getCompanyList() {
+		
+			List<CompanyDTO> list = customerServiceDAO.getCompanyList();
+			
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("list", list);
+			mav.setViewName("jsonView");
+
+			return mav;
+		}
+	//이메일무단수집거부
+	@RequestMapping(value="C_emailRefuse",method=RequestMethod.GET)
+	public String C_emailRefuse() {
+		return "/customerService/C_emailRefuse";
+	}
+	//개인정보처리방침
+	@RequestMapping(value="C_privacy",method=RequestMethod.GET)
+	public String C_privacy() {
+		return "/customerService/C_privacy";
+	}
+
 }

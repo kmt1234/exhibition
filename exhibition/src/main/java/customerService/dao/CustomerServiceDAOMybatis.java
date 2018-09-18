@@ -9,12 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import company.bean.CompanyDTO;
 import customerService.bean.CustomerServiceDTO;
 import customerService.bean.EventboardDTO;
 import customerService.bean.HotelboardDTO;
 import customerService.bean.ImageboardDTO;
 import customerService.bean.PlayBookDTO;
 import customerService.bean.SalesExhigitionDTO;
+import member.bean.MemberDTO;
 import rental.bean.ExhibitionDTO;
 
 @Transactional
@@ -228,5 +230,11 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 		} else {
 			return sqlSession.selectOne("customerServiceSQL.getSalesTotalRentExhibition", salesMon);
 		}
+	}
+	public List<MemberDTO> getMemberList() {
+		return sqlSession.selectList("customerServiceSQL.getMemberList");
+	}
+	public List<CompanyDTO> getCompanyList() {
+		return sqlSession.selectList("customerServiceSQL.getCompanyList");
 	}
 }
