@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -69,9 +70,10 @@
 		<div class="ui input" style="width: 30%;">
 			<input type="text" name="keyword" id="keyword" placeholder="검색어 입력" value="${keyword }">
 		</div>
-		<input type="button" class="middle ui button" value="검색"
-			id="C_notice_SearchBtn"> <input type="button"
-			class="middle ui button" id="C_notice_WriteBtn" value="관리자 작성">
+		<input type="button" class="middle ui button" value="검색" id="C_notice_SearchBtn">
+		<c:if test="${code=='3' }"> 
+			<input type="button" class="middle ui button" id="C_notice_WriteBtn" value="관리자 작성">
+		</c:if>
 </div>
 <script src="../semantic/semantic.min.js"></script>
 <script src="../js/C_notice_js.js?ver=1"></script>

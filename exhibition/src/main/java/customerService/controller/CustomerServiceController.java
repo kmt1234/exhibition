@@ -354,16 +354,13 @@ public class CustomerServiceController {
 
 	// 고객의 소리 - 문의 답하기 폼
 	@RequestMapping(value = "C_inquire_Reply", method = RequestMethod.POST)
-	public ModelAndView C_inquire_Reply(@ModelAttribute CustomerServiceDTO customerServiceDTO, @RequestParam String seq, @RequestParam String email, @RequestParam String name, @RequestParam String phone, @RequestParam String classify, @RequestParam int pseq, @RequestParam int pg, Model model) {
+	public ModelAndView C_inquire_Reply(@ModelAttribute CustomerServiceDTO customerServiceDTO, @RequestParam String seq, @RequestParam String email, @RequestParam int pseq, @RequestParam int pg, Model model) {
 
 		model.addAttribute("customerServiceDTO", customerServiceDTO);
 
 		ModelAndView mav = new ModelAndView();
 		model.addAttribute("pseq", pseq);
 		model.addAttribute("pg", pg);
-		model.addAttribute("classify", classify);
-		model.addAttribute("name", name);
-		model.addAttribute("phone", phone);
 		mav.addObject("display", "/customerService/C_inquire_Reply.jsp");
 		mav.setViewName("/customerService/C_customerServiceForm");
 		return mav;
@@ -372,14 +369,14 @@ public class CustomerServiceController {
 	// 고객의 소리 답변(관리자)
 	@RequestMapping(value = "C_inquire_checkReply", method = RequestMethod.POST)
 	public @ResponseBody ModelAndView C_inquire_checkReply(@ModelAttribute CustomerServiceDTO customerServiceDTO, 
-			@RequestParam final String email, @RequestParam String classify, @RequestParam String name,  @RequestParam String phone, @RequestParam final String content, @RequestParam int pg, Model model) {
+			@RequestParam final String email, @RequestParam final String subject, @RequestParam final String content, @RequestParam int pg, Model model) {
 		
 		CustomerServiceDTO cDTO = customerServiceDAO.getInquireInfo(customerServiceDTO.getPseq());//원글
 		final MimeMessagePreparator preparator = new MimeMessagePreparator() {
 			public void prepare(MimeMessage mimeMessage) throws Exception {
 				final MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
 
-				String replySubject = "문의 답변입니다.";
+				String replySubject = subject;
 				String replyContent = content;
 
 				helper.setFrom("jbi8045@gmail.com");
@@ -394,9 +391,6 @@ public class CustomerServiceController {
 		
 		customerServiceDAO.C_inquire_Reply(customerServiceDTO);
 		model.addAttribute("pg", pg);
-		model.addAttribute("classify", classify);
-		model.addAttribute("name", name);
-		model.addAttribute("phone", phone);
 		
 		emailSender.send(preparator);
 		return new ModelAndView("redirect:/customerService/C_inquire_List.do");

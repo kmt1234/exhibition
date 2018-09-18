@@ -58,12 +58,7 @@
 		</tr>
 	</table>
 	<input type="hidden" name="seq" id="seq" value="${customerServiceDTO.seq }">
-	<input type="hidden" name="classify" id="classify" value="${customerServiceDTO.classify }">
-	<input type="hidden" name="name" id="name" value="${customerServiceDTO.name }">
 	<input type="hidden" name="email" id="email" value="${customerServiceDTO.email }">
-	<input type="hidden" name="phone" id="phone" value="${customerServiceDTO.phone }">
-	<input type="hidden" name="subject" id="subject" value="${customerServiceDTO.subject }">
-	<input type="hidden" name="contect" id="content" value="${customerServiceDTO.content }">
 	<input type="button" id="C_inquire_replyBtn" class="middle ui button" value="문의 답하기">
 	<input type="button" class="middle ui button" id="C_inquire_ListBtn" value="목록">
 	<input type="hidden" name="pg" id="pg" value="${pg}">

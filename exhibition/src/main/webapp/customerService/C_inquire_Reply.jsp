@@ -13,10 +13,10 @@
 <body>
 <form name="C_inquire_Reply" id="C_inquire_Reply" method="post" action="/exhibition/customerService/C_inquire_checkReply.do">
 <h2 class="box-container" style="float: center; width: 100%; text-align: left;">
-	문의
-	<span class="h-light">하기</span>
+	고객의
+	<span class="h-light">소리</span>
+	답변
 </h2>
-<h1>문의 답변하기</h1>
 <table style="width:100%;" class="ui celled table">
 <tr>
 		<td style="width:8%; height:40px; background-color: #f7f6e6; font-size: 15px;text-align: center;" >제 목</td>
@@ -45,9 +45,6 @@
 	<input type="hidden" name="pg" id="pg" value="${pg}">
 	<input type="hidden" name="pseq" id="pseq" value="${pseq}">
 	<input type="hidden" name="email" id="email" value="${customerServiceDTO.email}">
-	<input type="hidden" name="phone" id="phone" value="${customerServiceDTO.phone }">
-	<input type="hidden" name="classify" id="classify" value="${classify}">
-	<input type="hidden" name="name" id="name" value="${customerServiceDTO.name }">
 </div>
 </form>
 <script src="../js/C_inquire_js.js?ver=1"></script>

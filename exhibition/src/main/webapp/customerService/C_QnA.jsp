@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -47,7 +48,9 @@ selector    : {
 <div id="C_QnA_List" class="ui styled fluid accordion"></div>
 <br>
 <div align="left">
-	<input class="middle ui button" type="button" value="작성" id="C_QnA_writeBtn">
+	<c:if test="${code=='3' }"> 
+		<input class="middle ui button" type="button" value="작성" id="C_QnA_writeBtn">
+	</c:if>
 </div>
 <script src="../semantic/semantic.min.js"></script>
 <script src="../js/C_QnA_js.js?ver=1"></script>

@@ -44,7 +44,7 @@ $(document).ready(function(){
 					width : '100px'
 				})).append($('<span/>',{
 					align : 'left',
-					text : item.subject
+					text : "["+item.classify+"]   "+item.subject
 				})).appendTo($('#C_QnA_List'));
 				
 				($('<div/>',{
@@ -80,7 +80,7 @@ $(document).ready(function(){
 						width : '100px'
 					})).append($('<span/>',{
 						align : 'left',
-						text : item.classify+item.subject
+						text : "["+item.classify+"]   "+item.subject
 					})).appendTo($('#C_QnA_List'));
 					
 					($('<div/>',{

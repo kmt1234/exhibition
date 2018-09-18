@@ -71,7 +71,7 @@
 		 									,#{phone}
 		 									,#{subject}
 		 									,#{content}
-		 									,0
+		 									,seq_C_inquire.currval
 		 									,0
 		 									,0
 		 									,0
@@ -88,7 +88,7 @@
  	<select id="getInquireList" parameterType="java.util.Map" resultType="customerService">
  		select * from 
  		(select rownum rn, tt.* from 
- 		(select * from C_inquire order by seq desc)tt) 
+ 		(select * from C_inquire order by ref desc, step asc)tt) 
  		where rn between #{startNum} and #{endNum}
  	</select>
  	
@@ -103,7 +103,7 @@
  		(select rownum rn, tt.* from 
  		(select * from C_inquire
  		 where ${searchOption} like '%'||#{keyword}||'%'
- 		 order by seq desc)tt) 
+ 		 order by ref desc, step asc)tt) 
  		where rn between #{startNum} and #{endNum}
  	</select>
  	
@@ -123,20 +123,15 @@
  	</update>
  	
  	<insert id="C_inquire_Reply2" parameterType="customerService">
- 		insert into C_inquire values(seq_C_inquire.nextval
- 								,#{email}
- 								,#{classify}
- 								,#{name}
- 								,#{phone}
- 								,#{subject}
- 								,#{content}
- 								,#{ref}
- 								,#{lev}
- 								,#{step}
- 								,#{pseq}
- 								,0
- 								,0
- 								,sysdate)
+ 		insert into C_inquire(seq, subject, content, ref, lev, step, pseq, reply, logtime) values(seq_C_inquire.nextval
+												 								,#{subject}
+												 								,#{content}
+												 								,#{ref}
+												 								,#{lev}
+												 								,#{step}
+												 								,#{pseq}
+												 								,#{reply}
+												 								,sysdate)
  	</insert>
  	
  	<update id="C_inquire_Reply3" parameterType="customerService">

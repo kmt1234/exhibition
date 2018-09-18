@@ -25,16 +25,16 @@
 </head>
 <body>
 <h2 class="box-container" style="float: center; width: 100%; text-align: left;">
-	문의
-	<span class="h-light">하기</span>
+	고객의
+	<span class="h-light">소리</span>
 </h2>
 
 <div style="width: 100%;" align="center">
-	<table style="width:894px ; height: 40px; " align="center" border="1" bordercolor="#ec008c" cellpadding="4" frame="hsides" rules="rows"
+	<table style="width:894px ; height: 40px; " align="center" border="1" bordercolor="#ec008c" cellpadding="4"  rules="rows"
 	id="C_inquire_List" class="ui striped table" >
 		<tr>
 			<td style="width: 200px;  padding-top: 10px; text-align: center;">번호</td>
-			<td style="width: 20px;"></td>
+			<td style="width: 50px;  padding-top: 10px; text-align: center;"></td>
 			<td style="width: 200px;  padding-top: 10px; text-align: center;">제목</td>
 			<td style="width: 200px;  padding-top: 10px; text-align: center;">작성자</td>
 			<td style="width: 200px;  padding-top: 10px; text-align: center;">이메일</td>
@@ -49,9 +49,9 @@
 		<option value="subject" selected>제목</option>
 		<option value="name">작성자</option>
 	</select>
-		
 	<div class="ui input" style="width: 50%;">
 		<input type="text" name="keyword" id="keyword" value="${keyword }">
+		
 	</div>
 		 <input type="button" class="middle ui button"  value="검색" id="C_inquire_SearchBtn">
 </div>
@@ -66,43 +66,43 @@ $.ajax({
 	success : function(data){
 		$.each(data.list, function(index, item){
 			
-			
+
 			$('<tr/>').append($('<td/>',{
 				align : 'center',
-				style: 'width: 230px; height: 9%; text-align: center;',
+				style: 'width: 230px; height: 50px; text-align: center;',
 				text : item.seq,
 				id : 'seqA'
 			})).append($('<td/>',{
 				align : 'center',
 				id : 'subjectA',
-				style: 'width: 230px; height: 9%; text-align: center;',
+				style: 'width: 230px; height: 50px; text-align: center;',
 				class : item.seq+"",
 				href : 'javascript:void(0)',
 				text : item.subject
 			})).append($('<td/>',{
 				align : 'center',
-				style: 'width: 230px; height: 9%; text-align: center;',
+				style: 'width: 230px; height: 50px; text-align: center;',
 				text : item.name,
 				id : 'nameA'
 			})).append($('<td/>',{
 				align : 'center',
-				style: 'width: 230px; height: 9%; text-align: center;',
+				style: 'width: 230px; height: 50px; text-align: center;',
 				text : item.email,
 				id : 'emailA'
 			})).append($('<td/>',{
 				align : 'center',
-				style: 'width: 230px; height: 9%; text-align: center;',
+				style: 'width: 230px; height: 50px; text-align: center;',
 				text : item.logtime,
 				id : 'logtime'
 			})).appendTo($('#C_inquire_List'));
 			
 			if(item.pseq!=0){//답글
-				for(i=0; i<item.lev; i++){
-					$('.'+item.seq).before('&emsp;');
-				}
-				$('.'+item.seq).before($('<img/>',{
-					src : '../img/reply.gif',
-					width : '10px'
+				$('.'+item.seq).before($('<i/>',{
+					class : 'exclamation circle icon'
+				}));
+			} else {
+				$('.'+item.seq).before($('<i/>',{
+					class : 'question circle icon'
 				}));
 			}
 		});
@@ -176,7 +176,7 @@ $('#C_inquire_SearchBtn').click(function(event, str){
 });
 
 $('#C_inquire_List').on('click','#subjectA',function(){
-	var seq = $(this).prev().text();
+	var seq = $(this).prev().prev().text();
 	location.href="/exhibition/customerService/C_inquire_View.do?seq="+seq+"&pg=${pg}";
 });
 
