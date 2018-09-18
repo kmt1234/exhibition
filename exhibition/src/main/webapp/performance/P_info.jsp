@@ -13,7 +13,7 @@
 		일정
 		<span class="h-light">정보</span>
 	</h2>
-	여기는 정체 일정에 대한 정보를 나열
+	
 </div>
 
 </body>
