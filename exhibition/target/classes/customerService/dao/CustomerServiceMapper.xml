@@ -71,6 +71,12 @@
 		 									,#{phone}
 		 									,#{subject}
 		 									,#{content}
+		 									,0
+		 									,0
+		 									,0
+		 									,0
+		 									,0
+		 									,0
 		 									,sysdate)
  	</insert>
  	
@@ -117,7 +123,7 @@
  	</update>
  	
  	<insert id="C_inquire_Reply2" parameterType="customerService">
- 		insert into C_inquire values(seq_inquire.nextval
+ 		insert into C_inquire values(seq_C_inquire.nextval
  								,#{email}
  								,#{classify}
  								,#{name}

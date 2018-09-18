@@ -4,6 +4,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type="text/css">
+.noresize {
+  resize: none; /* 사용자 임의 변경 불가 */
+}
+</style>
 <title>Insert title here</title>
 </head>
 <body>
@@ -29,7 +34,7 @@
 		
 		<td style="width:20%; height: 15%">
 			<div>
-				<div><textArea name="content" id="content" style="float: left; width:100%; height: 300px;"></textArea></div>
+				<div><textArea name="content" id="content" class=noresize style="float: left; width:100%; height: 300px;"></textArea></div>
 				<div id="contentDiv"></div>
 			</div>
 		</td>

@@ -30,14 +30,15 @@
 </h2>
 
 <div style="width: 100%;" align="center">
-	<table style="width: 100%; height: 40px; " align="center" border="1" bordercolor="#ec008c" cellpadding="4" frame="hsides" rules="rows"
+	<table style="width:894px ; height: 40px; " align="center" border="1" bordercolor="#ec008c" cellpadding="4" frame="hsides" rules="rows"
 	id="C_inquire_List" class="ui striped table" >
 		<tr>
-			<th style="width: 20%; height: 7%; padding-top: 10px; text-align: center;">번호</th>
-			<th style="width: 20%; height: 7%; padding-top: 10px; text-align: center;">제목</th>
-			<th style="width: 20%; height: 7%; padding-top: 10px; text-align: center;">작성자</th>
-			<th style="width: 20%; height: 7%; padding-top: 10px; text-align: center;">이메일</th>
-			<th style="width: 20%; height: 7%; padding-top: 10px; text-align: center;">등록일</th>
+			<td style="width: 200px;  padding-top: 10px; text-align: center;">번호</td>
+			<td style="width: 20px;"></td>
+			<td style="width: 200px;  padding-top: 10px; text-align: center;">제목</td>
+			<td style="width: 200px;  padding-top: 10px; text-align: center;">작성자</td>
+			<td style="width: 200px;  padding-top: 10px; text-align: center;">이메일</td>
+			<td style="width: 200px;  padding-top: 10px; text-align: center;">등록일</td>
 		</tr>
 	</table>
 	<br>
@@ -64,53 +65,44 @@ $.ajax({
 	dataType : 'json',
 	success : function(data){
 		$.each(data.list, function(index, item){
-			var head = "";
-			for(var i=0; i<item.lev; i++) {
-				head += '&emsp;';
-			}
-			if(item.pseq!=0)
-				head += '<img src="../img/reply.gif">';
-				
-				
+			
+			
 			$('<tr/>').append($('<td/>',{
 				align : 'center',
-				style: 'width: 20%; height: 9%; text-align: center;',
+				style: 'width: 230px; height: 9%; text-align: center;',
 				text : item.seq,
 				id : 'seqA'
 			})).append($('<td/>',{
 				align : 'center',
 				id : 'subjectA',
-				style: 'width: 20%; height: 9%; text-align: center;',
+				style: 'width: 230px; height: 9%; text-align: center;',
 				class : item.seq+"",
 				href : 'javascript:void(0)',
 				text : item.subject
 			})).append($('<td/>',{
 				align : 'center',
-				style: 'width: 20%; height: 9%; text-align: center;',
+				style: 'width: 230px; height: 9%; text-align: center;',
 				text : item.name,
 				id : 'nameA'
 			})).append($('<td/>',{
 				align : 'center',
-				style: 'width: 20%; height: 9%; text-align: center;',
+				style: 'width: 230px; height: 9%; text-align: center;',
 				text : item.email,
 				id : 'emailA'
 			})).append($('<td/>',{
 				align : 'center',
-				style: 'width: 20%; height: 9%; text-align: center;',
+				style: 'width: 230px; height: 9%; text-align: center;',
 				text : item.logtime,
 				id : 'logtime'
 			})).appendTo($('#C_inquire_List'));
 			
 			if(item.pseq!=0){//답글
 				for(i=0; i<item.lev; i++){
-					/*
-					 $('#subjectA')를 쓰면 5줄 모두 id="subjectA"로 붙는다
-					 그러면 첫번째줄의 subjectA에 이미지가 붙는다
-					*/
 					$('.'+item.seq).before('&emsp;');
-				}//for
+				}
 				$('.'+item.seq).before($('<img/>',{
-					src : '../image/reply.gif'
+					src : '../img/reply.gif',
+					width : '10px'
 				}));
 			}
 		});
