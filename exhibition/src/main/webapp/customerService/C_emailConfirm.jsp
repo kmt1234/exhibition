@@ -13,7 +13,7 @@
 <table class="ui celled table">
 	<tr>
 		<td  align="center" height="30" style="background-color: #f7f6e6;text-align: center;">
-			글번호
+			이메일
 		</td>
 		<td>
 			<input id="email" type="text" name="email"> 

@@ -19,16 +19,16 @@
  	</select>
  	
  	<!-- 공지사항 검색 총글수 -->
- 	<select id="getTotalC_notice_Search" parameterType="java.util.Map" resultType="int">
- 		select count(*) from C_notice where ${searchOption} like '%'||#{keyword}||'%'
+ 		<select id="getTotalC_notice_Search" parameterType="java.util.Map" resultType="int">
+ 		select count(*) from C_notice where ${subject} like '%'||#{keyword}||'%'
  	</select>
  	
  	<!-- 공지사항 검색 -->
- 	<select id="C_notice_Search" parameterType="java.util.Map" resultType="customerService">
+ 		<select id="C_notice_Search" parameterType="java.util.Map" resultType="customerService">
  		select * from 
  		(select rownum rn, tt.* from 
  		(select * from C_notice
- 		 where ${searchOption} like '%'||#{keyword}||'%'
+ 		 where ${subject} like '%'||#{keyword}||'%'
  		 order by seq desc)tt) 
  		where rn between #{startNum} and #{endNum}
  	</select>
@@ -179,8 +179,14 @@
 		 							,#{name}
 		 							,#{phone})
  	</insert>
- 	
- 	
+ 	 	
+ 	<!-- 글삭제 -->
+ 	<delete id="C_contactList_Delete" parameterType="java.util.List">
+ 		delete C_contactList where seq in 
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
  	
  	
  	
@@ -379,13 +385,27 @@
 									,#{imageName}
 									,#{playDate}
 									,#{playTicket}
-									,#{playTicket}
+									,#{remainTicket}
 									,#{ticketPrice}
 									,#{bookTicket}
 									,#{bookMemberId}
 									,#{bookStatus})
 						
 	</insert>
+	<!-- 매출현황  -->
+	<select id="getSalesExhibition" parameterType="java.lang.String" resultType="SalesExhigitionDTO">
+ 		select sum(endDate-startDate+1) as saleDays, sum(totalrent) as totalRent, boothName from EXHIBITIONRENTAL where STARTDATE BETWEEN #{salesMon} and (select last_day(#{salesMon}) from dual) group by BOOTHNAME
+ 	</select>
+ 	<!-- 매출현황  -->
+ 	<select id="getSalesTotalRentExhibition" parameterType="java.lang.String" resultType="int">
+ 		select sum(totalrent) as salesTotalRent from EXHIBITIONRENTAL where STARTDATE BETWEEN #{salesMon} and (select last_day(#{salesMon}) from dual)
+ 	</select>
+ 	<!-- 회원정보  -->
+ 	<select id="getMemberList" resultType="member">
+ 		select * from membertable 	
+ 	</select>
+ 	
+ 	
  </mapper>
  
  
