@@ -104,6 +104,8 @@ td.empty {
 <script src='../calendar2/fullcalendar.min.js'></script>
 <script src="../semantic/semantic.min.js"></script>
 <script>
+
+//호출한 roomName의 예약현황을 달력에 표시가하기 위해 해당 페이지 호출하는 동시에 listView를 
 var dataset = [
 		<c:forEach var="listView" items="${listView}" varStatus="status">
 		    <c:if test="${listView.startDate != ''}">
