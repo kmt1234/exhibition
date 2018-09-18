@@ -731,6 +731,20 @@ public class CustomerServiceController {
 			calStart.add(Calendar.DATE, 1);
 		}
 
+		System.out.println(eventboardDTO.getEndDate());
+		System.out.println(eventboardDTO.getEndTime());//
+		System.out.println(eventboardDTO.getEventContent());
+		System.out.println(eventboardDTO.getEventLink());
+		System.out.println(eventboardDTO.getEventPlace());
+		System.out.println(eventboardDTO.getEventPrice());
+		System.out.println(eventboardDTO.getEventRate());
+		System.out.println(eventboardDTO.getEventSeats());
+		System.out.println(eventboardDTO.getImage1());
+		System.out.println(eventboardDTO.getImageName());
+		System.out.println(eventboardDTO.getPostSelect());
+		System.out.println(eventboardDTO.getStartDate());
+		System.out.println(eventboardDTO.getStartTime());//
+		
 		List<PlayBookDTO> list = new ArrayList<PlayBookDTO>();
 
 		// 예매DB
@@ -740,7 +754,7 @@ public class CustomerServiceController {
 			playBookDTO.setRemainTicket(0); // 일별 잔여 티켓 수 등록
 			playBookDTO.setTicketPrice(Integer.parseInt(eventboardDTO.getEventPrice())); // 티켓 가격
 			playBookDTO.setBookTicket(0); // 예매된 티켓 수
-			playBookDTO.setBookMemberId(id + ""); // 예매자 아이디(세션값에서)
+			playBookDTO.setBookMemberId("kmtabcd"); // 예매자 아이디(세션값에서)
 			playBookDTO.setBookStatus('0'); // 예매 구분자 (0:예매X, 1:예매완료)
 
 			playBookDTO.setPlayDate(listDate.get(i));
