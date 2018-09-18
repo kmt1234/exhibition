@@ -19,4 +19,9 @@ public class CompanyDTO {
 	private String C_tel; //전화번호
 	private String C_email; //이메일
 	private int code; //코드번호
+	
+	@Override
+	public String toString() {
+		return String.valueOf(code);
+	}
 }

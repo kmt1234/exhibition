@@ -9,15 +9,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import company.bean.CompanyDTO;
 import customerService.bean.EventboardDTO;
+import customerService.bean.ExhibitionBookDTO;
+import member.bean.MemberDTO;
+import performance.bean.Book_performance_membersDTO;
 import performance.bean.PerformancePaging;
 import performance.dao.PerformanceDAO;
 import rental.dao.ExhibitionDAO;
@@ -33,6 +40,10 @@ public class PerformanceController {
 	private PerformancePaging performancePaging;
 	@Autowired
 	private ExhibitionDAO exhibitionDAO;
+	@Autowired
+	Book_performance_membersDTO book_performance_membersDTO;
+	@Autowired
+	ExhibitionBookDTO exhibitionBookDTO;
 	
 /* 사용메서드*/
 	/*일정정보에 관한 내용이 들어 있는 페이지로 이동~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -135,7 +146,35 @@ public class PerformanceController {
 	
 	//공연일정 리스트
 	@RequestMapping(value="P_performanceList", method=RequestMethod.GET)
-	public ModelAndView P_performanceList(@RequestParam(required=false , defaultValue="1") String pg) {
+	public ModelAndView P_performanceList(@RequestParam(required=false , defaultValue="1") String pg, HttpSession session) {
+		
+		//회원의 코드 값 얻기
+		Object object = session.getAttribute("homepageMember");
+		
+		if(object.toString().equals("1")) {
+			object = (MemberDTO)object;
+			
+		}else if(object.toString().equals("2")) {
+			object = (CompanyDTO)object;
+		}
+		
+		System.out.println("회원의 코드 : "+object);
+		
+		
+		//회원의 아이디 값 얻기
+		MemberDTO memberDTO = null;
+		CompanyDTO companyDTO = null;
+		String id = null;
+		
+		if(object.toString().equals("1")) {
+			memberDTO = (MemberDTO)session.getAttribute("homepageMember");
+			System.out.println("얻은 아이디 : "+memberDTO.getM_Id());
+			id = memberDTO.getM_Id();
+		}else if(object.toString().equals("2")) {
+			companyDTO = (CompanyDTO)session.getAttribute("homepageMember");
+			System.out.println("얻은 아이디 : "+companyDTO.getC_license());
+			id = companyDTO.getC_license();
+		}
 		
 		//Paging
 		int endNum = Integer.parseInt(pg)*9;
@@ -166,6 +205,7 @@ public class PerformanceController {
 			list.get(i).setEndDate(list.get(i).getEndDate().substring(0, 10));
 		}
 		
+		mav.addObject("id", id);
 		mav.addObject("pg", pg);
 		mav.addObject("list", list);
 		mav.addObject("listSize", list.size()+"");
@@ -245,9 +285,92 @@ public class PerformanceController {
 		return mav;
 	}
 	
-	//공연 예약하기 폼
+	//전시회 예약하기 폼
+	@RequestMapping(value="exhibitionBook", method=RequestMethod.GET)
+	public ModelAndView exhibitionBook(@RequestParam(required=false , defaultValue="1") String seq, HttpSession session) {
+		
+		//DB
+		EventboardDTO eventboardDTO = performanceDAO.exhibitionBook(seq);
+		
+		//String 타입 날짜를 Date 형식으로 변환
+		eventboardDTO.setStartDate(eventboardDTO.getStartDate().substring(0, 10));
+		eventboardDTO.setEndDate(eventboardDTO.getEndDate().substring(0, 10));
+		
+		System.out.println(eventboardDTO.getStartDate());
+		System.out.println(eventboardDTO.getEndDate());
+		
+		String startDate = eventboardDTO.getStartDate();
+		String endDate = eventboardDTO.getEndDate();
+		
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		
+		long diff = 0;
+		long diffDays = 0;
+		Date startDateF = null;
+		
+		try {
+			startDateF = formatter.parse(startDate);
+			Date endDateF = formatter.parse(endDate);
+			
+			diff = endDateF.getTime() - startDateF.getTime();
+			diffDays = diff / (24*60*60*1000);	//종료일-시작일 = 행사 일 수
+			
+		} catch (ParseException e) {
+			
+			e.printStackTrace();
+		}
+				
+		Calendar calStart = Calendar.getInstance();
+		calStart.setTime(startDateF);
+		
+		List<Date> listDate = new ArrayList<Date>();
+		for(int i=0; i<=diffDays; i++) {
+			
+			listDate.add(calStart.getTime());
+			calStart.add(Calendar.DATE, 1);
+		}
+				
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("eventboardDTO", eventboardDTO);
+		mav.addObject("listDate", listDate);
+		mav.addObject("display", "/performance/P_exhibitionBook.jsp");
+		mav.setViewName("P_performanceForm");
+		return mav;
+	}
+	
+	
+	//연극 예약하기 폼
 	@RequestMapping(value="performanceBook", method=RequestMethod.GET)
-	public ModelAndView performanceBook(@RequestParam String seq) {
+	public ModelAndView performanceBook(@RequestParam(required=false , defaultValue="1") String seq, HttpSession session) {
+		
+		//회원의 코드 값 얻기
+		Object object = session.getAttribute("homepageMember");
+		
+		if(object.toString().equals("1")) {
+			object = (MemberDTO)object;
+			
+		}else if(object.toString().equals("2")) {
+			object = (CompanyDTO)object;
+		}
+		
+		System.out.println("회원의 코드 : "+object);
+		
+		
+		//회원의 아이디 값 얻기
+		MemberDTO memberDTO = null;
+		CompanyDTO companyDTO = null;
+		String id = null;
+		
+		if(object.toString().equals("1")) {
+			memberDTO = (MemberDTO)session.getAttribute("homepageMember");
+			System.out.println("얻은 아이디 : "+memberDTO.getM_Id());
+			id = memberDTO.getM_Id();
+		}else if(object.toString().equals("2")) {
+			companyDTO = (CompanyDTO)session.getAttribute("homepageMember");
+			System.out.println("얻은 아이디 : "+companyDTO.getC_license());
+			id = companyDTO.getC_license();
+		}
 		
 		//DB
 		EventboardDTO eventboardDTO = performanceDAO.performanceBook(seq);
@@ -293,12 +416,102 @@ public class PerformanceController {
 		
 		ModelAndView mav = new ModelAndView();
 		
+		mav.addObject("id", id);
 		mav.addObject("eventboardDTO", eventboardDTO);
 		mav.addObject("listDate", listDate);
 		mav.addObject("display", "/performance/P_performanceBook.jsp");
 		mav.setViewName("P_performanceForm");
 		return mav;
 	}
+	
+	//연극 예매(ajax)
+	@RequestMapping(value="book_performance", method=RequestMethod.POST)
+	public @ResponseBody String book_performance(@RequestParam String imageName, @RequestParam String playDate, @RequestParam String ticketQty, HttpSession session) {
+		
+		//세션에서 아이디 값 얻기
+		MemberDTO memberDTO = (MemberDTO) session.getAttribute("homepageMember");
+		String id = memberDTO.getM_Id();
+		
+		//날짜 형식 변경(년,월,일 제거)
+		playDate=playDate.replace("년", "");
+		playDate=playDate.replace("월", "");
+		playDate=playDate.replace("일", "");
+		
+				
+		System.out.println("공연명 : "+imageName);
+		System.out.println("공연 날짜 : "+playDate);
+		System.out.println("예매 아이디 : "+id);
+		System.out.println("티켓 수 : " + ticketQty);
+		
+		//예매자 정보 DTO 담기
+		book_performance_membersDTO.setImageName(imageName);
+		book_performance_membersDTO.setPlayDate(playDate);
+		book_performance_membersDTO.setMemberId(id);
+		book_performance_membersDTO.setTicketQty(ticketQty);
+		
+		//DB (예매자 등록 DB)
+		int result = performanceDAO.bookPlayMembers(book_performance_membersDTO);
+		performanceDAO.bookPlayMembers_calculate(book_performance_membersDTO);	//예매한 티켓 만큼 잔여티켓 계산해주기
+		
+		
+		if(result==0) return "fail";
+		else return "ok";
+	}
+	
+	//잔여좌석 확인하기(ajax)
+	@RequestMapping(value="book_performance_remainSeats", method=RequestMethod.POST)
+	public @ResponseBody String book_performance_remainSeats(@RequestParam int totalSeats, @RequestParam String imageName, @RequestParam String playDate) {
+
+		System.out.println("총 좌석 수 : "+ totalSeats);
+		System.out.println("연극 명 : "+ imageName);
+		System.out.println("연극 날짜 : "+playDate);
+				
+		if(playDate.equals("날짜선택")) {
+			playDate = "2000년01월01일";
+		}
+		
+		//날짜 형식 변경(년,월,일 제거)
+		playDate=playDate.replace("년", "");
+		playDate=playDate.replace("월", "");
+		playDate=playDate.replace("일", "");
+		
+		//진행중
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("imageName", imageName);
+		map.put("playDate", playDate);
+		
+		//DB
+		String remainSeats = performanceDAO.checkRemainSeats(map);	//선택일자의 해당 연극 전체좌석 가져오기(기본값:일별 티켓 발행 수)
+		String usedSeats = performanceDAO.checkUsedSeats(map);		//선택일자의  해당 연극 예매된 티켓 수 가져오기
+		
+		System.out.println("전체석 : "+remainSeats);
+		System.out.println("예매석 : "+usedSeats);
+		
+		if(remainSeats==null) remainSeats = 0+"";
+		if(usedSeats==null) usedSeats = 0+"";
+	
+		
+		//잔여좌석 - 예매된 티켓 수 = 예매 가능한 좌석 수
+		int resultSeats = Integer.parseInt(remainSeats) - Integer.parseInt(usedSeats);
+				
+		//null값이면 ***
+		
+		if(resultSeats==0 && usedSeats.equals("0") && remainSeats.equals("0")) {
+			if(playDate.equals("20000101")) {
+				return "choseDate";
+			}else {
+				return "remainSeats";
+			}
+			
+		}else if(resultSeats==0) {
+			return "noSeats";
+		}else if(resultSeats>0){
+			return resultSeats+"";
+		}else {
+			return "choseDate";
+		} 
+	}
+	
 	
 	//달력 메소드
 	public static String[] getDiffDays(String fromDate, String toDate) {

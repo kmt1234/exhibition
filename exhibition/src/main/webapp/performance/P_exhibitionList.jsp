@@ -41,7 +41,7 @@ pre{
 <body>
 <!-- 메인 화면 -->
 <h2 class="box-container" style="float: center; width: 100%; text-align: left;">
-	전시회
+	박람회
 	<span class="h-light">일정</span>
 </h2>
 
@@ -63,18 +63,19 @@ pre{
 			<table border="1" frame="hsides" rules="rows" cellpadding="3" cellspacing="0">
 				<tr>
 					<th class="performanceTh">이미지</th>
-					<th class="performanceTh" colspan="2">전시회  정보</th>
+					<th class="performanceTh" colspan="2">박람회  정보</th>
 				</tr>
 				
 				<!--등록된 연극 정보가 없을 때  -->								
 				<c:if test="${listSize eq '0'}">	
 					<tr>
-						<td colspan="5" align="center">현재 등록된 전시회 정보가 없습니다</td>
+						<td colspan="5" align="center">현재 등록된 박람회 정보가 없습니다</td>
 					</tr>
 					
 				</c:if>
 				
 				<c:forEach items="${list}" var="list">		
+					<tr><td>${list.seq}</td></tr>
 					<tr>
 						<td rowspan="5"><a target="_blank" href="${list.eventLink}"><img class="play_img" src="../storage/${list.image1}" width="300px" height="350px"></a></td>
 						
@@ -82,7 +83,7 @@ pre{
 						<td><span class="play_Title_content">${list.imageName}</span></td>
 					</tr>
 					<tr>
-						<td>전시회 정보</td>
+						<td>박람회 정보</td>
 						<td><pre>${list.eventContent}</pre></td>
 					</tr>
 					<tr>
@@ -94,7 +95,7 @@ pre{
 						<td><span><a target="_blank" href="${list.eventLink}">홈페이지 방문</a></span></td>
 					</tr>
 					<tr>
-						<td colspan="2"><div align="center"><input type="button" value="예약하기"></div></td>
+						<td colspan="2"><div align="center"><input type="button" class="exhibitionBookBtn" value="예약하기"></div></td>
 					</tr>
 				</c:forEach>
 				
@@ -110,5 +111,6 @@ pre{
 function performancePaging_exhibition(pg){
 	location.href="/exhibition/performance/P_exhibitionList.do?pg="+pg;
 }
-</script><script src="../js/p_exhibitionList.js"></script>
+</script>
+<script src="../js/p_exhibitionList.js"></script>
 </html>

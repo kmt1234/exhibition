@@ -41,6 +41,7 @@ public class TrafficController {
 		return "/traffic/T_parkingAllForm";
 	}
 	
+	//사용자가 보는 호텔리스트
 	@RequestMapping(value="T_hotelList", method=RequestMethod.GET)
 	public ModelAndView T_hotelList(@RequestParam(required=false , defaultValue="1") String pg) {	
 		int endNum = Integer.parseInt(pg)*8;

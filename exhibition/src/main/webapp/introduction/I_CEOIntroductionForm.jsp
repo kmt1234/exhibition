@@ -23,6 +23,9 @@
 		color: #ec008c;
 	
 	}
+	#houseImg{
+	margin:-3px;
+	}
 </style>
 </head>
 <body>
@@ -43,17 +46,18 @@
 			<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
 				CEO
 				<span class="h-light">인사말</span>
+				<div style="font-size:13px; float:right;">
+					<img src="../img/house.png" width="15px" height="16px" id="houseImg">
+					> 소개 > CEO인사말
+				</div>
+				<div class="ui divider"></div>
 			</h2>
-			<jsp:include page="I_CEOIntroduction.jsp" ></jsp:include>
+			
 		</div>
 		<!-- footer -->
 		<div class="ui compact menu" style="width: 100%; float: right; ">
 			<jsp:include page="../main/I_footer.jsp" ></jsp:include>
 		</div>
 	</div>
-	<%-- <footer>
-		<jsp:include page="../main/I_footer.jsp"></jsp:include>
-	</footer> --%>
-
 </body>
 </html>

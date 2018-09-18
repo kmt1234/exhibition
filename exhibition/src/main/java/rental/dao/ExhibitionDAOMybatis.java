@@ -1,5 +1,6 @@
 package rental.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -37,8 +38,23 @@ public class ExhibitionDAOMybatis implements ExhibitionDAO {
 	}
 
 	public List<ExhibitionDTO> getAllCalendar() {
-		// TODO Auto-generated method stub
 		return sqlSession.selectList("exhibitionSQL.getAllCalendar");
 	}
+
+	public List<ExhibitionDTO> getSalesExhibition(String salesMon) {
+		return sqlSession.selectList("exhibitionSQL.getSalesExhibition", salesMon);
+	}
+
+	public int getSalesTotalRentExhibition(String salesMon) {
+		if(sqlSession.selectOne("exhibitionSQL.getSalesTotalRentExhibition", salesMon)==null) {
+			return 0;
+		} else {
+			return sqlSession.selectOne("exhibitionSQL.getSalesTotalRentExhibition", salesMon);
+		}
+			
+		
+	}
+
+	
 	
 }

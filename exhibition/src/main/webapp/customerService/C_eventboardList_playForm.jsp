@@ -103,7 +103,7 @@
 										<tr>
 											<td><input type="checkbox" name="check" class="check" value="${list.seq}"></td>
 											<td>${list.seq}</td>
-											<td><img src="../storage/${list.image1}" width="300" height="150"></td>
+											<td><a href="http://${list.eventLink }" target="_blank"><img src="../storage/${list.image1}" width="300" height="150"></a></td>
 											<td>${list.imageName}</td>
 											<td>${list.eventContent}</td>
 										</tr>
