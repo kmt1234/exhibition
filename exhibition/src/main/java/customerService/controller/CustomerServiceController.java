@@ -41,7 +41,6 @@ import customerService.bean.PlayBookDTO;
 import customerService.bean.SalesExhigitionDTO;
 import customerService.dao.CustomerServiceDAO;
 import member.bean.MemberDTO;
-import rental.bean.ExhibitionDTO;
 
 @RequestMapping(value = "customerService")
 @Component
@@ -341,7 +340,7 @@ public class CustomerServiceController {
 	// 고객의소리 내용보기(관리자
 	// 고객의소리 내용보기(관리자
 	@RequestMapping(value = "C_inquire_View", method = RequestMethod.GET)
-	public ModelAndView C_inquire_View(@RequestParam String seq, @RequestParam String pg, Model model) {
+	public ModelAndView C_inquire_View(@RequestParam int seq, @RequestParam String pg, Model model) {
 
 		CustomerServiceDTO customerServiceDTO = customerServiceDAO.getInquireInfo(seq);
 
@@ -356,12 +355,17 @@ public class CustomerServiceController {
 
 	// 고객의 소리 - 문의 답하기 폼
 	@RequestMapping(value = "C_inquire_Reply", method = RequestMethod.POST)
-	public ModelAndView C_inquire_Reply(@RequestParam String seq, @RequestParam String email, Model model) {
+	public ModelAndView C_inquire_Reply(@RequestParam String seq, @RequestParam String email,@RequestParam String name, @RequestParam String phone, @RequestParam String classify, @RequestParam int pseq, @RequestParam int pg, Model model) {
 		CustomerServiceDTO customerServiceDTO = customerServiceDAO.getReplyInfo(seq);
 
 		model.addAttribute("customerServiceDTO", customerServiceDTO);
 
 		ModelAndView mav = new ModelAndView();
+		model.addAttribute("pseq", pseq);
+		model.addAttribute("pg", pg);
+		model.addAttribute("classify", classify);
+		model.addAttribute("name", name);
+		model.addAttribute("phone", phone);
 		mav.addObject("display", "/customerService/C_inquire_Reply.jsp");
 		mav.setViewName("/customerService/C_customerServiceForm");
 		return mav;
@@ -369,8 +373,10 @@ public class CustomerServiceController {
 
 	// 고객의 소리 답변(관리자)
 	@RequestMapping(value = "C_inquire_checkReply", method = RequestMethod.POST)
-	public @ResponseBody ModelAndView C_inquire_checkReply(@RequestParam final String email,
-			@RequestParam final String subject, @RequestParam final String content, Model model) {
+	public @ResponseBody ModelAndView C_inquire_checkReply(@ModelAttribute CustomerServiceDTO customerServiceDTO, 
+			@RequestParam final String email, @RequestParam String classify, @RequestParam String name,  @RequestParam String phone, @RequestParam final String subject, @RequestParam final String content, @RequestParam int pg, Model model) {
+		
+		CustomerServiceDTO cDTO = customerServiceDAO.getInquireInfo(customerServiceDTO.getPseq());//원글
 		final MimeMessagePreparator preparator = new MimeMessagePreparator() {
 			public void prepare(MimeMessage mimeMessage) throws Exception {
 				final MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
@@ -385,6 +391,12 @@ public class CustomerServiceController {
 			}
 		};
 
+		customerServiceDAO.C_inquire_Reply(customerServiceDTO);
+		model.addAttribute("pg", pg);
+		model.addAttribute("classify", classify);
+		model.addAttribute("name", name);
+		model.addAttribute("phone", phone);
+		
 		emailSender.send(preparator);
 		return new ModelAndView("redirect:/customerService/C_emailConfirm.do");
 	}
@@ -401,7 +413,6 @@ public class CustomerServiceController {
 		return mav;
 	}
 
-	// 자주묻는 질문 - 버튼에 따라 리스트 가져오기
 	// 자주묻는 질문 - 버튼에 따라 리스트 가져오기
 	@RequestMapping(value = "getQnA_Classify", method = RequestMethod.POST)
 	public ModelAndView getQnA_Classify(@RequestParam String classify) {

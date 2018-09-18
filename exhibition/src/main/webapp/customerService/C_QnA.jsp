@@ -4,8 +4,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
 <style type="text/css">
+selector    : {
+  accordion : '.ui.styled.fluid.accordion',
+  title     : '.title',
+  trigger   : '.title',
+  content   : '.content'
+}
 </style>
 </head>
 <body>
@@ -15,37 +20,32 @@
 </h2>
 <div >
 	<input type="button" value="위치/교통" id="C_QnA_location"
-	style="width:13%; height:35; background-color:#ffffff;
+	style="width:15%; height:35; background-color:#ffffff;
 	 border:1 solid #f702e7;" class="ui secondary basic button QnA">
 	
 	<input type="button" value="주차" id="C_QnA_parking"
-	style="width:13%; height:35; font-family:돋움; background-color:#ffffff;
+	style="width:15%; height:35; font-family:돋움; background-color:#ffffff;
 	 border:1 solid #f702e7; " class="ui secondary basic button QnA">
 	 
 	 <input type="button" value="전시&공연" id="C_QnA_exhibition"
-	style="width:13%; height:35; font-family:돋움; background-color:#ffffff;
+	style="width:15%; height:35; font-family:돋움; background-color:#ffffff;
 	 border:1 solid #f702e7; " class="ui secondary basic button QnA">
 	 
 	 <input type="button" value="임대" id="C_QnA_rent"
-	style="width:13%; height:35; font-family:돋움; background-color:#ffffff;
+	style="width:15%; height:35; font-family:돋움; background-color:#ffffff;
 	 border:1 solid #f702e7; " class="ui secondary basic button QnA">
 	 
 	 <input type="button" value="시설" id="C_QnA_facility"
-	style="width:13%; height:35; font-family:돋움; background-color:#ffffff;
+	style="width:15%; height:35; font-family:돋움; background-color:#ffffff;
 	 border:1 solid #f702e7; " class="ui secondary basic button QnA">
 	 
 	 <input type="button" value="기타" id="C_QnA_etc"
-	style="width:13%; height:35; font-family:돋움; background-color:#ffffff;
+	style="width:15%; height:35; font-family:돋움; background-color:#ffffff;
 	 border:1 solid #f702e7; " class="ui secondary basic button QnA">
 </div>
-<div style="padding-top: 15px;">
-	<table style="width: 100%; height: 40px; " border="1" bordercolor="#ec008c" cellpadding="2" frame="hsides" rules="rows">
-		<tr>
-			<th style=" height: 7%; " id="subjectA">제목</th>
-		</tr>
-	</table>
-</div>
-<table id="C_QnA_List" class="ui styled fluid accordion"></table>
+<br>
+<div id="C_QnA_List" class="ui styled fluid accordion"></div>
+<br>
 <div align="left">
 	<input class="middle ui button" type="button" value="작성" id="C_QnA_writeBtn">
 </div>

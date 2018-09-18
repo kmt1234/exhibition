@@ -43,9 +43,11 @@ public interface CustomerServiceDAO {
 	
 	public void C_checkInquire(CustomerServiceDTO customerServiceDTO);				// 고객의 소리 고객이 작성후 등록하기
 	
-	public CustomerServiceDTO getInquireInfo(String seq);							// 고객의 소리 제목 클릭시 내용 보기
+	public CustomerServiceDTO getInquireInfo(int seq);								// 고객의 소리 제목 클릭시 내용 보기
 	
-	public CustomerServiceDTO getReplyInfo(String seq);								// 고객의 소리 관리자가 문의 답변 등록하기
+	public CustomerServiceDTO getReplyInfo(String seq);								// 고객의 소리 관리자가 문의글 데이터 넘기기 
+	
+	public void C_inquire_Reply(CustomerServiceDTO customerServiceDTO);				// 고객의 소리 문의 답변하기
 	
 	
 	
@@ -125,4 +127,6 @@ public interface CustomerServiceDAO {
 	public int getSalesTotalRentExhibition(String salesMon);
 
 	public List<MemberDTO> getMemberList();
+
+
 }

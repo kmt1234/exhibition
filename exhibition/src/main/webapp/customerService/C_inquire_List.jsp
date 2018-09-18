@@ -100,6 +100,19 @@ $.ajax({
 				text : item.logtime,
 				id : 'logtime'
 			})).appendTo($('#C_inquire_List'));
+			
+			if(item.pseq!=0){//답글
+				for(i=0; i<item.lev; i++){
+					/*
+					 $('#subjectA')를 쓰면 5줄 모두 id="subjectA"로 붙는다
+					 그러면 첫번째줄의 subjectA에 이미지가 붙는다
+					*/
+					$('.'+item.seq).before('&emsp;');
+				}//for
+				$('.'+item.seq).before($('<img/>',{
+					src : '../image/reply.gif'
+				}));
+			}
 		});
 		$('#C_inquire_PagingDiv').html(data.customerServicePaging.pagingHTML);
 	}

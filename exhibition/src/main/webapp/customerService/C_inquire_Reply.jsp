@@ -35,12 +35,16 @@
 		</td>
 	</tr>
 </table>
-<input type="hidden" name="email" id="email" value="${customerServiceDTO.email}">
 <div>
 	<input type="button" id="C_checkReplyBtn" class="middle ui button" value="문의 답하기">
 	<input type="button" class="middle ui button" id="C_inquire_ListBtn" value="목록">
-	<input type="hidden" id="pg" value="${pg}">
+	<input type="hidden" name="pg" id="pg" value="${pg}">
 	<input type="hidden" name="pseq" id="pseq" value="${pseq}">
+	<input type="hidden" name="email" id="email" value="${customerServiceDTO.email}">
+	<input type="hidden" name="phone" id="phone" value="${customerServiceDTO.phone }">
+	<input type="hidden" name="classify" id="classify" value="${classify}">
+	<input type="hidden" name="name" id="name" value="${customerServiceDTO.name }">
+	<input type="hidden" name="subject" id="subject" value="${customerServiceDTO.subject }">
 </div>
 </form>
 <script src="../js/C_inquire_js.js?ver=1"></script>

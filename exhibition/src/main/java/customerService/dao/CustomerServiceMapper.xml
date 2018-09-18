@@ -102,7 +102,7 @@
  	</select>
  	
  	<!-- 고객의 소리 문의받은 글 내용 불러오기 -->
- 	<select id="getInquireInfo" parameterType="String" resultType="customerService">
+ 	<select id="getInquireInfo" parameterType="int" resultType="customerService">
  		select * from C_inquire where seq=#{seq}
  	</select>
  	
@@ -111,7 +111,31 @@
  		select * from C_inquire where seq=#{seq}
  	</select>
  	
+ 	<!-- 답글 -->
+ 	<update id="C_inquire_Reply1" parameterType="customerService">
+ 		update C_inquire set step=step+1 where ref=#{ref} and step>=#{step}
+ 	</update>
  	
+ 	<insert id="C_inquire_Reply2" parameterType="customerService">
+ 		insert into C_inquire values(seq_inquire.nextval
+ 								,#{email}
+ 								,#{classify}
+ 								,#{name}
+ 								,#{phone}
+ 								,#{subject}
+ 								,#{content}
+ 								,#{ref}
+ 								,#{lev}
+ 								,#{step}
+ 								,#{pseq}
+ 								,0
+ 								,0
+ 								,sysdate)
+ 	</insert>
+ 	
+ 	<update id="C_inquire_Reply3" parameterType="customerService">
+ 		update C_inquire set reply = reply+1 where seq=#{pseq}
+ 	</update>
  	
  	
  	

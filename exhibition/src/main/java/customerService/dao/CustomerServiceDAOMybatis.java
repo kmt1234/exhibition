@@ -67,11 +67,16 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	public void C_checkInquire(CustomerServiceDTO customerServiceDTO) {// 고객의 소리 고객이 작성후 등록하기
 		sqlSession.insert("customerServiceSQL.C_checkInquire", customerServiceDTO);
 	}
-	public CustomerServiceDTO getInquireInfo(String seq) {// 고객의 소리 제목클릭 후 내용 보기
+	public CustomerServiceDTO getInquireInfo(int seq) {// 고객의 소리 제목클릭 후 내용 보기
 		return sqlSession.selectOne("customerServiceSQL.getInquireInfo", seq);
 	}
 	public CustomerServiceDTO getReplyInfo(String seq) {// 고객의 소리 관리자가 문의 답변 등록하기
 		return sqlSession.selectOne("customerServiceSQL.getReplyInfo", seq);
+	}
+	public void C_inquire_Reply(CustomerServiceDTO customerServiceDTO) {
+		sqlSession.update("customerServiceSQL.C_inquire_Reply1", customerServiceDTO);//step update
+		sqlSession.insert("customerServiceSQL.C_inquire_Reply2", customerServiceDTO);//insert
+		sqlSession.update("customerServiceSQL.C_inquire_Reply3", customerServiceDTO);//reply update
 	}
 	
 	
