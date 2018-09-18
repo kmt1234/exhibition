@@ -84,8 +84,6 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	}
 	
 	
-	
-	
 	public void C_contactList_checkWrite(Map<String, String> map) {// 주요시설 연락처 관리자가 작성하기
 		sqlSession.insert("customerServiceSQL.C_contactList_checkWrite", map);		
 	}
