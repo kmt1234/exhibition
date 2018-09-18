@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<form name="playboardWriteForm2" id="playboardWriteForm2" method="post"
-enctype="multipart/form-data">
 <!-- 내용 입력 -->
 <div style="width: 60%;">
+<input type="hidden" name="postSelect" id="postSelect" value="2">
 	<br>
 	<div class="ui inverted input" style="width: 100%;">
 		<div class="ui left icon input" style="width: 100%; height: 50px;">
@@ -18,6 +17,7 @@ enctype="multipart/form-data">
 			<input type="file" name="img" id="img">
 	 	</div>
 	</div>
+	<div id="imgDiv"></div>
 	<br><br>
 	
 	<div class="ui inverted input" style="width: 100%;">
@@ -84,4 +84,3 @@ enctype="multipart/form-data">
   	</div>
   	
 </div><!--수정영역 텍스트필드-->
-</form>

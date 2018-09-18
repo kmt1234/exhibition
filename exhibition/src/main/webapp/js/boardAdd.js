@@ -30,17 +30,15 @@ $(document).ready(function(){
 	
 	//시작일에 오늘 날짜 설정
 	$(".datepicker1").datepicker('setDate', new Date());
-	
-	
 	//목록 버튼
-	$('.imageboardList').click(function(){
-		if($('#postSelect').val('0')){
+	$('#imageboardList').click(function(){
+		if($('#postSelect').val()=='0'){
 			location.href='/exhibition/customerService/C_mainImageboardListForm.do';
-		}else if($('#postSelect').val('1')){
+		}else if($('#postSelect').val()=='1'){
 			location.href='/exhibition/customerService/C_eventboardListForm.do';
-		}else if($('#postSelect').val('2')){
+		}else if($('#postSelect').val()=='2'){
 			location.href='/exhibition/customerService/C_eventboardList_playForm.do';
-		}else if($('#postSelect').val('3')){
+		}else if($('#postSelect').val()=='3'){
 			location.href='/exhibition/customerService/C_hotelListForm.do';	
 		}	
 	});
@@ -49,51 +47,40 @@ $(document).ready(function(){
 	
 	$('#imageTap').click(function(){
 		$('#postSelect').val('0');
-		$('#imageNameDiv').empty();
-		$('#imgDiv').empty();
-		$('#hotelDiv').empty();
-		$('#telDiv').empty();
-		alert($('#postSelect').val());
+		location.href='/exhibition/customerService/C_mainImageboardForm.do?postSelect=0';
 	});
 	$('#exhibitionTap').click(function(){
 		$('#postSelect').val('1');
-		$('#imageNameDiv').empty();
-		$('#imgDiv').empty();
-		$('#hotelDiv').empty();
-		$('#telDiv').empty();
-		alert($('#postSelect').val());
+		location.href='/exhibition/customerService/C_mainImageboardForm.do?postSelect=1';
 	});
 	$('#PlayTap').click(function(){
 		$('#postSelect').val('2');
-		$('#imageNameDiv').empty();
-		$('#imgDiv').empty();
-		$('#hotelDiv').empty();
-		$('#telDiv').empty();
-		alert($('#postSelect').val());
+		location.href='/exhibition/customerService/C_mainImageboardForm.do?postSelect=2';
 	});
 	$('#HotelTap').click(function(){
 		$('#postSelect').val('3');
-		$('#imageNameDiv').empty();
-		$('#imgDiv').empty();
-		$('#hotelDiv').empty();
-		$('#telDiv').empty();
-		alert($('#postSelect').val());
+		location.href='/exhibition/customerService/C_mainImageboardForm.do?postSelect=3';
 	});
 	
 	//이미지 등록
 	$('#checkImageboardWrite').click(function(){
-		if($('#postSelect').val('0')){
+		$('#imageNameDiv').empty();
+		$('#imgDiv').empty();
+		$('#hotelDiv').empty();
+		$('#telDiv').empty();
+
+		if($('#postSelect').val()=='0'){
 			if($('#imageName').val()=='')
 				$('#imageNameDiv').text('제목을 입력하세요').css('color','red').css('font-size','9pt').css('font-weight','bold');
 			else if($('#img').val()=='') 
 				$('#imgDiv').text('파일을 선택해 주세요').css('color','magenta').css('font-size','9pt').css('font-weight','bold');
 			else//메인 이미지 슬라이더
-				$('#imageboardWriteForm2').attr({action:'/exhibition/customerService/C_imageboardWrite.do', method:'post'}).submit();
+				$('#imageboardWriteForm').attr({action:'/exhibition/customerService/C_imageboardWrite.do', method:'post'}).submit();
 		}
 		
-		else if($('#postSelect').val('1') || $('#postSelect').val('2')){
-			alert('시간1 : '+$('.timepicker1').val());
-			alert('시간2 : '+$('.timepicker2').val());
+		else if($('#postSelect').val()=='1' || $('#postSelect').val()=='2'){
+			alert($('.timepicker1').val());
+			alert($('.timepicker2').val());
 			
 			if($('#imageName').val()=='')
 				$('#imageNameDiv').text('제목을 입력하세요').css('color','red').css('font-size','9pt').css('font-weight','bold');
@@ -110,12 +97,12 @@ $(document).ready(function(){
 			/*else if($('.timepicker1').val() < $('.timepicker2').val()){
 				alert('시간2가 시간1 보다 작음');
 			}*/
-			else if($('#postSelect').val('1')){	//박람회
-				$('#eventboardWriteForm2').attr({action:'/exhibition/customerService/C_eventInfoWrite.do', method:'post'}).submit();
-			}else if($('#postSelect').val('2')){	//연극
-				$('#playboardWriteForm2').attr({action:'/exhibition/customerService/C_eventInfoWrite_play.do', method:'post'}).submit();
+			else if($('#postSelect').val()=='1'){	//박람회
+				$('#imageboardWriteForm').attr({action:'/exhibition/customerService/C_eventInfoWrite.do', method:'post'}).submit();
+			}else if($('#postSelect').val()=='2'){	//연극
+				$('#imageboardWriteForm').attr({action:'/exhibition/customerService/C_eventInfoWrite_play.do', method:'post'}).submit();
 			}
-		}else if($('#postSelect').val('3')){
+		}else if($('#postSelect').val()=='3'){
 			var reg = /^https?\:\/\/.+/;
 			var tel = /^((01[1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})|(02|0[3-9]+[0-9])(\d{3,4})(\d{4})$/;
 			if($('#imageName').val()=='')
@@ -131,7 +118,7 @@ $(document).ready(function(){
 			else if(!tel.test($('#telPlace').val())){
 				$('#telDiv').text('전화번호 양식에 맞지 않습니다').css('color','red').css('font-size','9pt').css('font-weight','bold');
 			}else
-				$('#hotelboardWriteForm2').attr({action:'/exhibition/customerService/C_hotelInfoWrite.do', method:'post'}).submit();
+				$('#imageboardWriteForm').attr({action:'/exhibition/customerService/C_hotelInfoWrite.do', method:'post'}).submit();
 		}
 		
 	});

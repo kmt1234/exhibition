@@ -111,7 +111,7 @@ $(document).ready(function(){
 	});
 	//게시판 추가
 	$('#C_boardAdd').click(function(){
-		location.href="/exhibition/customerService/C_mainImageboardForm.do";
+		location.href="/exhibition/customerService/C_mainImageboardForm.do?postSelect=0";
 	});
 	//매출현황
 	$('#C_salesExhibition').click(function(){
