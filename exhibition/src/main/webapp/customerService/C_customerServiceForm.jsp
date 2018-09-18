@@ -32,11 +32,13 @@
 			<a class="item" href="C_emailConfirm.do">고객의 소리</a> 
 			<a class="item" href="C_QnA.do">자주묻는 질문</a>
 			<a class="item" href="C_contactList.do">주요시설 연락처</a>
-			<c:if test="${code!=null }">
+			<c:if test="${code==null  }">
             	<a class="item" href="mypage.do">개인정보</a>
             </c:if>
-            <c:if test="${code=='1' }">
-              	<a class="item" href="C_mainImageboardForm.do">게시판 추가</a><!--세션값에 따라 보이게 할 예정-->
+            <c:if test="${code==null }">
+              	<a class="item" href="C_mainImageboardForm.do">게시판 추가</a>
+           		<a class="item" href="C_salesExhibitionView.do">매출 현황</a>
+           		<a class="item" href="C_memberShib.do">회원리스트</a>
            	</c:if>	
 		</div>
 		<!-- 메인 화면 -->

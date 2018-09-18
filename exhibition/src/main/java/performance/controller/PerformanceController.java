@@ -254,7 +254,7 @@ public class PerformanceController {
 	
 	//공연 예약하기 폼
 	@RequestMapping(value="performanceBook", method=RequestMethod.GET)
-	public ModelAndView performanceBook(@RequestParam String seq) {
+	public ModelAndView performanceBook(@RequestParam(required=false , defaultValue="1") String seq) {
 		
 		//DB
 		EventboardDTO eventboardDTO = performanceDAO.performanceBook(seq);
@@ -334,6 +334,8 @@ public class PerformanceController {
 		
 		//DB (예매자 등록 DB)
 		int result = performanceDAO.bookPlayMembers(book_performance_membersDTO);
+		performanceDAO.bookPlayMembers_calculate(book_performance_membersDTO);	//예매한 티켓 만큼 잔여티켓 계산해주기
+		
 		
 		if(result==0) return "fail";
 		else return "ok";
@@ -347,14 +349,40 @@ public class PerformanceController {
 		System.out.println("연극 명 : "+ imageName);
 		System.out.println("연극 날짜 : "+playDate);
 		
+		if(playDate.equals("날짜선택")) playDate = "2000년/01월/01일";
+		
+		//날짜 형식 변경(년,월,일 제거)
+		playDate=playDate.replace("년", "");
+		playDate=playDate.replace("월", "");
+		playDate=playDate.replace("일", "");
+		
 		//진행중
 		Map<String,String> map = new HashMap<String,String>();
-		//map.put("imageName", )
+		map.put("imageName", imageName);
+		map.put("playDate", playDate);
 		
 		//DB
-		//int usedSeats = performanceDAO.checkRemainSeats();
+		String remainSeats = performanceDAO.checkRemainSeats(map);	//선택일자의 해당 연극 전체좌석 가져오기(기본값:일별 티켓 발행 수)
+		String usedSeats = performanceDAO.checkUsedSeats(map);		//선택일자의  해당 연극 예매된 티켓 수 가져오기
 		
-		return "";
+		System.out.println("전체석 : "+remainSeats);
+		System.out.println("예매석 : "+usedSeats);
+		
+		if(remainSeats==null) remainSeats = 0+"";
+		if(usedSeats==null) usedSeats = 0+"";
+	
+		
+		//잔여좌석 - 예매된 티켓 수 = 예매 가능한 좌석 수
+		int resultSeats = Integer.parseInt(remainSeats) - Integer.parseInt(usedSeats);
+				
+		//null값이면 ***
+		if(resultSeats==0 && usedSeats.equals("0") && remainSeats.equals("0")) {
+			return "remainSeats";
+		}else if(resultSeats==0) {
+			return "noSeats";
+		}else {
+			return resultSeats+"";
+		} 
 	}
 	
 	

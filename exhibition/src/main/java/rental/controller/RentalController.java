@@ -210,33 +210,6 @@ public class RentalController {
 		
 		return "/rental/R_exhibitionOk";
 	}
-	
-	//부스별 총 매출액 보여주는 페이지로 이동
-	@RequestMapping(value="R_salesExhibitionView", method=RequestMethod.GET)
-	public String R_salesExhibitionView() {
-		return "/rental/R_salesExhibitionView";
-	}
-	
-	//부스별 총 매출액 보여주는 컨트롤
-	@RequestMapping(value="R_salesExhibition", method=RequestMethod.POST)
-	public ModelAndView R_salesExhibition(@RequestParam String year, @RequestParam String month) {
-		String salesMon = year.substring(2)+"-"+month+"-"+"01";
-		
-		//부스명, 예약점유 일수, 총 매출액 가져오는 sql
-		List<ExhibitionDTO> list = exhibitionDAO.getSalesExhibition(salesMon);
-		
-		int salesTotalRent = exhibitionDAO.getSalesTotalRentExhibition(salesMon);
-		String salesTotalRentstr = String.format("%,d", salesTotalRent);   
-
-		
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("list", list);
-		mav.addObject("salesTotalRent", salesTotalRentstr);
-		mav.setViewName("jsonView");
-		return mav;
-	}
-	
-	
 	/**
 	* 시작일부터 종료일까지 사이의 날짜를 배열에 담아 리턴 ( 시작일과 종료일을 모두 포함한다 )
 	* 
