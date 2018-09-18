@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import company.bean.CompanyDTO;
 import customerService.bean.EventboardDTO;
+import customerService.bean.ExhibitionBookDTO;
 import member.bean.MemberDTO;
 import performance.bean.Book_performance_membersDTO;
 import performance.bean.PerformancePaging;
@@ -40,6 +42,8 @@ public class PerformanceController {
 	private ExhibitionDAO exhibitionDAO;
 	@Autowired
 	Book_performance_membersDTO book_performance_membersDTO;
+	@Autowired
+	ExhibitionBookDTO exhibitionBookDTO;
 	
 /* 사용메서드*/
 	/*일정정보에 관한 내용이 들어 있는 페이지로 이동~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -142,7 +146,35 @@ public class PerformanceController {
 	
 	//공연일정 리스트
 	@RequestMapping(value="P_performanceList", method=RequestMethod.GET)
-	public ModelAndView P_performanceList(@RequestParam(required=false , defaultValue="1") String pg) {
+	public ModelAndView P_performanceList(@RequestParam(required=false , defaultValue="1") String pg, HttpSession session) {
+		
+		//회원의 코드 값 얻기
+		Object object = session.getAttribute("homepageMember");
+		
+		if(object.toString().equals("1")) {
+			object = (MemberDTO)object;
+			
+		}else if(object.toString().equals("2")) {
+			object = (CompanyDTO)object;
+		}
+		
+		System.out.println("회원의 코드 : "+object);
+		
+		
+		//회원의 아이디 값 얻기
+		MemberDTO memberDTO = null;
+		CompanyDTO companyDTO = null;
+		String id = null;
+		
+		if(object.toString().equals("1")) {
+			memberDTO = (MemberDTO)session.getAttribute("homepageMember");
+			System.out.println("얻은 아이디 : "+memberDTO.getM_Id());
+			id = memberDTO.getM_Id();
+		}else if(object.toString().equals("2")) {
+			companyDTO = (CompanyDTO)session.getAttribute("homepageMember");
+			System.out.println("얻은 아이디 : "+companyDTO.getC_license());
+			id = companyDTO.getC_license();
+		}
 		
 		//Paging
 		int endNum = Integer.parseInt(pg)*9;
@@ -173,6 +205,7 @@ public class PerformanceController {
 			list.get(i).setEndDate(list.get(i).getEndDate().substring(0, 10));
 		}
 		
+		mav.addObject("id", id);
 		mav.addObject("pg", pg);
 		mav.addObject("list", list);
 		mav.addObject("listSize", list.size()+"");
@@ -252,9 +285,92 @@ public class PerformanceController {
 		return mav;
 	}
 	
-	//공연 예약하기 폼
+	//전시회 예약하기 폼
+	@RequestMapping(value="exhibitionBook", method=RequestMethod.GET)
+	public ModelAndView exhibitionBook(@RequestParam(required=false , defaultValue="1") String seq, HttpSession session) {
+		
+		//DB
+		EventboardDTO eventboardDTO = performanceDAO.exhibitionBook(seq);
+		
+		//String 타입 날짜를 Date 형식으로 변환
+		eventboardDTO.setStartDate(eventboardDTO.getStartDate().substring(0, 10));
+		eventboardDTO.setEndDate(eventboardDTO.getEndDate().substring(0, 10));
+		
+		System.out.println(eventboardDTO.getStartDate());
+		System.out.println(eventboardDTO.getEndDate());
+		
+		String startDate = eventboardDTO.getStartDate();
+		String endDate = eventboardDTO.getEndDate();
+		
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		
+		long diff = 0;
+		long diffDays = 0;
+		Date startDateF = null;
+		
+		try {
+			startDateF = formatter.parse(startDate);
+			Date endDateF = formatter.parse(endDate);
+			
+			diff = endDateF.getTime() - startDateF.getTime();
+			diffDays = diff / (24*60*60*1000);	//종료일-시작일 = 행사 일 수
+			
+		} catch (ParseException e) {
+			
+			e.printStackTrace();
+		}
+				
+		Calendar calStart = Calendar.getInstance();
+		calStart.setTime(startDateF);
+		
+		List<Date> listDate = new ArrayList<Date>();
+		for(int i=0; i<=diffDays; i++) {
+			
+			listDate.add(calStart.getTime());
+			calStart.add(Calendar.DATE, 1);
+		}
+				
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("eventboardDTO", eventboardDTO);
+		mav.addObject("listDate", listDate);
+		mav.addObject("display", "/performance/P_exhibitionBook.jsp");
+		mav.setViewName("P_performanceForm");
+		return mav;
+	}
+	
+	
+	//연극 예약하기 폼
 	@RequestMapping(value="performanceBook", method=RequestMethod.GET)
-	public ModelAndView performanceBook(@RequestParam(required=false , defaultValue="1") String seq) {
+	public ModelAndView performanceBook(@RequestParam(required=false , defaultValue="1") String seq, HttpSession session) {
+		
+		//회원의 코드 값 얻기
+		Object object = session.getAttribute("homepageMember");
+		
+		if(object.toString().equals("1")) {
+			object = (MemberDTO)object;
+			
+		}else if(object.toString().equals("2")) {
+			object = (CompanyDTO)object;
+		}
+		
+		System.out.println("회원의 코드 : "+object);
+		
+		
+		//회원의 아이디 값 얻기
+		MemberDTO memberDTO = null;
+		CompanyDTO companyDTO = null;
+		String id = null;
+		
+		if(object.toString().equals("1")) {
+			memberDTO = (MemberDTO)session.getAttribute("homepageMember");
+			System.out.println("얻은 아이디 : "+memberDTO.getM_Id());
+			id = memberDTO.getM_Id();
+		}else if(object.toString().equals("2")) {
+			companyDTO = (CompanyDTO)session.getAttribute("homepageMember");
+			System.out.println("얻은 아이디 : "+companyDTO.getC_license());
+			id = companyDTO.getC_license();
+		}
 		
 		//DB
 		EventboardDTO eventboardDTO = performanceDAO.performanceBook(seq);
@@ -300,6 +416,7 @@ public class PerformanceController {
 		
 		ModelAndView mav = new ModelAndView();
 		
+		mav.addObject("id", id);
 		mav.addObject("eventboardDTO", eventboardDTO);
 		mav.addObject("listDate", listDate);
 		mav.addObject("display", "/performance/P_performanceBook.jsp");
@@ -348,8 +465,10 @@ public class PerformanceController {
 		System.out.println("총 좌석 수 : "+ totalSeats);
 		System.out.println("연극 명 : "+ imageName);
 		System.out.println("연극 날짜 : "+playDate);
-		
-		if(playDate.equals("날짜선택")) playDate = "2000년/01월/01일";
+				
+		if(playDate.equals("날짜선택")) {
+			playDate = "2000년01월01일";
+		}
 		
 		//날짜 형식 변경(년,월,일 제거)
 		playDate=playDate.replace("년", "");
@@ -376,12 +495,20 @@ public class PerformanceController {
 		int resultSeats = Integer.parseInt(remainSeats) - Integer.parseInt(usedSeats);
 				
 		//null값이면 ***
+		
 		if(resultSeats==0 && usedSeats.equals("0") && remainSeats.equals("0")) {
-			return "remainSeats";
+			if(playDate.equals("20000101")) {
+				return "choseDate";
+			}else {
+				return "remainSeats";
+			}
+			
 		}else if(resultSeats==0) {
 			return "noSeats";
-		}else {
+		}else if(resultSeats>0){
 			return resultSeats+"";
+		}else {
+			return "choseDate";
 		} 
 	}
 	

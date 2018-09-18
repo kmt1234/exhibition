@@ -62,4 +62,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="checkUsedSeats" parameterType="java.util.Map" resultType="java.lang.String">
 		select sum(ticketQty) from book_play_members where imageName = #{imageName} and playDate = #{playDate}
 	</select>
+	
+	<!--전시회 예약하기 폼-->
+	<select id="exhibitionBook" parameterType="java.lang.String" resultType="eventboard">
+		select * from eventboard where seq = #{seq}
+	</select>
 </mapper>

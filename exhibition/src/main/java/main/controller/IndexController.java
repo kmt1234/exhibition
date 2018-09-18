@@ -21,24 +21,18 @@ public class IndexController {
 	/* 메인페이지 이동~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 	@RequestMapping(value = "index", method = RequestMethod.GET)
 	public String index(@RequestParam(required = false, defaultValue = "1") String code, Model model) {
-
 		model.addAttribute("code", code);
 		model.addAttribute("display", "/main/I_body.jsp");
-
 		return "/main/index";
-
 	}
 	@RequestMapping(value = "I_body", method = RequestMethod.POST)
 	public String I_body(@RequestParam String[] check ,Model model) {
 		List<Integer> list = new ArrayList<Integer>();
 		for (String seq : check) {
 			list.add(Integer.parseInt(seq));
-			System.out.println(seq);
 		}
-
 		model.addAttribute("list",list);
 		model.addAttribute("display", "/main/I_body.jsp");
-
 		return "/main/index";
 	}
 }

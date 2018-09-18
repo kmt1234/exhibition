@@ -1,0 +1,248 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@	taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>전시회</title>
+
+<style>
+
+img{
+	width: 367px;
+	height: 425px;
+	border-radius: 10px;
+}
+
+td{
+	text-align: left;
+   	padding-left: 6%;
+    padding-top: 2px;
+}
+
+.bookWrapper{
+	float: left;
+}
+
+.ui.divider{
+	margin: 5rem 0 0 0;
+}
+
+.playContentHeader{
+	float: left;
+}
+
+.playContent{
+	display: grid;
+}
+
+.bookPlayTitle{
+   	margin-right: 30%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    font-size: 3rem;
+    width: 710px;
+}
+
+.bookPlayTitleDiv {
+    margin-top: 25px;
+}
+
+.book_play_confirm {
+    display: flex;
+}
+
+.playTableWrapper{
+	margin-left: 33px;
+}
+
+#modalImage1{
+	margin-left: 20px;
+}
+
+#bookInfo{
+	margin-left: 30px;
+}
+
+</style>
+
+</head>
+<body>
+	<body>
+	<!-- 메인 화면 -->
+	<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
+		전시회
+		<span class="h-light">예약하기</span>
+	</h2>
+	
+	<!--메뉴-->
+	<div class="bookWrapper">
+		<div class="ui steps">
+		  
+		  <div class="active step">
+		    <div class="content">
+		      <div class="title">예매하기</div>
+		    </div>
+		  </div>
+		  	  	  
+		</div><!--class="ui ordered steps"-->
+		
+	</div><!--class="bookWrapper"-->
+	
+<div class="ui divider"></div>	
+
+<!--내용 : 예매하기-->
+<div id="Book_play_div">
+
+	<div class="playContentHeader">
+		<div><img src="../storage/${eventboardDTO.image1}"></div>
+		
+	</div>
+	
+	<!--날짜 비교(기본 : 오늘날짜)-->
+	<jsp:useBean id="now" class="java.util.Date"/> 
+	
+	<div class="bookPlayTitleDiv"><span class="bookPlayTitle">${eventboardDTO.imageName}</span></div><input type="hidden" id="imageName" value="${eventboardDTO.imageName}"><!--연극 제목  -->
+	
+	<div class="playContent">
+		<table style="height: 170%;" class="playContentTable">
+			<tr>
+				<td>장소</td><td> : </td> <td>${eventboardDTO.eventPlace}</td>
+			</tr>
+			<tr>
+				<td>기간</td><td> : </td> <td>${eventboardDTO.startDate} ~ ${eventboardDTO.endDate}</td>
+			</tr>
+			<tr>
+				<td>가격</td><td> : </td> <td><fmt:formatNumber type="number" value="${eventboardDTO.eventPrice}" pattern="#,###" />원</td>
+			</tr>
+			<tr>
+				<td>전시회 날짜</td><td> : </td> 
+				<td>
+					<select id="selectEventDate">
+						<option value="2000-01-01">날짜선택</option>
+						
+						<!--오늘날짜와 비교 후, 기간 지났으면 날짜 선택 비활성화  -->
+						<c:forEach items="${listDate}" var="eventPeriod">
+							<c:if test="${eventPeriod < now}">
+								<option disabled="disabled" value="${eventPeriod}"><fmt:formatDate value="${eventPeriod}" pattern="yyyy년-MM월-dd일"/></option>
+							</c:if>
+						</c:forEach>
+					
+						<c:forEach items="${listDate}" var="eventPeriod">
+							<c:if test="${eventPeriod > now}">
+								<option value="${eventPeriod}"><fmt:formatDate value="${eventPeriod}" pattern="yyyy년-MM월-dd일"/></option>
+							</c:if>
+						</c:forEach>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>공연 시간</td><td> : </td> <td>${eventboardDTO.startTime} ~ ${eventboardDTO.endTime}</td>
+			</tr>
+			<tr>
+				<td>매수</td><td> : </td>
+				<td>
+					<select id="selectPlayTicket">
+						<option value="1">1매</option>
+						<option value="2">2매</option>
+						<option value="3">3매</option>
+						<option value="4">4매</option>
+						<option value="5">5매</option>
+					</select>
+				</td>
+			</tr>
+			<fmt:parseNumber var="remain" value="${eventboardDTO.eventSeats}" integerOnly="true" />
+			<tr>
+				<td>잔여 매수</td><td> : </td> <td><span id="remainSeats">${eventboardDTO.eventSeats}</span></td><!--잔여매수-->
+			</tr>
+			<tr>
+				<td colspan="3" align="center"><button class="ui pink button" id="book_next_Btn">다음단계로 진행</button></td>
+			</tr>
+		</table>			
+		
+	</div><!--class="playContent"  -->
+	
+	<input type="hidden" id="hiddenTicketPrice" value="${eventboardDTO.eventPrice}"><!--티켓가격-->
+	<input id="hiddenDate" type="hidden"><!--공연일자(하루)-->	
+	<input id="hiddenTicketQty" type="hidden"><!--티켓 수량 -->
+	<input type="hidden" value="${eventboardDTO.eventSeats}" id="hiddenTotalSeats"><!--전체 좌석 수 -->
+	<input id="hiddenId" type="hidden" value="${homepageMember}"><!--로그인 된 아이디-->
+			
+</div><!-- id="Book_play_div"-->
+	
+	
+	
+	<!--예약확인 및 결제하기 (모달-개인)-->
+	<div class="ui modal bookNextStep"><i class="close icon"></i>
+	  <div class="header" id="bookConfirmHeader">예매확인 및 결제하기</div>
+	  
+	  <div class="book_play_confirm">
+	  	
+	  	<div>
+	      <img src="../storage/${eventboardDTO.image1}" id="modalImage1">
+	    </div>
+	    
+	    <div class="playTableWrapper">
+	    
+	    	<table>
+	    		<tr>
+	    			<td>전시회명</td><td> : </td> <td>${eventboardDTO.imageName}</td>
+	    		</tr>
+	    		<tr>
+	    			<td>예매 티켓</td><td> : </td> <td><span id="BookConfirmedTicketQty"></span>매</td>
+	    		</tr>
+	    		<tr>
+	    			<td>예매자ID</td><td> : </td> <td>${homepageMember}</td>
+	    		</tr>
+	    		<tr>
+	    			<td>장소</td><td> : </td> <td>${eventboardDTO.eventPlace}</td>
+	    		</tr>
+	    		<tr>
+	    			<td>시간</td><td> : </td> <td>${eventboardDTO.startTime} ~ ${eventboardDTO.endTime}</td>
+	    		</tr>
+	    		<tr>
+	    			<td>결재 금액</td><td> : </td> <td><span id="totalPrice"></span>원</td>
+	    		</tr>
+	    	</table><br><br>
+		  	
+		  	<div id="bookInfo">입장 시, 신분증 제출 및 예매자 아이디를 말씀해주시면 됩니다.</div>	
+	    </div>
+	    
+	  </div><!--class="book_play_confirm"-->
+	  
+	  <div class="actions">
+	    <div class="ui black deny button" id="BookEventCancelBtn">취소</div>
+	    
+	    <div class="ui positive right labeled icon button" id="BookEventBtn">예매확인/결제<i class="checkmark icon"></i></div>
+	  </div><!--class="actions"  -->
+	  
+	</div><!--class="ui modal bookNextStep"-->
+	
+	
+	
+	
+	
+	
+	
+</body>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"
+	integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+	crossorigin="anonymous"></script>
+<script src="../semantic/semantic.min.js"></script>
+<script>
+$(document).ready(function(){
+	
+	//다음단계
+	$('#book_next_Btn').click(function(){
+		//모달 호출
+		$('.ui.modal.bookNextStep').modal({
+			closable : false,
+            duration : 460,
+		}).modal('show');
+	});
+});
+</script>
+</html>
