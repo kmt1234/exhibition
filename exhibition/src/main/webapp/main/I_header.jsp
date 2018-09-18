@@ -51,9 +51,10 @@
 </style>
 	<header>
 		<div id="main" class="ui three column grid container">
-			<div class="column" style="width: 25%; height: 50px;">
-				<a href="http://localhost:8080/exhibition/main/index.do"><img alt="" src="../img/logo.jpg"
-					style="width: 150px; height: 50px;"></a>
+			<div class="column" style="width: 25%; height: 50px;  margin-bottom: 30px;">
+				<a href="http://localhost:8080/exhibition/main/index.do">
+				<img alt="" src="../img/ipecLogo.png"
+					style="width: 120px; height: 108px;"></a>
 			</div>
 			<div class="column" style="width: 49%; padding-top: 100px;">
 				<div class="ui input" style="width: 100%;">

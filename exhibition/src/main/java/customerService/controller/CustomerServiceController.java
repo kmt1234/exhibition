@@ -1092,5 +1092,15 @@ public class CustomerServiceController {
 
 			return mav;
 		}
+	//이메일무단수집거부
+	@RequestMapping(value="C_emailRefuse",method=RequestMethod.GET)
+	public String C_emailRefuse() {
+		return "/customerService/C_emailRefuse";
+	}
+	//개인정보처리방침
+	@RequestMapping(value="C_privacy",method=RequestMethod.GET)
+	public String C_privacy() {
+		return "/customerService/C_privacy";
+	}
 
 }
