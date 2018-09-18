@@ -610,7 +610,7 @@ public class CustomerServiceController {
 			playBookDTO.setBookStatus('0');		//예매 구분자 (0:예매X, 1:예매완료)
 			
 			
-			playBookDTO.setPlayDate(listDate.get(i));
+			playBookDTO.setPlayDate(listDate.get(i)); 
 			
 	
 			list.add(playBookDTO);
