@@ -39,8 +39,6 @@
 		</td>
 	</tr>
 </table>
-<!-- 관리자모드가 아니면 없애야함 -->
-
 <c:if test="${code=='3' }">
 <div align="left">
 	<input class="middle ui button" type="button" id="C_email_ListBtn" value="관리자 버튼">
