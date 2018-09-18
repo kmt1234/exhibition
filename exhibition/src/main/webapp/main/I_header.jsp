@@ -51,9 +51,10 @@
 </style>
 	<header>
 		<div id="main" class="ui three column grid container">
-			<div class="column" style="width: 25%; height: 50px;">
-				<a href="http://localhost:8080/exhibition/main/index.do"><img alt="" src="../img/logo.jpg"
-					style="width: 150px; height: 50px;"></a>
+			<div class="column" style="width: 25%; height: 50px;  margin-bottom: 30px;">
+				<a href="http://localhost:8080/exhibition/main/index.do">
+				<img alt="" src="../img/ipecLogo.png"
+					style="width: 120px; height: 108px;"></a>
 			</div>
 			<div class="column" style="width: 49%; padding-top: 100px;">
 				<div class="ui input" style="width: 100%;">
@@ -124,16 +125,17 @@
 			</div>
 			<div class="ui compact menu" style="width: 20%;">
 				<div class="ui simple dropdown item">
-					<span id="R_rentalForm">시설/임대</span>
+					<span id="R_rentalForm">시설&임대</span>
 					<div class="menu">
-						<div class="item" id="R_exhibition">전시회 홀</div>
+						<div class="item" id="R_exhibition">박람회 홀</div>
 						<div class="item" id="R_performance">공연장 홀</div>
+						<div class="item" id="R_businessRoom">비지니스 룸</div>
 					</div>
 				</div>
 			</div>
 			<div class="ui compact menu" style="width: 20%;">
 				<div class="ui simple dropdown item">
-					<span id="T_allForm">교통/숙박/관광</span>
+					<span id="T_allForm">교통&숙박</span>
 					<div class="menu">
 						<div class="item" id="T_allFormS">교통안내</div>
 						<div class="item" id="T_hotelForm">숙박안내</div>

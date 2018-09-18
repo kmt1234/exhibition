@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import company.bean.CompanyDTO;
 import customerService.bean.CustomerServiceDTO;
 import customerService.bean.EventboardDTO;
 import customerService.bean.HotelboardDTO;
@@ -125,4 +126,6 @@ public interface CustomerServiceDAO {
 	public int getSalesTotalRentExhibition(String salesMon);
 
 	public List<MemberDTO> getMemberList();
+
+	public List<CompanyDTO> getCompanyList();
 }

@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import company.bean.CompanyDTO;
 import customerService.bean.CustomerServiceDTO;
 import customerService.bean.CustomerServicePaging;
 import customerService.bean.EventboardDTO;
@@ -1078,6 +1079,28 @@ public class CustomerServiceController {
 		mav.setViewName("jsonView");
 
 		return mav;
+	}
+	// 사업자리스트 불러오기
+		@RequestMapping(value = "getCompanyList", method = RequestMethod.GET)
+		public ModelAndView getCompanyList() {
+		
+			List<CompanyDTO> list = customerServiceDAO.getCompanyList();
+			
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("list", list);
+			mav.setViewName("jsonView");
+
+			return mav;
+		}
+	//이메일무단수집거부
+	@RequestMapping(value="C_emailRefuse",method=RequestMethod.GET)
+	public String C_emailRefuse() {
+		return "/customerService/C_emailRefuse";
+	}
+	//개인정보처리방침
+	@RequestMapping(value="C_privacy",method=RequestMethod.GET)
+	public String C_privacy() {
+		return "/customerService/C_privacy";
 	}
 
 }

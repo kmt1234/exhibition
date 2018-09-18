@@ -404,6 +404,10 @@
  	<select id="getMemberList" resultType="member">
  		select * from membertable 	
  	</select>
+ 	<!-- 사업자정보  -->
+ 	<select id="getCompanyList" resultType="company">
+ 		select * from company	
+ 	</select>
  	
  	
  </mapper>
