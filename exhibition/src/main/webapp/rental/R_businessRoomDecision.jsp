@@ -59,7 +59,7 @@ td.empty {
 </form>
 </div>	
 
-<div class="ui mini modal rental">
+<div class="ui mini modal rental"> <!-- 사업자 예약 못하게 하는 모달 -->
   <div class="header">
   	<i class="huge home icon"></i>
   </div>
@@ -71,7 +71,7 @@ td.empty {
   </div>
 </div>
 
-<div class="ui mini modal day">
+<div class="ui mini modal day"> <!-- 오늘날짜 보다 이전 날짜 예약못하게 하는 모달-->
   <div class="header">
   	<i class="huge home icon"></i>
   </div>
@@ -83,7 +83,7 @@ td.empty {
   </div>
 </div>
 
-<div class="ui mini modal success">
+<div class="ui mini modal success"> <!-- 예약성공 모달 -->
   <div class="header">
   	<i class="huge home icon"></i>
   </div>
@@ -117,7 +117,7 @@ var dataset = [
 		];  
 
 
-	var code = $('#code').val();
+	var code = $('#code').val(); //로그인 코드 받아오기
 	
 	$(document).ready(function(){
 		
@@ -134,12 +134,12 @@ var dataset = [
 	        editable: false,
 	        eventLimit: true,
 	        events: dataset,
-			dayClick: function(date) {
+			dayClick: function(date) { //예약되어있지 않는 날짜 클릭 이벤트
 				var startDate = date.format("YYYY") + '-' + date.format("MM") + '-' + date.format("DD");
 				alert(startDate);
 				var defaultDay = new Date().toISOString().slice(0,10);
 				alert(defaultDay);
-				if(startDate <= defaultDay) {
+				if(startDate <= defaultDay) { //오늘 날짜보다 이전 날짜 예약 못하게 함
 					$('.ui.mini.modal.day').modal('show');
 					return;
 				}
@@ -152,7 +152,7 @@ var dataset = [
 							'startDate' : startDate},
 					async: false,
 					dataType: 'json',
-					success : function(data) {
+					success : function(data) {  //룸 이름과 클릭한 날짜를 보내 해당 날짜 예약현황 보여주기
 						$('#time_list tr:gt(0)').remove();
 						
 						$('#timeListTitle').html('<pre>'+startDate + ' 이용 시간 선택'+'</pre>');
@@ -223,7 +223,7 @@ var dataset = [
 						
 						alert(JSON.stringify(data));
 						
-						$.each(data.list, function(index, item){
+						$.each(data.list, function(index, item){ //예약되어있는 시간대는 예약불가능이라고 써주고 체크박스 제거
 							
 							if(item.first=='Y') {
 								$('#first').text('예약불가능').css('color', 'red');
@@ -247,18 +247,18 @@ var dataset = [
 					
 				});
 				
-			},
+			},//밑에는 예약되어있는 날짜 클릭이벤트
 			eventClick: function(event){
 				var startDate = event.start.format("YYYY") + '-' + event.start.format("MM") + '-' + event.start.format("DD");
 				alert(startDate);
 				var defaultDay = new Date().toISOString().slice(0,10);
 				alert(defaultDay);
-				if(startDate <= defaultDay) {
+				if(startDate <= defaultDay) { //오늘 날짜보다 이전 날짜 예약 못하게 막는 것
 					$('.ui.mini.modal.day').modal('show');
 					return;
 				}
 				$('#startDate').val(startDate);
-				$.ajax({
+				$.ajax({ //룸 이름과 클릭한 날짜를 보내 해당 날짜 예약현황 보여주기
 					type : 'POST',
 					url : '/exhibition/rental/searchBusinessRoom.do',
 					data : {'roomName': '${businessRoom}',
@@ -336,7 +336,7 @@ var dataset = [
 						
 						alert(JSON.stringify(data));
 						
-						$.each(data.list, function(index, item){
+						$.each(data.list, function(index, item){ //예약되어있는 시간대는 예약불가능이라고 써주고 체크박스 제거
 							
 							if(item.first=='Y') {
 								$('#first').text('예약불가능').css('color', 'red');
@@ -361,9 +361,8 @@ var dataset = [
 				});
 			}
 			
-	        
-	        
 		});
+		
 		
 		//checkBox 전체 선택, 해제
 		$('#checkAll').on('click', function(){
@@ -377,7 +376,7 @@ var dataset = [
 		
 			//예약하기 버튼
 			$('#rentalBusinessRoomBtn').on('click', function(){
-			
+				//개인으로 로그인 할때만 submit
 				if($('#code').val()=='1') {
 				
 					$('.ui.mini.modal.success').modal({

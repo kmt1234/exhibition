@@ -219,6 +219,7 @@ public class RentalController {
 		
 		return "/rental/R_exhibitionOk";
 	}
+	
 	/**
 	* 시작일부터 종료일까지 사이의 날짜를 배열에 담아 리턴 ( 시작일과 종료일을 모두 포함한다 )
 	* 
@@ -228,6 +229,7 @@ public class RentalController {
 	* yyyyMMdd 형식의 종료일
 	* @return yyyyMMdd 형식의 날짜가 담긴 배열
 	*/
+	
 	public static String[] getDiffDays(String fromDate, String toDate) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 
