@@ -35,20 +35,23 @@ $(document).ready(function(){
 			$.each(data.list, function(index, item){
 				$('<tr/>',{
 					class : 'title',
+				}).append('<i/>',{
+					class : 'question icon'
 				}).append($('<td/>',{
 					id : 'subjectA',
 					href : 'javascript:void(0)',
+					width : '850px',
+					align : 'left',
 					text : item.subject
 				})).append($('<i/>',{
 					class : 'angle double down icon',
-					align : 'right',
-					style : 'width=80%'
 				})).appendTo($('#C_QnA_List'));
 				
 				$('<tr/>',{
 					class : 'content',
 				}).append($('<td/>',{
 					id : 'contentA',
+					align : 'left',
 					style : 'width=20%',
 					text : item.content
 				})).appendTo($('#C_QnA_List'));
@@ -69,23 +72,29 @@ $(document).ready(function(){
 				$.each(data.list, function(index, item){
 					$('<tr/>',{
 						class : 'title'
+					}).append('<i/>',{
+						class : 'question icon'
 					}).append($('<td/>',{
 						id : 'subjectA',
 						href : 'javascript:void(0)',
+						width : '850px',
+						align : 'left',
 						text : item.subject
+					})).append($('<i/>',{
+						class : 'angle double down icon',
 					})).appendTo($('#C_QnA_List'));
 					
 					$('<tr/>',{
 						class : 'content'
 					}).append($('<td/>',{
 						id : 'contentA',
+						align : 'left',
 						text : item.content
 					})).appendTo($('#C_QnA_List'));
 				});
 			}
 		});
 	});
-	
 	
 	$('.ui.styled.fluid.accordion').accordion({
 		selector: {

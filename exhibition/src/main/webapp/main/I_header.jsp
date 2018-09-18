@@ -149,11 +149,13 @@
 	                  <div class="item" id="C_emailConfirm">고객의 소리</div>
 	                  <div class="item" id="C_QnA">자주묻는 질문</div>
 	                  <div class="item" id="C_contactList">주요시설 연락처</div>
-	                  <c:if test="${code!=null }">
+	                  <c:if test="${code=='1' }">
 	                  	<div class="item" id="C_mypage">개인정보</div>
 	                  </c:if>
 	                  <c:if test="${code=='1' }">
 	                 	 <div class="item" id="C_boardAdd">게시판 추가</div><!--세션값에 따라 보이게 할 예정-->
+	               	  	 <div class="item" id="C_salesExhibition">메출현황</div><!--세션값에 따라 보이게 할 예정-->
+	               	  	 <div class="item" id="C_memberShib">회원리스트</div><!--세션값에 따라 보이게 할 예정-->
 	               	  </c:if>	
 	               </div>
 	            </div>
@@ -169,7 +171,7 @@
 			</div>
 		</div>
 	</header>
-	<input type="hidden" value="${code}" id="codeName">
+	<%-- <input type="hidden" value="${code}" id="codeName"> --%>
 <!--개인회원 회원가입 양식 페이지 인클루드-->
 <jsp:include page="../member/writeForm.jsp"/>
 <!--기업회원 회원가입 양식 페이지 인클루드  -->
@@ -178,14 +180,13 @@
 <jsp:include page="../login/memberLoginForm.jsp"/>
 <!--법인회원 로그인 양식 페이지 인클루드  -->
 <jsp:include page="../login/companyLoginForm.jsp"/>
-
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"
+<script src="https://code.jquery.com/jquery-3.1.1.min.js?ver=1"
 	integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
 	crossorigin="anonymous"></script>
 <script src="../semantic/semantic.min.js"></script>
-<script src="../js/index.js?ver=1" charset="UTF-8"></script>  <!--  -->
-<script src="../js/member.js" charset="UTF-8"></script> <!--  -->
-<script src="../js/company.js" charset="UTF-8"></script><!--  -->
-<script src="../js/login.js" charset="UTF-8"></script>	<!--  -->
-<script src="../js/post.js" charset="UTF-8"></script>	<!--  -->
+<script src="../js/index.js?ver=1" charset="UTF-8"></script> 
+<script src="../js/member.js" charset="UTF-8"></script> 
+<script src="../js/company.js" charset="UTF-8"></script>
+<script src="../js/login.js" charset="UTF-8"></script>	
+<script src="../js/post.js" charset="UTF-8"></script>	
 

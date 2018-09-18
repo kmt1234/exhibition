@@ -9,11 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import company.bean.CompanyDTO;
 import customerService.bean.CustomerServiceDTO;
 import customerService.bean.EventboardDTO;
 import customerService.bean.HotelboardDTO;
 import customerService.bean.ImageboardDTO;
 import customerService.bean.PlayBookDTO;
+import customerService.bean.SalesExhigitionDTO;
+import member.bean.MemberDTO;
+import rental.bean.ExhibitionDTO;
 
 @Transactional
 @Component
@@ -99,6 +103,9 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	}
 	public List<CustomerServiceDTO> C_contactList_Search(Map<String, String> map) {
 		return sqlSession.selectList("customerServiceSQL.C_contactList_Search", map);
+	}
+		public void C_contactList_Delete(List<Integer> list) {
+		sqlSession.delete("customerServiceSQL.C_contactList_Delete", list);
 	}
 	
 	
@@ -209,8 +216,27 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	//연극정보 예매DB에 저장
 	public void eventInfoWrite_play_bookDB(PlayBookDTO playBookDTO) {
 		sqlSession.insert("customerServiceSQL.eventInfoWrite_play_bookDB", playBookDTO);
-		
 	}
-	
+	public void C_hotelboardMod(HotelboardDTO hotelboardDTO) {
+		sqlSession.update("customerServiceSQL.C_hotelboardMod", hotelboardDTO);	
+	}
 
+	//매출가져오기
+	public List<SalesExhigitionDTO> getSalesExhibition(String salesMon) {
+		return sqlSession.selectList("customerServiceSQL.getSalesExhibition", salesMon);
+	}
+	//매출가져오기
+	public int getSalesTotalRentExhibition(String salesMon) {
+		if(sqlSession.selectOne("customerServiceSQL.getSalesTotalRentExhibition", salesMon)==null) {
+			return 0;
+		} else {
+			return sqlSession.selectOne("customerServiceSQL.getSalesTotalRentExhibition", salesMon);
+		}
+	}
+	public List<MemberDTO> getMemberList() {
+		return sqlSession.selectList("customerServiceSQL.getMemberList");
+	}
+	public List<CompanyDTO> getCompanyList() {
+		return sqlSession.selectList("customerServiceSQL.getCompanyList");
+	}
 }
