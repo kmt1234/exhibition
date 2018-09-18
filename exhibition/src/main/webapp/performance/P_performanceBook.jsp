@@ -141,7 +141,7 @@ $(document).ready(function(){
 		var conF = confirm("예매하시겠습니까?");
 		if(conF){
 			//alert($('#selectEventDate :selected').text()); //선택된 일자 호출
-			//alert($('#selectPlayTicket :selected').text()); //선택한 티켓 수 호출
+			//alert($('#selectPlayTicket :selected').text()); //선택한 티켓 수 호출 
 			
 			$('#hiddenTicketQty').val($('#selectPlayTicket :selected').val()); //티켓 수 히든에 넣기
 			$('#hiddenDate').val($('#selectEventDate :selected').text()); //공연일자 히든에 넣기 
