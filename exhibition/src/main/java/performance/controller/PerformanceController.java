@@ -148,14 +148,25 @@ public class PerformanceController {
 	@RequestMapping(value="P_performanceList", method=RequestMethod.GET)
 	public ModelAndView P_performanceList(@RequestParam(required=false , defaultValue="1") String pg, HttpSession session) {
 		
-		//회원의 코드 값 얻기
-		Object object = session.getAttribute("homepageMember");
+		Object object = null;
 		
-		if(object.toString().equals("1")) {
-			object = (MemberDTO)object;
+		try {
+			//회원의 코드 값 얻기
+			object = session.getAttribute("homepageMember");
 			
-		}else if(object.toString().equals("2")) {
-			object = (CompanyDTO)object;
+			if(object.toString().equals("1")) {
+				object = (MemberDTO)object;
+				
+			}else if(object.toString().equals("2")) {
+				object = (CompanyDTO)object;
+				
+			}else if(object.toString().equals("3")) {
+				object = "manager";
+			}else {
+				object = "guest";
+			}
+		} catch (Exception e) {
+			
 		}
 		
 		System.out.println("회원의 코드 : "+object);
@@ -166,14 +177,26 @@ public class PerformanceController {
 		CompanyDTO companyDTO = null;
 		String id = null;
 		
-		if(object.toString().equals("1")) {
-			memberDTO = (MemberDTO)session.getAttribute("homepageMember");
-			System.out.println("얻은 아이디 : "+memberDTO.getM_Id());
-			id = memberDTO.getM_Id();
-		}else if(object.toString().equals("2")) {
-			companyDTO = (CompanyDTO)session.getAttribute("homepageMember");
-			System.out.println("얻은 아이디 : "+companyDTO.getC_license());
-			id = companyDTO.getC_license();
+		try {
+			if(object.toString().equals("1")) {
+				memberDTO = (MemberDTO)session.getAttribute("homepageMember");
+				System.out.println("얻은 아이디 : "+memberDTO.getM_Id());
+				id = memberDTO.getM_Id();
+				
+			}else if(object.toString().equals("2")) {
+				companyDTO = (CompanyDTO)session.getAttribute("homepageMember");
+				System.out.println("얻은 아이디 : "+companyDTO.getC_license());
+				id = companyDTO.getC_license();
+				
+			}else if(object.toString().equals("3")) {
+				System.out.println("얻은 아이디 : manager");
+				id = "manager";
+			}else {
+				System.out.println("얻은 아이디 : guest");
+				id = "guest";
+			}
+		} catch (Exception e) {
+			
 		}
 		
 		//Paging
@@ -344,32 +367,53 @@ public class PerformanceController {
 	@RequestMapping(value="performanceBook", method=RequestMethod.GET)
 	public ModelAndView performanceBook(@RequestParam(required=false , defaultValue="1") String seq, HttpSession session) {
 		
-		//회원의 코드 값 얻기
-		Object object = session.getAttribute("homepageMember");
+		Object object = null;
 		
-		if(object.toString().equals("1")) {
-			object = (MemberDTO)object;
+		try {
+			//회원의 코드 값 얻기
+			object = session.getAttribute("homepageMember");
 			
-		}else if(object.toString().equals("2")) {
-			object = (CompanyDTO)object;
+			if(object.toString().equals("1")) {
+				object = (MemberDTO)object;
+				
+			}else if(object.toString().equals("2")) {
+				object = (CompanyDTO)object;
+			}else if(object.toString().equals("3")) {
+				object = "manager";
+			}else {
+				object = "guest";
+			}
+		} catch (Exception e) {
+			
 		}
 		
 		System.out.println("회원의 코드 : "+object);
-		
 		
 		//회원의 아이디 값 얻기
 		MemberDTO memberDTO = null;
 		CompanyDTO companyDTO = null;
 		String id = null;
 		
-		if(object.toString().equals("1")) {
-			memberDTO = (MemberDTO)session.getAttribute("homepageMember");
-			System.out.println("얻은 아이디 : "+memberDTO.getM_Id());
-			id = memberDTO.getM_Id();
-		}else if(object.toString().equals("2")) {
-			companyDTO = (CompanyDTO)session.getAttribute("homepageMember");
-			System.out.println("얻은 아이디 : "+companyDTO.getC_license());
-			id = companyDTO.getC_license();
+		try {
+			if(object.toString().equals("1")) {
+				memberDTO = (MemberDTO)session.getAttribute("homepageMember");
+				System.out.println("얻은 아이디 : "+memberDTO.getM_Id());
+				id = memberDTO.getM_Id();
+				
+			}else if(object.toString().equals("2")) {
+				companyDTO = (CompanyDTO)session.getAttribute("homepageMember");
+				System.out.println("얻은 아이디 : "+companyDTO.getC_license());
+				id = companyDTO.getC_license();
+				
+			}else if(object.toString().equals("3")) {
+				System.out.println("얻은 아이디 : manager");
+				id = "manager";
+			}else {
+				System.out.println("얻은 아이디 : guest");
+				id = "guest";
+			}
+		} catch (Exception e) {
+			
 		}
 		
 		//DB

@@ -722,23 +722,6 @@ public class CustomerServiceController {
 		}
 
 		List<PlayBookDTO> list = new ArrayList<PlayBookDTO>();
-<<<<<<< HEAD
-				
-		//예매DB
-		for(int i=0; i <= diffDays; i++) {
-			playBookDTO.setImageName(eventboardDTO.getImageName());	//공연명 등록
-			playBookDTO.setPlayTicket(Integer.parseInt(eventboardDTO.getEventSeats())); //일별 총 티켓 수 등록
-			playBookDTO.setRemainTicket(0);	//일별 잔여 티켓 수 등록
-			playBookDTO.setTicketPrice(Integer.parseInt(eventboardDTO.getEventPrice())); //티켓 가격
-			playBookDTO.setBookTicket(0);		//예매된 티켓 수
-			playBookDTO.setBookMemberId(id+"");	//예매자 아이디(세션값에서)
-			playBookDTO.setBookStatus('0');		//예매 구분자 (0:예매X, 1:예매완료)
-			
-			
-			playBookDTO.setPlayDate(listDate.get(i)); 
-			
-	
-=======
 
 		// 예매DB
 		for (int i = 0; i <= diffDays; i++) {
@@ -752,7 +735,6 @@ public class CustomerServiceController {
 
 			playBookDTO.setPlayDate(listDate.get(i));
 
->>>>>>> refs/remotes/origin/Kyunggon.Kim
 			list.add(playBookDTO);
 
 			System.out.println(playBookDTO.getImageName());
