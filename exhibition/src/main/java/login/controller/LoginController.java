@@ -83,6 +83,7 @@ public class LoginController {
 		else {
 			// 세션 설정
 			System.out.println("기업명 : " + companyDTO.getC_businessname() + " 로그인 성공");
+			System.out.println("코드 : " + companyDTO.getCode());
 			session.setAttribute("homepageMemberName", companyDTO.getC_license());
 			session.setAttribute("homepageMember", companyDTO); // 회원 전체 정보
 			session.setAttribute("code", companyDTO.getCode());
