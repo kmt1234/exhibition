@@ -32,7 +32,7 @@
 		<!-- 사이드바 메뉴 -->
 		<div class="ui compact menu" style="width: 20%; height: 977px; ">
 			<a class="item" href="R_rentalForm.do">시설임대</a>
-			<a class="item" href="R_exhibition.do">전시회홀</a> 
+			<a class="item" href="R_exhibition.do">박람회홀</a> 
 			<a class="item" href="R_performance.do">공연장홀</a> 
 			<a class="item" href="R_businessRoom.do">비즈니스룸</a> 
 		</div>

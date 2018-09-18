@@ -124,16 +124,17 @@
 			</div>
 			<div class="ui compact menu" style="width: 20%;">
 				<div class="ui simple dropdown item">
-					<span id="R_rentalForm">시설/임대</span>
+					<span id="R_rentalForm">시설&임대</span>
 					<div class="menu">
-						<div class="item" id="R_exhibition">전시회 홀</div>
+						<div class="item" id="R_exhibition">박람회 홀</div>
 						<div class="item" id="R_performance">공연장 홀</div>
+						<div class="item" id="R_businessRoom">비지니스 룸</div>
 					</div>
 				</div>
 			</div>
 			<div class="ui compact menu" style="width: 20%;">
 				<div class="ui simple dropdown item">
-					<span id="T_allForm">교통/숙박/관광</span>
+					<span id="T_allForm">교통&숙박</span>
 					<div class="menu">
 						<div class="item" id="T_allFormS">교통안내</div>
 						<div class="item" id="T_hotelForm">숙박안내</div>
