@@ -10,14 +10,14 @@
 	<jsp:include page="I_header.jsp"></jsp:include>
 </header>
 <section>
-	<div style=" margin-left:400px;margin-top: 20px;">
+	<div style="margin-top: 20px; height:500px;">
 	<jsp:include page="${display }"/>
 	</div>
 </section>
 
 <footer>
 <div class="ui five column grid container">
-	<div class="ui compact menu" style="width: 100%; float: right; ">
+	<div  style="width: 100%; float: right; ">
 		<jsp:include page="../main/I_footer.jsp" ></jsp:include>
 	</div>
 </div>

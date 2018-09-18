@@ -3,6 +3,7 @@ package rental.dao;
 import java.util.List;
 import java.util.Map;
 
+import customerService.bean.SalesExhigitionDTO;
 import performance.bean.PerformanceDTO;
 import rental.bean.ExhibitionDTO;
 

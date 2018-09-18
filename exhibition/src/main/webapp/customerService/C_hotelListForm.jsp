@@ -23,13 +23,13 @@
 
 }
 
-#currentEventPaging{
+#currentHotelPaging{
 	color: red;
 	text-decoration: underline;
 	cursor: pointer;
 }
 
-#eventpaging{
+#hotelpaging{
 	color: black;
 	text-decoration: none;
 	cursor: pointer;
@@ -89,10 +89,11 @@
 							
 							<c:forEach items="${list}" var="list">
 								
-								<c:if test="${list ne null}">	
+								<c:if test="${list ne null}">
 										<tr>
 											<td rowspan="2"><input type="checkbox" name="check" class="check" value="${list.seq}"></td>
-											<td rowspan="2" align="center">${list.seq}</td>
+											<td rowspan="2" align="center">${list.seq}<br>
+											<a href="/exhibition/customerService/C_hotel_modify.do?seq=${list.seq}">수정</a></td>
 											<td rowspan="2" align="center"><img src="../storage/${list.image1}" width="200" height="150"></td>
 											<td rowspan="2" align="center">${list.imageName}</td>	
 											<td>${list.eventLink}</td>
@@ -100,12 +101,13 @@
 										<tr>
 											<td>${list.eventPlace}</td>
 										</tr>
+									
 								</c:if>
 		
 							</c:forEach>
 								
 					</table>
-					
+					<div align="center">${imageboardPaging.pagingHTML }</div>
 					<div style="float:left;">
 						<input type="button" value="선택삭제" id="hotelDeleteBtn">
 					</div>
@@ -124,6 +126,9 @@
 	
 </body>
 <script>
+function hotelboardPaging(pg){
+	location.href="/exhibition/customerService/C_hotelListForm.do?pg="+pg
+}
 $(document).ready(function(){
 	//전체선택
 	$('#checkAll').click(function(){

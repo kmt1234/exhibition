@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ------------------------------------------------DB------------------------------------------------------------
 //°³ÀÎÈ¸¿ø DB
 create table memberTable(	
@@ -94,13 +95,13 @@ create sequence seq_eventboard  nocache nocycle;
 CREATE TABLE eventboard_play(
      seq NUMBER PRIMARY KEY,            --½ÃÄö½º      
      postSelect number default(2),               --±¸ºÐ(ºÐ·ù) ¹Ú¶÷È¸ : 1 ¿¬±Ø : 2
-     imageName VARCHAR2(40) NOT NULL,   --Á¦¸ñ
+     imageName VARCHAR2(500) NOT NULL,   --Á¦¸ñ
      image1 varchar2(500),              --ÀÌ¹ÌÁö¸í
      startDate date,                   --³¯Â¥1
      endDate date,                     --³¯Â¥2
      eventLink varchar2(200),            --¸µÅ©
-     startTime varchar2(30),		--½ÃÀÛÀÏ
-     endTime varchar2(30),		--Á¾·áÀÏ
+     startTime varchar2(30),		--½ÃÀÛ½Ã°£
+     endTime varchar2(30),		--Á¾·á½Ã°£
      eventPlace varchar2(100),	--Àå¼Ò
      eventPrice varchar2(100),	--°¡°Ý
      eventSeats varchar2(100),	--°ü¶÷ÁÂ¼®
@@ -169,6 +170,25 @@ create sequence seq_hotel_list nocycle nocache;
 
 
 
+--¿¬±Ø ÀÏÀÚº° DB
+create table eventboard_play_book(
+ seq NUMBER PRIMARY KEY,            --½ÃÄö½º     
+ imageName VARCHAR2(500) NOT NULL,  --°ø¿¬¸í
+ playDate date,                     --°ø¿¬ÀÏÀÚ(½ÃÀÛ/Á¾·á)
+ playTicket VARCHAR2(100),           --ÀÏº° ÃÑ Æ¼ÄÏ ¼ö
+ remainTicket VARCHAR2(100),         --ÀÏº° ÀÜ¿© Æ¼ÄÏ ¼ö
+ ticketPrice VARCHAR2(100),          --Æ¼ÄÏ °¡°Ý
+ bookTicket VARCHAR2(100),           --¿¹¸ÅµÈ Æ¼ÄÏ ¼ö
+ bookMemberId VARCHAR2(300),         --µî·ÏÇÑ ¾ÆÀÌµð(»èÁ¦¿¹Á¤)
+ bookStatus char(1) CONSTRAINT bookStatus_CK    --¿¹¸Å »óÅÂ(0 : ¿¹¸ÅX , 1 : ¿¹¸Å¿Ï·á)
+    check(bookStatus IN ('0','1'))
+);
+
+create sequence seq_eventboard_play_book  nocache nocycle;  --¿¹¸ÅDB ½ÃÄö½º
+
+
+
+
 //µ¿ÇõÀÌ²¨ ÀÓ½Ã
 create table calendar2(
 code varchar2(5),
@@ -183,3 +203,224 @@ insert into calendar2 values('1','¾Æ¾Æ¾Æ','20180928','20181005');
 insert into calendar2 values('2','°ÅÁþ¸»','20180908','20180912');
 
 commit;
+
+
+=======
+------------------------------------------------DB------------------------------------------------------------
+//ï¿½ï¿½ï¿½ï¿½È¸ï¿½ï¿½ DB
+create table memberTable(	
+M_Name varchar2(30) not null,	    --ï¿½Ì¸ï¿½
+M_Id varchar2(30) primary key,  --ï¿½ï¿½ï¿½Ìµï¿½ (ï¿½âº»Å°, unique, not null, ï¿½ï¿½ï¿½á¼º ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
+M_Pwd varchar2(30) not null,    --ï¿½ï¿½Ð¹ï¿½È£
+M_Email varchar2(50),           --ï¿½Ì¸ï¿½ï¿½ï¿½		
+M_Phone varchar2(15),	--ï¿½Úµï¿½ï¿½ï¿½
+code number default(1)	--ï¿½Úµï¿½(1=ï¿½ï¿½ï¿½ï¿½, 2=ï¿½ï¿½ï¿½ï¿½ï¿½) : ï¿½âº»ï¿½ï¿½:1
+);	
+
+//ï¿½ï¿½ï¿½ï¿½È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+insert into memberTable (M_Name, M_Id, M_Pwd,M_Email, M_Phone) values('È«ï¿½æµ¿','hong123','test123','toad001@nate.com','01012341234');
+insert into memberTable (M_Name, M_Id, M_Pwd,M_Email, M_Phone) values('ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½','gaeddong123','test123','toad001@nate.com','01012341234');
+select * from memberTable;
+drop table memberTable;
+commit;
+rollback;
+
+
+//ï¿½ï¿½ï¿½ï¿½ï¿½ DB
+CREATE TABLE company(
+     C_businessname VARCHAR2(100) NOT NULL,  -- ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½
+     C_license VARCHAR2(40) primary key,       -- ï¿½ï¿½ï¿½ï¿½Úµï¿½Ï¹ï¿½È£
+     C_password VARCHAR2(40) NOT NULL,     -- ï¿½ï¿½È£
+     C_corporate VARCHAR2(40) NOT NULL,     -- ï¿½ï¿½ï¿½Î¹ï¿½È£
+     C_condition VARCHAR2(40) NOT NULL,     -- ï¿½ï¿½ï¿½ï¿½
+     C_postnumbox VARCHAR2(40) NOT NULL,      -- ï¿½ï¿½ï¿½ï¿½ï¿½È£
+     C_address1 VARCHAR2(100) NOT NULL,      -- ï¿½Ö¼ï¿½1
+     C_address2 VARCHAR2(100) NOT NULL,      -- ï¿½Ö¼ï¿½2
+     C_representative VARCHAR2(40) NOT NULL,-- ï¿½ï¿½Ç¥ï¿½ï¿½
+     C_tel VARCHAR2(40) NOT NULL,           -- ï¿½ï¿½È­ï¿½ï¿½È£
+     C_email VARCHAR2(50) NOT NULL,          -- ï¿½Ì¸ï¿½ï¿½ï¿½
+     code number default(2)
+ );
+
+//ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ DB
+create table customerService(
+email varchar2(50) not null,			--ï¿½Ì¸ï¿½ï¿½ï¿½
+classify varchar2(50) not null,			--ï¿½Ð·ï¿½
+name varchar2(30) not null,			--ï¿½Ì¸ï¿½
+tel varchar2(15),				--ï¿½Úµï¿½ï¿½ï¿½
+subject varchar2(100) not null,		--ï¿½ï¿½ï¿½ï¿½
+content varchar2(100) not null,		--ï¿½ï¿½ï¿½ï¿½
+logtime DATE DEFAULT SYSDATE);		--ï¿½ï¿½Â¥
+
+//ï¿½Î½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ìºï¿½
+create table exhibitionRental(
+boothName varchar2(40) not null,
+C_license varchar2(40) not null,
+C_tel varchar2(40) not null,
+C_email varchar2(40) not null,
+totalRent number not null,
+code varchar2(30) not null,
+title varchar2(40) not null,
+startDate date not null,
+endDate date not null
+);
+
+//ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ DB
+CREATE TABLE customerImageboard(
+     seq NUMBER PRIMARY KEY,         --ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½      
+     postSelect number default(0),   --ï¿½ï¿½ï¿½ï¿½(ï¿½Ð·ï¿½) ï¿½ï¿½ï¿½ï¿½:0
+     imageName VARCHAR2(40) NOT NULL,--ï¿½ï¿½ï¿½ï¿½
+     image1 varchar2(500),          --ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½
+     startDate1 date,   --ï¿½ï¿½Â¥1
+     endDate2 date,   --ï¿½ï¿½Â¥2
+     eventLink varchar2(200)    --ï¿½ï¿½Å© 
+ );
+ 
+ create sequence seq_customerImageboard  nocache nocycle;
+
+//ï¿½Ú¶ï¿½È¸ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ DB
+CREATE TABLE eventboard(
+     seq NUMBER PRIMARY KEY,            --ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½      
+     postSelect number default(1),               --ï¿½ï¿½ï¿½ï¿½(ï¿½Ð·ï¿½) ï¿½Ú¶ï¿½È¸ : 1 ï¿½ï¿½ï¿½ï¿½ : 2
+     imageName VARCHAR2(40) NOT NULL,   --ï¿½ï¿½ï¿½ï¿½
+     image1 varchar2(500),              --ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½
+     startDate date,                   --ï¿½ï¿½Â¥1
+     endDate date,                     --ï¿½ï¿½Â¥2
+     eventLink varchar2(200),            --ï¿½ï¿½Å©
+     startTime varchar2(30),		--ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+     endTime varchar2(30),		--ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+     eventPlace varchar2(100),	--ï¿½ï¿½ï¿½
+     eventPrice varchar2(100),	--ï¿½ï¿½ï¿½ï¿½
+     eventSeats varchar2(100),	--ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
+     eventRate varchar2(100),		--ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+     eventContent varchar2(4000)	--ï¿½Ò°ï¿½ ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½)
+ );
+ 
+create sequence seq_eventboard  nocache nocycle;
+
+// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ DB
+CREATE TABLE eventboard_play(
+     seq NUMBER PRIMARY KEY,            --ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½      
+     postSelect number default(2),               --ï¿½ï¿½ï¿½ï¿½(ï¿½Ð·ï¿½) ï¿½Ú¶ï¿½È¸ : 1 ï¿½ï¿½ï¿½ï¿½ : 2
+     imageName VARCHAR2(500) NOT NULL,   --ï¿½ï¿½ï¿½ï¿½
+     image1 varchar2(500),              --ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½
+     startDate date,                   --ï¿½ï¿½Â¥1
+     endDate date,                     --ï¿½ï¿½Â¥2
+     eventLink varchar2(200),            --ï¿½ï¿½Å©
+     startTime varchar2(30),		--ï¿½ï¿½ï¿½Û½Ã°ï¿½
+     endTime varchar2(30),		--ï¿½ï¿½ï¿½ï¿½Ã°ï¿½
+     eventPlace varchar2(100),	--ï¿½ï¿½ï¿½
+     eventPrice varchar2(100),	--ï¿½ï¿½ï¿½ï¿½
+     eventSeats varchar2(100),	--ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
+     eventRate varchar2(100),		--ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+     eventContent varchar2(4000)	--ï¿½Ò°ï¿½ ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½)
+ );
+ 
+create sequence seq_eventboard_play  nocache nocycle;
+
+
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+create table C_notice(
+seq number primary key,
+subject varchar2(50) not null,
+content varchar2(500) not null,
+logtime date default sysdate);
+
+create sequence seq_C_notice nocycle nocache;
+
+//ï¿½ï¿½ï¿½Ö¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+create table C_QnA (
+seq number primary key,
+subject varchar2(200) not null,
+content varchar2(500) not null);
+
+create sequence seq_C_QnA nocycle nocache;
+
+
+
+//ï¿½ï¿½ï¿½ï¿½ ï¿½Ò¸ï¿½
+create table C_inquire(
+seq number primary key,
+email varchar2(50) not null,
+classify varchar2(50) not null,
+name varchar2(50) not null,
+tel varchar2(20),
+subject varchar2(50) not null,
+content varchar2(300) not null,
+logtime DATE DEFAULT sysdate);
+
+
+create sequence seq_C_inquire nocycle nocache;
+
+
+//ï¿½Ö¿ï¿½Ã¼ï¿½ ï¿½ï¿½ï¿½ï¿½Ã³
+create table C_contactList(
+seq number primary key,
+classify varchar2(50) not null,
+agency varchar2(50) not null,
+name varchar2(30) not null,
+contact varchar2(50) not null);
+
+create sequence seq_C_contactList nocycle nocache;
+
+
+//È£ï¿½Ú¸ï¿½ï¿½ï¿½Æ®
+create table hotel_list(
+seq number primary key,
+postSelect number default(3),      --ï¿½ï¿½ï¿½ï¿½(ï¿½Ð·ï¿½) ï¿½Ú¶ï¿½È¸ : 1 ï¿½ï¿½ï¿½ï¿½ : 2
+imageName VARCHAR2(40) NOT NULL,   --ï¿½ï¿½ï¿½ï¿½
+image1 varchar2(500) NOT NULL,     --ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+eventLink varchar2(200) NOT NULL,  --ï¿½ï¿½Å©
+eventPlace varchar2(100) NOT NULL  --TEL
+);
+create sequence seq_hotel_list nocycle nocache;
+
+
+
+--ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úºï¿½ DB
+create table eventboard_play_book(
+ seq NUMBER PRIMARY KEY,            --ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½     
+ imageName VARCHAR2(500) NOT NULL,  --ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ playDate date,                     --ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½)
+ playTicket VARCHAR2(100),           --ï¿½Ïºï¿½ ï¿½ï¿½ Æ¼ï¿½ï¿½ ï¿½ï¿½
+ remainTicket VARCHAR2(100),         --ï¿½Ïºï¿½ ï¿½Ü¿ï¿½ Æ¼ï¿½ï¿½ ï¿½ï¿½
+ ticketPrice VARCHAR2(100),          --Æ¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+ bookTicket VARCHAR2(100),           --ï¿½ï¿½ï¿½Åµï¿½ Æ¼ï¿½ï¿½ ï¿½ï¿½
+ bookMemberId VARCHAR2(300),         --ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
+ bookStatus char(1) CONSTRAINT bookStatus_CK    --ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(0 : ï¿½ï¿½ï¿½ï¿½X , 1 : ï¿½ï¿½ï¿½Å¿Ï·ï¿½)
+    check(bookStatus IN ('0','1'))
+);
+
+create sequence seq_eventboard_play_book  nocache nocycle;  --ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úºï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+
+
+
+//ï¿½ï¿½ï¿½ï¿½ DB
+create table book_play_members(
+imageName	VARCHAR2(500),
+playDate	DATE NOT NULL,
+memberId	VARCHAR2(100) NOT NULL,
+ticketQty	VARCHAR2(30) NOT NULL
+);
+
+create sequence seq_book_play_members  nocache nocycle;  --ï¿½ï¿½ï¿½ï¿½ DB ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+
+
+
+//ï¿½ï¿½ï¿½ï¿½ï¿½Ì²ï¿½ ï¿½Ó½ï¿½
+create table calendar2(
+code varchar2(5),
+title varchar2(30),
+startDate date,
+endDate date
+);
+
+insert into calendar2 values('2','ï¿½ï¿½ï¿½Ì¾ï¿½','20180910','20180913');
+insert into calendar2 values('1','ï¿½Æ¾Æ¾ï¿½','20180918','20180922');
+insert into calendar2 values('1','ï¿½Æ¾Æ¾ï¿½','20180928','20181005');
+insert into calendar2 values('2','ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½','20180908','20180912');
+
+commit;
+
+
+>>>>>>> refs/remotes/origin/shinwork

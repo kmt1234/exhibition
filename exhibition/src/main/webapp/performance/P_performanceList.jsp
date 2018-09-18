@@ -75,6 +75,7 @@ pre{
 				</c:if>
 				
 				<c:forEach items="${list}" var="list">	
+					<tr><td>${list.seq}</td></tr>
 					<tr>
 						<td rowspan="5"><a target="_blank" href="${list.eventLink}"><img class="play_img" src="../storage/${list.image1}" width="300px" height="350px"></a></td>
 						
@@ -94,7 +95,7 @@ pre{
 						<td><span><a target="_blank" href="${list.eventLink}">홈페이지 방문</a></span></td>
 					</tr>
 					<tr>
-						<td colspan="2"><div align="center"><input type="button" value="예약하기"></div></td>
+						<td colspan="2"><div align="left"><input type="button" class="performance_bookBtn" value="예약하기"></div></td>
 					</tr>
 					
 					
