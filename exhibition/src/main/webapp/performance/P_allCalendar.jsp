@@ -128,19 +128,17 @@ var dataSet = [
 				</td>
 			</tr>
 		</table>
-		 <span style="float: right;">
+		 <span style="float: right; margin-right:30px; ">
 		 <img src="../img/Ex.png" style="width:25px; height: 25px; " align='absmiddle'> 전시회
 		 </span>
 		 
-		 <span style="float: right;">
+		 <span style="float: right; margin-right:30px; ">
 		 	<img src="../img/Ev.png" style="width:25px; height: 25px;" align='absmiddle'> 공연  &ensp;&ensp;
 		 </span>
 	</div>
-		<br>
-		<br>
-	
-		<br>
-		<br>
+		<br><br><br><br>
 		<div  id='calendar'></div>
+
 </body>
+<script src="../js/p_exhibitionCalendar.js"></script>
 </html>

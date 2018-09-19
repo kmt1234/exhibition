@@ -29,7 +29,7 @@
 	비즈니스 
 	<span class="h-light">룸</span>
 </h2>
-<table style=" width: 40%;">
+<table style="margin-left:20px; width: 40%;">
 		<tr>
 			<td>
 				<button class="middle ui button" style="width: 50%;" id="3F">
