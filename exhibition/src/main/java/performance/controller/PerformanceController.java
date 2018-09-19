@@ -164,7 +164,7 @@ public class PerformanceController {
 				object = (CompanyDTO)object;
 				
 			}else if(object.toString().equals("3")) {
-				object = "manager";
+				object = (MemberDTO)object;
 			}else {
 				object = "guest";
 			}
@@ -327,7 +327,7 @@ public class PerformanceController {
 			}else if(object.toString().equals("2")) {
 				object = (CompanyDTO)object;
 			}else if(object.toString().equals("3")) {
-				object = "manager";
+				object = (MemberDTO)object;
 			}else {
 				object = "guest";
 			}
@@ -430,7 +430,7 @@ public class PerformanceController {
 			}else if(object.toString().equals("2")) {
 				object = (CompanyDTO)object;
 			}else if(object.toString().equals("3")) {
-				object = "manager";
+				object = (MemberDTO)object;
 			}else {
 				object = "guest";
 			}
@@ -508,7 +508,7 @@ public class PerformanceController {
 			}else if(object.toString().equals("2")) {
 				object = (CompanyDTO)object;
 			}else if(object.toString().equals("3")) {
-				object = "manager";
+				object = (MemberDTO)object;
 			}else {
 				object = "guest";
 			}
@@ -613,7 +613,7 @@ public class PerformanceController {
 			}else if(object.toString().equals("2")) {
 				object = (CompanyDTO)object;
 			}else if(object.toString().equals("3")) {
-				object = "manager";
+				object = (MemberDTO)object;
 			}else {
 				object = "guest";
 			}
@@ -781,6 +781,40 @@ public class PerformanceController {
 		}else {
 			return "choseDate";
 		} 
+	}
+	
+	//전시회 잔여좌석 보다 구매티켓이 높을 경우 구매 못하게 막음
+	@RequestMapping(value="book_exhibition_checkBuy", method=RequestMethod.POST)
+	public @ResponseBody String book_exhibition_checkBuy(@RequestParam String wantTicket, @RequestParam String imageName, @RequestParam String playDate) {
+		
+		if(playDate.equals("날짜선택")) {
+			playDate = "2000년01월01일";
+		}
+		
+		//날짜 형식 변경(년,월,일 제거)
+		playDate=playDate.replace("년", "");
+		playDate=playDate.replace("월", "");
+		playDate=playDate.replace("일", "");
+		
+		//Map에 담기
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("imageName", imageName);
+		map.put("playDate", playDate);
+		
+		//DB
+		String remainSeats = performanceDAO.checkRemainSeats_ex(map);	//선택일자의 해당 연극 전체좌석 가져오기(기본값:일별 티켓 발행 수)
+		String usedSeats = performanceDAO.checkUsedSeats_ex(map);		//선택일자의  해당 연극 예매된 티켓 수 가져오기
+		
+		if(remainSeats==null) remainSeats = 0+"";
+		if(usedSeats==null) usedSeats = 0+"";
+	
+		//잔여좌석 - 예매된 티켓 수 = 예매 가능한 좌석 수()
+		int resultSeats = Integer.parseInt(remainSeats) - Integer.parseInt(usedSeats);
+		
+		if(resultSeats - Integer.parseInt(wantTicket) >= 0) {
+			return "ok";
+		}else
+			return "no";
 	}
 	
 	//달력 메소드

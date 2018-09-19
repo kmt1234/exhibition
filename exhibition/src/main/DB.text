@@ -205,10 +205,10 @@ create table eventboard_exhibition_book(
 create sequence seq_eventboard_exhibition_book  nocache nocycle;  --예매DB 시퀀스
 
 --전시회 예매자 DB
-create Book_Exhibition_Members(
-IMAGENAME	VARCHAR2(500)
-PLAYDATE	DATE
-MEMBERID	VARCHAR2(100)
+create table Book_Exhibition_Members(
+IMAGENAME	VARCHAR2(500),
+PLAYDATE	DATE,
+MEMBERID	VARCHAR2(100),
 TICKETQTY	VARCHAR2(30)
 );
 
