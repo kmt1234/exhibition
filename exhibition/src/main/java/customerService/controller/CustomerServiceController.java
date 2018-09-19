@@ -53,7 +53,7 @@ public class CustomerServiceController {
 	private JavaMailSenderImpl emailSender;
 	@Autowired
 	private ImageboardPaging imageboardPaging;
-	private String filePath = "C:\\Users\\user\\git\\exhibition\\exhibition\\src\\main\\webapp\\storage\\";
+	private String filePath = "C:\\Users\\kmtab\\git\\exhibition\\exhibition\\src\\main\\webapp\\storage\\";
 	@Autowired
 	private CustomerServicePaging customerServicePaging;
 	@Autowired
@@ -548,13 +548,23 @@ public class CustomerServiceController {
 		return mav;
 	}
 
+	
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	
+	
 	// 이미지 boardWriteForm
 	@RequestMapping(value = "C_mainImageboardForm", method = RequestMethod.GET)
-	public ModelAndView imageboardWriteForm() {
-
+	public ModelAndView imageboardWriteForm(@RequestParam String postSelect) {
 		ModelAndView mav = new ModelAndView();
-
-		mav.addObject("postSelect", "0");
+		if(postSelect.equals("0")) {
+			mav.addObject("display", "/customerService/INCLUDE_imageboard.jsp");
+		}else if(postSelect.equals("1")) {
+			mav.addObject("display", "/customerService/INCLUDE_event.jsp");
+		}else if(postSelect.equals("2")) {
+			mav.addObject("display", "/customerService/INCLUDE_play.jsp");
+		}else if(postSelect.equals("3")) {
+			mav.addObject("display", "/customerService/INCLUDE_hotel.jsp");
+		}
 		mav.setViewName("/customerService/C_mainImageboardForm");
 		return mav;
 	}
@@ -574,8 +584,6 @@ public class CustomerServiceController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-		imageboardDTO.setImage1(fileName);
 		// DB
 		customerServiceDAO.imageboardWrite(imageboardDTO);
 		model.addAttribute("imageboardDTO", imageboardDTO);
@@ -664,7 +672,8 @@ public class CustomerServiceController {
 	@RequestMapping(value = "C_eventInfoWrite_play", method = RequestMethod.POST)
 	public ModelAndView C_exhibitionInfoWrite_play(@ModelAttribute EventboardDTO eventboardDTO,
 			@RequestParam MultipartFile img, HttpSession session) {
-
+		
+		System.out.println("이게뭐야");
 		// 경로 바꿔야함***
 		String fileName = img.getOriginalFilename();
 
@@ -678,11 +687,12 @@ public class CustomerServiceController {
 		}
 
 		eventboardDTO.setImage1(fileName);
-
+		System.out.println(eventboardDTO.getImageName());
 		// 세션에서 아이디 얻기
 		MemberDTO memberDTO = (MemberDTO) session.getAttribute("homepageMember");
 		String id = memberDTO.getM_Id();
-
+		
+		System.out.println(id);
 		// String 타입 날짜를 Date 형식으로 변환(연극 기간 구하기)
 		eventboardDTO.setStartDate(eventboardDTO.getStartDate().substring(0, 10).replaceAll("/", "-"));
 		eventboardDTO.setEndDate(eventboardDTO.getEndDate().substring(0, 10).replaceAll("/", "-"));

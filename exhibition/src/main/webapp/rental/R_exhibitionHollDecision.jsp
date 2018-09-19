@@ -78,6 +78,7 @@
     <div class="ui approve button">확인</div>
   </div>
 </div>
+
 <input type="hidden" id="code" value="${code}">
 
 <script src='../calendar2/lib/moment.min.js'></script>

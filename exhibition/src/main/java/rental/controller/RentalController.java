@@ -128,9 +128,18 @@ public class RentalController {
 		
 		
 		List<BusinessRoomDTO> list = businessRoomDAO.getCalendar(businessRoom);
+		
 		for(BusinessRoomDTO data : list) {
 			data.setStartDate(data.getStartDate().substring(0, 10));
-			
+			if(data.getFirst().equals("Y")) {
+				data.setTitle("09 ~ 12");
+			} else if(data.getSecond().equals("Y")) {
+				data.setTitle("12 ~ 15");
+			} else if(data.getThird().equals("Y")) {
+				data.setTitle("15 ~ 18");
+			} else if(data.getFourth().equals("Y")) {
+				data.setTitle("18 ~ 21");
+			}
 		}
 		
 		modelMap.addAttribute("listView", list);

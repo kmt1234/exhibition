@@ -385,7 +385,7 @@
 									,#{imageName}
 									,#{playDate}
 									,#{playTicket}
-									,#{playTicket}
+									,#{remainTicket}
 									,#{ticketPrice}
 									,#{bookTicket}
 									,#{bookMemberId}

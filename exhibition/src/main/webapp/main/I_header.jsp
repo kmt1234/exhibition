@@ -112,8 +112,8 @@
 			</div><!--class="column"-->
 		</div><!--id="main"-->
 		
-		<div class="ui five column grid container">
-			<div class="ui compact menu">
+		<div style="min-width: 1170px;  position: relative;">
+			<div class="ui compact menu" style="display: inline-block; width:227px;  position: relative; ">
 				<div class="ui simple dropdown item">
 					<span id="P_performanceForm">일정</span>
 					<div class="menu">
@@ -123,7 +123,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="ui compact menu" style="width: 20%;">
+			<div class="ui compact menu" style="width: 20%; display: inline-block; width:227px;  position: relative;">
 				<div class="ui simple dropdown item">
 					<span id="R_rentalForm">시설&임대</span>
 					<div class="menu">
@@ -133,7 +133,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="ui compact menu" style="width: 20%;">
+			<div class="ui compact menu" style="width: 20%; display: inline-block; width:227px;  position: relative;">
 				<div class="ui simple dropdown item">
 					<span id="T_allForm">교통&숙박</span>
 					<div class="menu">
@@ -142,7 +142,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="ui compact menu" style="width: 20%;">
+			<div class="ui compact menu" style="width: 20%; display: inline-block; width:227px;  position: relative;">
 
 	            <div class="ui simple dropdown item">
 	               <span id="C_customerServiceForm" >고객센터</span>
@@ -162,7 +162,7 @@
 	               </div>
 	            </div>
 		    </div>
-			<div class="ui compact menu" style="width: 20%;">
+			<div class="ui compact menu" style="width: 20%; display: inline-block; width:227px;">
 				<div class="ui simple dropdown item">
 					<span id="I_infoForm">소개</span> 
 					<div class="menu">
@@ -185,7 +185,7 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js?ver=1"
 	integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
 	crossorigin="anonymous"></script>
-<script src="../semantic/semantic.min.js"></script>
+<script src="../semantic/semantic.min.js?ver=1"></script>
 <script src="../js/index.js?ver=1" charset="UTF-8"></script> 
 <script src="../js/member.js" charset="UTF-8"></script> 
 <script src="../js/company.js" charset="UTF-8"></script>

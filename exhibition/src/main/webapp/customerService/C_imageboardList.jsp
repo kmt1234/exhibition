@@ -119,7 +119,7 @@ $(document).ready(function(){
 	
 	//업로드 버튼
 	$('.eventUploadBtn').click(function(){
-		location.href='/exhibition/customerService/C_mainImageboardForm.do';
+		location.href='/exhibition/customerService/C_mainImageboardForm.do?postSelect=0';
 	});
 });
 </script>
