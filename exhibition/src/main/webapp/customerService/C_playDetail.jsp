@@ -51,8 +51,10 @@
 				연극
 				<span class="h-light">수정</span>
 			</h2>
-<form name="playboardModForm" id="playboardModForm" method="POST"
+<form id="playboardModForm" method="POST"
 	enctype="multipart/form-data">
+	<input type="hidden" name="postSelect" value="2">
+	<input type="hidden" name="seq" value="${eventboardDTO.seq}">
 			<!-- 내용 입력 -->
 <div style="width: 60%;align:left">
 	<br>
@@ -65,7 +67,7 @@
   	<br><br>
   	<div class="ui inverted input" style="width: 200px; height: 150px;">
   		<div class="ui left icon input" style="width: 100%; height: 50px;">
-			<img src="../storage/${eventboardDTO.image1}" name="img" id="imgView" width="200px" height="150px">
+			<img src="../storage/${eventboardDTO.image1}" name="imaView" id="imaView" width="200px" height="150px">
 	 	</div>
 	</div>
 	<div class="ui inverted input" style="width: 100%;">
@@ -161,7 +163,9 @@
 <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script><!--달력-->
 <script>
 $(document).ready(function(){
-	
+	$('#ModeButton').click(function(){
+		$('#playboardModForm').attr('action','/exhibition/customerService/C_playboardMod.do').submit();
+	});
 });
 </script>
 </html>

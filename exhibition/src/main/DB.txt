@@ -182,6 +182,7 @@ create sequence seq_hotel_list nocycle nocache;
 create table eventboard_play_book(
  seq NUMBER PRIMARY KEY,            --시퀀스     
  imageName VARCHAR2(500) NOT NULL,  --공연명
+  eventLink VARCHAR2(200),            --링크
  playDate date,                     --공연일자(시작/종료)
  playTicket VARCHAR2(100),           --일별 총 티켓 수
  remainTicket VARCHAR2(100),         --일별 잔여 티켓 수
@@ -196,9 +197,9 @@ create sequence seq_eventboard_exhibition_book  nocache nocycle;  --예매DB 시
 
 --전시회 예매자 DB
 create Book_Exhibition_Members(
-IMAGENAME	VARCHAR2(500)
-PLAYDATE	DATE
-MEMBERID	VARCHAR2(100)
+IMAGENAME	VARCHAR2(500),
+PLAYDATE	DATE,
+MEMBERID	VARCHAR2(100),
 TICKETQTY	VARCHAR2(30)
 );
 

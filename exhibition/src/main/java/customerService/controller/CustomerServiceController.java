@@ -1002,25 +1002,28 @@ public class CustomerServiceController {
 		EventboardDTO eventboardDTO = customerServiceDAO.getPlayboard(seq);
 
 		ModelAndView mav = new ModelAndView();
-		System.out.println(eventboardDTO.getStartDate());
 		mav.addObject("eventboardDTO", eventboardDTO);
 		mav.addObject("postSelect", "2");
-		mav.addObject("modify", "1");
 		mav.setViewName("/customerService/C_playDetail");
 		return mav;
 	}
 
 	// 연극 업로드 리스트 삭제
 	@RequestMapping(value = "C_eventboardDelete_play", method = RequestMethod.POST)
-	public ModelAndView C_eventboardDelete_play(@RequestParam String[] check) {
+	public ModelAndView C_eventboardDelete_play(@RequestParam String[] check, @RequestParam String[] eventLink) {
 
 		List<Integer> list = new ArrayList<Integer>();
 		for (String seq : check) {
 			list.add(Integer.parseInt(seq));
 		}
+		List<String> list2 = new ArrayList<String>();
+		for (String eventLink2 : eventLink) {
+			list2.add(eventLink2);
+		}
 
 		// DB
 		customerServiceDAO.eventboardDelete_play(list);
+		customerServiceDAO.eventboardDelete_play_book(list2);
 
 		return new ModelAndView("redirect:/customerService/C_eventboardList_playForm.do");
 	}
@@ -1106,7 +1109,97 @@ public class CustomerServiceController {
 		model.addAttribute("hotelboardDTO", hotelboardDTO);
 		return "/customerService/C_hotel_modify";
 	}
-
+	// 메인이미지 수정완료 클릭시 DB내용 수정
+	@RequestMapping(value = "C_imageboardMod", method = RequestMethod.POST)
+	public ModelAndView C_imageboardMod(@ModelAttribute ImageboardDTO imageboardDTO, @RequestParam MultipartFile img) {
+		System.out.println(imageboardDTO.getSeq());
+		if (!img.isEmpty()) {
+			File fileDelete = new File(filePath + imageboardDTO.getImage1());
+			if (fileDelete.exists())
+				fileDelete.delete();
+			String fileName = img.getOriginalFilename();
+			File file = new File(filePath, fileName);
+			try {
+				FileCopyUtils.copy(img.getInputStream(), new FileOutputStream(file));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			imageboardDTO.setImage1(fileName);
+			customerServiceDAO.C_imageboardMod(imageboardDTO);
+		}else {
+			String fileName = img.getOriginalFilename();
+			File file = new File(filePath, fileName);
+			try {
+				FileCopyUtils.copy(img.getInputStream(), new FileOutputStream(file));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			imageboardDTO.setImage1(fileName);
+			customerServiceDAO.C_imageboardMod(imageboardDTO);
+		}
+		return new ModelAndView("redirect:/customerService/C_mainImageboardListForm.do");
+	}
+	
+	// 박람회 수정완료 클릭시 DB내용 수정
+	@RequestMapping(value = "C_eventboardMod", method = RequestMethod.POST)
+	public ModelAndView C_eventboardMod(@ModelAttribute EventboardDTO eventboardDTO, @RequestParam MultipartFile img) {
+		if (!img.isEmpty()) {
+			File fileDelete = new File(filePath + eventboardDTO.getImage1());
+			if (fileDelete.exists())
+				fileDelete.delete();
+			String fileName = img.getOriginalFilename();
+			File file = new File(filePath, fileName);
+			try {
+				FileCopyUtils.copy(img.getInputStream(), new FileOutputStream(file));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			eventboardDTO.setImage1(fileName);
+			customerServiceDAO.C_eventboardMod(eventboardDTO);
+		} else {
+			String fileName = img.getOriginalFilename();
+			File file = new File(filePath, fileName);
+			try {
+				FileCopyUtils.copy(img.getInputStream(), new FileOutputStream(file));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			eventboardDTO.setImage1(fileName);
+			customerServiceDAO.C_eventboardMod(eventboardDTO);
+		}
+		return new ModelAndView("redirect:/customerService/C_eventboardListForm.do");
+	}
+	
+	// 연극 수정완료 클릭시 DB내용 수정
+	@RequestMapping(value = "C_playboardMod", method = RequestMethod.POST)
+	public ModelAndView C_playboardMod(@ModelAttribute EventboardDTO eventboardDTO, @RequestParam MultipartFile img) {
+		if (!img.isEmpty()) {
+			File fileDelete = new File(filePath + eventboardDTO.getImage1());
+			if (fileDelete.exists())
+				fileDelete.delete();
+			String fileName = img.getOriginalFilename();
+			File file = new File(filePath, fileName);
+			try {
+				FileCopyUtils.copy(img.getInputStream(), new FileOutputStream(file));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			eventboardDTO.setImage1(fileName);
+			customerServiceDAO.C_playboardMod(eventboardDTO);
+		}else {
+			String fileName = img.getOriginalFilename();
+			File file = new File(filePath, fileName);
+			try {
+				FileCopyUtils.copy(img.getInputStream(), new FileOutputStream(file));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			eventboardDTO.setImage1(fileName);
+			customerServiceDAO.C_playboardMod(eventboardDTO);
+		}
+		return new ModelAndView("redirect:/customerService/C_eventboardList_playForm.do");
+	}
+	
 	// 호텔 수정완료 클릭시 DB내용 수정
 	@RequestMapping(value = "C_hotelboardMod", method = RequestMethod.POST)
 	public ModelAndView C_hotelboardMod(@ModelAttribute HotelboardDTO hotelboardDTO, @RequestParam MultipartFile img) {
