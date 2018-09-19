@@ -5,7 +5,7 @@
 <br>
 	<div>
 		<ul>
-			<li><img src="../img/ipecLogo.png" style="width: 90px; height: 80px; margin-bottom: 30px" align="left"></li>
+			<li><img src="../img/ipecLogo.png" style="min-width: 90px; height: 80px; margin-bottom: 30px" align="left"></li>
 		</ul>
 	</div>
 	<div style="width: 380px; height: 50px; float: left" align="left" ><br>
