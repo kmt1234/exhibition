@@ -18,7 +18,7 @@
 	 	</div>
 	</div>
 	<div id="imgDiv"></div>
-	<br><br>
+	<br>
 	
 	<div class="ui inverted input" style="width: 100%;">
 		<div class="ui left icon input" style="width: 100%; height: 50px;">

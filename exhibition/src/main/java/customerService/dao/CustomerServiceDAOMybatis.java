@@ -237,4 +237,14 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	public List<CompanyDTO> getCompanyList() {
 		return sqlSession.selectList("customerServiceSQL.getCompanyList");
 	}
+	
+	//연극수정하기 위해 값 불러오기
+	public EventboardDTO getPlayboard(String seq) {
+		return sqlSession.selectOne("customerServiceSQL.getPlayboard", seq);
+	}
+	
+	//메인이미지 수정하기 위해 값 불러오기
+	public ImageboardDTO getImageboard(String seq) {
+		return sqlSession.selectOne("customerServiceSQL.getImageboard", seq);
+	}
 }

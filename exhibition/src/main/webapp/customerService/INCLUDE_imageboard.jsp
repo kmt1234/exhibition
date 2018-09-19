@@ -11,6 +11,7 @@
 		</div>
 	</div>
 	<div id="imageNameDiv"></div>
+	<br>
 	
 	<div class="ui inverted input" style="width: 100%; height: 50px;">
 		<div class="ui left icon input" style="width: 100%; height: 50px;">
@@ -18,7 +19,7 @@
 	 	</div>
 	</div>
 	<div id="imgDiv"></div>
-	
+	<br>
 	<div class="ui inverted input" style="width: 100%;">
 		<div class="ui left icon input" style="width: 100%; height: 50px;">
 			<input type="text" name="startDate" class="datepicker1">
@@ -26,17 +27,13 @@
 			<input type="text" name="endDate" class="datepicker2">
 		</div>
 	</div>
-	
+	<br><br>
 	<div class="ui inverted input" style="width: 100%;">
 		<div class="ui left icon input" style="width: 100%; height: 50px;">
 			<input type="text" name="eventLink" id="eventLink" placeholder="행사링크">
 			<i class="user icon"></i>
 		</div>
 	</div>
-	<div class="ui inverted input" style="width: 100%;">
-		<div class="ui left icon input" >
-			<textarea rows="5" cols="78" name="eventContent" id="eventContent" style="resize: none;" placeholder="행사정보"></textarea>
-		</div>
-	</div>
+	<br><br>
 </div>
 

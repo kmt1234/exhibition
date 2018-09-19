@@ -63,7 +63,7 @@
 			<!-- 타이틀 -->
 			<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
 				호텔
-				<span class="h-light">리스트</span>
+				<span class="h-light">수정</span>
 			</h2>
 			<br>
 			<br>

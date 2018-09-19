@@ -402,13 +402,22 @@
  	</select>
  	<!-- 회원정보  -->
  	<select id="getMemberList" resultType="member">
- 		select * from membertable 	
+ 		select * from membertable
  	</select>
  	<!-- 사업자정보  -->
  	<select id="getCompanyList" resultType="company">
  		select * from company	
  	</select>
  	
+ 	<!--연극 정보 보기(수정하기 위해)  -->
+	<select id="getPlayboard" parameterType="java.lang.String" resultType="eventboard">
+		select * from eventboard_play where seq = #{seq}
+	</select>	
+ 	
+ 	<!--메인이미지 정보 보기(수정하기 위해)  -->
+	<select id="getImageboard" parameterType="java.lang.String" resultType="imageboard">
+		select * from customerImageboard where seq = #{seq}
+	</select>	
  	
  </mapper>
  
