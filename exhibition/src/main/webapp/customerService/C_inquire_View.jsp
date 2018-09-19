@@ -59,7 +59,9 @@
 	</table>
 	<input type="hidden" name="seq" id="seq" value="${customerServiceDTO.seq }">
 	<input type="hidden" name="email" id="email" value="${customerServiceDTO.email }">
+	<c:if test="${customerServiceDTO.reply<'1' || customerServiceDTO.lev=='0'}">
 		<input type="button" id="C_inquire_replyBtn" class="middle ui button" value="문의 답하기">
+	</c:if>
 	<input type="button" class="middle ui button" id="C_inquire_ListBtn" value="목록">
 	<input type="hidden" name="pg" id="pg" value="${pg}">
 	<input type="hidden" name="pseq" id="pseq" value="${customerServiceDTO.seq }">

@@ -368,8 +368,8 @@ public class CustomerServiceController {
 
 	// 고객의 소리 답변(관리자)
 	@RequestMapping(value = "C_inquire_checkReply", method = RequestMethod.POST)
-	public @ResponseBody ModelAndView C_inquire_checkReply(@ModelAttribute CustomerServiceDTO customerServiceDTO, 
-			@RequestParam final String email, @RequestParam final String subject, @RequestParam final String content, @RequestParam int pg, Model model) {
+	public @ResponseBody ModelAndView C_inquire_checkReply(@ModelAttribute CustomerServiceDTO customerServiceDTO, @RequestParam final String email,
+										@RequestParam final String subject, @RequestParam final String content, @RequestParam int pg, Model model) {
 		
 		CustomerServiceDTO cDTO = customerServiceDAO.getInquireInfo(customerServiceDTO.getPseq());//원글
 		final MimeMessagePreparator preparator = new MimeMessagePreparator() {
@@ -461,10 +461,6 @@ public class CustomerServiceController {
 
 		List<Integer> list = new ArrayList<Integer>();
 
-		for (String seq : box) {
-			list.add(Integer.parseInt(seq));
-			System.out.println(seq);
-		}
 		customerServiceDAO.C_contactList_Delete(list);
 
 		return new ModelAndView("redirect:/customerService/C_contactList.do");

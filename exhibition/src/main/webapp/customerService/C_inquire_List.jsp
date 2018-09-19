@@ -28,31 +28,31 @@
 	고객의
 	<span class="h-light">소리</span>
 </h2>
-
 <div style="width: 100%;" align="center">
-	<table style="width:894px ; height: 40px; " align="center" border="1" bordercolor="#ec008c" cellpadding="4"  rules="rows"
+	<table style="height: 40px; " align="center" border="1" bordercolor="#ec008c" cellpadding="4"  rules="rows"
 	id="C_inquire_List" class="ui striped table" >
 		<tr>
-			<td style="width: 200px;  padding-top: 10px; text-align: center;">번호</td>
+			<td style="width: 50px;  padding-top: 10px; text-align: center;">번호</td>
 			<td style="width: 50px;  padding-top: 10px; text-align: center;"></td>
-			<td style="width: 200px;  padding-top: 10px; text-align: center;">제목</td>
-			<td style="width: 200px;  padding-top: 10px; text-align: center;">작성자</td>
-			<td style="width: 200px;  padding-top: 10px; text-align: center;">이메일</td>
-			<td style="width: 200px;  padding-top: 10px; text-align: center;">등록일</td>
+			<td style="width: 250px;  padding-top: 10px; text-align: center;">제목</td>
+			<td style="width: 100px;  padding-top: 10px; text-align: center;">작성자</td>
+			<td style="width: 150px;  padding-top: 10px; text-align: center;">이메일</td>
+			<td style="width: 100px;  padding-top: 10px; text-align: center;">등록일</td>
 		</tr>
 	</table>
 	<br>
 	<div id="C_inquire_PagingDiv" class="ui center pagination menu"></div>
 	<input type="hidden" name="pg" id="pg" value="1">
 	<br><br>
-	<select name="searchOption" id="searchOption"  class="ui compact selection dropdown" style="height: auto; ">
-		<option value="subject" selected>제목</option>
+	<select name="searchOption" id="searchOption"  class="ui compact selection dropdown" style="width:100px">
+		<option value="subject" style="width:100px">제목</option>
 		<option value="name">작성자</option>
 	</select>
+	&nbsp
 	<div class="ui input" style="width: 50%;">
 		<input type="text" name="keyword" id="keyword" value="${keyword }">
-		
 	</div>
+	&nbsp
 		 <input type="button" class="middle ui button"  value="검색" id="C_inquire_SearchBtn">
 </div>
 <script src="../semantic/semantic.min.js"></script>
@@ -65,47 +65,44 @@ $.ajax({
 	dataType : 'json',
 	success : function(data){
 		$.each(data.list, function(index, item){
-			
 
 			$('<tr/>').append($('<td/>',{
-				align : 'center',
-				style: 'width: 230px; height: 50px; text-align: center;',
 				text : item.seq,
-				id : 'seqA'
+				style : 'text-align : center',
+				id : 'seqA',
 			})).append($('<td/>',{
-				align : 'center',
+				class : item.seq+""
+			})).append($('<td/>',{
 				id : 'subjectA',
-				style: 'width: 230px; height: 50px; text-align: center;',
-				class : item.seq+"",
+				style : 'text-align : center',
 				href : 'javascript:void(0)',
 				text : item.subject
 			})).append($('<td/>',{
-				align : 'center',
-				style: 'width: 230px; height: 50px; text-align: center;',
+				style : 'text-align : center',
 				text : item.name,
 				id : 'nameA'
 			})).append($('<td/>',{
-				align : 'center',
-				style: 'width: 230px; height: 50px; text-align: center;',
+				style : 'text-align : center',
 				text : item.email,
 				id : 'emailA'
 			})).append($('<td/>',{
-				align : 'center',
-				style: 'width: 230px; height: 50px; text-align: center;',
+				style : 'text-align : center',
 				text : item.logtime,
 				id : 'logtime'
 			})).appendTo($('#C_inquire_List'));
 			
+			
 			if(item.pseq!=0){//답글
-				$('.'+item.seq).before($('<i/>',{
-					class : 'exclamation circle icon'
+				$('.'+item.seq).append($('<i/>',{
+					class : 'check icon'
 				}));
 			} else {
-				$('.'+item.seq).before($('<i/>',{
+				$('.'+item.seq).append($('<i/>',{
 					class : 'question circle icon'
 				}));
 			}
 		});
+		
 		$('#C_inquire_PagingDiv').html(data.customerServicePaging.pagingHTML);
 	}
 });
@@ -133,7 +130,7 @@ $('#C_inquire_SearchBtn').click(function(event, str){
 					$('<tr/>',{
 						align: 'center'
 					}).append($('<td/>',{
-						colspan: '5',
+						colspan: '6',
 						align : 'center',
 						text : '검색된 결과가 없습니다.'
 					})).appendTo($('#C_inquire_List'));  
@@ -141,32 +138,39 @@ $('#C_inquire_SearchBtn').click(function(event, str){
 				}else if(data.tataA!='0'){
 					$.each(data.list, function(index, item){
 						$('<tr/>').append($('<td/>',{
-							align : 'center',
-							style: 'width: 20%; height: 9%; text-align: center;',
 							text : item.seq,
-							id : 'seqA'
+							style : 'text-align : center',
+							id : 'seqA',
 						})).append($('<td/>',{
-							align : 'center',
+							class : item.seq+""
+						})).append($('<td/>',{
 							id : 'subjectA',
-							style: 'width: 20%; height: 9%; text-align: center;',
+							style : 'text-align : center',
 							href : 'javascript:void(0)',
 							text : item.subject
 						})).append($('<td/>',{
-							align : 'center',
-							style: 'width: 20%; height: 9%; text-align: center;',
+							style : 'text-align : center',
 							text : item.name,
 							id : 'nameA'
 						})).append($('<td/>',{
-							align : 'center',
-							style: 'width: 20%; height: 9%; text-align: center;',
+							style : 'text-align : center',
 							text : item.email,
 							id : 'emailA'
 						})).append($('<td/>',{
-							align : 'center',
-							style: 'width: 20%; height: 9%; text-align: center;',
+							style : 'text-align : center',
 							text : item.logtime,
 							id : 'logtime'
 						})).appendTo($('#C_inquire_List'));
+					
+					if(item.pseq!=0){//답글
+						$('.'+item.seq).append($('<i/>',{
+							class : 'check icon'
+						}));
+					} else {
+						$('.'+item.seq).append($('<i/>',{
+							class : 'question circle icon'
+						}));
+					}
 					});
 				}
 				$('#C_inquire_PagingDiv').html(data.customerServicePaging.pagingHTML);

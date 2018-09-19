@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -42,6 +43,7 @@
 <div>
 	<input type="button" id="C_checkReplyBtn" class="middle ui button" value="문의 답하기">
 	<input type="button" class="middle ui button" id="C_inquire_ListBtn" value="목록">
+	<input type="hidden" name="name" id="name" value="관리자">
 	<input type="hidden" name="pg" id="pg" value="${pg}">
 	<input type="hidden" name="pseq" id="pseq" value="${pseq}">
 	<input type="hidden" name="email" id="email" value="${customerServiceDTO.email}">

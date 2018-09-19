@@ -122,7 +122,8 @@
  	</update>
  	
  	<insert id="C_inquire_Reply2" parameterType="customerService">
- 		insert into C_inquire(seq, subject, content, ref, lev, step, pseq, reply, logtime) values(seq_C_inquire.nextval
+ 		insert into C_inquire(seq, name, subject, content, ref, lev, step, pseq, reply, logtime) values(seq_C_inquire.nextval
+												 								,#{name}
 												 								,#{subject}
 												 								,#{content}
 												 								,#{ref}

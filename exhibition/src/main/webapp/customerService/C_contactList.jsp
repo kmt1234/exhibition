@@ -51,6 +51,7 @@
 	<div id="C_contactList_PagingDiv" class="ui center pagination menu"></div>
 	<input type="hidden" name="pg" id="pg" value="1">
 	<br><br>
+
 	<select class="ui compact selection dropdown" id="searchOption">
 			<option value="facility">기관&시설</option>
 			<option value="name">담당자</option>
@@ -107,6 +108,7 @@ $(document).ready(function(){
 							text : item.name,
 							id : 'nameA'
 						})).appendTo($('#C_contactList_List'));
+						
 					}else if(code==3){
 						$('<tr/>').append($('<td/>').append($('<input/>',{
 							type : 'checkbox',
@@ -265,6 +267,9 @@ function C_contactList_Search(pg){
 	$('#pg').val(pg);
 	$('#C_contactList_SearchBtn').trigger('click','trigger');
 }
+$('.ui.compact.selection.dropdown')
+.dropdown()
+;
 </script>
 </body>
 </html>
