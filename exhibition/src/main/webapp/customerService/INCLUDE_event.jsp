@@ -38,9 +38,9 @@
   	
   	<div class="ui inverted input" style="width: 100%;">
 		<div class="ui left icon input" style="width: 100%; height: 50px;">
-			<input type="text" name="startDate" class="timepicker1">
+			<input type="text" name="startTime" class="timepicker1">
 			<div style="width: 5%;">&nbsp;</div>
-			<input type="text" name="endDate" class="timepicker2">
+			<input type="text" name="endTime" class="timepicker2">
 		</div>
   	</div>
   	<br><br>
