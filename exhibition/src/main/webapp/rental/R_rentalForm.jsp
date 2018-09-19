@@ -36,7 +36,7 @@
 		<!-- 사이드바 메뉴 -->
 		<div style="width:230px; height:900px auto; display: inline-block;">
 			<div class="ui compact menu"  id="slidbar" style="display: inline-block;">
-				<a class="item" style="border: none; width: 227px;" href="R_rentalForm" >시설임대</a>
+				<a class="item" style="border: none; width: 227px;" href="R_rentalForm.do" >시설임대</a>
 				<a class="item" href="R_exhibition.do">박람회홀</a> 
 				<a class="item" href="R_performance.do">공연장홀</a> 
 				<a class="item" href="R_businessRoom.do">비즈니스룸</a> 

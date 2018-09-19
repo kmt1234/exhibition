@@ -64,9 +64,9 @@ pre{
 </div>
 	<br><br>	
 	<!--전시회 리스트 -->
-	<div align="center">
+	<div align="center" style="margin-left:20px; width: 880px;">
 		<form name="performanceList" id="performanceList" method="post">
-			<table  frame="hsides" rules="rows" cellpadding="3" cellspacing="0">
+			<table  frame="hsides" border="1px" cellpadding="3" cellspacing="0"><!-- rules="rows" -->
 				<tr>
 					<th class="performanceTh">이미지</th>
 					<th class="performanceTh" colspan="2">박람회  정보</th>
@@ -85,7 +85,7 @@ pre{
 					<tr>
 						<td rowspan="5"><a target="_blank" href="${list.eventLink}"><img class="play_img" src="../storage/${list.image1}" width="300px" height="350px"></a></td>
 						
-						<td width="200px"><div>제 목</div></td>
+						<td width="20px"><div>제 목</div></td>
 						<td><span class="play_Title_content">${list.imageName}</span></td>
 					</tr>
 					<tr>

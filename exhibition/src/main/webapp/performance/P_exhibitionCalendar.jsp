@@ -70,10 +70,7 @@ var dataSet = [
                     eventElement.find("span.fc-title").prepend("<img src='" + event.imageurl +	"'width='30px' height='30px' align='absmiddle' > &ensp;");
                 }
             },
-           
 			events: dataSet
-       
-			
 		});
 		
 	 });
@@ -125,7 +122,6 @@ var dataSet = [
 	</div>
 		<br><br><br><br>
 	<div  id='calendar'></div>
-
 </body>
 <script src="../js/p_exhibitionCalendar.js"></script>
 </html>
