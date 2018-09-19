@@ -156,6 +156,12 @@ public class PerformanceController {
 			
 		}else if(object.toString().equals("2")) {
 			object = (CompanyDTO)object;
+			
+		}else if(object.toString().equals("3")) {
+			object = "manager";
+			
+		}else {
+			object = "guest";
 		}
 		
 		System.out.println("회원의 코드 : "+object);

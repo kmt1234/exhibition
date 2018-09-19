@@ -2,7 +2,7 @@
  *	rental 관련 javascript
  * 
  */
-$(document).ready(function(){
+$(document).ready(function(){	
 	$('#exhibition2F').hide();
 	
 	$('#1F').click(function(){
@@ -85,4 +85,19 @@ $(document).ready(function(){
 	$('#room5').click(function(){
 		location.href="/exhibition/rental/R_exhibitionHollDecision.do?room="+$('#Room5').text();
 	});
+//공연 홀~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	
+//지하1층	
+	$('#C_room1').click(function(){
+		location.href="/exhibition/rental/R_exhibitionHollDecision.do?room="+$('#C_room1').text();
+	});
+	$('#C_room2').click(function(){
+		location.href="/exhibition/rental/R_exhibitionHollDecision.do?room="+$('#C_room2').text();
+	});
+	$('#C_room3').click(function(){
+		location.href="/exhibition/rental/R_exhibitionHollDecision.do?room="+$('#C_room3').text();
+	});
+	$('#C_room4').click(function(){
+		location.href="/exhibition/rental/R_exhibitionHollDecision.do?room="+$('#C_room4').text();
+	});
+	
 });

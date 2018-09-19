@@ -171,13 +171,12 @@ $(document).ready(function(){
 	
 	//업로드 버튼
 	$('.eventUploadBtn').click(function(){
-		location.href='/exhibition/customerService/C_mainImageboardForm.do';
+		location.href='/exhibition/customerService/C_mainImageboardForm.do?postSelect=1';
 	});
 	
 	//전시회 내용 보기	잠시대기******
 	$('.exhibition_detail').click(function(){
 		var seq = $(this).parent().prev().text();
-		alert(seq); //시퀀스 번호 확인
 		location.href="/exhibition/customerService/C_eventDetail.do?seq="+seq+"";
 	});
 	

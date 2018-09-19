@@ -51,9 +51,10 @@
 </style>
 	<header>
 		<div id="main" class="ui three column grid container">
-			<div class="column" style="width: 25%; height: 50px;">
-				<a href="http://localhost:8080/exhibition/main/index.do"><img alt="" src="../img/logo.jpg"
-					style="width: 150px; height: 50px;"></a>
+			<div class="column" style="width: 25%; height: 50px;  margin-bottom: 30px;">
+				<a href="http://localhost:8080/exhibition/main/index.do">
+				<img alt="" src="../img/ipecLogo.png"
+					style="width: 120px; height: 108px;"></a>
 			</div>
 			<div class="column" style="width: 49%; padding-top: 100px;">
 				<div class="ui input" style="width: 100%;">
@@ -111,8 +112,8 @@
 			</div><!--class="column"-->
 		</div><!--id="main"-->
 		
-		<div class="ui five column grid container">
-			<div class="ui compact menu">
+		<div style="min-width: 1170px;  position: relative;">
+			<div class="ui compact menu" style="display: inline-block; width:227px;  position: relative; ">
 				<div class="ui simple dropdown item">
 					<span id="P_performanceForm">일정</span>
 					<div class="menu">
@@ -122,25 +123,26 @@
 					</div>
 				</div>
 			</div>
-			<div class="ui compact menu" style="width: 20%;">
+			<div class="ui compact menu" style="width: 20%; display: inline-block; width:227px;  position: relative;">
 				<div class="ui simple dropdown item">
-					<span id="R_rentalForm">시설/임대</span>
+					<span id="R_rentalForm">시설&임대</span>
 					<div class="menu">
-						<div class="item" id="R_exhibition">전시회 홀</div>
+						<div class="item" id="R_exhibition">박람회 홀</div>
 						<div class="item" id="R_performance">공연장 홀</div>
+						<div class="item" id="R_businessRoom">비지니스 룸</div>
 					</div>
 				</div>
 			</div>
-			<div class="ui compact menu" style="width: 20%;">
+			<div class="ui compact menu" style="width: 20%; display: inline-block; width:227px;  position: relative;">
 				<div class="ui simple dropdown item">
-					<span id="T_allForm">교통/숙박/관광</span>
+					<span id="T_allForm">교통&숙박</span>
 					<div class="menu">
 						<div class="item" id="T_allFormS">교통안내</div>
 						<div class="item" id="T_hotelForm">숙박안내</div>
 					</div>
 				</div>
 			</div>
-			<div class="ui compact menu" style="width: 20%;">
+			<div class="ui compact menu" style="width: 20%; display: inline-block; width:227px;  position: relative;">
 
 	            <div class="ui simple dropdown item">
 	               <span id="C_customerServiceForm" >고객센터</span>
@@ -160,7 +162,7 @@
 	               </div>
 	            </div>
 		    </div>
-			<div class="ui compact menu" style="width: 20%;">
+			<div class="ui compact menu" style="width: 20%; display: inline-block; width:227px;">
 				<div class="ui simple dropdown item">
 					<span id="I_infoForm">소개</span> 
 					<div class="menu">
@@ -183,7 +185,7 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js?ver=1"
 	integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
 	crossorigin="anonymous"></script>
-<script src="../semantic/semantic.min.js"></script>
+<script src="../semantic/semantic.min.js?ver=1"></script>
 <script src="../js/index.js?ver=1" charset="UTF-8"></script> 
 <script src="../js/member.js" charset="UTF-8"></script> 
 <script src="../js/company.js" charset="UTF-8"></script>

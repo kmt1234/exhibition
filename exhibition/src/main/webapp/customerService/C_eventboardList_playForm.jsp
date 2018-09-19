@@ -103,7 +103,7 @@
 										<tr>
 											<td><input type="checkbox" name="check" class="check" value="${list.seq}"></td>
 											<td>${list.seq}</td>
-											<td><a href="http://${list.eventLink }" target="_blank"><img src="../storage/${list.image1}" width="300" height="150"></a></td>
+											<td><a class="play_detail"><img src="../storage/${list.image1}" width="300" height="150"></a></td>
 											<td>${list.imageName}</td>
 											<td>${list.eventContent}</td>
 										</tr>
@@ -166,7 +166,13 @@ $(document).ready(function(){
 	
 	//업로드 버튼
 	$('.eventUploadBtn').click(function(){
-		location.href='/exhibition/customerService/C_mainImageboardForm.do';
+		location.href='/exhibition/customerService/C_mainImageboardForm.do?postSelect=2';
+	});
+	
+	//연극 내용 보기
+	$('.play_detail').click(function(){
+		var seq = $(this).parent().prev().text();
+		location.href="/exhibition/customerService/C_playDetail.do?seq="+seq+"";
 	});
 	
 });

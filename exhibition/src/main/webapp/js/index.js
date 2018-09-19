@@ -67,6 +67,10 @@ $(document).ready(function(){
 	$('#R_performance').click(function(){//공연장 홀
 		location.href="/exhibition/rental/R_performance.do";
 	});
+	//공연장 위치에 대한 정보(공연장 클릭시 공연장에서 행해지는 공연의 일정 정보 뜸) 
+	$('#R_businessRoom').click(function(){//공연장 홀
+		location.href="/exhibition/rental/R_businessRoom.do";
+	});
 	
 	/*교통&숙박(교통&숙박으로 분리 되어 있음)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 	//교통&숙박시설에 관한 내용
@@ -107,7 +111,7 @@ $(document).ready(function(){
 	});
 	//게시판 추가
 	$('#C_boardAdd').click(function(){
-		location.href="/exhibition/customerService/C_mainImageboardForm.do";
+		location.href="/exhibition/customerService/C_mainImageboardForm.do?postSelect=0";
 	});
 	//매출현황
 	$('#C_salesExhibition').click(function(){

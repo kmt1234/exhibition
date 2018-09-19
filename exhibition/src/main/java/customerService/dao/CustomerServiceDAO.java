@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import company.bean.CompanyDTO;
 import customerService.bean.CustomerServiceDTO;
 import customerService.bean.EventboardDTO;
 import customerService.bean.HotelboardDTO;
@@ -111,6 +112,8 @@ public interface CustomerServiceDAO {
 	public int getHotelboardTotalA();//호텔리스트 총글수
 	
 	public EventboardDTO getEventboard(String seq);	//박람회 내용 보기(수정하기 위해)
+	
+	public EventboardDTO getPlayboard(String seq);//연극 내용 보기
 
 	public HotelboardDTO getHotelInfo(String seq);//호텔리스트 수정 클릭시 상세보기
 	
@@ -125,4 +128,10 @@ public interface CustomerServiceDAO {
 	public int getSalesTotalRentExhibition(String salesMon);
 
 	public List<MemberDTO> getMemberList();
+
+	public List<CompanyDTO> getCompanyList();
+
+	public ImageboardDTO getImageboard(String seq);//메인이미지 내용 보기(수정하기 위해)
+
+	
 }

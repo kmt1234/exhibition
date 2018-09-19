@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import company.bean.CompanyDTO;
 import customerService.bean.CustomerServiceDTO;
 import customerService.bean.CustomerServicePaging;
 import customerService.bean.EventboardDTO;
@@ -52,7 +53,7 @@ public class CustomerServiceController {
 	private JavaMailSenderImpl emailSender;
 	@Autowired
 	private ImageboardPaging imageboardPaging;
-	private String filePath = "C:\\Users\\user\\git\\exhibition\\exhibition\\src\\main\\webapp\\storage\\";
+	private String filePath = "C:\\Users\\kmtab\\git\\exhibition\\exhibition\\src\\main\\webapp\\storage\\";
 	@Autowired
 	private CustomerServicePaging customerServicePaging;
 	@Autowired
@@ -547,13 +548,23 @@ public class CustomerServiceController {
 		return mav;
 	}
 
+	
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	
+	
 	// 이미지 boardWriteForm
 	@RequestMapping(value = "C_mainImageboardForm", method = RequestMethod.GET)
-	public ModelAndView imageboardWriteForm() {
-
+	public ModelAndView imageboardWriteForm(@RequestParam String postSelect) {
 		ModelAndView mav = new ModelAndView();
-
-		mav.addObject("postSelect", "0");
+		if(postSelect.equals("0")) {
+			mav.addObject("display", "/customerService/INCLUDE_imageboard.jsp");
+		}else if(postSelect.equals("1")) {
+			mav.addObject("display", "/customerService/INCLUDE_event.jsp");
+		}else if(postSelect.equals("2")) {
+			mav.addObject("display", "/customerService/INCLUDE_play.jsp");
+		}else if(postSelect.equals("3")) {
+			mav.addObject("display", "/customerService/INCLUDE_hotel.jsp");
+		}
 		mav.setViewName("/customerService/C_mainImageboardForm");
 		return mav;
 	}
@@ -573,8 +584,6 @@ public class CustomerServiceController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-		imageboardDTO.setImage1(fileName);
 		// DB
 		customerServiceDAO.imageboardWrite(imageboardDTO);
 		model.addAttribute("imageboardDTO", imageboardDTO);
@@ -663,7 +672,8 @@ public class CustomerServiceController {
 	@RequestMapping(value = "C_eventInfoWrite_play", method = RequestMethod.POST)
 	public ModelAndView C_exhibitionInfoWrite_play(@ModelAttribute EventboardDTO eventboardDTO,
 			@RequestParam MultipartFile img, HttpSession session) {
-
+		
+		System.out.println("이게뭐야");
 		// 경로 바꿔야함***
 		String fileName = img.getOriginalFilename();
 
@@ -677,11 +687,12 @@ public class CustomerServiceController {
 		}
 
 		eventboardDTO.setImage1(fileName);
-
+		System.out.println(eventboardDTO.getImageName());
 		// 세션에서 아이디 얻기
 		MemberDTO memberDTO = (MemberDTO) session.getAttribute("homepageMember");
 		String id = memberDTO.getM_Id();
-
+		
+		System.out.println(id);
 		// String 타입 날짜를 Date 형식으로 변환(연극 기간 구하기)
 		eventboardDTO.setStartDate(eventboardDTO.getStartDate().substring(0, 10).replaceAll("/", "-"));
 		eventboardDTO.setEndDate(eventboardDTO.getEndDate().substring(0, 10).replaceAll("/", "-"));
@@ -721,6 +732,20 @@ public class CustomerServiceController {
 			calStart.add(Calendar.DATE, 1);
 		}
 
+		System.out.println(eventboardDTO.getEndDate());
+		System.out.println(eventboardDTO.getEndTime());//
+		System.out.println(eventboardDTO.getEventContent());
+		System.out.println(eventboardDTO.getEventLink());
+		System.out.println(eventboardDTO.getEventPlace());
+		System.out.println(eventboardDTO.getEventPrice());
+		System.out.println(eventboardDTO.getEventRate());
+		System.out.println(eventboardDTO.getEventSeats());
+		System.out.println(eventboardDTO.getImage1());
+		System.out.println(eventboardDTO.getImageName());
+		System.out.println(eventboardDTO.getPostSelect());
+		System.out.println(eventboardDTO.getStartDate());
+		System.out.println(eventboardDTO.getStartTime());//
+		
 		List<PlayBookDTO> list = new ArrayList<PlayBookDTO>();
 
 		// 예매DB
@@ -730,7 +755,7 @@ public class CustomerServiceController {
 			playBookDTO.setRemainTicket(0); // 일별 잔여 티켓 수 등록
 			playBookDTO.setTicketPrice(Integer.parseInt(eventboardDTO.getEventPrice())); // 티켓 가격
 			playBookDTO.setBookTicket(0); // 예매된 티켓 수
-			playBookDTO.setBookMemberId(id + ""); // 예매자 아이디(세션값에서)
+			playBookDTO.setBookMemberId("kmtabcd"); // 예매자 아이디(세션값에서)
 			playBookDTO.setBookStatus('0'); // 예매 구분자 (0:예매X, 1:예매완료)
 
 			playBookDTO.setPlayDate(listDate.get(i));
@@ -824,6 +849,22 @@ public class CustomerServiceController {
 		mav.setViewName("/customerService/C_eventboardListForm");
 		return mav;
 	}
+	
+	// 메인이미지 정보 보기(이미지 클릭 시, -> 수정하기 위해서)
+		@RequestMapping(value = "C_imageDetail", method = RequestMethod.GET)
+		public ModelAndView C_image_Detail(@RequestParam String seq) {
+
+			// DB
+			ImageboardDTO imageboardDTO = customerServiceDAO.getImageboard(seq);
+
+			ModelAndView mav = new ModelAndView();
+			System.out.println(imageboardDTO.getStartDate());
+			mav.addObject("eventboardDTO", imageboardDTO);
+			mav.addObject("postSelect", "0");
+			mav.addObject("modify", "1");
+			mav.setViewName("/customerService/C_imageDetail");
+			return mav;
+		}
 
 	// 박람회 정보 보기(이미지 클릭 시, -> 수정하기 위해서)***잠시 대기중************************
 	@RequestMapping(value = "C_eventDetail", method = RequestMethod.GET)
@@ -833,11 +874,11 @@ public class CustomerServiceController {
 		EventboardDTO eventboardDTO = customerServiceDAO.getEventboard(seq);
 
 		ModelAndView mav = new ModelAndView();
+		System.out.println(eventboardDTO.getStartDate());
 		mav.addObject("eventboardDTO", eventboardDTO);
 		mav.addObject("postSelect", "1");
 		mav.addObject("modify", "1");
-		mav.setViewName("/customerService/C_mainImageboardForm");
-
+		mav.setViewName("/customerService/C_eventDetail");
 		return mav;
 	}
 
@@ -888,6 +929,22 @@ public class CustomerServiceController {
 		mav.setViewName("/customerService/C_eventboardList_playForm");
 		return mav;
 	}
+	
+	// 연극 정보 보기(이미지 클릭 시, -> 수정하기 위해서)
+		@RequestMapping(value = "C_playDetail", method = RequestMethod.GET)
+		public ModelAndView C_playDetail(@RequestParam String seq) {
+
+			// DB
+			EventboardDTO eventboardDTO = customerServiceDAO.getPlayboard(seq);
+
+			ModelAndView mav = new ModelAndView();
+			System.out.println(eventboardDTO.getStartDate());
+			mav.addObject("eventboardDTO", eventboardDTO);
+			mav.addObject("postSelect", "2");
+			mav.addObject("modify", "1");
+			mav.setViewName("/customerService/C_playDetail");
+			return mav;
+		}
 
 	// 연극 업로드 리스트 삭제
 	@RequestMapping(value = "C_eventboardDelete_play", method = RequestMethod.POST)
@@ -1078,6 +1135,28 @@ public class CustomerServiceController {
 		mav.setViewName("jsonView");
 
 		return mav;
+	}
+	// 사업자리스트 불러오기
+		@RequestMapping(value = "getCompanyList", method = RequestMethod.GET)
+		public ModelAndView getCompanyList() {
+		
+			List<CompanyDTO> list = customerServiceDAO.getCompanyList();
+			
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("list", list);
+			mav.setViewName("jsonView");
+
+			return mav;
+		}
+	//이메일무단수집거부
+	@RequestMapping(value="C_emailRefuse",method=RequestMethod.GET)
+	public String C_emailRefuse() {
+		return "/customerService/C_emailRefuse";
+	}
+	//개인정보처리방침
+	@RequestMapping(value="C_privacy",method=RequestMethod.GET)
+	public String C_privacy() {
+		return "/customerService/C_privacy";
 	}
 
 }

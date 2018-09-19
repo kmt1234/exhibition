@@ -20,24 +20,26 @@
 </style>
 </head>
 <body>
+	<div style="float: left; margin-left: 375px">
 	<header>
 		<jsp:include page="../main/I_header.jsp"></jsp:include>
 	</header>
+	</div>
 	<br>
 	<br>
-	<div class="ui five column grid container">
+	<div style="float: left; margin-left: 375px; margin-top: 15px">
 		<!-- 사이드바 메뉴 -->
-		<div class="ui compact menu" style="width: 20%; height: 977px; ">
+		<div class="ui compact menu" style="width: 230px;  display: inline-block; float: inherit;">
 			<a class="item" href="P_allSchedule.do">전체일정</a> 
 			<a class="item" href="P_performanceSchedule.do">공연일정</a> 
 			<a class="item" href="P_exhibitionSchedule.do">박람회일정</a>
 		</div>
 		<!-- 메인 화면 -->
-		<div class="ui compact menu" style="width: 80%; height: 900px;" >
+		<div class="ui compact menu" style="width: 920px;  display: inline-block; float: inherit;" >
 			<jsp:include page="${display}" ></jsp:include>
 		</div>
 		<!-- footer -->
-		<div class="ui compact menu" style="width: 100%; float: right; ">
+		<div class="ui compact menu" style="width: 1170px; float: right; ">
 			<jsp:include page="../main/I_footer.jsp" ></jsp:include>
 		</div>
 	</div>

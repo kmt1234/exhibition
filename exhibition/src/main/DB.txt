@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 ------------------------------------------------DB------------------------------------------------------------
 //����ȸ�� DB
 create table memberTable(	
@@ -424,3 +425,211 @@ commit;
 
 
 >>>>>>> refs/remotes/origin/shinwork
+=======
+//개인회원 DB
+create table memberTable(	
+M_Name varchar2(30) not null,	    --이름
+M_Id varchar2(30) primary key,  --아이디 (기본키, unique, not null, 무결성 제약 조건)
+M_Pwd varchar2(30) not null,    --비밀번호
+M_Email varchar2(50),           --이메일		
+M_Phone varchar2(15),	--핸드폰
+code number default(1)	--코드(1=개인, 2=사업자) : 기본값:1
+);	
+
+//개인회원 샘플
+insert into memberTable (M_Name, M_Id, M_Pwd,M_Email, M_Phone) values('홍길동','hong123','test123','toad001@nate.com','01012341234');
+insert into memberTable (M_Name, M_Id, M_Pwd,M_Email, M_Phone) values('개똥이','gaeddong123','test123','toad001@nate.com','01012341234');
+select * from memberTable;
+drop table memberTable;
+commit;
+
+rollback;
+
+
+//사업자 DB
+CREATE TABLE company(
+     C_businessname VARCHAR2(100) NOT NULL,  -- 사업자명
+     C_license VARCHAR2(40) primary key,       -- 사업자등록번호
+     C_password VARCHAR2(40) NOT NULL,     -- 암호
+     C_corporate VARCHAR2(40) NOT NULL,     -- 법인번호
+     C_condition VARCHAR2(40) NOT NULL,     -- 업태
+     C_postnumbox VARCHAR2(40) NOT NULL,      -- 우편번호
+     C_address1 VARCHAR2(100) NOT NULL,      -- 주소1
+     C_address2 VARCHAR2(100) NOT NULL,      -- 주소2
+     C_representative VARCHAR2(40) NOT NULL,-- 대표자
+     C_tel VARCHAR2(40) NOT NULL,           -- 전화번호
+     C_email VARCHAR2(50) NOT NULL,          -- 이메일
+     code number default(2)
+ );
+
+//문의하기 DB
+create table customerService(
+email varchar2(50) not null,			--이메일
+classify varchar2(50) not null,			--분류
+name varchar2(30) not null,			--이름
+tel varchar2(15),				--핸드폰
+subject varchar2(100) not null,		--제목
+content varchar2(100) not null,		--내용
+logtime DATE DEFAULT SYSDATE);		--날짜
+
+//부스 예약테이블
+create table exhibitionRental(
+boothName varchar2(40) not null,
+C_license varchar2(40) not null,
+C_tel varchar2(40) not null,
+C_email varchar2(40) not null,
+totalRent number not null,
+code varchar2(30) not null,
+title varchar2(40) not null,
+startDate date not null,
+endDate date not null
+);
+
+//메인 이미지 보드 DB
+CREATE TABLE customerImageboard(
+     seq NUMBER PRIMARY KEY,         --시퀀스      
+     postSelect number default(0),   --구분(분류) 메인:0
+     imageName VARCHAR2(40) NOT NULL,--제목
+     image1 varchar2(500),          --이미지명
+     startDate1 date,   --날짜1
+     endDate2 date,   --날짜2
+     eventLink varchar2(200)    --링크 
+ );
+ 
+ create sequence seq_customerImageboard  nocache nocycle;
+
+//박람회 등록 보드 DB
+CREATE TABLE eventboard(
+     seq NUMBER PRIMARY KEY,            --시퀀스      
+     postSelect number default(1),               --구분(분류) 박람회 : 1 연극 : 2
+     imageName VARCHAR2(40) NOT NULL,   --제목
+     image1 varchar2(500),              --이미지명
+     startDate date,                   --날짜1
+     endDate date,                     --날짜2
+     eventLink varchar2(200),            --링크
+     startTime varchar2(30),		--시작일
+     endTime varchar2(30),		--종료일
+     eventPlace varchar2(100),	--장소
+     eventPrice varchar2(100),	--가격
+     eventSeats varchar2(100),	--관람좌석
+     eventRate varchar2(100),		--관람등급
+     eventContent varchar2(4000)	--소개 글(간단)
+ );
+ 
+create sequence seq_eventboard  nocache nocycle;
+
+// 연극 등록 보드 DB
+CREATE TABLE eventboard_play(
+     seq NUMBER PRIMARY KEY,            --시퀀스      
+     postSelect number default(2),               --구분(분류) 박람회 : 1 연극 : 2
+     imageName VARCHAR2(500) NOT NULL,   --제목
+     image1 varchar2(500),              --이미지명
+     startDate date,                   --날짜1
+     endDate date,                     --날짜2
+     eventLink varchar2(200),            --링크
+     startTime varchar2(30),		--시작시간
+     endTime varchar2(30),		--종료시간
+     eventPlace varchar2(100),	--장소
+     eventPrice varchar2(100),	--가격
+     eventSeats varchar2(100),	--관람좌석
+     eventRate varchar2(100),		--관람등급
+     eventContent varchar2(4000)	--소개 글(간단)
+ );
+ 
+create sequence seq_eventboard_play  nocache nocycle;
+
+
+//공지사항
+create table C_notice(
+seq number primary key,
+subject varchar2(50) not null,
+content varchar2(500) not null,
+logtime date default sysdate);
+
+create sequence seq_C_notice nocycle nocache;
+
+//자주묻는 질문
+create table C_QnA (
+seq number primary key,
+subject varchar2(200) not null,
+content varchar2(500) not null);
+
+create sequence seq_C_QnA nocycle nocache;
+
+
+
+//고객의 소리
+create table C_inquire(
+seq number primary key,
+email varchar2(50) not null,
+classify varchar2(50) not null,
+name varchar2(50) not null,
+tel varchar2(20),
+subject varchar2(50) not null,
+content varchar2(300) not null,
+logtime DATE DEFAULT sysdate);
+
+
+create sequence seq_C_inquire nocycle nocache;
+
+
+//주요시설 연락처
+create table C_contactList(
+seq number primary key,
+classify varchar2(50) not null,
+agency varchar2(50) not null,
+name varchar2(30) not null,
+contact varchar2(50) not null);
+
+create sequence seq_C_contactList nocycle nocache;
+
+
+//호텔리스트
+create table hotel_list(
+seq number primary key,
+postSelect number default(3),      --구분(분류) 박람회 : 1 연극 : 2
+imageName VARCHAR2(40) NOT NULL,   --제목
+image1 varchar2(500) NOT NULL,     --이미지파일
+eventLink varchar2(200) NOT NULL,  --링크
+eventPlace varchar2(100) NOT NULL  --TEL
+);
+create sequence seq_hotel_list nocycle nocache;
+
+
+
+--연극 일자별 DB
+create table eventboard_play_book(
+ seq NUMBER PRIMARY KEY,            --시퀀스     
+ imageName VARCHAR2(500) NOT NULL,  --공연명
+ playDate date,                     --공연일자(시작/종료)
+ playTicket VARCHAR2(100),           --일별 총 티켓 수
+ remainTicket VARCHAR2(100),         --일별 잔여 티켓 수
+ ticketPrice VARCHAR2(100),          --티켓 가격
+ bookTicket VARCHAR2(100),           --예매된 티켓 수
+ bookMemberId VARCHAR2(300),         --등록한 아이디(삭제예정)
+ bookStatus char(1) CONSTRAINT bookStatus_CK    --예매 상태(0 : 예매X , 1 : 예매완료)
+    check(bookStatus IN ('0','1'))
+);
+
+create sequence seq_eventboard_play_book  nocache nocycle;  --예매DB 시퀀스
+
+
+
+
+//동혁이꺼 임시
+create table calendar2(
+code varchar2(5),
+title varchar2(30),
+startDate date,
+endDate date
+);
+
+insert into calendar2 values('2','라이어','20180910','20180913');
+insert into calendar2 values('1','아아아','20180918','20180922');
+insert into calendar2 values('1','아아아','20180928','20181005');
+insert into calendar2 values('2','거짓말','20180908','20180912');
+
+commit;
+
+
+>>>>>>> refs/remotes/origin/min_tae

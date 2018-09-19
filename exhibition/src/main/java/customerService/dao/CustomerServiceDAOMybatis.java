@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import company.bean.CompanyDTO;
 import customerService.bean.CustomerServiceDTO;
 import customerService.bean.EventboardDTO;
 import customerService.bean.HotelboardDTO;
@@ -83,8 +84,6 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	public void C_QnA_checkWrite(Map<String, String> map) {// 자주묻는 질문 관리자가 작성하기
 		sqlSession.insert("customerServiceSQL.C_QnA_checkWrite", map);		
 	}
-	
-	
 	
 	
 	public void C_contactList_checkWrite(Map<String, String> map) {// 주요시설 연락처 관리자가 작성하기
@@ -234,5 +233,18 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	}
 	public List<MemberDTO> getMemberList() {
 		return sqlSession.selectList("customerServiceSQL.getMemberList");
+	}
+	public List<CompanyDTO> getCompanyList() {
+		return sqlSession.selectList("customerServiceSQL.getCompanyList");
+	}
+	
+	//연극수정하기 위해 값 불러오기
+	public EventboardDTO getPlayboard(String seq) {
+		return sqlSession.selectOne("customerServiceSQL.getPlayboard", seq);
+	}
+	
+	//메인이미지 수정하기 위해 값 불러오기
+	public ImageboardDTO getImageboard(String seq) {
+		return sqlSession.selectOne("customerServiceSQL.getImageboard", seq);
 	}
 }

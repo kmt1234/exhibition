@@ -16,4 +16,5 @@ public class BusinessRoomDTO {
 	private int totalRent;
 	private String[] checkRow;
 	private String time;
+	private String title;
 }
