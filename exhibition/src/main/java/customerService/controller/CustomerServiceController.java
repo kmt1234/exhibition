@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -35,6 +34,7 @@ import company.bean.CompanyDTO;
 import customerService.bean.CustomerServiceDTO;
 import customerService.bean.CustomerServicePaging;
 import customerService.bean.EventboardDTO;
+import customerService.bean.ExhibitionBookDTO;
 import customerService.bean.HotelboardDTO;
 import customerService.bean.ImageboardDTO;
 import customerService.bean.ImageboardPaging;
@@ -58,6 +58,8 @@ public class CustomerServiceController {
 	private CustomerServicePaging customerServicePaging;
 	@Autowired
 	private PlayBookDTO playBookDTO;
+	@Autowired
+	private ExhibitionBookDTO exhibitionBookDTO;
 
 	// 고객센터 설명페이지
 	@RequestMapping(value = "C_customerServiceForm", method = RequestMethod.GET)
@@ -661,8 +663,66 @@ public class CustomerServiceController {
 		}
 
 		eventboardDTO.setImage1(fileName);
+		
+		
+		// String 타입 날짜를 Date 형식으로 변환(연극 기간 구하기)
+		eventboardDTO.setStartDate(eventboardDTO.getStartDate().substring(0, 10).replaceAll("/", "-"));
+		eventboardDTO.setEndDate(eventboardDTO.getEndDate().substring(0, 10).replaceAll("/", "-"));
+		
+		System.out.println(eventboardDTO.getStartDate());
+		System.out.println(eventboardDTO.getEndDate());
+		System.out.println(eventboardDTO.getImageName());
 
-		// DB + 예매DB 추후 넣어야함 
+		String startDate = eventboardDTO.getStartDate();
+		String endDate = eventboardDTO.getEndDate();
+
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+		long diff = 0;
+		long diffDays = 0;
+		Date startDateF = null;
+
+		try {
+			startDateF = formatter.parse(startDate);
+			Date endDateF = formatter.parse(endDate);
+
+			diff = endDateF.getTime() - startDateF.getTime();
+			diffDays = diff / (24 * 60 * 60 * 1000); // 종료일-시작일 = 행사 일 수(기간)
+
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		Calendar calStart = Calendar.getInstance();
+		calStart.setTime(startDateF);
+
+		// 공연 기간 리스트 구하기
+		List<Date> listDate = new ArrayList<Date>();
+		for (int i = 0; i <= diffDays; i++) {
+
+			listDate.add(calStart.getTime());
+			calStart.add(Calendar.DATE, 1);
+		}
+		
+		List<ExhibitionBookDTO> list = new ArrayList<ExhibitionBookDTO>();
+
+		// 예매DB
+		for (int i = 0; i <= diffDays; i++) {
+			exhibitionBookDTO.setImageName(eventboardDTO.getImageName()); // 공연명 등록
+			exhibitionBookDTO.setPlayTicket(Integer.parseInt(eventboardDTO.getEventSeats())); // 일별 총 티켓 수 등록
+			exhibitionBookDTO.setRemainTicket(0); // 일별 잔여 티켓 수 등록
+			exhibitionBookDTO.setTicketPrice(Integer.parseInt(eventboardDTO.getEventPrice())); // 티켓 가격
+			exhibitionBookDTO.setBookTicket(0); // 예매된 티켓 수
+			
+			exhibitionBookDTO.setPlayDate(listDate.get(i));
+
+			list.add(exhibitionBookDTO);
+
+			customerServiceDAO.eventInfoWrite_exhibition_bookDB(exhibitionBookDTO); // 예매 DB에 박람회 정보 넣는 메소드(예매DB)
+		}
+		
+		
+		// DB 
 		customerServiceDAO.eventInfoWrite(eventboardDTO);
 
 		return new ModelAndView("redirect:/customerService/C_eventboardListForm.do");
@@ -931,20 +991,20 @@ public class CustomerServiceController {
 	}
 	
 	// 연극 정보 보기(이미지 클릭 시, -> 수정하기 위해서)
-		@RequestMapping(value = "C_playDetail", method = RequestMethod.GET)
-		public ModelAndView C_playDetail(@RequestParam String seq) {
+	@RequestMapping(value = "C_playDetail", method = RequestMethod.GET)
+	public ModelAndView C_playDetail(@RequestParam String seq) {
 
-			// DB
-			EventboardDTO eventboardDTO = customerServiceDAO.getPlayboard(seq);
+		// DB
+		EventboardDTO eventboardDTO = customerServiceDAO.getPlayboard(seq);
 
-			ModelAndView mav = new ModelAndView();
-			System.out.println(eventboardDTO.getStartDate());
-			mav.addObject("eventboardDTO", eventboardDTO);
-			mav.addObject("postSelect", "2");
-			mav.addObject("modify", "1");
-			mav.setViewName("/customerService/C_playDetail");
-			return mav;
-		}
+		ModelAndView mav = new ModelAndView();
+		System.out.println(eventboardDTO.getStartDate());
+		mav.addObject("eventboardDTO", eventboardDTO);
+		mav.addObject("postSelect", "2");
+		mav.addObject("modify", "1");
+		mav.setViewName("/customerService/C_playDetail");
+		return mav;
+	}
 
 	// 연극 업로드 리스트 삭제
 	@RequestMapping(value = "C_eventboardDelete_play", method = RequestMethod.POST)

@@ -418,6 +418,24 @@
 	<select id="getImageboard" parameterType="java.lang.String" resultType="imageboard">
 		select * from customerImageboard where seq = #{seq}
 	</select>	
+	
+	<!--박람회 일자별 DB 등록 메소드 -->
+	<insert id="eventInfoWrite_exhibition_bookDB" parameterType="customerService.bean.ExhibitionBookDTO">
+		insert into eventboard_exhibition_book(seq
+									,imageName
+									,playDate
+									,playTicket
+									,remainTicket
+									,ticketPrice
+									,bookTicket)
+							values (seq_eventboard_play_book.nextval
+									,#{imageName}
+									,#{playDate}
+									,#{playTicket}
+									,#{remainTicket}
+									,#{ticketPrice}
+									,#{bookTicket})
+	</insert>
  	
  </mapper>
  

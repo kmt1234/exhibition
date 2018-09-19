@@ -293,7 +293,6 @@ $(document).ready(function(){
 					$('#remainSeats').text(data);	
 				}
 				
-				
 			}//success
 		});//ajax
 		

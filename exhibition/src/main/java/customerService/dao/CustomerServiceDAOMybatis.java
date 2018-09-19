@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import company.bean.CompanyDTO;
 import customerService.bean.CustomerServiceDTO;
 import customerService.bean.EventboardDTO;
+import customerService.bean.ExhibitionBookDTO;
 import customerService.bean.HotelboardDTO;
 import customerService.bean.ImageboardDTO;
 import customerService.bean.PlayBookDTO;
@@ -246,5 +247,11 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	//메인이미지 수정하기 위해 값 불러오기
 	public ImageboardDTO getImageboard(String seq) {
 		return sqlSession.selectOne("customerServiceSQL.getImageboard", seq);
+	}
+	
+	//박람회 일자별 DB 등록 메소드 
+	public void eventInfoWrite_exhibition_bookDB(ExhibitionBookDTO exhibitionBookDTO) {
+		sqlSession.insert("customerServiceSQL.eventInfoWrite_exhibition_bookDB", exhibitionBookDTO);
+		
 	}
 }

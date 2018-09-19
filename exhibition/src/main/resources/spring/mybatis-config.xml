@@ -13,6 +13,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias alias="eventboard" type="customerService.bean.EventboardDTO"/>
 		<typeAlias alias="hotelboard" type="customerService.bean.HotelboardDTO"/>
 		<typeAlias alias="bookboard" type="performance.bean.Book_performance_membersDTO"/>
+		<typeAlias alias="bookboardEx" type="performance.bean.Book_exhibition_membersDTO"/>
 		<typeAlias alias="exhibition" type="rental.bean.ExhibitionDTO"/>
 	</typeAliases>
 </configuration>

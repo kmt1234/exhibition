@@ -32,7 +32,7 @@
 				 function init(){
 					 container = $('.slide ul');
 					 max = container.children().length;
-					interval = setInterval(next,3000);
+					 interval = setInterval(next,3000);
 				 }
 				 function prev(e){
 					 current--;
