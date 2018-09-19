@@ -8,11 +8,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script>	
-function imageboardPaging(pg){
-	location.href="/exhibition/customerService/C_mainImageboardListForm.do?pg="+pg 	//이거는 paging에서 보낸 pg값을 가져온 것이다.
-}
-</script>
 <style type="text/css">
 #subjectA:link{color:black; text-decoration: none;}
 #subjectA:visited{color:black; text-decoration: none;}
@@ -42,7 +37,6 @@ function imageboardPaging(pg){
 	<th width="100"><input type="checkbox" id="checkAll">번 호</th>
 	<th width="150">이미지</th>
 	<th width="100">상품명</th>
-	
 </tr>
 </table>
 <div style=" float:left; width:500px" align="center" id="imagePaging" name="imagePaging"></div><br>
@@ -55,6 +49,11 @@ function imageboardPaging(pg){
 </form>
 </div>
 <!-- <script src="http://code.jquery.com/jquery-3.3.1.min.js" type="text/javascript"></script> -->
+<script>	
+function imageboardPaging(pg){
+	location.href="/exhibition/customerService/C_mainImageboardListForm.do?pg="+pg 	//이거는 paging에서 보낸 pg값을 가져온 것이다.
+}
+</script>
 <script type="text/javascript">
 $(document).ready(function(){
 	$.ajax({
@@ -72,11 +71,11 @@ $(document).ready(function(){
 						class : 'check',
 						name : 'check',
 						value : item.seq
-					
 				}),item.seq
 				)).append($('<td/>',{
 				}).append($('<a/>',{
-					html : img
+					html : img,
+					class : 'play_detail',
 				}))
 				).append($('<td/>',{
 					text : item.imageName
@@ -116,10 +115,14 @@ $(document).ready(function(){
 			$('#imageboardListForm').attr('action','/exhibition/main/I_body.do').submit();
 			
 	});
-	
 	//업로드 버튼
 	$('.eventUploadBtn').click(function(){
 		location.href='/exhibition/customerService/C_mainImageboardForm.do?postSelect=0';
+	});
+
+	$('#imageboardListTab').on('click','.play_detail',function(){
+			var seq = $(this).parent().prev().text();
+			location.href="/exhibition/customerService/C_imageDetail.do?seq="+seq+"";
 	});
 });
 </script>

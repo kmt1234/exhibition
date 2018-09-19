@@ -115,11 +115,6 @@
 	 <!--button=몇번부터 몇번  -->
 	 <div id="area11" style="position:absolute; left:76px;top:529px" >
 	    <div class="absol" id="Booth11" style="font-size: 25px; cursor:pointer;">Booth11</div>
-	      <!-- <div>예약하기</div>
-	      <div>6,343(㎡)</div>
-	      <div>요율단가 : 2,350원</div>
-	      <div>요율 : 1.2</div>
-	      <div>1일 기준(08:00~20:00)</div> -->
 	 </div>
   	 <!--button=몇번부터 몇번  -->
      <div id="area12" style="position:absolute; left:76px;top:665px" >

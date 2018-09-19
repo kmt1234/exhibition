@@ -2,18 +2,17 @@
 	pageEncoding="UTF-8"%>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<link rel="stylesheet" type="text/css" href="../semantic/semantic.min.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"><!--달력 ui-->
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css"><!--시간 ui-->
 <style>
 .ui.inverted.divider {
 	margin: 5px 0;
 }
-
 #textf {
 	width: 40%;
 	float: left;
 }
-
 .middle.ui.button {
 	width: 19%;
 }
@@ -37,7 +36,6 @@ enctype="multipart/form-data">
 			<div style="width: 100%;height:1000px;">
 			  	<div class="content" >
 			    	<div class="description" align="left">
-			    	
 				    <jsp:include page="${display}"></jsp:include>
 				    <br><br>
 				    <div class="ui two buttons">
@@ -59,16 +57,6 @@ enctype="multipart/form-data">
 </form>
 </div> <!-- center -->
 </body>
-
-<link rel="stylesheet" type="text/css" href="../semantic/semantic.min.css">
-
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"
-	integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-	crossorigin="anonymous"></script>
-<script src="../semantic/semantic.min.js"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"><!--달력 ui-->
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css"><!--시간 ui-->
-<script src="http://code.jquery.com/jquery.min.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script><!-- 시간 -->
 <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script><!--달력-->
 <script src="../js/boardAdd.js"></script>
