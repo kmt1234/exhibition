@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,18 +49,17 @@
 		style="float: center; width: 100%; text-align: left;">
 		공지 <span class="h-light">사항</span>
 	</h2>
-
 	<div style="width: 100%;" align="center">
-		<table style="width: 100%; height: 40px;" align="center" border="1"
+		<table style="width: 894px; height: 40px;" align="center" border="1"
 			bordercolor="#ec008c" cellpadding="2" frame="hsides" rules="rows"
 			id="C_notice_List" class="ui striped table">
 			<tr>
 				<th
-					style="width: 20%; height: 7%; padding-top: 10px; text-align: center;">번호</th>
+					style="width: 100px; height: 7%; padding-top: 10px; text-align: center;">번호</th>
 				<th
-					style="width: 45%; height: 7%; padding-top: 10px; text-align: center;">제목</th>
+					style="width: 500px; height: 7%; padding-top: 10px; text-align: center;">제목</th>
 				<th
-					style="width: 35%; height: 7%; padding-top: 10px; text-align: center;">등록일</th>
+					style="width: 100px; height: 7%; padding-top: 10px; text-align: center;">등록일</th>
 			</tr>
 		</table>
 		<br>
@@ -69,10 +69,11 @@
 		<div class="ui input" style="width: 30%;">
 			<input type="text" name="keyword" id="keyword" placeholder="검색어 입력" value="${keyword }">
 		</div>
-		<input type="button" class="middle ui button" value="검색"
-			id="C_notice_SearchBtn"> <input type="button"
-			class="middle ui button" id="C_notice_WriteBtn" value="관리자 작성">
-</div>
+		<input type="button" class="middle ui button" value="검색" id="C_notice_SearchBtn">
+		<c:if test="${code=='3' }"> 
+			<input type="button" class="middle ui button" id="C_notice_WriteBtn" value="관리자 작성">
+		</c:if>
+		</div>
 <script src="../semantic/semantic.min.js"></script>
 <script src="../js/C_notice_js.js?ver=1"></script>
 <script type="text/javascript">

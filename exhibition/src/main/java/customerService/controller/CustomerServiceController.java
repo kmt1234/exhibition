@@ -42,7 +42,6 @@ import customerService.bean.PlayBookDTO;
 import customerService.bean.SalesExhigitionDTO;
 import customerService.dao.CustomerServiceDAO;
 import member.bean.MemberDTO;
-import rental.bean.ExhibitionDTO;
 
 @RequestMapping(value = "customerService")
 @Component
@@ -223,8 +222,9 @@ public class CustomerServiceController {
 		return mav;
 	}
 
+	// 고객의 소리 인증 번호 보내기
 	@RequestMapping(value = "sendEmail", method = RequestMethod.POST)
-	public @ResponseBody String sendEmail(@RequestParam final String email, Model model) {// 인증번호 받기 위한 메일 전송
+	public @ResponseBody String sendEmail(@RequestParam final String email, Model model) {
 
 		final String authNum = randomNum();
 
@@ -233,19 +233,19 @@ public class CustomerServiceController {
 				final MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
 
 				String subject = "[IPEC 전시회 이메일 인증 안내 입니다]";
-				String content = "안녕하세요 IPEC 전시회 관계자 입니다./n" + "해당 이메일 인증 번호는 아래와 같습니다./n" + "인증번호 : " + authNum;
-
+				String content = "안녕하세요 IPEC 전시회 관계자 입니다.  해당 이메일 인증 번호는 아래와 같습니다.  인증번호 : " + authNum;
 				helper.setFrom("jbi8045@gmail.com");
 				helper.setTo(email);
 				helper.setSubject("인증번호 메일입니다.");
 				helper.setText(content, true);
 			}
 		};
-
+		
 		emailSender.send(preparator);
 		return authNum;
 	}
 
+	// 이메일인증 인증번호 생성
 	private String randomNum() {
 		StringBuffer buffer = new StringBuffer();
 		for (int i = 0; i <= 6; i++) {
@@ -340,9 +340,8 @@ public class CustomerServiceController {
 	}
 
 	// 고객의소리 내용보기(관리자
-	// 고객의소리 내용보기(관리자
 	@RequestMapping(value = "C_inquire_View", method = RequestMethod.GET)
-	public ModelAndView C_inquire_View(@RequestParam String seq, @RequestParam String pg, Model model) {
+	public ModelAndView C_inquire_View(@RequestParam int seq, @RequestParam String pg, Model model) {
 
 		CustomerServiceDTO customerServiceDTO = customerServiceDAO.getInquireInfo(seq);
 
@@ -357,12 +356,13 @@ public class CustomerServiceController {
 
 	// 고객의 소리 - 문의 답하기 폼
 	@RequestMapping(value = "C_inquire_Reply", method = RequestMethod.POST)
-	public ModelAndView C_inquire_Reply(@RequestParam String seq, @RequestParam String email, Model model) {
-		CustomerServiceDTO customerServiceDTO = customerServiceDAO.getReplyInfo(seq);
+	public ModelAndView C_inquire_Reply(@ModelAttribute CustomerServiceDTO customerServiceDTO, @RequestParam String seq, @RequestParam String email, @RequestParam int pseq, @RequestParam int pg, Model model) {
 
 		model.addAttribute("customerServiceDTO", customerServiceDTO);
 
 		ModelAndView mav = new ModelAndView();
+		model.addAttribute("pseq", pseq);
+		model.addAttribute("pg", pg);
 		mav.addObject("display", "/customerService/C_inquire_Reply.jsp");
 		mav.setViewName("/customerService/C_customerServiceForm");
 		return mav;
@@ -370,8 +370,10 @@ public class CustomerServiceController {
 
 	// 고객의 소리 답변(관리자)
 	@RequestMapping(value = "C_inquire_checkReply", method = RequestMethod.POST)
-	public @ResponseBody ModelAndView C_inquire_checkReply(@RequestParam final String email,
-			@RequestParam final String subject, @RequestParam final String content, Model model) {
+	public @ResponseBody ModelAndView C_inquire_checkReply(@ModelAttribute CustomerServiceDTO customerServiceDTO, @RequestParam final String email,
+										@RequestParam final String subject, @RequestParam final String content, @RequestParam int pg, Model model) {
+		
+		CustomerServiceDTO cDTO = customerServiceDAO.getInquireInfo(customerServiceDTO.getPseq());//원글
 		final MimeMessagePreparator preparator = new MimeMessagePreparator() {
 			public void prepare(MimeMessage mimeMessage) throws Exception {
 				final MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
@@ -385,13 +387,19 @@ public class CustomerServiceController {
 				helper.setText(replyContent, true);
 			}
 		};
-
+		customerServiceDTO.setRef(cDTO.getRef());//답글ref = 원글ref
+		customerServiceDTO.setLev(cDTO.getLev()+1);//답글lev = 원글lev+1
+		customerServiceDTO.setStep(cDTO.getStep()+1);//답글step = 원글step+1
+		
+		customerServiceDAO.C_inquire_Reply(customerServiceDTO);
+		model.addAttribute("pg", pg);
+		
 		emailSender.send(preparator);
-		return new ModelAndView("redirect:/customerService/C_emailConfirm.do");
+		return new ModelAndView("redirect:/customerService/C_inquire_List.do");
 	}
 
 	// 자주묻는
-	// 질문~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ㄴ
+	// 질문~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 	// 자주묻는 질문
 	@RequestMapping(value = "C_QnA", method = RequestMethod.GET)
@@ -402,7 +410,6 @@ public class CustomerServiceController {
 		return mav;
 	}
 
-	// 자주묻는 질문 - 버튼에 따라 리스트 가져오기
 	// 자주묻는 질문 - 버튼에 따라 리스트 가져오기
 	@RequestMapping(value = "getQnA_Classify", method = RequestMethod.POST)
 	public ModelAndView getQnA_Classify(@RequestParam String classify) {
@@ -451,15 +458,12 @@ public class CustomerServiceController {
 		return mav;
 	}
 
+	//주요시설 연락처 삭제
 	@RequestMapping(value = "C_contactList_Delete", method = RequestMethod.POST)
 	public ModelAndView C_contactList_Delete(@RequestParam String[] box, Model model) {
 
 		List<Integer> list = new ArrayList<Integer>();
 
-		for (String seq : box) {
-			list.add(Integer.parseInt(seq));
-			System.out.println(seq);
-		}
 		customerServiceDAO.C_contactList_Delete(list);
 
 		return new ModelAndView("redirect:/customerService/C_contactList.do");
@@ -518,8 +522,7 @@ public class CustomerServiceController {
 		return new ModelAndView("redirect:/customerService/C_contactList.do");
 	}
 
-	// 검색
-
+	// 주요시설 연락처 검색
 	@RequestMapping(value = "C_contactList_Search", method = RequestMethod.POST)
 	public ModelAndView C_contactList_Search(@RequestParam(required = false) Map<String, String> map) {
 		int endNum = Integer.parseInt(map.get("pg")) * 10;

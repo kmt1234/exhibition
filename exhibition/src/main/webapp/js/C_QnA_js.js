@@ -33,33 +33,32 @@ $(document).ready(function(){
 		dataType : 'json',
 		success : function(data){
 			$.each(data.list, function(index, item){
-				$('<tr/>',{
+				($('<div/>',{
 					class : 'title',
-				}).append('<i/>',{
-					class : 'question icon'
-				}).append($('<td/>',{
 					id : 'subjectA',
-					href : 'javascript:void(0)',
-					width : '850px',
 					align : 'left',
-					text : item.subject
+					href : 'javascript:void(0)',
 				})).append($('<i/>',{
-					class : 'angle double down icon',
+					class : 'dropdown icon',
+					align : 'left',
+					width : '100px'
+				})).append($('<span/>',{
+					align : 'left',
+					text : "["+item.classify+"]   "+item.subject
 				})).appendTo($('#C_QnA_List'));
 				
-				$('<tr/>',{
-					class : 'content',
-				}).append($('<td/>',{
+				($('<div/>',{
 					id : 'contentA',
+					class : 'content',
 					align : 'left',
-					style : 'width=20%',
+					style : 'margin-left : 104px',
 					text : item.content
 				})).appendTo($('#C_QnA_List'));
 			});
 		}
 	});
 	
-	
+
 	$('.QnA').click(function(){
 		var child = $('#C_QnA_List').empty();
 		var classify = $(this).val();
@@ -70,25 +69,25 @@ $(document).ready(function(){
 			dataType : 'json',
 			success : function(data){
 				$.each(data.list, function(index, item){
-					$('<tr/>',{
-						class : 'title'
-					}).append('<i/>',{
-						class : 'question icon'
-					}).append($('<td/>',{
+					($('<div/>',{
+						class : 'title',
 						id : 'subjectA',
-						href : 'javascript:void(0)',
-						width : '850px',
 						align : 'left',
-						text : item.subject
+						href : 'javascript:void(0)',
 					})).append($('<i/>',{
-						class : 'angle double down icon',
+						class : 'dropdown icon',
+						align : 'left',
+						width : '100px'
+					})).append($('<span/>',{
+						align : 'left',
+						text : "["+item.classify+"]   "+item.subject
 					})).appendTo($('#C_QnA_List'));
 					
-					$('<tr/>',{
-						class : 'content'
-					}).append($('<td/>',{
+					($('<div/>',{
 						id : 'contentA',
+						class : 'content',
 						align : 'left',
+						style : 'margin-left : 104px',
 						text : item.content
 					})).appendTo($('#C_QnA_List'));
 				});

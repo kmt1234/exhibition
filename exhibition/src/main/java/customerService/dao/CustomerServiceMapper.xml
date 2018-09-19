@@ -71,6 +71,11 @@
 		 									,#{phone}
 		 									,#{subject}
 		 									,#{content}
+		 									,seq_C_inquire.currval
+		 									,0
+		 									,0
+		 									,0
+		 									,0
 		 									,sysdate)
  	</insert>
  	
@@ -82,7 +87,7 @@
  	<select id="getInquireList" parameterType="java.util.Map" resultType="customerService">
  		select * from 
  		(select rownum rn, tt.* from 
- 		(select * from C_inquire order by seq desc)tt) 
+ 		(select * from C_inquire order by ref desc, step asc)tt) 
  		where rn between #{startNum} and #{endNum}
  	</select>
  	
@@ -97,12 +102,12 @@
  		(select rownum rn, tt.* from 
  		(select * from C_inquire
  		 where ${searchOption} like '%'||#{keyword}||'%'
- 		 order by seq desc)tt) 
+ 		 order by ref desc, step asc)tt) 
  		where rn between #{startNum} and #{endNum}
  	</select>
  	
  	<!-- 고객의 소리 문의받은 글 내용 불러오기 -->
- 	<select id="getInquireInfo" parameterType="String" resultType="customerService">
+ 	<select id="getInquireInfo" parameterType="int" resultType="customerService">
  		select * from C_inquire where seq=#{seq}
  	</select>
  	
@@ -111,7 +116,27 @@
  		select * from C_inquire where seq=#{seq}
  	</select>
  	
- 	
+ 	<!-- 답글 -->
+ 	<update id="C_inquire_Reply1" parameterType="customerService">
+ 		update C_inquire set step=step+1 where ref=#{ref} and step>=#{step}
+ 	</update>
+ 	<!-- 답글 -->
+ 	<insert id="C_inquire_Reply2" parameterType="customerService">
+ 		insert into C_inquire(seq, name, subject, content, ref, lev, step, pseq, reply, logtime) values(seq_C_inquire.nextval
+												 								,#{name}
+												 								,#{subject}
+												 								,#{content}
+												 								,#{ref}
+												 								,#{lev}
+												 								,#{step}
+												 								,#{pseq}
+												 								,#{reply}
+												 								,sysdate)
+ 	</insert>
+ 	<!-- 답글 -->
+ 	<update id="C_inquire_Reply3" parameterType="customerService">
+ 		update C_inquire set reply = reply+1 where seq=#{pseq}
+ 	</update>
  	
  	
  	
@@ -180,7 +205,7 @@
 		 							,#{phone})
  	</insert>
  	 	
- 	<!-- 글삭제 -->
+ 	<!-- 주요시설 연락처 삭제 -->
  	<delete id="C_contactList_Delete" parameterType="java.util.List">
  		delete C_contactList where seq in 
 		<foreach collection="list" item="item" open="(" close=")" separator=",">
