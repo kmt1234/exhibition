@@ -51,8 +51,10 @@ td.empty {
 			<td class="empty" colspan="4"> 이용 일자를 선택하세요. </td>
 		</tr>
 	</table>
+	<c:if test="${code == '1'}">
 	<input type="hidden" name="M_Id" value="${homepageMember.getM_Id()}">
 	<input type="hidden" name="M_Email" value="${homepageMember.getM_Email()}">
+	</c:if>
 	<input type="hidden" id="startDate" name="startDate" value="">
 	<input type="hidden" name="roomName" value="${businessRoom}">
 	<input type="button" value="예약하기" id="rentalBusinessRoomBtn">

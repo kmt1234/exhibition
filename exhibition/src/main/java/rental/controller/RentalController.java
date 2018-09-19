@@ -81,17 +81,21 @@ public class RentalController {
 	@RequestMapping(value = "R_concertHallDecision", method = RequestMethod.GET)
 	public ModelAndView R_concertHallDecision(@RequestParam String hallName, Model model, ModelMap modelMap) {
 		
-		double rate = 0;
-		if (hallName.equals("P_Room1") || hallName.equals("P_Room1")) {
-			rate = 2350 * 1.0 * 1.0 * 3/* 2.592 */;
-		} else if (hallName.equals("P_Room1") || hallName.equals("P_Room1")) {
-			rate = 2350 * 1.0 * 1.2 * 5/* 6.343 */;
+		int price = 0;
+		if (hallName.equals("P_Room1") || hallName.equals("P_Room2")) {
+			price = 100000;
+		} else if (hallName.equals("P_Room3") || hallName.equals("P_Room4")) {
+			price = 120000;
 		}
-
-		Date date = new Date();
+		
+		Calendar cal = Calendar.getInstance();
+		cal.add(cal.MONTH, 1);
+		
+		Date date = new Date(cal.getTimeInMillis());
+		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-		model.addAttribute("rate", rate);
+		model.addAttribute("price", price);
 		model.addAttribute("hallName", hallName);
 		model.addAttribute("date", sdf.format(date));
 
@@ -212,6 +216,19 @@ public class RentalController {
 
 		return result;
 	}
+	
+	// 예약가능한 concertHall 날짜 확인하기
+	@RequestMapping(value = "searchConcertHallRentDay", method = RequestMethod.POST)
+	public @ResponseBody String searchConcertHallRentDay(@RequestParam String hallName, @RequestParam String startDate,
+			@RequestParam String endDate) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("hallName", hallName);
+		map.put("startDate", startDate);
+		map.put("endDate", endDate);
+		String result = concertHallDAO.searchConcertHallRentDay(map);
+
+		return result;
+	}
 
 	// 특정 날짜 비지니스룸 예약현황 확인
 	@RequestMapping(value = "searchBusinessRoom", method = RequestMethod.POST)
@@ -257,18 +274,29 @@ public class RentalController {
 	public String reservationHoll(@RequestParam String booth, @RequestParam String startDate,
 			@RequestParam String endDate, @RequestParam String C_email, @RequestParam String C_license,
 			@RequestParam String C_tel, @RequestParam String title, @RequestParam int totalRent) {
+		System.out.println(C_email);
 		ExhibitionDTO exhibitionDTO = new ExhibitionDTO();
 		exhibitionDTO.setBoothName(booth);
 		exhibitionDTO.setC_email(C_email);
 		exhibitionDTO.setC_license(C_license);
 		exhibitionDTO.setC_tel(C_tel);
-		exhibitionDTO.setCode("1");
+		exhibitionDTO.setCode("2");
 		exhibitionDTO.setEndDate(endDate);
 		exhibitionDTO.setStartDate(startDate);
 		exhibitionDTO.setTotalRent(totalRent);
 		exhibitionDTO.setTitle(title);
 
 		exhibitionDAO.reservationHoll(exhibitionDTO);
+
+		return "/rental/R_exhibitionOk";
+	}
+	
+	// 공연장 예약
+	@RequestMapping(value = "reservationConcertHall", method = RequestMethod.POST)
+	public String reservationConcertHall(@ModelAttribute ConcertHallDTO concertHallDTO) {
+		
+
+		concertHallDAO.reservationConcertHall(concertHallDTO);
 
 		return "/rental/R_exhibitionOk";
 	}

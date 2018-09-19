@@ -60,7 +60,7 @@
       <div>1일 기준(08:00~20:00)</div>-->
    </div>
 
-    <div id="C_room2" style="position:absolute; left:76px;top:605px;" >
+    <div id="" style="position:absolute; left:76px;top:605px;" >
       <div id="C_room2" style="font-size: 25px; cursor:pointer; margin-top:30px;">P_Room2</div>
      <!-- <div>예약하기</div>
       <div>2,592(㎡)</div>
@@ -69,7 +69,7 @@
       <div>1일 기준(08:00~20:00)</div>-->
    </div>
 
-   <div id="C_room3" style="position:absolute; left:390px;top:690px" >
+   <div id="" style="position:absolute; left:390px;top:690px" >
       <div id="C_room3" style="font-size: 25px; cursor:pointer;">P_Room3</div>
       <!-- <div>예약하기</div>
       <div>6,343(㎡)</div>
@@ -78,8 +78,8 @@
       <div>1일 기준(08:00~20:00)</div> -->
    </div>
    
-   <div id="C_room4" style="position:absolute; left:400px;top:360px" >
-      <div class="absol" id="C_room4" style="font-size: 25px; cursor:pointer;">P_Room1</div>
+   <div id="" style="position:absolute; left:400px;top:360px" >
+      <div class="absol" id="C_room4" style="font-size: 25px; cursor:pointer;">P_Room4</div>
       <!-- <div>예약하기</div>
       <div>6,343(㎡)</div>
       <div>요율단가 : 2,350원</div>
@@ -90,6 +90,6 @@
 </div>
 <script src="../js/businessRoom.js?ver=1"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="../js/concertHall.js"></script>
+<script src="../js/concertHall.js?ver=1"></script>
 </body>
 </html>
