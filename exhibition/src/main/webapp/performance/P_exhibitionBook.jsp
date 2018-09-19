@@ -234,6 +234,28 @@ td{
 <script src="../semantic/semantic.min.js"></script>
 <script>
 $(document).ready(function(){
+	//페이지 호출 시(기본),
+	$('#BookEventBtn').show();	//매진 시, 버튼 숨기고 아닐 시, 보이기
+	
+	//로그인 아닐 시, 예매버튼 없애버림
+	if($('#hiddenId').val()==''){
+		$('#BookEventBtn').hide(); //예매버튼 숨김
+		$('#bookConfirmHeader').text('로그인 후 예매가능합니다');
+	}
+	
+	if($('#selectEventDate :selected').val()=='2000-01-01'){
+		$('#BookEventBtn').hide();
+	}
+	
+	//날짜 변경 시, 히든 태그에 날짜 값 넣기
+	$("#selectEventDate").change(function() {
+		$('#BookEventBtn').show();
+		$('#hiddenDate').val($('#selectEventDate :selected').text());
+		
+		if($('#selectEventDate :selected').val()=='2000-01-01'){
+			$('#BookEventBtn').hide();
+		}
+	});
 	
 	//다음단계
 	$('#book_next_Btn').click(function(){
