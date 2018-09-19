@@ -215,6 +215,8 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	public void eventInfoWrite_play_bookDB(PlayBookDTO playBookDTO) {
 		sqlSession.insert("customerServiceSQL.eventInfoWrite_play_bookDB", playBookDTO);
 	}
+	
+	//호텔 수정
 	public void C_hotelboardMod(HotelboardDTO hotelboardDTO) {
 		sqlSession.update("customerServiceSQL.C_hotelboardMod", hotelboardDTO);	
 	}
@@ -246,5 +248,19 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	//메인이미지 수정하기 위해 값 불러오기
 	public ImageboardDTO getImageboard(String seq) {
 		return sqlSession.selectOne("customerServiceSQL.getImageboard", seq);
+	}
+	public void C_imageboardMod(ImageboardDTO imageboardDTO) {//메인이미지 수정실행
+		sqlSession.update("customerServiceSQL.C_imageboardMod", imageboardDTO);	
+	}
+	public void C_eventboardMod(EventboardDTO eventboardDTO) {//박람회 수정실행
+		sqlSession.update("customerServiceSQL.C_eventboardMod", eventboardDTO);			
+	}
+	public void C_playboardMod(EventboardDTO eventboardDTO) {//연극 수정실행
+		sqlSession.update("customerServiceSQL.C_playboardMod", eventboardDTO);			
+	}
+	
+	//예매티켓일자 삭제
+	public void eventboardDelete_play_book(List<String> list2) {
+		sqlSession.delete("customerServiceSQL.eventboardDelete_play_book", list2);
 	}
 }

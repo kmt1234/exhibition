@@ -50,21 +50,23 @@
 				메인이미지
 				<span class="h-light">수정</span>
 			</h2>
-<form name="imageboardModForm" id="imageboardModForm" method="POST"
+<form id="imageboardModForm" method="POST"
 	enctype="multipart/form-data">
+	<input type="hidden" name="postSelect" id="postSelect" value="0">
+	<input type="hidden" name="seq" value="${imageboardDTO.seq}">
 			<!-- 내용 입력 -->
-<div style="width: 60%;align:left">
+ <div style="width: 60%;align:left">
 	<br>
 	<div class="ui labeled input" style="width: 100%;height: 50px;">
 		<div class="ui label">
 			제목
 		</div>
-		<input type="text" name="imageName" id="imageName" value="${eventboardDTO.imageName}">
+		<input type="text" name="imageName" id="imageName" value="${imageboardDTO.imageName}">
   	</div>
   	<br><br>
   	<div class="ui inverted input" style="width: 200px; height: 150px;">
   		<div class="ui left icon input" style="width: 100%; height: 50px;">
-			<img src="../storage/${eventboardDTO.image1}" name="img" id="imgView" width="200px" height="150px">
+			<img src="../storage/${eventboardDTO.image1}" name="imaView" id="imaView" width="200px" height="150px">
 	 	</div>
 	</div>
 	<div class="ui inverted input" style="width: 100%;">
@@ -85,7 +87,7 @@
 		<div class="ui label">
 			링크
 		</div>
-		<input type="text" name="eventLink" id="eventLink" value="${eventboardDTO.eventLink}">
+		<input type="text" name="eventLink" id="eventLink" value="${imageboardDTO.eventLink}">
   	</div>
   	<br><br>
   	
@@ -112,7 +114,9 @@
 <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script><!--달력-->
 <script>
 $(document).ready(function(){
-	
+	$('#ModeButton').click(function(){
+		$('#imageboardModForm').attr('action','/exhibition/customerService/C_imageboardMod.do').submit();
+	});
 });
 </script>
 </html>

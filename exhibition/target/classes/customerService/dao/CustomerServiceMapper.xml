@@ -56,12 +56,6 @@
  		update C_notice set subject=#{subject} , content =#{content} where seq=#{seq}
  	</update>
  	
- 	
- 	
- 	
- 	
- 	
- 	
  	<!-- 고객의 소리 문의하기 -->
  	<insert id="C_checkInquire" parameterType="customerService">
  		insert into C_inquire values(seq_C_inquire.nextval
@@ -374,6 +368,7 @@
 		      															  										  
 	insert into eventboard_play_book(seq
 									,imageName
+									,eventLink
 									,playDate
 									,playTicket
 									,remainTicket
@@ -383,6 +378,7 @@
 									,bookStatus)
 							values (seq_eventboard_play_book.nextval
 									,#{imageName}
+									,#{eventLink}
 									,#{playDate}
 									,#{playTicket}
 									,#{remainTicket}
@@ -417,7 +413,36 @@
  	<!--메인이미지 정보 보기(수정하기 위해)  -->
 	<select id="getImageboard" parameterType="java.lang.String" resultType="imageboard">
 		select * from customerImageboard where seq = #{seq}
-	</select>	
+	</select>
+	
+	<!--메인이미지 정보 수정  -->
+	<select id="C_imageboardMod" parameterType="imageboard">
+		update customerImageboard set imageName=#{imageName},image1=#{image1},eventLink=#{eventLink} where seq=#{seq}
+	</select>
+	
+	<!--박람회 정보 수정  -->
+	<select id="C_eventboardMod" parameterType="eventboard">
+		update eventboard set imageName=#{imageName},image1=#{image1},startDate=#{startDate},endDate=#{endDate},
+							  eventLink=#{eventLink},startTime=#{startTime},endTime=#{endTime},eventPlace=#{eventPlace},
+							  eventPrice=#{eventPrice},eventSeats=#{eventSeats},eventRate=#{eventRate},
+							  eventContent=#{eventContent} where seq=#{seq}
+	</select>
+	
+	<!--연극 정보 수정  -->
+	<select id="C_playboardMod" parameterType="eventboard">
+		update eventboard_play set imageName=#{imageName},image1=#{image1},startDate=#{startDate},endDate=#{endDate},
+							  eventLink=#{eventLink},startTime=#{startTime},endTime=#{endTime},eventPlace=#{eventPlace},
+							  eventPrice=#{eventPrice},eventSeats=#{eventSeats},eventRate=#{eventRate},
+							  eventContent=#{eventContent} where seq=#{seq}
+	</select>
+	
+	<!-- 연극  예매일자 삭제   -->
+	<delete id="eventboardDelete_play_book" parameterType="java.util.List">
+		delete eventboard_play_book where eventLink in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
  	
  </mapper>
  

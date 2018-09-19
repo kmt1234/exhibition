@@ -133,5 +133,13 @@ public interface CustomerServiceDAO {
 
 	public ImageboardDTO getImageboard(String seq);//메인이미지 내용 보기(수정하기 위해)
 
+	public void C_imageboardMod(ImageboardDTO imageboardDTO);//메인이미지 수정실행
+
+	public void C_eventboardMod(EventboardDTO eventboardDTO);//박람회 수정 실행
+
+	public void C_playboardMod(EventboardDTO eventboardDTO);//연극 수정실행
+
+	public void eventboardDelete_play_book(List<String> list2);//예매날짜 지우기
+
 	
 }
