@@ -662,7 +662,7 @@ public class CustomerServiceController {
 
 		eventboardDTO.setImage1(fileName);
 
-		// DB
+		// DB + 예매DB 추후 넣어야함 
 		customerServiceDAO.eventInfoWrite(eventboardDTO);
 
 		return new ModelAndView("redirect:/customerService/C_eventboardListForm.do");
