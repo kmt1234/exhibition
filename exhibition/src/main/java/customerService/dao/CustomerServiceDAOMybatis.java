@@ -18,7 +18,6 @@ import customerService.bean.ImageboardDTO;
 import customerService.bean.PlayBookDTO;
 import customerService.bean.SalesExhigitionDTO;
 import member.bean.MemberDTO;
-import rental.bean.ExhibitionDTO;
 
 @Transactional
 @Component
@@ -255,11 +254,45 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 			return sqlSession.selectOne("customerServiceSQL.getSalesTotalRentExhibition", salesMon);
 		}
 	}
-	public List<MemberDTO> getMemberList() {
-		return sqlSession.selectList("customerServiceSQL.getMemberList");
+	
+	
+	//회원정보 불러오기
+	public List<MemberDTO> getMemberList(Map<String, Integer> map) {
+		return sqlSession.selectList("customerServiceSQL.getMemberList",map);
 	}
-	public List<CompanyDTO> getCompanyList() {
-		return sqlSession.selectList("customerServiceSQL.getCompanyList");
+	//회원 페이징처리
+	public int getMemberListTotal() {
+		return sqlSession.selectOne("customerServiceSQL.getMemberListTotal");
+	}
+	//회원검색
+	public List<MemberDTO> memberListSearch(Map<String, String> map) {
+		return sqlSession.selectList("customerServiceSQL.memberListSearch",map);
+	}
+	//회원검색페이지
+	public int getMemberListSearchTotal(Map<String, String> map) {
+		return sqlSession.selectOne("customerServiceSQL.getMemberListSearchTotal",map);
+	}
+	
+	//사업자 정보 불러오기
+	public List<CompanyDTO> getCompanyList(Map<String, Integer> map) {
+		return sqlSession.selectList("customerServiceSQL.getCompanyList",map);
+	}
+	//사업자 페이징
+	public int getCompanyTotal() {
+		return sqlSession.selectOne("customerServiceSQL.getCompanyTotal");
+	}
+	//사업자 검색
+	public List<CompanyDTO> CompanyListSearch(Map<String, String> map) {
+		return sqlSession.selectList("customerServiceSQL.CompanyListSearch",map);
+	}
+	//사업자 검색토탈 페이징
+	public int getCompanyListSearchTotal(Map<String, String> map) {
+		return sqlSession.selectOne("customerServiceSQL.getCompanyListSearchTotal",map);
+	}
+	
+	//사업자 뷰
+	public List<CompanyDTO> getCompanyView(String C_license) {
+		return sqlSession.selectList("customerServiceSQL.getCompanyView",C_license);
 	}
 	
 	//연극수정하기 위해 값 불러오기

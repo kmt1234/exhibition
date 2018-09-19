@@ -425,14 +425,62 @@
  	<select id="getSalesTotalRentExhibition" parameterType="java.lang.String" resultType="int">
  		select sum(totalrent) as salesTotalRent from EXHIBITIONRENTAL where STARTDATE BETWEEN #{salesMon} and (select last_day(#{salesMon}) from dual)
  	</select>
- 	<!-- 회원정보  -->
- 	<select id="getMemberList" resultType="member">
- 		select * from membertable
+ 	 	
+	<!-- 회원정보  -->
+ 	<select id="getMemberList" resultType="member" parameterType="java.util.Map">
+ 		select * from(
+		select rownum rn, tt.* from(
+		select * from membertable)tt
+		)where rn <![CDATA[ >= ]]> #{startNum} and rn<![CDATA[<=]]> #{endNum}	
  	</select>
+ 	
+	<!-- 회원 정보 페이징처리 -->
+	<select id="getMemberListTotal" parameterType="java.util.Map" resultType="int">
+		select count(*) from membertable
+	</select>
+	
+ 	<!-- 회원 검색 -->
+ 	<select id="memberListSearch" parameterType="java.util.Map" resultType="member">
+		select * from (
+		select rownum rn, tt.* from(
+		select * from membertable where ${memberSearchOption} like '%'||#{memberSearch}||'%')tt
+		)where rn <![CDATA[ >= ]]> #{startNum} and rn<![CDATA[<=]]> #{endNum}
+	</select>
+	
+ 	<!-- 회원 검색 페이징-->
+ 	<select id="getMemberListSearchTotal" parameterType="java.util.Map" resultType="int">
+		select count(*) from membertable where ${memberSearchOption} like '%'||#{memberSearch}||'%'
+	</select>
+	
  	<!-- 사업자정보  -->
- 	<select id="getCompanyList" resultType="company">
- 		select * from company	
+ 	<select id="getCompanyList" resultType="company" parameterType="java.util.Map">
+ 		select * from(
+		select rownum rn, tt.* from(
+		select * from company)tt
+		)where rn <![CDATA[ >= ]]> #{startNum} and rn<![CDATA[<=]]> #{endNum}	
  	</select>
+ 	
+	<!-- 사업자 페이징처리 -->
+	<select id="getCompanyTotal" parameterType="java.util.Map" resultType="int">
+		select count(*) from company
+	</select>
+	
+ 	<!-- 사업자 검색 -->
+ 	<select id="CompanyListSearch" parameterType="java.util.Map" resultType="company">
+		select * from (
+		select rownum rn, tt.* from(
+		select * from company where ${companySearchOption} like '%'||#{companySearch}||'%')tt
+		)where rn <![CDATA[ >= ]]> #{startNum} and rn<![CDATA[<=]]> #{endNum}
+	</select>
+	
+ 	<!-- 사업자 검색토탈 페이징-->
+ 	<select id="getCompanyListSearchTotal" parameterType="java.util.Map" resultType="int">
+		select count(*) from company where ${companySearchOption} like '%'||#{companySearch}||'%'
+	</select>
+	
+	<select id="getCompanyView" resultType="company" parameterType="String">
+		select * from exhibitionrental where C_license like #{C_license}
+	</select>
  	
  	<!--연극 정보 보기(수정하기 위해)  -->
 	<select id="getPlayboard" parameterType="java.lang.String" resultType="eventboard">

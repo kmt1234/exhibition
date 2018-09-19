@@ -140,7 +140,198 @@ $(document).ready(function(){
    });
    
    
-   
-   
-   
+   //사업자 정보 불러오기
+   $('#companySearchDiv').hide();
+	$('#companyBtn').click(function(event,str){
+		if(str!='trigger') $('#pg').val(1);
+		$('#memberSearchDiv').hide();
+		$('#companySearchDiv').show();
+		$('#memberListTable').empty();
+		
+		$.ajax({
+			type : 'POST',
+			url : '/exhibition/customerService/getCompanyList.do',
+			data : {'pg' : $('#pg').val()},
+			dataType : 'json',
+			success : function(data){
+				/* $('#C_memberListFrom div:gt(0)').remove(); */
+				$.each(data.list,function(index, item){
+					$('<tr/>').append($('<td/>',{
+				 		name : 'C_businessname',
+				 		text : item.c_businessname
+				 	})).append($('<td/>',{
+				 		name : 'C_license',
+				 		class : 'C_license',
+				 		text : item.c_license
+				 	})).append($('<td/>',{
+				 		name : 'C_email',
+				 		text : item.c_email
+				 	})).append($('<td/>',{
+				 		name : 'C_tel',
+				 		text : item.c_tel
+				 	})).appendTo($('#memberListTable'));
+				});
+				$('#paging').html(data.customerServicePaging.pagingHTML);
+			}
+		});
+	});
+		
+		//사업자 검색
+		$('#companySearchBtn').click(function(event,str){
+			$('#memberListTable').empty();
+			if(str!='trigger') $('#pg').val(1);
+			if($('#companySearch').val()==''){
+				alert("검색어를 입력하세요");
+			}else{
+				$.ajax({
+					type: 'POST',
+					url : '/exhibition/customerService/CompanySearch.do',
+					data : {'pg' : $('#pg').val()
+						,'companySearchOption' : $('#companySearchOption').val() 
+						,'companySearch' : $('#companySearch').val()
+						},
+					dataType : 'json',
+					success : function(data){
+						$('#C_memberListFrom div:gt(0)').remove();
+						/*  alert(JSON.stringify(data)); */
+						 $.each(data.list,function(index, item){
+							 $('<tr/>').append($('<td/>',{
+							 		name : 'C_businessname',
+							 		text : item.c_businessname
+							 	})).append($('<td/>',{
+							 		name : 'C_license',
+							 		class : 'C_license',
+							 		text : item.c_license
+							 	})).append($('<td/>',{
+							 		name : 'C_email',
+							 		text : item.c_email
+							 	})).append($('<td/>',{
+							 		name : 'C_tel',
+							 		text : item.c_tel
+							 	})).appendTo($('#memberListTable'));
+							});
+						 $('#paging').html(data.customerServicePaging.pagingHTML);
+						 
+						}
+				});
+			}
+		});
+	
+	
+	//개인회원정보 불러오기
+	 $('#memberSearchDiv').hide();
+	$('#memberBtn').click(function(event,str){
+		if(str!='trigger') $('#pg').val(1);
+		$('#companySearchDiv').hide();
+		$('#memberSearchDiv').show();
+		$('#memberListTable').empty();
+		
+		$.ajax({
+			type : 'POST',
+			url : '/exhibition/customerService/getMemberList.do',
+			data : {'pg' : $('#pg').val()},
+			dataType : 'json',
+			success : function(data){
+				/*alert(JSON.stringify(data));*/
+				/*$('#memberListTable td:gt(0)').remove();*/
+				$.each(data.list,function(index, item){
+					$('<tr/>').append($('<td/>',{
+				 		name : 'M_Name',
+				 		text : item.m_Name
+				 	})).append($('<td/>',{
+				 		name : 'M_Id',
+				 		class : 'M_Id',
+				 		text : item.m_Id
+				 	})).append($('<td/>',{
+				 		name : 'M_Email',
+				 		text : item.m_Email
+				 	})).append($('<td/>',{
+				 		name : 'M_Phone',
+				 		text : item.m_Phone
+				 	})).appendTo($('#memberListTable'));
+				});
+				$('#paging').html(data.customerServicePaging.pagingHTML);
+			}
+	
+	});
+	
+
+		$('#memberSearchBtn').click(function(event,str){
+			$('#memberListTable').empty();
+			if(str!='trigger') $('#pg').val(1);
+			if($('#memberSearch').val()==''){
+				alert("검색어를 입력하세요");
+			}else{
+				$.ajax({
+					type: 'POST',
+					url : '/exhibition/customerService/memberListSearch.do',
+					data : {'pg' : $('#pg').val()
+						,'memberSearchOption' : $('#memberSearchOption').val() 
+						,'memberSearch' : $('#memberSearch').val()
+						},
+					dataType : 'json',
+					success : function(data){
+						$('#C_memberListFrom div:gt(0)').remove();
+						
+						 $.each(data.list,function(index, item){
+							 $('<tr/>').append($('<td/>',{
+							 		name : 'M_Name',
+							 		text : item.m_Name
+							 	})).append($('<td/>',{
+							 		name : 'M_Id',
+							 		class : 'M_Id',
+							 		text : item.m_Id
+							 	})).append($('<td/>',{
+							 		name : 'M_Email',
+							 		text : item.m_Email
+							 	})).append($('<td/>',{
+							 		name : 'M_Phone',
+							 		text : item.m_Phone
+							 	})).appendTo($('#memberListTable'));
+							});
+						 $('#paging').html(data.customerServicePaging.pagingHTML);
+						 
+						}
+				});
+			}
+		});
+	});
+	$('#memberListTable').on('click','.C_license',function(){
+		$.ajax({
+			type : 'POST',
+			url : '/exhibition/customerService/companyView.do',
+			data : {'C_license' : $(this).text()},
+			dataType : 'json',
+			success : function(data){
+				alert(JSON.stringify(data));
+				$.each(data.list,function(index, item){
+					$('<div/>').append($('<div/>',{
+						id : aa,
+						text : item.c_license +"님 예약내역"
+					})).append($('<div/>',{
+						id : bb,
+						text : "하하하"
+					})).appendTo($('#modalForm'));
+				});
+			}
+	});
+	$('.ui.modal.member').modal('show');
+});
+	
+	
+	$('#memberListTable').on('click','.M_Id',function(){
+		$.ajax({
+			type : 'POST',
+			url : '/exhibition/customerService/memberView.do',
+			data : {'M_Id' : $(this).text()},
+			dataType : 'text',
+			success : function(data){
+				
+				$.each(data.list,function(index, item){
+				});
+			}
+	});
+	$('.ui.modal.member').modal('show');
+});
+	
 });

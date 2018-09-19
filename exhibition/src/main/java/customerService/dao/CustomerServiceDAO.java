@@ -129,9 +129,25 @@ public interface CustomerServiceDAO {
 
 	public int getSalesTotalRentExhibition(String salesMon);
 
-	public List<MemberDTO> getMemberList();
+		//회원정보
+	public List<MemberDTO> getMemberList(Map<String, Integer> map);
+	//회원 페이징
+	public int getMemberListTotal();
+	//회원정보 검색
+	public List<MemberDTO> memberListSearch(Map<String, String> map);
+	//회원정보 검색 토탈 페이징
+	public int getMemberListSearchTotal(Map<String, String> map);
+	
+	//사업자 정보
+	public List<CompanyDTO> getCompanyList(Map<String, Integer> map);
+	//사업자 페이징
+	public int getCompanyTotal();
+	//사업자 검색 
+	public List<CompanyDTO> CompanyListSearch(Map<String, String> map);
+	//사업자 검색 페이징
+	public int getCompanyListSearchTotal(Map<String, String> map);
 
-	public List<CompanyDTO> getCompanyList();
+	public List<CompanyDTO> getCompanyView(String C_license);
 
 	public ImageboardDTO getImageboard(String seq);//메인이미지 내용 보기(수정하기 위해)
 
