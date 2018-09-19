@@ -23,27 +23,29 @@
 </style>
 </head>
 <body>
-	<header>
+<header>
+	<div style="margin-top: 20px; min-width:1170px; border: 1px solid; position: relative;   ">
 		<jsp:include page="../main/I_header.jsp"/>
-	</header>
-	<br>
-	<br>
-	<div class="ui five column grid container">
+	</div>
+</header>
+	<div style="margin-top: 5px; min-width:1170px; position: relative;  border: 1px solid;  " class="ui container" >
 		<!-- 사이드바 메뉴 -->
-		<div class="ui compact menu" style="width: 20%; height: 977px; ">
-			<a class="item" href="R_rentalForm.do">시설임대</a>
-			<a class="item" href="R_exhibition.do">박람회홀</a> 
-			<a class="item" href="R_performance.do">공연장홀</a> 
-			<a class="item" href="R_businessRoom.do">비즈니스룸</a> 
+		<div class="ui compact menu" style="width:230px ; height:900px auto; ">
+			<div style="display: inline-block;">
+				<a class="item" style="width: 230px;" href="R_rentalForm.do">시설임대</a>
+				<a class="item" href="R_exhibition.do">박람회홀</a> 
+				<a class="item" href="R_performance.do">공연장홀</a> 
+				<a class="item" href="R_businessRoom.do">비즈니스룸</a> 
+			</div>
 		</div>
 		<!-- 메인 화면 -->
-		<div class="ui compact menu" style="width: 80%; height: 900px;" >
+		<div class="ui compact menu" style="width: 930px; height:900px auto;  display: inline-block;" >
 			<jsp:include page="${display }" />
 		</div>
-		<!-- footer -->
-		<div class="ui compact menu" style="width: 100%; float: right; ">
-			<jsp:include page="../main/I_footer.jsp" />
-		</div>
 	</div>
+	<div class="ui container" style="margin-top: 20px; min-width:1170px; position: relative; ">
+		<jsp:include page="../main/I_footer.jsp" />
+	</div>
+
 </body>
 </html>

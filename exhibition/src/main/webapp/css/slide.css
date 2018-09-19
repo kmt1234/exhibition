@@ -7,12 +7,12 @@ img.pic{
 	display: block;
 	border: 0;
 	width: 1150px;
-	height: 400px
+	height: 500px
 }
 
 .slide{
 	width:1150px;
-	height: 400px;
+	height: 500px;
 	overflow: hidden;
 	margin: 0 auto;
 	position: relative;
