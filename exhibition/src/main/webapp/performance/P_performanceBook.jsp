@@ -272,6 +272,9 @@ $(document).ready(function(){
 			$('#bookConfirmHeader').text('로그인 후 예매가능합니다');
 		}
 		
+		//잔여석 보다 예매표가 많을 시, 예매 막기
+		
+		
 		//티켓 잔여 확인
 		$.ajax({
 			type : 'POST',
@@ -347,7 +350,6 @@ $(document).ready(function(){
 		}
 		
 	});//예매하기 버튼 클릭 
-	
 	
 	//다음단계 버튼 클릭 시,
 	$('#book_next_Btn').click(function(){
