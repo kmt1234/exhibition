@@ -30,6 +30,7 @@ $(document).ready(function(){
 	
 	//시작일에 오늘 날짜 설정
 	$(".datepicker1").datepicker('setDate', new Date());
+
 	//목록 버튼
 	$('#imageboardList').click(function(){
 		if($('#postSelect').val()=='0'){
