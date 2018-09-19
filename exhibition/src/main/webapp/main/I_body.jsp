@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
 </head>
-<body>
+<body> 
 <section id="mainSection">
 	<div id="mainSlideDiv" class="slide">
 		<ul id="mainSlideUl"></ul>
