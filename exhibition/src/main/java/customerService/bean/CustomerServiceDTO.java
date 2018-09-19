@@ -21,13 +21,13 @@ public class CustomerServiceDTO {
 	private String facility;	//기관&시설
 	private String title;		//명칭
 	
-	private int ref;
-    private int lev;
-    private int step;
-    private int pseq;
-    private int reply;
+	private int ref;			//그룹번호
+    private int lev;			//단계
+    private int step;			//글순서
+    private int pseq;			//원글번호
+    private int reply;			//답변수
  
-    private int hit;
+    private int hit;			//조회수
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date logtime;		//등록일 
 }

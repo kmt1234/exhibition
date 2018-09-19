@@ -154,12 +154,12 @@ create sequence seq_C_inquire nocycle nocache;
 
 // 주요시설 연락처
 create table C_contactList(
-seq number primary key,
-classify varchar2(100) not null,
-facility varchar2(100) not null,
-title varchar2(100) not null,
-name varchar2(100) not null,
-phone varchar2(100) not null);
+seq number primary key,					--시퀀스
+classify varchar2(100) not null,		--분류
+facility varchar2(100) not null,		--기관&시설
+title varchar2(100) not null,			--명칭
+name varchar2(100) not null,			--담당자
+phone varchar2(100) not null);			--연락처
 
 
 create sequence seq_C_contactList nocycle nocache;

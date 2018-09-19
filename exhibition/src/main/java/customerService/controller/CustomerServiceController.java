@@ -221,8 +221,9 @@ public class CustomerServiceController {
 		return mav;
 	}
 
+	// 고객의 소리 인증 번호 보내기
 	@RequestMapping(value = "sendEmail", method = RequestMethod.POST)
-	public @ResponseBody String sendEmail(@RequestParam final String email, Model model) {// 인증번호 받기 위한 메일 전송
+	public @ResponseBody String sendEmail(@RequestParam final String email, Model model) {
 
 		final String authNum = randomNum();
 
@@ -243,6 +244,7 @@ public class CustomerServiceController {
 		return authNum;
 	}
 
+	// 이메일인증 인증번호 생성
 	private String randomNum() {
 		StringBuffer buffer = new StringBuffer();
 		for (int i = 0; i <= 6; i++) {
@@ -337,7 +339,6 @@ public class CustomerServiceController {
 	}
 
 	// 고객의소리 내용보기(관리자
-	// 고객의소리 내용보기(관리자
 	@RequestMapping(value = "C_inquire_View", method = RequestMethod.GET)
 	public ModelAndView C_inquire_View(@RequestParam int seq, @RequestParam String pg, Model model) {
 
@@ -397,7 +398,7 @@ public class CustomerServiceController {
 	}
 
 	// 자주묻는
-	// 질문~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ㄴ
+	// 질문~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 	// 자주묻는 질문
 	@RequestMapping(value = "C_QnA", method = RequestMethod.GET)
@@ -456,6 +457,7 @@ public class CustomerServiceController {
 		return mav;
 	}
 
+	//주요시설 연락처 삭제
 	@RequestMapping(value = "C_contactList_Delete", method = RequestMethod.POST)
 	public ModelAndView C_contactList_Delete(@RequestParam String[] box, Model model) {
 
@@ -519,8 +521,7 @@ public class CustomerServiceController {
 		return new ModelAndView("redirect:/customerService/C_contactList.do");
 	}
 
-	// 검색
-
+	// 주요시설 연락처 검색
 	@RequestMapping(value = "C_contactList_Search", method = RequestMethod.POST)
 	public ModelAndView C_contactList_Search(@RequestParam(required = false) Map<String, String> map) {
 		int endNum = Integer.parseInt(map.get("pg")) * 10;

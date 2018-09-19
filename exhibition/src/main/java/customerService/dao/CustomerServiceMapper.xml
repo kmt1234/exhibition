@@ -120,7 +120,7 @@
  	<update id="C_inquire_Reply1" parameterType="customerService">
  		update C_inquire set step=step+1 where ref=#{ref} and step>=#{step}
  	</update>
- 	
+ 	<!-- 답글 -->
  	<insert id="C_inquire_Reply2" parameterType="customerService">
  		insert into C_inquire(seq, name, subject, content, ref, lev, step, pseq, reply, logtime) values(seq_C_inquire.nextval
 												 								,#{name}
@@ -133,7 +133,7 @@
 												 								,#{reply}
 												 								,sysdate)
  	</insert>
- 	
+ 	<!-- 답글 -->
  	<update id="C_inquire_Reply3" parameterType="customerService">
  		update C_inquire set reply = reply+1 where seq=#{pseq}
  	</update>
@@ -205,7 +205,7 @@
 		 							,#{phone})
  	</insert>
  	 	
- 	<!-- 글삭제 -->
+ 	<!-- 주요시설 연락처 삭제 -->
  	<delete id="C_contactList_Delete" parameterType="java.util.List">
  		delete C_contactList where seq in 
 		<foreach collection="list" item="item" open="(" close=")" separator=",">

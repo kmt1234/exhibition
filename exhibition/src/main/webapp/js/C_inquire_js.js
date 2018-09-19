@@ -70,5 +70,5 @@ $(document).ready(function(){
 		$('#C_inquire_writeReply').submit();
 	});
 
-	$('.ui.compact.selection.dropdown').dropdown();	
+	$('.ui.selection.dropdown').dropdown();	
 });

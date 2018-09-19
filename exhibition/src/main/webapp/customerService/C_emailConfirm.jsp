@@ -41,7 +41,7 @@
 </table>
 <c:if test="${code=='3' }">
 <div align="left">
-	<input class="middle ui button" type="button" id="C_email_ListBtn" value="관리자 버튼">
+	<input class="ui button" type="button" id="C_email_ListBtn" value="관리자 버튼">
 </div>
 </c:if>
 <script src="../js/C_inquire_js.js?ver=1"></script>

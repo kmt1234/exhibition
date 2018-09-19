@@ -52,7 +52,7 @@
 	<input type="hidden" name="pg" id="pg" value="1">
 	<br><br>
 
-	<select class="ui compact selection dropdown" id="searchOption">
+	<select class="ui selection dropdown" id="searchOption">
 			<option value="facility">기관&시설</option>
 			<option value="name">담당자</option>
 	</select>
@@ -267,7 +267,7 @@ function C_contactList_Search(pg){
 	$('#pg').val(pg);
 	$('#C_contactList_SearchBtn').trigger('click','trigger');
 }
-$('.ui.compact.selection.dropdown')
+$('.ui.selection.dropdown')
 .dropdown()
 ;
 </script>

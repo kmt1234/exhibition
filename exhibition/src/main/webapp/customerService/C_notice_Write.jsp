@@ -9,7 +9,6 @@
   resize: none; /* 사용자 임의 변경 불가 */
 }
 </style>
-<title>Insert title here</title>
 </head>
 <body>
 <h2 class="box-container" style="float: center; width: 100%; text-align: left;">
