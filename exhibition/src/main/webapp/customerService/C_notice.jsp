@@ -80,7 +80,7 @@
 //공지사항 리스트 불러오기
 $(document).ready(function(){
 	$.ajax({
-		 type : 'POST',
+		type : 'POST',
 		url : '/exhibition/customerService/getNoticeList.do',
 		data :  'pg=${pg}',
 		dataType : 'json',
