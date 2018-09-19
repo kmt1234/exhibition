@@ -59,6 +59,7 @@ public class CustomerServiceController {
 	@Autowired
 	private PlayBookDTO playBookDTO;
 
+
 	// 고객센터 설명페이지
 	@RequestMapping(value = "C_customerServiceForm", method = RequestMethod.GET)
 	public ModelAndView C_customerServiceForm() {
@@ -1059,39 +1060,154 @@ public class CustomerServiceController {
 
 	// 회원리스트로 이동
 	@RequestMapping(value = "C_memberShib", method = RequestMethod.GET)
-	public ModelAndView C_memberShib() {
+	public ModelAndView C_memberShib(@RequestParam(required=false , defaultValue="1") String pg) {
 		ModelAndView mav = new ModelAndView();
 
 		mav.addObject("display", "/customerService/C_memberShib.jsp");
+		mav.addObject("pg",pg);
 		mav.setViewName("/customerService/C_customerServiceForm");
 
 		return mav;
 	}
-
-	// 회원리스트 불러오기
-	@RequestMapping(value = "getMemberList", method = RequestMethod.GET)
-	public ModelAndView getMemberList() {
 	
-		List<MemberDTO> list = customerServiceDAO.getMemberList();
+	// 회원리스트 불러오기
+	@RequestMapping(value = "getMemberList", method = RequestMethod.POST)
+	public ModelAndView getMemberList(@RequestParam(required=false , defaultValue="1") String pg) {
+		int endNum = Integer.parseInt(pg)*3;
+		int startNum = endNum-2;
+		
+		Map<String,Integer> map = new HashMap<String,Integer>();
+		map.put("endNum", endNum);
+		map.put("startNum", startNum);
+		
+		List<MemberDTO> list = customerServiceDAO.getMemberList(map);
+		
+		int totalA = customerServiceDAO.getMemberListTotal();
+		
+		customerServicePaging.setCurrentPage(Integer.parseInt(pg));
+		customerServicePaging.setPageBlock(3);
+		customerServicePaging.setPageSize(3);
+		customerServicePaging.setTotalA(totalA);
+		customerServicePaging.member_pagingHTML();
 		
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("pg", pg);
 		mav.addObject("list", list);
+		mav.addObject("customerServicePaging",customerServicePaging);
+		
+		mav.setViewName("jsonView");
+
+		return mav;	
+	}
+	//회원검색
+	@RequestMapping(value="memberListSearch", method = RequestMethod.POST)
+	public ModelAndView memberListSearch(@RequestParam Map<String,String> map) {
+		
+		int endNum = Integer.parseInt(map.get("pg"))*3;
+		int startNum = endNum-2;
+		map.put("endNum", endNum+"" );
+		map.put("startNum", startNum+"" );
+		
+		List<MemberDTO> list = customerServiceDAO.memberListSearch(map);
+		
+		int totalA = customerServiceDAO.getMemberListSearchTotal(map);
+		
+		customerServicePaging.setCurrentPage(Integer.parseInt(map.get("pg")));
+		customerServicePaging.setPageBlock(3);
+		customerServicePaging.setPageSize(3);
+		customerServicePaging.setTotalA(totalA);
+		customerServicePaging.memberSearch_pagingHTML();
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list",list);
+		mav.addObject("customerServicePaging",customerServicePaging);
+		
+		mav.setViewName("jsonView");
+		return mav;
+	}
+	//회원 상세정보
+	@RequestMapping(value="memberView", method = RequestMethod.POST)
+	public ModelAndView memberView(@RequestParam String M_Id) {
+		System.out.println(M_Id);
+		
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");
+		return mav;
+	}
+	
+	//사업자 상세정보
+		@RequestMapping(value="companyView", method = RequestMethod.POST)
+		public ModelAndView companyView(@RequestParam String C_license) {
+			List<CompanyDTO> list = customerServiceDAO.getCompanyView(C_license);
+			
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("list",list);
+			mav.setViewName("jsonView");
+			return mav;
+		}
+	
+	// 사업자리스트 불러오기
+	@RequestMapping(value ="getCompanyList", method = RequestMethod.POST)
+	public ModelAndView getCompanyList(@RequestParam(required=false , defaultValue="1") String pg) {
+		int endNum = Integer.parseInt(pg)*3;
+		int startNum = endNum-2;
+		
+		Map<String,Integer> map = new HashMap<String,Integer>();
+		map.put("endNum", endNum);
+		map.put("startNum", startNum);
+		
+		List<CompanyDTO> list = customerServiceDAO.getCompanyList(map);
+		
+		int totalA = customerServiceDAO.getCompanyTotal();
+		
+		customerServicePaging.setCurrentPage(Integer.parseInt(pg));
+		customerServicePaging.setPageBlock(3);
+		customerServicePaging.setPageSize(3);
+		customerServicePaging.setTotalA(totalA);
+		customerServicePaging.company_pagingHTML();
+		
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("pg", pg);
+		mav.addObject("list", list);
+		mav.addObject("customerServicePaging",customerServicePaging);
+		
 		mav.setViewName("jsonView");
 
 		return mav;
 	}
-	// 사업자리스트 불러오기
-		@RequestMapping(value = "getCompanyList", method = RequestMethod.GET)
-		public ModelAndView getCompanyList() {
+	
+	//사업자검색
+	@RequestMapping(value="CompanySearch", method = RequestMethod.POST)
+	public ModelAndView CompanySearch(@RequestParam Map<String,String> map) {
 		
-			List<CompanyDTO> list = customerServiceDAO.getCompanyList();
-			
-			ModelAndView mav = new ModelAndView();
-			mav.addObject("list", list);
-			mav.setViewName("jsonView");
-
-			return mav;
-		}
+		int endNum = Integer.parseInt(map.get("pg"))*3;
+		int startNum = endNum-2;
+		map.put("endNum", endNum+"" );
+		map.put("startNum", startNum+"" );
+		
+		List<CompanyDTO> list = customerServiceDAO.CompanyListSearch(map);
+		
+		int totalA = customerServiceDAO.getCompanyListSearchTotal(map);
+		
+		customerServicePaging.setCurrentPage(Integer.parseInt(map.get("pg")));
+		customerServicePaging.setPageBlock(3);
+		customerServicePaging.setPageSize(3);
+		customerServicePaging.setTotalA(totalA);
+		customerServicePaging.companySearch_pagingHTML();
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list",list);
+		mav.addObject("customerServicePaging",customerServicePaging);
+		
+		mav.setViewName("jsonView");
+		return mav;
+	}
+	
+	
+		
+		
 	//이메일무단수집거부
 	@RequestMapping(value="C_emailRefuse",method=RequestMethod.GET)
 	public String C_emailRefuse() {

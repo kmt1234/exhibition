@@ -132,6 +132,89 @@ public class CustomerServicePaging {
 		if(endPage!=totalP) 
 			pagingHTML.append("<span class='item' id=paging onclick=C_contactList_Search("+(endPage+1)+")>다음</span>");
 	}
+	//사업자 페이징
+	public void company_pagingHTML() {
+		pagingHTML = new StringBuffer();
+		
+		int totalP = (totalA+pageSize-1)/pageSize;
+		int startPage = (currentPage-1)/pageBlock*pageBlock+1;
+		int endPage = startPage+(pageBlock-1);
+		if(endPage > totalP) endPage = totalP;
+		
+		if(startPage!=1) 
+			pagingHTML.append("<span  id=paging onclick=CompanyList("+(startPage-1)+")>이전</span>");
+		for(int i=startPage; i<=endPage; i++) {
+			if(i==currentPage)
+				pagingHTML.append("<span id=currentPaging onclick=CompanyList("+i+")>"+"["+i+"]"+"</span>");
+			else
+				pagingHTML.append("<span id=paging onclick=CompanyList("+i+")>"+"["+i+"]"+"</span>");
+		}
+		if(endPage!=totalP) 
+			pagingHTML.append("<span id=paging onclick=CompanyList("+(endPage+1)+")>다음</span>");
+	}
+	
+	//사업자 검색 페이징
+	public void companySearch_pagingHTML() {
+		pagingHTML = new StringBuffer();
+		
+		int totalP = (totalA+pageSize-1)/pageSize;
+		int startPage = (currentPage-1)/pageBlock*pageBlock+1;
+		int endPage = startPage+(pageBlock-1);
+		if(endPage > totalP) endPage = totalP;
+		
+		if(startPage!=1) 
+			pagingHTML.append("<span  id=paging onclick=CompanySearch("+(startPage-1)+")>이전</span>");
+		for(int i=startPage; i<=endPage; i++) {
+			if(i==currentPage)
+				pagingHTML.append("<span id=currentPaging onclick=CompanySearch("+i+")>"+"["+i+"]"+"</span>");
+			else
+				pagingHTML.append("<span id=paging onclick=CompanySearch("+i+")>"+"["+i+"]"+"</span>");
+		}
+		if(endPage!=totalP) 
+			pagingHTML.append("<span id=paging onclick=CompanySearch("+(endPage+1)+")>다음</span>");
+	}
+	
+	//개인회원 페이징
+		public void member_pagingHTML() {
+			pagingHTML = new StringBuffer();
+			
+			int totalP = (totalA+pageSize-1)/pageSize;
+			int startPage = (currentPage-1)/pageBlock*pageBlock+1;
+			int endPage = startPage+(pageBlock-1);
+			if(endPage > totalP) endPage = totalP;
+			
+			if(startPage!=1) 
+				pagingHTML.append("<span  id=paging onclick=memberList("+(startPage-1)+")>이전</span>");
+			for(int i=startPage; i<=endPage; i++) {
+				if(i==currentPage)
+					pagingHTML.append("<span id=currentPaging onclick=memberList("+i+")>"+"["+i+"]"+"</span>");
+				else
+					pagingHTML.append("<span id=paging onclick=memberList("+i+")>"+"["+i+"]"+"</span>");
+			}
+			if(endPage!=totalP) 
+				pagingHTML.append("<span id=paging onclick=memberList("+(endPage+1)+")>다음</span>");
+		}
+		
+		//개인회원 검색 페이징
+		public void memberSearch_pagingHTML() {
+			pagingHTML = new StringBuffer();
+			
+			int totalP = (totalA+pageSize-1)/pageSize;
+			int startPage = (currentPage-1)/pageBlock*pageBlock+1;
+			int endPage = startPage+(pageBlock-1);
+			if(endPage > totalP) endPage = totalP;
+			
+			if(startPage!=1) 
+				pagingHTML.append("<span  id=paging onclick=memberSearch("+(startPage-1)+")>이전</span>");
+			for(int i=startPage; i<=endPage; i++) {
+				if(i==currentPage)
+					pagingHTML.append("<span id=currentPaging onclick=memberSearch("+i+")>"+"["+i+"]"+"</span>");
+				else
+					pagingHTML.append("<span id=paging onclick=memberSearch("+i+")>"+"["+i+"]"+"</span>");
+			}
+			if(endPage!=totalP) 
+				pagingHTML.append("<span id=paging onclick=memberSearch("+(endPage+1)+")>다음</span>");
+		}
 }
 
 
