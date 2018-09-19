@@ -102,7 +102,7 @@
 			</div><!--class="column"-->
 		</div><!--id="main"-->
 		
-		<div class="ui container" style="min-width: 1170px; margin-top: 10px;">
+		<div class="ui five columns grid container" style="min-width: 1170px; margin-top: 10px;">
 			<div class="ui compact menu" style="display: inline-block; width:230px;">
 				<div class="ui simple dropdown item">
 					<span id="P_performanceForm">일정</span>
