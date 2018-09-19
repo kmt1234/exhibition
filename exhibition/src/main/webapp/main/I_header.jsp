@@ -103,11 +103,11 @@
 		</div><!--id="main"-->
 		
 		<div class="ui container" style="min-width: 1170px; margin-top: 10px;">
-			<div class="ui compact menu" style="display: inline-block; width:230px;  ">
+			<div class="ui compact menu" style="display: inline-block; width:230px;">
 				<div class="ui simple dropdown item">
 					<span id="P_performanceForm">일정</span>
 					<div class="menu">
-						<div class="item" id="P_allSchedule">전체일정</div>
+						<div class="item" style="width: 226px;" id="P_allSchedule">전체일정</div>
 						<div class="item" id="P_performanceSchedule">공연일정</div>
 						<div class="item" id="P_exhibitionSchedule">박람회일정</div>
 					</div>
@@ -117,7 +117,7 @@
 				<div class="ui simple dropdown item">
 					<span id="R_rentalForm">시설&임대</span>
 					<div class="menu">
-						<div class="item" id="R_exhibition">박람회 홀</div>
+						<div class="item" style="width: 226px;" id="R_exhibition">박람회 홀</div>
 						<div class="item" id="R_performance">공연장 홀</div>
 						<div class="item" id="R_businessRoom">비지니스 룸</div>
 					</div>
@@ -127,7 +127,7 @@
 				<div class="ui simple dropdown item">
 					<span id="T_allForm">교통&숙박</span>
 					<div class="menu">
-						<div class="item" id="T_allFormS">교통안내</div>
+						<div class="item" style="width: 226px;" id="T_allFormS">교통안내</div>
 						<div class="item" id="T_hotelForm">숙박안내</div>
 					</div>
 				</div>
@@ -137,7 +137,7 @@
 	            <div class="ui simple dropdown item">
 	               <span id="C_customerServiceForm" >고객센터</span>
 	               <div class="menu">
-	                  <div class="item" id="C_notice">공지사항</div>
+	                  <div class="item" style="width: 226px;" id="C_notice">공지사항</div>
 	                  <div class="item" id="C_emailConfirm">고객의 소리</div>
 	                  <div class="item" id="C_QnA">자주묻는 질문</div>
 	                  <div class="item" id="C_contactList">주요시설 연락처</div>
@@ -156,7 +156,7 @@
 				<div class="ui simple dropdown item">
 					<span id="I_infoForm">소개</span> 
 					<div class="menu">
-						<div class="item" id="I_companyIntroductionForm">회사소개</div>
+						<div class="item" style="width: 226px;" id="I_companyIntroductionForm">회사소개</div>
 						<div class="item" id="I_CEOIntroductionForm">CEO인사말</div>
 					</div>
 				</div>

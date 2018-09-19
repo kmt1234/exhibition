@@ -100,8 +100,7 @@ var dataSet = [
 		font-size: 14px;
 	}
 	#calendar {
-		max-width: 800px;
-		max-height: 600px;
+		max-width: 880px;
 		margin: 0 auto;
 	}
 </style>
@@ -115,12 +114,20 @@ var dataSet = [
 	</h2>
 	<!-- 버튼 -->
 	<div>
-		<input type="button" value="달력으로 보기" 
-			style="width:150; height:35; background-color:#ffffff;
-		 border:1 solid #f702e7; float: left">
-		<input type="button" value="리스트로 보기" 
-			style="width:150; height:35; font-family:돋움; background-color:#ffffff;
-		 	border:1 solid #f702e7; float: left">
+		<table style="margin-left:20px; width: 40%;">
+			<tr>
+				<td>
+					<button class="middle ui button" style="width: 100%;" id="P_allCalendarBtn">
+						달력으로 보기
+					</button> 
+				</td>
+				<td>
+					<button class="middle ui button" style="width: 100%;" id="P_allLsintBtn">
+						리스트로 보기
+					</button> 
+				</td>
+			</tr>
+		</table>
 		 <span style="float: right;">
 		 <img src="../img/Ex.png" style="width:25px; height: 25px; " align='absmiddle'> 전시회
 		 </span>
@@ -131,12 +138,9 @@ var dataSet = [
 	</div>
 		<br>
 		<br>
-	<div style= "height: 86%;width: 100%; border: 1px solid;">
+	
 		<br>
 		<br>
 		<div  id='calendar'></div>
-	</div>
-
-
 </body>
 </html>

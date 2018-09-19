@@ -28,6 +28,7 @@
 		<div style=" margin-left:20px; width:270px; height:200px;  display: inline-block; float: left;" >
 			<img style="min-width:270; height: 200px " src='../img/B1.jpg'></img>
 		</div>
+		<!-- 공지사항  -->
 		<div style=" margin-left:20px; width:270px; height:200px;  display: inline-block; float: left;" >
 			<img style="min-width:270; height: 200px " src='../img/B1.jpg'></img>
 		</div>
