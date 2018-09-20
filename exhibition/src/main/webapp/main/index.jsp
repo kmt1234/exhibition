@@ -29,11 +29,12 @@
 			<img style="min-width:270; height: 200px " src='../img/B1.jpg'></img>
 		</div>
 		<!-- 공지사항  -->
-		<div style=" margin-left:20px; width:270px; height:200px;  display: inline-block; float: left;" >
-			<table id="C_notice_MainList" class="ui striped table"></table>
-			<input type="hidden" name="pg" id="pg" value="1"> <br>
+		<div style="overflow:auto; margin-left:20px; width:270px; height:200px;  display: inline-block; float: left;" >
+			<div id="C_notice_MainList" class="ui striped table"></div>
 		</div>
 	</div>
+			<input type="hidden" name="pg" id="pg" value="1"> <br>
+			<input type="hidden" name="seq" id="seq" value=""> <br>
 </section>
 </div>
 <footer>
@@ -51,19 +52,22 @@ $(document).ready(function(){
 		success : function(data){
 			$.each(data.list, function(index, item){
 				$('<tr/>').append($('<td/>',{
-						align : 'center',
-						id : 'subjectA',
-						style: 'width: 45%; height: 7%; text-align: center;',
-						
-						class : item.seq+"",
-						href : 'javascript:void(0)',
-						text : item.subject
-					})).appendTo($('#C_notice_MainList'));
-				});
+					align : 'center',
+					id : 'subjectA',
+					style: 'width: 260px; height: 20px; text-align: left;',
+					class : item.seq+"",
+					href : 'javascript:void(0)',
+					text : item.subject
+				})).append($('<input>',{
+					type : 'hidden',
+					text : item.seq
+				})).appendTo($('#C_notice_MainList'));
+			});
 		}
 	});
+	
 	$('#C_notice_MainList').on('click','#subjectA',function(){
-		var seq = $(this).prev().text();
+		var seq = $(this).next().next().text();
 		location.href="/exhibition/customerService/C_notice_View.do?seq="+seq+"&pg=${pg}";
 	});
 });
