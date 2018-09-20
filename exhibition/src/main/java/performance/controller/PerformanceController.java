@@ -278,9 +278,25 @@ public class PerformanceController {
 		int endNum = Integer.parseInt(pg)*9;
 		int startNum = endNum-8;
 		
-		Map<String,Integer> map = new HashMap<String,Integer>();
-		map.put("endNum", endNum);
-		map.put("startNum", startNum);
+		//현재 날짜
+		Date currentDate = new Date();
+			
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+		
+		String startDateC = formatter.format(currentDate);
+		
+		String selMonth = startDateC.substring(0, 8) + "01";
+		
+		System.out.println("월 : "+ selMonth);
+		
+
+		
+		
+		
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("endNum", endNum+"");
+		map.put("startNum", startNum+"");
+		map.put("selMonth", selMonth);
 		
 		int totalA = performanceDAO.getExhibitionListTotalA();
 		
@@ -780,7 +796,7 @@ public class PerformanceController {
 			return resultSeats+"";
 		}else {
 			return "choseDate";
-		} 
+		}  
 	}
 	
 	//전시회 잔여좌석 보다 구매티켓이 높을 경우 구매 못하게 막음
@@ -802,8 +818,8 @@ public class PerformanceController {
 		map.put("playDate", playDate);
 		
 		//DB
-		String remainSeats = performanceDAO.checkRemainSeats_ex(map);	//선택일자의 해당 연극 전체좌석 가져오기(기본값:일별 티켓 발행 수)
-		String usedSeats = performanceDAO.checkUsedSeats_ex(map);		//선택일자의  해당 연극 예매된 티켓 수 가져오기
+		String remainSeats = performanceDAO.checkRemainSeats_ex(map);	//선택일자의 해당 전시회 전체좌석 가져오기(기본값:일별 티켓 발행 수)
+		String usedSeats = performanceDAO.checkUsedSeats_ex(map);		//선택일자의  해당 전시회 예매된 티켓 수 가져오기
 		
 		if(remainSeats==null) remainSeats = 0+"";
 		if(usedSeats==null) usedSeats = 0+"";
@@ -816,6 +832,41 @@ public class PerformanceController {
 		}else
 			return "no";
 	}
+	
+	//연극 잔여좌석 보다 구매티켓이 높을 경우 구매 못하게 막음
+	@RequestMapping(value="book_play_checkBuy", method=RequestMethod.POST)
+	public @ResponseBody String book_play_checkBuy(@RequestParam String wantTicket, @RequestParam String imageName, @RequestParam String playDate) {
+		
+		if(playDate.equals("날짜선택")) {
+			playDate = "2000년01월01일";
+		}
+		
+		//날짜 형식 변경(년,월,일 제거)
+		playDate=playDate.replace("년", "");
+		playDate=playDate.replace("월", "");
+		playDate=playDate.replace("일", "");
+		
+		//Map에 담기
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("imageName", imageName);
+		map.put("playDate", playDate);
+		
+		//DB
+		String remainSeats = performanceDAO.checkRemainSeats(map);	//선택일자의 해당 연극 전체좌석 가져오기(기본값:일별 티켓 발행 수)
+		String usedSeats = performanceDAO.checkUsedSeats(map);		//선택일자의  해당 연극 예매된 티켓 수 가져오기
+		
+		if(remainSeats==null) remainSeats = 0+"";
+		if(usedSeats==null) usedSeats = 0+"";
+	
+		//잔여좌석 - 예매된 티켓 수 = 예매 가능한 좌석 수()
+		int resultSeats = Integer.parseInt(remainSeats) - Integer.parseInt(usedSeats);
+		
+		if(resultSeats - Integer.parseInt(wantTicket) >= 0) {
+			return "ok";
+		}else
+			return "no";
+	}
+		
 	
 	//달력 메소드
 	public static String[] getDiffDays(String fromDate, String toDate) {

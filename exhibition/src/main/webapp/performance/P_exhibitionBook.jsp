@@ -259,7 +259,7 @@ $(document).ready(function(){
 					alert('ok');
 					$('#BookEventBtn').show();
 				}else if(data=='no'){
-					alert('no');
+					alert('예매 가능한 티켓이 부족합니다. 다른 날짜를 선택해주세요');
 					$('#BookEventBtn').hide();
 				}
 			}//success

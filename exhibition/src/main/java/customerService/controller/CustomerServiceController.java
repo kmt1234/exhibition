@@ -883,8 +883,8 @@ public class CustomerServiceController {
 	@RequestMapping(value = "C_eventboardListForm", method = RequestMethod.GET)
 	public ModelAndView C_exhibitionboardList(@RequestParam(required = false, defaultValue = "1") String pg) {
 
-		int endNum = Integer.parseInt(pg) * 3;
-		int startNum = endNum - 2;
+		int endNum = Integer.parseInt(pg) * 5;
+		int startNum = endNum - 4;
 
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("endNum", endNum);
@@ -894,7 +894,7 @@ public class CustomerServiceController {
 
 		imageboardPaging.setCurrentPage(Integer.parseInt(pg));
 		imageboardPaging.setPageBlock(3);
-		imageboardPaging.setPageSize(3);
+		imageboardPaging.setPageSize(5);
 		imageboardPaging.setTotalA(totalA);
 
 		imageboardPaging.eventMakePagingHTML();
@@ -916,20 +916,20 @@ public class CustomerServiceController {
 	}
 	
 	// 메인이미지 정보 보기(이미지 클릭 시, -> 수정하기 위해서)
-		@RequestMapping(value = "C_imageDetail", method = RequestMethod.GET)
-		public ModelAndView C_image_Detail(@RequestParam String seq) {
+	@RequestMapping(value = "C_imageDetail", method = RequestMethod.GET)
+	public ModelAndView C_image_Detail(@RequestParam String seq) {
 
-			// DB
-			ImageboardDTO imageboardDTO = customerServiceDAO.getImageboard(seq);
+		// DB
+		ImageboardDTO imageboardDTO = customerServiceDAO.getImageboard(seq);
 
-			ModelAndView mav = new ModelAndView();
-			System.out.println(imageboardDTO.getStartDate());
-			mav.addObject("eventboardDTO", imageboardDTO);
-			mav.addObject("postSelect", "0");
-			mav.addObject("modify", "1");
-			mav.setViewName("/customerService/C_imageDetail");
-			return mav;
-		}
+		ModelAndView mav = new ModelAndView();
+		System.out.println(imageboardDTO.getStartDate());
+		mav.addObject("eventboardDTO", imageboardDTO);
+		mav.addObject("postSelect", "0");
+		mav.addObject("modify", "1");
+		mav.setViewName("/customerService/C_imageDetail");
+		return mav;
+	}
 
 	// 박람회 정보 보기(이미지 클릭 시, -> 수정하기 위해서)***잠시 대기중************************
 	@RequestMapping(value = "C_eventDetail", method = RequestMethod.GET)
