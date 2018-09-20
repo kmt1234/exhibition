@@ -780,7 +780,7 @@ public class PerformanceController {
 			return resultSeats+"";
 		}else {
 			return "choseDate";
-		} 
+		}  
 	}
 	
 	//달력 메소드
