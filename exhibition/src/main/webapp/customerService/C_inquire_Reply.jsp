@@ -1,18 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<style type="text/css">
+.noresize {
+  resize: none; /* 사용자 임의 변경 불가 */
+}
+</style>
 </head>
 <body>
 <form name="C_inquire_Reply" id="C_inquire_Reply" method="post" action="/exhibition/customerService/C_inquire_checkReply.do">
 <h2 class="box-container" style="float: center; width: 100%; text-align: left;">
-	문의
-	<span class="h-light">하기</span>
+	고객의
+	<span class="h-light">소리</span>
+	답변
 </h2>
-<h1>문의 답변하기</h1>
 <table style="width:100%;" class="ui celled table">
 <tr>
 		<td style="width:8%; height:40px; background-color: #f7f6e6; font-size: 15px;text-align: center;" >제 목</td>
@@ -29,18 +34,19 @@
 		
 		<td style="width:20%; height: 15%">
 			<div>
-				<div><textArea name="content" id="content" style="float: left; width:100%; height: 300px;"></textArea></div>
+				<div><textArea name="content" id="content" class=noresize style="float: left; width:100%; height: 300px;"></textArea></div>
 				<div id="contentDiv"></div>
 			</div>
 		</td>
 	</tr>
 </table>
-<input type="hidden" name="email" id="email" value="${customerServiceDTO.email}">
 <div>
 	<input type="button" id="C_checkReplyBtn" class="middle ui button" value="문의 답하기">
 	<input type="button" class="middle ui button" id="C_inquire_ListBtn" value="목록">
-	<input type="hidden" id="pg" value="${pg}">
+	<input type="hidden" name="name" id="name" value="관리자">
+	<input type="hidden" name="pg" id="pg" value="${pg}">
 	<input type="hidden" name="pseq" id="pseq" value="${pseq}">
+	<input type="hidden" name="email" id="email" value="${customerServiceDTO.email}">
 </div>
 </form>
 <script src="../js/C_inquire_js.js?ver=1"></script>

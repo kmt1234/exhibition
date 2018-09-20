@@ -305,13 +305,9 @@ $(document).ready(function(){
 			success : function(data){
 				alert(JSON.stringify(data));
 				$.each(data.list,function(index, item){
-					$('<div/>').append($('<div/>',{
-						id : aa,
-						text : item.c_license +"님 예약내역"
-					})).append($('<div/>',{
-						id : bb,
-						text : "하하하"
-					})).appendTo($('#modalForm'));
+					$('#header').text(item.c_license+"님 예약내역");
+					$('#content').text(item.c_license);
+					
 				});
 			}
 	});
@@ -328,6 +324,7 @@ $(document).ready(function(){
 			success : function(data){
 				
 				$.each(data.list,function(index, item){
+					$('#header').text(item.C_license);
 				});
 			}
 	});

@@ -70,10 +70,7 @@ var dataSet = [
                     eventElement.find("span.fc-title").prepend("<img src='" + event.imageurl +	"'width='30px' height='30px' align='absmiddle' > &ensp;");
                 }
             },
-           
 			events: dataSet
-       
-			
 		});
 		
 	 });
@@ -86,8 +83,7 @@ var dataSet = [
 		font-size: 14px;
 	}
 	#calendar {
-		max-width: 800px;
-		max-height: 600px;
+		max-width: 880px;
 		margin: 0 auto;
 	}
 </style>
@@ -102,27 +98,30 @@ var dataSet = [
 	
 	<!-- 버튼 -->
 	<div>
-		<input type="button" value="달력으로 보기" 
-			style="width:150; height:35; background-color:#ffffff;
-		 border:1 solid #f702e7; float: left">
-		<input type="button" id="list_exhibition" value="리스트로 보기" 
-			style="width:150; height:35; font-family:돋움; background-color:#ffffff;
-		 	border:1 solid #f702e7; float: left">
-		 <span style="float: right;">
+		<table style="margin-left:20px; width: 40%;">
+			<tr>
+				<td>
+					<button class="middle ui button" style="width: 100%;" id="P_exhibitionCalendarBtn">
+						달력으로 보기
+					</button> 
+				</td>
+				<td>
+					<button class="middle ui button" style="width: 100%;" id="list_exhibition">
+						리스트로 보기
+					</button> 
+				</td>
+			</tr>
+		</table>
+		 <span style="float: right; margin-right:30px; ">
 		 <img src="../img/Ex.png" style="width:25px; height: 25px; " align='absmiddle'> 전시회
 		 </span>
 		 
-		 <span style="float: right;">
+		 <span style="float: right; margin-right:30px; ">
 		 	<img src="../img/Ev.png" style="width:25px; height: 25px;" align='absmiddle'> 공연  &ensp;&ensp;
 		 </span>
 	</div>
-		<br>
-		<br>
-<div style="height: 800px; border: 1px solid ;">
-<br>
-<br>
+		<br><br><br><br>
 	<div  id='calendar'></div>
-</div>	
 </body>
 <script src="../js/p_exhibitionCalendar.js"></script>
 </html>

@@ -40,8 +40,10 @@
 	</table>
 	<div>
 		<div style=" padding-top: 50px;" align="center">
-			<button class="middle ui button" id="C_notice_modifyBtn" >글수정</button>
-			<button class="middle ui button" id="C_notice_deleteBtn" >글삭제</button>
+			<c:if test="${code=='3' }"> 
+				<button class="middle ui button" id="C_notice_modifyBtn" >글수정</button>
+				<button class="middle ui button" id="C_notice_deleteBtn" >글삭제</button>
+			</c:if>
 			<button class="middle ui button" id="C_notice_ListBtn" >목록</button>
 			<input type="hidden" id="putSeq" value="${customerServiceDTO.seq}">
 			<input type="hidden" id="pg" value="${pg}">

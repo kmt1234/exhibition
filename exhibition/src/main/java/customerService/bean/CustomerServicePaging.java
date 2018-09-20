@@ -13,6 +13,7 @@ public class CustomerServicePaging {
 	private int totalA;
 	private StringBuffer pagingHTML;
 	
+	//공지사항 페이징
 	public void C_notice_PagingHTML() {
 		pagingHTML = new StringBuffer();
 		
@@ -33,6 +34,7 @@ public class CustomerServicePaging {
 			pagingHTML.append("<a class='item' href='C_notice.do?pg="+(endPage+1)+"'>다음</a>");
 	}
 	
+	//공지사항 검색후 페이징
 	public void C_notice_searchPagingHTML() {
 		pagingHTML = new StringBuffer();
 		
@@ -53,6 +55,7 @@ public class CustomerServicePaging {
 			pagingHTML.append("<span class='item' id=paging onclick=C_notice_Search("+(endPage+1)+")>다음</span>");
 	}
 	
+	//고객의 소리 페이징
 	public void C_inquire_PagingHTML() {
 		pagingHTML = new StringBuffer();
 		
@@ -73,6 +76,7 @@ public class CustomerServicePaging {
 			pagingHTML.append("<a class='item' href='C_inquire_List.do?pg="+(endPage+1)+"'>다음</a>");
 	}
 	
+	//고객의 소리 검색후 페이징
 	public void C_inquire_searchPagingHTML() {
 		pagingHTML = new StringBuffer();
 		
@@ -93,6 +97,7 @@ public class CustomerServicePaging {
 			pagingHTML.append("<span class='item' id=paging onclick=C_inquire_Search("+(endPage+1)+")>다음</span>");
 	}
 	
+	//주요시설 연락처 페이징
 	public void C_contactList_PagingHTML() {
 		pagingHTML = new StringBuffer();
 		
@@ -113,6 +118,7 @@ public class CustomerServicePaging {
 			pagingHTML.append("<a class='item' href='C_contactList.do?pg="+(endPage+1)+"'>다음</a>");
 	}
 	
+	//주요시설 연락처 검색후 페이징
 	public void C_contactList_searchPagingHTML() {
 		pagingHTML = new StringBuffer();
 		

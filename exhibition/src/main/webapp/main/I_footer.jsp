@@ -1,30 +1,24 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 
-<div id="footer_main">
-<br>
-	<div>
-		<img src="../img/ipecLogo.png" style="width: 90px; height: 80px; margin-bottom: 30px" align="left">
+<div id="footer_main" >
+	<div style=" display: inline-block; float: left;">
+		<img src="../img/ipecLogo.png" style="width: 90px; height: 80px; margin-bottom: 30px; " >
 	</div>
-	<div style="width: 380px; height: 50px; float: left" align="left" ><br>
+	
+	<div style="margin-top:25px; width: 380px; display: inline-block; float: left;"  >
 		<address>
-			¼­¿ï Æ¯º°½Ã °­³²±¸ ¿µµ¿´ë·Î 513 (»ï¼ºµ¿,ÄÚ¿¢½º) 06164<br/>
-			¹®ÀÇÀüÈ­ : 02-6000-0114 ÆÑ½º : 02-1234-1111
+			ì„œìš¸ íŠ¹ë³„ì‹œ ê°•ë‚¨êµ¬ ì˜ë™ëŒ€ë¡œ 513 (ì‚¼ì„±ë™,ì½”ì—‘ìŠ¤) 06164<br>
+			ë¬¸ì˜ì „í™” : 02-6000-0114 íŒ©ìŠ¤ : 02-1234-1111
 			<p> bruno mars - When I wa your man</p>
 		</address>
 	</div>
-	<div style="width: 380px; height: 50px; float: right" align="right">
-	<!-- ÁÖ¿ä¿¬¶ôÃ³, °³ÀÎÁ¤º¸Ã³¸®¹æÄ§(1),ÀÌ¸ÞÀÌ¹«´Ü¼öÁý°ÅºÎ(2),»çÀÌÆ®¸Ê(3) (1,2,3)ÆäÀÌÁö¸¦ ¸¸µé¾î¾ßÇÑ´Ù.  -->
-		<div>
-			<u1 >
-				<il><a href="/exhibition/customerService/C_contactList.do">ÁÖ¿ä¿¬¶ôÃ³</a></il>&nbsp;
-				<il><a href="/exhibition/customerService/C_privacy.do">°³ÀÎÁ¤º¸Ã³¸®¹æÄ§</a></il>&nbsp;
-				<il><a href="/exhibition/customerService/C_emailRefuse.do">ÀÌ¸ÞÀÏ¹«´Ü¼öÁý°ÅºÎ</a></il>&nbsp;
-				<il><a id="site_map">»çÀÌÆ®¸Ê</a></il>&nbsp;
-			</u1>
-		</div>
+	
+	<div style="margin-left:320px; margin-top:25px; min-width: 380px; float: left; display: inline-block;" >
+		<a href="/exhibition/customerService/C_contactList.do">ì£¼ìš”ì—°ë½ì²˜</a>&nbsp;
+		<a href="/exhibition/customerService/C_privacy.do">ê°œì¸ì •ë³´ì²˜ë¦¬ë°©ì¹¨</a>&nbsp;
+		<a href="/exhibition/customerService/C_emailRefuse.do">ì´ë©”ì¼ë¬´ë‹¨ìˆ˜ì§‘ê±°ë¶€</a>&nbsp;
+		<a id="site_map">ì‚¬ì´íŠ¸ë§µ</a>&nbsp;
 	</div>
-<br>
-<script src="../js/index.js"></script>
 </div>
-<br>
+

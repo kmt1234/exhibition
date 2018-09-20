@@ -25,7 +25,7 @@
 	</header>
 	<br>
 	<br>
-	<div class="ui five column grid container">
+	<div class="ui container">
 		<!-- 사이드바 메뉴 -->
 		<div class="ui compact menu" style="width: 20%; height: 960px; ">
 			<a class="item" href="C_notice.do">공지사항</a> 
