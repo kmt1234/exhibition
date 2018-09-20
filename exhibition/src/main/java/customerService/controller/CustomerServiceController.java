@@ -106,6 +106,26 @@ public class CustomerServiceController {
 		mav.setViewName("jsonView");
 		return mav;
 	}
+	
+	// 공지사항 리스트 데이터 베이스에서 불러와 index.jsp로 리스트 보내주기
+		@RequestMapping(value = "getNoticeMainList", method = RequestMethod.POST)
+		public ModelAndView getNoticeMainList(@RequestParam(required = false, defaultValue = "1") String pg) {
+			// DB - 1페이지당 10개씩
+			int endNum = Integer.parseInt(pg) * 4;
+			int startNum = endNum - 3;
+
+			Map<String, Integer> map = new HashMap<String, Integer>();
+			map.put("startNum", startNum);
+			map.put("endNum", endNum);
+
+			List<CustomerServiceDTO> list = customerServiceDAO.getNoticeMainList(map);
+
+			ModelAndView mav = new ModelAndView();
+
+			mav.addObject("list", list);
+			mav.setViewName("jsonView");
+			return mav;
+		}
 
 	// 검색내용 찾아오기
 	@RequestMapping(value = "C_notice_Search", method = RequestMethod.POST)

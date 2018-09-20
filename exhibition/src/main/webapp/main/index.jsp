@@ -3,6 +3,22 @@
 <!DOCTYPE >
 <html>
 <head>
+<style type="text/css">
+#subjectA:hover{
+	cursor: pointer;
+	font-weight: bold;
+}
+#C_notice_MainList{
+	font-weight: bold;
+}
+.subjectC {
+	width             : 200px; 
+	overflow: hidden;  
+	white-space: nowrap;  
+	text-overflow     : ellipsis;
+}
+
+</style>
 </head>
 <body>
 <header>
@@ -29,12 +45,12 @@
 			<img style="min-width:270; height: 200px " src='../img/B1.jpg'></img>
 		</div>
 		<!-- 공지사항  -->
-		<div style="overflow:auto; margin-left:20px; width:270px; height:200px;  display: inline-block; float: left;" >
-			<div id="C_notice_MainList" class="ui striped table"></div>
+		<div style=" margin-left:20px; width:270px; height:200px;  display: inline-block; float: left;" >
+			<div style="height : 50px; font-weight: bold; font-size: x-large;" >공지사항</div>
+			<div id="C_notice_MainList" style="height : 170px;"></div>
 		</div>
 	</div>
-			<input type="hidden" name="pg" id="pg" value="1"> <br>
-			<input type="hidden" name="seq" id="seq" value=""> <br>
+			<input type="hidden" name="pg" id="pg" value="1">
 </section>
 </div>
 <footer>
@@ -46,16 +62,16 @@
 $(document).ready(function(){
 	$.ajax({
 		type : 'POST',
-		url : '/exhibition/customerService/getNoticeList.do',
+		url : '/exhibition/customerService/getNoticeMainList.do',
 		data :  'pg=${pg}',
 		dataType : 'json',
 		success : function(data){
 			$.each(data.list, function(index, item){
-				$('<tr/>').append($('<td/>',{
+				$('<ul/>').append($('<p/>',{
 					align : 'center',
 					id : 'subjectA',
-					style: 'width: 260px; height: 20px; text-align: left;',
-					class : item.seq+"",
+					style: ' width : 250px; height: 35px; margin-left : 20px; text-align: left;',
+					class : 'subjectC',
 					href : 'javascript:void(0)',
 					text : item.subject
 				})).append($('<input>',{
@@ -67,7 +83,7 @@ $(document).ready(function(){
 	});
 	
 	$('#C_notice_MainList').on('click','#subjectA',function(){
-		var seq = $(this).next().next().text();
+		var seq = $(this).next().text();
 		location.href="/exhibition/customerService/C_notice_View.do?seq="+seq+"&pg=${pg}";
 	});
 });
