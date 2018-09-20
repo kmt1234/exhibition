@@ -66,7 +66,7 @@
   	<br><br>
   	<div class="ui inverted input" style="width: 200px; height: 150px;">
   		<div class="ui left icon input" style="width: 100%; height: 50px;">
-			<img src="../storage/${eventboardDTO.image1}" name="imaView" id="imaView" width="200px" height="150px">
+			<img src="../storage/${imageboardDTO.image1}" name="imaView" id="imaView" width="200px" height="150px">
 	 	</div>
 	</div>
 	<div class="ui inverted input" style="width: 100%;">

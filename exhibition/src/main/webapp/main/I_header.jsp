@@ -3,42 +3,33 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 
 <link rel="stylesheet" type="text/css" href="../semantic/semantic.min.css">
-
-
 <style type="text/css">
 @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 * {
 	font-family: 'Nanum Gothic';
 }
-.column {
-   align-self: center;
-}
 .item {
    text-align: center;
+   
 }
-#main {
+/* #main {
    height: 200px;
-}
+} */
 #mainMenu {
    float: none;
-}
-.ui.compact.menu {
-   display: table;
-   width: 20%;
 }
 .ui.simple.dropdown.item {
    display: table-cell;
    vertical-align: middle;
    text-align: center;
 }
-
 .menu {
    text-align: center;
+
 }
 #T_inform{
  font-size: 18px;
 }
-
 
 #T_Atag:link {color:black; text-decoration: none;}	<!--일반 링크 검정 -->
 #T_Atag:visited {color:black; text-decoration: none;}
@@ -50,15 +41,15 @@
 
 </style>
 	<header>
-		<div id="main" class="ui three column grid container">
-			<div class="column" style="width: 25%; height: 50px;  margin-bottom: 30px;">
+		<div id="main" style="width: 1170px; " class="ui container" >
+			<div  style="width: 25%;  display: inline-block;">
 				<a href="http://localhost:8080/exhibition/main/index.do">
-				<img alt="" src="../img/ipecLogo.png"
-					style="width: 120px; height: 108px;"></a>
+					<img alt="" src="../img/ipecLogo.png" style="width: 90px; height: 90px;  ">
+				</a>
 			</div>
-			<div class="column" style="width: 49%; padding-top: 100px;">
-				<div class="ui input" style="width: 100%;">
-					<div class="ui action input"  style="width: 100%; height: 40px;">
+			<div  style="width: 49%;  display: inline-block;">
+				<div class="ui input" style="width: 100%; ">
+					<div class="ui action input"  style="width: 100%; ">
 						<input type="text" placeholder="Search..." style="width: 30%;">
 						<button class="ui icon button">
 							<i class="search icon"></i>
@@ -67,8 +58,7 @@
 				</div>
 			</div>
 			
-			<div class="column" style="width: 23%; height: 50px; text-align: right; padding-top: 30px;">
-			
+			<div style="width: 23%; text-align: right; padding-top: 30px;  display: inline-block;">
 			<!--회원가입 시, 축하메세지 출력(1분 동안)-->
 				<c:if test="${registerMessage != null}">
 					<div>${registerMessage}</div>
@@ -78,8 +68,8 @@
 					<div>&nbsp;</div>
 					<div class="circular ui icon button" id="M_member"><i class="dropdown icon"></i>회원가입
 						<div class="ui member1 dropdown">
-							<div class="menu" class="info">
-								<div class="item" id="M_individual" style="cursor: pointer; display:block;">개인</div>
+							<div class="menu" class="info" style="width: 10px ; height:80px ;">
+								<div class="item" id="M_individual" style="cursor: pointer;  display:block;">개인</div>
 								<div class="item" id="C_company" style="cursor: pointer;  display:block;">법인</div>
 							</div>
 						</div>
@@ -89,7 +79,7 @@
 				<c:if test="${homepageMember == nul}">
 					<div class="circular ui icon button" id="L_login"><i class="dropdown icon"></i>로그인
 						<div class="ui member2 dropdown">
-							<div class="menu" class="info1">
+							<div class="menu" class="info1" style="width: 10px ; height:80px ;">
 								<div class="item" id="M_individual_L" style="cursor: pointer; display:block;">개인</div>
 								<div class="item" id="C_company_L" style="cursor: pointer;  display:block;">법인</div>
 							</div>
@@ -112,42 +102,42 @@
 			</div><!--class="column"-->
 		</div><!--id="main"-->
 		
-		<div style="min-width: 1170px;  position: relative;">
-			<div class="ui compact menu" style="display: inline-block; width:227px;  position: relative; ">
+		<div class="ui container" style="min-width: 1170px; margin-top: 10px;">
+			<div class="ui compact menu" style="display: inline-block; width:230px;">
 				<div class="ui simple dropdown item">
 					<span id="P_performanceForm">일정</span>
 					<div class="menu">
-						<div class="item" id="P_allSchedule">전체일정</div>
+						<div class="item" style="width: 226px;" id="P_allSchedule">전체일정</div>
 						<div class="item" id="P_performanceSchedule">공연일정</div>
 						<div class="item" id="P_exhibitionSchedule">박람회일정</div>
 					</div>
 				</div>
 			</div>
-			<div class="ui compact menu" style="width: 20%; display: inline-block; width:227px;  position: relative;">
+			<div class="ui compact menu" style=" display: inline-block; width:230px;  ">
 				<div class="ui simple dropdown item">
 					<span id="R_rentalForm">시설&임대</span>
 					<div class="menu">
-						<div class="item" id="R_exhibition">박람회 홀</div>
+						<div class="item" style="width: 226px;" id="R_exhibition">박람회 홀</div>
 						<div class="item" id="R_performance">공연장 홀</div>
 						<div class="item" id="R_businessRoom">비지니스 룸</div>
 					</div>
 				</div>
 			</div>
-			<div class="ui compact menu" style="width: 20%; display: inline-block; width:227px;  position: relative;">
+			<div class="ui compact menu" style=" display: inline-block; width:230px;  ">
 				<div class="ui simple dropdown item">
 					<span id="T_allForm">교통&숙박</span>
 					<div class="menu">
-						<div class="item" id="T_allFormS">교통안내</div>
+						<div class="item" style="width: 226px;" id="T_allFormS">교통안내</div>
 						<div class="item" id="T_hotelForm">숙박안내</div>
 					</div>
 				</div>
 			</div>
-			<div class="ui compact menu" style="width: 20%; display: inline-block; width:227px;  position: relative;">
+			<div class="ui compact menu" style=" display: inline-block; width:230px; ">
 
 	            <div class="ui simple dropdown item">
 	               <span id="C_customerServiceForm" >고객센터</span>
 	               <div class="menu">
-	                  <div class="item" id="C_notice">공지사항</div>
+	                  <div class="item" style="width: 226px;" id="C_notice">공지사항</div>
 	                  <div class="item" id="C_emailConfirm">고객의 소리</div>
 	                  <div class="item" id="C_QnA">자주묻는 질문</div>
 	                  <div class="item" id="C_contactList">주요시설 연락처</div>
@@ -162,11 +152,11 @@
 	               </div>
 	            </div>
 		    </div>
-			<div class="ui compact menu" style="width: 20%; display: inline-block; width:227px;">
+			<div class="ui compact menu" style="display: inline-block; width:230px;">
 				<div class="ui simple dropdown item">
 					<span id="I_infoForm">소개</span> 
 					<div class="menu">
-						<div class="item" id="I_companyIntroductionForm">회사소개</div>
+						<div class="item" style="width: 226px;" id="I_companyIntroductionForm">회사소개</div>
 						<div class="item" id="I_CEOIntroductionForm">CEO인사말</div>
 					</div>
 				</div>

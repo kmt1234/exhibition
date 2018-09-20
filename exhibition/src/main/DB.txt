@@ -111,49 +111,58 @@ CREATE TABLE eventboard_play(
 create sequence seq_eventboard_play  nocache nocycle;
 
 
-//공지사항
+// 공지 사항
 create table C_notice(
-seq number primary key,
-subject varchar2(50) not null,
-content varchar2(500) not null,
-logtime date default sysdate);
+seq number primary key,                 --시퀀스
+subject varchar2(200) not null,          --제목
+content varchar2(500) not null,         --내용
+logtime date default sysdate);          --날짜
 
 create sequence seq_C_notice nocycle nocache;
 
-//자주묻는 질문
+// 자주묻는 질문
 create table C_QnA (
-seq number primary key,
-subject varchar2(200) not null,
-content varchar2(500) not null);
+seq number primary key,                 --시퀀스
+classify varchar2(100),                 --분류
+subject varchar2(200) not null,         --제목
+content varchar2(500) not null);        --내용
 
 create sequence seq_C_QnA nocycle nocache;
 
 
 
-//고객의 소리
+// 고객의 소리
 create table C_inquire(
-seq number primary key,
-email varchar2(50) not null,
-classify varchar2(50) not null,
-name varchar2(50) not null,
-tel varchar2(20),
-subject varchar2(50) not null,
-content varchar2(300) not null,
-logtime DATE DEFAULT sysdate);
+seq number primary key,                 --시퀀스
+email varchar2(100),                     --이메일
+classify varchar2(100),                  --분류
+name varchar2(100),                      --작성자
+phone varchar2(100),                     --전화번호
+subject varchar2(200) not null,          --제목
+content varchar2(500) not null,         --내용
+ref NUMBER NOT NULL,                    --그룹번호
+lev NUMBER DEFAULT 0 NOT NULL,          --단계
+step NUMBER DEFAULT 0 NOT NULL,         --글순서
+pseq NUMBER DEFAULT 0 NOT NULL,         --원글번호
+reply NUMBER DEFAULT 0 NOT NULL,        --답변수
+logtime DATE DEFAULT sysdate);          --날짜
 
 
 create sequence seq_C_inquire nocycle nocache;
 
 
-//주요시설 연락처
+// 주요시설 연락처
 create table C_contactList(
-seq number primary key,
-classify varchar2(50) not null,
-agency varchar2(50) not null,
-name varchar2(30) not null,
-contact varchar2(50) not null);
+seq number primary key,					--시퀀스
+classify varchar2(100) not null,		--분류
+facility varchar2(100) not null,		--기관&시설
+title varchar2(100) not null,			--명칭
+name varchar2(100) not null,			--담당자
+phone varchar2(100) not null);			--연락처
+
 
 create sequence seq_C_contactList nocycle nocache;
+
 
 
 //호텔리스트
@@ -172,8 +181,8 @@ create sequence seq_hotel_list nocycle nocache;
 --연극 일자별 DB
 create table eventboard_play_book(
  seq NUMBER PRIMARY KEY,            --시퀀스     
+ num NUMBER,                        --연극시퀀스
  imageName VARCHAR2(500) NOT NULL,  --공연명
- eventLink VARCHAR2(200),            --링크
  playDate date,                     --공연일자(시작/종료)
  playTicket VARCHAR2(100),           --일별 총 티켓 수
  remainTicket VARCHAR2(100),         --일별 잔여 티켓 수
@@ -184,32 +193,17 @@ create table eventboard_play_book(
     check(bookStatus IN ('0','1'))
 );
 
-create sequence seq_eventboard_play_book  nocache nocycle;  --예매DB 시퀀스
+create sequence seq_eventboard_exhibition_book  nocache nocycle;  --예매DB 시퀀스
 
---연극을 예매한 사람들 DB
-create table Book_Exhibition_Members(
-IMAGENAME   VARCHAR2(500),
-PLAYDATE   DATE,
-MEMBERID   VARCHAR2(100),
-TICKETQTY   VARCHAR2(30)
-);
-create sequence seq_Book_Exhibition_Members;
-
-
-
-//동혁이꺼 임시
-create table calendar2(
-code varchar2(5),
-title varchar2(30),
-startDate date,
-endDate date
+--전시회 예매자 DB
+create Book_Exhibition_Members(
+IMAGENAME	VARCHAR2(500),
+PLAYDATE	DATE,
+MEMBERID	VARCHAR2(100),
+TICKETQTY	VARCHAR2(30)
 );
 
-insert into calendar2 values('2','라이어','20180910','20180913');
-insert into calendar2 values('1','아아아','20180918','20180922');
-insert into calendar2 values('1','아아아','20180928','20181005');
-insert into calendar2 values('2','거짓말','20180908','20180912');
+create sequence seq_Book_Exhibition_Members;--전시회 예매자 DB 시퀀스
 
-commit;
 
 

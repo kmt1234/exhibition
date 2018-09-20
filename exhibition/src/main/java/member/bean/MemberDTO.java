@@ -14,4 +14,10 @@ public class MemberDTO {
 	private String M_Email;		// 이메일
 	private int code;
 	// 코드 : 1번-> 개인, 2번 -> 사업자 
+	@Override
+	public String toString() {
+		return String.valueOf(code);
+	}
+	
+	
 }

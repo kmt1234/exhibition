@@ -4,7 +4,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<style type="text/css">
+.noresize {
+  resize: none; /* 사용자 임의 변경 불가 */
+}
+</style>
 </head>
 <body>
 <form id="C_QnA_checkWrite" method="post" action="/exhibition/customerService/C_QnA_checkWrite.do">
@@ -17,7 +21,7 @@
 		<td style="width:8%; height:40px; background-color: #f7f6e6; font-size: 15px; text-align: center;" >분 류</td>
 		
 		<td style="width:20%;" >
-			<select id="classify" class="ui compact selection dropdown" style="height: auto;">
+			<select id="classify" class="ui selection dropdown" style="height: auto;">
 				<option  value="위치/교통">위치/교통</option>
 				<option  value="주차">주차</option>
 				<option  value="전시&공연">전시 & 공연</option>
@@ -43,7 +47,7 @@
 		
 		<td style="width:20%; height: 15%">
 			<div>
-				<div><textArea name="content" id="content" style="float: left; width:100%; height: 300px;"></textArea></div>
+				<div><textArea name="content" id="content"  class=noresize style="float: left; width:100%; height: 300px;"></textArea></div>
 				<div id="contentDiv"></div>
 			</div>
 		</td>
@@ -55,6 +59,10 @@
 </form>
 <script src="../semantic/semantic.min.js"></script>
 <script src="../js/C_QnA_js.js?ver=1"></script>
-
+<script type="text/javascript">
+$(document).ready(function(){
+	$('.ui.selection.dropdown').dropdown();	
+});
+</script>
 </body>
 </html>

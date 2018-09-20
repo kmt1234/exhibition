@@ -65,6 +65,11 @@
 		 									,#{phone}
 		 									,#{subject}
 		 									,#{content}
+		 									,seq_C_inquire.currval
+		 									,0
+		 									,0
+		 									,0
+		 									,0
 		 									,sysdate)
  	</insert>
  	
@@ -76,7 +81,7 @@
  	<select id="getInquireList" parameterType="java.util.Map" resultType="customerService">
  		select * from 
  		(select rownum rn, tt.* from 
- 		(select * from C_inquire order by seq desc)tt) 
+ 		(select * from C_inquire order by ref desc, step asc)tt) 
  		where rn between #{startNum} and #{endNum}
  	</select>
  	
@@ -91,12 +96,12 @@
  		(select rownum rn, tt.* from 
  		(select * from C_inquire
  		 where ${searchOption} like '%'||#{keyword}||'%'
- 		 order by seq desc)tt) 
+ 		 order by ref desc, step asc)tt) 
  		where rn between #{startNum} and #{endNum}
  	</select>
  	
  	<!-- 고객의 소리 문의받은 글 내용 불러오기 -->
- 	<select id="getInquireInfo" parameterType="String" resultType="customerService">
+ 	<select id="getInquireInfo" parameterType="int" resultType="customerService">
  		select * from C_inquire where seq=#{seq}
  	</select>
  	
@@ -105,7 +110,27 @@
  		select * from C_inquire where seq=#{seq}
  	</select>
  	
- 	
+ 	<!-- 답글 -->
+ 	<update id="C_inquire_Reply1" parameterType="customerService">
+ 		update C_inquire set step=step+1 where ref=#{ref} and step>=#{step}
+ 	</update>
+ 	<!-- 답글 -->
+ 	<insert id="C_inquire_Reply2" parameterType="customerService">
+ 		insert into C_inquire(seq, name, subject, content, ref, lev, step, pseq, reply, logtime) values(seq_C_inquire.nextval
+												 								,#{name}
+												 								,#{subject}
+												 								,#{content}
+												 								,#{ref}
+												 								,#{lev}
+												 								,#{step}
+												 								,#{pseq}
+												 								,#{reply}
+												 								,sysdate)
+ 	</insert>
+ 	<!-- 답글 -->
+ 	<update id="C_inquire_Reply3" parameterType="customerService">
+ 		update C_inquire set reply = reply+1 where seq=#{pseq}
+ 	</update>
  	
  	
  	
@@ -174,7 +199,7 @@
 		 							,#{phone})
  	</insert>
  	 	
- 	<!-- 글삭제 -->
+ 	<!-- 주요시설 연락처 삭제 -->
  	<delete id="C_contactList_Delete" parameterType="java.util.List">
  		delete C_contactList where seq in 
 		<foreach collection="list" item="item" open="(" close=")" separator=",">
@@ -367,8 +392,8 @@
 	<insert id="eventInfoWrite_play_bookDB" parameterType="customerService.bean.PlayBookDTO">
 		      															  										  
 	insert into eventboard_play_book(seq
+									,num
 									,imageName
-									,eventLink
 									,playDate
 									,playTicket
 									,remainTicket
@@ -377,8 +402,8 @@
 									,bookMemberId
 									,bookStatus)
 							values (seq_eventboard_play_book.nextval
+									,#{num}
 									,#{imageName}
-									,#{eventLink}
 									,#{playDate}
 									,#{playTicket}
 									,#{remainTicket}
@@ -396,14 +421,62 @@
  	<select id="getSalesTotalRentExhibition" parameterType="java.lang.String" resultType="int">
  		select sum(totalrent) as salesTotalRent from EXHIBITIONRENTAL where STARTDATE BETWEEN #{salesMon} and (select last_day(#{salesMon}) from dual)
  	</select>
- 	<!-- 회원정보  -->
- 	<select id="getMemberList" resultType="member">
- 		select * from membertable
+ 	 	
+	<!-- 회원정보  -->
+ 	<select id="getMemberList" resultType="member" parameterType="java.util.Map">
+ 		select * from(
+		select rownum rn, tt.* from(
+		select * from membertable)tt
+		)where rn <![CDATA[ >= ]]> #{startNum} and rn<![CDATA[<=]]> #{endNum}	
  	</select>
+ 	
+	<!-- 회원 정보 페이징처리 -->
+	<select id="getMemberListTotal" parameterType="java.util.Map" resultType="int">
+		select count(*) from membertable
+	</select>
+	
+ 	<!-- 회원 검색 -->
+ 	<select id="memberListSearch" parameterType="java.util.Map" resultType="member">
+		select * from (
+		select rownum rn, tt.* from(
+		select * from membertable where ${memberSearchOption} like '%'||#{memberSearch}||'%')tt
+		)where rn <![CDATA[ >= ]]> #{startNum} and rn<![CDATA[<=]]> #{endNum}
+	</select>
+	
+ 	<!-- 회원 검색 페이징-->
+ 	<select id="getMemberListSearchTotal" parameterType="java.util.Map" resultType="int">
+		select count(*) from membertable where ${memberSearchOption} like '%'||#{memberSearch}||'%'
+	</select>
+	
  	<!-- 사업자정보  -->
- 	<select id="getCompanyList" resultType="company">
- 		select * from company	
+ 	<select id="getCompanyList" resultType="company" parameterType="java.util.Map">
+ 		select * from(
+		select rownum rn, tt.* from(
+		select * from company)tt
+		)where rn <![CDATA[ >= ]]> #{startNum} and rn<![CDATA[<=]]> #{endNum}	
  	</select>
+ 	
+	<!-- 사업자 페이징처리 -->
+	<select id="getCompanyTotal" parameterType="java.util.Map" resultType="int">
+		select count(*) from company
+	</select>
+	
+ 	<!-- 사업자 검색 -->
+ 	<select id="CompanyListSearch" parameterType="java.util.Map" resultType="company">
+		select * from (
+		select rownum rn, tt.* from(
+		select * from company where ${companySearchOption} like '%'||#{companySearch}||'%')tt
+		)where rn <![CDATA[ >= ]]> #{startNum} and rn<![CDATA[<=]]> #{endNum}
+	</select>
+	
+ 	<!-- 사업자 검색토탈 페이징-->
+ 	<select id="getCompanyListSearchTotal" parameterType="java.util.Map" resultType="int">
+		select count(*) from company where ${companySearchOption} like '%'||#{companySearch}||'%'
+	</select>
+	
+	<select id="getCompanyView" resultType="company" parameterType="String">
+		select * from exhibitionrental where C_license like #{C_license}
+	</select>
  	
  	<!--연극 정보 보기(수정하기 위해)  -->
 	<select id="getPlayboard" parameterType="java.lang.String" resultType="eventboard">
@@ -414,7 +487,6 @@
 	<select id="getImageboard" parameterType="java.lang.String" resultType="imageboard">
 		select * from customerImageboard where seq = #{seq}
 	</select>
-	
 	<!--메인이미지 정보 수정  -->
 	<select id="C_imageboardMod" parameterType="imageboard">
 		update customerImageboard set imageName=#{imageName},image1=#{image1},eventLink=#{eventLink} where seq=#{seq}
@@ -438,11 +510,38 @@
 	
 	<!-- 연극  예매일자 삭제   -->
 	<delete id="eventboardDelete_play_book" parameterType="java.util.List">
-		delete eventboard_play_book where eventLink in
+		delete eventboard_play_book where num in
 		<foreach collection="list" item="item" open="(" close=")" separator=",">
 			#{item}
 		</foreach>
-	</delete>
+	</delete>	
+	
+	<!--박람회 일자별 DB 등록 메소드 -->
+	<insert id="eventInfoWrite_exhibition_bookDB" parameterType="customerService.bean.ExhibitionBookDTO">
+		insert into eventboard_exhibition_book(seq
+									,imageName
+									,playDate
+									,playTicket
+									,remainTicket
+									,ticketPrice
+									,bookTicket)
+							values (seq_eventboard_play_book.nextval
+									,#{imageName}
+									,#{playDate}
+									,#{playTicket}
+									,#{remainTicket}
+									,#{ticketPrice}
+									,#{bookTicket})
+	</insert>
+	
+	<select id="C_playboardBookMod" parameterType="eventboard">
+		update eventboard_play_book set imageName=#{imageName} where num=#{seq}
+	</select>
+	
+	<!--연극삽입하기 위해 시퀀스 가져오기  -->
+	<select id="eventInfoWrite_play2" parameterType="eventboard" resultType="eventboard">
+		select * from eventboard_play where imageName=#{imageName} and startDate=#{startDate} and eventPlace=#{eventPlace}
+	</select>
  	
  </mapper>
  

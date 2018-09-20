@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,9 +35,11 @@
 		id="C_contactList_List" class="ui striped table" >
 			
 			<tr>
-				<th style="width: 2%; height: 7%; padding-top: 10px; text-align: center;">
-					<input type="checkbox" id="checkAll">
+				<c:if test="${code=='3' }">
+					<th style="width: 2%; height: 7%; padding-top: 10px; text-align: center;">
+						<input type="checkbox" id="checkAll">
 				</th>
+				</c:if>
 				<th style="width: 18%; height: 7%; padding-top: 10px; text-align: center;">분류</th>
 				<th style="width: 18%; height: 7%; padding-top: 10px; text-align: center;">기관 & 시설</th>
 				<th style="width: 18%; height: 7%; padding-top: 10px; text-align: center;">명칭</th>
@@ -48,7 +51,8 @@
 	<div id="C_contactList_PagingDiv" class="ui center pagination menu"></div>
 	<input type="hidden" name="pg" id="pg" value="1">
 	<br><br>
-	<select class="ui compact selection dropdown" id="searchOption">
+
+	<select class="ui selection dropdown" id="searchOption">
 			<option value="facility">기관&시설</option>
 			<option value="name">담당자</option>
 	</select>
@@ -57,52 +61,88 @@
 		<input type="text" name="keyword" id="keyword" value="${keyword }">
 	</div>
 		<input type="button" class="middle ui button"  value="검색" id="C_contactList_SearchBtn">
-		<input type="button" class="middle ui button" id="C_contactList_WriteBtn" value="관리자 작성" >
-		<input type="button" class="middle ui button" id="C_contactList_DeleteBtn" value="삭제" >
+		<c:if test="${code=='3' }"> 
+			<input type="button" class="middle ui button" id="C_contactList_WriteBtn" value="관리자 작성" >
+			<input type="button" class="middle ui button" id="C_contactList_DeleteBtn" value="삭제" >
+		</c:if>
 </div>
 </form>
+<input type="hidden" id="hiddenCode" value="${code}">
 <script src="../semantic/semantic.min.js"></script>
 <script src="../js/C_contactList_js.js?ver=1"></script>
 <script type="text/javascript">
 $(document).ready(function(){
+	var code = $('#hiddenCode').val();
 	$.ajax({
 			type : 'POST',
 			url : '/exhibition/customerService/getContactList.do',
 			data : 'pg=${pg}',
 			dataType : 'json',
 			success : function(data){
-				$.each(data.list, function(index, item){
-					$('<tr/>').append($('<td/>').append($('<input/>',{
-						type : 'checkbox',
-						value : item.seq,
-						name : 'box',
-						class : 'box'
-					}))).append($('<td/>',{
-						align : 'center',
-						style: 'width: 20%; height: 9%; text-align: center;',
-						text : item.classify,
-						id : 'classifyA'
-					})).append($('<td/>',{
-						align : 'center',
-						style: 'width: 20%; height: 9%; text-align: center;',
-						text : item.facility,
-						id : 'facilityA'
-					})).append($('<td/>',{
-						align : 'center',
-						style: 'width: 20%; height: 9%; text-align: center;',
-						text : item.title,
-						id : 'titleA'
-					})).append($('<td/>',{
-						align : 'center',
-						style: 'width: 20%; height: 9%; text-align: center;',
-						text : item.phone,
-						id : 'phoneA'
-					})).append($('<td/>',{
-						align : 'center',
-						style: 'width: 20%; height: 9%; text-align: center;',
-						text : item.name,
-						id : 'nameA'
-					})).appendTo($('#C_contactList_List'));
+				
+				$.each(data.list, function(index, item){	
+					if(code!=3){
+						$('<tr/>').append($('<td/>',{
+							align : 'center',
+							style: 'width: 20%; height: 9%; text-align: center;',
+							text : item.classify,
+							id : 'classifyA'
+						})).append($('<td/>',{
+							align : 'center',
+							style: 'width: 20%; height: 9%; text-align: center;',
+							text : item.facility,
+							id : 'facilityA'
+						})).append($('<td/>',{
+							align : 'center',
+							style: 'width: 20%; height: 9%; text-align: center;',
+							text : item.title,
+							id : 'titleA'
+						})).append($('<td/>',{
+							align : 'center',
+							style: 'width: 20%; height: 9%; text-align: center;',
+							text : item.phone,
+							id : 'phoneA'
+						})).append($('<td/>',{
+							align : 'center',
+							style: 'width: 20%; height: 9%; text-align: center;',
+							text : item.name,
+							id : 'nameA'
+						})).appendTo($('#C_contactList_List'));
+						
+					}else if(code==3){
+						$('<tr/>').append($('<td/>').append($('<input/>',{
+							type : 'checkbox',
+							value : item.seq,
+							name : 'box',
+							class : 'box'
+						}))).append($('<td/>',{
+							align : 'center',
+							style: 'width: 20%; height: 9%; text-align: center;',
+							text : item.classify,
+							id : 'classifyA'
+						})).append($('<td/>',{
+							align : 'center',
+							style: 'width: 20%; height: 9%; text-align: center;',
+							text : item.facility,
+							id : 'facilityA'
+						})).append($('<td/>',{
+							align : 'center',
+							style: 'width: 20%; height: 9%; text-align: center;',
+							text : item.title,
+							id : 'titleA'
+						})).append($('<td/>',{
+							align : 'center',
+							style: 'width: 20%; height: 9%; text-align: center;',
+							text : item.phone,
+							id : 'phoneA'
+						})).append($('<td/>',{
+							align : 'center',
+							style: 'width: 20%; height: 9%; text-align: center;',
+							text : item.name,
+							id : 'nameA'
+						})).appendTo($('#C_contactList_List'));	
+					}
+					
 				});
 				$('#C_contactList_PagingDiv').html(data.customerServicePaging.pagingHTML);
 			}
@@ -135,37 +175,66 @@ $(document).ready(function(){
 						$('#C_contactList_PagingDiv').remove();
 					}else if(data.tataA!='0'){
 						$.each(data.list, function(index, item){
-							$('<tr/>').append($('<td/>').append($('<input/>',{
-								type : 'checkbox',
-								value : item.seq,
-								name : 'box',
-								class : 'box'
-							}))).append($('<td/>',{
-								align : 'center',
-								style: 'width: 20%; height: 9%; text-align: center;',
-								text : item.classify,
-								id : 'classifyA'
-							})).append($('<td/>',{
-								align : 'center',
-								style: 'width: 20%; height: 9%; text-align: center;',
-								text : item.facility,
-								id : 'facilityA'
-							})).append($('<td/>',{
-								align : 'center',
-								style: 'width: 20%; height: 9%; text-align: center;',
-								text : item.title,
-								id : 'titleA'
-							})).append($('<td/>',{
-								align : 'center',
-								style: 'width: 20%; height: 9%; text-align: center;',
-								text : item.name,
-								id : 'nameA'
-							})).append($('<td/>',{
-								align : 'center',
-								style: 'width: 20%; height: 9%; text-align: center;',
-								text : item.phone,
-								id : 'phoneA'
-							})).appendTo($('#C_contactList_List'));
+							if(code!=3){
+								$('<tr/>').append($('<td/>',{
+									align : 'center',
+									style: 'width: 20%; height: 9%; text-align: center;',
+									text : item.classify,
+									id : 'classifyA'
+								})).append($('<td/>',{
+									align : 'center',
+									style: 'width: 20%; height: 9%; text-align: center;',
+									text : item.facility,
+									id : 'facilityA'
+								})).append($('<td/>',{
+									align : 'center',
+									style: 'width: 20%; height: 9%; text-align: center;',
+									text : item.title,
+									id : 'titleA'
+								})).append($('<td/>',{
+									align : 'center',
+									style: 'width: 20%; height: 9%; text-align: center;',
+									text : item.phone,
+									id : 'phoneA'
+								})).append($('<td/>',{
+									align : 'center',
+									style: 'width: 20%; height: 9%; text-align: center;',
+									text : item.name,
+									id : 'nameA'
+								})).appendTo($('#C_contactList_List'));
+							}else if(code==3){
+								$('<tr/>').append($('<td/>').append($('<input/>',{
+									type : 'checkbox',
+									value : item.seq,
+									name : 'box',
+									class : 'box'
+								}))).append($('<td/>',{
+									align : 'center',
+									style: 'width: 20%; height: 9%; text-align: center;',
+									text : item.classify,
+									id : 'classifyA'
+								})).append($('<td/>',{
+									align : 'center',
+									style: 'width: 20%; height: 9%; text-align: center;',
+									text : item.facility,
+									id : 'facilityA'
+								})).append($('<td/>',{
+									align : 'center',
+									style: 'width: 20%; height: 9%; text-align: center;',
+									text : item.title,
+									id : 'titleA'
+								})).append($('<td/>',{
+									align : 'center',
+									style: 'width: 20%; height: 9%; text-align: center;',
+									text : item.phone,
+									id : 'phoneA'
+								})).append($('<td/>',{
+									align : 'center',
+									style: 'width: 20%; height: 9%; text-align: center;',
+									text : item.name,
+									id : 'nameA'
+								})).appendTo($('#C_contactList_List'));	
+							}
 						});
 					}
 					$('#C_contactList_PagingDiv').html(data.customerServicePaging.pagingHTML);
@@ -198,6 +267,9 @@ function C_contactList_Search(pg){
 	$('#pg').val(pg);
 	$('#C_contactList_SearchBtn').trigger('click','trigger');
 }
+$('.ui.selection.dropdown')
+.dropdown()
+;
 </script>
 </body>
 </html>

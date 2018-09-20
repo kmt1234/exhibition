@@ -2,13 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="../semantic/semantic.min.css">
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"><!--달력 ui-->
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css"><!--시간 ui-->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 <style>
 .box-container{
 	display: inline-block;
@@ -78,9 +79,11 @@
 	
 	<div class="ui inverted input" style="width: 100%;">
 		<div class="ui left icon input" style="width: 100%; height: 50px;">
-			<input type="text" name="startDate" class="datepicker1">
+			<input type="text" name="startDate" id="datepicker_1" class="datepicker1">
+			<input type="hidden" id="startDate" value="${eventboardDTO.startDate}">
 			<div style="width: 5%;">&nbsp;</div>
-			<input type="text" name="endDate" class="datepicker2">
+			<input type="text" name="endDate" id="datepicker_2" class="datepicker2">
+			<input type="hidden" id="endDate" value="${eventboardDTO.endDate}">
 		</div>
   	</div>
   	<br><br>
@@ -95,8 +98,10 @@
   	<div class="ui inverted input" style="width: 100%;">
 		<div class="ui left icon input" style="width: 100%; height: 50px;">
 			<input type="text" name="startTime" class="timepicker1">
+			<input type="hidden" id="timepicker1" value="${eventboardDTO.startTime}">
 			<div style="width: 5%;">&nbsp;</div>
 			<input type="text" name="endTime" class="timepicker2">
+			<input type="hidden" id="timepicker2" value="${eventboardDTO.endTime}">
 		</div>
   	</div>
   	<br><br>
@@ -159,13 +164,60 @@
 	</div>
 
 </body>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script><!-- 시간 -->
-<script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script><!--달력-->
+<script src="http://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+<script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 <script>
 $(document).ready(function(){
+	alert($('#startDate').val());
+	alert($('#endDate').val());
+	
+
+	//시간
+	$('.timepicker1').timepicker({
+		timeFormat : 'H:mm',
+	    interval: 60,
+	    minTime: '08',
+	    maxTime: '10:00pm',
+	    defaultTime: '08',
+	   	startTime: '08:00am',
+	    dynamic: false,
+	    dropdown: true,
+	    scrollbar: false	
+	});
+	$('.timepicker2').timepicker({
+		timeFormat : 'H:mm',
+	    interval: 60,
+	    minTime: '08',
+	    maxTime: '10:00pm',
+	    defaultTime: '08',
+	   	startTime: '08:00am',
+	    dynamic: false,
+	    dropdown: true,
+	    scrollbar: false	
+	});
+	//날짜
+	$(".datepicker1, .datepicker2").datepicker({
+		dateFormat : "yy/mm/dd",
+	    prevText: '이전 달',
+	    nextText: '다음 달',
+	    monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+	    monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+	    dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+	    dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+	    dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+	    showMonthAfterYear: true,
+	    yearSuffix: '년'
+	});
+	
+	//시작일과 마지막날짜 설정
+	$('#datepicker_1').datepicker('setDate', $('#startDate').val());
+	$('#datepicker_2').datepicker('setDate', $('#endDate').val());
+	
 	$('#ModeButton').click(function(){
 		$('#playboardModForm').attr('action','/exhibition/customerService/C_playboardMod.do').submit();
 	});
+	
+	
 });
 </script>
 </html>

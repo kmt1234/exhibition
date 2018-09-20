@@ -12,12 +12,12 @@ import org.springframework.transaction.annotation.Transactional;
 import company.bean.CompanyDTO;
 import customerService.bean.CustomerServiceDTO;
 import customerService.bean.EventboardDTO;
+import customerService.bean.ExhibitionBookDTO;
 import customerService.bean.HotelboardDTO;
 import customerService.bean.ImageboardDTO;
 import customerService.bean.PlayBookDTO;
 import customerService.bean.SalesExhigitionDTO;
 import member.bean.MemberDTO;
-import rental.bean.ExhibitionDTO;
 
 @Transactional
 @Component
@@ -25,84 +25,107 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	public int getTotalC_notice() { // 공지사항 총 글수
+	// 공지사항 총 글수
+	public int getTotalC_notice() { 
 		return sqlSession.selectOne("customerServiceSQL.getTotalC_notice");
 	}
-	public List<CustomerServiceDTO> getNoticeList(Map<String, Integer> map) {//공지사항 리스트 불러오기
+	//공지사항 리스트 불러오기
+	public List<CustomerServiceDTO> getNoticeList(Map<String, Integer> map) {
 		return sqlSession.selectList("customerServiceSQL.getNoticeList", map);
 	}
+	//공지사항 검색된 글수
 	public int getTotalC_notice_Search(Map<String, String> map) {
 		return sqlSession.selectOne("customerServiceSQL.getTotalC_notice_Search", map);
 	}
+	//공지사항 검색된 글 불러오기
 	public List<CustomerServiceDTO> C_notice_Search(Map<String, String> map) {
 		return sqlSession.selectList("customerServiceSQL.C_notice_Search", map);
 	}
-	public CustomerServiceDTO getNoticeInfo(String seq) { // 공지사항 제목 클릭시 내용 보기
+	// 공지사항 제목 클릭시 내용 보기
+	public CustomerServiceDTO getNoticeInfo(String seq) { 
 		return sqlSession.selectOne("customerServiceSQL.getNoticeInfo", seq);
 	}
-	public void C_notice_Write(Map<String, String> map) {// 공지사항 관리자가 작성하기
+	// 공지사항 관리자가 작성하기
+	public void C_notice_Write(Map<String, String> map) {
 		sqlSession.insert("customerServiceSQL.C_notice_Write", map);		
 	}
-	public void C_notice_Modify(Map<String, String> map) {// 공지사항 관리자가 수정하기
+	// 공지사항 관리자가 수정하기
+	public void C_notice_Modify(Map<String, String> map) {
 		sqlSession.update("customerServiceSQL.C_notice_Modify", map);
 	}
-	public void C_notice_Delete(String seq) {// 공지사항 관리자가 삭제하기
+	// 공지사항 관리자가 삭제하기
+	public void C_notice_Delete(String seq) {
 		sqlSession.delete("customerServiceSQL.C_notice_Delete", seq);
 	}
 	
 	
 	
-	
-	public int getTotalC_inquire() {	//고객이 소리 문의받은 글수
+	//고객이 소리 문의받은 글수
+	public int getTotalC_inquire() {	
 		return sqlSession.selectOne("customerServiceSQL.getTotalC_inquire");
 	}
-	public List<CustomerServiceDTO> getInquireList(Map<String, Integer> map) {// 고객의 소리 문의받은 리스트 불러오기
+	// 고객의 소리 문의받은 리스트 불러오기
+	public List<CustomerServiceDTO> getInquireList(Map<String, Integer> map) {
 		return sqlSession.selectList("customerServiceSQL.getInquireList", map);
 	}
-	public int getTotalC_inquire_Search(Map<String, String> map) {	//고객의 소리 검색된 글 수
+	//고객의 소리 검색된 글 수
+	public int getTotalC_inquire_Search(Map<String, String> map) {	
 		return sqlSession.selectOne("customerServiceSQL.getTotalC_inquire_Search", map);
 	}
-	public List<CustomerServiceDTO> C_inquire_Search(Map<String, String> map) {	//고객의 소리 검색
+	//고객의 소리 검색
+	public List<CustomerServiceDTO> C_inquire_Search(Map<String, String> map) {	
 		return sqlSession.selectList("customerServiceSQL.C_inquire_Search", map);
 	}
-	public void C_checkInquire(CustomerServiceDTO customerServiceDTO) {// 고객의 소리 고객이 작성후 등록하기
+	// 고객의 소리 고객이 작성후 등록하기
+	public void C_checkInquire(CustomerServiceDTO customerServiceDTO) {
 		sqlSession.insert("customerServiceSQL.C_checkInquire", customerServiceDTO);
 	}
-	public CustomerServiceDTO getInquireInfo(String seq) {// 고객의 소리 제목클릭 후 내용 보기
+	// 고객의 소리 제목클릭 후 내용 보기
+	public CustomerServiceDTO getInquireInfo(int seq) {
 		return sqlSession.selectOne("customerServiceSQL.getInquireInfo", seq);
 	}
-	public CustomerServiceDTO getReplyInfo(String seq) {// 고객의 소리 관리자가 문의 답변 등록하기
-		return sqlSession.selectOne("customerServiceSQL.getReplyInfo", seq);
+	// 고객의 소리 관리자가 문의 답변 등록하기
+	public void C_inquire_Reply(CustomerServiceDTO customerServiceDTO) {
+		sqlSession.update("customerServiceSQL.C_inquire_Reply1", customerServiceDTO);//step update
+		sqlSession.insert("customerServiceSQL.C_inquire_Reply2", customerServiceDTO);//insert
+		sqlSession.update("customerServiceSQL.C_inquire_Reply3", customerServiceDTO);//reply update
 	}
 	
 	
 	
-	
-	public List<CustomerServiceDTO> getQnA_Classify(String classify) {// 자주묻는 질문 리스트 불러오기 & 버튼마다 리스트 불러오기
+	// 자주묻는 질문 리스트 불러오기 & 버튼마다 리스트 불러오기
+	public List<CustomerServiceDTO> getQnA_Classify(String classify) {
 		return sqlSession.selectList("customerServiceSQL.getQnA_Classify", classify);
 	}
-	public void C_QnA_checkWrite(Map<String, String> map) {// 자주묻는 질문 관리자가 작성하기
+	// 자주묻는 질문 관리자가 작성하기
+	public void C_QnA_checkWrite(Map<String, String> map) {
 		sqlSession.insert("customerServiceSQL.C_QnA_checkWrite", map);		
 	}
 	
 	
-	public void C_contactList_checkWrite(Map<String, String> map) {// 주요시설 연락처 관리자가 작성하기
+	
+	// 주요시설 연락처 관리자가 작성하기
+	public void C_contactList_checkWrite(Map<String, String> map) {
 		sqlSession.insert("customerServiceSQL.C_contactList_checkWrite", map);		
 	}
-	public int getTotalC_contactList() {// 주요시설 연락처 총 글수
+	// 주요시설 연락처 총 글수
+	public int getTotalC_contactList() {
 		return sqlSession.selectOne("customerServiceSQL.getTotalC_contactList");
 	}
-	public List<CustomerServiceDTO> getContactList(Map<String, Integer> map) {// 주요시설 연락처 리스트 불러오기
+	// 주요시설 연락처 리스트 불러오기
+	public List<CustomerServiceDTO> getContactList(Map<String, Integer> map) {
 		return sqlSession.selectList("customerServiceSQL.getContactList", map);
 	}
-	
+	//주요시설 연락처 검색된 글수
 	public int getTotalC_contactList_Search(Map<String, String> map) {
 		return sqlSession.selectOne("customerServiceSQL.getTotalC_contactList_Search", map);
 	}
+	//주요시설 연락처 검색된글 불러오기
 	public List<CustomerServiceDTO> C_contactList_Search(Map<String, String> map) {
 		return sqlSession.selectList("customerServiceSQL.C_contactList_Search", map);
 	}
-		public void C_contactList_Delete(List<Integer> list) {
+	//주요시설 연락처 삭제
+	public void C_contactList_Delete(List<Integer> list) {
 		sqlSession.delete("customerServiceSQL.C_contactList_Delete", list);
 	}
 	
@@ -233,11 +256,45 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 			return sqlSession.selectOne("customerServiceSQL.getSalesTotalRentExhibition", salesMon);
 		}
 	}
-	public List<MemberDTO> getMemberList() {
-		return sqlSession.selectList("customerServiceSQL.getMemberList");
+	
+	
+	//회원정보 불러오기
+	public List<MemberDTO> getMemberList(Map<String, Integer> map) {
+		return sqlSession.selectList("customerServiceSQL.getMemberList",map);
 	}
-	public List<CompanyDTO> getCompanyList() {
-		return sqlSession.selectList("customerServiceSQL.getCompanyList");
+	//회원 페이징처리
+	public int getMemberListTotal() {
+		return sqlSession.selectOne("customerServiceSQL.getMemberListTotal");
+	}
+	//회원검색
+	public List<MemberDTO> memberListSearch(Map<String, String> map) {
+		return sqlSession.selectList("customerServiceSQL.memberListSearch",map);
+	}
+	//회원검색페이지
+	public int getMemberListSearchTotal(Map<String, String> map) {
+		return sqlSession.selectOne("customerServiceSQL.getMemberListSearchTotal",map);
+	}
+	
+	//사업자 정보 불러오기
+	public List<CompanyDTO> getCompanyList(Map<String, Integer> map) {
+		return sqlSession.selectList("customerServiceSQL.getCompanyList",map);
+	}
+	//사업자 페이징
+	public int getCompanyTotal() {
+		return sqlSession.selectOne("customerServiceSQL.getCompanyTotal");
+	}
+	//사업자 검색
+	public List<CompanyDTO> CompanyListSearch(Map<String, String> map) {
+		return sqlSession.selectList("customerServiceSQL.CompanyListSearch",map);
+	}
+	//사업자 검색토탈 페이징
+	public int getCompanyListSearchTotal(Map<String, String> map) {
+		return sqlSession.selectOne("customerServiceSQL.getCompanyListSearchTotal",map);
+	}
+	
+	//사업자 뷰
+	public List<CompanyDTO> getCompanyView(String C_license) {
+		return sqlSession.selectList("customerServiceSQL.getCompanyView",C_license);
 	}
 	
 	//연극수정하기 위해 값 불러오기
@@ -260,7 +317,21 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	}
 	
 	//예매티켓일자 삭제
-	public void eventboardDelete_play_book(List<String> list2) {
+	public void eventboardDelete_play_book(List<Integer> list2) {
 		sqlSession.delete("customerServiceSQL.eventboardDelete_play_book", list2);
+	}
+	//박람회 일자별 DB 등록 메소드 
+	public void eventInfoWrite_exhibition_bookDB(ExhibitionBookDTO exhibitionBookDTO) {
+		sqlSession.insert("customerServiceSQL.eventInfoWrite_exhibition_bookDB", exhibitionBookDTO);
+		
+	}
+	
+	//연극 일자별 제목 수정
+	public void C_playboardBookMod(EventboardDTO eventboardDTO) {
+		sqlSession.update("customerServiceSQL.C_playboardBookMod", eventboardDTO);	
+	}
+	//연극 시퀀스 가져오기위해서
+	public EventboardDTO eventInfoWrite_play2(EventboardDTO eventboardDTO) {
+		return sqlSession.selectOne("customerServiceSQL.eventInfoWrite_play2", eventboardDTO);
 	}
 }

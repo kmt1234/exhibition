@@ -11,19 +11,16 @@
 
 <style>
 
-h1:first-child, h2:first-child, h3:first-child, h4:first-child, h5:first-child {
-    margin-top: 20px;
-}
-
 img{
 	width: 367px;
-	height: 420px;
+	height: 425px;
 	border-radius: 10px;
 }
 
 td{
 	text-align: left;
-    padding-left: 29px;
+   	padding-left: 6%;
+    padding-top: 2px;
 }
 
 .bookWrapper{
@@ -50,12 +47,24 @@ td{
     width: 710px;
 }
 
+.bookPlayTitleDiv {
+    margin-top: 25px;
+}
+
 .book_play_confirm {
     display: flex;
 }
 
+.playTableWrapper{
+	margin-left: 33px;
+}
+
 #modalImage1{
 	margin-left: 20px;
+}
+
+#bookInfo{
+	margin-left: 30px;
 }
 
 </style>
@@ -96,10 +105,10 @@ td{
 	<!--날짜 비교(기본 : 오늘날짜)-->
 	<jsp:useBean id="now" class="java.util.Date"/> 
 	
-	<div class="bookPlayTitle">${eventboardDTO.imageName}</div><input type="hidden" id="imageName" value="${eventboardDTO.imageName}"><!--연극 제목  -->
+	<div class="bookPlayTitleDiv"><span class="bookPlayTitle">${eventboardDTO.imageName}</span></div><input type="hidden" id="imageName" value="${eventboardDTO.imageName}"><!--연극 제목  -->
 	
 	<div class="playContent">
-		<table style="height: 170%;">
+		<table style="height: 170%;" class="playContentTable">
 			<tr>
 				<td>장소</td><td> : </td> <td>${eventboardDTO.eventPlace}</td>
 			</tr>
@@ -163,7 +172,7 @@ td{
 	<input id="hiddenDate" type="hidden"><!--공연일자(하루)-->	
 	<input id="hiddenTicketQty" type="hidden"><!--티켓 수량 -->
 	<input type="hidden" value="${eventboardDTO.eventSeats}" id="hiddenTotalSeats"><!--전체 좌석 수 -->
-	<input id="hiddenId" type="hidden" value="${homepageMember.getM_Id()}"><!--로그인 된 아이디-->
+	<input id="hiddenId" type="hidden" value="${id}"><!--로그인 된 아이디-->
 			
 </div><!-- id="Book_play_div"-->
 		
@@ -178,7 +187,7 @@ td{
 	      <img src="../storage/${eventboardDTO.image1}" id="modalImage1">
 	    </div>
 	    
-	    <div>
+	    <div class="playTableWrapper">
 	    
 	    	<table>
 	    		<tr>
@@ -191,7 +200,7 @@ td{
 	    			<td>좌석</td><td> : </td> <td>선착순</td>
 	    		</tr>
 	    		<tr>
-	    			<td>예매자ID</td><td> : </td> <td>${homepageMember.getM_Id()}</td>
+	    			<td>예매자ID</td><td> : </td> <td>${id}</td>
 	    		</tr>
 	    		<tr>
 	    			<td>장소</td><td> : </td> <td>${eventboardDTO.eventPlace}</td>
@@ -204,7 +213,7 @@ td{
 	    		</tr>
 	    	</table><br><br>
 		  	
-		  	<div>티켓 발권 시, 신분증과 함께 예매자 아이디를 말씀해주시면 됩니다.</div>	
+		  	<div id="bookInfo">티켓 발권 시, 신분증 제출 및 예매자 아이디를 말씀해주시면 됩니다.</div>	
 	    </div>
 	    
 	  </div><!--class="book_play_confirm"-->
@@ -226,7 +235,7 @@ td{
 		
 		
 		
-		
+		 
 		
 </body>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"
@@ -244,18 +253,27 @@ $(document).ready(function(){
 		$('#bookConfirmHeader').text('로그인 후 예매가능합니다');
 	}
 	
+	if($('#selectEventDate :selected').val()=='2000-01-01'){
+		$('#BookEventBtn').hide();
+	}
+	
 	//날짜 변경 시, 히든 태그에 날짜 값 넣기
 	$("#selectEventDate").change(function() {
 		$('#BookEventBtn').show();
 		$('#hiddenDate').val($('#selectEventDate :selected').text());
 		
-		if($('#selectEventDate :selected').val()=='2000-01-01') $('#remainSeats').text('--');
+		if($('#selectEventDate :selected').val()=='2000-01-01'){
+			$('#BookEventBtn').hide();
+		}
 		
 		//로그인 아닐 시, 예매버튼 없애버림
 		if($('#hiddenId').val()==''){
 			$('#BookEventBtn').hide(); //예매버튼 숨김
 			$('#bookConfirmHeader').text('로그인 후 예매가능합니다');
 		}
+		
+		//잔여석 보다 예매표가 많을 시, 예매 막기
+		
 		
 		//티켓 잔여 확인
 		$.ajax({
@@ -277,7 +295,6 @@ $(document).ready(function(){
 				}else{
 					$('#remainSeats').text(data);	
 				}
-				
 				
 			}//success
 		});//ajax
@@ -333,7 +350,6 @@ $(document).ready(function(){
 		}
 		
 	});//예매하기 버튼 클릭 
-	
 	
 	//다음단계 버튼 클릭 시,
 	$('#book_next_Btn').click(function(){

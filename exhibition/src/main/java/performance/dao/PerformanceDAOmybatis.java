@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import customerService.bean.EventboardDTO;
+import customerService.bean.ExhibitionBookDTO;
+import performance.bean.Book_exhibition_membersDTO;
 import performance.bean.Book_performance_membersDTO;
 import performance.bean.PerformanceDTO;
 
@@ -51,13 +53,13 @@ public class PerformanceDAOmybatis implements PerformanceDAO {
 		return sqlSession.selectOne("performanceSQL.performanceBook", seq);
 	}
 
-	//예매자 등록(예매자 DB)
+	//공연 예매자 등록(예매자 DB)
 	public int bookPlayMembers(Book_performance_membersDTO book_performance_membersDTO) {
 		return sqlSession.insert("performanceSQL.bookPlayMembers", book_performance_membersDTO);
 		
 	}
 	
-	//예매 수만큼 잔여티켓 감소
+	//연극 예매 수만큼 잔여티켓 감소
 	public void bookPlayMembers_calculate(Book_performance_membersDTO book_performance_membersDTO) {
 		sqlSession.update("performanceSQL.bookPlayMembers_calculate", book_performance_membersDTO);
 		
@@ -71,6 +73,31 @@ public class PerformanceDAOmybatis implements PerformanceDAO {
 	//선택일자의  해당 연극 예매된 티켓 수 가져오기
 	public String checkUsedSeats(Map<String, String> map) {
 		return sqlSession.selectOne("performanceSQL.checkUsedSeats", map);
+	}
+	
+	//전시회 예약하기 폼
+	public EventboardDTO exhibitionBook(String seq) {
+		return sqlSession.selectOne("performanceSQL.exhibitionBook", seq);
+	}
+	
+	//전시회 예매자 등록(예매자 DB)
+	public int bookExhibitionMembers(Book_exhibition_membersDTO book_exhibition_membersDTO) {
+		return sqlSession.insert("performanceSQL.bookExhibitionMembers", book_exhibition_membersDTO);
+	}
+	
+	//전시회 예매 수만큼 잔여티켓 감소
+	public void bookExhibitionMembers_calculate(Book_exhibition_membersDTO book_exhibition_membersDTO) {
+		sqlSession.update("performanceSQL.bookExhibitionMembers_calculate", book_exhibition_membersDTO);
+	}
+
+	//전시회 잔여좌석 가져오는 메소드
+	public String checkRemainSeats_ex(Map<String, String> map) {
+		return sqlSession.selectOne("performanceSQL.checkRemainSeats_ex", map);
+	}
+
+	//선택일자의  해당 전시회 예매된 티켓 수 가져오기
+	public String checkUsedSeats_ex(Map<String, String> map) {
+		return sqlSession.selectOne("performanceSQL.checkUsedSeats_ex", map);
 	}
 	
 
