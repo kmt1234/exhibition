@@ -157,13 +157,18 @@ public interface CustomerServiceDAO {
 
 	public void C_playboardMod(EventboardDTO eventboardDTO);//연극 수정실행
 
-	public void eventboardDelete_play_book(List<Integer> list2);//예매날짜 지우기
+	public void eventboardDelete_play_book(List<Integer> list2);//연극 리스트 지울때 예매날짜 지우기
 	
 	public void eventInfoWrite_exhibition_bookDB(ExhibitionBookDTO exhibitionBookDTO);	//박람회 일자별 DB 등록 메소드 
 	
-	public void C_playboardBookMod(EventboardDTO eventboardDTO);//연극 예매일짜별 제목 수정
+	public void C_playboardBookDel(EventboardDTO eventboardDTO);//연극 수정하기 위해서 예매일짜 날려버리기
 	
 	public EventboardDTO eventInfoWrite_play2(EventboardDTO eventboardDTO);//연극 예매일짜 삽입하기위한 시퀀스 가져오기
+	public EventboardDTO eventInfoWrite2(EventboardDTO eventboardDTO);//박람회연극 예매일짜 삽입하기위한 시퀀스 가져오기
+	
+	public void eventboardDelete_book(List<Integer> list2);//박람회 리스트지울때 예매날짜 지우기
+	
+	public void C_exhibitionboardBookDel(EventboardDTO eventboardDTO);//박람회 수정하기 위해서 예매일짜 날려버리기
 
 	
 }

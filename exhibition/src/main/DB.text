@@ -195,6 +195,7 @@ create sequence seq_Book_Play_Members;--연극 예매자 DB 시퀀스
 --전시회 일자별 DB
 create table eventboard_exhibition_book(
  seq NUMBER PRIMARY KEY,            --시퀀스     
+ num NUMBER,                         --연극시퀀스
  imageName VARCHAR2(500) NOT NULL,  --공연명
  playDate date,                     --공연일자(시작/종료)
  playTicket VARCHAR2(100),           --일별 총 티켓 수

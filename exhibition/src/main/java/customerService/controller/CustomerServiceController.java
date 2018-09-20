@@ -654,29 +654,19 @@ public class CustomerServiceController {
 	@RequestMapping(value = "C_eventInfoWrite", method = RequestMethod.POST)
 	public ModelAndView C_exhibitionInfoWrite(@ModelAttribute EventboardDTO eventboardDTO,
 			@RequestParam MultipartFile img) {
-
 		// 경로 바꿔야함***
 		String fileName = img.getOriginalFilename();
-
 		File file = new File(filePath, fileName);
-
 		try {
 			FileCopyUtils.copy(img.getInputStream(), new FileOutputStream(file));
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 		eventboardDTO.setImage1(fileName);
-		
-		
+
 		// String 타입 날짜를 Date 형식으로 변환(연극 기간 구하기)
 		eventboardDTO.setStartDate(eventboardDTO.getStartDate().substring(0, 10).replaceAll("/", "-"));
 		eventboardDTO.setEndDate(eventboardDTO.getEndDate().substring(0, 10).replaceAll("/", "-"));
-		
-		System.out.println(eventboardDTO.getStartDate());
-		System.out.println(eventboardDTO.getEndDate());
-		System.out.println(eventboardDTO.getImageName());
 
 		String startDate = eventboardDTO.getStartDate();
 		String endDate = eventboardDTO.getEndDate();
@@ -709,10 +699,14 @@ public class CustomerServiceController {
 			calStart.add(Calendar.DATE, 1);
 		}
 		
+		// DB 
+		customerServiceDAO.eventInfoWrite(eventboardDTO);
+		EventboardDTO second = customerServiceDAO.eventInfoWrite2(eventboardDTO);
+		
 		List<ExhibitionBookDTO> list = new ArrayList<ExhibitionBookDTO>();
-
 		// 예매DB
 		for (int i = 0; i <= diffDays; i++) {
+			exhibitionBookDTO.setNum(second.getSeq());
 			exhibitionBookDTO.setImageName(eventboardDTO.getImageName()); // 공연명 등록
 			exhibitionBookDTO.setPlayTicket(Integer.parseInt(eventboardDTO.getEventSeats())); // 일별 총 티켓 수 등록
 			exhibitionBookDTO.setRemainTicket(0); // 일별 잔여 티켓 수 등록
@@ -722,13 +716,11 @@ public class CustomerServiceController {
 			exhibitionBookDTO.setPlayDate(listDate.get(i));
 
 			list.add(exhibitionBookDTO);
-
 			customerServiceDAO.eventInfoWrite_exhibition_bookDB(exhibitionBookDTO); // 예매 DB에 박람회 정보 넣는 메소드(예매DB)
 		}
 		
 		
-		// DB 
-		customerServiceDAO.eventInfoWrite(eventboardDTO);
+		
 
 		return new ModelAndView("redirect:/customerService/C_eventboardListForm.do");
 	}
@@ -792,9 +784,7 @@ public class CustomerServiceController {
 
 		 customerServiceDAO.eventInfoWrite_play(eventboardDTO);
 		 EventboardDTO second = customerServiceDAO.eventInfoWrite_play2(eventboardDTO);
-		 
-		 
-		System.out.println("시퀀스번호테스트"+second.getSeq());
+
 		List<PlayBookDTO> list = new ArrayList<PlayBookDTO>();
 		// 예매DB
 		for (int i = 0; i <= diffDays; i++) {
@@ -903,7 +893,7 @@ public class CustomerServiceController {
 			ImageboardDTO imageboardDTO = customerServiceDAO.getImageboard(seq);
 
 			ModelAndView mav = new ModelAndView();
-			System.out.println(imageboardDTO.getStartDate());
+			System.out.println(imageboardDTO.getStartDate1());
 			mav.addObject("imageboardDTO", imageboardDTO);
 			mav.addObject("postSelect", "0");
 			mav.addObject("modify", "1");
@@ -935,9 +925,14 @@ public class CustomerServiceController {
 		for (String seq : check) {
 			list.add(Integer.parseInt(seq));
 		}
+		List<Integer> list2 = new ArrayList<Integer>();
+		for (String seq : check) {
+			list2.add(Integer.parseInt(seq));
+		}
 
 		// DB
 		customerServiceDAO.eventboardDelete(list);
+		customerServiceDAO.eventboardDelete_book(list2);
 
 		return new ModelAndView("redirect:/customerService/C_eventboardListForm.do");
 	}
@@ -980,7 +975,6 @@ public class CustomerServiceController {
 	public ModelAndView C_playDetail(@RequestParam String seq) {
 		// DB
 		EventboardDTO eventboardDTO = customerServiceDAO.getPlayboard(seq);
-		
 		//날짜,시간
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("eventboardDTO", eventboardDTO);
@@ -1148,12 +1142,68 @@ public class CustomerServiceController {
 			eventboardDTO.setImage1(fileName);
 			customerServiceDAO.C_eventboardMod(eventboardDTO);
 		}
+		customerServiceDAO.C_exhibitionboardBookDel(eventboardDTO);
+		
+		// String 타입 날짜를 Date 형식으로 변환(기간 구하기)
+		eventboardDTO.setStartDate(eventboardDTO.getStartDate().substring(0, 10).replaceAll("/", "-"));
+		eventboardDTO.setEndDate(eventboardDTO.getEndDate().substring(0, 10).replaceAll("/", "-"));
+
+		String startDate = eventboardDTO.getStartDate();
+		String endDate = eventboardDTO.getEndDate();
+
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+		long diff = 0;
+		long diffDays = 0;
+		Date startDateF = null;
+
+		try {
+			startDateF = formatter.parse(startDate);
+			Date endDateF = formatter.parse(endDate);
+
+			diff = endDateF.getTime() - startDateF.getTime();
+			diffDays = diff / (24 * 60 * 60 * 1000); // 종료일-시작일 = 행사 일 수(기간)
+
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		Calendar calStart = Calendar.getInstance();
+		calStart.setTime(startDateF);
+
+		// 공연 기간 리스트 구하기
+		List<Date> listDate = new ArrayList<Date>();
+		for (int i = 0; i <= diffDays; i++) {
+
+			listDate.add(calStart.getTime());
+			calStart.add(Calendar.DATE, 1);
+		}
+		
+		// DB 
+		List<ExhibitionBookDTO> list = new ArrayList<ExhibitionBookDTO>();
+		// 예매DB
+		for (int i = 0; i <= diffDays; i++) {
+			exhibitionBookDTO.setNum(eventboardDTO.getSeq());
+			exhibitionBookDTO.setImageName(eventboardDTO.getImageName()); // 공연명 등록
+			exhibitionBookDTO.setPlayTicket(Integer.parseInt(eventboardDTO.getEventSeats())); // 일별 총 티켓 수 등록
+			exhibitionBookDTO.setRemainTicket(0); // 일별 잔여 티켓 수 등록
+			exhibitionBookDTO.setTicketPrice(Integer.parseInt(eventboardDTO.getEventPrice())); // 티켓 가격
+			exhibitionBookDTO.setBookTicket(0); // 예매된 티켓 수
+			
+			exhibitionBookDTO.setPlayDate(listDate.get(i));
+
+			list.add(exhibitionBookDTO);
+			customerServiceDAO.eventInfoWrite_exhibition_bookDB(exhibitionBookDTO); // 예매 DB에 박람회 정보 넣는 메소드(예매DB)
+		}
+		
+		
 		return new ModelAndView("redirect:/customerService/C_eventboardListForm.do");
 	}
 	
 	// 연극 수정완료 클릭시 DB내용 수정
 	@RequestMapping(value = "C_playboardMod", method = RequestMethod.POST)
-	public ModelAndView C_playboardMod(@ModelAttribute EventboardDTO eventboardDTO, @RequestParam MultipartFile img) {
+	public ModelAndView C_playboardMod(@ModelAttribute EventboardDTO eventboardDTO, @RequestParam MultipartFile img,
+			HttpSession session) {
 		if (!img.isEmpty()) {
 			File fileDelete = new File(filePath + eventboardDTO.getImage1());
 			if (fileDelete.exists())
@@ -1178,8 +1228,63 @@ public class CustomerServiceController {
 			eventboardDTO.setImage1(fileName);
 			customerServiceDAO.C_playboardMod(eventboardDTO);
 		}
+		customerServiceDAO.C_playboardBookDel(eventboardDTO);
 		
-		customerServiceDAO.C_playboardBookMod(eventboardDTO);
+		// 세션에서 아이디 얻기
+		MemberDTO memberDTO = (MemberDTO) session.getAttribute("homepageMember");
+		String id = memberDTO.getM_Id();
+		// String 타입 날짜를 Date 형식으로 변환(연극 기간 구하기)
+		eventboardDTO.setStartDate(eventboardDTO.getStartDate().substring(0, 10).replaceAll("/", "-"));
+		eventboardDTO.setEndDate(eventboardDTO.getEndDate().substring(0, 10).replaceAll("/", "-"));
+
+		String startDate = eventboardDTO.getStartDate();
+		String endDate = eventboardDTO.getEndDate();
+
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+		long diff = 0;
+		long diffDays = 0;
+		Date startDateF = null;
+
+		try {
+			startDateF = formatter.parse(startDate);
+			Date endDateF = formatter.parse(endDate);
+
+			diff = endDateF.getTime() - startDateF.getTime();
+			diffDays = diff / (24 * 60 * 60 * 1000); // 종료일-시작일 = 행사 일 수(기간)
+
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		Calendar calStart = Calendar.getInstance();
+		calStart.setTime(startDateF);
+
+		// 공연 기간 리스트 구하기
+		List<Date> listDate = new ArrayList<Date>();
+		for (int i = 0; i <= diffDays; i++) {
+
+			listDate.add(calStart.getTime());
+			calStart.add(Calendar.DATE, 1);
+		}
+		List<PlayBookDTO> list = new ArrayList<PlayBookDTO>();
+		// 예매DB
+		for (int i = 0; i <= diffDays; i++) {
+			playBookDTO.setNum(eventboardDTO.getSeq()); // 공연시퀀스번호
+			playBookDTO.setImageName(eventboardDTO.getImageName()); // 공연명 등록
+			playBookDTO.setPlayTicket(Integer.parseInt(eventboardDTO.getEventSeats())); // 일별 총 티켓 수 등록
+			playBookDTO.setRemainTicket(0); // 일별 잔여 티켓 수 등록
+			playBookDTO.setTicketPrice(Integer.parseInt(eventboardDTO.getEventPrice())); // 티켓 가격
+			playBookDTO.setBookTicket(0); // 예매된 티켓 수
+			playBookDTO.setBookMemberId(id+""); // 예매자 아이디(세션값에서)
+			playBookDTO.setBookStatus('0'); // 예매 구분자 (0:예매X, 1:예매완료)
+
+			playBookDTO.setPlayDate(listDate.get(i));
+
+			list.add(playBookDTO);
+			customerServiceDAO.eventInfoWrite_play_bookDB(playBookDTO); // 예매 DB에 연극 정보 넣는 메소드(예매DB)
+		}
+		
 		return new ModelAndView("redirect:/customerService/C_eventboardList_playForm.do");
 	}
 	

@@ -168,17 +168,17 @@
 <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 <script>
 $(document).ready(function(){
-	alert($('#startDate').val());
-	alert($('#endDate').val());
-	
-
+	var startDate = $('#startDate').val().substring(0,4)+"/"+$('#startDate').val().substring(5,7)+"/"+$('#startDate').val().substring(8,10);
+	var endDate = $('#endDate').val().substring(0,4)+"/"+$('#endDate').val().substring(5,7)+"/"+$('#endDate').val().substring(8,10);
+	var startTime = $('#timepicker1').val().substring(0,2);
+	var endTime = $('#timepicker2').val().substring(0,2);
 	//시간
 	$('.timepicker1').timepicker({
 		timeFormat : 'H:mm',
 	    interval: 60,
 	    minTime: '08',
 	    maxTime: '10:00pm',
-	    defaultTime: '08',
+	    defaultTime: startTime,
 	   	startTime: '08:00am',
 	    dynamic: false,
 	    dropdown: true,
@@ -189,7 +189,7 @@ $(document).ready(function(){
 	    interval: 60,
 	    minTime: '08',
 	    maxTime: '10:00pm',
-	    defaultTime: '08',
+	    defaultTime: endTime,
 	   	startTime: '08:00am',
 	    dynamic: false,
 	    dropdown: true,
@@ -210,8 +210,8 @@ $(document).ready(function(){
 	});
 	
 	//시작일과 마지막날짜 설정
-	$('#datepicker_1').datepicker('setDate', $('#startDate').val());
-	$('#datepicker_2').datepicker('setDate', $('#endDate').val());
+	$('.datepicker1').datepicker('setDate', startDate);
+	$('.datepicker2').datepicker('setDate', endDate);
 	
 	$('#ModeButton').click(function(){
 		$('#playboardModForm').attr('action','/exhibition/customerService/C_playboardMod.do').submit();

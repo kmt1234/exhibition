@@ -1,6 +1,5 @@
 package customerService.dao;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -316,7 +315,7 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 		sqlSession.update("customerServiceSQL.C_playboardMod", eventboardDTO);			
 	}
 	
-	//예매티켓일자 삭제
+	//연극 예매티켓일자 삭제
 	public void eventboardDelete_play_book(List<Integer> list2) {
 		sqlSession.delete("customerServiceSQL.eventboardDelete_play_book", list2);
 	}
@@ -326,12 +325,27 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 		
 	}
 	
-	//연극 일자별 제목 수정
-	public void C_playboardBookMod(EventboardDTO eventboardDTO) {
-		sqlSession.update("customerServiceSQL.C_playboardBookMod", eventboardDTO);	
+	//연극 수정할때 예매일자별 날려버리기
+	public void C_playboardBookDel(EventboardDTO eventboardDTO) {
+		sqlSession.delete("customerServiceSQL.C_playboardBookDel", eventboardDTO);	
 	}
 	//연극 시퀀스 가져오기위해서
 	public EventboardDTO eventInfoWrite_play2(EventboardDTO eventboardDTO) {
 		return sqlSession.selectOne("customerServiceSQL.eventInfoWrite_play2", eventboardDTO);
+	}
+	
+	//박람회 시퀀스 가져오기위해서
+	public EventboardDTO eventInfoWrite2(EventboardDTO eventboardDTO) {
+		return sqlSession.selectOne("customerServiceSQL.eventInfoWrite2", eventboardDTO);
+	}
+	
+	//박람회 예매 지우기
+	public void eventboardDelete_book(List<Integer> list2) {
+		sqlSession.delete("customerServiceSQL.eventboardDelete_book", list2);	
+	}
+	
+	//박람회 수정할때 예매일자별 날려버리기
+	public void C_exhibitionboardBookDel(EventboardDTO eventboardDTO) {
+		sqlSession.delete("customerServiceSQL.C_exhibitionboardBookDel", eventboardDTO);	
 	}
 }
