@@ -39,7 +39,8 @@ import customerService.bean.HotelboardDTO;
 import customerService.bean.ImageboardDTO;
 import customerService.bean.ImageboardPaging;
 import customerService.bean.PlayBookDTO;
-import customerService.bean.SalesExhigitionDTO;
+import customerService.bean.SalesConcertHallDTO;
+import customerService.bean.SalesExhibitionDTO;
 import customerService.dao.CustomerServiceDAO;
 import member.bean.MemberDTO;
 
@@ -1258,9 +1259,27 @@ public class CustomerServiceController {
 		String salesMon = year.substring(2) + "-" + month + "-" + "01";
 
 		// 부스명, 예약점유 일수, 총 매출액 가져오는 sql
-		List<SalesExhigitionDTO> list = customerServiceDAO.getSalesExhibition(salesMon);
+		List<SalesExhibitionDTO> list = customerServiceDAO.getSalesExhibition(salesMon);
 
 		int salesTotalRent = customerServiceDAO.getSalesTotalRentExhibition(salesMon);
+		String salesTotalRentstr = String.format("%,d", salesTotalRent);
+
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.addObject("salesTotalRent", salesTotalRentstr);
+		mav.setViewName("jsonView");
+		return mav;
+	}
+	
+	// 콘서트 홀 총 매출액 보여주는 컨트롤
+	@RequestMapping(value = "C_salesConcertHall", method = RequestMethod.POST)
+	public ModelAndView C_salesConcertHall(@RequestParam String year, @RequestParam String month) {
+		String salesMon = year.substring(2) + "-" + month + "-" + "01";
+
+		// 홀 이름, 예약점유 일수, 총 매출액 가져오는 sql
+		List<SalesConcertHallDTO> list = customerServiceDAO.getSalesConcertHall(salesMon);
+
+		int salesTotalRent = customerServiceDAO.getSalesTotalRentConcertHall(salesMon);
 		String salesTotalRentstr = String.format("%,d", salesTotalRent);
 
 		ModelAndView mav = new ModelAndView();
