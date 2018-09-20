@@ -70,7 +70,7 @@
 	
 	
 	<!-- 콘서트홀 매출 연월 선택 -->
-	<div id="C_salesConcertHallSelect" style="float:left; display: inline-block;" >	
+	<!-- <div id="C_salesConcertHallSelect" style="float:left; display: inline-block;" >	
 		<div style="display: inline-block;">해당연월 선택</div>
 		<div style="display: inline-block;">
 			<select id="concertHallYear" name="year">
@@ -94,7 +94,7 @@
 			<th>예약점유 일수</th>
 			<th>총 매출액</th>
 		</tr>
-	</table>
+	</table> -->
 	<!-- 콘서트홀 매출 연월 선택 -->
 	
 </div>

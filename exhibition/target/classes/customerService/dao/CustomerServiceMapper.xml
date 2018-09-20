@@ -424,7 +424,7 @@
  	</select>
  	<!-- 콘서트 홀 매출현황 -->
  	<select id="getSalesConcertHall" parameterType="java.lang.String" resultType="customerService.bean.SalesConcertHallDTO">
- 		select sum(endDate-startDate+1) as saleDays, sum(totalrent) as totalRent, hallName from concertHall where STARTDATE BETWEEN #{salesMon} and (select last_day(#{salesMon}) from dual) group by hallName
+ 		select sum((select last_day(#{salesMon}) from dual)-startDate) as saleDays, sum(totalrent) as totalRent, hallName from concertHall where STARTDATE BETWEEN #{salesMon} and (select last_day(#{salesMon}) from dual) group by hallName
  	</select>
  	<!-- 콘서트 홀 총 매출현황 -->
  	<select id="getSalesTotalRentConcertHall" parameterType="java.lang.String" resultType="int">
