@@ -142,25 +142,28 @@
 			
 			<br>
 			<div id="carMap">
-				<div align="left">
+				<div style="float: inherit;">
+					<div style=" width: 10px auto; text-align: left; margin-left: 20px; margin-top: -8px;">
 					&ensp;&ensp;승용차 이용 시 출발지를 선택하세요
-						<div style="background-color: #e8e8e8;">
-							&ensp;&ensp;
-							<span id="banpoBtn" class="B">반포대교 방면</span>
-							&ensp;&ensp;|
-							&ensp;&ensp;
-							<span id="jamwonBtn" class="B">잠원로 방면</span>
-							&ensp;&ensp;|
-							&ensp;&ensp;
-							<span id="sapyungBtn" class="B">사평 지하차도 방면</span>
-							&ensp;&ensp;|
-							&ensp;&ensp;
-							<span id="seochoBtn" class="B">서초구 방면</span>
-							&ensp;&ensp;|
-							&ensp;&ensp;
-							<span id="banpoStationBtn" class="B">반포역 방면</span>		
-						</div>
 					</div>
+				
+					<div style="background-color: #e8e8e8;">
+						&ensp;&ensp;
+						<span id="banpoBtn" class="B">반포대교 방면</span>
+						&ensp;&ensp;|
+						&ensp;&ensp;
+						<span id="jamwonBtn" class="B">잠원로 방면</span>
+						&ensp;&ensp;|
+						&ensp;&ensp;
+						<span id="sapyungBtn" class="B">사평 지하차도 방면</span>
+						&ensp;&ensp;|
+						&ensp;&ensp;
+						<span id="seochoBtn" class="B">서초구 방면</span>
+						&ensp;&ensp;|
+						&ensp;&ensp;
+						<span id="banpoStationBtn" class="B">반포역 방면</span>		
+					</div>
+				</div>
 				<div id="banpoDiv">
 					<img src="../img/carMap.jpg"><br>
 					<div class="ui divider"></div>
@@ -223,33 +226,33 @@
 			</div>
 			<div id="busMap">
 				<div style="float: inherit;">
-					<div style=" width: 10px auto; text-align: left; margin-left: 20px;">
+					<div style=" width: 10px auto; text-align: left; margin-left: 20px; margin-top: -8px;">
 						버스 하차 정거장을 선택하세요
 					</div>
 				</div>
 				<div style="float: left; text-align: left;  margin-left: 20px; margin-top: 10px;">
 					<div style="background-color: #e8e8e8; ">
 						&ensp;&ensp;
-						<span id="eastStationBtn" class="B">IPEC 동문 앞</span>
+						<a id="eastStationBtn" class="B">IPEC 동문 앞</a>
 						&ensp;&ensp;|
-						&ensp;&ensp;<span id="southStationBtn" class="B">IPEC 남문 앞</span>
+						&ensp;&ensp;<a id="southStationBtn" class="B">IPEC 남문 앞</a>
 						&ensp;&ensp;|
-						&ensp;&ensp;<span id="megaboxStationBtn" class="B">메가박스 센트럴 건너편</span>
+						&ensp;&ensp;<a id="megaboxStationBtn" class="B">메가박스 센트럴 건너편</a>
 						&ensp;&ensp;|
-						&ensp;&ensp;<span id="exitStationBtn" class="B">고속터미널 1번 출구</span>	
+						&ensp;&ensp;<a id="exitStationBtn" class="B">고속터미널 1번 출구</a>	
 						&ensp;&ensp;		
 					</div>
 				</div>
 			
 				
 				<div id="eastStationDiv">
-					<img src="../img/busMap.jpg"><br>
+					<img style="margin-top:10px;" src="../img/busMap.jpg"><br>
 					<div class="ui divider"></div>
 					<div align="left">
 						<span style="margin-left:10px; padding:7px;color: red;">IPEC 동문 앞 | 23501 정류장</span><br><br>
 						<ul>
 							<li class="stationLi">
-								<img src="../img/blueBus.png" width="20px" height="25px">
+								<img  src="../img/blueBus.png" width="20px" height="25px">
 								간선버스 - 146, 341, 360, 337, 740, N13(심야), 하남 9303
 							</li>
 							<li class="stationLi">
@@ -269,7 +272,7 @@
 				</div>
 				
 				<div id="megaboxStationDiv">
-					<img src="../img/megaboxStationMap.jpg"><br>
+					<img style="margin-top:10px;" src="../img/megaboxStationMap.jpg"><br>
 					<div class="ui divider"></div>
 					<div align="left">
 						<span style="margin-left:10px; padding:7px;color: red; ">메가박스 센트럴 건너편 | 24058 정류장</span><br><br>
@@ -296,7 +299,7 @@
 				</div>
 				
 				<div id="southStationDiv">
-					<img src="../img/southStationMap.jpg"><br>
+					<img style="margin-top:10px;" src="../img/southStationMap.jpg"><br>
 					<div class="ui divider"></div>
 					<div align="left">
 						<span style="margin-left:10px; padding:7px;color: red;">IPEC남문 앞 | 23458 정류장</span><br><br>
@@ -322,7 +325,7 @@
 				</div>
 				
 				<div id="exitStationDiv">
-					<img src="../img/exitStation.jpg"><br>
+					<img style="margin-top:10px;" src="../img/exitStation.jpg"><br>
 					<div class="ui divider"></div>
 					<div align="left">
 						<span style="margin-left:10px; padding:7px;color: red;">고속터미널 1번 출구 | 22296 정류장</span><br><br>
