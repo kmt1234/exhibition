@@ -21,6 +21,8 @@ public interface CustomerServiceDAO {
 	public int getTotalC_notice();													
 	//공지사항 리스트 불러오기
 	public List<CustomerServiceDTO> getNoticeList(Map<String, Integer> map);		
+	//공지사항 메인화면 리스트 불러오기
+	public List<CustomerServiceDTO> getNoticeMainList(Map<String, Integer> map);
 	// 공지사항 검색된 글 수
 	public int getTotalC_notice_Search(Map<String, String> map);					
 	// 공지사항 검색된 글 불러오기

@@ -34,6 +34,10 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	public List<CustomerServiceDTO> getNoticeList(Map<String, Integer> map) {
 		return sqlSession.selectList("customerServiceSQL.getNoticeList", map);
 	}
+	//공지사항 메인화면에 리스트 불러오기
+	public List<CustomerServiceDTO> getNoticeMainList(Map<String, Integer> map) {
+		return sqlSession.selectList("customerServiceSQL.getNoticeMainList", map);
+	}
 	//공지사항 검색된 글수
 	public int getTotalC_notice_Search(Map<String, String> map) {
 		return sqlSession.selectOne("customerServiceSQL.getTotalC_notice_Search", map);
