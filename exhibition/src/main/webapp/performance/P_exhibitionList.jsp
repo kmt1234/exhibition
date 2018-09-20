@@ -47,20 +47,26 @@ pre{
 
 <!-- 버튼 -->
 <div>
-	<input type="button" id="calendar_exhibition" value="달력으로 보기" 
-		style="width:150; height:35; background-color:#ffffff;
-	 border:1 solid #f702e7; float: left">
-	<input type="button" id="" value="리스트로 보기" 
-		style="width:150; height:35; font-family:돋움; background-color:#ffffff;
-	 	border:1 solid #f702e7; float: left">
+	<table style="margin-left:20px; width: 40%;">
+			<tr>
+				<td>
+					<button class="middle ui button" style="width: 100%;" id="P_exhibitionCalendarBtn">
+						달력으로 보기
+					</button> 
+				</td>
+				<td>
+					<button class="middle ui button" style="width: 100%;" id="list_exhibition">
+						리스트로 보기
+					</button> 
+				</td>
+			</tr>
+		</table>
 </div>
-	<br>
-	<br>
-	
+	<br><br>	
 	<!--전시회 리스트 -->
-	<div align="center">
+	<div align="center" style="margin-left:20px; width: 880px;">
 		<form name="performanceList" id="performanceList" method="post">
-			<table border="1" frame="hsides" rules="rows" cellpadding="3" cellspacing="0">
+			<table  frame="hsides" border="1px" cellpadding="3" cellspacing="0"><!-- rules="rows" -->
 				<tr>
 					<th class="performanceTh">이미지</th>
 					<th class="performanceTh" colspan="2">박람회  정보</th>
@@ -79,7 +85,7 @@ pre{
 					<tr>
 						<td rowspan="5"><a target="_blank" href="${list.eventLink}"><img class="play_img" src="../storage/${list.image1}" width="300px" height="350px"></a></td>
 						
-						<td width="200px"><div>제 목</div></td>
+						<td width="20px"><div>제 목</div></td>
 						<td><span class="play_Title_content">${list.imageName}</span></td>
 					</tr>
 					<tr>

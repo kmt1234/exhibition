@@ -14,7 +14,7 @@
 		</address>
 	</div>
 	
-	<div style="margin-left:300px; margin-top:25px; min-width: 380px; float: left; display: inline-block;" >
+	<div style="margin-left:320px; margin-top:25px; min-width: 380px; float: left; display: inline-block;" >
 		<a href="/exhibition/customerService/C_contactList.do">주요연락처</a>&nbsp;
 		<a href="/exhibition/customerService/C_privacy.do">개인정보처리방침</a>&nbsp;
 		<a href="/exhibition/customerService/C_emailRefuse.do">이메일무단수집거부</a>&nbsp;

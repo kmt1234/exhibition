@@ -18,12 +18,11 @@
 }
 .h-light{
 	color: #ec008c;
-
 }
 #slidbar{
 	position:absolute;
-	top : 50px; 
-	left: 10px;
+	top : 0px; 
+	left: 0px;
 }
 </style>
 </head>
@@ -35,9 +34,9 @@
 </header>
 	<div style="margin-top: 5px; min-width:1170px; position: relative;   " class="ui container" >
 		<!-- 사이드바 메뉴 -->
-		<div class="ui compact menu"  style="width:230px ; height:900px auto; ">
-			<div id="slidbar" style="display: inline-block;">
-				<a class="item" style="width: 230px;" href="R_rentalForm.do">시설임대</a>
+		<div style="width:230px; height:900px auto; display: inline-block;">
+			<div class="ui compact menu"  id="slidbar" style="display: inline-block;">
+				<a class="item" style="border: none; width: 227px;" href="R_rentalForm.do" >시설임대</a>
 				<a class="item" href="R_exhibition.do">박람회홀</a> 
 				<a class="item" href="R_performance.do">공연장홀</a> 
 				<a class="item" href="R_businessRoom.do">비즈니스룸</a> 
@@ -51,16 +50,7 @@
 	<div class="ui container" style="margin-top: 20px; min-width:1170px; position: relative; ">
 		<jsp:include page="../main/I_footer.jsp" />
 	</div>
-<script>
-$(function(){
-	var currentPosition=parseInt($('#slidbar').css("top"));
-	$(window).scroll(function(){
-		var position=$(window).scrollTop();
-		$("#slidbar").stop().animate({
-			"top":position+currentPosition+"px"},500);
-	});
-});
-</script>
+<script src="../js/slidbar.js"></script>
 </body>
 
 </html>

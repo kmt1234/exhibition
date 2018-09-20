@@ -10,6 +10,7 @@ import lombok.Data;
 @Component
 public class PlayBookDTO {
 	String imageName;			//공연명
+	String eventLink;			//링크
 	Date playDate;              //공연일자(시작/종료)
 	int playTicket;           	//일별 총 티켓 수
 	int remainTicket;         	//일별 잔여 티켓 수

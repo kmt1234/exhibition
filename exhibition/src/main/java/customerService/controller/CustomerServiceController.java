@@ -42,7 +42,6 @@ import customerService.bean.PlayBookDTO;
 import customerService.bean.SalesExhigitionDTO;
 import customerService.dao.CustomerServiceDAO;
 import member.bean.MemberDTO;
-import rental.bean.ExhibitionDTO;
 
 @RequestMapping(value = "customerService")
 @Component
@@ -60,6 +59,7 @@ public class CustomerServiceController {
 	private PlayBookDTO playBookDTO;
 	@Autowired
 	private ExhibitionBookDTO exhibitionBookDTO;
+
 
 	// 고객센터 설명페이지
 	@RequestMapping(value = "C_customerServiceForm", method = RequestMethod.GET)
@@ -225,8 +225,9 @@ public class CustomerServiceController {
 		return mav;
 	}
 
+	// 고객의 소리 인증 번호 보내기
 	@RequestMapping(value = "sendEmail", method = RequestMethod.POST)
-	public @ResponseBody String sendEmail(@RequestParam final String email, Model model) {// 인증번호 받기 위한 메일 전송
+	public @ResponseBody String sendEmail(@RequestParam final String email, Model model) {
 
 		final String authNum = randomNum();
 
@@ -235,19 +236,19 @@ public class CustomerServiceController {
 				final MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
 
 				String subject = "[IPEC 전시회 이메일 인증 안내 입니다]";
-				String content = "안녕하세요 IPEC 전시회 관계자 입니다./n" + "해당 이메일 인증 번호는 아래와 같습니다./n" + "인증번호 : " + authNum;
-
+				String content = "안녕하세요 IPEC 전시회 관계자 입니다.  해당 이메일 인증 번호는 아래와 같습니다.  인증번호 : " + authNum;
 				helper.setFrom("jbi8045@gmail.com");
 				helper.setTo(email);
 				helper.setSubject("인증번호 메일입니다.");
 				helper.setText(content, true);
 			}
 		};
-
+		
 		emailSender.send(preparator);
 		return authNum;
 	}
 
+	// 이메일인증 인증번호 생성
 	private String randomNum() {
 		StringBuffer buffer = new StringBuffer();
 		for (int i = 0; i <= 6; i++) {
@@ -342,9 +343,8 @@ public class CustomerServiceController {
 	}
 
 	// 고객의소리 내용보기(관리자
-	// 고객의소리 내용보기(관리자
 	@RequestMapping(value = "C_inquire_View", method = RequestMethod.GET)
-	public ModelAndView C_inquire_View(@RequestParam String seq, @RequestParam String pg, Model model) {
+	public ModelAndView C_inquire_View(@RequestParam int seq, @RequestParam String pg, Model model) {
 
 		CustomerServiceDTO customerServiceDTO = customerServiceDAO.getInquireInfo(seq);
 
@@ -359,12 +359,13 @@ public class CustomerServiceController {
 
 	// 고객의 소리 - 문의 답하기 폼
 	@RequestMapping(value = "C_inquire_Reply", method = RequestMethod.POST)
-	public ModelAndView C_inquire_Reply(@RequestParam String seq, @RequestParam String email, Model model) {
-		CustomerServiceDTO customerServiceDTO = customerServiceDAO.getReplyInfo(seq);
+	public ModelAndView C_inquire_Reply(@ModelAttribute CustomerServiceDTO customerServiceDTO, @RequestParam String seq, @RequestParam String email, @RequestParam int pseq, @RequestParam int pg, Model model) {
 
 		model.addAttribute("customerServiceDTO", customerServiceDTO);
 
 		ModelAndView mav = new ModelAndView();
+		model.addAttribute("pseq", pseq);
+		model.addAttribute("pg", pg);
 		mav.addObject("display", "/customerService/C_inquire_Reply.jsp");
 		mav.setViewName("/customerService/C_customerServiceForm");
 		return mav;
@@ -372,8 +373,10 @@ public class CustomerServiceController {
 
 	// 고객의 소리 답변(관리자)
 	@RequestMapping(value = "C_inquire_checkReply", method = RequestMethod.POST)
-	public @ResponseBody ModelAndView C_inquire_checkReply(@RequestParam final String email,
-			@RequestParam final String subject, @RequestParam final String content, Model model) {
+	public @ResponseBody ModelAndView C_inquire_checkReply(@ModelAttribute CustomerServiceDTO customerServiceDTO, @RequestParam final String email,
+										@RequestParam final String subject, @RequestParam final String content, @RequestParam int pg, Model model) {
+		
+		CustomerServiceDTO cDTO = customerServiceDAO.getInquireInfo(customerServiceDTO.getPseq());//원글
 		final MimeMessagePreparator preparator = new MimeMessagePreparator() {
 			public void prepare(MimeMessage mimeMessage) throws Exception {
 				final MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
@@ -387,13 +390,19 @@ public class CustomerServiceController {
 				helper.setText(replyContent, true);
 			}
 		};
-
+		customerServiceDTO.setRef(cDTO.getRef());//답글ref = 원글ref
+		customerServiceDTO.setLev(cDTO.getLev()+1);//답글lev = 원글lev+1
+		customerServiceDTO.setStep(cDTO.getStep()+1);//답글step = 원글step+1
+		
+		customerServiceDAO.C_inquire_Reply(customerServiceDTO);
+		model.addAttribute("pg", pg);
+		
 		emailSender.send(preparator);
-		return new ModelAndView("redirect:/customerService/C_emailConfirm.do");
+		return new ModelAndView("redirect:/customerService/C_inquire_List.do");
 	}
 
 	// 자주묻는
-	// 질문~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ㄴ
+	// 질문~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 	// 자주묻는 질문
 	@RequestMapping(value = "C_QnA", method = RequestMethod.GET)
@@ -404,7 +413,6 @@ public class CustomerServiceController {
 		return mav;
 	}
 
-	// 자주묻는 질문 - 버튼에 따라 리스트 가져오기
 	// 자주묻는 질문 - 버튼에 따라 리스트 가져오기
 	@RequestMapping(value = "getQnA_Classify", method = RequestMethod.POST)
 	public ModelAndView getQnA_Classify(@RequestParam String classify) {
@@ -453,15 +461,12 @@ public class CustomerServiceController {
 		return mav;
 	}
 
+	//주요시설 연락처 삭제
 	@RequestMapping(value = "C_contactList_Delete", method = RequestMethod.POST)
 	public ModelAndView C_contactList_Delete(@RequestParam String[] box, Model model) {
 
 		List<Integer> list = new ArrayList<Integer>();
 
-		for (String seq : box) {
-			list.add(Integer.parseInt(seq));
-			System.out.println(seq);
-		}
 		customerServiceDAO.C_contactList_Delete(list);
 
 		return new ModelAndView("redirect:/customerService/C_contactList.do");
@@ -520,8 +525,7 @@ public class CustomerServiceController {
 		return new ModelAndView("redirect:/customerService/C_contactList.do");
 	}
 
-	// 검색
-
+	// 주요시설 연락처 검색
 	@RequestMapping(value = "C_contactList_Search", method = RequestMethod.POST)
 	public ModelAndView C_contactList_Search(@RequestParam(required = false) Map<String, String> map) {
 		int endNum = Integer.parseInt(map.get("pg")) * 10;
@@ -878,8 +882,8 @@ public class CustomerServiceController {
 	@RequestMapping(value = "C_eventboardListForm", method = RequestMethod.GET)
 	public ModelAndView C_exhibitionboardList(@RequestParam(required = false, defaultValue = "1") String pg) {
 
-		int endNum = Integer.parseInt(pg) * 3;
-		int startNum = endNum - 2;
+		int endNum = Integer.parseInt(pg) * 5;
+		int startNum = endNum - 4;
 
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("endNum", endNum);
@@ -889,7 +893,7 @@ public class CustomerServiceController {
 
 		imageboardPaging.setCurrentPage(Integer.parseInt(pg));
 		imageboardPaging.setPageBlock(3);
-		imageboardPaging.setPageSize(3);
+		imageboardPaging.setPageSize(5);
 		imageboardPaging.setTotalA(totalA);
 
 		imageboardPaging.eventMakePagingHTML();
@@ -911,20 +915,20 @@ public class CustomerServiceController {
 	}
 	
 	// 메인이미지 정보 보기(이미지 클릭 시, -> 수정하기 위해서)
-		@RequestMapping(value = "C_imageDetail", method = RequestMethod.GET)
-		public ModelAndView C_image_Detail(@RequestParam String seq) {
+	@RequestMapping(value = "C_imageDetail", method = RequestMethod.GET)
+	public ModelAndView C_image_Detail(@RequestParam String seq) {
 
-			// DB
-			ImageboardDTO imageboardDTO = customerServiceDAO.getImageboard(seq);
+		// DB
+		ImageboardDTO imageboardDTO = customerServiceDAO.getImageboard(seq);
 
-			ModelAndView mav = new ModelAndView();
-			System.out.println(imageboardDTO.getStartDate());
-			mav.addObject("eventboardDTO", imageboardDTO);
-			mav.addObject("postSelect", "0");
-			mav.addObject("modify", "1");
-			mav.setViewName("/customerService/C_imageDetail");
-			return mav;
-		}
+		ModelAndView mav = new ModelAndView();
+		System.out.println(imageboardDTO.getStartDate());
+		mav.addObject("eventboardDTO", imageboardDTO);
+		mav.addObject("postSelect", "0");
+		mav.addObject("modify", "1");
+		mav.setViewName("/customerService/C_imageDetail");
+		return mav;
+	}
 
 	// 박람회 정보 보기(이미지 클릭 시, -> 수정하기 위해서)***잠시 대기중************************
 	@RequestMapping(value = "C_eventDetail", method = RequestMethod.GET)
@@ -998,25 +1002,28 @@ public class CustomerServiceController {
 		EventboardDTO eventboardDTO = customerServiceDAO.getPlayboard(seq);
 
 		ModelAndView mav = new ModelAndView();
-		System.out.println(eventboardDTO.getStartDate());
 		mav.addObject("eventboardDTO", eventboardDTO);
 		mav.addObject("postSelect", "2");
-		mav.addObject("modify", "1");
 		mav.setViewName("/customerService/C_playDetail");
 		return mav;
 	}
 
 	// 연극 업로드 리스트 삭제
 	@RequestMapping(value = "C_eventboardDelete_play", method = RequestMethod.POST)
-	public ModelAndView C_eventboardDelete_play(@RequestParam String[] check) {
+	public ModelAndView C_eventboardDelete_play(@RequestParam String[] check, @RequestParam String[] eventLink) {
 
 		List<Integer> list = new ArrayList<Integer>();
 		for (String seq : check) {
 			list.add(Integer.parseInt(seq));
 		}
+		List<String> list2 = new ArrayList<String>();
+		for (String eventLink2 : eventLink) {
+			list2.add(eventLink2);
+		}
 
 		// DB
 		customerServiceDAO.eventboardDelete_play(list);
+		customerServiceDAO.eventboardDelete_play_book(list2);
 
 		return new ModelAndView("redirect:/customerService/C_eventboardList_playForm.do");
 	}
@@ -1102,7 +1109,97 @@ public class CustomerServiceController {
 		model.addAttribute("hotelboardDTO", hotelboardDTO);
 		return "/customerService/C_hotel_modify";
 	}
-
+	// 메인이미지 수정완료 클릭시 DB내용 수정
+	@RequestMapping(value = "C_imageboardMod", method = RequestMethod.POST)
+	public ModelAndView C_imageboardMod(@ModelAttribute ImageboardDTO imageboardDTO, @RequestParam MultipartFile img) {
+		System.out.println(imageboardDTO.getSeq());
+		if (!img.isEmpty()) {
+			File fileDelete = new File(filePath + imageboardDTO.getImage1());
+			if (fileDelete.exists())
+				fileDelete.delete();
+			String fileName = img.getOriginalFilename();
+			File file = new File(filePath, fileName);
+			try {
+				FileCopyUtils.copy(img.getInputStream(), new FileOutputStream(file));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			imageboardDTO.setImage1(fileName);
+			customerServiceDAO.C_imageboardMod(imageboardDTO);
+		}else {
+			String fileName = img.getOriginalFilename();
+			File file = new File(filePath, fileName);
+			try {
+				FileCopyUtils.copy(img.getInputStream(), new FileOutputStream(file));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			imageboardDTO.setImage1(fileName);
+			customerServiceDAO.C_imageboardMod(imageboardDTO);
+		}
+		return new ModelAndView("redirect:/customerService/C_mainImageboardListForm.do");
+	}
+	
+	// 박람회 수정완료 클릭시 DB내용 수정
+	@RequestMapping(value = "C_eventboardMod", method = RequestMethod.POST)
+	public ModelAndView C_eventboardMod(@ModelAttribute EventboardDTO eventboardDTO, @RequestParam MultipartFile img) {
+		if (!img.isEmpty()) {
+			File fileDelete = new File(filePath + eventboardDTO.getImage1());
+			if (fileDelete.exists())
+				fileDelete.delete();
+			String fileName = img.getOriginalFilename();
+			File file = new File(filePath, fileName);
+			try {
+				FileCopyUtils.copy(img.getInputStream(), new FileOutputStream(file));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			eventboardDTO.setImage1(fileName);
+			customerServiceDAO.C_eventboardMod(eventboardDTO);
+		} else {
+			String fileName = img.getOriginalFilename();
+			File file = new File(filePath, fileName);
+			try {
+				FileCopyUtils.copy(img.getInputStream(), new FileOutputStream(file));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			eventboardDTO.setImage1(fileName);
+			customerServiceDAO.C_eventboardMod(eventboardDTO);
+		}
+		return new ModelAndView("redirect:/customerService/C_eventboardListForm.do");
+	}
+	
+	// 연극 수정완료 클릭시 DB내용 수정
+	@RequestMapping(value = "C_playboardMod", method = RequestMethod.POST)
+	public ModelAndView C_playboardMod(@ModelAttribute EventboardDTO eventboardDTO, @RequestParam MultipartFile img) {
+		if (!img.isEmpty()) {
+			File fileDelete = new File(filePath + eventboardDTO.getImage1());
+			if (fileDelete.exists())
+				fileDelete.delete();
+			String fileName = img.getOriginalFilename();
+			File file = new File(filePath, fileName);
+			try {
+				FileCopyUtils.copy(img.getInputStream(), new FileOutputStream(file));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			eventboardDTO.setImage1(fileName);
+			customerServiceDAO.C_playboardMod(eventboardDTO);
+		}else {
+			String fileName = img.getOriginalFilename();
+			File file = new File(filePath, fileName);
+			try {
+				FileCopyUtils.copy(img.getInputStream(), new FileOutputStream(file));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			eventboardDTO.setImage1(fileName);
+			customerServiceDAO.C_playboardMod(eventboardDTO);
+		}
+		return new ModelAndView("redirect:/customerService/C_eventboardList_playForm.do");
+	}
+	
 	// 호텔 수정완료 클릭시 DB내용 수정
 	@RequestMapping(value = "C_hotelboardMod", method = RequestMethod.POST)
 	public ModelAndView C_hotelboardMod(@ModelAttribute HotelboardDTO hotelboardDTO, @RequestParam MultipartFile img) {
@@ -1175,39 +1272,154 @@ public class CustomerServiceController {
 
 	// 회원리스트로 이동
 	@RequestMapping(value = "C_memberShib", method = RequestMethod.GET)
-	public ModelAndView C_memberShib() {
+	public ModelAndView C_memberShib(@RequestParam(required=false , defaultValue="1") String pg) {
 		ModelAndView mav = new ModelAndView();
 
 		mav.addObject("display", "/customerService/C_memberShib.jsp");
+		mav.addObject("pg",pg);
 		mav.setViewName("/customerService/C_customerServiceForm");
 
 		return mav;
 	}
-
-	// 회원리스트 불러오기
-	@RequestMapping(value = "getMemberList", method = RequestMethod.GET)
-	public ModelAndView getMemberList() {
 	
-		List<MemberDTO> list = customerServiceDAO.getMemberList();
+	// 회원리스트 불러오기
+	@RequestMapping(value = "getMemberList", method = RequestMethod.POST)
+	public ModelAndView getMemberList(@RequestParam(required=false , defaultValue="1") String pg) {
+		int endNum = Integer.parseInt(pg)*3;
+		int startNum = endNum-2;
+		
+		Map<String,Integer> map = new HashMap<String,Integer>();
+		map.put("endNum", endNum);
+		map.put("startNum", startNum);
+		
+		List<MemberDTO> list = customerServiceDAO.getMemberList(map);
+		
+		int totalA = customerServiceDAO.getMemberListTotal();
+		
+		customerServicePaging.setCurrentPage(Integer.parseInt(pg));
+		customerServicePaging.setPageBlock(3);
+		customerServicePaging.setPageSize(3);
+		customerServicePaging.setTotalA(totalA);
+		customerServicePaging.member_pagingHTML();
 		
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("pg", pg);
 		mav.addObject("list", list);
+		mav.addObject("customerServicePaging",customerServicePaging);
+		
+		mav.setViewName("jsonView");
+
+		return mav;	
+	}
+	//회원검색
+	@RequestMapping(value="memberListSearch", method = RequestMethod.POST)
+	public ModelAndView memberListSearch(@RequestParam Map<String,String> map) {
+		
+		int endNum = Integer.parseInt(map.get("pg"))*3;
+		int startNum = endNum-2;
+		map.put("endNum", endNum+"" );
+		map.put("startNum", startNum+"" );
+		
+		List<MemberDTO> list = customerServiceDAO.memberListSearch(map);
+		
+		int totalA = customerServiceDAO.getMemberListSearchTotal(map);
+		
+		customerServicePaging.setCurrentPage(Integer.parseInt(map.get("pg")));
+		customerServicePaging.setPageBlock(3);
+		customerServicePaging.setPageSize(3);
+		customerServicePaging.setTotalA(totalA);
+		customerServicePaging.memberSearch_pagingHTML();
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list",list);
+		mav.addObject("customerServicePaging",customerServicePaging);
+		
+		mav.setViewName("jsonView");
+		return mav;
+	}
+	//회원 상세정보
+	@RequestMapping(value="memberView", method = RequestMethod.POST)
+	public ModelAndView memberView(@RequestParam String M_Id) {
+		System.out.println(M_Id);
+		
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");
+		return mav;
+	}
+	
+	//사업자 상세정보
+		@RequestMapping(value="companyView", method = RequestMethod.POST)
+		public ModelAndView companyView(@RequestParam String C_license) {
+			List<CompanyDTO> list = customerServiceDAO.getCompanyView(C_license);
+			
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("list",list);
+			mav.setViewName("jsonView");
+			return mav;
+		}
+	
+	// 사업자리스트 불러오기
+	@RequestMapping(value ="getCompanyList", method = RequestMethod.POST)
+	public ModelAndView getCompanyList(@RequestParam(required=false , defaultValue="1") String pg) {
+		int endNum = Integer.parseInt(pg)*3;
+		int startNum = endNum-2;
+		
+		Map<String,Integer> map = new HashMap<String,Integer>();
+		map.put("endNum", endNum);
+		map.put("startNum", startNum);
+		
+		List<CompanyDTO> list = customerServiceDAO.getCompanyList(map);
+		
+		int totalA = customerServiceDAO.getCompanyTotal();
+		
+		customerServicePaging.setCurrentPage(Integer.parseInt(pg));
+		customerServicePaging.setPageBlock(3);
+		customerServicePaging.setPageSize(3);
+		customerServicePaging.setTotalA(totalA);
+		customerServicePaging.company_pagingHTML();
+		
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("pg", pg);
+		mav.addObject("list", list);
+		mav.addObject("customerServicePaging",customerServicePaging);
+		
 		mav.setViewName("jsonView");
 
 		return mav;
 	}
-	// 사업자리스트 불러오기
-		@RequestMapping(value = "getCompanyList", method = RequestMethod.GET)
-		public ModelAndView getCompanyList() {
+	
+	//사업자검색
+	@RequestMapping(value="CompanySearch", method = RequestMethod.POST)
+	public ModelAndView CompanySearch(@RequestParam Map<String,String> map) {
 		
-			List<CompanyDTO> list = customerServiceDAO.getCompanyList();
-			
-			ModelAndView mav = new ModelAndView();
-			mav.addObject("list", list);
-			mav.setViewName("jsonView");
-
-			return mav;
-		}
+		int endNum = Integer.parseInt(map.get("pg"))*3;
+		int startNum = endNum-2;
+		map.put("endNum", endNum+"" );
+		map.put("startNum", startNum+"" );
+		
+		List<CompanyDTO> list = customerServiceDAO.CompanyListSearch(map);
+		
+		int totalA = customerServiceDAO.getCompanyListSearchTotal(map);
+		
+		customerServicePaging.setCurrentPage(Integer.parseInt(map.get("pg")));
+		customerServicePaging.setPageBlock(3);
+		customerServicePaging.setPageSize(3);
+		customerServicePaging.setTotalA(totalA);
+		customerServicePaging.companySearch_pagingHTML();
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list",list);
+		mav.addObject("customerServicePaging",customerServicePaging);
+		
+		mav.setViewName("jsonView");
+		return mav;
+	}
+	
+	
+		
+		
 	//이메일무단수집거부
 	@RequestMapping(value="C_emailRefuse",method=RequestMethod.GET)
 	public String C_emailRefuse() {

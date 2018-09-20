@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="concertHallSQL">
+ 	
+ 	<select id="getCalendar" resultType="rental.bean.ConcertHallDTO">
+ 		select hallName, C_license, C_tel, C_email, totalRent, title, startDate, endDate+1 endDate from concertHall where hallName=#{hallName}
+ 	</select>
+ 	
+	<select id="searchConcertHallRentDay" parameterType="java.util.Map" resultType="rental.bean.ConcertHallDTO">
+ 		select * from concertHall where hallName=#{hallName} and (#{startDate} between startDate and endDate or #{endDate} between startDate and endDate)
+ 	</select>
+ 	
+ 	<insert id="reservationConcertHall" parameterType="rental.bean.ConcertHallDTO">
+ 		insert into concertHall(hallName, C_license, C_tel, C_email, totalRent, title, startDate, endDate) values(#{hallName}, #{C_license}, #{C_tel}, #{C_email}, #{totalRent}, #{title}, #{startDate}, #{endDate})
+ 	</insert>
+ 	
+</mapper>
