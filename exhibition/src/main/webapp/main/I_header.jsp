@@ -57,7 +57,6 @@
 					</div>
 				</div>
 			</div>
-			
 			<div style="width: 23%; text-align: right; padding-top: 30px;  display: inline-block;">
 			<!--회원가입 시, 축하메세지 출력(1분 동안)-->
 				<c:if test="${registerMessage != null}">
