@@ -483,7 +483,7 @@
 		select count(*) from company where ${companySearchOption} like '%'||#{companySearch}||'%'
 	</select>
 	
-	<select id="getCompanyView" resultType="company" parameterType="String">
+	<select id="getCompanyView" resultType="exhibition" parameterType="String">
 		select * from exhibitionrental where C_license like #{C_license}
 	</select>
  	
