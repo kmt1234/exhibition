@@ -3,14 +3,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css"
-	href="../semantic/semantic.min.css">
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"
-	integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-	crossorigin="anonymous"></script>
-<script src="../semantic/semantic.min.js"></script>
-<script src="../js/traffic.js?ver=1"></script>
-
 <style>
 	.box-container{
 		display: inline-block;
@@ -142,56 +134,56 @@
 			
 			<br>
 			<div id="carMap">
-				<div style="float: inherit;">
+				<div align="left">
 					<div style=" width: 10px auto; text-align: left; margin-left: 20px; margin-top: -8px;">
-					&ensp;&ensp;승용차 이용 시 출발지를 선택하세요
+						승용차 이용 시 출발지를 선택하세요
 					</div>
-				
-					<div style="background-color: #e8e8e8;">
-						&ensp;&ensp;
-						<span id="banpoBtn" class="B">반포대교 방면</span>
-						&ensp;&ensp;|
-						&ensp;&ensp;
-						<span id="jamwonBtn" class="B">잠원로 방면</span>
-						&ensp;&ensp;|
-						&ensp;&ensp;
-						<span id="sapyungBtn" class="B">사평 지하차도 방면</span>
-						&ensp;&ensp;|
-						&ensp;&ensp;
-						<span id="seochoBtn" class="B">서초구 방면</span>
-						&ensp;&ensp;|
-						&ensp;&ensp;
-						<span id="banpoStationBtn" class="B">반포역 방면</span>		
+						<div style="margin-left:20px; margin-top:10px; background-color: #e8e8e8;">
+							&ensp;&ensp;
+							<a id="banpoBtn" class="B">반포대교 방면</a>
+							&ensp;&ensp;|
+							&ensp;&ensp;
+							<a id="jamwonBtn" class="B">잠원로 방면</a>
+							&ensp;&ensp;|
+							&ensp;&ensp;
+							<a id="sapyungBtn" class="B">사평 지하차도 방면</a>
+							&ensp;&ensp;|
+							&ensp;&ensp;
+							<a id="seochoBtn" class="B">서초구 방면</a>
+							&ensp;&ensp;|
+							&ensp;&ensp;
+							<a id="banpoStationBtn" class="B">반포역 방면</a>	
+							&ensp;&ensp;	
+						</div>
 					</div>
-				</div>
 				<div id="banpoDiv">
-					<img src="../img/carMap.jpg"><br>
+					<img style="margin-top:10px;" src="../img/carMap.jpg"><br>
 					<div class="ui divider"></div>
 					<div align="left">
-						<span style="border:1px solid gray;padding:7px">반포대교 방면</span><!-- carMap  -->
+						<span style="padding:7px; color: red;">반포대교 방면</span><!-- carMap  -->
 						<ol>
-						<li>반포대교 건너서 우회전 후 직진</li>
-						<li>IPEC 북문 GATE로 진입</li>
+							<li>반포대교 건너서 우회전 후 직진</li>
+							<li>IPEC 북문 GATE로 진입</li>
 						</ol>
 					</div>
 				</div>
 				<div id="jamwonDiv">
-					<img src="../img/carMap3.jpg"><br>
+					<img style="margin-top:10px;" src="../img/carMap3.jpg"><br>
 					<div class="ui divider"></div>
 					<div align="left">
-						<span style="border:1px solid gray;padding:7px">잠원로 방면</span> <!-- carMap3  -->
+						<span style="padding:7px; color: red;">잠원로 방면</span> <!-- carMap3  -->
 						<ol>
-						<li>잠원로 방면으로 직진 </li>
-						<li>신 반포로 건너서 직진</li>
-						<li>IPEC동문 GATE로 우회전 후 진입</li>
+							<li>잠원로 방면으로 직진 </li>
+							<li>신 반포로 건너서 직진</li>
+							<li>IPEC동문 GATE로 우회전 후 진입</li>
 						</ol>
 					</div>
 				</div>
 				<div id="sapyungDiv">
-					<img src="../img/carMapgosok.jpg"><br>
+					<img style="margin-top:10px;" src="../img/carMapgosok.jpg"><br>
 					<div class="ui divider"></div>
 					<div align="left">
-						<span style="border:1px solid gray;padding:7px">사평 지하차도 방면</span><!-- carMapgosok  -->
+						<span style="padding:7px; color: red;">사평 지하차도 방면</span><!-- carMapgosok  -->
 						<ol>
 						<li>고속터미널 사거리에서 직진 </li>
 						<li>IPEC 사거리에서 좌회전</li>
@@ -200,10 +192,10 @@
 					</div>
 				</div>
 				<div id="seochoDiv">
-					<img src="../img/eastCarMap.jpg"><br>
+					<img style="margin-top:10px;" src="../img/eastCarMap.jpg"><br>
 					<div class="ui divider"></div>
 					<div align="left">
-						<span style="border:1px solid gray;padding:7px">서초구 방면</span><!-- carMapeast  -->
+						<span style="padding:7px; color: red;">서초구 방면</span><!-- carMapeast  -->
 						<ol>
 						<li>사평역 방향에서 직진 </li>
 						<li>IPEC 사거리에서 우회전</li>
@@ -212,10 +204,10 @@
 					</div>
 				</div>
 				<div id="banpoStationDiv">
-					<img src="../img/carMap2.jpg"><br>
+					<img style="margin-top:10px;" src="../img/carMap2.jpg"><br>
 					<div class="ui divider"></div>
 					<div align="left">
-						<span style="border:1px solid gray;padding:7px">반포역 방면</span><!-- carMap2  -->
+						<span style="padding:7px; color: red;">반포역 방면</span><!-- carMap2  -->
 						<ol>
 						<li>반포역 방면에서 직진 </li>
 						<li>신반포역 사거리에서 150m 직진 후 좌회전해서 IPEC북문 GATE로 진입</li>
@@ -243,8 +235,6 @@
 						&ensp;&ensp;		
 					</div>
 				</div>
-			
-				
 				<div id="eastStationDiv">
 					<img style="margin-top:10px;" src="../img/busMap.jpg"><br>
 					<div class="ui divider"></div>
@@ -349,8 +339,6 @@
 						</ul>
 					</div>
 				</div>
-			
-				
 			</div>
 		</div>
 		</div>
@@ -360,6 +348,7 @@
 			<jsp:include page="../main/I_footer.jsp" ></jsp:include>
 		</div>
 	
-<script src="../js/slidbar.js"></script>		
+<script src="../js/slidbar.js"></script>	
+<script src="../js/traffic.js?ver=1"></script>	
 </body>
 </html>
