@@ -71,7 +71,7 @@ public class RentalController {
 	@RequestMapping(value = "R_performance", method = RequestMethod.GET)
 	public ModelAndView R_performance() {
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("display", "/rental/R_consert.jsp");
+		mav.addObject("display", "/rental/R_concert.jsp");
 		mav.setViewName("/rental/R_rentalForm");
 
 		return mav;
@@ -293,12 +293,15 @@ public class RentalController {
 	
 	// 공연장 예약
 	@RequestMapping(value = "reservationConcertHall", method = RequestMethod.POST)
-	public String reservationConcertHall(@ModelAttribute ConcertHallDTO concertHallDTO) {
+	public ModelAndView reservationConcertHall(@ModelAttribute ConcertHallDTO concertHallDTO) {
 		
 
 		concertHallDAO.reservationConcertHall(concertHallDTO);
 
-		return "/rental/R_exhibitionOk";
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("display", "/rental/R_concert.jsp");
+		mav.setViewName("/rental/R_rentalForm");
+		return mav;
 	}
 
 	/**
