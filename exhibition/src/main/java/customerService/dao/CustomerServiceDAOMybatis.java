@@ -16,6 +16,7 @@ import customerService.bean.ExhibitionBookDTO;
 import customerService.bean.HotelboardDTO;
 import customerService.bean.ImageboardDTO;
 import customerService.bean.PlayBookDTO;
+import customerService.bean.SalesBusinessRoomDTO;
 import customerService.bean.SalesConcertHallDTO;
 import customerService.bean.SalesExhibitionDTO;
 import member.bean.MemberDTO;
@@ -273,6 +274,33 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 		}
 	}
 	
+	//비즈니스룸 매출가져오기
+	public List<SalesBusinessRoomDTO> getSalesBusinessRoom(String salesMon) {
+		return sqlSession.selectList("customerServiceSQL.getSalesBusinessRoom", salesMon);
+	}
+	
+	//비즈니스룸 총 매출액 가져오기
+	public int getSalesTotalRentBusinessRoom(String salesMon) {
+		if(sqlSession.selectOne("customerServiceSQL.getSalesTotalRentBusinessRoom", salesMon)==null) {
+			return 0;
+		} else {
+			return sqlSession.selectOne("customerServiceSQL.getSalesTotalRentBusinessRoom", salesMon);
+		}
+	}
+	
+	//콘서트 티켓 매출 가져오기
+	public List<EventboardDTO> getSalesConcertTicket(String salesMon) {
+		return sqlSession.selectList("customerServiceSQL.getSalesConcertTicket", salesMon);
+	}
+	//콘서트 티켓 총 매출액
+	public int getSalesTotalRentConcertTicket(String salesMon) {
+		if(sqlSession.selectOne("customerServiceSQL.getSalesTotalRentConcertTicket", salesMon)==null) {
+			return 0;
+		} else {
+			return sqlSession.selectOne("customerServiceSQL.getSalesTotalRentConcertTicket", salesMon);
+		}
+	}
+	
 	
 	//회원정보 불러오기
 	public List<MemberDTO> getMemberList(Map<String, Integer> map) {
@@ -332,8 +360,8 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 		sqlSession.update("customerServiceSQL.C_playboardMod", eventboardDTO);			
 	}
 	
-	//예매티켓일자 삭제
-	public void eventboardDelete_play_book(List<String> list2) {
+	//연극 예매티켓일자 삭제
+	public void eventboardDelete_play_book(List<Integer> list2) {
 		sqlSession.delete("customerServiceSQL.eventboardDelete_play_book", list2);
 	}
 	//박람회 일자별 DB 등록 메소드 
@@ -341,6 +369,34 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 		sqlSession.insert("customerServiceSQL.eventInfoWrite_exhibition_bookDB", exhibitionBookDTO);
 		
 	}
+		
+	//연극 수정할때 예매일자별 날려버리기
+	public void C_playboardBookDel(EventboardDTO eventboardDTO) {
+		sqlSession.delete("customerServiceSQL.C_playboardBookDel", eventboardDTO);	
+	}
+	//연극 시퀀스 가져오기위해서
+	public EventboardDTO eventInfoWrite_play2(EventboardDTO eventboardDTO) {
+		return sqlSession.selectOne("customerServiceSQL.eventInfoWrite_play2", eventboardDTO);
+	}
 	
+	//박람회 시퀀스 가져오기위해서
+	public EventboardDTO eventInfoWrite2(EventboardDTO eventboardDTO) {
+		return sqlSession.selectOne("customerServiceSQL.eventInfoWrite2", eventboardDTO);
+	}
+	
+	//박람회 예매 지우기
+	public void eventboardDelete_book(List<Integer> list2) {
+		sqlSession.delete("customerServiceSQL.eventboardDelete_book", list2);	
+	}
+	
+	//박람회 수정할때 예매일자별 날려버리기
+	public void C_exhibitionboardBookDel(EventboardDTO eventboardDTO) {
+		sqlSession.delete("customerServiceSQL.C_exhibitionboardBookDel", eventboardDTO);	
+	}
+	public List<CustomerServiceDTO> getNoticeMainList(Map<String, Integer> map) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 }

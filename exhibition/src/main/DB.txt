@@ -181,8 +181,8 @@ create sequence seq_hotel_list nocycle nocache;
 --연극 일자별 DB
 create table eventboard_play_book(
  seq NUMBER PRIMARY KEY,            --시퀀스     
+ num NUMBER,                        --연극시퀀스
  imageName VARCHAR2(500) NOT NULL,  --공연명
-  eventLink VARCHAR2(200),            --링크
  playDate date,                     --공연일자(시작/종료)
  playTicket VARCHAR2(100),           --일별 총 티켓 수
  remainTicket VARCHAR2(100),         --일별 잔여 티켓 수
@@ -205,5 +205,29 @@ TICKETQTY	VARCHAR2(30)
 
 create sequence seq_Book_Exhibition_Members;--전시회 예매자 DB 시퀀스
 
+
+
+--비지니스룸 예약테이블
+create table businessRoom(
+roomName varchar2(30), --룸이름
+M_Id varchar2(30), --멤버아이디
+M_Email varchar2(50), --멤버이메일
+startDate date, --예약일자
+first varchar2(10) default 'N', --09시~12시
+second varchar2(10) default 'N', --12시~15시
+third varchar2(10) default 'N', --15시~18시
+fourth varchar2(10) default 'N'); --18시~21시
+
+--콘서트홀 예약테이블
+create table concertHall(
+hallName varchar2(40) not null,
+C_license varchar2(40) not null,
+C_tel varchar2(40) not null,
+C_email varchar2(40) not null,
+totalRent number not null,
+title varchar2(40) not null,
+startDate date not null,
+endDate date not null
+);
 
 

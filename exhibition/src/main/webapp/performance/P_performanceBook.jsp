@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>연극</title>
 
 <style>
 
@@ -257,6 +257,24 @@ $(document).ready(function(){
 		$('#BookEventBtn').hide();
 	}
 	
+	//잔여좌석 보다 구매티켓이 높을 경우 구매 못하게 막음
+	$('#selectPlayTicket').change(function(){
+		$.ajax({
+			type : 'POST',
+			url : '/exhibition/performance/book_play_checkBuy.do',
+			data : {'wantTicket':$('#selectPlayTicket :selected').val(),'imageName' : $('#imageName').val(), 'playDate' : $('#selectEventDate :selected').text()},
+			dataType : 'text',
+			success : function(data){
+				if(data=='ok'){
+					$('#BookEventBtn').show();
+				}else if(data=='no'){
+					alert('예매 가능한 티켓이 충분하지 않습니다. 죄솧합니다.');
+					$('#BookEventBtn').hide();
+				}
+			}//success
+		});//ajax
+	});
+	
 	//날짜 변경 시, 히든 태그에 날짜 값 넣기
 	$("#selectEventDate").change(function() {
 		$('#BookEventBtn').show();
@@ -271,9 +289,6 @@ $(document).ready(function(){
 			$('#BookEventBtn').hide(); //예매버튼 숨김
 			$('#bookConfirmHeader').text('로그인 후 예매가능합니다');
 		}
-		
-		//잔여석 보다 예매표가 많을 시, 예매 막기
-		
 		
 		//티켓 잔여 확인
 		$.ajax({

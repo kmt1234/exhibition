@@ -41,6 +41,7 @@ left: 0px;
 		</div>
 		<!-- 메인 화면 -->
 		<div class="ui compact menu" style="width: 930px; min-height:900px auto;  display: inline-block;" >
+		
 			<jsp:include page="${display}" ></jsp:include>
 		</div>
 	</div>
