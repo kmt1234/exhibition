@@ -18,6 +18,13 @@
  		where rn between #{startNum} and #{endNum}
  	</select>
  	
+ 	<select id="getNoticeMainList" parameterType="java.util.Map" resultType="customerService">
+ 		select * from 
+ 		(select rownum rn, tt.* from 
+ 		(select * from C_notice order by seq desc)tt) 
+ 		where rn between #{startNum} and #{endNum}
+ 	</select>
+ 	
  	<!-- 공지사항 검색 총글수 -->
  		<select id="getTotalC_notice_Search" parameterType="java.util.Map" resultType="int">
  		select count(*) from C_notice where ${subject} like '%'||#{keyword}||'%'
@@ -218,8 +225,8 @@
 											,#{postSelect}
 											,#{imageName}
 											,#{image1}
-											,#{startDate}
-											,#{endDate}
+											,#{startDate1}
+											,#{endDate2}
 											,#{eventLink})
 	</insert>
 	<!-- 총글수 -->
@@ -392,8 +399,8 @@
 	<insert id="eventInfoWrite_play_bookDB" parameterType="customerService.bean.PlayBookDTO">
 		      															  										  
 	insert into eventboard_play_book(seq
+									,num
 									,imageName
-									,eventLink
 									,playDate
 									,playTicket
 									,remainTicket
@@ -402,8 +409,8 @@
 									,bookMemberId
 									,bookStatus)
 							values (seq_eventboard_play_book.nextval
+									,#{num}
 									,#{imageName}
-									,#{eventLink}
 									,#{playDate}
 									,#{playTicket}
 									,#{remainTicket}
@@ -413,13 +420,22 @@
 									,#{bookStatus})
 						
 	</insert>
-	<!-- 매출현황  -->
-	<select id="getSalesExhibition" parameterType="java.lang.String" resultType="SalesExhigitionDTO">
+	
+	<!-- 박람회 부스 매출현황  -->
+	<select id="getSalesExhibition" parameterType="java.lang.String" resultType="SalesExhibitionDTO">
  		select sum(endDate-startDate+1) as saleDays, sum(totalrent) as totalRent, boothName from EXHIBITIONRENTAL where STARTDATE BETWEEN #{salesMon} and (select last_day(#{salesMon}) from dual) group by BOOTHNAME
  	</select>
- 	<!-- 매출현황  -->
+ 	<!-- 박람회 부스 총 매출현황  -->
  	<select id="getSalesTotalRentExhibition" parameterType="java.lang.String" resultType="int">
  		select sum(totalrent) as salesTotalRent from EXHIBITIONRENTAL where STARTDATE BETWEEN #{salesMon} and (select last_day(#{salesMon}) from dual)
+ 	</select>
+ 	<!-- 콘서트 홀 매출현황 -->
+ 	<select id="getSalesConcertHall" parameterType="java.lang.String" resultType="customerService.bean.SalesConcertHallDTO">
+ 		select sum((select last_day(#{salesMon}) from dual)-startDate) as saleDays, sum(totalrent) as totalRent, hallName from concertHall where STARTDATE BETWEEN #{salesMon} and (select last_day(#{salesMon}) from dual) group by hallName
+ 	</select>
+ 	<!-- 콘서트 홀 총 매출현황 -->
+ 	<select id="getSalesTotalRentConcertHall" parameterType="java.lang.String" resultType="int">
+ 		select sum(totalrent) as salesTotalRent from concertHall where STARTDATE BETWEEN #{salesMon} and (select last_day(#{salesMon}) from dual)
  	</select>
  	 	
 	<!-- 회원정보  -->
@@ -489,7 +505,7 @@
 	</select>
 	<!--메인이미지 정보 수정  -->
 	<select id="C_imageboardMod" parameterType="imageboard">
-		update customerImageboard set imageName=#{imageName},image1=#{image1},eventLink=#{eventLink} where seq=#{seq}
+		update customerImageboard set imageName=#{imageName},image1=#{image1},startDate1=#{startDate1},endDate2=#{endDate2},eventLink=#{eventLink} where seq=#{seq}
 	</select>
 	
 	<!--박람회 정보 수정  -->
@@ -510,7 +526,7 @@
 	
 	<!-- 연극  예매일자 삭제   -->
 	<delete id="eventboardDelete_play_book" parameterType="java.util.List">
-		delete eventboard_play_book where eventLink in
+		delete eventboard_play_book where num in
 		<foreach collection="list" item="item" open="(" close=")" separator=",">
 			#{item}
 		</foreach>
@@ -519,13 +535,15 @@
 	<!--박람회 일자별 DB 등록 메소드 -->
 	<insert id="eventInfoWrite_exhibition_bookDB" parameterType="customerService.bean.ExhibitionBookDTO">
 		insert into eventboard_exhibition_book(seq
+									,num
 									,imageName
 									,playDate
 									,playTicket
 									,remainTicket
 									,ticketPrice
 									,bookTicket)
-							values (seq_eventboard_play_book.nextval
+							values (seq_eventboard_exhibition_book.nextval
+									,#{num}
 									,#{imageName}
 									,#{playDate}
 									,#{playTicket}
@@ -533,6 +551,34 @@
 									,#{ticketPrice}
 									,#{bookTicket})
 	</insert>
+	
+	<!-- 연극 수정하기 위해 예매를 날려버린다 -->
+	<delete id="C_playboardBookDel" parameterType="eventboard">
+		delete eventboard_play_book where num=#{seq}
+	</delete>
+	
+	<!--연극삽입하기 위해 시퀀스 가져오기  -->
+	<select id="eventInfoWrite_play2" parameterType="eventboard" resultType="eventboard">
+		select * from eventboard_play where imageName=#{imageName} and startDate=#{startDate} and eventPlace=#{eventPlace}
+	</select>
+	
+	<!--박람회 삽입하기 위해 시퀀스 가져오기  -->
+	<select id="eventInfoWrite2" parameterType="eventboard" resultType="eventboard">
+		select * from eventboard where imageName=#{imageName} and startDate=#{startDate} and eventPlace=#{eventPlace}
+	</select>
+	
+	<!-- 박람회  예매일자 삭제   -->
+	<delete id="eventboardDelete_book" parameterType="java.util.List">
+		delete eventboard_exhibition_book where num in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<!-- 연극 수정하기 위해 예매를 날려버린다 -->
+	<delete id="C_exhibitionboardBookDel" parameterType="eventboard">
+		delete eventboard_exhibition_book where num=#{seq}
+	</delete>
  	
  </mapper>
  

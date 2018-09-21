@@ -107,11 +107,21 @@ function memberSearch(pg){
 	</div>	
 </div>
 
-<div class="ui modal member"  id="modalForm">
-  <div class="header" id="header"></div>
-  <div class="scrolling content" id="content">
-    
-  </div>
+<div class="ui modal member" id="modalForm">
+	<div class="header" id="header"></div>
+	<table class="ui striped table">
+	  <thead>
+	    <tr>
+		    <th>부스 장소</th>
+		    <th>부스명</th>
+		    <th>사용일자</th>
+		    <th>진행상황</th>
+		    <th>구매 티켓 수</th>
+	  </tr></thead>
+	  <tbody id="reservationTable">
+	  
+	  </tbody>
+ </table>
 </div>
 
 </body>

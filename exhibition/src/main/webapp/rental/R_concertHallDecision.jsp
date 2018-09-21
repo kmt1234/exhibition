@@ -179,7 +179,14 @@
 					success : function(data){
 						
 						if(data==='not_exist') {
-							$('#concertHallDecisionForm').submit();
+							$('.ui.mini.modal.successConcert').modal({
+								closable : false,
+					            duration : 460,
+							}).modal('show');
+							
+							$('.ui.approve.button.successConcert').on('click', function(){
+								$('#concertHallDecisionForm').submit();
+							});
 						} else if(data==='exist') {
 							$('#writeDiv').text('예약불가능');
 						}  

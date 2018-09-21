@@ -4,6 +4,7 @@ $(document).ready(function(){
 	 $('#memberSearchDiv').show();
 	 $('#memberListTable').empty();
 	 
+	
 		$.ajax({
 			type : 'POST',
 			url : '/exhibition/customerService/getMemberList.do',

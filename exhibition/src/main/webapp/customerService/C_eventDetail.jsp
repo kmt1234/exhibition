@@ -79,8 +79,10 @@
 	<div class="ui inverted input" style="width: 100%;">
 		<div class="ui left icon input" style="width: 100%; height: 50px;">
 			<input type="text" name="startDate" class="datepicker1">
+			<input type="hidden" id="startDate" value="${eventboardDTO.startDate}">
 			<div style="width: 5%;">&nbsp;</div>
 			<input type="text" name="endDate" class="datepicker2">
+			<input type="hidden" id="endDate" value="${eventboardDTO.endDate}">
 		</div>
   	</div>
   	<br><br>
@@ -95,8 +97,10 @@
   	<div class="ui inverted input" style="width: 100%;">
 		<div class="ui left icon input" style="width: 100%; height: 50px;">
 			<input type="text" name="startTime" class="timepicker1">
+			<input type="hidden" id="timepicker1" value="${eventboardDTO.startTime}">
 			<div style="width: 5%;">&nbsp;</div>
 			<input type="text" name="endTime" class="timepicker2">
+			<input type="hidden" id="timepicker2" value="${eventboardDTO.endTime}">
 		</div>
   	</div>
   	<br><br>
@@ -163,6 +167,51 @@
 <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script><!--달력-->
 <script>
 $(document).ready(function(){
+	var startDate = $('#startDate').val().substring(0,4)+"/"+$('#startDate').val().substring(5,7)+"/"+$('#startDate').val().substring(8,10);
+	var endDate = $('#endDate').val().substring(0,4)+"/"+$('#endDate').val().substring(5,7)+"/"+$('#endDate').val().substring(8,10);
+	var startTime = $('#timepicker1').val().substring(0,2);
+	var endTime = $('#timepicker2').val().substring(0,2);
+	//시간
+	$('.timepicker1').timepicker({
+		timeFormat : 'H:mm',
+	    interval: 60,
+	    minTime: '08',
+	    maxTime: '10:00pm',
+	    defaultTime: startTime,
+	   	startTime: '08:00am',
+	    dynamic: false,
+	    dropdown: true,
+	    scrollbar: false	
+	});
+	$('.timepicker2').timepicker({
+		timeFormat : 'H:mm',
+	    interval: 60,
+	    minTime: '08',
+	    maxTime: '10:00pm',
+	    defaultTime: endTime,
+	   	startTime: '08:00am',
+	    dynamic: false,
+	    dropdown: true,
+	    scrollbar: false	
+	});
+	//날짜
+	$(".datepicker1, .datepicker2").datepicker({
+		dateFormat : "yy/mm/dd",
+	    prevText: '이전 달',
+	    nextText: '다음 달',
+	    monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+	    monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+	    dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+	    dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+	    dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+	    showMonthAfterYear: true,
+	    yearSuffix: '년'
+	});
+	
+	//시작일과 마지막날짜 설정
+	$('.datepicker1').datepicker('setDate', startDate);
+	$('.datepicker2').datepicker('setDate', endDate);
+	
 	$('#ModeButton').click(function(){
 		$('#eventboardModForm').attr('action','/exhibition/customerService/C_eventboardMod.do').submit();
 	});
