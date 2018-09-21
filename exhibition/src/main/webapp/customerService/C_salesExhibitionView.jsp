@@ -107,6 +107,7 @@
 			
 			//매출보기 아이디 변경 전 클릭이벤트 제거
 			$('#C_salesconcertHallViewBtn').off('click'); 
+			$('#C_salesBusinessRoomViewBtn').off('click');
 			
 			$('#C_salesSelect').show();
 			$('#salesList').hide();
@@ -114,8 +115,10 @@
 			
 			$('#C_salesViewBtn').attr('id', 'C_salesExhibitionViewBtn');
 			$('#C_salesconcertHallViewBtn').attr('id', 'C_salesExhibitionViewBtn');
+			$('#C_salesBusinessRoomViewBtn').attr('id', 'C_salesconcertHallViewBtn');
 			
 			$('#C_salesExhibitionViewBtn').click(function(){
+				$('#salesDate').show();
 				$('#salesDate').html($('<h2>'+$('#year option:selected').text()+' '+$('#month option:selected').text()+' 박람회 부스 매출'+'</h2>'));
 				$.ajax({
 					type: "POST",
@@ -159,10 +162,13 @@
 		//콘서트 홀 매출 현황
 		$('.middle.ui.button.concertHall').click(function(){
 			
+			//매출보기 아이디 변경 전 클릭이벤트 제거
 			$('#C_salesExhibitionViewBtn').off('click');
+			$('#C_salesBusinessRoomViewBtn').off('click');
 			
 			$('#C_salesViewBtn').attr('id', 'C_salesconcertHallViewBtn');
 			$('#C_salesExhibitionViewBtn').attr('id', 'C_salesconcertHallViewBtn');
+			$('#C_salesBusinessRoomViewBtn').attr('id', 'C_salesconcertHallViewBtn');
 			
 			$('#C_salesSelect').show();
 			
@@ -212,8 +218,7 @@
 		
 		
 		//비즈니스룸 매출 현황
-		$('middle.ui.button.businessRoom').click(function(){
-			
+		$('.middle.ui.button.businessRoom').click(function(){
 			$('#C_salesExhibitionViewBtn').off('click');
 			$('#C_salesconcertHallViewBtn').off('click'); 
 			

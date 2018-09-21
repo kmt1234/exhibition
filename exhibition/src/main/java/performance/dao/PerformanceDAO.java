@@ -18,7 +18,7 @@ public interface PerformanceDAO {
 
 	public int getExhibitionListTotalA();	// 전시회 일정 리스트 총 글수 가져오는 메소드
 
-	public List<EventboardDTO> getExhibitionList(Map<String, Integer> map);	// 전시회 일정 리스트 가져오는 메소드
+	public List<EventboardDTO> getExhibitionList(Map<String, String> map);	// 전시회 일정 리스트 가져오는 메소드
 
 	public List<EventboardDTO> getPerformancePlay();
 	

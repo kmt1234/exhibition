@@ -86,14 +86,13 @@
 							<th width="100">번호</th>
 							<th width="150">이미지</th>
 							<th width="100">상품명</th>
-							<th width="100">링크</th>
 							<th width="380">행사 소개</th>
 						</tr>
 												
 						<!--등록된 연극 정보가 없을 때  -->								
 						<c:if test="${listSize eq '0'}">	
 									<tr>
-										<td colspan="6" align="center">현재 등록된 연극 정보가 없습니다</td>
+										<td colspan="5" align="center">현재 등록된 연극 정보가 없습니다</td>
 									</tr>
 									<input type="hidden" id="hiddenListSize" value="${listSize }">
 						</c:if>
@@ -106,10 +105,6 @@
 											<td>${list.seq}</td>
 											<td><a class="play_detail"><img src="../storage/${list.image1}" width="300" height="150"></a></td>
 											<td>${list.imageName}</td>
-											<td>
-												${list.eventLink}
-												<input type="hidden" name="eventLink" value="${list.eventLink}">
-											</td>
 											<td>${list.eventContent}</td>
 										</tr>
 										

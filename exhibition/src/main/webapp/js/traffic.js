@@ -147,6 +147,10 @@ $(document).ready(function(){
 		
 	});
 	
+	$('#houseImg').click(function(){
+		location.href='/exhibition/main/index.do';
+	});
+	
 	$('#T_hotel').click(function(){
 		location.href='/exhibition/traffic/T_hotelList.do';
 	});
