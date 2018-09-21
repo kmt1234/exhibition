@@ -5,11 +5,16 @@
 <head>
 </head>
 <body>
-<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
-	공지
-	<span class="h-light">사항</span>
-</h2>
-	<table style="width:100%;" class="ui celled table">
+<div class="ui compact menu" style="width: 930px; height:900px auto;  display: inline-block;" >
+	<h2 class="box-container" style="float: center; width: 100%; height:126px; text-align: left;">
+		공지<span class="h-light">사항</span>
+		<div style="font-size:13px; float:right; height: 50px; margin-top:30px ">
+						<img src="../img/house.png" width="15px" height="16px" style="cursor: pointer;" id="houseImg"></img>
+						> 고객센터 > 공지사항 > 공지사항 수정
+		</div>
+		<div class="ui divider"></div> 
+	</h2>
+	<table style="width:880px; margin-left: 20px;" class="ui celled table">
 		<tr>
 			<td height="30" style="width:10%; background-color: #f7f6e6; text-align: center;">글제목</td>
 			
@@ -43,9 +48,11 @@
 			</td>
 		</tr>
 	</table>
-<div style="padding-top: 30px;">
-	<input class="middle ui button" type="button" id="C_notice_checkModifyBtn" value="수정">
-	<input class="middle ui button" type="reset" value="취소">
+	<div style="float: left; margin-left: 20px;">
+		<input class="middle ui button" type="button" id="C_notice_checkModifyBtn" value="수정">
+		<input class="middle ui button" type="reset" value="취소">
+	</div>
+	<div style="height: 80px;"></div>
 </div>
 <script src="../js/C_notice_js.js?ver=1"></script></body>
 </html>

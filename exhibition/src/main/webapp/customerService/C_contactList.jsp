@@ -25,21 +25,26 @@
 </style>
 </head>
 <body>
+<div class="ui compact menu" style="width: 930px; height:900px auto;  display: inline-block;" >
 <form id="C_contactList_delete" method="post" action="C_contactList_Delete.do">
-<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
-	주요시설
-	<span class="h-light">연락처</span>
-</h2>
-<div style="width: 100%;" align="center">
+	<h2 class="box-container"style="float: center; width: 100%; height:126px;  text-align: left;">
+		<span>주요시설</span>
+		<span class="h-light">연락처</span>
+		<div style="font-size:13px; float:right; height: 50px; margin-top:30px ">
+			<img src="../img/house.png" width="15px" height="16px" style="cursor: pointer;" id="houseImg"></img>
+			> 고객센터 > 주요시설 연락처 
+		</div>
+		<div class="ui divider"></div> 
+	</h2>
+<div style="width: 880px; margin-left: 20px;" align="center">
 	<table style="width: 100%; height: 40px; " align="center" border="1" bordercolor="#ec008c" cellpadding="4" frame="hsides" rules="rows"
 		id="C_contactList_List" class="ui striped table" >
-			
 			<tr>
-				<c:if test="${code=='3' }">
-					<th style="width: 2%; height: 7%; padding-top: 10px; text-align: center;">
-						<input type="checkbox" id="checkAll">
+				 <c:if test="${code=='3' }"> 
+				<th style="width: 2%; height: 7%; padding-top: 10px; text-align: center;">
+					<input type="checkbox" id="checkAll">
 				</th>
-				</c:if>
+			</c:if>
 				<th style="width: 18%; height: 7%; padding-top: 10px; text-align: center;">분류</th>
 				<th style="width: 18%; height: 7%; padding-top: 10px; text-align: center;">기관 & 시설</th>
 				<th style="width: 18%; height: 7%; padding-top: 10px; text-align: center;">명칭</th>
@@ -65,8 +70,11 @@
 			<input type="button" class="middle ui button" id="C_contactList_WriteBtn" value="관리자 작성" >
 			<input type="button" class="middle ui button" id="C_contactList_DeleteBtn" value="삭제" >
 		</c:if>
+
 </div>
+<div style="margin-top: 40px;"></div>
 </form>
+</div>
 <input type="hidden" id="hiddenCode" value="${code}">
 <script src="../semantic/semantic.min.js"></script>
 <script src="../js/C_contactList_js.js?ver=1"></script>

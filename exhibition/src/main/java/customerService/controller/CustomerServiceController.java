@@ -1502,5 +1502,15 @@ public class CustomerServiceController {
 	public String C_privacy() {
 		return "/customerService/C_privacy";
 	}
+	//개인정보처리방침
+	@RequestMapping(value="C_map",method=RequestMethod.GET)
+	public ModelAndView C_map() {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("display","/main/map.jsp");
+		mav.setViewName("/customerService/C_map");
+		return mav;
+	}
+		
+	
 
 }
