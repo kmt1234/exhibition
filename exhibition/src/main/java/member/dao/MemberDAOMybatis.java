@@ -1,5 +1,6 @@
 package member.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import member.bean.MemberDTO;
+import performance.bean.Book_performance_membersDTO;
 
 @Transactional
 @Component
@@ -55,6 +57,11 @@ public class MemberDAOMybatis implements MemberDAO {
 	//개인회원 탈퇴	
 	public int deleteMember(Map<String, String> map) {
 		return sqlSession.delete("memberSQL.deleteMember", map);
+	}
+	
+	//회원의 예매 리스트를 가져오는 메소드
+	public List<Book_performance_membersDTO> getMemberTicketList(String id) {
+		return sqlSession.selectList("memberSQL.getMemberTicketList", id);
 	}
 	
 	

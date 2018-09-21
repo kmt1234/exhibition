@@ -145,9 +145,7 @@
 	</div>	
 	
 	<div class="ui segment" id="Ticket-History-Div">
-	  
 	  <div>
-		  <p>예매내역</p>
 		  <p>예매내역</p>
 		  <p>예매내역</p>
 		  <p>예매내역</p>
