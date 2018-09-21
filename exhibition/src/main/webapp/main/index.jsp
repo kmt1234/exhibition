@@ -45,15 +45,14 @@
 			<div id="mainCal" style="min-width:270; height: 200px "></div>
 		</div>
 		<!-- today -->
-		<div style=" margin-left:20px; width:270px; height:200px;  display: inline-block; float: left;" >
+		<div style=" margin-left:20px; width:270px; height:200px;  display: inline-block; float: left; overflow: scroll;" >
 			<!-- <img style="min-width:270; height: 200px " src='../img/B1.jpg'></img> -->
-			<dl class="todays">
+			<dl class="todays" id="todays">
 				<dt>Today's</dt>
 				<dd id="today_list">
-					<ul class="total_list" id="total_list">
+					<ul class="total_list" id="total_list" style="list-style:none">
 						
 					</ul>
-					<a href="" class="more" title="Today's 더보기">more+</a>
 				</dd>
 			</dl>
 		</div>
@@ -102,6 +101,8 @@ $(document).ready(function(){
 	
 	
 	
+	
+	
 	$('#mainCal').datepicker({
 		dateFormat : "yy/mm/dd",
 	    prevText: '이전 달',
@@ -122,19 +123,89 @@ $(document).ready(function(){
 				async: false,
 				dataType: 'json',
 				success : function(data) {
-					alert(JSON.stringify(data));
+					$('#today_list ul li:gt(0)').remove();
 					$.each(data.list, function(index, item){
 						if(item.postSelect=='1') {
+							$('<li/>',{
+								class : 'ex_item',
+							}).append($('<span/>',{
+								html : '<img id="ex_img" width="20px" height="20px" src="../img/Ex.png">'+item.imageName+'</img>',
+								style : 'display : block'
+							})).append($('<span/>',{
+								text : item.startDate.substring(0,10) + '-' + item.endDate.substring(0,10),
+								style : 'display : block'
+							})).append($('<span/>',{
+								text : item.eventPlace,
+								style : 'display : block'
+							})).appendTo($('#total_list'));
+							
 							
 						} else if(item.postSelect=='2') {
-							
+							$('<li/>',{
+								class : 'co_item',
+							}).append($('<span/>',{
+								html : '<img  id="co_img" width="20px" height="20px" src="../img/Ev.png">'+item.imageName+'</img>',
+								style : 'display : block'
+							})).append($('<span/>',{
+								class : 't-tit ellipsis',
+								text : item.startDate.substring(0,10) + '-' + item.endDate.substring(0,10),
+								style : 'display : block'
+							})).append($('<span/>',{
+								class : 't-tit ellipsis',
+								text : item.eventPlace,
+								style : 'display : block'
+							})).appendTo($('#total_list'));
 						}
 					});
+					
+					
 				}
 	    		
 	    	});
 	    }
 	});
+	
+	
+	$('ul li span img').eq(i).css("visibility","hidden");
+	for(var i = 0; i < $('li.ex_item').size(); i++) {
+		$('li.ex_item').eq(i).css("visibility","hidden");
+		
+	}
+	for(var i = 0; i < $('li.co_item').size(); i++) {
+		$('li.co_item').eq(i).css("visibility","hidden");
+	}
+	
+	
+	setInterval(function () {
+		if($('li.ex_item').size() > 1){moveExItems()}
+		if($('li.co_item').size() > 1){moveCoItems()}
+	}, 3000);
+	
+
+
+	function moveExItems() {
+		
+		var current_item = $('li.ex_item:visible');
+		var next_item = current_item.next();
+		if(next_item.attr('class') != 'ex_item') {
+			next_item = $('li.ex_item').first();
+		}
+		next_item.fadeIn("slow");
+		current_item.hide();
+	}
+	function moveCoItems() {
+		
+		var current_item = $('li.co_item:visible');
+		var next_item = current_item.next();
+		if(next_item.attr('class') != 'co_item') {
+			next_item = $('li.co_item').first();
+		}
+		next_item.fadeIn("slow");
+		current_item.hide();
+	}
+
+	
+
 	  
 	
 });
