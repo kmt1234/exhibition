@@ -764,9 +764,8 @@ public class CustomerServiceController {
 		}
 
 		eventboardDTO.setImage1(fileName);
-		// 세션에서 아이디 얻기
-		MemberDTO memberDTO = (MemberDTO) session.getAttribute("homepageMember");
-		String id = memberDTO.getM_Id();
+		
+		String id = "admin";
 
 		// String 타입 날짜를 Date 형식으로 변환(연극 기간 구하기)
 		eventboardDTO.setStartDate(eventboardDTO.getStartDate().substring(0, 10).replaceAll("/", "-"));
@@ -1166,7 +1165,7 @@ public class CustomerServiceController {
 		return new ModelAndView("redirect:/customerService/C_eventboardListForm.do");
 	}
 	
-// 연극 수정완료 클릭시 DB내용 수정
+	// 연극 수정완료 클릭시 DB내용 수정
 	@RequestMapping(value = "C_playboardMod", method = RequestMethod.POST)
 	public ModelAndView C_playboardMod(@ModelAttribute EventboardDTO eventboardDTO, @RequestParam MultipartFile img,
 			HttpSession session) {

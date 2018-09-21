@@ -258,38 +258,66 @@
 	
 	<!--박람회 정보 넣기-->
 	<insert id="eventInfoWrite" parameterType="eventboard">
-		insert into eventboard values(seq_eventboard.nextval
-						  			  ,#{postSelect}
-									  ,#{imageName}
-									  ,#{image1}
-									  ,#{startDate}
-									  ,#{endDate}
-									  ,#{eventLink}
-									  ,#{startTime}
-									  ,#{endTime}
-									  ,#{eventPlace}
-									  ,#{eventPrice}
-									  ,#{eventSeats}
-									  ,#{eventRate}
-									  ,#{eventContent})
+		insert into eventboard(seq
+							  ,postSelect
+							  ,imageName
+							  ,image1
+							  ,startDate
+							  ,endDate
+							  ,eventLink
+							  ,startTime
+							  ,endTime
+							  ,eventPlace
+							  ,eventPrice
+							  ,eventSeats
+							  ,eventRate
+							  ,eventContent)
+					 values(seq_eventboard.nextval
+							  ,#{postSelect}
+							  ,#{imageName}
+							  ,#{image1}
+							  ,#{startDate}
+							  ,#{endDate}
+							  ,#{eventLink}
+							  ,#{startTime}
+							  ,#{endTime}
+							  ,#{eventPlace}
+							  ,#{eventPrice}
+							  ,#{eventSeats}
+							  ,#{eventRate}
+							  ,#{eventContent})
 	</insert>
 	
 	<!--연극 정보 넣기-->
 	<insert id="eventInfoWrite_play" parameterType="eventboard">
-		insert into eventboard_play values(seq_eventboard_play.nextval
-						  			  ,#{postSelect}
-									  ,#{imageName}
-									  ,#{image1}
-									  ,#{startDate}
-									  ,#{endDate}
-									  ,#{eventLink}
-									  ,#{startTime}
-									  ,#{endTime}
-									  ,#{eventPlace}
-									  ,#{eventPrice}
-									  ,#{eventSeats}
-									  ,#{eventRate}
-									  ,#{eventContent})
+		insert into eventboard_play(seq
+							  ,postSelect
+							  ,imageName
+							  ,image1
+							  ,startDate
+							  ,endDate
+							  ,eventLink
+							  ,startTime
+							  ,endTime
+							  ,eventPlace
+							  ,eventPrice
+							  ,eventSeats
+							  ,eventRate
+							  ,eventContent)
+				   values(seq_eventboard_play.nextval
+							  ,#{postSelect}
+							  ,#{imageName}
+							  ,#{image1}
+							  ,#{startDate}
+							  ,#{endDate}
+							  ,#{eventLink}
+							  ,#{startTime}
+							  ,#{endTime}
+							  ,#{eventPlace}
+							  ,#{eventPrice}
+							  ,#{eventSeats}
+							  ,#{eventRate}
+							  ,#{eventContent})
 	</insert>
 
 	
