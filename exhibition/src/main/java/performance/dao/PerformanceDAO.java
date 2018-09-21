@@ -56,7 +56,9 @@ public interface PerformanceDAO {
 
 	public List<EventboardDTO> getAllListConcert(String date);//해당하는 날의 공연 리스트 가져오기
 
+	public List<EventboardDTO> getAllExhibitionList(Map<String, Integer> map);//박람회-리스트 전체 일정 가져오기
 
+	public int getAllListTotalA(Map<String, Integer> map); //전체 리스트 총글구하기
 	
 
 	
