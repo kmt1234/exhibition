@@ -19,8 +19,7 @@
     <context:component-scan base-package="performance.dao"/>
     <context:component-scan base-package="rental.bean"/>
     <context:component-scan base-package="rental.dao"/>
-    
-    <tx:annotation-driven transaction-manager="transactionManager"/>
+
 	
 	<!-- SqlSessionFactory -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">

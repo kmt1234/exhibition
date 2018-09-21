@@ -1,58 +1,67 @@
-<<<<<<< HEAD
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css"
-	href="../semantic/semantic.min.css">
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"
-	integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-	crossorigin="anonymous"></script>
-<script src="../semantic/semantic.min.js"></script>
 <style>
-	.box-container{
-		display: inline-block;
-		padding-bottom: 40px;
-		padding-left: 20px;
-		padding-right: 20px;
-		padding-top: 20px;
-		font-weight:normal;
-		font-size: 50px;
-	}
-	.h-light{
-		color: #ec008c;
-	
-	}
-	.smallFont{
-	 font-size: 16px;
-	 color: #878787;
-	}
-	.middleFont{
-		color: #302c2c;
-		font-size: 18px;
-	}
+.box-container{
+	display: inline-block;
+	padding-bottom: 40px;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 20px;
+	font-weight:normal;
+	font-size: 50px;
+}
+.h-light{
+	color: #ec008c;
+
+}
+.smallFont{
+	font-size: 16px;
+    color: #878787;
+}
+.middleFont{
+	color: #302c2c;
+	font-size: 18px;
+}
+#slidbar{
+	position:absolute;
+	top : 0px; 
+	left: 0px;
+}
+#houseImg{
+	margin:-3px;
+}
 </style>
 </head>
 <body>
 	<header>
+	<div style="margin-top: 20px; min-width:1170px; position: relative;   ">
 		<jsp:include page="../main/I_header.jsp"></jsp:include>
+	</div>
 	</header>
-	<br>
-	<br>
-	<div class="ui five column grid container">
+	<div style="margin-top: 5px; min-width:1170px; position: relative;   " class="ui container" >
 		<!-- 사이드바 메뉴 -->
-		<div class="ui compact menu" style="width: 20%; height: 900px; ">
-			<a class="item" href="I_companyIntroductionForm.jsp">회사소개</a> 
-			<a class="item" href="I_CEOIntroductionForm.jsp">CEO인사말</a> 
+		<div style="width:230px; height:900px auto; display: inline-block;">
+			<div class="ui compact menu" id="slidbar" style="display: inline-block; ">
+				<a class="item" style="border: none; width: 227px;" href="I_companyIntroductionForm.jsp">회사소개</a> 
+				<a class="item" href="I_CEOIntroductionForm.jsp">CEO인사말</a> 
+			</div>
 		</div>
 		<!-- 메인 화면 -->
-		<div class="ui compact menu" style="width: 80%; height: 900px;" >
+		<div class="ui compact menu" style="width: 930px; height:900px auto;  display: inline-block;" >
 			<!-- 타이틀 -->
 			<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
 				CEO
 				<span class="h-light">인사말</span>
+				<div style="font-size:13px; float:right; height: 50px; margin-top:30px ">
+					<img src="../img/house.png" width="15px" height="16px" style="cursor: pointer; " id="houseImg"></img>
+					> 소개 > CEO인사말
+				</div>
+				<div class="ui divider"></div> 
 			</h2>
+			<div style="width: 880px; margin-left: 20px;">
 			<div style="font-size:20px; text-align: left;"><!-- 이미지  넣으면 됨 -->
 			<img src="../img/bujin.jpg" align="left" height="505px">
 			<p style="color: #ec008c; font-size: 30px;"><strong>IPEX와 함께 큰 꿈을 이루세요!</strong></p>
@@ -108,12 +117,12 @@
 				</p>
 			</div>
 		</div>
-		<!-- footer -->
-		<div class="ui compact menu" style="width: 100%; float: right; ">
-			<jsp:include page="../main/I_footer.jsp" ></jsp:include>
-		</div>
 	</div>
-
-
+	<!-- footer -->
+	<div class="ui container" style="margin-top: 20px; min-width:1170px; position: relative; ">
+		<jsp:include page="../main/I_footer.jsp" ></jsp:include>
+	</div>
+	
+<script src="../js/slidbar.js"></script>
 </body>
 </html>

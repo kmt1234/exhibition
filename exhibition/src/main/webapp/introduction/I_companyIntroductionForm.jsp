@@ -3,64 +3,73 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css"
-	href="../semantic/semantic.min.css">
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"
-	integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-	crossorigin="anonymous"></script>
-<script src="../semantic/semantic.min.js"></script>
 <style>
-	.box-container{
-		display: inline-block;
-		padding-bottom: 40px;
-		padding-left: 20px;
-		padding-right: 20px;
-		padding-top: 20px;
-		font-weight:normal;
-		font-size: 50px;
-	}
-	.h-light{
-		color: #ec008c;
-	
-	}
-	
-	.background{
-	background-image: url(../img/sogae.jpg);
-    background-size: 100% 100%;
-  	background-repeat: no-repeat;
-    position: absolute;
-	}
-	.middleFont{
-		color: #4b4c4c;
-		font-size: 25px;
-		text-align: left;
-	}
-	.smallFont{
-	 font-size: 16px;
-	 color: #878787;
-	}
+.box-container{
+	display: inline-block;
+	padding-bottom: 40px;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 20px;
+	font-weight:normal;
+	font-size: 50px;
+}
+.h-light{
+	color: #ec008c;
+}
+
+.background{
+background-image: url(../img/sogae.jpg);
+   background-size: 100% 100%;
+ 	background-repeat: no-repeat;
+   position: absolute;
+}
+.middleFont{
+	color: #4b4c4c;
+	font-size: 25px;
+	text-align: left;
+}
+.smallFont{
+ font-size: 16px;
+ color: #878787;
+}
+#slidbar{
+	position:absolute;
+	top : 0px; 
+	left: 0px;
+}
+#houseImg{
+	margin:-3px;
+}
 </style>
 </head>
 <body>
 	<header>
+	<div style="margin-top: 20px; min-width:1170px; position: relative;   ">
 		<jsp:include page="../main/I_header.jsp"></jsp:include>
+	</div>
 	</header>
-	<br>
-	<br>
-	<div class="ui five column grid container">
+	<div style="margin-top: 5px; min-width:1170px; position: relative;   " class="ui container" >
 		<!-- 사이드바 메뉴 -->
-		<div class="ui compact menu" style="width: 20%; height: 900px; ">
-			<a class="item" href="I_companyIntroductionForm.jsp">회사소개</a> 
-			<a class="item" href="I_CEOIntroductionForm.jsp">CEO인사말</a> 
+		<div style="width:230px; height:900px auto; display: inline-block;">
+			<div class="ui compact menu" id="slidbar" style="display: inline-block; ">
+				<a class="item" style="border: none; width: 227px;" href="I_companyIntroductionForm.jsp">회사소개</a> 
+				<a class="item" href="I_CEOIntroductionForm.jsp">CEO인사말</a> 
+			</div>
 		</div>
 		<!-- 메인 화면 -->
-		<div class="ui compact menu" style="width: 80%; height: 900px;" >
+		<div class="ui compact menu" style="width: 930px; height:900px auto;  display: inline-block;" >
 			<!-- 타이틀 -->
 			<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
 				회사
 				<span class="h-light">소개</span>
+				<div style="font-size:13px; float:right; height: 50px; margin-top:30px ">
+					<img src="../img/house.png" width="15px" height="16px" style="cursor: pointer; " id="houseImg"></img>
+					> 소개 > 회사소개
+				</div>
+				<div class="ui divider"></div> 
 			</h2>
 			<div>
+				<div style="width: 880px; margin-left: 20px;">
 				<div style="font-size:20px; text-align: left;">
 					<div style="font-size: 30px;">MICE 산업을 선도(先導)하는 <span style="color: #ec008c; font-size: 35px;">글로벌리더</span></div><br>
 					<p>1979년 3월 개관이래, 글로벌 전시회와 국제회의 개최를 통한 국제교류의 장을 마련하고 글로벌 비즈니스 인프라를 
@@ -118,12 +127,12 @@
 				</div>
 			</div>
 		</div>
-		<!-- footer -->
-		<div class="ui compact menu" style="width: 100%; float: right; ">
-			<jsp:include page="../main/I_footer.jsp" ></jsp:include>
 		</div>
 	</div>
-
-
+	<!-- footer -->
+	<div class="ui container" style="margin-top: 20px; min-width:1170px; position: relative; ">
+		<jsp:include page="../main/I_footer.jsp" ></jsp:include>
+	</div>
+<script src="../js/slidbar.js"></script>	
 </body>
 </html>

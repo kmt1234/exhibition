@@ -66,7 +66,7 @@
   	<br><br>
   	<div class="ui inverted input" style="width: 200px; height: 150px;">
   		<div class="ui left icon input" style="width: 100%; height: 50px;">
-			<img src="../storage/${eventboardDTO.image1}" name="imaView" id="imaView" width="200px" height="150px">
+			<img src="../storage/${imageboardDTO.image1}" name="imaView" id="imaView" width="200px" height="150px">
 	 	</div>
 	</div>
 	<div class="ui inverted input" style="width: 100%;">
@@ -77,9 +77,11 @@
 	
 	<div class="ui inverted input" style="width: 100%;">
 		<div class="ui left icon input" style="width: 100%; height: 50px;">
-			<input type="text" name="startDate" class="datepicker1">
+			<input type="text" name="startDate1" class="datepicker1">
+			<input type="hidden" id="startDate1" value="${imageboardDTO.startDate1}">
 			<div style="width: 5%;">&nbsp;</div>
-			<input type="text" name="endDate" class="datepicker2">
+			<input type="text" name="endDate2" class="datepicker2">
+			<input type="hidden" id="endDate2" value="${imageboardDTO.endDate2}">
 		</div>
   	</div>
   	<br><br>
@@ -114,6 +116,27 @@
 <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script><!--달력-->
 <script>
 $(document).ready(function(){
+	var startDate1 = $('#startDate1').val().substring(0,4)+"/"+$('#startDate1').val().substring(5,7)+"/"+$('#startDate1').val().substring(8,10);
+	var endDate2 = $('#endDate2').val().substring(0,4)+"/"+$('#endDate2').val().substring(5,7)+"/"+$('#endDate2').val().substring(8,10);
+	
+	//날짜
+	$(".datepicker1, .datepicker2").datepicker({
+		dateFormat : "yy/mm/dd",
+	    prevText: '이전 달',
+	    nextText: '다음 달',
+	    monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+	    monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+	    dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+	    dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+	    dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+	    showMonthAfterYear: true,
+	    yearSuffix: '년'
+	});
+	
+	//시작일과 마지막날짜 설정
+	$('.datepicker1').datepicker('setDate', startDate1);
+	$('.datepicker2').datepicker('setDate', endDate2);
+	
 	$('#ModeButton').click(function(){
 		$('#imageboardModForm').attr('action','/exhibition/customerService/C_imageboardMod.do').submit();
 	});
