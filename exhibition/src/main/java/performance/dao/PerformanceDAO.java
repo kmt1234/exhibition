@@ -18,7 +18,7 @@ public interface PerformanceDAO {
 
 	public int getExhibitionListTotalA();	// 전시회 일정 리스트 총 글수 가져오는 메소드
 
-	public List<EventboardDTO> getExhibitionList(Map<String, Integer> map);	// 전시회 일정 리스트 가져오는 메소드
+	public List<EventboardDTO> getExhibitionList(Map<String, String> map);	// 전시회 일정 리스트 가져오는 메소드
 
 	public List<EventboardDTO> getPerformancePlay();
 	
@@ -38,6 +38,10 @@ public interface PerformanceDAO {
 
 	public String checkRemainSeats_ex(Map<String, String> map);	//선택일자의 해당 전시회 잔여좌석 가져오기(기본값:일별 티켓 발행 수)
 	public String checkUsedSeats_ex(Map<String, String> map);	//선택일자의  해당 전시회 예매된 티켓 수 가져오기
+
+	public List<EventboardDTO> getAllExhibitionList(Map<String, Integer> map);//박람회-리스트 전체 일정 가져오기
+
+	public int getAllListTotalA(Map<String, Integer> map); //전체 리스트 총글구하기
 
 		
 

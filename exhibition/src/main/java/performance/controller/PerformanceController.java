@@ -93,31 +93,47 @@ public class PerformanceController {
 		return mav ;
 	}
 	
-	
-	/*@RequestMapping(value="getPerformance", method=RequestMethod.GET)
-	public String getPerformance(ModelMap modelMap) {
-		List<PerformanceDTO> list = performanceDAO.getPerformance();
+	//전체일정 리스트
+	@RequestMapping(value="P_allScheduleList", method=RequestMethod.GET)
+	public ModelAndView P_allScheduleList(@RequestParam(required=false , defaultValue="1") String pg) {	
+		//Paging
+		int endNum = Integer.parseInt(pg)*5;
+		int startNum = endNum-4;
+		Date date = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("YYMM");
+		String dateS = formatter.format(date);
 		
-		for(PerformanceDTO data : list) {
-			data.setStartDate(data.getStartDate().substring(0, 10));
-			data.setEndDate(data.getEndDate().substring(0, 10));
-			data.setDays(getDiffDays(data.getStartDate().substring(0, 10).replaceAll("-", ""), data.getEndDate().substring(0, 10).replaceAll("-", "")));
-			String[] strDays = data.getDays();
-			for(int i = 0; i < data.getDays().length; i++) {
-				StringBuffer sb = new StringBuffer(strDays[i]);
-				sb.insert(4, "-");
-				sb.insert(7, "-");
-				strDays[i] = sb.toString();
-			}
-			data.setDays(strDays);
-			data.setDaysSize(strDays.length);
+		Map<String,Integer> map = new HashMap<String,Integer>();
+		map.put("endNum", endNum);
+		map.put("startNum", startNum);
+		map.put("dateS", Integer.parseInt(dateS));
+		
+		int totalA = performanceDAO.getAllListTotalA(map);
+		
+		//Paging
+		performancePaging.setCurrentPage(Integer.parseInt(pg));
+		performancePaging.setPageBlock(3);
+		performancePaging.setPageSize(5);
+		performancePaging.setTotalA(totalA);
+
+		performancePaging.makePagingHTML();
+		
+		//DB
+		List<EventboardDTO> list = performanceDAO.getAllExhibitionList(map);
+		for(int i = 0; i < list.size(); i++) {
+			list.get(i).setStartDate(list.get(i).getStartDate().substring(0, 10));
+			list.get(i).setEndDate(list.get(i).getEndDate().substring(0, 10));
 		}
-		
-		modelMap.addAttribute("listView",list);
-		return "/performance/getPerformance";
-	}*/
-	
-	
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.addObject("listSize", list.size()+"");
+		mav.addObject("pg", pg);
+		mav.addObject("performancePaging", performancePaging);
+		mav.addObject("display","/performance/P_allCalendarList.jsp");
+		mav.setViewName("/performance/P_performanceForm");
+		return mav ;
+	}
+
 	//공연일정를 데이터베이스에서 불러와 달력으로 보내준다.
 	@RequestMapping(value="P_performanceSchedule", method=RequestMethod.GET)
 	public ModelAndView P_performanceSchedule(ModelMap modelMap) {
@@ -164,7 +180,7 @@ public class PerformanceController {
 				object = (CompanyDTO)object;
 				
 			}else if(object.toString().equals("3")) {
-				object = "manager";
+				object = (MemberDTO)object;
 			}else {
 				object = "guest";
 			}
@@ -278,9 +294,25 @@ public class PerformanceController {
 		int endNum = Integer.parseInt(pg)*9;
 		int startNum = endNum-8;
 		
-		Map<String,Integer> map = new HashMap<String,Integer>();
-		map.put("endNum", endNum);
-		map.put("startNum", startNum);
+		//현재 날짜
+		Date currentDate = new Date();
+			
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+		
+		String startDateC = formatter.format(currentDate);
+		
+		String selMonth = startDateC.substring(0, 8) + "01";
+		
+		System.out.println("월 : "+ selMonth);
+		
+
+		
+		
+		
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("endNum", endNum+"");
+		map.put("startNum", startNum+"");
+		map.put("selMonth", selMonth);
 		
 		int totalA = performanceDAO.getExhibitionListTotalA();
 		
@@ -327,7 +359,7 @@ public class PerformanceController {
 			}else if(object.toString().equals("2")) {
 				object = (CompanyDTO)object;
 			}else if(object.toString().equals("3")) {
-				object = "manager";
+				object = (MemberDTO)object;
 			}else {
 				object = "guest";
 			}
@@ -430,7 +462,7 @@ public class PerformanceController {
 			}else if(object.toString().equals("2")) {
 				object = (CompanyDTO)object;
 			}else if(object.toString().equals("3")) {
-				object = "manager";
+				object = (MemberDTO)object;
 			}else {
 				object = "guest";
 			}
@@ -508,7 +540,7 @@ public class PerformanceController {
 			}else if(object.toString().equals("2")) {
 				object = (CompanyDTO)object;
 			}else if(object.toString().equals("3")) {
-				object = "manager";
+				object = (MemberDTO)object;
 			}else {
 				object = "guest";
 			}
@@ -613,7 +645,7 @@ public class PerformanceController {
 			}else if(object.toString().equals("2")) {
 				object = (CompanyDTO)object;
 			}else if(object.toString().equals("3")) {
-				object = "manager";
+				object = (MemberDTO)object;
 			}else {
 				object = "guest";
 			}
@@ -780,8 +812,77 @@ public class PerformanceController {
 			return resultSeats+"";
 		}else {
 			return "choseDate";
-		} 
+		}  
 	}
+	
+	//전시회 잔여좌석 보다 구매티켓이 높을 경우 구매 못하게 막음
+	@RequestMapping(value="book_exhibition_checkBuy", method=RequestMethod.POST)
+	public @ResponseBody String book_exhibition_checkBuy(@RequestParam String wantTicket, @RequestParam String imageName, @RequestParam String playDate) {
+		
+		if(playDate.equals("날짜선택")) {
+			playDate = "2000년01월01일";
+		}
+		
+		//날짜 형식 변경(년,월,일 제거)
+		playDate=playDate.replace("년", "");
+		playDate=playDate.replace("월", "");
+		playDate=playDate.replace("일", "");
+		
+		//Map에 담기
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("imageName", imageName);
+		map.put("playDate", playDate);
+		
+		//DB
+		String remainSeats = performanceDAO.checkRemainSeats_ex(map);	//선택일자의 해당 전시회 전체좌석 가져오기(기본값:일별 티켓 발행 수)
+		String usedSeats = performanceDAO.checkUsedSeats_ex(map);		//선택일자의  해당 전시회 예매된 티켓 수 가져오기
+		
+		if(remainSeats==null) remainSeats = 0+"";
+		if(usedSeats==null) usedSeats = 0+"";
+	
+		//잔여좌석 - 예매된 티켓 수 = 예매 가능한 좌석 수()
+		int resultSeats = Integer.parseInt(remainSeats) - Integer.parseInt(usedSeats);
+		
+		if(resultSeats - Integer.parseInt(wantTicket) >= 0) {
+			return "ok";
+		}else
+			return "no";
+	}
+	
+	//연극 잔여좌석 보다 구매티켓이 높을 경우 구매 못하게 막음
+	@RequestMapping(value="book_play_checkBuy", method=RequestMethod.POST)
+	public @ResponseBody String book_play_checkBuy(@RequestParam String wantTicket, @RequestParam String imageName, @RequestParam String playDate) {
+		
+		if(playDate.equals("날짜선택")) {
+			playDate = "2000년01월01일";
+		}
+		
+		//날짜 형식 변경(년,월,일 제거)
+		playDate=playDate.replace("년", "");
+		playDate=playDate.replace("월", "");
+		playDate=playDate.replace("일", "");
+		
+		//Map에 담기
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("imageName", imageName);
+		map.put("playDate", playDate);
+		
+		//DB
+		String remainSeats = performanceDAO.checkRemainSeats(map);	//선택일자의 해당 연극 전체좌석 가져오기(기본값:일별 티켓 발행 수)
+		String usedSeats = performanceDAO.checkUsedSeats(map);		//선택일자의  해당 연극 예매된 티켓 수 가져오기
+		
+		if(remainSeats==null) remainSeats = 0+"";
+		if(usedSeats==null) usedSeats = 0+"";
+	
+		//잔여좌석 - 예매된 티켓 수 = 예매 가능한 좌석 수()
+		int resultSeats = Integer.parseInt(remainSeats) - Integer.parseInt(usedSeats);
+		
+		if(resultSeats - Integer.parseInt(wantTicket) >= 0) {
+			return "ok";
+		}else
+			return "no";
+	}
+		
 	
 	//달력 메소드
 	public static String[] getDiffDays(String fromDate, String toDate) {

@@ -11,7 +11,8 @@ import customerService.bean.ExhibitionBookDTO;
 import customerService.bean.HotelboardDTO;
 import customerService.bean.ImageboardDTO;
 import customerService.bean.PlayBookDTO;
-import customerService.bean.SalesExhigitionDTO;
+import customerService.bean.SalesConcertHallDTO;
+import customerService.bean.SalesExhibitionDTO;
 import member.bean.MemberDTO;
 import rental.bean.ExhibitionDTO;
 
@@ -20,6 +21,8 @@ public interface CustomerServiceDAO {
 	public int getTotalC_notice();													
 	//공지사항 리스트 불러오기
 	public List<CustomerServiceDTO> getNoticeList(Map<String, Integer> map);		
+	//공지사항 메인화면 리스트 불러오기
+	public List<CustomerServiceDTO> getNoticeMainList(Map<String, Integer> map);
 	// 공지사항 검색된 글 수
 	public int getTotalC_notice_Search(Map<String, String> map);					
 	// 공지사항 검색된 글 불러오기
@@ -124,12 +127,19 @@ public interface CustomerServiceDAO {
 	public void C_hotelboardMod(HotelboardDTO hotelboardDTO);//호텔 수정
 	
 	
-	//매출현황
-	public List<SalesExhigitionDTO> getSalesExhibition(String salesMon);
-
+	//박람회 부스 매출현황
+	public List<SalesExhibitionDTO> getSalesExhibition(String salesMon);
+	
+	//박람회 부스 총 매출액
 	public int getSalesTotalRentExhibition(String salesMon);
+	
+	//콘서트 홀 매출현황
+	public List<SalesConcertHallDTO> getSalesConcertHall(String salesMon);
+	
+	//콘서트 홀 총 매출액
+	public int getSalesTotalRentConcertHall(String salesMon);
 
-		//회원정보
+	//회원정보
 	public List<MemberDTO> getMemberList(Map<String, Integer> map);
 	//회원 페이징
 	public int getMemberListTotal();
@@ -157,9 +167,10 @@ public interface CustomerServiceDAO {
 
 	public void C_playboardMod(EventboardDTO eventboardDTO);//연극 수정실행
 
-	public void eventboardDelete_play_book(List<Integer> list2);//연극 리스트 지울때 예매날짜 지우기
+		public void eventboardDelete_play_book(List<Integer> list2);//연극 리스트 지울때 예매날짜 지우기
 	
 	public void eventInfoWrite_exhibition_bookDB(ExhibitionBookDTO exhibitionBookDTO);	//박람회 일자별 DB 등록 메소드 
+	
 	
 	public void C_playboardBookDel(EventboardDTO eventboardDTO);//연극 수정하기 위해서 예매일짜 날려버리기
 	
@@ -169,6 +180,7 @@ public interface CustomerServiceDAO {
 	public void eventboardDelete_book(List<Integer> list2);//박람회 리스트지울때 예매날짜 지우기
 	
 	public void C_exhibitionboardBookDel(EventboardDTO eventboardDTO);//박람회 수정하기 위해서 예매일짜 날려버리기
+	
 
 	
 }

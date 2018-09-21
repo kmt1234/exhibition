@@ -109,7 +109,7 @@ pre{
 </body>
 <script>
 /*페이징 */
-function performancePaging(pg){
+function performancePaging_All(pg){
 	location.href="/exhibition/performance/P_performanceList.do?pg="+pg;
 }
 </script>

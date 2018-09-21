@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,9 +22,7 @@ if(month.length == 1){
 if(day.length == 1){ 
   day = "0" + day; 
 }
-
 //alert(JASON.stringify('${listView}'));
-
 var dataSet = [
 	<c:forEach var="listView" items="${listView}" varStatus="status">
 		<c:if test="${listView.postSelect == '1'}">
@@ -63,8 +61,6 @@ var dataSet = [
 		</c:forEach>
 	];
 	
-
-
 	$(document).ready(function() {
 	    	 /*  $.ajax({
 	        	  type : 'GET',
@@ -75,7 +71,6 @@ var dataSet = [
 	        	  }
 	        	  
 	        	});  */
-
 	    	  
 		$('#calendar').fullCalendar({
 			defaultDate: date,
@@ -140,5 +135,4 @@ var dataSet = [
 		<div  id='calendar'></div>
 
 </body>
-<script src="../js/p_exhibitionCalendar.js"></script>
 </html>

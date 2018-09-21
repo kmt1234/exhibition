@@ -40,7 +40,7 @@ public class PerformanceDAOmybatis implements PerformanceDAO {
 	}
 	
 	//전시회 일정 리스트 가져오는 메소드 
-	public List<EventboardDTO> getExhibitionList(Map<String, Integer> map) {
+	public List<EventboardDTO> getExhibitionList(Map<String, String> map) {
 		return sqlSession.selectList("performanceSQL.getExhibitionList", map);
 	}
 
@@ -98,6 +98,16 @@ public class PerformanceDAOmybatis implements PerformanceDAO {
 	//선택일자의  해당 전시회 예매된 티켓 수 가져오기
 	public String checkUsedSeats_ex(Map<String, String> map) {
 		return sqlSession.selectOne("performanceSQL.checkUsedSeats_ex", map);
+	}
+
+	//전체-리스트 전체일정 가져오기
+	public List<EventboardDTO> getAllExhibitionList(Map<String, Integer> map) {
+		return sqlSession.selectList("performanceSQL.getAllExhibitionList",map);
+	}
+	
+	//전체 리스트 총글 구하기
+	public int getAllListTotalA(Map<String, Integer> map) {
+		return sqlSession.selectOne("performanceSQL.getAllListTotalA",map);
 	}
 	
 

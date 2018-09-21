@@ -39,7 +39,8 @@ import customerService.bean.HotelboardDTO;
 import customerService.bean.ImageboardDTO;
 import customerService.bean.ImageboardPaging;
 import customerService.bean.PlayBookDTO;
-import customerService.bean.SalesExhigitionDTO;
+import customerService.bean.SalesConcertHallDTO;
+import customerService.bean.SalesExhibitionDTO;
 import customerService.dao.CustomerServiceDAO;
 import member.bean.MemberDTO;
 
@@ -109,6 +110,26 @@ public class CustomerServiceController {
 		mav.setViewName("jsonView");
 		return mav;
 	}
+	
+	// 공지사항 리스트 데이터 베이스에서 불러와 index.jsp로 리스트 보내주기
+		@RequestMapping(value = "getNoticeMainList", method = RequestMethod.POST)
+		public ModelAndView getNoticeMainList(@RequestParam(required = false, defaultValue = "1") String pg) {
+			// DB - 1페이지당 10개씩
+			int endNum = Integer.parseInt(pg) * 4;
+			int startNum = endNum - 3;
+
+			Map<String, Integer> map = new HashMap<String, Integer>();
+			map.put("startNum", startNum);
+			map.put("endNum", endNum);
+
+			List<CustomerServiceDTO> list = customerServiceDAO.getNoticeMainList(map);
+
+			ModelAndView mav = new ModelAndView();
+
+			mav.addObject("list", list);
+			mav.setViewName("jsonView");
+			return mav;
+		}
 
 	// 검색내용 찾아오기
 	@RequestMapping(value = "C_notice_Search", method = RequestMethod.POST)
@@ -853,8 +874,8 @@ public class CustomerServiceController {
 	@RequestMapping(value = "C_eventboardListForm", method = RequestMethod.GET)
 	public ModelAndView C_exhibitionboardList(@RequestParam(required = false, defaultValue = "1") String pg) {
 
-		int endNum = Integer.parseInt(pg) * 3;
-		int startNum = endNum - 2;
+		int endNum = Integer.parseInt(pg) * 5;
+		int startNum = endNum - 4;
 
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("endNum", endNum);
@@ -864,7 +885,7 @@ public class CustomerServiceController {
 
 		imageboardPaging.setCurrentPage(Integer.parseInt(pg));
 		imageboardPaging.setPageBlock(3);
-		imageboardPaging.setPageSize(3);
+		imageboardPaging.setPageSize(5);
 		imageboardPaging.setTotalA(totalA);
 
 		imageboardPaging.eventMakePagingHTML();
@@ -886,13 +907,13 @@ public class CustomerServiceController {
 	}
 	
 	// 메인이미지 정보 보기(이미지 클릭 시, -> 수정하기 위해서)
-		@RequestMapping(value = "C_imageDetail", method = RequestMethod.GET)
-		public ModelAndView C_image_Detail(@RequestParam String seq) {
+	@RequestMapping(value = "C_imageDetail", method = RequestMethod.GET)
+	public ModelAndView C_image_Detail(@RequestParam String seq) {
 
-			// DB
-			ImageboardDTO imageboardDTO = customerServiceDAO.getImageboard(seq);
+		// DB
+		ImageboardDTO imageboardDTO = customerServiceDAO.getImageboard(seq);
 
-			ModelAndView mav = new ModelAndView();
+		ModelAndView mav = new ModelAndView();
 			System.out.println(imageboardDTO.getStartDate1());
 			mav.addObject("imageboardDTO", imageboardDTO);
 			mav.addObject("postSelect", "0");
@@ -933,7 +954,6 @@ public class CustomerServiceController {
 		// DB
 		customerServiceDAO.eventboardDelete(list);
 		customerServiceDAO.eventboardDelete_book(list2);
-
 		return new ModelAndView("redirect:/customerService/C_eventboardListForm.do");
 	}
 
@@ -973,6 +993,7 @@ public class CustomerServiceController {
 	// 연극 정보 보기(이미지 클릭 시, -> 수정하기 위해서)
 	@RequestMapping(value = "C_playDetail", method = RequestMethod.GET)
 	public ModelAndView C_playDetail(@RequestParam String seq) {
+
 		// DB
 		EventboardDTO eventboardDTO = customerServiceDAO.getPlayboard(seq);
 		//날짜,시간
@@ -985,13 +1006,13 @@ public class CustomerServiceController {
 
 	// 연극 업로드 리스트 삭제
 	@RequestMapping(value = "C_eventboardDelete_play", method = RequestMethod.POST)
-	public ModelAndView C_eventboardDelete_play(@RequestParam String[] check) {
+		public ModelAndView C_eventboardDelete_play(@RequestParam String[] check) {
 
 		List<Integer> list = new ArrayList<Integer>();
 		for (String seq : check) {
 			list.add(Integer.parseInt(seq));
 		}
-		List<Integer> list2 = new ArrayList<Integer>();
+	List<Integer> list2 = new ArrayList<Integer>();
 		for (String seq : check) {
 			list2.add(Integer.parseInt(seq));
 		}
@@ -1142,65 +1163,10 @@ public class CustomerServiceController {
 			eventboardDTO.setImage1(fileName);
 			customerServiceDAO.C_eventboardMod(eventboardDTO);
 		}
-		customerServiceDAO.C_exhibitionboardBookDel(eventboardDTO);
-		
-		// String 타입 날짜를 Date 형식으로 변환(기간 구하기)
-		eventboardDTO.setStartDate(eventboardDTO.getStartDate().substring(0, 10).replaceAll("/", "-"));
-		eventboardDTO.setEndDate(eventboardDTO.getEndDate().substring(0, 10).replaceAll("/", "-"));
-
-		String startDate = eventboardDTO.getStartDate();
-		String endDate = eventboardDTO.getEndDate();
-
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-
-		long diff = 0;
-		long diffDays = 0;
-		Date startDateF = null;
-
-		try {
-			startDateF = formatter.parse(startDate);
-			Date endDateF = formatter.parse(endDate);
-
-			diff = endDateF.getTime() - startDateF.getTime();
-			diffDays = diff / (24 * 60 * 60 * 1000); // 종료일-시작일 = 행사 일 수(기간)
-
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-
-		Calendar calStart = Calendar.getInstance();
-		calStart.setTime(startDateF);
-
-		// 공연 기간 리스트 구하기
-		List<Date> listDate = new ArrayList<Date>();
-		for (int i = 0; i <= diffDays; i++) {
-
-			listDate.add(calStart.getTime());
-			calStart.add(Calendar.DATE, 1);
-		}
-		
-		// DB 
-		List<ExhibitionBookDTO> list = new ArrayList<ExhibitionBookDTO>();
-		// 예매DB
-		for (int i = 0; i <= diffDays; i++) {
-			exhibitionBookDTO.setNum(eventboardDTO.getSeq());
-			exhibitionBookDTO.setImageName(eventboardDTO.getImageName()); // 공연명 등록
-			exhibitionBookDTO.setPlayTicket(Integer.parseInt(eventboardDTO.getEventSeats())); // 일별 총 티켓 수 등록
-			exhibitionBookDTO.setRemainTicket(0); // 일별 잔여 티켓 수 등록
-			exhibitionBookDTO.setTicketPrice(Integer.parseInt(eventboardDTO.getEventPrice())); // 티켓 가격
-			exhibitionBookDTO.setBookTicket(0); // 예매된 티켓 수
-			
-			exhibitionBookDTO.setPlayDate(listDate.get(i));
-
-			list.add(exhibitionBookDTO);
-			customerServiceDAO.eventInfoWrite_exhibition_bookDB(exhibitionBookDTO); // 예매 DB에 박람회 정보 넣는 메소드(예매DB)
-		}
-		
-		
 		return new ModelAndView("redirect:/customerService/C_eventboardListForm.do");
 	}
 	
-	// 연극 수정완료 클릭시 DB내용 수정
+// 연극 수정완료 클릭시 DB내용 수정
 	@RequestMapping(value = "C_playboardMod", method = RequestMethod.POST)
 	public ModelAndView C_playboardMod(@ModelAttribute EventboardDTO eventboardDTO, @RequestParam MultipartFile img,
 			HttpSession session) {
@@ -1346,9 +1312,27 @@ public class CustomerServiceController {
 		String salesMon = year.substring(2) + "-" + month + "-" + "01";
 
 		// 부스명, 예약점유 일수, 총 매출액 가져오는 sql
-		List<SalesExhigitionDTO> list = customerServiceDAO.getSalesExhibition(salesMon);
+		List<SalesExhibitionDTO> list = customerServiceDAO.getSalesExhibition(salesMon);
 
 		int salesTotalRent = customerServiceDAO.getSalesTotalRentExhibition(salesMon);
+		String salesTotalRentstr = String.format("%,d", salesTotalRent);
+
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.addObject("salesTotalRent", salesTotalRentstr);
+		mav.setViewName("jsonView");
+		return mav;
+	}
+	
+	// 콘서트 홀 총 매출액 보여주는 컨트롤
+	@RequestMapping(value = "C_salesConcertHall", method = RequestMethod.POST)
+	public ModelAndView C_salesConcertHall(@RequestParam String year, @RequestParam String month) {
+		String salesMon = year.substring(2) + "-" + month + "-" + "01";
+
+		// 홀 이름, 예약점유 일수, 총 매출액 가져오는 sql
+		List<SalesConcertHallDTO> list = customerServiceDAO.getSalesConcertHall(salesMon);
+
+		int salesTotalRent = customerServiceDAO.getSalesTotalRentConcertHall(salesMon);
 		String salesTotalRentstr = String.format("%,d", salesTotalRent);
 
 		ModelAndView mav = new ModelAndView();

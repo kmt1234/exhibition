@@ -44,8 +44,8 @@ public class TrafficController {
 	//사용자가 보는 호텔리스트
 	@RequestMapping(value="T_hotelList", method=RequestMethod.GET)
 	public ModelAndView T_hotelList(@RequestParam(required=false , defaultValue="1") String pg) {	
-		int endNum = Integer.parseInt(pg)*8;
-		int startNum = endNum-7;
+		int endNum = Integer.parseInt(pg)*16;
+		int startNum = endNum-15;
 		
 		Map<String,Integer> map = new HashMap<String,Integer>();
 		map.put("endNum", endNum);
@@ -55,7 +55,7 @@ public class TrafficController {
 
 		imageboardPaging.setCurrentPage(Integer.parseInt(pg));
 		imageboardPaging.setPageBlock(3);
-		imageboardPaging.setPageSize(8);
+		imageboardPaging.setPageSize(16);
 		imageboardPaging.setTotalA(totalA);
 
 		imageboardPaging.hotelMakePagingHTML();

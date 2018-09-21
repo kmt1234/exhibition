@@ -18,6 +18,13 @@
  		where rn between #{startNum} and #{endNum}
  	</select>
  	
+ 	<select id="getNoticeMainList" parameterType="java.util.Map" resultType="customerService">
+ 		select * from 
+ 		(select rownum rn, tt.* from 
+ 		(select * from C_notice order by seq desc)tt) 
+ 		where rn between #{startNum} and #{endNum}
+ 	</select>
+ 	
  	<!-- 공지사항 검색 총글수 -->
  		<select id="getTotalC_notice_Search" parameterType="java.util.Map" resultType="int">
  		select count(*) from C_notice where ${subject} like '%'||#{keyword}||'%'
@@ -413,13 +420,22 @@
 									,#{bookStatus})
 						
 	</insert>
-	<!-- 매출현황  -->
-	<select id="getSalesExhibition" parameterType="java.lang.String" resultType="SalesExhigitionDTO">
+	
+	<!-- 박람회 부스 매출현황  -->
+	<select id="getSalesExhibition" parameterType="java.lang.String" resultType="SalesExhibitionDTO">
  		select sum(endDate-startDate+1) as saleDays, sum(totalrent) as totalRent, boothName from EXHIBITIONRENTAL where STARTDATE BETWEEN #{salesMon} and (select last_day(#{salesMon}) from dual) group by BOOTHNAME
  	</select>
- 	<!-- 매출현황  -->
+ 	<!-- 박람회 부스 총 매출현황  -->
  	<select id="getSalesTotalRentExhibition" parameterType="java.lang.String" resultType="int">
  		select sum(totalrent) as salesTotalRent from EXHIBITIONRENTAL where STARTDATE BETWEEN #{salesMon} and (select last_day(#{salesMon}) from dual)
+ 	</select>
+ 	<!-- 콘서트 홀 매출현황 -->
+ 	<select id="getSalesConcertHall" parameterType="java.lang.String" resultType="customerService.bean.SalesConcertHallDTO">
+ 		select sum((select last_day(#{salesMon}) from dual)-startDate) as saleDays, sum(totalrent) as totalRent, hallName from concertHall where STARTDATE BETWEEN #{salesMon} and (select last_day(#{salesMon}) from dual) group by hallName
+ 	</select>
+ 	<!-- 콘서트 홀 총 매출현황 -->
+ 	<select id="getSalesTotalRentConcertHall" parameterType="java.lang.String" resultType="int">
+ 		select sum(totalrent) as salesTotalRent from concertHall where STARTDATE BETWEEN #{salesMon} and (select last_day(#{salesMon}) from dual)
  	</select>
  	 	
 	<!-- 회원정보  -->
@@ -474,7 +490,7 @@
 		select count(*) from company where ${companySearchOption} like '%'||#{companySearch}||'%'
 	</select>
 	
-	<select id="getCompanyView" resultType="company" parameterType="String">
+	<select id="getCompanyView" resultType="exhibition" parameterType="String">
 		select * from exhibitionrental where C_license like #{C_license}
 	</select>
  	
