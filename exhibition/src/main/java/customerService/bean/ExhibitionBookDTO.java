@@ -9,6 +9,7 @@ import lombok.Data;
 @Data
 @Component
 public class ExhibitionBookDTO {
+	int num;
 	String imageName;			//공연명
 	Date playDate;              //공연일자(시작/종료)
 	int playTicket;           	//일별 총 티켓 수

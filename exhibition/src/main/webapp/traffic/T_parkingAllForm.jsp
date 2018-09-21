@@ -3,12 +3,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css"
-	href="../semantic/semantic.min.css">
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"
-	integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-	crossorigin="anonymous"></script>
-<script src="../semantic/semantic.min.js"></script>
 <style>
 	.box-container{
 		display: inline-block;
@@ -43,150 +37,152 @@
 	
 #houseImg{
 	margin:-3px;
+}
+#slidbar{
+	position:absolute;
+	top : 0px; 
+	left: 0px;
 }	
 </style>
 </head>
 <body>
-	<header>
+<header>
+	<div style="margin-top: 20px; min-width:1170px; position: relative;   ">
 		<jsp:include page="../main/I_header.jsp"></jsp:include>
-	</header>
-	<br>
-	<br>
-	<div class="ui five column grid container">
-		<!-- 사이드바 메뉴 -->
-
-		<div class="ui compact menu" style="width: 20%; height: 977px; ">
-			<a class="item" href="T_allForm.do" id="T_map">교통안내</a> 
-			<ul class="ui list" id="T_mapList" style="text-align: center; width: 120px">
-			  <li><a href="T_allForm.do">오시는 길</a></li>
-			  <li><a href="T_parkingAllForm.do">주차 안내</a></li>
-			</ul>
-			<a class="item" href="P_performanceScheduleForm.do">숙박안내</a> 
-			<a class="item" href="P_exhibitionScheduleForm.do">관광안내</a>
-
+	</div>
+</header>
+<div style="margin-top: 5px; min-width:1170px; position: relative;   " class="ui container" >
+	<!-- 사이드바 메뉴 -->
+	<div style="width:230px; height:900px auto; display: inline-block;">
+		<div class="ui compact menu" id="slidbar" style="display: inline-block;">
+			<a class="item" style="border: none; width: 227px;" href="T_allForm.do" id="T_map">교통안내</a> 
+				<ul class="ui list" id="T_mapList" style="text-align: center; width: 120px">
+				  <li><a href="T_allForm.do">오시는 길</a></li>
+				  <li><a href="T_parkingAllForm.do">주차 안내</a></li>
+				</ul>
+			<a class="item" href="T_hotelList.do">숙박안내</a> 
 		</div>
-		<!-- 메인 화면 -->
-		<div class="ui compact menu" style="width: 80%; height: 900px;" >
-			<!-- 타이틀 -->
-			<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
-				주차
-				<span class="h-light">안내</span>
-				<div style="font-size:13px; float:right;">
-				<img src="../img/house.png" width="15px" height="16px" id="houseImg">
-				   > 교통/숙박/관광 > 교통안내 > 주차 안내
+	</div>
+	<!-- 메인 화면 -->
+	<div class="ui compact menu" style="width: 930px; height:900px auto;  display: inline-block;" >
+		<!-- 타이틀 -->
+		<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
+			주차
+			<span class="h-light">안내</span>
+			<div style="font-size:13px; float:right; height: 50px; margin-top:30px ">
+				<img src="../img/house.png" width="15px" height="16px" style="cursor: pointer;" id="houseImg">
+			   	> 교통/숙박/관광 > 교통안내 > 주차 안내
+			</div>
+			<div class="ui divider"></div>
+		</h2>
+		
+		<div style="float: left; margin-left: 20px;">
+			<input type="button" value="주차안내" id="parkingInform" class="middle ui button">
+			<input type="button" value="주차장 층별 정보" id="parkingB" class="middle ui button">
+			<input type="button" value="주차요금" id="parkingPriceBtn" class="middle ui button">
+		</div>
+		<br><br><br><br>
+		<div id="carMap">
+			<div align="left">
+				<div style=" width: 10px auto; text-align: left; margin-left: 20px; margin-top: -8px;">
+					승용차 이용 시 출발지를 선택하세요
 				</div>
+					<div style="margin-left:20px;margin-top:10px; background-color: #e8e8e8;">
+						&ensp;&ensp;
+						<a id="banpoBtn" class="B">반포대교 방면</a>
+						&ensp;&ensp;|
+						&ensp;&ensp;
+						<a id="jamwonBtn" class="B">잠원로 방면</a>
+						&ensp;&ensp;|
+						&ensp;&ensp;
+						<a id="sapyungBtn" class="B">사평 지하차도 방면</a>
+						&ensp;&ensp;|
+						&ensp;&ensp;
+						<a id="seochoBtn" class="B">서초구 방면</a>
+						&ensp;&ensp;|
+						&ensp;&ensp;
+						<a id="banpoStationBtn" class="B">반포역 방면</a>	
+						&ensp;&ensp;
+						&ensp;&ensp;
+					</div>
+				</div>
+			<div id="banpoDiv">
+				<img style="margin-top:10px;" src="../img/carMap.jpg"><br>
 				<div class="ui divider"></div>
-			</h2>
-			<div style="float: left;">
-				<input type="button" value="주차안내" id="parkingInform" class="middle ui button">
-				
-				<input type="button" value="주차장 층별 정보" id="parkingB" class="middle ui button">
-				
-				<input type="button" value="주차요금" id="parkingPriceBtn" class="middle ui button">
-				 
-				 
-			</div>
-			
-			<br><br><br><br>
-
-			<div id="carMap">
 				<div align="left">
-					&ensp;&ensp;승용차 이용 시 출발지를 선택하세요
-						<div style="background-color: #e8e8e8;">
-							&ensp;&ensp;
-							<span id="banpoBtn" class="B">반포대교 방면</span>
-							&ensp;&ensp;|
-							&ensp;&ensp;
-							<span id="jamwonBtn" class="B">잠원로 방면</span>
-							&ensp;&ensp;|
-							&ensp;&ensp;
-							<span id="sapyungBtn" class="B">사평 지하차도 방면</span>
-							&ensp;&ensp;|
-							&ensp;&ensp;
-							<span id="seochoBtn" class="B">서초구 방면</span>
-							&ensp;&ensp;|
-							&ensp;&ensp;
-							<span id="banpoStationBtn" class="B">반포역 방면</span>		
-						</div>
-					</div>
-				<div id="banpoDiv">
-					<img src="../img/carMap.jpg"><br>
-					<div class="ui divider"></div>
-					<div align="left">
-						<span style="border:1px solid gray;padding:7px">반포대교 방면</span><!-- carMap  -->
-						<ol>
-						<li>반포대교 건너서 우회전 후 직진</li>
-						<li>IPEC 북문 GATE로 진입</li>
-						</ol>
-					</div>
-				</div>
-				<div id="jamwonDiv">
-					<img src="../img/carMap3.jpg"><br>
-					<div class="ui divider"></div>
-					<div align="left">
-						<span style="border:1px solid gray;padding:7px">잠원로 방면</span> <!-- carMap3  -->
-						<ol>
-						<li>잠원로 방면으로 직진 </li>
-						<li>신 반포로 건너서 직진</li>
-						<li>IPEC동문 GATE로 우회전 후 진입</li>
-						</ol>
-					</div>
-				</div>
-				<div id="sapyungDiv">
-					<img src="../img/carMapgosok.jpg"><br>
-					<div class="ui divider"></div>
-					<div align="left">
-						<span style="border:1px solid gray;padding:7px">사평 지하차도 방면</span><!-- carMapgosok  -->
-						<ol>
-						<li>고속터미널 사거리에서 직진 </li>
-						<li>IPEC 사거리에서 좌회전</li>
-						<li>50m 직진 후 좌회전 IPEC동문 GATE로 진입</li>
-						</ol>
-					</div>
-				</div>
-				<div id="seochoDiv">
-					<img src="../img/eastCarMap.jpg"><br>
-					<div class="ui divider"></div>
-					<div align="left">
-						<span style="border:1px solid gray;padding:7px">서초구 방면</span><!-- carMapeast  -->
-						<ol>
-						<li>사평역 방향에서 직진 </li>
-						<li>IPEC 사거리에서 우회전</li>
-						<li>50m 직진 후 좌회전 IPEC동문 GATE로 진입</li>
-						</ol>
-					</div>
-				</div>
-				<div id="banpoStationDiv">
-					<img src="../img/carMap2.jpg"><br>
-					<div class="ui divider"></div>
-					<div align="left">
-						<span style="border:1px solid gray;padding:7px">반포역 방면</span><!-- carMap2  -->
-						<ol>
-						<li>반포역 방면에서 직진 </li>
-						<li>신반포역 사거리에서 150m 직진 후 좌회전해서 IPEC북문 GATE로 진입</li>
-						
-						</ol>
-					</div>
+					<span style="padding:7px; color:red">반포대교 방면</span><!-- carMap  -->
+					<ol>
+					<li>반포대교 건너서 우회전 후 직진</li>
+					<li>IPEC 북문 GATE로 진입</li>
+					</ol>
 				</div>
 			</div>
+			<div id="jamwonDiv">
+				<img style="margin-top:10px;" src="../img/carMap3.jpg"><br>
+				<div class="ui divider"></div>
+				<div align="left">
+					<span style="padding:7px; color:red">잠원로 방면</span> <!-- carMap3  -->
+					<ol>
+					<li>잠원로 방면으로 직진 </li>
+					<li>신 반포로 건너서 직진</li>
+					<li>IPEC동문 GATE로 우회전 후 진입</li>
+					</ol>
+				</div>
+			</div>
+			<div id="sapyungDiv">
+				<img style="margin-top:10px;"src="../img/carMapgosok.jpg"><br>
+				<div class="ui divider"></div>
+				<div align="left">
+					<span style="padding:7px; color:red">사평 지하차도 방면</span><!-- carMapgosok  -->
+					<ol>
+					<li>고속터미널 사거리에서 직진 </li>
+					<li>IPEC 사거리에서 좌회전</li>
+					<li>50m 직진 후 좌회전 IPEC동문 GATE로 진입</li>
+					</ol>
+				</div>
+			</div>
+			<div id="seochoDiv">
+				<img style="margin-top:10px;" src="../img/eastCarMap.jpg"><br>
+				<div class="ui divider"></div>
+				<div align="left">
+					<span style="padding:7px; color:red">서초구 방면</span><!-- carMapeast  -->
+					<ol>
+					<li>사평역 방향에서 직진 </li>
+					<li>IPEC 사거리에서 우회전</li>
+					<li>50m 직진 후 좌회전 IPEC동문 GATE로 진입</li>
+					</ol>
+				</div>
+			</div>
+			<div id="banpoStationDiv">
+				<img style="margin-top:10px;" src="../img/carMap2.jpg"><br>
+				<div class="ui divider"></div>
+				<div align="left">
+					<span style="padding:7px; color:red">반포역 방면</span><!-- carMap2  -->
+					<ol>
+					<li>반포역 방면에서 직진 </li>
+					<li>신반포역 사거리에서 150m 직진 후 좌회전해서 IPEC북문 GATE로 진입</li>
+					
+					</ol>
+				</div>
+			</div>
+		</div>
 			
 			<div id="parkingDiv" align="left">
-				&ensp;&ensp;주차장 층을 선택 해 주세요
-				<div style="background-color: #e8e8e8;">
-					&ensp;&ensp;<span id="B1" class="B">B2</span>
+				<div style=" width: 10px auto; text-align: left; margin-left: 20px; margin-top: -8px;">
+					주차장 층을 선택 해 주세요
+				</div>
+				<div style="margin-left:20px;margin-top:10px; background-color: #e8e8e8;">
+					&ensp;&ensp;
+					<a id="B1" class="B">B2</a>
 					&ensp;&ensp;|
-					&ensp;&ensp;<span id="B2" class="B">B3</span>
+					<a id="B2" class="B">B3</a>
+					&ensp;&ensp;
 				</div>
 			</div>
 			
 			<div id="T_parkingB1Map">
 				<img src="../img/B1.jpg" width="700px" height="600px">
 				<div class="ui divider"></div>
-				<ul>
-					<li></li>
-					<li></li>
-					
-				</ul>
 			</div>
 			
 			<div id="T_parkingB2Map">
@@ -195,9 +191,8 @@
 			</div>
 			
 			<div id="T_parkingPriceMap">
-					<table class="ui celled table" style="width: 100%;">
-				<!-- <table border="1" cellpadding="8" cellspacing="2"> -->
-					<span style="float:left"><h2>주차요금</h2></span><br>
+				<table class="ui celled table" style="margin-left:20px; width: 880px;">
+					<span style="float:left ; margin-left: 20px;"><h2>주차요금</h2></span><br>
 					<tr>
 						<td  align="center" height="30" style="width:10%; background-color: #f7f6e6;text-align: center;">승용차</td>
 						<td style="width:20%;text-align: left;" >
@@ -235,8 +230,8 @@
 				</table>
 				<br>
 				<div class="ui divider"></div>
-				<table class="ui celled table" style="width: 100%;">
-				<span style="float:left"><h2>주차요금 할인</h2></span><br>
+				<table class="ui celled table" style="width: 880px; margin-left: 20px;">
+				<span style="float:left; margin-left: 20px;"><h2>주차요금 할인</h2></span><br>
 					<tr>
 						<th align="center" height="30" style="width:10%; background-color: #f7f6e6;text-align: center;">구분</th>
 						<th align="center" height="30" style="width:10%; background-color: #f7f6e6;text-align: center;">시간</th>
@@ -250,23 +245,21 @@
 					<tr>
 						<td style="width:20%;">공연 티켓 소지</td>
 						<td style="width:20%;">최소 4시간까지 4,800원</td>
-						
 					</tr>
 					<tr>
 						<td style="width:20%;">비즈니스룸 영수증 소지</td>
 						<td style="width:20%;">2시간 주차요금 무료</td>
-						
 					</tr>
 				</table>
 			</div><!--T_parkPriceMap  -->
 		</div>
-		<br>
-		
-		<!-- footer -->
-		<div class="ui compact menu" style="width: 100%; float: right; ">
-			<jsp:include page="../main/I_footer.jsp" ></jsp:include>
-		</div>
 	</div>
+<footer>
+	<div class="ui container" style="margin-top: 20px; min-width:1170px; position: relative; ">
+		<jsp:include page="../main/I_footer.jsp" ></jsp:include>
+	</div>
+</footer>
+<script src="../js/slidbar.js"></script>	
 <script src="../js/trafficParking.js?ver=1"></script>
 </body>
 </html>

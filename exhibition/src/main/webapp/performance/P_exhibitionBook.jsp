@@ -256,7 +256,6 @@ $(document).ready(function(){
 			dataType : 'text',
 			success : function(data){
 				if(data=='ok'){
-					alert('ok');
 					$('#BookEventBtn').show();
 				}else if(data=='no'){
 					alert('예매 가능한 티켓이 부족합니다. 다른 날짜를 선택해주세요');

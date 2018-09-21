@@ -108,8 +108,8 @@ function memberSearch(pg){
 </div>
 
 <div class="ui modal member"  id="modalForm">
-  <div class="header" ></div>
-  <div class="scrolling content">
+  <div class="header" id="header"></div>
+  <div class="scrolling content" id="content">
     
   </div>
 </div>
