@@ -299,9 +299,8 @@ $(document).ready(function(){
 							 		text : item.m_Phone
 							 	})).appendTo($('#memberListTable'));
 							});
-						 $('#paging').html(data.customerServicePaging.pagingHTML);
-						 
-						}
+						$('#paging').html(data.customerServicePaging.pagingHTML);
+					}
 				});
 			}
 		});
@@ -318,7 +317,7 @@ $(document).ready(function(){
 			dataType : 'json',
 			success : function(data){
 				$('#companyModalForm tr:gt(0)').remove();
-				alert(JSON.stringify(data));
+				/*alert(JSON.stringify(data));*/
 				$.each(data.list,function(index, item){
 					var startDate = item.startDate.toString().slice(0,10);
 					var endDate = item.endDate.toString().slice(0,10);
@@ -346,17 +345,11 @@ $(document).ready(function(){
 				 		name : 'c_license',
 				 		html : ing
 				 	})).appendTo($('#reservationCompanyTable'));
-					
-					
-					
-			});
+					});
 				$('.ui.modal.member.com').modal('show');
 			}
-		
-		});
-	
-		
-});
+		});	
+	});
 	
 	
 	$('#memberListTable').on('click','.M_Id',function(){
@@ -368,7 +361,7 @@ $(document).ready(function(){
 			data : {'M_Id' : $(this).text()},
 			dataType : 'json',
 			success : function(data){
-				alert(JSON.stringify(data));
+				/*alert(JSON.stringify(data));*/
 				$('#memberModalForm tr:gt(0)').remove();
 				$.each(data.list,function(index, item){
 					var playDate = item.playDate.toString().slice(0,10);
@@ -394,14 +387,11 @@ $(document).ready(function(){
 				 		text : item.ticketQty
 				 	})).appendTo($('#reservationMemberTable'));
 					
-				});
+					});
 				$('.ui.modal.member.mem').modal('show');
-				
 			}
+		});
+			
 	});
-		
-	
-});
-	
 	
 });
