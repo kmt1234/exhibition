@@ -12,10 +12,7 @@ code number default(1)	--코드(1=개인, 2=사업자) : 기본값:1
 insert into memberTable (M_Name, M_Id, M_Pwd,M_Email, M_Phone) values('홍길동','hong123','test123','toad001@nate.com','01012341234');
 insert into memberTable (M_Name, M_Id, M_Pwd,M_Email, M_Phone) values('개똥이','gaeddong123','test123','toad001@nate.com','01012341234');
 select * from memberTable;
-drop table memberTable;
-commit;
 
-rollback;
 
 
 //사업자 DB

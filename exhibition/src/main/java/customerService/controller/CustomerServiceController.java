@@ -44,6 +44,9 @@ import customerService.bean.SalesConcertHallDTO;
 import customerService.bean.SalesExhibitionDTO;
 import customerService.dao.CustomerServiceDAO;
 import member.bean.MemberDTO;
+import performance.bean.Book_exhibition_membersDTO;
+import performance.bean.Book_performance_membersDTO;
+import rental.bean.ExhibitionDTO;
 
 @RequestMapping(value = "customerService")
 @Component
@@ -831,13 +834,13 @@ public class CustomerServiceController {
 	public ModelAndView getImageboardSlide(@RequestParam String code) {
 		ArrayList<ImageboardDTO> list = new ArrayList<ImageboardDTO>();
 		ModelAndView mav = new ModelAndView();
-		String[] str = { "posterMain.jpg", "poster2.jpg", "poster4.jpg", "poster1.jpg", "poster3.jpg" };
+		String[] str = { "mainPoster.jpg", "poster2.jpg", "poster4.jpg", "poster1.jpg", "poster3.jpg" };
 
 		if (code.equals("1")) {
 			for (int i = 0; i < str.length; i++) {
 				ImageboardDTO imageboardDTO = new ImageboardDTO();
 				imageboardDTO.setImage1(str[i]);
-				System.out.println(imageboardDTO.getImage1());
+				
 				list.add(imageboardDTO);
 			}
 			mav.addObject("list", list);
@@ -859,7 +862,7 @@ public class CustomerServiceController {
 	public ModelAndView getImageboardSlide1(@RequestParam List<String> list) {
 		ModelAndView mav = new ModelAndView();
 		for (String data : list) {
-			System.out.println("data=" + data);
+			
 		}
 		List<ImageboardDTO> list1 = customerServiceDAO.getImageboardSlide(list);
 
@@ -893,9 +896,6 @@ public class CustomerServiceController {
 
 		ModelAndView mav = new ModelAndView();
 
-		for (EventboardDTO dto : list) {
-			System.out.println(dto.getImageName());
-		}
 
 		mav.addObject("pg", pg);
 		mav.addObject("imageboardPaging", imageboardPaging);
@@ -913,7 +913,7 @@ public class CustomerServiceController {
 		ImageboardDTO imageboardDTO = customerServiceDAO.getImageboard(seq);
 
 		ModelAndView mav = new ModelAndView();
-			System.out.println(imageboardDTO.getStartDate1());
+			
 			mav.addObject("imageboardDTO", imageboardDTO);
 			mav.addObject("postSelect", "0");
 			mav.addObject("modify", "1");
@@ -1392,6 +1392,7 @@ public class CustomerServiceController {
 		customerServicePaging.setTotalA(totalA);
 		customerServicePaging.member_pagingHTML();
 		
+		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("pg", pg);
 		mav.addObject("list", list);
@@ -1430,10 +1431,15 @@ public class CustomerServiceController {
 	//회원 상세정보
 	@RequestMapping(value="memberView", method = RequestMethod.POST)
 	public ModelAndView memberView(@RequestParam String M_Id) {
-		System.out.println(M_Id);
 		
+		List<Book_exhibition_membersDTO> exhibitionList = customerServiceDAO.getExhibitionView(M_Id);
+		List<Book_exhibition_membersDTO> performanceList = customerServiceDAO.getPerformanceView(M_Id);
+		exhibitionList.addAll(performanceList);
 		
 		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("list",exhibitionList);
+		
 		mav.setViewName("jsonView");
 		return mav;
 	}
@@ -1441,7 +1447,7 @@ public class CustomerServiceController {
 	//사업자 상세정보
 		@RequestMapping(value="companyView", method = RequestMethod.POST)
 		public ModelAndView companyView(@RequestParam String C_license) {
-			List<CompanyDTO> list = customerServiceDAO.getCompanyView(C_license);
+			List<ExhibitionDTO> list = customerServiceDAO.getCompanyView(C_license);
 			
 			ModelAndView mav = new ModelAndView();
 			mav.addObject("list",list);
