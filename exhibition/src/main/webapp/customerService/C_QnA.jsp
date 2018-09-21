@@ -28,7 +28,7 @@ selector    : {
 	style="width:140px; height:35px; font-family:돋움;
 	 border:1 solid #f702e7; " class="ui button QnA">
 	 
-	 <input type="button" value="전시&공연" id="C_QnA_exhibition"
+	 <input type="button" value="전시/공연" id="C_QnA_exhibition"
 	style="width:140px; height:35px; font-family:돋움;
 	 border:1 solid #f702e7; " class="ui button QnA">
 	 

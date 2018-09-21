@@ -7,13 +7,19 @@ $(document).ready(function(){
 	
 	//공지사항 - 작성하기
 	$('#C_notice_checkWriteBtn').click(function(){ // 공지사항 - 등록버튼 클릭시
+		var content_length = $('#content').val().length;
+		var subject_length = $('#subject').val().length;
 		$('#subjectDiv').empty();
 		$('#contentDiv').empty();
 		
 		if($('#subject').val()=='')
 			$('#subjectDiv').text("제목을 입력하세요").css('font-size','9pt').css('color','red')
+		else if(subject_length>=100)
+			$('#subjectDiv').text("100글자까지 입력 가능합니다").css('font-size','9pt').css('color','red')
 		else if($('#content').val()=='')
 			$('#contentDiv').text("내용을 입력하세요").css('font-size','9pt').css('color','red')
+		else if(content_length>=1300)
+			$('#contentDiv').text("1300글자까지 입력 가능합니다").css('font-size','9pt').css('color','red')
 		else
 			$('#C_notice_Write').submit();
 	});

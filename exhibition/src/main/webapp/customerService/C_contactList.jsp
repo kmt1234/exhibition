@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -133,13 +133,13 @@ $(document).ready(function(){
 						})).append($('<td/>',{
 							align : 'center',
 							style: 'width: 20%; height: 9%; text-align: center;',
-							text : item.phone,
-							id : 'phoneA'
+							text : item.name,
+							id : 'nameA'
 						})).append($('<td/>',{
 							align : 'center',
 							style: 'width: 20%; height: 9%; text-align: center;',
-							text : item.name,
-							id : 'nameA'
+							text : item.phone,
+							id : 'phoneA'
 						})).appendTo($('#C_contactList_List'));	
 					}
 					
@@ -147,6 +147,10 @@ $(document).ready(function(){
 				$('#C_contactList_PagingDiv').html(data.customerServicePaging.pagingHTML);
 			}
 		});
+	
+	$('#box').click(function(){
+		alert("1")
+	});
 	
 	$('#C_contactList_SearchBtn').click(function(event, str){
 		
@@ -194,13 +198,13 @@ $(document).ready(function(){
 								})).append($('<td/>',{
 									align : 'center',
 									style: 'width: 20%; height: 9%; text-align: center;',
-									text : item.phone,
-									id : 'phoneA'
+									text : item.name,
+									id : 'nameA'
 								})).append($('<td/>',{
 									align : 'center',
 									style: 'width: 20%; height: 9%; text-align: center;',
-									text : item.name,
-									id : 'nameA'
+									text : item.phone,
+									id : 'phoneA'
 								})).appendTo($('#C_contactList_List'));
 							}else if(code==3){
 								$('<tr/>').append($('<td/>').append($('<input/>',{
@@ -226,13 +230,13 @@ $(document).ready(function(){
 								})).append($('<td/>',{
 									align : 'center',
 									style: 'width: 20%; height: 9%; text-align: center;',
-									text : item.phone,
-									id : 'phoneA'
+									text : item.name,
+									id : 'nameA'
 								})).append($('<td/>',{
 									align : 'center',
 									style: 'width: 20%; height: 9%; text-align: center;',
-									text : item.name,
-									id : 'nameA'
+									text : item.phone,
+									id : 'phoneA'
 								})).appendTo($('#C_contactList_List'));	
 							}
 						});
@@ -242,7 +246,6 @@ $(document).ready(function(){
 			});
 		}
 	});
-	
 	
 	//전체선택
 	$('#checkAll').click(function(){
