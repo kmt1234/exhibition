@@ -48,9 +48,9 @@ selector    : {
 <div id="C_QnA_List" class="ui styled fluid accordion"></div>
 <br>
 <div align="left">
-	<c:if test="${code=='3' }"> 
+	<%-- <c:if test="${code=='3' }">  --%>
 		<input class="middle ui button" type="button" value="작성" id="C_QnA_writeBtn">
-	</c:if>
+	<%-- </c:if> --%>
 </div>
 <script src="../semantic/semantic.min.js"></script>
 <script src="../js/C_QnA_js.js?ver=1"></script>

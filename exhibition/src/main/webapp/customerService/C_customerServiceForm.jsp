@@ -55,7 +55,6 @@ left: 0px;
 		<div class="ui compact menu" style="width: 930px; min-height:900px auto;  display: inline-block;" >
 			<jsp:include page="${display}"></jsp:include>
 		</div>
-	
 </div>
 		<!-- footer -->
 	<div class="ui container" style="margin-top: 20px; min-width:1170px; position: relative; ">

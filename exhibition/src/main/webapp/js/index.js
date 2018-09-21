@@ -134,11 +134,4 @@ $(document).ready(function(){
 	});
 /*BODY 설명*/	
 	
-
-/*Footer 설명*/		
-	//클릭시(네이버사이트 맵과 연동)
-	$('#site_map').click(function(){
-		  window.open('/exhibition/main/map.jsp',"","width=900px, height=600px");
-		
-	});
 });
