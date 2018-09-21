@@ -306,7 +306,9 @@ $(document).ready(function(){
 			}
 		});
 	
+		
 	$('#memberListTable').on('click','.C_license',function(){
+		
 		var toDay = year+"-"+month+"-"+day;
 		var ing;
 		$.ajax({
@@ -315,8 +317,7 @@ $(document).ready(function(){
 			data : {'C_license' : $(this).text()},
 			dataType : 'json',
 			success : function(data){
-				$('#modalForm tr:gt(0)').remove();
-				$('#content').empty();
+				$('#companyModalForm tr:gt(0)').remove();
 				alert(JSON.stringify(data));
 				$.each(data.list,function(index, item){
 					var startDate = item.startDate.toString().slice(0,10);
@@ -324,15 +325,15 @@ $(document).ready(function(){
 					var allDate = startDate+"~"+endDate;
 					
 					if(startDate <= toDay && endDate >= toDay ){
-					 ing = "진행중";
+					 ing = "<font color='green'>진행중</font>";
 					}else if(endDate >toDay){
-						ing = "진행 예정";
+						ing = "<font color='blue'>진행 예정</font>";
 					}else if(startDate < toDay){
-						ing = "진행 종료";
+						ing = "<font color='red'>진행 종료</font>";
 					}	
 				
 				
-					$('#header').text(item.c_license);
+					$('#companyHeader').text(item.c_license+"님 예약 정보");
 					$('<tr/>').append($('<td/>',{
 				 		name : 'boothName',
 				 		text : item.boothName
@@ -343,11 +344,13 @@ $(document).ready(function(){
 				 		text : allDate
 				 	})).append($('<td/>',{
 				 		name : 'c_license',
-				 		text : ing
-				 	})).appendTo($('#reservationTable'));
+				 		html : ing
+				 	})).appendTo($('#reservationCompanyTable'));
 					
-					$('.ui.modal.member').modal('show');
+					
+					
 			});
+				$('.ui.modal.member.com').modal('show');
 			}
 		
 		});
@@ -357,16 +360,43 @@ $(document).ready(function(){
 	
 	
 	$('#memberListTable').on('click','.M_Id',function(){
+		var toDay = year+"-"+month+"-"+day;
+		var ing;
 		$.ajax({
 			type : 'POST',
 			url : '/exhibition/customerService/memberView.do',
 			data : {'M_Id' : $(this).text()},
-			dataType : 'text',
+			dataType : 'json',
 			success : function(data){
-				
+				alert(JSON.stringify(data));
+				$('#memberModalForm tr:gt(0)').remove();
 				$.each(data.list,function(index, item){
-					$('#header').text(item.C_license);
+					var playDate = item.playDate.toString().slice(0,10);
+					
+					if(playDate < toDay){
+						ing = "<font color='gray'>기간만료</font>"
+					}else if(playDate >= toDay){
+						ing = "<font color='green'>예매완료</font>"
+					}
+					
+					$('#memberHeader').text(item.memberId+"님 예약 정보");
+					$('<tr/>').append($('<td/>',{
+				 		name : 'imageName',
+				 		text : item.imageName
+				 	})).append($('<td/>',{
+				 		name : 'playDate',
+				 		text : playDate
+				 	})).append($('<td/>',{
+				 		name : "Status",
+				 		html : ing
+				 	})).append($('<td/>',{
+				 		name : 'tickeyQty',
+				 		text : item.ticketQty
+				 	})).appendTo($('#reservationMemberTable'));
+					
 				});
+				$('.ui.modal.member.mem').modal('show');
+				
 			}
 	});
 		

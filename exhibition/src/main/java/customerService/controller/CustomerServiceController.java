@@ -43,6 +43,8 @@ import customerService.bean.SalesConcertHallDTO;
 import customerService.bean.SalesExhibitionDTO;
 import customerService.dao.CustomerServiceDAO;
 import member.bean.MemberDTO;
+import performance.bean.Book_exhibition_membersDTO;
+import performance.bean.Book_performance_membersDTO;
 import rental.bean.ExhibitionDTO;
 
 @RequestMapping(value = "customerService")
@@ -1416,10 +1418,15 @@ public class CustomerServiceController {
 	//회원 상세정보
 	@RequestMapping(value="memberView", method = RequestMethod.POST)
 	public ModelAndView memberView(@RequestParam String M_Id) {
-		System.out.println(M_Id);
 		
+		List<Book_exhibition_membersDTO> exhibitionList = customerServiceDAO.getExhibitionView(M_Id);
+		List<Book_exhibition_membersDTO> performanceList = customerServiceDAO.getPerformanceView(M_Id);
+		exhibitionList.addAll(performanceList);
 		
 		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("list",exhibitionList);
+		
 		mav.setViewName("jsonView");
 		return mav;
 	}
