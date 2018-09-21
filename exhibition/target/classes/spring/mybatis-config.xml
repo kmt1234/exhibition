@@ -9,9 +9,11 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias alias="performance" type="performance.bean.PerformanceDTO" />
 		<typeAlias alias="customerService" type="customerService.bean.CustomerServiceDTO" />
 		<typeAlias alias="imageboard" type="customerService.bean.ImageboardDTO" />
-		<typeAlias alias="exhibition" type="rental.bean.ExhibitionDTO"  />
+		<typeAlias alias="SalesExhibitionDTO" type="customerService.bean.SalesExhibitionDTO"  />
 		<typeAlias alias="eventboard" type="customerService.bean.EventboardDTO"/>
 		<typeAlias alias="hotelboard" type="customerService.bean.HotelboardDTO"/>
+		<typeAlias alias="bookboard" type="performance.bean.Book_performance_membersDTO"/>
+		<typeAlias alias="bookboardEx" type="performance.bean.Book_exhibition_membersDTO"/>
+		<typeAlias alias="exhibition" type="rental.bean.ExhibitionDTO"/>
 	</typeAliases>
-
 </configuration>

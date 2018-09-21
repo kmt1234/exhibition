@@ -67,6 +67,10 @@ $(document).ready(function(){
 	$('#R_performance').click(function(){//공연장 홀
 		location.href="/exhibition/rental/R_performance.do";
 	});
+	//공연장 위치에 대한 정보(공연장 클릭시 공연장에서 행해지는 공연의 일정 정보 뜸) 
+	$('#R_businessRoom').click(function(){//공연장 홀
+		location.href="/exhibition/rental/R_businessRoom.do";
+	});
 	
 	/*교통&숙박(교통&숙박으로 분리 되어 있음)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 	//교통&숙박시설에 관한 내용
@@ -81,10 +85,11 @@ $(document).ready(function(){
 	});
 
 	/*고객센터(공지사항&고객의소리&자주묻는질마누&주요시설열락처 분리 되어 있음)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-	//공지사항
+	//고객센터 정보
 	$('#C_customerServiceForm').click(function(){
 		location.href="/exhibition/customerService/C_customerServiceForm.do";
 	});
+	//공지사항
 	$('#C_notice').click(function(){
 		location.href="/exhibition/customerService/C_notice.do";
 	});
@@ -100,15 +105,22 @@ $(document).ready(function(){
 	$('#C_contactList').click(function(){
 		location.href="/exhibition/customerService/C_contactList.do";
 	});
-	$('#C_boardAdd').click(function(){
-		location.href="/exhibition/customerService/C_mainImageboardForm.do";
-	});
-	//마이페이지
+	//마이페이지(개인정보)
 	$('#C_mypage').click(function(){
 		location.href="/exhibition/customerService/mypage.do";
 	});
-	
-	
+	//게시판 추가
+	$('#C_boardAdd').click(function(){
+		location.href="/exhibition/customerService/C_mainImageboardForm.do?postSelect=0";
+	});
+	//매출현황
+	$('#C_salesExhibition').click(function(){
+		location.href="/exhibition/customerService/C_salesExhibitionView.do";
+	});
+	//회원리스트
+	$('#C_memberShib').click(function(){
+		location.href="/exhibition/customerService/C_memberShib.do";
+	});
 	/*회사관련사항(소개&인사말&연혁??)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 	//회사의 전반적인 설명
 	$('#I_infoForm').click(function(){

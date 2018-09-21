@@ -8,26 +8,20 @@
 		url : '/exhibition/customerService/getImageboardSlide.do?code='+$("#code").val(),
 		dataType : 'json',
 		success : function(data){
-			//alert(JSON.stringify(data)); 데이터 확인
 			if(data.list.length==0) alert('메인 이미지 없습니다. 관리자에게 문의하십시오');
 			else{
 				$.each(data.list, function(index,item){
-				
-					
 					$('#mainSlideUl').append($('<li/>',{
 												style : 'display: inline-block'
 												})
 							   					.append($('<img>',{
 																	src : '../storage/'+item.image1+'',
 																	style : 'cursor:pointer; display:block; border:0;',
-
 																	class : 'pic',
 																	id : 'image1'
 								}))).appendTo('.slide',{
 									style : 'width : 6000px; list-style: none; font-size: 0'
 								});
-					
-				//	$('#imageSlide').attr('src','../storage/'+item.image1+'');
 				});//each
 				
 				 var current = 0;
@@ -38,7 +32,7 @@
 				 function init(){
 					 container = $('.slide ul');
 					 max = container.children().length;
-					interval = setInterval(next,3000);
+					 interval = setInterval(next,3000);
 				 }
 				 function prev(e){
 					 current--;
@@ -64,15 +58,12 @@
 		}//success
 	 });//ajax
 	 }else if(code == ''){
-		alert("여기오") 
 		$.ajax({
 		type : 'POST',
 		url : '/exhibition/customerService/getImageboardSlide1.do',
 		data : {'list':$('#list').val()},
 		dataType : 'json',
 		success : function(data){
-			alert(data.list)
-			//alert(JSON.stringify(data)); 데이터 확인
 			if(data.list.length==0) alert('메인 이미지 없습니다. 관리자에게 문의하십시오');
 			else{
 				$.each(data.list, function(index,item){
@@ -88,9 +79,7 @@
 								}))).appendTo('.slide',{
 									style : 'width : 100%; list-style: none; font-size: 0'
 								});
-					
-				//	$('#imageSlide').attr('src','../storage/'+item.image1+'');
-				});//each
+				});
 				
 				 var current = 0;
 				 var max = 0;

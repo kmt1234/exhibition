@@ -42,4 +42,50 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="performanceBook" parameterType="java.lang.String" resultType="eventboard">
 		select * from eventboard_play where seq = #{seq}
 	</select>
+	
+	<!--공연 예매자 등록(예매자 DB)-->
+	<insert id="bookPlayMembers" parameterType="bookboard">
+		insert into book_play_members values(#{imageName},#{playDate},#{memberId},#{ticketQty})
+	</insert>
+	
+	<!--예매 수만큼 잔여티켓 감소 -->
+	<update id="bookPlayMembers_calculate" parameterType="bookboard">
+		update eventboard_play_book set remainTicket =playTicket - #{ticketQty}, bookTicket = bookTicket + #{ticketQty} where imageName = #{imageName} and playDate = #{playDate} 
+	</update>
+	
+	<!--연극 잔여좌석 가져오는 메소드  -->
+	<select id="checkRemainSeats" parameterType="java.util.Map" resultType="java.lang.String">
+		select playTicket from eventboard_play_book where imageName = #{imageName} and playDate = #{playDate}
+	</select>
+	
+	<!--선택일자의  해당 연극 예매된 티켓 수 가져오기  -->
+	<select id="checkUsedSeats" parameterType="java.util.Map" resultType="java.lang.String">
+		select sum(ticketQty) from book_play_members where imageName = #{imageName} and playDate = #{playDate}
+	</select>
+	
+	<!--전시회 예약하기 폼-->
+	<select id="exhibitionBook" parameterType="java.lang.String" resultType="eventboard">
+		select * from eventboard where seq = #{seq}
+	</select>
+	
+	<!--전시회 예매자 등록(예매자 DB)-->
+	<insert id="bookExhibitionMembers" parameterType="bookboardEx">
+		insert into book_exhibition_members values(#{imageName},#{playDate},#{memberId},#{ticketQty})
+	</insert>
+	
+	<!--예매 수만큼 잔여티켓 감소 -->
+	<update id="bookExhibitionMembers_calculate" parameterType="bookboardEx">
+		update eventboard_exhibition_book set remainTicket =playTicket - #{ticketQty}, bookTicket = bookTicket + #{ticketQty} where imageName = #{imageName} and playDate = #{playDate} 
+	</update>
+	
+	<!--전시회 잔여좌석 가져오는 메소드 -->
+	<select id="checkRemainSeats_ex" parameterType="java.util.Map" resultType="java.lang.String">
+		select playTicket from eventboard_exhibition_book where imageName = #{imageName} and playDate = #{playDate}
+	</select>
+	
+	<!--선택일자의  해당 전시회 예매된 티켓 수 가져오기-->
+	<select id="checkUsedSeats_ex" parameterType="java.util.Map" resultType="java.lang.String">
+		select sum(ticketQty) from book_exhibition_members where imageName = #{imageName} and playDate = #{playDate}
+	</select>
+	
 </mapper>

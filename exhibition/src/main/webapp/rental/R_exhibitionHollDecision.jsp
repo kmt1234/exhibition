@@ -44,9 +44,11 @@
 					<input type="date" name="endDate" id="endDate" value="${date}">
 				</span>
 			</h4>
-			<input type="hidden" name="C_email" value="${C_email}">
+		    <c:if test="${code== '2'}">
+			<input type="hidden" name="C_email" value='${C_email}'>
 			<input type="hidden" name="C_license" value="${C_license}">
 			<input type="hidden" name="C_tel" value="${C_tel}">
+			</c:if>
 			<input type="hidden" id="totalRent" name="totalRent" value="">
 			<input type="hidden" id="booth" name="booth" value="${booth}">
 			<h4>
@@ -78,6 +80,7 @@
     <div class="ui approve button">확인</div>
   </div>
 </div>
+
 <input type="hidden" id="code" value="${code}">
 
 <script src='../calendar2/lib/moment.min.js'></script>
@@ -101,6 +104,7 @@
 	var code = $('#code').val();
 	
 	$(document).ready(function(){
+		alert('${C_email}');
 		
 		$('#rentBtn').click(function(){
 			if($('#startDate').val() < '${date}') {

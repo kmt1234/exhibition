@@ -23,6 +23,14 @@ public class BusinessRoomDAOMybatis implements BusinessRoomDAO {
 	public List<BusinessRoomDTO> getTimeListBusinessRoom(Map<String, String> map) {
 		return sqlSession.selectList("businessRoomSQL.getTimeListBusinessRoom", map);
 	}
+
+	public void rentalBusinessRoom(BusinessRoomDTO businessRoomDTO) {
+		for(int i = 0; i < businessRoomDTO.getCheckRow().length; i++) {
+			businessRoomDTO.setTime(businessRoomDTO.getCheckRow()[i]);;
+			sqlSession.insert("businessRoomSQL.rentalBusinessRoom", businessRoomDTO);
+		}
+		
+	}
 	
 	
 }

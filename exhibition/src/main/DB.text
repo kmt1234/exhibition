@@ -1,4 +1,3 @@
-------------------------------------------------DB------------------------------------------------------------
 //개인회원 DB
 create table memberTable(	
 M_Name varchar2(30) not null,	    --이름
@@ -15,6 +14,7 @@ insert into memberTable (M_Name, M_Id, M_Pwd,M_Email, M_Phone) values('개똥이','
 select * from memberTable;
 drop table memberTable;
 commit;
+
 rollback;
 
 
@@ -110,7 +110,6 @@ CREATE TABLE eventboard_play(
  
 create sequence seq_eventboard_play  nocache nocycle;
 
-
 //공지사항
 create table C_notice(
 seq number primary key,
@@ -127,8 +126,6 @@ subject varchar2(200) not null,
 content varchar2(500) not null);
 
 create sequence seq_C_QnA nocycle nocache;
-
-
 
 //고객의 소리
 create table C_inquire(
@@ -168,7 +165,6 @@ eventPlace varchar2(100) NOT NULL  --TEL
 create sequence seq_hotel_list nocycle nocache;
 
 
-
 --연극 일자별 DB
 create table eventboard_play_book(
  seq NUMBER PRIMARY KEY,            --시퀀스     
@@ -185,22 +181,37 @@ create table eventboard_play_book(
 
 create sequence seq_eventboard_play_book  nocache nocycle;  --예매DB 시퀀스
 
-
-
-
-//동혁이꺼 임시
-create table calendar2(
-code varchar2(5),
-title varchar2(30),
-startDate date,
-endDate date
+--연극 예매자 DB
+create Book_Play_Members(
+IMAGENAME	VARCHAR2(500)
+PLAYDATE	DATE
+MEMBERID	VARCHAR2(100)
+TICKETQTY	VARCHAR2(30)
 );
 
-insert into calendar2 values('2','라이어','20180910','20180913');
-insert into calendar2 values('1','아아아','20180918','20180922');
-insert into calendar2 values('1','아아아','20180928','20181005');
-insert into calendar2 values('2','거짓말','20180908','20180912');
+create sequence seq_Book_Play_Members;--연극 예매자 DB 시퀀스
 
-commit;
+--전시회 일자별 DB
+create table eventboard_exhibition_book(
+ seq NUMBER PRIMARY KEY,            --시퀀스     
+ imageName VARCHAR2(500) NOT NULL,  --공연명
+ playDate date,                     --공연일자(시작/종료)
+ playTicket VARCHAR2(100),           --일별 총 티켓 수
+ remainTicket VARCHAR2(100),         --일별 잔여 티켓 수
+ ticketPrice VARCHAR2(100),          --티켓 가격
+ bookTicket VARCHAR2(100)           --예매된 티켓 수
+);
+
+create sequence seq_eventboard_exhibition_book  nocache nocycle;  --예매DB 시퀀스
+
+--전시회 예매자 DB
+create Book_Exhibition_Members(
+IMAGENAME	VARCHAR2(500)
+PLAYDATE	DATE
+MEMBERID	VARCHAR2(100)
+TICKETQTY	VARCHAR2(30)
+);
+
+create sequence seq_Book_Exhibition_Members;--전시회 예매자 DB 시퀀스
 
 
