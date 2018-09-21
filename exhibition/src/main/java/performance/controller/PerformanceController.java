@@ -206,9 +206,21 @@ public class PerformanceController {
 		int endNum = Integer.parseInt(pg)*9;
 		int startNum = endNum-8;
 		
-		Map<String,Integer> map = new HashMap<String,Integer>();
-		map.put("endNum", endNum);
-		map.put("startNum", startNum);
+		//현재 날짜
+		Date currentDate = new Date();
+			
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+		
+		String startDateC = formatter.format(currentDate);
+		
+		String selMonth = startDateC.substring(0, 8) + "01";
+		
+		System.out.println("월 : "+ selMonth);
+		
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("endNum", endNum+"");
+		map.put("startNum", startNum+"");
+		map.put("selMonth", selMonth);
 		
 		int totalA = performanceDAO.getPlayListTotalA();
 		
@@ -240,7 +252,221 @@ public class PerformanceController {
 		mav.setViewName("P_performanceForm");
 		return mav;
 		
-	}	
+	}
+	
+	//다음 공연일정 리스트(3개월 치)
+	@RequestMapping(value="P_next_performanceList", method=RequestMethod.GET)
+	public ModelAndView P_next_performanceList(@RequestParam(required=false , defaultValue="1") String pg, HttpSession session) {
+		
+		Object object = null;
+		
+		try {
+			//회원의 코드 값 얻기
+			object = session.getAttribute("homepageMember");
+
+			if(object.toString().equals("1")) {
+				object = (MemberDTO)object;
+				
+			}else if(object.toString().equals("2")) {
+				object = (CompanyDTO)object;
+				
+			}else if(object.toString().equals("3")) {
+				object = (MemberDTO)object;
+			}else {
+				object = "guest";
+			}
+		} catch (Exception e) {
+			
+		}
+		
+		System.out.println("회원의 코드 : "+object);
+		
+		
+		//회원의 아이디 값 얻기
+		MemberDTO memberDTO = null;
+		CompanyDTO companyDTO = null;
+		String id = null;
+		
+		try {
+			if(object.toString().equals("1")) {
+				memberDTO = (MemberDTO)session.getAttribute("homepageMember");
+				System.out.println("얻은 아이디 : "+memberDTO.getM_Id());
+				id = memberDTO.getM_Id();
+				
+			}else if(object.toString().equals("2")) {
+				companyDTO = (CompanyDTO)session.getAttribute("homepageMember");
+				System.out.println("얻은 아이디 : "+companyDTO.getC_license());
+				id = companyDTO.getC_license();
+				
+			}else if(object.toString().equals("3")) {
+				System.out.println("얻은 아이디 : manager");
+				id = "manager";
+			}else {
+				System.out.println("얻은 아이디 : guest");
+				id = "guest";
+			}
+		} catch (Exception e) {
+			
+		}
+		
+		//Paging
+		int endNum = Integer.parseInt(pg)*9;
+		int startNum = endNum-8;
+		
+		//현재 날짜
+		Date currentDate = new Date();
+			
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+		
+		String startDateC = formatter.format(currentDate);
+
+		String selMonth = startDateC.substring(0, 8) + "01";
+		System.out.println("월 : "+ selMonth);	//현재 월
+		
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("endNum", endNum+"");
+		map.put("startNum", startNum+"");
+		map.put("selMonth", selMonth);
+		
+		int totalA = performanceDAO.getNextPlayListTotalA(map);	//연극 3개월 후 일정 수 가져오는 메소드
+		
+		//Paging
+		performancePaging.setCurrentPage(Integer.parseInt(pg));
+		performancePaging.setPageBlock(5);
+		performancePaging.setPageSize(9);
+		performancePaging.setTotalA(totalA);
+
+		performancePaging.makeNextPagingHTML_play();
+		
+		//DB
+		List<EventboardDTO> list = performanceDAO.getNextPlayList(map);
+		
+		ModelAndView mav = new ModelAndView();
+		
+		//String 타입 날짜를 Date 형식으로 변환
+		for(int i = 0; i < list.size(); i++) {
+			list.get(i).setStartDate(list.get(i).getStartDate().substring(0, 10));
+			list.get(i).setEndDate(list.get(i).getEndDate().substring(0, 10));
+		}
+		
+		mav.addObject("id", id);
+		mav.addObject("pg", pg);
+		mav.addObject("list", list);
+		mav.addObject("listSize", list.size()+"");
+		mav.addObject("performancePaging", performancePaging);
+		mav.addObject("display", "/performance/P_performanceList.jsp");
+		mav.setViewName("P_performanceForm");
+		return mav;
+		
+	}
+	
+	//이전 공연일정 리스트(3개월 치)
+	@RequestMapping(value="P_prev_performanceList", method=RequestMethod.GET)
+	public ModelAndView P_prev_performanceList(@RequestParam(required=false , defaultValue="1") String pg, HttpSession session) {
+		
+		Object object = null;
+		
+		try {
+			//회원의 코드 값 얻기
+			object = session.getAttribute("homepageMember");
+
+			if(object.toString().equals("1")) {
+				object = (MemberDTO)object;
+				
+			}else if(object.toString().equals("2")) {
+				object = (CompanyDTO)object;
+				
+			}else if(object.toString().equals("3")) {
+				object = (MemberDTO)object;
+			}else {
+				object = "guest";
+			}
+		} catch (Exception e) {
+			
+		}
+		
+		System.out.println("회원의 코드 : "+object);
+		
+		
+		//회원의 아이디 값 얻기
+		MemberDTO memberDTO = null;
+		CompanyDTO companyDTO = null;
+		String id = null;
+		
+		try {
+			if(object.toString().equals("1")) {
+				memberDTO = (MemberDTO)session.getAttribute("homepageMember");
+				System.out.println("얻은 아이디 : "+memberDTO.getM_Id());
+				id = memberDTO.getM_Id();
+				
+			}else if(object.toString().equals("2")) {
+				companyDTO = (CompanyDTO)session.getAttribute("homepageMember");
+				System.out.println("얻은 아이디 : "+companyDTO.getC_license());
+				id = companyDTO.getC_license();
+				
+			}else if(object.toString().equals("3")) {
+				System.out.println("얻은 아이디 : manager");
+				id = "manager";
+			}else {
+				System.out.println("얻은 아이디 : guest");
+				id = "guest";
+			}
+		} catch (Exception e) {
+			
+		}
+		
+		//Paging
+		int endNum = Integer.parseInt(pg)*9;
+		int startNum = endNum-8;
+		
+		//현재 날짜
+		Date currentDate = new Date();
+			
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+		
+		String startDateC = formatter.format(currentDate);
+
+		String selMonth = startDateC.substring(0, 8) + "01";
+		System.out.println("월 : "+ selMonth);	//현재 월
+		
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("endNum", endNum+"");
+		map.put("startNum", startNum+"");
+		map.put("selMonth", selMonth);
+		
+		int totalA = performanceDAO.getPrevPlayListTotalA(map);	//연극 3개월 후 일정 수 가져오는 메소드
+		
+		//Paging
+		performancePaging.setCurrentPage(Integer.parseInt(pg));
+		performancePaging.setPageBlock(5);
+		performancePaging.setPageSize(9);
+		performancePaging.setTotalA(totalA);
+
+		performancePaging.makePrevPagingHTML_play();
+		
+		//DB
+		List<EventboardDTO> list = performanceDAO.getPrevPlayList(map);
+		
+		ModelAndView mav = new ModelAndView();
+		
+		//String 타입 날짜를 Date 형식으로 변환
+		for(int i = 0; i < list.size(); i++) {
+			list.get(i).setStartDate(list.get(i).getStartDate().substring(0, 10));
+			list.get(i).setEndDate(list.get(i).getEndDate().substring(0, 10));
+		}
+		
+		mav.addObject("id", id);
+		mav.addObject("pg", pg);
+		mav.addObject("list", list);
+		mav.addObject("listSize", list.size()+"");
+		mav.addObject("performancePaging", performancePaging);
+		mav.addObject("display", "/performance/P_performanceList.jsp");
+		mav.setViewName("P_performanceForm");
+		return mav;
+		
+	}
+	
+	
 	
 	//전시회일정를 데이터베이스에서 불러와 달력으로 보내준다.
 	@RequestMapping(value="P_exhibitionSchedule", method=RequestMethod.GET)
@@ -289,9 +515,6 @@ public class PerformanceController {
 		
 		System.out.println("월 : "+ selMonth);
 		
-
-		
-		
 		
 		Map<String,String> map = new HashMap<String,String>();
 		map.put("endNum", endNum+"");
@@ -327,6 +550,218 @@ public class PerformanceController {
 		return mav;
 	}
 	
+	//다음 전시회일정 리스트(3개월 치)
+	@RequestMapping(value="P_next_exhibitionList", method=RequestMethod.GET)
+	public ModelAndView P_next_exhibitionList(@RequestParam(required=false , defaultValue="1") String pg, HttpSession session) {
+		
+		Object object = null;
+		
+		try {
+			//회원의 코드 값 얻기
+			object = session.getAttribute("homepageMember");
+
+			if(object.toString().equals("1")) {
+				object = (MemberDTO)object;
+				
+			}else if(object.toString().equals("2")) {
+				object = (CompanyDTO)object;
+				
+			}else if(object.toString().equals("3")) {
+				object = (MemberDTO)object;
+			}else {
+				object = "guest";
+			}
+		} catch (Exception e) {
+			
+		}
+		
+		System.out.println("회원의 코드 : "+object);
+		
+		
+		//회원의 아이디 값 얻기
+		MemberDTO memberDTO = null;
+		CompanyDTO companyDTO = null;
+		String id = null;
+		
+		try {
+			if(object.toString().equals("1")) {
+				memberDTO = (MemberDTO)session.getAttribute("homepageMember");
+				System.out.println("얻은 아이디 : "+memberDTO.getM_Id());
+				id = memberDTO.getM_Id();
+				
+			}else if(object.toString().equals("2")) {
+				companyDTO = (CompanyDTO)session.getAttribute("homepageMember");
+				System.out.println("얻은 아이디 : "+companyDTO.getC_license());
+				id = companyDTO.getC_license();
+				
+			}else if(object.toString().equals("3")) {
+				System.out.println("얻은 아이디 : manager");
+				id = "manager";
+			}else {
+				System.out.println("얻은 아이디 : guest");
+				id = "guest";
+			}
+		} catch (Exception e) {
+			
+		}
+		
+		//Paging
+		int endNum = Integer.parseInt(pg)*9;
+		int startNum = endNum-8;
+		
+		//현재 날짜
+		Date currentDate = new Date();
+			
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+		
+		String startDateC = formatter.format(currentDate);
+
+		String selMonth = startDateC.substring(0, 8) + "01";
+		System.out.println("월 : "+ selMonth);	//현재 월
+		
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("endNum", endNum+"");
+		map.put("startNum", startNum+"");
+		map.put("selMonth", selMonth);
+		
+		int totalA = performanceDAO.getNextExhibitionListTotalA(map);	//연극 3개월 후 일정 수 가져오는 메소드
+		
+		//Paging
+		performancePaging.setCurrentPage(Integer.parseInt(pg));
+		performancePaging.setPageBlock(5);
+		performancePaging.setPageSize(9);
+		performancePaging.setTotalA(totalA);
+
+		performancePaging.makeNextPagingHTML_exhibition();
+		
+		//DB
+		List<EventboardDTO> list = performanceDAO.getNextExhibitionList(map);
+		
+		ModelAndView mav = new ModelAndView();
+		
+		//String 타입 날짜를 Date 형식으로 변환
+		for(int i = 0; i < list.size(); i++) {
+			list.get(i).setStartDate(list.get(i).getStartDate().substring(0, 10));
+			list.get(i).setEndDate(list.get(i).getEndDate().substring(0, 10));
+		}
+		
+		mav.addObject("id", id);
+		mav.addObject("pg", pg);
+		mav.addObject("list", list);
+		mav.addObject("listSize", list.size()+"");
+		mav.addObject("performancePaging", performancePaging);
+		mav.addObject("display", "/performance/P_exhibitionList.jsp");
+		mav.setViewName("P_performanceForm");
+		return mav;
+		
+	}
+	
+	//이전 전시회일정 리스트(3개월 치)
+	@RequestMapping(value="P_prev_exhibitionList", method=RequestMethod.GET)
+	public ModelAndView P_prev_exhibitionList(@RequestParam(required=false , defaultValue="1") String pg, HttpSession session) {
+		
+		Object object = null;
+		
+		try {
+			//회원의 코드 값 얻기
+			object = session.getAttribute("homepageMember");
+
+			if(object.toString().equals("1")) {
+				object = (MemberDTO)object;
+				
+			}else if(object.toString().equals("2")) {
+				object = (CompanyDTO)object;
+				
+			}else if(object.toString().equals("3")) {
+				object = (MemberDTO)object;
+			}else {
+				object = "guest";
+			}
+		} catch (Exception e) {
+			
+		}
+		
+		System.out.println("회원의 코드 : "+object);
+		
+		
+		//회원의 아이디 값 얻기
+		MemberDTO memberDTO = null;
+		CompanyDTO companyDTO = null;
+		String id = null;
+		
+		try {
+			if(object.toString().equals("1")) {
+				memberDTO = (MemberDTO)session.getAttribute("homepageMember");
+				System.out.println("얻은 아이디 : "+memberDTO.getM_Id());
+				id = memberDTO.getM_Id();
+				
+			}else if(object.toString().equals("2")) {
+				companyDTO = (CompanyDTO)session.getAttribute("homepageMember");
+				System.out.println("얻은 아이디 : "+companyDTO.getC_license());
+				id = companyDTO.getC_license();
+				
+			}else if(object.toString().equals("3")) {
+				System.out.println("얻은 아이디 : manager");
+				id = "manager";
+			}else {
+				System.out.println("얻은 아이디 : guest");
+				id = "guest";
+			}
+		} catch (Exception e) {
+			
+		}
+		
+		//Paging
+		int endNum = Integer.parseInt(pg)*9;
+		int startNum = endNum-8;
+		
+		//현재 날짜
+		Date currentDate = new Date();
+			
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+		
+		String startDateC = formatter.format(currentDate);
+
+		String selMonth = startDateC.substring(0, 8) + "01";
+		System.out.println("월 : "+ selMonth);	//현재 월
+		
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("endNum", endNum+"");
+		map.put("startNum", startNum+"");
+		map.put("selMonth", selMonth);
+		
+		int totalA = performanceDAO.getPrevExhibitionListTotalA(map);	//연극 3개월 후 일정 수 가져오는 메소드
+		
+		//Paging
+		performancePaging.setCurrentPage(Integer.parseInt(pg));
+		performancePaging.setPageBlock(5);
+		performancePaging.setPageSize(9);
+		performancePaging.setTotalA(totalA);
+
+		performancePaging.makePrevPagingHTML_exhibition();
+		
+		//DB
+		List<EventboardDTO> list = performanceDAO.getPrevExhibitionList(map);
+		
+		ModelAndView mav = new ModelAndView();
+		
+		//String 타입 날짜를 Date 형식으로 변환
+		for(int i = 0; i < list.size(); i++) {
+			list.get(i).setStartDate(list.get(i).getStartDate().substring(0, 10));
+			list.get(i).setEndDate(list.get(i).getEndDate().substring(0, 10));
+		}
+		
+		mav.addObject("id", id);
+		mav.addObject("pg", pg);
+		mav.addObject("list", list);
+		mav.addObject("listSize", list.size()+"");
+		mav.addObject("performancePaging", performancePaging);
+		mav.addObject("display", "/performance/P_exhibitionList.jsp");
+		mav.setViewName("P_performanceForm");
+		return mav;
+		
+	}
+
 	//전시회 예약하기 폼
 	@RequestMapping(value="exhibitionBook", method=RequestMethod.GET)
 	public ModelAndView exhibitionBook(@RequestParam(required=false , defaultValue="1") String seq, HttpSession session) {
@@ -866,8 +1301,22 @@ public class PerformanceController {
 		}else
 			return "no";
 	}
-		
 	
+	//날짜 별 전시회, 콘서트 일정 받아오기
+	@RequestMapping(value="searchAllList", method = RequestMethod.POST)
+	public ModelAndView searchAllList(@RequestParam String date) {
+		
+		List<EventboardDTO> list = performanceDAO.getAllListExhibition(date);
+		List<EventboardDTO> consertList = performanceDAO.getAllListConcert(date);
+		
+		list.addAll(consertList);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.setViewName("jsonView");
+		return mav;
+	}
+		
 	//달력 메소드
 	public static String[] getDiffDays(String fromDate, String toDate) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
