@@ -256,6 +256,7 @@ $(document).ready(function(){
 			dataType : 'text',
 			success : function(data){
 				if(data=='ok'){
+					alert('ok');
 					$('#BookEventBtn').show();
 				}else if(data=='no'){
 					alert('예매 가능한 티켓이 부족합니다. 다른 날짜를 선택해주세요');
@@ -351,7 +352,6 @@ $(document).ready(function(){
 		}
 		
 	});//예매하기 버튼 클릭 
-	
 	//다음단계
 	$('#book_next_Btn').click(function(){
 		//모달 호출
@@ -366,9 +366,7 @@ $(document).ready(function(){
 		//결제금액 확인(3자리수)
 		var totPrice = $('#hiddenTicketPrice').val() * $('#selectPlayTicket :selected').val();	
 		$('#totalPrice').text(totPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-		
 	});
-	
 });
 </script>
 </html>

@@ -1301,6 +1301,21 @@ public class PerformanceController {
 		}else
 			return "no";
 	}
+	
+	//날짜 별 전시회, 콘서트 일정 받아오기
+	@RequestMapping(value="searchAllList", method = RequestMethod.POST)
+	public ModelAndView searchAllList(@RequestParam String date) {
+		
+		List<EventboardDTO> list = performanceDAO.getAllListExhibition(date);
+		List<EventboardDTO> consertList = performanceDAO.getAllListConcert(date);
+		
+		list.addAll(consertList);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.setViewName("jsonView");
+		return mav;
+	}
 		
 	//달력 메소드
 	public static String[] getDiffDays(String fromDate, String toDate) {

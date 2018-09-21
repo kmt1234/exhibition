@@ -207,3 +207,27 @@ create sequence seq_Book_Exhibition_Members;--전시회 예매자 DB 시퀀스
 
 
 
+--비지니스룸 예약테이블
+create table businessRoom(
+roomName varchar2(30), --룸이름
+M_Id varchar2(30), --멤버아이디
+M_Email varchar2(50), --멤버이메일
+startDate date, --예약일자
+first varchar2(10) default 'N', --09시~12시
+second varchar2(10) default 'N', --12시~15시
+third varchar2(10) default 'N', --15시~18시
+fourth varchar2(10) default 'N'); --18시~21시
+
+--콘서트홀 예약테이블
+create table concertHall(
+hallName varchar2(40) not null,
+C_license varchar2(40) not null,
+C_tel varchar2(40) not null,
+C_email varchar2(40) not null,
+totalRent number not null,
+title varchar2(40) not null,
+startDate date not null,
+endDate date not null
+);
+
+

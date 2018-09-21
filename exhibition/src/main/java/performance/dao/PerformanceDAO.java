@@ -8,6 +8,7 @@ import customerService.bean.ExhibitionBookDTO;
 import performance.bean.Book_exhibition_membersDTO;
 import performance.bean.Book_performance_membersDTO;
 
+
 public interface PerformanceDAO {
 
 	public List<EventboardDTO> getPerformance();
@@ -50,6 +51,11 @@ public interface PerformanceDAO {
 
 	public List<EventboardDTO> getPrevExhibitionList(Map<String, String> map);	////전시회 3개월 전 일정 가져오는 메소드	
 	public int getPrevExhibitionListTotalA(Map<String, String> map);	//전시회 3개월 전 일정 수 가져오는 메소드	
+
+	public List<EventboardDTO> getAllListExhibition(String date); //해당하는 날의 전시 리스트 가져오기
+
+	public List<EventboardDTO> getAllListConcert(String date);//해당하는 날의 공연 리스트 가져오기
+
 
 	
 

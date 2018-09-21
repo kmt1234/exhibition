@@ -138,4 +138,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 select * from eventboard where startDate <![CDATA[>=]]> (select add_months(sysdate,-3) from dual) and endDate <![CDATA[<=]]> (select (sysdate+1) as nextdate from dual) order by startDate desc)tt
              )where rn <![CDATA[>=]]> ${startNum} and rn <![CDATA[<=]]> ${endNum} 
 	</select>
+	
+	<!-- 해당하는 날의 전시회 리스트 -->
+	<select id="getAllListExhibition" parameterType="String" resultType="eventboard">
+		select * from EVENTBOARD where #{date} BETWEEN startDate and endDate
+	</select>
+	
+	<!-- 해당하는 날의 공연 리스트 -->
+	<select id="getAllListConcert" parameterType="String" resultType="eventboard">
+		select * from EVENTBOARD_PLAY where #{date} BETWEEN startDate and endDate
+	</select>
 </mapper>

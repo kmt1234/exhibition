@@ -11,6 +11,7 @@ import customerService.bean.ExhibitionBookDTO;
 import customerService.bean.HotelboardDTO;
 import customerService.bean.ImageboardDTO;
 import customerService.bean.PlayBookDTO;
+import customerService.bean.SalesBusinessRoomDTO;
 import customerService.bean.SalesConcertHallDTO;
 import customerService.bean.SalesExhibitionDTO;
 import member.bean.MemberDTO;
@@ -138,6 +139,18 @@ public interface CustomerServiceDAO {
 	
 	//콘서트 홀 총 매출액
 	public int getSalesTotalRentConcertHall(String salesMon);
+	
+	//비즈니스룸 부스 매출현황
+	public List<SalesBusinessRoomDTO> getSalesBusinessRoom(String salesMon);
+	
+	//비즈니스룸 총 매출액
+	public int getSalesTotalRentBusinessRoom(String salesMon);
+	
+	//콘서트 티켓 매출현황
+	public List<EventboardDTO> getSalesConcertTicket(String salesMon);
+	
+	//콘서트 티켓 총 매출액
+	public int getSalesTotalRentConcertTicket(String salesMon);
 
 	//회원정보
 	public List<MemberDTO> getMemberList(Map<String, Integer> map);
@@ -180,6 +193,10 @@ public interface CustomerServiceDAO {
 	public void eventboardDelete_book(List<Integer> list2);//박람회 리스트지울때 예매날짜 지우기
 	
 	public void C_exhibitionboardBookDel(EventboardDTO eventboardDTO);//박람회 수정하기 위해서 예매일짜 날려버리기
+	
+	
+	
+	
 	
 
 	

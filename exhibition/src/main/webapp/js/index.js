@@ -107,7 +107,7 @@ $(document).ready(function(){
 	});
 	//마이페이지(개인정보)
 	$('#C_mypage').click(function(){
-		location.href="/exhibition/customerService/mypage.do";
+		location.href="/exhibition/login/mypage.do";
 	});
 	//게시판 추가
 	$('#C_boardAdd').click(function(){
