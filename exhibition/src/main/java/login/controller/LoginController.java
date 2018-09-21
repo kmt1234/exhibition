@@ -1,6 +1,8 @@
 package login.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -23,6 +25,7 @@ import company.bean.CompanyDTO;
 import company.dao.CompanyDAO;
 import member.bean.MemberDTO;
 import member.dao.MemberDAO;
+import performance.bean.Book_performance_membersDTO;
 
 @RequestMapping(value = "login")
 @Component
@@ -34,6 +37,8 @@ public class LoginController {
 	private CompanyDAO companyDAO;
 	@Autowired
 	private JavaMailSenderImpl emailSender;
+	@Autowired
+	private Book_performance_membersDTO book_performance_membersDTO;
 
 	// 개인회원-로그인
 	@RequestMapping(value = "login", method = RequestMethod.POST)
@@ -204,5 +209,28 @@ public class LoginController {
 		else
 			return "0";
 	}
-
+	
+	//회원의 예매 리스트를 가져오는 ajax
+	@RequestMapping(value="getMemberTicketList", method=RequestMethod.GET)
+	public ModelAndView getMemberTicketList(HttpSession session) {
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("homepageMember");
+		String id = memberDTO.getM_Id();
+		
+		System.out.println("아이디는 : "+id);
+		
+		//DB
+		List<Book_performance_membersDTO> list = new ArrayList<Book_performance_membersDTO>();
+		list = memberDAO.getMemberTicketList(id);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.setViewName("jsonView");
+		
+		if(list==null) {
+			mav.addObject("no_data", "no_data");
+			return mav;
+		} 
+		else return mav;
+	}
+	
 }
