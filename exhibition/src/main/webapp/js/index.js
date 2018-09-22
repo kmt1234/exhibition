@@ -132,6 +132,34 @@ $(document).ready(function(){
 	$('#I_CEOIntroductionForm').click(function(){//CEO인사말
 		location.href="/exhibition/introduction/I_CEOIntroductionForm.do";
 	});
+	
+	// 메인화면에 공지사항 리스트 불러오기
+	$.ajax({
+		type : 'POST',
+		url : '/exhibition/customerService/getNoticeMainList.do',
+		data : {'pg':$('#pg').val()},
+		dataType : 'json',
+		success : function(data){
+			$.each(data.list, function(index, item){
+				$('<ul/>').append($('<p/>',{
+					align : 'center',
+					id : 'subjectA',
+					style: ' width : 250px; height: 35px; margin-left : 20px; text-align: left;',
+					class : 'subjectC',
+					href : 'javascript:void(0)',
+					text : item.subject
+				})).append($('<input>',{
+					type : 'hidden',
+					text : item.seq
+				})).appendTo($('#C_notice_MainList'));
+			});
+		}
+	}); 
+	// 메인화면 공지사항 리스트 제목 클릭시 내용 보여줌
+	$('#C_notice_MainList').on('click','#subjectA',function(){
+		var seq = $(this).next().text();
+		location.href='/exhibition/customerService/C_notice_View.do?seq='+seq+'&pg='+$('#pg').val();
+	});
 /*BODY 설명*/	
 	
 });

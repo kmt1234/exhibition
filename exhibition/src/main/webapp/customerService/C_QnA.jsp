@@ -15,6 +15,7 @@ selector    : {
 </head>
 <body>
 <div class="ui compact menu" style="width: 930px; height:900px auto;  display: inline-block;" >
+<form id="C_QnA_delete" method="post" action="C_QnA_Delete.do">
 	<h2 class="box-container"style="float: center; width: 100%; height:126px;  text-align: left;">
 		<span>자주묻는</span>
 		<span class="h-light">질문</span>
@@ -50,15 +51,24 @@ selector    : {
 		 border:1 solid #f702e7; " class="ui button QnA">
 	</div>
 	<br>
+	<ul>
+	</ul>
 	<div id="C_QnA_List" style="width: 880px; margin-left: 20px;" class="ui styled fluid accordion"></div>
 	<br>
-	<div align="left" style="margin-left: 20px;">
-	<%-- <c:if test="${code=='3' }">  --%>
-		<input class="middle ui button" type="button" value="작성" id="C_QnA_writeBtn">
-	<%-- </c:if> --%>
+	<div align="left" style="margin-left: 64px;">
+		<c:if test="${code=='3' }"> 
+			<th style="width: 300px; height: 7%; padding-top: 10px; text-align: center;">
+				<input type="checkbox" id="checkAll">
+			</th>
+		<input class="middle ui button" type="button" style="margin-left: 50px;" value="작성" id="C_QnA_writeBtn">
+		<input type="button" class="middle ui button" id="C_QnA_DeleteBtn" value="삭제" >
+		</c:if>
 	</div>
 	<div style="margin-top: 40px;"></div>
+</form>
 </div>
+
+<input type="hidden" id="hiddenCode" value="${code}">
 <script src="../semantic/semantic.min.js"></script>
 <script src="../js/C_QnA_js.js?ver=1"></script>
 

@@ -161,6 +161,13 @@
  		select * from C_QnA where classify=#{classify}
  	</select>
  	
+ 	<!-- 자주 묻는 질문 삭제 -->
+ 	<delete id="C_QnA_Delete" parameterType="java.util.List">
+ 		delete C_QnA where seq in 
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
  	
  	
  	

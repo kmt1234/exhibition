@@ -80,37 +80,7 @@
 
 <script>
 $(document).ready(function(){
-	$.ajax({
-		type : 'POST',
-		url : '/exhibition/customerService/getNoticeMainList.do',
-		data :  'pg=${pg}',
-		dataType : 'json',
-		success : function(data){
-			$.each(data.list, function(index, item){
-				$('<ul/>').append($('<p/>',{
-					align : 'center',
-					id : 'subjectA',
-					style: ' width : 250px; height: 35px; margin-left : 20px; text-align: left;',
-					class : 'subjectC',
-					href : 'javascript:void(0)',
-					text : item.subject
-				})).append($('<input>',{
-					type : 'hidden',
-					text : item.seq
-				})).appendTo($('#C_notice_MainList'));
-			});
-		}
-	}); 
-	
-	$('#C_notice_MainList').on('click','#subjectA',function(){
-		var seq = $(this).next().text();
-		location.href="/exhibition/customerService/C_notice_View.do?seq="+seq+"&pg=${pg}";
-	});
-	
-	
-
-	
-	
+		
 	setInterval(function () {
 		if($('li.ex_item').length > 1){moveExItems()}
 		if($('li.co_item').length > 1){moveCoItems()}
