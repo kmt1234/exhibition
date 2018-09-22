@@ -93,7 +93,7 @@ public class PerformanceController {
 		return mav ;
 	}
 	
-	//전체일정 리스트
+	//이번달 전체일정 리스트
 	@RequestMapping(value="P_allScheduleList", method=RequestMethod.GET)
 	public ModelAndView P_allScheduleList(@RequestParam(required=false , defaultValue="1") String pg) {	
 		//Paging
@@ -133,6 +133,105 @@ public class PerformanceController {
 		mav.setViewName("/performance/P_performanceForm");
 		return mav ;
 	}
+	
+	//3개월 이전 전체행사 리스트
+	@RequestMapping(value="P_allScheduleList_Prev", method=RequestMethod.GET)
+	public ModelAndView P_allScheduleList_Prev(@RequestParam(required=false , defaultValue="1") String pg) {	
+		//Paging
+		int endNum = Integer.parseInt(pg)*5;
+		int startNum = endNum-4;	
+		
+		Date date = new Date();						//현재 날짜의 월
+		SimpleDateFormat formatter = new SimpleDateFormat("YYMM");
+		String dateM = formatter.format(date);
+		
+		Calendar cal = Calendar.getInstance();
+		cal.add(cal.MONTH, -3);
+		String beforeYear = formatter.format(cal.getTime()).substring(0,2);
+		String beforeMonth = formatter.format(cal.getTime()).substring(2,4);
+		
+		String dateS= beforeYear+beforeMonth;
+
+		Map<String,Integer> map = new HashMap<String,Integer>();
+		map.put("endNum", endNum);
+		map.put("startNum", startNum);
+		map.put("dateS", Integer.parseInt(dateS));
+		map.put("dateM", Integer.parseInt(dateM));
+		
+		int totalA = performanceDAO.getAllListTotalA_Prev(map);
+		
+		//Paging
+		performancePaging.setCurrentPage(Integer.parseInt(pg));
+		performancePaging.setPageBlock(3);
+		performancePaging.setPageSize(5);
+		performancePaging.setTotalA(totalA);
+
+		performancePaging.makePagingHTML();
+		
+		//DB
+		List<EventboardDTO> list = performanceDAO.getAllExhibitionList_Prev(map);
+		for(int i = 0; i < list.size(); i++) {
+			list.get(i).setStartDate(list.get(i).getStartDate().substring(0, 10));
+			list.get(i).setEndDate(list.get(i).getEndDate().substring(0, 10));
+		}
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.addObject("listSize", list.size()+"");
+		mav.addObject("pg", pg);
+		mav.addObject("performancePaging", performancePaging);
+		mav.addObject("display","/performance/P_allScheduleList_Prev.jsp");
+		mav.setViewName("/performance/P_performanceForm");
+		return mav ;
+	}
+	
+	//3개월 이후 전체행사 리스트
+		@RequestMapping(value="P_allScheduleList_After", method=RequestMethod.GET)
+		public ModelAndView P_allScheduleList_After(@RequestParam(required=false , defaultValue="1") String pg) {	
+			//Paging
+			int endNum = Integer.parseInt(pg)*5;
+			int startNum = endNum-4;	
+			
+			Date date = new Date();						//현재 날짜의 월
+			SimpleDateFormat formatter = new SimpleDateFormat("YYMM");
+			String dateM = formatter.format(date);
+			
+			Calendar cal = Calendar.getInstance();
+			cal.add(cal.MONTH, +3);
+			String beforeYear = formatter.format(cal.getTime()).substring(0,2);
+			String beforeMonth = formatter.format(cal.getTime()).substring(2,4);
+			
+			String dateS= beforeYear+beforeMonth;
+			Map<String,Integer> map = new HashMap<String,Integer>();
+			map.put("endNum", endNum);
+			map.put("startNum", startNum);
+			map.put("dateS", Integer.parseInt(dateS));
+			map.put("dateM", Integer.parseInt(dateM));
+			
+			int totalA = performanceDAO.getAllListTotalA_After(map);
+			
+			//Paging
+			performancePaging.setCurrentPage(Integer.parseInt(pg));
+			performancePaging.setPageBlock(3);
+			performancePaging.setPageSize(5);
+			performancePaging.setTotalA(totalA);
+
+			performancePaging.makePagingHTML();
+			
+			//DB
+			List<EventboardDTO> list = performanceDAO.getAllExhibitionList_After(map);
+			for(int i = 0; i < list.size(); i++) {
+				list.get(i).setStartDate(list.get(i).getStartDate().substring(0, 10));
+				list.get(i).setEndDate(list.get(i).getEndDate().substring(0, 10));
+			}
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("list", list);
+			mav.addObject("listSize", list.size()+"");
+			mav.addObject("pg", pg);
+			mav.addObject("performancePaging", performancePaging);
+			mav.addObject("display","/performance/P_allScheduleList_After.jsp");
+			mav.setViewName("/performance/P_performanceForm");
+			return mav ;
+		}
 
 	//공연일정를 데이터베이스에서 불러와 달력으로 보내준다.
 	@RequestMapping(value="P_performanceSchedule", method=RequestMethod.GET)
