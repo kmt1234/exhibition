@@ -41,6 +41,6 @@
 			     </div>
 				  
 			  </div><!--class="ui inverted form"-->
-			</div><!--class="ui inverted segment"-->
+			</div><!--class="ui inverted segment"-->  
 		</div>  
 </div>   
