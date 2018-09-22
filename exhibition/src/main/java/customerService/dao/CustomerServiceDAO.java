@@ -62,7 +62,8 @@ public interface CustomerServiceDAO {
 	public List<CustomerServiceDTO> getQnA_Classify(String classify);				
 	// 자주묻는 질문 관리자가 작성하기
 	public void C_QnA_checkWrite(Map<String, String> map);							
-	
+	// 자주묻는 질문 관리자가 삭제하기
+	public void C_QnA_Delete(List<Integer> list);
 	
 	
 	// 주요시설 연락처 관리자가 작성하기

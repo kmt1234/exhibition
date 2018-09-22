@@ -471,6 +471,23 @@ public class CustomerServiceController {
 
 		return new ModelAndView("redirect:/customerService/C_QnA.do");
 	}
+	
+	//자주 묻는 질문 연락처 삭제
+		@RequestMapping(value = "C_QnA_Delete", method = RequestMethod.POST)
+		public ModelAndView C_QnA_Delete(@RequestParam String[] box, Model model) {
+
+			List<Integer> list = new ArrayList<Integer>();
+			
+			for(String seq : box) {
+				list.add(Integer.parseInt(seq));
+			}
+			
+			customerServiceDAO.C_QnA_Delete(list);
+
+			return new ModelAndView("redirect:/customerService/C_QnA.do");
+		}
+	
+	
 
 	// 주요시설
 	// 연락처~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -491,7 +508,11 @@ public class CustomerServiceController {
 	public ModelAndView C_contactList_Delete(@RequestParam String[] box, Model model) {
 
 		List<Integer> list = new ArrayList<Integer>();
-
+		
+		for(String seq : box) {
+			list.add(Integer.parseInt(seq));
+		}
+		
 		customerServiceDAO.C_contactList_Delete(list);
 
 		return new ModelAndView("redirect:/customerService/C_contactList.do");

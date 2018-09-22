@@ -106,7 +106,10 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	public void C_QnA_checkWrite(Map<String, String> map) {
 		sqlSession.insert("customerServiceSQL.C_QnA_checkWrite", map);		
 	}
-	
+	// 자주 묻는 질문 관리자가 삭제하기
+	public void C_QnA_Delete(List<Integer> list) {
+		sqlSession.delete("customerServiceSQL.C_QnA_Delete", list);
+	}
 	
 	
 	// 주요시설 연락처 관리자가 작성하기
@@ -136,7 +139,7 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	
 	
 	
-	/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~```*/
+	/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 	
 	
 	
