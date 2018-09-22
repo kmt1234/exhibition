@@ -31,7 +31,7 @@
 						  <span id="verify-Number2-Send"><i class="envelope outline icon"></i>인증번호 발송하기</span></label>
 						  <input name="verify-Number2" id="verify-Number2" placeholder="인증번호 입력" type="text"><br>
 						  <input type="hidden" class="verify-Number2-hidden">
-					</div>
+					</div>   
 					
 				 </div> 
 					 	     
