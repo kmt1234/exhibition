@@ -366,6 +366,7 @@ $(document).ready(function(){
 				$.each(data.list,function(index, item){
 					var playDate = item.playDate.toString().slice(0,10);
 					
+					
 					if(playDate < toDay){
 						ing = "<font color='gray'>기간만료</font>"
 					}else if(playDate >= toDay){
