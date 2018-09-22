@@ -74,11 +74,11 @@ ul{
 		<div class="ui compact menu" style="width: 930px; height:900px auto;  display: inline-block;" >
 			<!-- 타이틀 -->
 			<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
-				오시는
+				<span>오시는</span>
 				<span class="h-light">길</span>
 			 	<div style="font-size:13px; float:right; height: 50px; margin-top:30px ">
 					<img src="../img/house.png" width="15px" height="16px" style="cursor: pointer;" id="houseImg"></img>
-					> 교통/숙박/관광 > 교통안내 > 오시는 길
+					> 교통&숙박 > 교통안내 > 오시는 길
 				</div>
 				<div class="ui divider"></div> 
 			</h2>

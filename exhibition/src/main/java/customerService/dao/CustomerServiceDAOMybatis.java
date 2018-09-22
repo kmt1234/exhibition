@@ -20,6 +20,9 @@ import customerService.bean.SalesBusinessRoomDTO;
 import customerService.bean.SalesConcertHallDTO;
 import customerService.bean.SalesExhibitionDTO;
 import member.bean.MemberDTO;
+import performance.bean.Book_exhibition_membersDTO;
+import performance.bean.Book_performance_membersDTO;
+import rental.bean.ExhibitionDTO;
 
 @Transactional
 @Component
@@ -318,6 +321,14 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	public int getMemberListSearchTotal(Map<String, String> map) {
 		return sqlSession.selectOne("customerServiceSQL.getMemberListSearchTotal",map);
 	}
+	//박람회뷰
+	public List<Book_exhibition_membersDTO> getExhibitionView(String M_Id) {
+		return sqlSession.selectList("customerServiceSQL.getExhibitionView",M_Id);
+	}
+	//연극뷰
+	public List<Book_exhibition_membersDTO> getPerformanceView(String M_Id) {
+		return sqlSession.selectList("customerServiceSQL.getPerformanceView",M_Id);
+	}
 	
 	//사업자 정보 불러오기
 	public List<CompanyDTO> getCompanyList(Map<String, Integer> map) {
@@ -337,7 +348,7 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	}
 	
 	//사업자 뷰
-	public List<CompanyDTO> getCompanyView(String C_license) {
+	public List<ExhibitionDTO> getCompanyView(String C_license) {
 		return sqlSession.selectList("customerServiceSQL.getCompanyView",C_license);
 	}
 	
@@ -396,6 +407,9 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	public List<CustomerServiceDTO> getNoticeMainList(Map<String, Integer> map) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	public List<Book_exhibition_membersDTO> getMemberView(String M_Id) {
+		return sqlSession.selectList("customerServiceSQL.getMemberView",M_Id);
 	}
 
 	

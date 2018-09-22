@@ -54,9 +54,9 @@ pre{
 		<input type="button" id="list_play" value="리스트로 보기" 
 			style="width:150; height:35; font-family:돋움; background-color:#ffffff;
 		 	border:1 solid #f702e7; float: left">
-		 <button id="prevEvent">이전 공연(3개월)</button>
-		 <button id="currEvent">이번달 공연</button>
-		 <button id="nextEvent">다음 공연(3개월)</button>	
+		 <button id="prevEvent">지난 공연(3개월)</button>
+		 <button id="currEvent">진행중인 공연</button>
+		 <button id="nextEvent">예정 공연(3개월)</button>	
 	</div>
 		<br>
 		<br>
@@ -111,17 +111,17 @@ pre{
 	</div>	
 </body>
 <script>
-/*페이징 */
+/*진행중인 페이징 */
 function performancePaging(pg){
 	location.href="/exhibition/performance/P_performanceList.do?pg="+pg;
 }
 
-/*3개월 다음 공연 페이징 */
+/*3개월 예정 공연 페이징 */
 function performanceNextPaging(pg){
 	location.href="/exhibition/performance/P_next_performanceList.do?pg="+pg;
 }
 
-/*3개월 이전 공연 페이징 */
+/*3개월 지난 공연 페이징 */
 function performancePrevPaging(pg){
 	location.href="/exhibition/performance/P_prev_performanceList.do?pg="+pg;
 }

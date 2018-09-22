@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
- PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
- "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="performanceSQL">
-
 	<select id="getPerformance" resultType="eventboard">
 		select * from eventboard
 	</select>
@@ -13,29 +12,29 @@
 	</select>
 	
 	<!--공연 일정 리스트 가져오기 -->
-	<select id="getPlayList" parameterType="java.util.Map" resultType="eventboard">
+	<select id="getPlayList" parameterType="java.util.Map" resultType="eventboard">        
 		select * from(
                 select rownum rn, tt.* from(
-                select * from eventboard_play where startDate <![CDATA[>=]]> #{selMonth} and endDate <![CDATA[<=]]> (select last_day(#{selMonth}) from dual) order by startDate desc)tt
-             )where rn <![CDATA[>=]]> ${startNum} and rn <![CDATA[<=]]> ${endNum} 
+                select * from eventboard_play where startDate <![CDATA[<=]]> sysdate and endDate <![CDATA[>=]]> sysdate order by startDate desc)tt
+             )where rn <![CDATA[>=]]> ${startNum} and rn <![CDATA[<=]]> ${endNum}     
 	</select>
 	
 	<!--공연일정 리스트 총 글수 가져오는 메소드 -->
 	<select id="getPlayListTotalA" resultType="Integer">
-		select count(*) from eventboard_play where startDate <![CDATA[>=]]> (select TRUNC(sysdate,'MM') from dual) and endDate <![CDATA[<=]]> (select last_day(sysdate) from dual)
+		select count(*) from eventboard_play where startDate <![CDATA[<=]]> sysdate and endDate <![CDATA[>=]]> sysdate
 	</select>
 	
 	<!--전시회일정 리스트 총 글수 가져오는 메소드  -->
 	<select id="getExhibitionListTotalA" resultType="Integer">
-		select count(*) from eventboard where startDate <![CDATA[>=]]> (select TRUNC(sysdate,'MM') from dual) and endDate <![CDATA[<=]]> (select last_day(sysdate) from dual)
+		select count(*) from eventboard where startDate <![CDATA[<=]]> sysdate and endDate <![CDATA[>=]]> sysdate
 	</select>
 	
 	<!--전시회일정 리스트 가져오는 메소드 -->
-	<select id="getExhibitionList" parameterType="java.util.Map" resultType="eventboard">
-		select * from(
+	<select id="getExhibitionList" parameterType="java.util.Map" resultType="eventboard">            
+        select * from(
                 select rownum rn, tt.* from(
-                select * from eventboard where startDate <![CDATA[>=]]> #{selMonth} and endDate <![CDATA[<=]]> (select last_day(#{selMonth}) from dual) order by startDate desc)tt
-             )where rn <![CDATA[>=]]> ${startNum} and rn <![CDATA[<=]]> ${endNum} 
+                select * from eventboard where startDate <![CDATA[<=]]> sysdate and endDate <![CDATA[>=]]> sysdate order by startDate desc)tt
+             )where rn <![CDATA[>=]]> ${startNum} and rn <![CDATA[<=]]> ${endNum}      
 	</select>
 	
 	<!--공연 예약하기 폼  -->
@@ -90,23 +89,23 @@
 	
 	<!--연극 3개월 후 일정 가져오는 메소드-->
 	<select id="getNextPlayList" parameterType="java.util.Map" resultType="eventboard">
-		select * from(
+         select * from(
                 select rownum rn, tt.* from(
-                select * from eventboard_play where startDate <![CDATA[>=]]> (select add_months(#{selMonth},1) from dual) and endDate <![CDATA[<=]]> (select last_day(add_months(#{selMonth},3)) from dual) order by startDate desc)tt
-             )where rn <![CDATA[>=]]> ${startNum} and rn <![CDATA[<=]]> ${endNum}
+                select * from eventboard_play where startDate <![CDATA[>]]> (select sysdate from dual) and endDate <![CDATA[<=]]> (select add_months(sysdate,3) from dual) order by startDate desc)tt
+             )where rn <![CDATA[>=]]> ${startNum} and rn <![CDATA[<=]]> ${endNum}     
 	</select>
 	
 	<!--연극 3개월 후 일정 수 가져오는 메소드-->
 	<select id="getNextPlayListTotalA" parameterType="java.util.Map" resultType="int">
-		select count(*) from eventboard_play where startDate <![CDATA[>=]]> (select add_months(#{selMonth},1) from dual) and endDate <![CDATA[<=]]> (select last_day(add_months(#{selMonth},3)) from dual)
+		select count(*) from eventboard_play where startDate <![CDATA[>]]> (select sysdate from dual) and endDate <![CDATA[<=]]> (select add_months(sysdate,3) from dual)
 	</select>
 	
 	<!--연극 3개월 전 일정 가져오는 메소드-->
-	<select id="getPrevPlayList" parameterType="java.util.Map" resultType="eventboard">
-		select * from(
+	<select id="getPrevPlayList" parameterType="java.util.Map" resultType="eventboard">             
+        select * from(
                 select rownum rn, tt.* from(
-                select * from eventboard_play where startDate <![CDATA[>=]]> (select add_months(#{selMonth},-3) from dual) and endDate <![CDATA[<=]]> (select last_day(add_months(#{selMonth},-1)) from dual) order by startDate desc)tt
-             )where rn <![CDATA[>=]]> ${startNum} and rn <![CDATA[<=]]> ${endNum}
+                select * from eventboard_play where startDate <![CDATA[>=]]> (select add_months(sysdate,-3) from dual) and endDate <![CDATA[<=]]> (select (sysdate+1) as nextdate from dual) order by startDate desc)tt
+             )where rn <![CDATA[>=]]> ${startNum} and rn <![CDATA[<=]]> ${endNum}     
 	</select>
 	
 	<!--연극 3개월 전 일정 수 가져오는 메소드 -->
@@ -116,15 +115,15 @@
 	
 	<!--전시회 3개월 후 일정 수 가져오는 메소드 -->
 	<select id="getNextExhibitionListTotalA" parameterType="java.util.Map" resultType="int">
-		select count(*) from eventboard where startDate <![CDATA[>=]]> (select add_months(#{selMonth},1) from dual) and endDate <![CDATA[<=]]> (select last_day(add_months(#{selMonth},3)) from dual)
+		select count(*) from eventboard where startDate <![CDATA[>]]> (select sysdate from dual) and endDate <![CDATA[<=]]> (select add_months(sysdate,3) from dual)
 	</select>
 	
 	<!--전시회 3개월 후 일정 가져오는 메소드-->
 	<select id="getNextExhibitionList" parameterType="java.util.Map" resultType="eventboard">
-		select * from(
+        select * from(
                 select rownum rn, tt.* from(
-                select * from eventboard where startDate <![CDATA[>=]]> (select add_months(#{selMonth},1) from dual) and endDate <![CDATA[<=]]> (select last_day(add_months(#{selMonth},3)) from dual) order by startDate desc)tt
-             )where rn <![CDATA[>=]]> ${startNum} and rn <![CDATA[<=]]> ${endNum}
+                select * from eventboard where startDate <![CDATA[>]]> (select sysdate from dual) and endDate <![CDATA[<=]]> (select add_months(sysdate,3) from dual) order by startDate desc)tt
+             )where rn <![CDATA[>=]]> ${startNum} and rn <![CDATA[<=]]> ${endNum}       
 	</select>
 	
 	<!--전시회 3개월 전 일정 수 가져오는 메소드   -->
@@ -136,8 +135,8 @@
 	<select id="getPrevExhibitionList" parameterType="java.util.Map" resultType="eventboard">
 		select * from(
                 select rownum rn, tt.* from(
-                select * from eventboard where startDate <![CDATA[>=]]> (select add_months(#{selMonth},-3) from dual) and endDate <![CDATA[<=]]> (select last_day(add_months(#{selMonth},-1)) from dual) order by startDate desc)tt
-             )where rn <![CDATA[>=]]> ${startNum} and rn <![CDATA[<=]]> ${endNum}
+                select * from eventboard where startDate <![CDATA[>=]]> (select add_months(sysdate,-3) from dual) and endDate <![CDATA[<=]]> (select (sysdate+1) as nextdate from dual) order by startDate desc)tt
+             )where rn <![CDATA[>=]]> ${startNum} and rn <![CDATA[<=]]> ${endNum} 
 	</select>
 	
 	<!-- 해당하는 날의 전시회 리스트 -->
@@ -148,5 +147,38 @@
 	<!-- 해당하는 날의 공연 리스트 -->
 	<select id="getAllListConcert" parameterType="String" resultType="eventboard">
 		select * from EVENTBOARD_PLAY where #{date} BETWEEN startDate and endDate
+	</select>
+	<!--박람회/공연 전체일정 요번달 리스트 가져오기 -->
+	<select id="getAllExhibitionList" parameterType="java.util.Map" resultType="eventboard">
+		select * from
+		(select * from(
+		select rownum rn, tt.* from(
+		select * from(
+		select postSelect,imageName,image1,startDate,endDate,eventLink,eventContent
+		,to_char(startDate,'YYMM') as startdateM,to_char(endDate,'YYMM') as endDateM 
+		from eventboard
+		union 
+		select postSelect,imageName,image1,startDate,endDate,eventLink,eventContent
+		,to_char(startDate,'YYMM') as startdateM,to_char(endDate,'YYMM') as endDateM 
+		from eventboard_play order by startDate
+		) where startDateM = #{dateS} or endDateM = #{dateS})tt
+		) where rn <![CDATA[>=]]> #{startNum} and rn <![CDATA[<=]]> #{endNum})
+	</select>
+	
+	<!--전체 리스트 총 글수 가져오는 메소드  -->
+	<select id="getAllListTotalA" parameterType="java.util.Map" resultType="Integer">
+		select count(*) from
+		(select * from(
+		select rownum rn, tt.* from(
+		select * from(
+		select postSelect,imageName,image1,startDate,endDate,eventLink,eventContent
+		,to_char(startDate,'YYMM') as startdateM,to_char(endDate,'YYMM') as enddateM 
+		from eventboard
+		union 
+		select postSelect,imageName,image1,startDate,endDate,eventLink,eventContent
+		,to_char(startDate,'YYMM') as startdateM,to_char(endDate,'YYMM') as enddateM 
+		from eventboard_play order by startDate
+		) where startDateM = #{dateS} or enddateM = #{dateS})tt
+		) where rn <![CDATA[>=]]> #{startNum} and rn <![CDATA[<=]]> #{endNum})
 	</select>
 </mapper>
