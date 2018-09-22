@@ -53,6 +53,7 @@ $(document).ready(function(){
 		location.href="/exhibition/customerService/C_notice.do?pg=${pg}";
 	});
 	
+	// 공지사항 리스트 불러오기
 	$.ajax({
 		type : 'POST',
 		url : '/exhibition/customerService/getNoticeList.do',
@@ -138,6 +139,7 @@ $(document).ready(function(){
 	});
 	$('.ui.compact.selection.dropdown').dropdown();
 	
+	// 공지사항 리스트 제목 클릭시 내용 보여줌
 	$('#C_notice_List').on('click','#subjectA',function(){
 		var seq = $(this).prev().text();
 		location.href='/exhibition/customerService/C_notice_View.do?seq='+seq+'&pg='+$('#pg').val();

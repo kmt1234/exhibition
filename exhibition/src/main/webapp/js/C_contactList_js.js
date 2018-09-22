@@ -32,7 +32,7 @@ $(document).ready(function(){
 	
 	$('.ui.compact.selection.dropdown').dropdown();	
 	
-	
+	// 주요 시설 연락처 리스트 불러오기
 	$.ajax({
 		type : 'POST',
 		url : '/exhibition/customerService/getContactList.do',
@@ -108,6 +108,103 @@ $(document).ready(function(){
 		}
 	});
 	
+	// 주요 시설 연락처 검색시 리스트 불러오기
+	$('#C_contactList_SearchBtn').click(function(event, str){
+		
+		if(str!='trigger') $('#pg').val(1);
+		
+		if($('#keyword').val()=='')
+			alert("검색어를 입력하세요");
+		else{
+			$.ajax({
+				type : 'POST',
+				url : '/exhibition/customerService/C_contactList_Search.do',
+				data : {'pg':$('#pg').val(),
+						'searchOption':$('#searchOption').val(),
+						'keyword':$('#keyword').val()},
+				dataType : 'json',
+				success : function(data){
+					$('#C_contactList_List tr:gt(0)').remove();
+					if(data.totalA=='0'){
+						$('<tr/>',{
+							align: 'center'
+						}).append($('<td/>',{
+							colspan: '6',
+							align : 'center',
+							text : '검색된 결과가 없습니다.'
+						})).appendTo($('#C_contactList_List'));  
+						$('#C_contactList_PagingDiv').remove();
+					}else if(data.tataA!='0'){
+						$.each(data.list, function(index, item){
+							if(code!=3){
+								$('<tr/>').append($('<td/>',{
+									align : 'center',
+									style: 'width: 20%; height: 9%; text-align: center;',
+									text : item.classify,
+									id : 'classifyA'
+								})).append($('<td/>',{
+									align : 'center',
+									style: 'width: 20%; height: 9%; text-align: center;',
+									text : item.facility,
+									id : 'facilityA'
+								})).append($('<td/>',{
+									align : 'center',
+									style: 'width: 20%; height: 9%; text-align: center;',
+									text : item.title,
+									id : 'titleA'
+								})).append($('<td/>',{
+									align : 'center',
+									style: 'width: 20%; height: 9%; text-align: center;',
+									text : item.name,
+									id : 'nameA'
+								})).append($('<td/>',{
+									align : 'center',
+									style: 'width: 20%; height: 9%; text-align: center;',
+									text : item.phone,
+									id : 'phoneA'
+								})).appendTo($('#C_contactList_List'));
+								
+							} else if(code==3){
+								$('<tr/>').append($('<td/>').append($('<input/>',{
+									type : 'checkbox',
+									value : item.seq,
+									name : 'box',
+									class : 'box'
+								}))).append($('<td/>',{
+									align : 'center',
+									style: 'width: 20%; height: 9%; text-align: center;',
+									text : item.classify,
+									id : 'classifyA'
+								})).append($('<td/>',{
+									align : 'center',
+									style: 'width: 20%; height: 9%; text-align: center;',
+									text : item.facility,
+									id : 'facilityA'
+								})).append($('<td/>',{
+									align : 'center',
+									style: 'width: 20%; height: 9%; text-align: center;',
+									text : item.title,
+									id : 'titleA'
+								})).append($('<td/>',{
+									align : 'center',
+									style: 'width: 20%; height: 9%; text-align: center;',
+									text : item.name,
+									id : 'nameA'
+								})).append($('<td/>',{
+									align : 'center',
+									style: 'width: 20%; height: 9%; text-align: center;',
+									text : item.phone,
+									id : 'phoneA'
+								})).appendTo($('#C_contactList_List'));	
+							}
+						});
+					}
+					$('#C_contactList_PagingDiv').html(data.customerServicePaging.pagingHTML);
+				}
+			});
+		}
+	});
+	// 전체 선택
 	$('#checkAll').click(function(){
 		if($('#checkAll').prop('checked')){
 			//$('.box')[i].checked = true;

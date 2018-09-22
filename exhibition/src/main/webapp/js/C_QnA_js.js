@@ -26,7 +26,7 @@ $(document).ready(function(){
 		}	
 	});
 	
-		
+	// 자주 묻는 질문 리스트 불러오기
 	$.ajax({
 		type : 'POST',
 		url : '/exhibition/customerService/getQnA_Classify.do',
@@ -93,7 +93,7 @@ $(document).ready(function(){
 		}
 	});
 	
-
+	// 자주 묻는 질문 버튼에 따라 리스트 불러오기
 	$('.QnA').click(function(){
 		var child = $('#C_QnA_List').empty();
 		var classify = $(this).val();
@@ -174,6 +174,7 @@ $(document).ready(function(){
 			$('.box').prop('checked',false);
 		}
 	});
+	
 	//선택 삭제
 	$('#C_QnA_DeleteBtn').click(function(){
 		var count = $('.box:checked').length;

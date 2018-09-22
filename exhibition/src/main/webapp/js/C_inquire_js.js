@@ -72,7 +72,7 @@ $(document).ready(function(){
 
 	$('.ui.selection.dropdown').dropdown();	
 	
-	
+	// 고객의 소리 문의 받은 글 불러오기
 	$.ajax({
 		type : 'POST',
 		url : '/exhibition/customerService/getInquireList.do',
@@ -192,6 +192,7 @@ $(document).ready(function(){
 	});
 	$('.ui.selection.dropdown').dropdown();	
 	
+	// 고객의 소리 문의 받은 글 제목 클릭시 내용 보여주기
 	$('#C_inquire_List').on('click','#subjectA',function(){
 		var seq = $(this).prev().prev().text();
 		location.href='/exhibition/customerService/C_inquire_View.do?seq='+seq+'&pg='+$('#pg').val();
