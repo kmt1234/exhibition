@@ -141,14 +141,11 @@
 				</div><!--class="ui card"-->
 			</div><!--align="center"  -->
 		</div><!--id="modify-Div"  -->
-	<div class="ui segment" id="Ticket-List-Div">
+	
 		
 	
-	<div class="ui segment" id="Ticket-History-Div">
-	  
-	 
-	  
-	</div>		
+	<div class="ui segment" id="Ticket-History-Div"></div>	
+		
 </div><!-- 전체 -->
 </div>
 <script src="../js/memberMypage.js?ver=1"></script>

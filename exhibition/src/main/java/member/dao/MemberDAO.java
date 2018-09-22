@@ -24,7 +24,9 @@ public interface MemberDAO {
 
 	public int deleteMember(Map<String, String> map);	//회원탈퇴
 
-	public List<Book_performance_membersDTO> getMemberTicketList(String id); //회원의 예매 리스트를 가져오는 메소드
+	public List<Book_performance_membersDTO> getMemberTicketList(Map<String, String> map); //회원의 예매 리스트를 가져오는 메소드
+
+	public int getMemberTicketListTotalA(Map<String, String> map);	//회원의 예매 리스트를 가져오는 메소드
 
 	
 
