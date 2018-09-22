@@ -131,9 +131,7 @@
 				</div><!--class="ui card"-->
 			</div><!--align="center"  -->
 		</div><!--id="modify-Div"  -->
-	<div class="ui segment" id="Ticket-List-Div" style="display: inline-block;">
-		
-	</div>		
+	
 	<div class="ui segment" id="Ticket-History-Div">
 	  
 	</div>		
