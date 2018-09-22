@@ -61,6 +61,10 @@ pre{
 				</td>
 			</tr>
 		</table>
+		
+		<button id="prevEvent">이전 전시회(3개월)</button>
+		<button id="currEvent">이번달 전시회</button>
+		<button id="nextEvent">다음 전시회(3개월)</button>	
 </div>
 	<br><br>	
 	<!--전시회 리스트 -->
@@ -117,6 +121,16 @@ pre{
 function performancePaging_exhibition(pg){
 	location.href="/exhibition/performance/P_exhibitionList.do?pg="+pg;
 }
+/*3개월 다음 전시회 페이징 */
+function exhibitionNextPaging(pg){
+	location.href="/exhibition/performance/P_next_exhibitionList.do?pg="+pg;
+}
+
+/*3개월 이전 전시회 페이징 */
+function exhibitionPrevPaging(pg){
+	location.href="/exhibition/performance/P_prev_exhibitionList.do?pg="+pg;
+}
+
 </script>
 <script src="../js/p_exhibitionList.js"></script>
 </html>

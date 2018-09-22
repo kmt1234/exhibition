@@ -17,4 +17,5 @@
  	<select id="getAllCalendar" resultType="exhibition">
  		select * from exhibitionRental
  	</select>
+ 	
 </mapper>

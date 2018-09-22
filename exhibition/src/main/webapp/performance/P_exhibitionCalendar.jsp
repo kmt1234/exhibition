@@ -123,5 +123,4 @@ var dataSet = [
 		<br><br><br><br>
 	<div  id='calendar'></div>
 </body>
-<script src="../js/p_exhibitionCalendar.js"></script>
 </html>

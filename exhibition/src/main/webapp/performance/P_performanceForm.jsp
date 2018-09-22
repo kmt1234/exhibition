@@ -49,5 +49,6 @@ left: 0px;
 		<jsp:include page="../main/I_footer.jsp" ></jsp:include>
 	</div>
 <script src="../js/slidbar.js"></script>
+<script src="../js/p_exhibitionCalendar.js"></script>
 </body>
 </html>

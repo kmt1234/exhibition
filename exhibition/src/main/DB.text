@@ -1,21 +1,18 @@
 //개인회원 DB
-create table memberTable(	
-M_Name varchar2(30) not null,	    --이름
+create table memberTable(   
+M_Name varchar2(30) not null,       --이름
 M_Id varchar2(30) primary key,  --아이디 (기본키, unique, not null, 무결성 제약 조건)
 M_Pwd varchar2(30) not null,    --비밀번호
-M_Email varchar2(50),           --이메일		
-M_Phone varchar2(15),	--핸드폰
-code number default(1)	--코드(1=개인, 2=사업자) : 기본값:1
-);	
+M_Email varchar2(50),           --이메일      
+M_Phone varchar2(15),   --핸드폰
+code number default(1)   --코드(1=개인, 2=사업자) : 기본값:1
+);   
 
 //개인회원 샘플
 insert into memberTable (M_Name, M_Id, M_Pwd,M_Email, M_Phone) values('홍길동','hong123','test123','toad001@nate.com','01012341234');
 insert into memberTable (M_Name, M_Id, M_Pwd,M_Email, M_Phone) values('개똥이','gaeddong123','test123','toad001@nate.com','01012341234');
 select * from memberTable;
-drop table memberTable;
-commit;
 
-rollback;
 
 
 //사업자 DB
@@ -34,15 +31,17 @@ CREATE TABLE company(
      code number default(2)
  );
 
+
 //문의하기 DB
 create table customerService(
-email varchar2(50) not null,			--이메일
-classify varchar2(50) not null,			--분류
-name varchar2(30) not null,			--이름
-tel varchar2(15),				--핸드폰
-subject varchar2(100) not null,		--제목
-content varchar2(100) not null,		--내용
-logtime DATE DEFAULT SYSDATE);		--날짜
+email varchar2(50) not null,         --이메일
+classify varchar2(50) not null,         --분류
+name varchar2(30) not null,         --이름
+tel varchar2(15),            --핸드폰
+subject varchar2(100) not null,      --제목
+content varchar2(100) not null,      --내용
+logtime DATE DEFAULT SYSDATE);      --날짜
+
 
 //부스 예약테이블
 create table exhibitionRental(
@@ -79,13 +78,13 @@ CREATE TABLE eventboard(
      startDate date,                   --날짜1
      endDate date,                     --날짜2
      eventLink varchar2(200),            --링크
-     startTime varchar2(30),		--시작일
-     endTime varchar2(30),		--종료일
-     eventPlace varchar2(100),	--장소
-     eventPrice varchar2(100),	--가격
-     eventSeats varchar2(100),	--관람좌석
-     eventRate varchar2(100),		--관람등급
-     eventContent varchar2(4000)	--소개 글(간단)
+     startTime varchar2(30),      --시작일
+     endTime varchar2(30),      --종료일
+     eventPlace varchar2(100),   --장소
+     eventPrice varchar2(100),   --가격
+     eventSeats varchar2(100),   --관람좌석
+     eventRate varchar2(100),      --관람등급
+     eventContent varchar2(4000)   --소개 글(간단)
  );
  
 create sequence seq_eventboard  nocache nocycle;
@@ -99,58 +98,70 @@ CREATE TABLE eventboard_play(
      startDate date,                   --날짜1
      endDate date,                     --날짜2
      eventLink varchar2(200),            --링크
-     startTime varchar2(30),		--시작시간
-     endTime varchar2(30),		--종료시간
-     eventPlace varchar2(100),	--장소
-     eventPrice varchar2(100),	--가격
-     eventSeats varchar2(100),	--관람좌석
-     eventRate varchar2(100),		--관람등급
-     eventContent varchar2(4000)	--소개 글(간단)
+     startTime varchar2(30),      --시작시간
+     endTime varchar2(30),      --종료시간
+     eventPlace varchar2(100),   --장소
+     eventPrice varchar2(100),   --가격
+     eventSeats varchar2(100),   --관람좌석
+     eventRate varchar2(100),      --관람등급
+     eventContent varchar2(4000)   --소개 글(간단)
  );
  
 create sequence seq_eventboard_play  nocache nocycle;
 
-//공지사항
+
+// 공지 사항
 create table C_notice(
-seq number primary key,
-subject varchar2(50) not null,
-content varchar2(500) not null,
-logtime date default sysdate);
+seq number primary key,                 --시퀀스
+subject varchar2(200) not null,          --제목
+content varchar2(500) not null,         --내용
+logtime date default sysdate);          --날짜
 
 create sequence seq_C_notice nocycle nocache;
 
-//자주묻는 질문
+// 자주묻는 질문
 create table C_QnA (
-seq number primary key,
-subject varchar2(200) not null,
-content varchar2(500) not null);
+seq number primary key,                 --시퀀스
+classify varchar2(100),                 --분류
+subject varchar2(200) not null,         --제목
+content varchar2(500) not null);        --내용
 
 create sequence seq_C_QnA nocycle nocache;
 
-//고객의 소리
+
+
+// 고객의 소리
 create table C_inquire(
-seq number primary key,
-email varchar2(50) not null,
-classify varchar2(50) not null,
-name varchar2(50) not null,
-tel varchar2(20),
-subject varchar2(50) not null,
-content varchar2(300) not null,
-logtime DATE DEFAULT sysdate);
+seq number primary key,                 --시퀀스
+email varchar2(100),                     --이메일
+classify varchar2(100),                  --분류
+name varchar2(100),                      --작성자
+phone varchar2(100),                     --전화번호
+subject varchar2(200) not null,          --제목
+content varchar2(500) not null,         --내용
+ref NUMBER NOT NULL,                    --그룹번호
+lev NUMBER DEFAULT 0 NOT NULL,          --단계
+step NUMBER DEFAULT 0 NOT NULL,         --글순서
+pseq NUMBER DEFAULT 0 NOT NULL,         --원글번호
+reply NUMBER DEFAULT 0 NOT NULL,        --답변수
+logtime DATE DEFAULT sysdate);          --날짜
 
 
 create sequence seq_C_inquire nocycle nocache;
 
 
-//주요시설 연락처
+// 주요시설 연락처
 create table C_contactList(
-seq number primary key,
-classify varchar2(50) not null,
-agency varchar2(50) not null,
-name varchar2(30) not null,
-contact varchar2(50) not null);
+seq number primary key,               --시퀀스
+classify varchar2(100) not null,      --분류
+facility varchar2(100) not null,      --기관&시설
+title varchar2(100) not null,         --명칭
+name varchar2(100) not null,         --담당자
+phone varchar2(100) not null);         --연락처
+
 
 create sequence seq_C_contactList nocycle nocache;
+
 
 
 //호텔리스트
@@ -165,10 +176,11 @@ eventPlace varchar2(100) NOT NULL  --TEL
 create sequence seq_hotel_list nocycle nocache;
 
 
+
 --연극 일자별 DB
 create table eventboard_play_book(
- seq NUMBER PRIMARY KEY,            --시퀀스    
-num NUMBER,                        --연극시퀀스
+ seq NUMBER PRIMARY KEY,            --시퀀스     
+ num NUMBER,                        --연극시퀀스
  imageName VARCHAR2(500) NOT NULL,  --공연명
  playDate date,                     --공연일자(시작/종료)
  playTicket VARCHAR2(100),           --일별 총 티켓 수
@@ -180,40 +192,40 @@ num NUMBER,                        --연극시퀀스
     check(bookStatus IN ('0','1'))
 );
 
-create sequence seq_eventboard_play_book  nocache nocycle;  --예매DB 시퀀스
-
---연극 예매자 DB
-create Book_Play_Members(
-IMAGENAME	VARCHAR2(500)
-PLAYDATE	DATE
-MEMBERID	VARCHAR2(100)
-TICKETQTY	VARCHAR2(30)
-);
-
-create sequence seq_Book_Play_Members;--연극 예매자 DB 시퀀스
-
---전시회 일자별 DB
-create table eventboard_exhibition_book(
- seq NUMBER PRIMARY KEY,            --시퀀스     
- num NUMBER,                         --연극시퀀스
- imageName VARCHAR2(500) NOT NULL,  --공연명
- playDate date,                     --공연일자(시작/종료)
- playTicket VARCHAR2(100),           --일별 총 티켓 수
- remainTicket VARCHAR2(100),         --일별 잔여 티켓 수
- ticketPrice VARCHAR2(100),          --티켓 가격
- bookTicket VARCHAR2(100)           --예매된 티켓 수
-);
-
 create sequence seq_eventboard_exhibition_book  nocache nocycle;  --예매DB 시퀀스
 
 --전시회 예매자 DB
-create table Book_Exhibition_Members(
-IMAGENAME	VARCHAR2(500),
-PLAYDATE	DATE,
-MEMBERID	VARCHAR2(100),
-TICKETQTY	VARCHAR2(30)
+create Book_Exhibition_Members(
+IMAGENAME   VARCHAR2(500),
+PLAYDATE   DATE,
+MEMBERID   VARCHAR2(100),
+TICKETQTY   VARCHAR2(30)
 );
 
 create sequence seq_Book_Exhibition_Members;--전시회 예매자 DB 시퀀스
 
+
+
+--비지니스룸 예약테이블
+create table businessRoom(
+roomName varchar2(30), --룸이름
+M_Id varchar2(30), --멤버아이디
+M_Email varchar2(50), --멤버이메일
+startDate date, --예약일자
+first varchar2(10) default 'N', --09시~12시
+second varchar2(10) default 'N', --12시~15시
+third varchar2(10) default 'N', --15시~18시
+fourth varchar2(10) default 'N'); --18시~21시
+
+--콘서트홀 예약테이블
+create table concertHall(
+hallName varchar2(40) not null,
+C_license varchar2(40) not null,
+C_tel varchar2(40) not null,
+C_email varchar2(40) not null,
+totalRent number not null,
+title varchar2(40) not null,
+startDate date not null,
+endDate date not null
+);
 

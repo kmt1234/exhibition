@@ -163,6 +163,17 @@ $(document).ready(function(){
 		$('#modify-Div').hide();
 		$('#Ticket-List-Div').show();
 		$('#Ticket-History-Div').hide();
+		
+		alert('hey');
+		//회원의 예매 리스트를 가져오는 ajax 
+		$.ajax({
+			type : 'GET',
+			url : "/exhibition/login/getMemberTicketList.do",
+			dataType : 'json',
+			success : function(data){
+				alert(JSON.stringify(data));
+			}//success
+		});//ajax
 	});
 	
 	//예매내역

@@ -11,6 +11,7 @@ import customerService.bean.ExhibitionBookDTO;
 import customerService.bean.HotelboardDTO;
 import customerService.bean.ImageboardDTO;
 import customerService.bean.PlayBookDTO;
+import customerService.bean.SalesBusinessRoomDTO;
 import customerService.bean.SalesConcertHallDTO;
 import customerService.bean.SalesExhibitionDTO;
 import member.bean.MemberDTO;
@@ -140,6 +141,18 @@ public interface CustomerServiceDAO {
 	
 	//콘서트 홀 총 매출액
 	public int getSalesTotalRentConcertHall(String salesMon);
+	
+	//비즈니스룸 부스 매출현황
+	public List<SalesBusinessRoomDTO> getSalesBusinessRoom(String salesMon);
+	
+	//비즈니스룸 총 매출액
+	public int getSalesTotalRentBusinessRoom(String salesMon);
+	
+	//콘서트 티켓 매출현황
+	public List<EventboardDTO> getSalesConcertTicket(String salesMon);
+	
+	//콘서트 티켓 총 매출액
+	public int getSalesTotalRentConcertTicket(String salesMon);
 
 	//회원정보
 	public List<MemberDTO> getMemberList(Map<String, Integer> map);
@@ -149,6 +162,9 @@ public interface CustomerServiceDAO {
 	public List<MemberDTO> memberListSearch(Map<String, String> map);
 	//회원정보 검색 토탈 페이징
 	public int getMemberListSearchTotal(Map<String, String> map);
+	//회원 예매 삭제
+	public void memberExTicketDelete(int seq);
+	public void memberPerTicketDelete(int seq);
 	
 	//사업자 정보
 	public List<CompanyDTO> getCompanyList(Map<String, Integer> map);
@@ -185,6 +201,8 @@ public interface CustomerServiceDAO {
 	
 	public List<Book_exhibition_membersDTO> getExhibitionView(String M_Id);	//박람회 상세정보
 	public List<Book_exhibition_membersDTO> getPerformanceView(String M_Id); //연극 상세정보
+	
+	
 	
 	
 

@@ -41,10 +41,10 @@ left: 0px;
 			<a class="item" href="C_emailConfirm.do">고객의 소리</a> 
 			<a class="item" href="C_QnA.do">자주묻는 질문</a>
 			<a class="item" href="C_contactList.do">주요시설 연락처</a>
-			<c:if test="${code==null  }">
-            	<a class="item" href="mypage.do">개인정보</a>
+			<c:if test="${code == '1' || code == '2' }">
+            	<a class="item" href="/exhibition/login/mypage.do">개인정보</a>
             </c:if>
-            <c:if test="${code==null }">
+            <c:if test="${code == '3' }">
               	<a class="item" href="C_mainImageboardForm.do">게시판 추가</a>
            		<a class="item" href="C_salesExhibitionView.do">매출 현황</a>
            		<a class="item" href="C_memberShib.do">회원리스트</a>
@@ -55,7 +55,6 @@ left: 0px;
 		<div class="ui compact menu" style="width: 930px; min-height:900px auto;  display: inline-block;" >
 			<jsp:include page="${display}"></jsp:include>
 		</div>
-	
 </div>
 		<!-- footer -->
 	<div class="ui container" style="margin-top: 20px; min-width:1170px; position: relative; ">
