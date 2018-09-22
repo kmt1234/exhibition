@@ -24,11 +24,18 @@
 </style>
 </head>
 <body>
-<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
-	고객의
-	<span class="h-light">소리</span>
-</h2>
-<div style="width: 100%;" align="center">
+<div class="ui compact menu" style="width: 930px; height:900px auto;  display: inline-block;" >
+	<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
+		<span>고객의</span>
+		<span class="h-light">소리</span>
+		<div style="font-size:13px; float:right; height: 50px; margin-top:30px ">
+			<img src="../img/house.png" width="15px" height="16px" style="cursor: pointer;" id="houseImg"></img>
+			> 고객센터 > 고객의 소리 > 내용
+		</div>
+		<div class="ui divider"></div> 
+	</h2>
+
+<div style="width: 880px; margin-left: 20px;" align="center">
 	<table style="height: 40px; " align="center" border="1" bordercolor="#ec008c" cellpadding="4"  rules="rows"
 	id="C_inquire_List" class="ui striped table" >
 		<tr>
@@ -53,7 +60,9 @@
 		<input type="text" name="keyword" id="keyword" value="${keyword }">
 	</div>
 	&nbsp
-		 <input type="button" class="middle ui button"  value="검색" id="C_inquire_SearchBtn">
+		<input type="button" class="middle ui button"  value="검색" id="C_inquire_SearchBtn">
+	</div>
+	<div style="margin-top: 40px;"></div>
 </div>
 <script src="../semantic/semantic.min.js"></script>
 <script src="../js/C_inquire_js.js?ver=1"></script>
@@ -107,9 +116,6 @@ $(document).ready(function(){
 			$('#C_inquire_PagingDiv').html(data.customerServicePaging.pagingHTML);
 		}
 	});
-	
-	
-	
 	//고객의소리 리스트 검색한 값 불러오기
 	$('#C_inquire_SearchBtn').click(function(event, str){
 		

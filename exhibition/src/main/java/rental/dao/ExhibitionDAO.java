@@ -3,6 +3,7 @@ package rental.dao;
 import java.util.List;
 import java.util.Map;
 
+import customerService.bean.EventboardDTO;
 import customerService.bean.SalesExhibitionDTO;
 import performance.bean.PerformanceDTO;
 import rental.bean.ConcertHallDTO;
@@ -19,5 +20,7 @@ public interface ExhibitionDAO {
 
 
 	public void reservationHoll(ExhibitionDTO exhibitionDTO);
+
+
 
 }

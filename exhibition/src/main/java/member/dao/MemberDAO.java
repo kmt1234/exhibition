@@ -1,8 +1,10 @@
 package member.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import member.bean.MemberDTO;
+import performance.bean.Book_performance_membersDTO;
 
 public interface MemberDAO {
 
@@ -21,6 +23,9 @@ public interface MemberDAO {
 	public int memberModify(Map<String, String> map);	//회원정보 수정
 
 	public int deleteMember(Map<String, String> map);	//회원탈퇴
+
+	public List<Book_performance_membersDTO> getMemberTicketList(String id); //회원의 예매 리스트를 가져오는 메소드
+
 	
 
 }

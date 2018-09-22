@@ -1,4 +1,13 @@
 $(document).ready(function(){
+	var date = new Date();
+    var year  = date.getFullYear();
+    var month = date.getMonth() + 1; // 0부터 시작하므로 1더함 더함
+    var day   = date.getDate();
+    if (("" + month).length == 1) { month = "0" + month; }
+    if (("" + day).length   == 1) { day   = "0" + day;   }
+    
+    
+
    var C_name = /^[가-힣]+$/;   //한글만 가능 
    var C_phone =  /^((01[1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})$/;   //휴대폰 번호 양식
    
@@ -253,11 +262,12 @@ $(document).ready(function(){
 				$('#paging').html(data.customerServicePaging.pagingHTML);
 			}
 	
+		});
 	});
 	
 
 		$('#memberSearchBtn').click(function(event,str){
-			$('#memberListTable').empty();
+			$('#memberListTable').hide();$('#memberListTable').show();
 			if(str!='trigger') $('#pg').val(1);
 			if($('#memberSearch').val()==''){
 				alert("검색어를 입력하세요");
@@ -289,46 +299,99 @@ $(document).ready(function(){
 							 		text : item.m_Phone
 							 	})).appendTo($('#memberListTable'));
 							});
-						 $('#paging').html(data.customerServicePaging.pagingHTML);
-						 
-						}
+						$('#paging').html(data.customerServicePaging.pagingHTML);
+					}
 				});
 			}
 		});
-	});
+	
+		
 	$('#memberListTable').on('click','.C_license',function(){
+		
+		var toDay = year+"-"+month+"-"+day;
+		var ing;
 		$.ajax({
 			type : 'POST',
 			url : '/exhibition/customerService/companyView.do',
 			data : {'C_license' : $(this).text()},
 			dataType : 'json',
 			success : function(data){
-				alert(JSON.stringify(data));
+				$('#companyModalForm tr:gt(0)').remove();
+				/*alert(JSON.stringify(data));*/
 				$.each(data.list,function(index, item){
-					$('#header').text(item.c_license+"님 예약내역");
-					$('#content').text(item.c_license);
+					var startDate = item.startDate.toString().slice(0,10);
+					var endDate = item.endDate.toString().slice(0,10);
+					var allDate = startDate+"~"+endDate;
 					
-				});
+					if(startDate <= toDay && endDate >= toDay ){
+					 ing = "<font color='green'>진행중</font>";
+					}else if(endDate >toDay){
+						ing = "<font color='blue'>진행 예정</font>";
+					}else if(startDate < toDay){
+						ing = "<font color='red'>진행 종료</font>";
+					}	
+				
+				
+					$('#companyHeader').text(item.c_license+"님 예약 정보");
+					$('<tr/>').append($('<td/>',{
+				 		name : 'boothName',
+				 		text : item.boothName
+				 	})).append($('<td/>',{
+				 		name : 'title',
+				 		text : item.title
+				 	})).append($('<td/>',{
+				 		text : allDate
+				 	})).append($('<td/>',{
+				 		name : 'c_license',
+				 		html : ing
+				 	})).appendTo($('#reservationCompanyTable'));
+					});
+				$('.ui.modal.member.com').modal('show');
 			}
+		});	
 	});
-	$('.ui.modal.member').modal('show');
-});
 	
 	
 	$('#memberListTable').on('click','.M_Id',function(){
+		var toDay = year+"-"+month+"-"+day;
+		var ing;
 		$.ajax({
 			type : 'POST',
 			url : '/exhibition/customerService/memberView.do',
 			data : {'M_Id' : $(this).text()},
-			dataType : 'text',
+			dataType : 'json',
 			success : function(data){
-				
+				/*alert(JSON.stringify(data));*/
+				$('#memberModalForm tr:gt(0)').remove();
 				$.each(data.list,function(index, item){
-					$('#header').text(item.C_license);
-				});
+					var playDate = item.playDate.toString().slice(0,10);
+					
+					if(playDate < toDay){
+						ing = "<font color='gray'>기간만료</font>"
+					}else if(playDate >= toDay){
+						ing = "<font color='green'>예매완료</font>"
+					}
+					
+					$('#memberHeader').text(item.memberId+"님 예약 정보");
+					$('<tr/>').append($('<td/>',{
+				 		name : 'imageName',
+				 		text : item.imageName
+				 	})).append($('<td/>',{
+				 		name : 'playDate',
+				 		text : playDate
+				 	})).append($('<td/>',{
+				 		name : "Status",
+				 		html : ing
+				 	})).append($('<td/>',{
+				 		name : 'tickeyQty',
+				 		text : item.ticketQty
+				 	})).appendTo($('#reservationMemberTable'));
+					
+					});
+				$('.ui.modal.member.mem').modal('show');
 			}
+		});
+			
 	});
-	$('.ui.modal.member').modal('show');
-});
 	
 });

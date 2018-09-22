@@ -352,7 +352,6 @@ $(document).ready(function(){
 		}
 		
 	});//예매하기 버튼 클릭 
-	
 	//다음단계
 	$('#book_next_Btn').click(function(){
 		//모달 호출
@@ -367,9 +366,7 @@ $(document).ready(function(){
 		//결제금액 확인(3자리수)
 		var totPrice = $('#hiddenTicketPrice').val() * $('#selectPlayTicket :selected').val();	
 		$('#totalPrice').text(totPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-		
 	});
-	
 });
 </script>
 </html>

@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import customerService.bean.EventboardDTO;
 import performance.bean.PerformanceDTO;
+import rental.bean.ConcertHallDTO;
 import rental.bean.ExhibitionDTO;
 
 @Transactional
@@ -54,6 +56,7 @@ public class ExhibitionDAOMybatis implements ExhibitionDAO {
 			
 		
 	}
+
 
 	
 	

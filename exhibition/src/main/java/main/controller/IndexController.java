@@ -9,8 +9,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
+import customerService.bean.EventboardDTO;
 import customerService.dao.CustomerServiceDAO;
+import rental.bean.ConcertHallDTO;
+import rental.dao.ConcertHallDAO;
+import rental.dao.ExhibitionDAO;
 
 @RequestMapping(value = "main")
 @Component
@@ -35,4 +40,9 @@ public class IndexController {
 		model.addAttribute("display", "/main/I_body.jsp");
 		return "/main/index";
 	}
+	
+
+	
+	
+	
 }

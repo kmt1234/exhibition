@@ -49,4 +49,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from memberTable where M_Id = #{M_Id} and M_Pwd = #{M_Pwd}
 	</delete>
 	
+	<!--회원의 예매 리스트를 가져오는 메소드-->
+	<select id="getMemberTicketList" parameterType="java.lang.String" resultType="performance.bean.Book_performance_membersDTO">
+		select * from book_play_members where memberId = #{id}
+	</select>
+	
 </mapper>
