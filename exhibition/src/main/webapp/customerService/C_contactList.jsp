@@ -72,7 +72,7 @@
 		</c:if>
 
 </div>
-<div style="margin-top: 40px;"></div>
+<div style="margin-top: 40px;"></div> 
 </form>
 </div>
 <input type="hidden" id="hiddenCode" value="${code}">
