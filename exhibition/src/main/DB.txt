@@ -110,46 +110,53 @@ CREATE TABLE eventboard_play(
  
 create sequence seq_eventboard_play  nocache nocycle;
 
-//공지사항
+-- 공지 사항
 create table C_notice(
-seq number primary key,
-subject varchar2(50) not null,
-content varchar2(500) not null,
-logtime date default sysdate);
+seq number primary key,                 --시퀀스
+subject varchar2(500) not null,          --제목
+content varchar2(4000) not null,         --내용
+logtime date default sysdate);          --날짜
 
 create sequence seq_C_notice nocycle nocache;
 
-//자주묻는 질문
+
+-- 자주묻는 질문
 create table C_QnA (
-seq number primary key,
-subject varchar2(200) not null,
-content varchar2(500) not null);
+seq number primary key,                 --시퀀스
+classify varchar2(200),                 --분류
+subject varchar2(500) not null,         --제목
+content varchar2(4000) not null);        --내용
 
 create sequence seq_C_QnA nocycle nocache;
 
-//고객의 소리
-create table C_inquire(
-seq number primary key,
-email varchar2(50) not null,
-classify varchar2(50) not null,
-name varchar2(50) not null,
-tel varchar2(20),
-subject varchar2(50) not null,
-content varchar2(300) not null,
-logtime DATE DEFAULT sysdate);
 
+-- 고객의 소리
+create table C_inquire(
+seq number primary key,                 --시퀀스
+email varchar2(200),                     --이메일
+classify varchar2(200),                  --분류
+name varchar2(200),                      --작성자
+phone varchar2(200),                     --전화번호
+subject varchar2(200) not null,          --제목
+content varchar2(4000) not null,         --내용
+ref NUMBER NOT NULL,                    --그룹번호
+lev NUMBER DEFAULT 0 NOT NULL,          --단계
+step NUMBER DEFAULT 0 NOT NULL,         --글순서
+pseq NUMBER DEFAULT 0 NOT NULL,         --원글번호
+reply NUMBER DEFAULT 0 NOT NULL,        --답변수
+logtime DATE DEFAULT sysdate);          --날짜
 
 create sequence seq_C_inquire nocycle nocache;
 
 
-//주요시설 연락처
+-- 주요시설 연락처
 create table C_contactList(
-seq number primary key,
-classify varchar2(50) not null,
-facilty varchar2(50) not null,
-title varchar2(50) not null,
-name varchar2(30) not null,
-phone varchar2(50) not null);
+seq number primary key,               --시퀀스
+classify varchar2(200) not null,      --분류
+facility varchar2(200) not null,      --기관&시설
+title varchar2(200) not null,         --명칭
+name varchar2(200) not null,         --담당자
+phone varchar2(200) not null);         --연락처
 
 create sequence seq_C_contactList nocycle nocache;
 

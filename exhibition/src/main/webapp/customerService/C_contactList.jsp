@@ -108,13 +108,13 @@ $(document).ready(function(){
 						})).append($('<td/>',{
 							align : 'center',
 							style: 'width: 20%; height: 9%; text-align: center;',
-							text : item.phone,
-							id : 'phoneA'
+							text : item.name,
+							id : 'nameA'
 						})).append($('<td/>',{
 							align : 'center',
 							style: 'width: 20%; height: 9%; text-align: center;',
-							text : item.name,
-							id : 'nameA'
+							text : item.phone,
+							id : 'phoneA'
 						})).appendTo($('#C_contactList_List'));
 						
 					}else if(code==3){
@@ -141,13 +141,13 @@ $(document).ready(function(){
 						})).append($('<td/>',{
 							align : 'center',
 							style: 'width: 20%; height: 9%; text-align: center;',
-							text : item.phone,
-							id : 'phoneA'
+							text : item.name,
+							id : 'nameA'
 						})).append($('<td/>',{
 							align : 'center',
 							style: 'width: 20%; height: 9%; text-align: center;',
-							text : item.name,
-							id : 'nameA'
+							text : item.phone,
+							id : 'phoneA'
 						})).appendTo($('#C_contactList_List'));	
 					}
 					
@@ -202,13 +202,13 @@ $(document).ready(function(){
 								})).append($('<td/>',{
 									align : 'center',
 									style: 'width: 20%; height: 9%; text-align: center;',
-									text : item.phone,
-									id : 'phoneA'
+									text : item.name,
+									id : 'nameA'
 								})).append($('<td/>',{
 									align : 'center',
 									style: 'width: 20%; height: 9%; text-align: center;',
-									text : item.name,
-									id : 'nameA'
+									text : item.phone,
+									id : 'phoneA'
 								})).appendTo($('#C_contactList_List'));
 							}else if(code==3){
 								$('<tr/>').append($('<td/>').append($('<input/>',{
@@ -234,13 +234,13 @@ $(document).ready(function(){
 								})).append($('<td/>',{
 									align : 'center',
 									style: 'width: 20%; height: 9%; text-align: center;',
-									text : item.phone,
-									id : 'phoneA'
+									text : item.name,
+									id : 'nameA'
 								})).append($('<td/>',{
 									align : 'center',
 									style: 'width: 20%; height: 9%; text-align: center;',
-									text : item.name,
-									id : 'nameA'
+									text : item.phone,
+									id : 'phoneA'
 								})).appendTo($('#C_contactList_List'));	
 							}
 						});
