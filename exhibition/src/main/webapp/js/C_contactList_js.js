@@ -204,6 +204,7 @@ $(document).ready(function(){
 			});
 		}
 	});
+	
 	// 전체 선택
 	$('#checkAll').click(function(){
 		if($('#checkAll').prop('checked')){
