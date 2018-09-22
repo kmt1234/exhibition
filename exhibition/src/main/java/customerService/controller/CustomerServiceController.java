@@ -1443,6 +1443,18 @@ public class CustomerServiceController {
 		mav.setViewName("jsonView");
 		return mav;
 	}
+	//회원 예약 삭제
+	@RequestMapping(value="memberTicketDelete", method = RequestMethod.POST)
+	public ModelAndView memberTicketDelete(@RequestParam int seq) {
+		
+		customerServiceDAO.memberExTicketDelete(seq);
+		customerServiceDAO.memberPerTicketDelete(seq);
+		
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");
+		return mav;
+	}
 	
 	//사업자 상세정보
 		@RequestMapping(value="companyView", method = RequestMethod.POST)
@@ -1454,6 +1466,7 @@ public class CustomerServiceController {
 			mav.setViewName("jsonView");
 			return mav;
 		}
+		
 	
 	// 사업자리스트 불러오기
 	@RequestMapping(value ="getCompanyList", method = RequestMethod.POST)

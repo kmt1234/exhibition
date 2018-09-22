@@ -172,14 +172,17 @@ num NUMBER,                        --연극시퀀스
 create sequence seq_eventboard_play_book  nocache nocycle; 
 
 create table Book_Play_Members(
+seq number primary key,
 IMAGENAME	VARCHAR2(500),
 PLAYDATE	DATE,
 MEMBERID	VARCHAR2(100),
 TICKETQTY	VARCHAR2(30));
 
+create sequence seq_Book_Play_Members;
 
 --전시회 예매자 DB
 create table Book_Exhibition_Members(
+seq number primary key,
 IMAGENAME	VARCHAR2(500),
 PLAYDATE	DATE,
 MEMBERID	VARCHAR2(100),

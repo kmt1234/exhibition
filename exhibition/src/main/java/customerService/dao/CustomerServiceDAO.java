@@ -162,6 +162,9 @@ public interface CustomerServiceDAO {
 	public List<MemberDTO> memberListSearch(Map<String, String> map);
 	//회원정보 검색 토탈 페이징
 	public int getMemberListSearchTotal(Map<String, String> map);
+	//회원 예매 삭제
+	public void memberExTicketDelete(int seq);
+	public void memberPerTicketDelete(int seq);
 	
 	//사업자 정보
 	public List<CompanyDTO> getCompanyList(Map<String, Integer> map);
@@ -198,6 +201,7 @@ public interface CustomerServiceDAO {
 	
 	public List<Book_exhibition_membersDTO> getExhibitionView(String M_Id);	//박람회 상세정보
 	public List<Book_exhibition_membersDTO> getPerformanceView(String M_Id); //연극 상세정보
+	
 	
 	
 	

@@ -411,6 +411,15 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	public List<Book_exhibition_membersDTO> getMemberView(String M_Id) {
 		return sqlSession.selectList("customerServiceSQL.getMemberView",M_Id);
 	}
+	
+	//회원 예약 취소
+	public void memberExTicketDelete(int seq) {
+		sqlSession.delete("customerServiceSQL.memberExTicketDelete",seq);
+	}
+	public void memberPerTicketDelete(int seq) {
+		sqlSession.delete("customerServiceSQL.memberPerTicketDelete",seq);
+		
+	}
 
 	
 }
