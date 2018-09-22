@@ -5,7 +5,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 </head>
 <style>
 body {
@@ -22,7 +21,10 @@ body {
 	text-decoration: none;
 	cursor: pointer;
 }
-
+#sub-high{
+	color:#999999;
+	font-size:23px;
+}
 #paging{
 	color: black;
 	text-decoration: none;
@@ -34,6 +36,7 @@ body {
 	<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
 		전체
 		<span class="h-light">일정</span>
+		<span id="sub-high">- 이번달 행사 리스트</span>
 	</h2>
 	<!-- 버튼 -->
 	<div>
@@ -53,6 +56,27 @@ body {
 		</table>
 	</div>
 <br><br>
+		<div align="center">
+		<table style="align:center; width: 70%;">
+			<tr>
+				<td>
+					<button class="ui inverted pink button" style="width: 100%;" id="P_allLsintBtn_Prev">
+						◀이전 행사 리스트(3개월)
+					</button> 
+				</td>
+				<td>
+					<button class="ui inverted pink button" style="width: 100%;" id="P_allLsintBtn_Now">
+						이번달 행사 리스트
+					</button> 
+				</td>
+				<td>
+					<button class="ui inverted pink button" style="width: 100%;" id="P_allLsintBtn_After">
+						이후 행사 리스트(3개월)▶
+					</button> 
+				</td>
+			</tr>
+		</table>
+	</div><br>
 	<!-- 전체일정 리스트 -->
 	<div align="center" style="margin-left:20px; width: 880px;">
 		<form name="AllCalendarListForm" id="AllCalendarListForm" method="post">

@@ -39,10 +39,14 @@ import customerService.bean.HotelboardDTO;
 import customerService.bean.ImageboardDTO;
 import customerService.bean.ImageboardPaging;
 import customerService.bean.PlayBookDTO;
+import customerService.bean.SalesBusinessRoomDTO;
 import customerService.bean.SalesConcertHallDTO;
 import customerService.bean.SalesExhibitionDTO;
 import customerService.dao.CustomerServiceDAO;
 import member.bean.MemberDTO;
+import performance.bean.Book_exhibition_membersDTO;
+import performance.bean.Book_performance_membersDTO;
+import rental.bean.ExhibitionDTO;
 
 @RequestMapping(value = "customerService")
 @Component
@@ -764,9 +768,7 @@ public class CustomerServiceController {
 		}
 
 		eventboardDTO.setImage1(fileName);
-		// 세션에서 아이디 얻기
-		MemberDTO memberDTO = (MemberDTO) session.getAttribute("homepageMember");
-		String id = memberDTO.getM_Id();
+		String id = "master";
 
 		// String 타입 날짜를 Date 형식으로 변환(연극 기간 구하기)
 		eventboardDTO.setStartDate(eventboardDTO.getStartDate().substring(0, 10).replaceAll("/", "-"));
@@ -832,13 +834,13 @@ public class CustomerServiceController {
 	public ModelAndView getImageboardSlide(@RequestParam String code) {
 		ArrayList<ImageboardDTO> list = new ArrayList<ImageboardDTO>();
 		ModelAndView mav = new ModelAndView();
-		String[] str = { "posterMain.jpg", "poster2.jpg", "poster4.jpg", "poster1.jpg", "poster3.jpg" };
+		String[] str = { "mainPoster.jpg", "poster2.jpg", "poster4.jpg", "poster1.jpg", "poster3.jpg" };
 
 		if (code.equals("1")) {
 			for (int i = 0; i < str.length; i++) {
 				ImageboardDTO imageboardDTO = new ImageboardDTO();
 				imageboardDTO.setImage1(str[i]);
-				System.out.println(imageboardDTO.getImage1());
+				
 				list.add(imageboardDTO);
 			}
 			mav.addObject("list", list);
@@ -860,7 +862,7 @@ public class CustomerServiceController {
 	public ModelAndView getImageboardSlide1(@RequestParam List<String> list) {
 		ModelAndView mav = new ModelAndView();
 		for (String data : list) {
-			System.out.println("data=" + data);
+			
 		}
 		List<ImageboardDTO> list1 = customerServiceDAO.getImageboardSlide(list);
 
@@ -894,9 +896,6 @@ public class CustomerServiceController {
 
 		ModelAndView mav = new ModelAndView();
 
-		for (EventboardDTO dto : list) {
-			System.out.println(dto.getImageName());
-		}
 
 		mav.addObject("pg", pg);
 		mav.addObject("imageboardPaging", imageboardPaging);
@@ -914,7 +913,7 @@ public class CustomerServiceController {
 		ImageboardDTO imageboardDTO = customerServiceDAO.getImageboard(seq);
 
 		ModelAndView mav = new ModelAndView();
-			System.out.println(imageboardDTO.getStartDate1());
+			
 			mav.addObject("imageboardDTO", imageboardDTO);
 			mav.addObject("postSelect", "0");
 			mav.addObject("modify", "1");
@@ -1166,7 +1165,7 @@ public class CustomerServiceController {
 		return new ModelAndView("redirect:/customerService/C_eventboardListForm.do");
 	}
 	
-// 연극 수정완료 클릭시 DB내용 수정
+	// 연극 수정완료 클릭시 DB내용 수정
 	@RequestMapping(value = "C_playboardMod", method = RequestMethod.POST)
 	public ModelAndView C_playboardMod(@ModelAttribute EventboardDTO eventboardDTO, @RequestParam MultipartFile img,
 			HttpSession session) {
@@ -1275,26 +1274,6 @@ public class CustomerServiceController {
 		return new ModelAndView("redirect:/customerService/C_hotelListForm.do");
 	}
 
-	// 마이페이지
-	@RequestMapping(value = "mypage", method = RequestMethod.GET)
-	public ModelAndView mypage(HttpSession session) {
-
-		int code = (Integer) session.getAttribute("code");
-
-		Object DTO = session.getAttribute("homepageMember");
-		session.setAttribute("DTO", DTO);
-
-		ModelAndView mav = new ModelAndView();
-
-		if (code == 1) {
-			mav.setViewName("/customerService/C_personalInformationForm"); // 개인마이페이지
-		} else if (code == 2) {
-			mav.setViewName("/customerService/C_companyInformationForm"); // 법인마이페이지
-		}
-
-		return mav;
-	}
-
 	// 부스별 총 매출액 보여주는 페이지로 이동
 	@RequestMapping(value = "C_salesExhibitionView", method = RequestMethod.GET)
 	public ModelAndView R_salesExhibitionView() {
@@ -1341,6 +1320,45 @@ public class CustomerServiceController {
 		mav.setViewName("jsonView");
 		return mav;
 	}
+	
+	
+	// 비즈니스룸 총 매출액 보여주는 컨트롤 
+	@RequestMapping(value = "C_salesBusinessRoom", method = RequestMethod.POST)
+	public ModelAndView C_salesBusinessRoom(@RequestParam String year, @RequestParam String month) {
+		String salesMon = year.substring(2) + "-" + month + "-" + "01";
+
+		// 홀 이름, 예약점유 일수, 총 매출액 가져오는 sql
+		List<SalesBusinessRoomDTO> list = customerServiceDAO.getSalesBusinessRoom(salesMon);
+
+		int salesTotalRent = customerServiceDAO.getSalesTotalRentBusinessRoom(salesMon);
+		String salesTotalRentstr = String.format("%,d", salesTotalRent);
+
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.addObject("salesTotalRent", salesTotalRentstr);
+		mav.setViewName("jsonView");
+		return mav;
+	}
+	
+	//콘서트 티켓 매출
+	@RequestMapping(value = "C_salesConcertTicket", method = RequestMethod.POST)
+	public ModelAndView C_salesConcertTicket(@RequestParam String year, @RequestParam String month) {
+		String salesMon = year.substring(2) + "-" + month + "-" + "01";
+		
+		System.out.println(salesMon);
+		
+		// 홀 이름, 예약점유 일수, 총 매출액 가져오는 sql
+		List<EventboardDTO> list = customerServiceDAO.getSalesConcertTicket(salesMon);
+
+		int salesTotalRent = customerServiceDAO.getSalesTotalRentConcertTicket(salesMon);
+		String salesTotalRentstr = String.format("%,d", salesTotalRent);
+
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.addObject("salesTotalRent", salesTotalRentstr);
+		mav.setViewName("jsonView");
+		return mav;
+	}
 
 	// 회원리스트로 이동
 	@RequestMapping(value = "C_memberShib", method = RequestMethod.GET)
@@ -1373,6 +1391,7 @@ public class CustomerServiceController {
 		customerServicePaging.setPageSize(3);
 		customerServicePaging.setTotalA(totalA);
 		customerServicePaging.member_pagingHTML();
+		
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("pg", pg);
@@ -1412,10 +1431,15 @@ public class CustomerServiceController {
 	//회원 상세정보
 	@RequestMapping(value="memberView", method = RequestMethod.POST)
 	public ModelAndView memberView(@RequestParam String M_Id) {
-		System.out.println(M_Id);
 		
+		List<Book_exhibition_membersDTO> exhibitionList = customerServiceDAO.getExhibitionView(M_Id);
+		List<Book_exhibition_membersDTO> performanceList = customerServiceDAO.getPerformanceView(M_Id);
+		exhibitionList.addAll(performanceList);
 		
 		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("list",exhibitionList);
+		
 		mav.setViewName("jsonView");
 		return mav;
 	}
@@ -1423,7 +1447,7 @@ public class CustomerServiceController {
 	//사업자 상세정보
 		@RequestMapping(value="companyView", method = RequestMethod.POST)
 		public ModelAndView companyView(@RequestParam String C_license) {
-			List<CompanyDTO> list = customerServiceDAO.getCompanyView(C_license);
+			List<ExhibitionDTO> list = customerServiceDAO.getCompanyView(C_license);
 			
 			ModelAndView mav = new ModelAndView();
 			mav.addObject("list",list);
@@ -1502,5 +1526,15 @@ public class CustomerServiceController {
 	public String C_privacy() {
 		return "/customerService/C_privacy";
 	}
+	//개인정보처리방침
+	@RequestMapping(value="C_map",method=RequestMethod.GET)
+	public ModelAndView C_map() {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("display","/main/map.jsp");
+		mav.setViewName("/customerService/C_map");
+		return mav;
+	}
+		
+	
 
 }

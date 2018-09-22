@@ -68,12 +68,14 @@ function memberSearch(pg){
 </div> -->
 <table class="ui striped table">
   <thead>
-    <tr><th>이름(사업자명)</th>
-    <th>아이디(사업자번호)</th>
-    <th>이메일</th>
-    <th>핸드폰(대표번호)</th>
-  </tr></thead>
-  <tbody id="memberListTable">
+    <tr  align="center">
+	    <th>이름(사업자명)</th>
+	    <th>아이디(사업자번호)</th>
+	    <th>이메일</th>
+	    <th>핸드폰(대표번호)</th>
+ 	</tr>
+ </thead>
+  <tbody id="memberListTable" align="center">
   
   </tbody>
  </table>
@@ -107,11 +109,37 @@ function memberSearch(pg){
 	</div>	
 </div>
 
-<div class="ui modal member"  id="modalForm">
-  <div class="header" id="header"></div>
-  <div class="scrolling content" id="content">
-    
-  </div>
+<div class="ui modal member com" id="companyModalForm">
+	<div class="header" id="companyHeader"></div>
+	<table class="ui striped table">
+	  <thead>
+	    <tr align="center">
+		    <th>부스 장소</th>
+		    <th>부스명</th>
+		    <th>사용일자</th>
+		    <th>진행상황</th>
+		    <th>구매 티켓 수</th>
+	  </tr></thead>
+	  <tbody id="reservationCompanyTable" align="center">
+	  
+	  </tbody>
+ </table>
+</div>
+
+<div class="ui modal member mem" id="memberModalForm">
+	<div class="header" id="memberHeader"></div>
+	<table class="ui striped table">
+	  <thead>
+	    <tr align="center">
+		    <th>예약명</th>
+		    <th>예매 날짜</th>
+		    <th>예매 현황</th>
+		    <th>예매 티켓 수</th>
+	  </tr></thead>
+	  <tbody id="reservationMemberTable" align="center">
+	  
+	  </tbody>
+ </table>
 </div>
 
 </body>

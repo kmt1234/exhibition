@@ -107,7 +107,7 @@ $(document).ready(function(){
 	});
 	//마이페이지(개인정보)
 	$('#C_mypage').click(function(){
-		location.href="/exhibition/customerService/mypage.do";
+		location.href="/exhibition/login/mypage.do";
 	});
 	//게시판 추가
 	$('#C_boardAdd').click(function(){
@@ -134,11 +134,4 @@ $(document).ready(function(){
 	});
 /*BODY 설명*/	
 	
-
-/*Footer 설명*/		
-	//클릭시(네이버사이트 맵과 연동)
-	$('#site_map').click(function(){
-		  window.open('/exhibition/main/map.jsp',"","width=900px, height=600px");
-		
-	});
 });

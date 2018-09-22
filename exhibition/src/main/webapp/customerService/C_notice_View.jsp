@@ -4,12 +4,18 @@
 <!DOCTYPE">
 <head>
 </head>
-<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
-	공지
-	<span class="h-light">사항</span>
-</h2>
 <body>
-	<table class="ui celled table">
+<div class="ui compact menu" style="width: 930px; height:900px auto;  display: inline-block;" >
+	<h2 class="box-container" style="float: center; width: 100%; height:126px; text-align: left;">
+		공지
+		<span class="h-light">사항</span>
+		<div style="font-size:13px; float:right; height: 50px; margin-top:30px ">
+			<img src="../img/house.png" width="15px" height="16px" style="cursor: pointer;" id="houseImg"></img>
+			> 고객센터 > 공지사항 > 내용보기 
+		</div>
+		<div class="ui divider"></div> 
+	</h2>
+	<table class="ui celled table" style="margin-left: 20px; width: 880px">
 		<tr>
 			<td  align="center" height="30" style="width:10%; background-color: #f7f6e6;text-align: center;">글번호</td>
 			
@@ -39,17 +45,19 @@
 		</tr>
 	</table>
 	<div>
-		<div style=" padding-top: 50px;" align="center">
-			<c:if test="${code=='3' }"> 
+		<div style="float:left; margin-left: 20px; height: 50px;" align="center" >
+			<%-- <c:if test="${code=='3' }"> --%>
 				<button class="middle ui button" id="C_notice_modifyBtn" >글수정</button>
 				<button class="middle ui button" id="C_notice_deleteBtn" >글삭제</button>
-			</c:if>
+		<%-- 	</c:if> --%>
 			<button class="middle ui button" id="C_notice_ListBtn" >목록</button>
 			<input type="hidden" id="putSeq" value="${customerServiceDTO.seq}">
 			<input type="hidden" id="pg" value="${pg}">
-			
 		</div>
 	</div>
+	<div style="height: 80px;"></div>
+</div>
+
 <script>
 $(document).ready(function(){
 	$('#C_notice_ListBtn').on('click', function(){
