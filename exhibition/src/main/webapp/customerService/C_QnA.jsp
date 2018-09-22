@@ -60,9 +60,9 @@ selector    : {
 			<th style="width: 300px; height: 7%; padding-top: 10px; text-align: center;">
 				<input type="checkbox" id="checkAll">
 			</th>
-		</c:if>
 		<input class="middle ui button" type="button" style="margin-left: 50px;" value="작성" id="C_QnA_writeBtn">
 		<input type="button" class="middle ui button" id="C_QnA_DeleteBtn" value="삭제" >
+		</c:if>
 	</div>
 	<div style="margin-top: 40px;"></div>
 </form>

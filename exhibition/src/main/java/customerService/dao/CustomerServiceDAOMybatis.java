@@ -38,6 +38,10 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	public List<CustomerServiceDTO> getNoticeList(Map<String, Integer> map) {
 		return sqlSession.selectList("customerServiceSQL.getNoticeList", map);
 	}
+	//공지사항 메인화면 리스트 불러오기
+	public List<CustomerServiceDTO> getNoticeMainList(Map<String, Integer> map) {
+		return sqlSession.selectList("customerServiceSQL.getNoticeMainList", map);
+	}
 	//공지사항 검색된 글수
 	public int getTotalC_notice_Search(Map<String, String> map) {
 		return sqlSession.selectOne("customerServiceSQL.getTotalC_notice_Search", map);
@@ -406,10 +410,6 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	//박람회 수정할때 예매일자별 날려버리기
 	public void C_exhibitionboardBookDel(EventboardDTO eventboardDTO) {
 		sqlSession.delete("customerServiceSQL.C_exhibitionboardBookDel", eventboardDTO);	
-	}
-	public List<CustomerServiceDTO> getNoticeMainList(Map<String, Integer> map) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 	public List<Book_exhibition_membersDTO> getMemberView(String M_Id) {
 		return sqlSession.selectList("customerServiceSQL.getMemberView",M_Id);
