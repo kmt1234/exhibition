@@ -71,7 +71,31 @@ public class LoginController {
 			return "exist";
 		}
 	}
-
+	
+	// 개인회원-카카오 로그인
+	@RequestMapping(value = "Klogin", method = RequestMethod.POST)
+	public ModelAndView Klogin(@RequestParam String kakaoId, @RequestParam String kakaoNickname, @RequestParam String kakaoEmail, @RequestParam(required = false, defaultValue = "kakao") String Kcode, HttpSession session) {
+		// 회원가입 축하 메세지 삭제
+		session.removeAttribute("registerMessage");
+		
+		// 세션 설정
+		MemberDTO memberDTO = new MemberDTO();
+		memberDTO.setM_Id(kakaoId);
+		memberDTO.setM_Name(kakaoNickname);
+		memberDTO.setM_Email(kakaoEmail);
+		memberDTO.setCode(1);
+		
+		
+		session.setAttribute("homepageMember", memberDTO);
+		session.setAttribute("homepageMemberName", kakaoNickname);
+		session.setAttribute("code", 1); // 코드 정보 넣어야함(1은 개인)
+		session.setAttribute("kakao", Kcode);	//카카오 로그인 구별 
+		
+		ModelAndView mav = new ModelAndView();
+		return new ModelAndView("redirect:/main/index.do");
+	}
+	
+	
 	// 기업회원 로그인
 	@RequestMapping(value = "Clogin", method = RequestMethod.POST)
 	public @ResponseBody String Clogin(@RequestParam String C_license, @RequestParam String C_password,

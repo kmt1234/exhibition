@@ -1,4 +1,16 @@
-$(document).ready(function(){
+$(document).ready(function(){	
+	
+	//카카오톡 로그인
+	$('#kakaoImg').click(function(){
+		location.href="javascript:loginWithKakao()";
+	});
+	
+	//카카오톡 로그아웃 처리 함수
+	function logoutWithKakao(){
+	    Kakao.Auth.logout();
+	   // alert('카카오 로그아웃 완료!');
+	    setCookie("kakao_login","",-1);  // 쿠키삭제 (로그아웃)
+	}
 	
 	/*----------개인회원 로그인---------*/
 	$('#Mlogin').click(function(){
@@ -88,6 +100,7 @@ $(document).ready(function(){
 	
 	/*-----로그아웃(공통)------*/
 	$('#logout').click(function(){
+		logoutWithKakao();
 		location.href="/exhibition/login/logout.do";
 	});
 	
@@ -475,7 +488,5 @@ $(document).ready(function(){
 			 });//ajax
 		}//else	
 	});
-	
-	
 	
 });

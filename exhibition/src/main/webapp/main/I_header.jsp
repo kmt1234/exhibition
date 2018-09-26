@@ -79,14 +79,14 @@ a:active{
 				</c:if>
 				
 				<c:if test="${homepageMember == nul}">
-					<div class="circular ui icon button" id="L_login"><i class="dropdown icon"></i>로그인
+					<div class="circular ui icon button" id="L_login"><i class="dropdown icon"></i>로그인	
 						<div class="ui member2 dropdown">
 							<div class="menu" class="info1" style="width: 10px ; height:80px ;">
 								<div class="item" id="M_individual_L" style="cursor: pointer; display:block;">개인</div>
 								<div class="item" id="C_company_L" style="cursor: pointer;  display:block;">법인</div>
 							</div>
 						</div>
-					</div>
+					</div>							
 				</c:if>
 			
 			<c:if test="${homepageMember != nul}">
@@ -95,9 +95,11 @@ a:active{
 					<div class="circular ui icon button" id="logout">
 						<i class="power off icon"></i>로그아웃
 					</div>
-					<div class="circular ui icon button" id="mypage">
-						<i class="user circle icon"></i>마이페이지
-					</div>
+					<c:if test="${kakao == null}">
+						<div class="circular ui icon button" id="mypage">
+							<i class="user circle icon"></i>마이페이지
+						</div>
+					</c:if>
 				</div>
 			</c:if>				
 				
@@ -178,6 +180,7 @@ a:active{
 	integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
 	crossorigin="anonymous"></script>
 <script src="../semantic/semantic.min.js?ver=1"></script>
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script src="../js/index.js?ver=1" charset="UTF-8"></script> 
 <script src="../js/member.js" charset="UTF-8"></script> 
 <script src="../js/company.js" charset="UTF-8"></script>
