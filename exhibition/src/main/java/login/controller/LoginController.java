@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import company.bean.CompanyDTO;
 import company.dao.CompanyDAO;
+import customerService.bean.EventboardDTO;
 import member.bean.MemberDTO;
 import member.dao.MemberDAO;
 import member.dao.MemberTicketListPaging;
@@ -269,12 +270,30 @@ public class LoginController {
 	@RequestMapping(value="eventDetail", method=RequestMethod.POST)
 	public ModelAndView eventDetail(@RequestParam String memberId, @RequestParam String imageName, @RequestParam String playDate, @RequestParam String ticketQty) {
 		
-		System.out.println("내역 아이디 :" + memberId);
-		System.out.println("내역 연극명 :" + imageName);
-		System.out.println("내역 날짜 :" + playDate);
-		System.out.println("내역 티켓수 :" + ticketQty);
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("imageName", imageName);
+		
+		EventboardDTO eventboardDTO = null;
+		
+		//DB(연극)
+		eventboardDTO = memberDAO.getPerformanceInfo(map);
+		
+		if(eventboardDTO==null) {
+			//DB(전시회)
+			eventboardDTO = memberDAO.getExhibitionInfo(map);
+		}
+		
+		String playDate2=playDate.replace("-", "");
 		
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("memberId", memberId);
+		mav.addObject("imageName", imageName);
+		mav.addObject("playDate2", playDate2);
+		mav.addObject("playDate", playDate);
+		mav.addObject("ticketQty", ticketQty);
+		mav.addObject("eventboardDTO", eventboardDTO);
+		mav.addObject("display","/login/memberMypage_ticketInfo.jsp");
+		mav.setViewName("/customerService/C_customerServiceForm");
 		return mav;
 	}
 	

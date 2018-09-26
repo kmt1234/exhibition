@@ -17,6 +17,10 @@
 	text-decoration: none;
 	cursor: pointer;
 }
+.imageName{
+	cursor: pointer;
+	color: green;
+}
 </style>
 </head>
 <body>
@@ -52,16 +56,23 @@
 	<!--내용--><input type="hidden" id="pg" value="${pg}"><!--현재 페이지-->	
 	<div class="ui segment" id="Ticket-List-Div" style="display: inline-block;">
 		
+		<table class="ui selectable inverted table" id="ticketList">
+			<thead>
+				<tr>
+					<th>회원 아이디</th><th>공연 및 전시회</th><th>예매 일자</th><th>예매 티켓 수량</th>
+				
+				</tr>
+			</thead>
+		</table>
+		
+		<!--클릭 시, hidden에 해당 데이터 저장  -->
 		<form name="eventDetailInfo" id="eventDetailInfo" method="post" action="/exhibition/login/eventDetail.do">
-			<table id="ticketList" style="border: solid red;">
-				<thead>
-					<tr>
-						<th>회원 아이디</th><th>공연 및 전시회 명</th><th>예매 일자</th><th>예매 티켓 수량</th>
-					
-					</tr>
-				</thead>
-			</table>
+			<input type="hidden" name="memberId" id="memberId">
+			<input type="hidden" name="imageName" id="imageName">
+			<input type="hidden" name="playDate" id="playDate">
+			<input type="hidden" name="ticketQty" id="ticketQty">
 		</form>
+		
 		
 		<div id="paging"></div>
 		
@@ -80,33 +91,19 @@ $.ajax({
 			$('<tr/>',{
 				class : 'tr'
 			}).append($('<td/>',{
-				text : item.memberId
-			}).append($('<input/>',{
-				name : 'memberId',
-				type : 'text',
+				text : item.memberId,
 				value : item.memberId
-			}))).append($('<a/>',{
-				/* id : 'bookEventInfo' */
-			}).append($('<td/>',{
+			})).append($('<td/>',{
 				text : item.imageName,
-				id : 'bookEventInfo',
-			}).append($('<input/>',{
-				name : 'imageName',
-				type : 'text',
+				class : 'imageName',
 				value : item.imageName
-			})))).append($('<td/>',{
+			})).append($('<td/>',{
 				text : item.playDate,
-			}).append($('<input/>',{
-				name : 'playDate',
-				type : 'text',
 				value : item.playDate
-			}))).append($('<td/>',{
+			})).append($('<td/>',{
 				text : item.ticketQty,
-			}).append($('<input/>',{
-				name : 'ticketQty',
-				type : 'text',
 				value : item.ticketQty
-			}))).appendTo($('#ticketList'));
+			})).appendTo($('#ticketList'));
 		});//each
 		
 		$('#paging').html(data.memberTicketListPaging.pagingHTML);
@@ -121,9 +118,15 @@ function MemberTicketListPaging(pg){
 	
 $(document).ready(function(){
 	
-	$('#ticketList').on('click','#bookEventInfo',function(){
+	$('#ticketList').on('click','.imageName',function(){
+		
+		$('#memberId').val($(this).prev().text());
+		$('#imageName').val($(this).text());
+		$('#playDate').val($(this).next().text());
+		$('#ticketQty').val($(this).next().next().text());
 		$('#eventDetailInfo').submit();
 	});
+	
 });
 
 </script>

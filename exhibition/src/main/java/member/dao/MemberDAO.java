@@ -3,6 +3,7 @@ package member.dao;
 import java.util.List;
 import java.util.Map;
 
+import customerService.bean.EventboardDTO;
 import member.bean.MemberDTO;
 import performance.bean.Book_performance_membersDTO;
 
@@ -27,6 +28,10 @@ public interface MemberDAO {
 	public List<Book_performance_membersDTO> getMemberTicketList(Map<String, String> map); //회원의 예매 리스트를 가져오는 메소드
 
 	public int getMemberTicketListTotalA(Map<String, String> map);	//회원의 예매 리스트를 가져오는 메소드
+
+	public EventboardDTO getPerformanceInfo(Map<String, String> map);	//연극 정보 가져오는 메소드
+
+	public EventboardDTO getExhibitionInfo(Map<String, String> map);	//전시회 정보 가져오는 메소드
 
 	
 
