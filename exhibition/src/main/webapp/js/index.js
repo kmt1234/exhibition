@@ -155,11 +155,18 @@ $(document).ready(function(){
 			});
 		}
 	}); 
+	
 	// 메인화면 공지사항 리스트 제목 클릭시 내용 보여줌
 	$('#C_notice_MainList').on('click','#subjectA',function(){
 		var seq = $(this).next().text();
 		location.href='/exhibition/customerService/C_notice_View.do?seq='+seq+'&pg='+$('#pg').val();
 	});
-/*BODY 설명*/	
 	
+	$('#index_searchBtn').click(function(){
+		if($('#index_keyword').val()=='')
+			alert("검색어를 입력하세요");
+		else location.href='/exhibition/main/index_SearchForm.do';
+	});
+
+/*BODY 설명*/	
 });

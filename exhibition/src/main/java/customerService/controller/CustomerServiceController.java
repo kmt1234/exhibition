@@ -337,7 +337,7 @@ public class CustomerServiceController {
 		mav.setViewName("jsonView");
 		return mav;
 	}
-
+	
 	// 고객의 소리 문의받은글 검색 & 페이징
 	@RequestMapping(value = "C_inquire_Search", method = RequestMethod.POST)
 	public ModelAndView C_inquire_Search(@RequestParam(required = false) Map<String, String> map) {
@@ -457,7 +457,7 @@ public class CustomerServiceController {
 		mav.setViewName("/customerService/C_customerServiceForm");
 		return mav;
 	}
-
+	
 	// 자주묻는 질문 - 작성등록
 	@RequestMapping(value = "C_QnA_checkWrite", method = RequestMethod.POST)
 	public ModelAndView C_QnA_checkWrite(@RequestParam String C_qty, @RequestParam String subject,

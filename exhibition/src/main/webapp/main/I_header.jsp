@@ -53,8 +53,8 @@ a:active{
 			<div  style="width: 49%;  display: inline-block;">
 				<div class="ui input" style="width: 100%; ">
 					<div class="ui action input"  style="width: 100%; ">
-						<input type="text" placeholder="Search..." style="width: 30%;">
-						<button class="ui icon button">
+						<input type="text" id="index_keyword" placeholder="Search..." style="width: 30%;">
+						<button class="ui icon button" id="index_searchBtn">
 							<i class="search icon"></i>
 						</button>
 					</div>
