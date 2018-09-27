@@ -71,13 +71,13 @@
   	<div style="width: 100%; text-align: left; margin-top: 20px;display: inline-block; ">
 		<div class="ui labeled input " >
 			<div class="ui label " style="width: 100px; text-align: center;">
-				<span>날짜선택</span>
+				<span>시간선택</span>
 			</div>
 		  	<div class="ui inverted input" style="width: 100%;">
 				<div class="ui left icon input focus" style="width: 100%; height: 50px;">
-					<input type="text" name="startTime" class="timepicker1" style="width:195px;">
+					<input type="text" name="startTime" id="startTime" class="timepicker1" style="width:195px;">
 					<div style="width: 10px;">&nbsp;</div>
-					<input type="text" name="endTime" class="timepicker2" style="width:195px;">
+					<input type="text" name="endTime" id="endTime" class="timepicker2" style="width:195px;">
 				</div>
 		  	</div>
   		</div>
@@ -91,7 +91,7 @@
 			</div>
 		  	<div class="ui inverted input" style="width: 100%;">
 				<div class="ui left icon input focus" style="width: 400px;  height: 50px;">
-					<input type="text" name="eventPlace" placeholder="공연위치">
+					<input type="text" name="eventPlace" id="eventPlace" placeholder="공연위치">
 					<i class="user icon"></i>
 				</div>
 		  	</div>
@@ -106,7 +106,7 @@
 			</div>
 		  	<div class="ui inverted input" style="width: 100%;">
 				<div class="ui left icon input focus" style="width: 400px; height: 50px;">
-					<input type="text" name="eventPrice" placeholder="티켓 금액">
+					<input type="text" name="eventPrice" id="eventPrice" placeholder="티켓 금액">
 					<i class="user icon"></i>
 				</div>
 		  	</div>
@@ -121,7 +121,7 @@
 			</div>	
 		  	<div class="ui inverted input" style="width: 100%;">
 				<div class="ui left icon input focus" style="width: 400px; height: 50px;">
-					<input type="text" name="eventSeats" placeholder="관람인원">
+					<input type="text" name="eventSeats" id="eventSeats" placeholder="관람인원">
 					<i class="user icon"></i>
 				</div>
 		  	</div>

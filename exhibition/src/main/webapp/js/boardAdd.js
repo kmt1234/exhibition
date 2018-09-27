@@ -1,18 +1,28 @@
 $(document).ready(function(){
 
 	//시간
-	$('.timepicker1, .timepicker2').timepicker({
+	$('.timepicker1').timepicker({
 		timeFormat : 'H:mm',
 	    interval: 60,
-	    minTime: '08',
+	    minTime: '09',
 	    maxTime: '10:00pm',
-	    defaultTime: '08',
-	    startTime: '08:00am',
+	    defaultTime: '09',
+	    startTime: '09:00am',
 	    dynamic: false,
 	    dropdown: true,
 	    scrollbar: false	
 	});
 		
+	$('.timepicker2').timepicker({
+		timeFormat : 'H:mm',
+	    interval: 60,
+	    minTime: $('.timepicker1').val(),
+	    maxTime: '10:00pm',
+	    defaultTime: $('.timepicker1').val(),
+	    dynamic: false,
+	    dropdown: true,
+	    scrollbar: false	
+	});
 	
 	//날짜
 	$(".datepicker1, .datepicker2").datepicker({
@@ -64,6 +74,37 @@ $(document).ready(function(){
 		location.href='/exhibition/customerService/C_mainImageboardForm.do?postSelect=3';
 	});
 	
+	
+	var checkP = false;
+	var checkS = false;
+	
+	//전시회 티켓 금액 유효성
+	$('#eventPrice').blur(function(){
+		//숫자 유효성
+		var test = $('#eventPrice').val();
+		console.log(test);
+			if (!$.isNumeric(test)) {
+				alert('티켓금액은 숫자만 입력하세요(ex.3,000원 -> 3000)');
+				return false;
+			}else{
+				checkP = true;
+			}	
+	});
+	
+	
+	//관람인원 유효성
+	$('#eventSeats').blur(function(){
+		//숫자 유효성
+		var test = $('#eventSeats').val();
+		console.log(test);
+			if (!$.isNumeric(test)) {
+				alert('관람인원은 숫자만 입력하세요(ex.100석 -> 100)');
+				return false;
+			}else{
+				checkS = true;
+			}
+	});
+	
 	//이미지 등록
 	$('#checkImageboardWrite').click(function(){
 		$('#imageNameDiv').empty();
@@ -71,19 +112,17 @@ $(document).ready(function(){
 		$('#hotelDiv').empty();
 		$('#telDiv').empty();
 		
-		
-		//숫자 유효성
-		var test = $('#test').val();
-
-			if ( $.isNumeric(test) ) {
-	
-			alert('숫자만 입력해주세요.');
-	
-			$('#test').val('');
-		}
-		
-
-	/*	if($('#postSelect').val()=='0'){
+		 var date1 = $("#startTime").val();
+	     var date2 = $("#endTime").val();
+	     
+	     var cutDate1 = date1.split(':');
+	     var cutDate2 = date2.split(':');
+	     
+	     console.log(cutDate1[0]);
+	     console.log(cutDate2[0]);
+	     
+	   
+		if($('#postSelect').val()=='0'){
 			if($('#imageName').val()=='')
 				$('#imageNameDiv').text('제목을 입력하세요').css('color','red').css('font-size','9pt').css('font-weight','bold');
 			else if($('#img').val()=='') 
@@ -93,24 +132,31 @@ $(document).ready(function(){
 		}
 		
 		else if($('#postSelect').val()=='1' || $('#postSelect').val()=='2'){
-			alert($('.timepicker1').val());
-			alert($('.timepicker2').val());
-			
+				
 			if($('#imageName').val()=='')
 				$('#imageNameDiv').text('제목을 입력하세요').css('color','red').css('font-size','9pt').css('font-weight','bold');
 			else if($('#img').val()=='') 
 				$('#imgDiv').text('파일을 선택해 주세요').css('color','magenta').css('font-size','9pt').css('font-weight','bold');
-			else if($('.datepicker1').datepicker().val()=='')
+			else if($('.datepicker1').datepicker().val()==''){
 				alert('날짜1 입력해야함');
-			else if($('.datepicker2').datepicker().val()=='')
-				alert('날짜2 입력해야함');
-			else if($('.datepicker2').datepicker().val() < $('.datepicker1').datepicker().val())
-				alert('날짜2가 날짜1 보다 작음');
-			
-			//유효성 다시 해야함
-			else if($('.timepicker1').val() < $('.timepicker2').val()){
-				alert('시간2가 시간1 보다 작음');
+				return false;
 			}
+			else if($('.datepicker2').datepicker().val()==''){
+				alert('날짜2 입력해야함');
+				return false;
+			}
+			else if($('.datepicker2').datepicker().val() < $('.datepicker1').datepicker().val()){
+				alert('날짜2가 날짜1 보다 작음');
+				return false;
+			}
+			else if(checkP == false || checkS == false){
+				alert('티켓 가격 및 관람인원에는 숫자만 입력하세요');
+				return false;
+			}
+			else if (parseInt(cutDate2[0]) - parseInt(cutDate1[0]) < 0){
+			    alert("종료시간이 시작시간보다 이전일수 없습니다");
+			    return false;
+		    }
 			else if($('#postSelect').val()=='1'){	//박람회
 				$('#imageboardWriteForm').attr({action:'/exhibition/customerService/C_eventInfoWrite.do', method:'post'}).submit();
 			}else if($('#postSelect').val()=='2'){	//연극
@@ -133,7 +179,7 @@ $(document).ready(function(){
 				$('#telDiv').text('전화번호 양식에 맞지 않습니다').css('color','red').css('font-size','9pt').css('font-weight','bold');
 			}else
 				$('#imageboardWriteForm').attr({action:'/exhibition/customerService/C_hotelInfoWrite.do', method:'post'}).submit();
-		}*/
+		}
 		
 	});
 	
