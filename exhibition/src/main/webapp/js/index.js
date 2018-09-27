@@ -163,9 +163,11 @@ $(document).ready(function(){
 	});
 	
 	$('#index_searchBtn').click(function(){
+		var index_keyword = $('#index_keyword').val();
 		if($('#index_keyword').val()=='')
 			alert("검색어를 입력하세요");
-		else location.href='/exhibition/main/index_SearchForm.do';
+		else location.href='/exhibition/main/index_SearchForm.do?index_keyword='+index_keyword;
+		
 	});
 
 /*BODY 설명*/	

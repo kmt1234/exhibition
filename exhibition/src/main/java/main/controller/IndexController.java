@@ -49,21 +49,19 @@ public class IndexController {
 	}
 	
 	@RequestMapping(value = "index_SearchForm", method=RequestMethod.GET)
-	public ModelAndView index_SearchForm() {
-		
+	public ModelAndView index_SearchForm(@RequestParam String index_keyword, Model model) {
 		ModelAndView mav = new ModelAndView();
+		model.addAttribute("index_keyword", index_keyword);
 		mav.addObject("display", "/main/index_Search.jsp");
 		mav.setViewName("/main/index_SearchForm");
 		return mav;
 	}
 	
 	@RequestMapping(value="index_Search", method=RequestMethod.POST)
-	public ModelAndView index_Search(@RequestParam Map<String, String> map) {
+	public ModelAndView index_Search(@RequestParam(required = false) Map<String, String> map) {
 		List<MainDTO> list = mainDAO.index_Search(map);
-		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
-		System.out.println(list);
 		mav.setViewName("jsonView");
 		
 		return mav; 

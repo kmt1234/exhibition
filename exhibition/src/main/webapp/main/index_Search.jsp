@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<!-- <style type="text/css">
+<style type="text/css">
 #subjectA:link {
 	color: black;
 	text-decoration: none;
@@ -39,7 +39,7 @@
 	text-decoration: none;
 	cursor: pointer;
 }
-</style> -->
+</style>
 
 </head>
 <body>
@@ -58,6 +58,23 @@
 		<div style="width: 100%;" align="center">
 			<table style="width: 880px; height: 40px;" align="center" border="1"
 				bordercolor="#ec008c" cellpadding="2" frame="hsides" rules="rows"
+				id="index_NoticeSearch" class="ui striped table">
+				<tr>
+					<th
+						style="width: 100px; height: 7%; padding-top: 10px; text-align: center;">번호</th>
+					<th
+						style="width: 500px; height: 7%; padding-top: 10px; text-align: center;">제목</th>
+					<th
+						style="width: 100px; height: 7%; padding-top: 10px; text-align: center;">등록일</th>
+				</tr>
+			</table>
+			<br>
+			<!-- <div id="index_PagingDiv" class="ui center pagination menu"></div> -->
+			<br><br> 
+		</div>
+		<div style="width: 100%;" align="center">
+			<table style="width: 880px; height: 40px;" align="center" border="1"
+				bordercolor="#ec008c" cellpadding="2" frame="hsides" rules="rows"
 				id="index_SearchList" class="ui striped table">
 				<tr>
 					<th
@@ -72,10 +89,44 @@
 			<!-- <div id="index_PagingDiv" class="ui center pagination menu"></div> -->
 			<br><br> 
 		</div>
+		<div style="width: 100%;" align="center">
+			<table style="width: 880px; height: 40px;" align="center" border="1"
+				bordercolor="#ec008c" cellpadding="2" frame="hsides" rules="rows"
+				id="index_SearchList" class="ui striped table">
+				<tr>
+					<th
+						style="width: 100px; height: 7%; padding-top: 10px; text-align: center;">번호</th>
+					<th
+						style="width: 500px; height: 7%; padding-top: 10px; text-align: center;">제목</th>
+					<th
+						style="width: 100px; height: 7%; padding-top: 10px; text-align: center;">등록일</th>
+				</tr>
+			</table>
+			<br>
+			<!-- <div id="index_PagingDiv" class="ui center pagination menu"></div> -->
+			<br><br> 
+		</div>
+		<div style="width: 100%;" align="center">
+			<table style="width: 880px; height: 40px;" align="center" border="1"
+				bordercolor="#ec008c" cellpadding="2" frame="hsides" rules="rows"
+				id="index_SearchList" class="ui striped table">
+				<tr>
+					<th
+						style="width: 100px; height: 7%; padding-top: 10px; text-align: center;">번호</th>
+					<th
+						style="width: 500px; height: 7%; padding-top: 10px; text-align: center;">제목</th>
+					<th
+						style="width: 100px; height: 7%; padding-top: 10px; text-align: center;">등록일</th>
+				</tr>
+			</table>
+			<br>
+			<!-- <div id="index_PagingDiv" class="ui center pagination menu"></div> -->
+			<br><br> 
+		</div>
+		<input type="hidden" name="index_keyword" id="index_keyword" value="index_keyword">
 		<input type="hidden" name="pg" id="pg" value="1"> <br>
 		<div style="height: 40px;"></div>
 	</div>
 <script src="../semantic/semantic.min.js"></script>
-<script src="../js/index_Search.js?ver=1"></script>
 </body>
 </html>

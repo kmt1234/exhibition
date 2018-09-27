@@ -43,15 +43,12 @@ left: 0px;
 		<div class="ui compact menu" style="width: 930px; min-height:900px auto;  display: inline-block;" >
 			<jsp:include page="${display}"></jsp:include>
 		</div>
-</div>
+	</div>
 		<!-- footer -->
 	<div class="ui container" style="margin-top: 20px; min-width:1170px; position: relative; ">
 		<jsp:include page="../main/I_footer.jsp" ></jsp:include>
 	</div>
-
+	<input type="hidden" name="index_keyword" id="index_keyword" value="${index_keyword}">
 <script src="../js/slidbar.js"></script>
-<script>
-
-</script>
 </body>
 </html>
