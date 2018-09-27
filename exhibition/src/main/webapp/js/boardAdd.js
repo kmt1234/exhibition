@@ -25,6 +25,7 @@ $(document).ready(function(){
 	    dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
 	    dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
 	    showMonthAfterYear: true,
+	    minDate: 0,
 	    yearSuffix: '년'
 	});
 	
@@ -69,8 +70,20 @@ $(document).ready(function(){
 		$('#imgDiv').empty();
 		$('#hotelDiv').empty();
 		$('#telDiv').empty();
+		
+		
+		//숫자 유효성
+		var test = $('#test').val();
 
-		if($('#postSelect').val()=='0'){
+			if ( $.isNumeric(test) ) {
+	
+			alert('숫자만 입력해주세요.');
+	
+			$('#test').val('');
+		}
+		
+
+	/*	if($('#postSelect').val()=='0'){
 			if($('#imageName').val()=='')
 				$('#imageNameDiv').text('제목을 입력하세요').css('color','red').css('font-size','9pt').css('font-weight','bold');
 			else if($('#img').val()=='') 
@@ -95,9 +108,9 @@ $(document).ready(function(){
 				alert('날짜2가 날짜1 보다 작음');
 			
 			//유효성 다시 해야함
-			/*else if($('.timepicker1').val() < $('.timepicker2').val()){
+			else if($('.timepicker1').val() < $('.timepicker2').val()){
 				alert('시간2가 시간1 보다 작음');
-			}*/
+			}
 			else if($('#postSelect').val()=='1'){	//박람회
 				$('#imageboardWriteForm').attr({action:'/exhibition/customerService/C_eventInfoWrite.do', method:'post'}).submit();
 			}else if($('#postSelect').val()=='2'){	//연극
@@ -120,7 +133,7 @@ $(document).ready(function(){
 				$('#telDiv').text('전화번호 양식에 맞지 않습니다').css('color','red').css('font-size','9pt').css('font-weight','bold');
 			}else
 				$('#imageboardWriteForm').attr({action:'/exhibition/customerService/C_hotelInfoWrite.do', method:'post'}).submit();
-		}
+		}*/
 		
 	});
 	

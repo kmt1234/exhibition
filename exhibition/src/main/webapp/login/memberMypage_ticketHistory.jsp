@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>예매내역</title>
 <style type="text/css">
 #currentPaging{
 	color: red;
@@ -17,13 +17,14 @@
 	text-decoration: none;
 	cursor: pointer;
 }
+
 .imageName{
 	cursor: pointer;
-	color: green;
+	color: red;
 }
 
 #cancelMsg{
-	color: green;
+	color: red;
 	text-align: center;
 }
 
@@ -60,40 +61,32 @@
 		  	</a>
 		</div>
 	</div>
-</div><!--class="ui compact menu"   -->
+</div><!--class="ui compact menu"   -->	
+
+<!--내용--><input type="hidden" id="pg" value="${pg}"><!--현재 페이지-->	
+<div class="ui segment" id="Ticket-List-Div" style="display: inline-block;">
 		
-	<!--내용--><input type="hidden" id="pg" value="${pg}"><!--현재 페이지-->	
-	<div class="ui segment" id="Ticket-List-Div" style="display: inline-block;">
-		
-		<table class="ui selectable inverted table" id="ticketList">
-			<thead>
-				<tr>
-					<th>회원 아이디</th><th>공연 및 전시회</th><th>예매 일자</th><th>예매 티켓 수량</th><th>환불 여부</th>
-				
-				</tr>
-			</thead>
-		</table>
-		
-		<!--클릭 시, hidden에 해당 데이터 저장  -->
-		<form name="eventDetailInfo" id="eventDetailInfo" method="post" action="/exhibition/login/eventDetail.do">
-			<input type="hidden" name="memberId" id="memberId">
-			<input type="hidden" name="imageName" id="imageName">
-			<input type="hidden" name="playDate" id="playDate">
-			<input type="hidden" name="ticketQty" id="ticketQty">
-		</form>
-		
-		
-		<div id="paging"></div>
-		
-	</div>
+	<table class="ui selectable inverted table" id="ticketList">
+		<thead>
+			<tr>
+				<th>회원 아이디</th><th>공연 및 전시회</th><th>예매 일자</th><th>예매 티켓 수량</th><th>환불 여부</th>
+			
+			</tr>
+		</thead>
+	</table>
+	
+	<div id="paging"></div>
+	
+</div>
+
 </body>
-<script>
+<script type="text/javascript">
 $('.tr').remove();	//예매리스트 내용 초기화
 
-//회원의 예매 리스트를 가져오는 ajax 
+//과거 예매 내역 불러오는 ajax
 $.ajax({
 	type : 'GET',
-	url : '/exhibition/login/getMemberTicketList.do?pg='+$('#pg').val()+'',
+	url : '/exhibition/login/getTicketHistory.do?pg='+$('#pg').val()+'',
 	dataType : 'json',
 	success : function(data){
 		$.each(data.list, function(index, item){
@@ -115,47 +108,39 @@ $.ajax({
 				value : item.ticketQty
 			})).append($('<td/>',{
 				id : 'cancelMsg',
-				text : '환불 가능'
+				text : '환불 불가'
 			})).appendTo($('#ticketList'));
 		});//each
-		
-		$('#paging').html(data.memberTicketListPaging.pagingHTML);
+		$('#paging').html(data.TicketHistoryListPaging.pagingHTML);
 	}//success
 });//ajax
+
+
 </script>
-<script>
+<script type="text/javascript">
 /*페이징 */
-function MemberTicketListPaging(pg){
-	location.href="/exhibition/login/memerMypage_ticketList.do?pg="+pg;
+function TicketHistoryListPaging(pg){
+	location.href="/exhibition/login/ticketHistory.do?pg="+pg;
 }
+
+//회원정보 수정 메뉴
+$('#member-info-modify').click(function(){
+	location.href="/exhibition/login/mypage.do";
 	
-$(document).ready(function(){
-	
-	$('#ticketList').on('click','.imageName',function(){
-		
-		$('#memberId').val($(this).prev().text());
-		$('#imageName').val($(this).text());
-		$('#playDate').val($(this).next().text());
-		$('#ticketQty').val($(this).next().next().text());
-		$('#eventDetailInfo').submit();
-	});
-	
-	//회원정보 수정 메뉴
-	$('#member-info-modify').click(function(){
-		location.href="/exhibition/login/mypage.do";
-		
-	});
-	
-	// 예매리스트 탭 
-	$('#member-ticket-list').click(function(){
-		location.href="/exhibition/login/memerMypage_ticketList.do";
-	});
-	
-	//예매내역 탭
-	$('#member-ticket-history').click(function(){
-		location.href="/exhibition/login/ticketHistory.do";
-	});
-	
+});
+
+// 예매리스트 탭 
+$('#member-ticket-list').click(function(){
+	location.href="/exhibition/login/memerMypage_ticketList.do";
+});
+
+//예매내역 탭
+$('#member-ticket-history').click(function(){
+	location.href="/exhibition/login/ticketHistory.do";
+});
+
+$('#ticketList').on('click','.imageName',function(){
+	alert('기간만료된 티켓 및 당일 행사는 취소 불가능합니다');
 });
 
 </script>
