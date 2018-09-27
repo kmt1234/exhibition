@@ -105,6 +105,20 @@ $(document).ready(function(){
 			}
 	});
 	
+	
+	//예약 중복 확인
+	$('#eventPlace').blur(function(){
+		$.ajax({
+			type : 'POST',
+			url : '/exhibition/customerService/checkReservation.do',
+			data : {'postSelect':$('#postSelect').val(), 'imageName' : $('#imageName').val(), 'startDate' : $('.datepicker1').val(), 'endDate' : $('.datepicker2').val(),'eventPlace' : $('#eventPlace').val()},
+			dataType : 'text',
+			success : function(data){
+				
+			}
+		});//ajax
+	});
+	
 	//이미지 등록
 	$('#checkImageboardWrite').click(function(){
 		$('#imageNameDiv').empty();

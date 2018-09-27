@@ -659,6 +659,15 @@
 		delete eventboard_exhibition_book where num=#{seq}
 	</delete>
  	
+ 	<!--전시회 층 예약 중복 체크  -->
+ 	<select id="checkReservation_exhibition" parameterType="java.util.Map" resultType="eventboard">
+ 		select * from eventboard where imageName = #{imageName} and startDate = #{startDate} and endDate = #{endDate} and eventPlace = #{eventPlace}
+ 	</select>
+ 	
+ 	<!--연극 공연장 예약 중복 체크  -->
+ 	<select id="checkReservation_performance" parameterType="java.util.Map" resultType="eventboard">
+ 		select * from eventboard_play where imageName = #{imageName} and startDate = #{startDate} and endDate = #{endDate} and eventPlace = #{eventPlace}
+ 	</select>
  	
  </mapper>
  
