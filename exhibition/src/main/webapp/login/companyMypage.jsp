@@ -17,15 +17,16 @@
 	<h2 class="box-container" style="float: center; width: 100%; height:126px; text-align: left;">
 		<span>마이</span>
 		<span class="h-light">페이지</span>
-		<div style="font-size:13px; float:right; height: 50px; margin-top:30px ">
+	<div style="font-size:13px; float:right; height: 50px; margin-top:30px ">
 		<img src="../img/house.png" width="15px" height="16px" style="cursor: pointer;" id="houseImg"></img>
 		> 고객센터 > 마이페이지(법인) 
 		</div>
+	<div class="ui divider"></div> 
 	</h2>
 	<!-- 메인메뉴 -->
 	<div style="width: 100%;">
 		<!-- 맨위 메뉴 텝 -->
-		<div style="margin-left: 20px; width:880px; float: left; text-align: left;">
+		<div style=" width:880px; float: left; text-align: left;">
 			<a class="middle ui button" class="active item" id="company-info-modify" style="margin-left:20px; width:150px; float: left;">수정</a>
 			<a class="middle ui button" class="item"id="rental-list"  style=" width:150px; float: left;">임대리스트</a>
 			<a class="middle ui button" class="item"id="rental-history"  style=" width:150px; float: left;">지난 임대 내역</a>
@@ -235,6 +236,6 @@
 				</div>
 			</div>
 	</div>		
-
+	<div style="display: inline-block; border: 1px solid; margin-top:80px; width: 465px; height: 385px;"></div>
 </div>
 <jsp:include page="companyOut.jsp"/>
