@@ -53,4 +53,14 @@
 		delete from company where C_license = #{C_license} and C_password = #{C_password}
 	</delete>
 	
+	<!--박람회 임대리스트-->
+ 	<select id="getExhibitionList" parameterType="java.lang.String" resultType="exhibition">
+ 		select * from EXHIBITIONRENTAL where C_license = #{C_license}
+ 	</select>
+ 	
+ 	<!--공연 임대리스트-->
+ 	<select id="getPlayList" parameterType="java.lang.String" resultType="concert">
+ 		select * from concertHall where C_license = #{C_license}
+ 	</select>
+	
 </mapper>

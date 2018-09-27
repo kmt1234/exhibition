@@ -161,6 +161,13 @@
  		select * from C_QnA where classify=#{classify}
  	</select>
  	
+ 	<!-- 자주 묻는 질문 삭제 -->
+ 	<delete id="C_QnA_Delete" parameterType="java.util.List">
+ 		delete C_QnA where seq in 
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
  	
  	
  	
@@ -481,17 +488,18 @@
 	<select id="getSalesTotalRentConcertTicket" parameterType="java.lang.String" resultType="int">
 		select sum(sum(ticketPrice*bookTicket)) as salesTotalRent from EVENTBOARD_PLAY_BOOK where playDATE BETWEEN #{salesMon} and (select last_day(#{salesMon}) from dual) group by BOOKMEMBERID
 	</select> 	 	
+	
 	<!-- 회원정보  -->
  	<select id="getMemberList" resultType="member" parameterType="java.util.Map">
  		select * from(
 		select rownum rn, tt.* from(
 		select * from membertable)tt
-		)where rn <![CDATA[ >= ]]> #{startNum} and rn<![CDATA[<=]]> #{endNum}	
+		)where rn <![CDATA[ >= ]]> #{startNum} and rn<![CDATA[<=]]> #{endNum} and code=1
  	</select>
  	
 	<!-- 회원 정보 페이징처리 -->
 	<select id="getMemberListTotal" parameterType="java.util.Map" resultType="int">
-		select count(*) from membertable
+		select count(*) from membertable where code=1
 	</select>
 	
  	<!-- 회원 검색 -->
@@ -499,22 +507,28 @@
 		select * from (
 		select rownum rn, tt.* from(
 		select * from membertable where ${memberSearchOption} like '%'||#{memberSearch}||'%')tt
-		)where rn <![CDATA[ >= ]]> #{startNum} and rn<![CDATA[<=]]> #{endNum}
+		)where rn <![CDATA[ >= ]]> #{startNum} and rn<![CDATA[<=]]> #{endNum} and code=1
 	</select>
 	
  	<!-- 회원 검색 페이징-->
  	<select id="getMemberListSearchTotal" parameterType="java.util.Map" resultType="int">
-		select count(*) from membertable where ${memberSearchOption} like '%'||#{memberSearch}||'%'
+		select count(*) from membertable where ${memberSearchOption} like '%'||#{memberSearch}||'%' and code=1
 	</select>
 	
 	<!-- 회원 상세정보 -->
 	<select id="getPerformanceView" resultType="performance.bean.Book_exhibition_membersDTO" parameterType="String">
-		select * from Book_play_Members where memberid like #{M_Id}
+		select * from Book_play_Members where memberid like #{M_Id} order by seq desc 
 	</select>
-	
 	<select id="getExhibitionView" resultType="performance.bean.Book_exhibition_membersDTO" parameterType="String">
-		select * from Book_exhibition_Members where memberid like #{M_Id}
+		select * from Book_exhibition_Members where memberid like #{M_Id}  order by seq desc
 	</select>
+	<!-- 회원 예매 삭제 -->
+	<delete id="memberExTicketDelete" parameterType="int">
+ 		delete Book_exhibition_Members where seq=#{seq}
+ 	</delete>
+ 	<delete id="memberPerTicketDelete" parameterType="int">
+ 		delete Book_play_Members where seq=#{seq}
+ 	</delete>
 	
  	<!-- 사업자정보  -->
  	<select id="getCompanyList" resultType="company" parameterType="java.util.Map">
@@ -541,9 +555,10 @@
  	<select id="getCompanyListSearchTotal" parameterType="java.util.Map" resultType="int">
 		select count(*) from company where ${companySearchOption} like '%'||#{companySearch}||'%'
 	</select>
+	
 	<!-- 사업자 상세정보 -->
 	<select id="getCompanyView" resultType="exhibition" parameterType="String">
-		select * from exhibitionrental where C_license like #{C_license}
+		select * from exhibitionrental order by seq desc where C_license like #{C_license}
 	</select>
  	
  	<!--연극 정보 보기(수정하기 위해)  -->

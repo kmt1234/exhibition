@@ -50,5 +50,6 @@ left: 0px;
 	</div>
 <script src="../js/slidbar.js"></script>
 <script src="../js/p_exhibitionCalendar.js"></script>
+<script src="../js/p_peformanceCalendar.js"></script>
 </body>
 </html>

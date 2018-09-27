@@ -156,24 +156,7 @@ $(document).ready(function(){
 	
 	//예매리스트
 	$('#member-ticket-list').click(function(){
-		$('#member-info-modify').removeClass('active');
-		$('#member-ticket-list').addClass('active');
-		$('#member-ticket-history').removeClass('active');
-		
-		$('#modify-Div').hide();
-		$('#Ticket-List-Div').show();
-		$('#Ticket-History-Div').hide();
-		
-		alert('hey');
-		//회원의 예매 리스트를 가져오는 ajax 
-		$.ajax({
-			type : 'GET',
-			url : "/exhibition/login/getMemberTicketList.do",
-			dataType : 'json',
-			success : function(data){
-				alert(JSON.stringify(data));
-			}//success
-		});//ajax
+		location.href="/exhibition/login/memerMypage_ticketList.do";
 	});
 	
 	//예매내역

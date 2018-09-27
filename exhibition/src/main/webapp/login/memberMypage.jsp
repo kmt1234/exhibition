@@ -39,34 +39,31 @@
 			<div>
 				<div style="width: 100%">
 				  	<div class="content" >
-				    	<div class="description" align="left">
+				    	<div class="description" style=" text-align: left; ">
 				    	<br>
 				    		<div >
-				    			<h2 class="header" id="M-modify-id" style="float: left;" >ID : ${DTO.getM_Id()}</h2>
+				    			<h2 class="header" id="M-modify-id" style="float: left; " >ID : ${DTO.getM_Id()}</h2>
 					    		<input type="hidden" id="M-modify-id-hidden" value="${DTO.getM_Id()}">
 					    	</div>
-					    	<!--  -->
-				      		<div style="width: 60%;">
-								<br>
-								<div class="ui labeled input">
-									<div class="ui label" style="width: 80px;">
-									이 름 
+				      		<div style="width: 100%; text-align: left; margin-top: 20px;display: inline-block; ">
+								<div class="ui labeled input " >
+									<div class="ui label " style="width: 100px; text-align: center;">
+										<span>이 름</span>
 									</div>
-									<div class="ui inverted input" style="width: 100%;">
-										<div class="ui left icon input" style="width: 100%; height: 50px;">
-											<input type="text" id="textf" disabled="disabled" value="${DTO.getM_Name()}">
+									<div class="ui inverted input " style="width: 300px;">
+										<div class="ui left icon input focus"  style="width: 300px; height: 50px;">
+											<input type="text" id="text" readonly="readonly" value="${DTO.getM_Name()}">
 											<i class="user icon"></i>
 										</div>
 								  	</div>
 							  	</div>
 								<br><br>
 								<div class="ui labeled input">
-								<div class="ui label">
-									비밀번호 
+									<div class="ui label " style="width: 100px; text-align: center;">
+										<span>비밀번호</span> 
 									</div>
-								<div class="ui inverted input" style="width: 100%;">
-									
-									<div class="ui left icon input" style="width: 100%; height: 50px;">
+									<div class="ui inverted input" style="width: 100%;">
+										<div class="ui left icon input focus" style="width: 300px; height: 50px;">
 										<br>
 										<input type="password" id="M-modify-pwd"  placeholder="새 비밀번호">
 										<i class="lock icon"></i>
@@ -74,7 +71,6 @@
 							  	</div><!--class="ui inverted input"-->
 							  	</div>
 							  	<br><span class="M-modify-pwd-Span"></span>
-									
 							  	<br>
 							  	<div class="ui inverted input" style="width: 100%;">
 									<div class="ui left icon input" style="width: 100%; height: 50px;">
@@ -128,27 +124,18 @@
 										    </div>
 										  </div>
 									</div><!-- 숨어있다 -->
-									
-									
 									<jsp:include page="memberOut.jsp"/>
-									
-									
 				    		</div><!--수정영역 텍스트필드-->
-				    		
 				  		</div><!--class="description"  -->
-					  	
 					</div><!--class="content"  -->
 				</div><!--class="ui card"-->
 			</div><!--align="center"  -->
 		</div><!--id="modify-Div"  -->
-	<div class="ui segment" id="Ticket-List-Div">
-		
 	
 	<div class="ui segment" id="Ticket-History-Div">
-	  
-	 
 	  
 	</div>		
 </div><!-- 전체 -->
 </div>
+
 <script src="../js/memberMypage.js?ver=1"></script>

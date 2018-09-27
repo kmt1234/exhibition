@@ -30,6 +30,7 @@ body {
 	text-decoration: none;
 	cursor: pointer;
 }
+
 </style>
 <body>
 	<!-- 메인 화면 -->
@@ -127,4 +128,5 @@ function performancePaging(pg){
 }
 </script>
 </body>
+
 </html>

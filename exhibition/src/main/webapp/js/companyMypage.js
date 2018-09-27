@@ -178,10 +178,7 @@ $(document).ready(function(){
 	});
 	
 	
-	
-	
-	
-	//예매리스트
+	//임대리스트
 	$('#member-ticket-list').click(function(){
 		$('#member-info-modify').removeClass('active');
 		$('#member-ticket-list').addClass('active');
@@ -192,7 +189,7 @@ $(document).ready(function(){
 		$('#Ticket-History-Div').hide();
 	});
 	
-	//예매내역
+	//임대내역
 	$('#member-ticket-history').click(function(){
 		$('#member-info-modify').removeClass('active');
 		$('#member-ticket-list').removeClass('active');

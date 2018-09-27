@@ -22,9 +22,9 @@
 	<br>
 	<div class="ui inverted input" style="width: 100%;">
 		<div class="ui left icon input" style="width: 100%; height: 50px;">
-			<input type="text" name="startDate" class="datepicker1">
+			<input type="text" name="startDate1" class="datepicker1">
 			<div style="width: 5%;">&nbsp;</div>
-			<input type="text" name="endDate" class="datepicker2">
+			<input type="text" name="endDate2" class="datepicker2">
 		</div>
 	</div>
 	<br><br>

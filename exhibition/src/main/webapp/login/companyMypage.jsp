@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
 .ui.inverted.divider2 {
 	margin: 5px 0;
@@ -16,9 +16,9 @@
 <div style="width: 100%;">
 	<!-- 맨위 메뉴 텝 -->
 	<div class="">
-		<a class="middle ui button" class="active item" id="member-info-modify"> 수정 </a>
-		<a class="middle ui button" class="item"id="member-ticket-list"> 예매리스트 </a>
-		<a class="middle ui button" class="item"id="member-ticket-history"> 예매 내역 </a>
+		<a class="middle ui button" class="active item" id="member-info-modify" style="width: 130px;"> 수정 </a>
+		<a class="middle ui button" class="item"id="member-ticket-list" style="width: 130px;"> 임대리스트 </a>
+		<a class="middle ui button" class="item"id="member-ticket-history" style="width: 130px;"> 임대 내역 </a>
 	</div>
 	<!-- 메인메뉴 -->
 	<div class="ui inverted drovider2" id="modify-Div" align="left">
@@ -182,24 +182,53 @@
 	</div>
 </div>
 
-	<div class="ui segment" id="Ticket-List-Div">
-		
-		  <div>
-			  <p>예매리스트</p>
-			  <p>예매리스트</p>
-			  <p>예매리스트</p>
-			  <p>예매리스트</p>
-			  <p>예매리스트</p>
-			  <p>예매리스트</p>
-			  <p>예매리스트</p>
-			  <p>예매리스트</p>
-			  <p>예매리스트</p>
-			  <p>예매리스트</p>
-		  </div>
+	<div class="ui segment" id="Ticket-List-Div" align="center">
+	<div align="left">박람회</div>
+		  <table border="1" style="align:center;width:80%;border-collapse: collapse;">
+		  	<tr>
+			  	<th>부스명</th>
+			  	<th>행사명</th>
+			  	<th>행사시작일</th>
+			  	<th>행사종료일</th>
+			  	<th>이메일</th>
+			  	<th>연락처</th>
+		  	</tr>
+		  	<c:forEach items="${list}" var="list">
+		  		<tr>
+				  	<td>${list.getBoothName()}</td>
+				  	<td>${list.getTitle()}</td>
+				  	<td>${list.getStartDate()}</td>
+				  	<td>${list.getEndDate()}</td>
+				  	<td>${list.getC_email()}</td>
+				  	<td>${list.getC_tel()}</td>
+			  	 </tr>
+			  </c:forEach>		 
+		  </table> 
+<br><br>
+	<div align="left">공연</div>
+	<table border="1" style="align:center;width:80%;border-collapse: collapse;">
+		  	<tr>
+			  	<th>부스명</th>
+			  	<th>공연명</th>
+			  	<th>공연시작일</th>
+			  	<th>공연종료일</th>
+			  	<th>이메일</th>
+			  	<th>연락처</th>
+		  	</tr>
+		  	<c:forEach items="${list}" var="list">
+		  		<tr>
+				  	<td>${list2.getBoothName()}</td>
+				  	<td>${list2.getTitle()}</td>
+				  	<td>${list2.getStartDate()}</td>
+				  	<td>${list2.getEndDate()}</td>
+				  	<td>${list2.getC_email()}</td>
+				  	<td>${list2.getC_tel()}</td>
+			  	 </tr>
+			  </c:forEach>		 
+		  </table> 
 	</div>	
 
 	<div class="ui segment" id="Ticket-History-Div">
-		<!-- <a class="ui green left ribbon label">Ticket History</a> -->
 		  <div>
 			  <p>예매내역</p>
 			  <p>예매내역</p>
@@ -214,14 +243,8 @@
 	</div>		
 
 </div>
-<!--페이지 인클루드 후 삭제해야합니다!!!!******(제이쿼리 충돌 방지 )  -->
-
-<link rel="stylesheet" type="text/css" href="../semantic/semantic.min.css">
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"
-	integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-	crossorigin="anonymous"></script>
-<script src="../semantic/semantic.min.js"></script>
-<script src="../js/post.js"></script>
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<script src="../js/companyMypage.js?ver=1"></script>
 <jsp:include page="companyOut.jsp"/>
+
+<!--페이지 인클루드 후 삭제해야합니다!!!!******(제이쿼리 충돌 방지 )  -->
+<script src="../js/companyMypage.js?ver=1"></script>
+

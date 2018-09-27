@@ -62,7 +62,8 @@ public interface CustomerServiceDAO {
 	public List<CustomerServiceDTO> getQnA_Classify(String classify);				
 	// 자주묻는 질문 관리자가 작성하기
 	public void C_QnA_checkWrite(Map<String, String> map);							
-	
+	// 자주묻는 질문 관리자가 삭제하기
+	public void C_QnA_Delete(List<Integer> list);
 	
 	
 	// 주요시설 연락처 관리자가 작성하기
@@ -162,6 +163,9 @@ public interface CustomerServiceDAO {
 	public List<MemberDTO> memberListSearch(Map<String, String> map);
 	//회원정보 검색 토탈 페이징
 	public int getMemberListSearchTotal(Map<String, String> map);
+	//회원 예매 삭제
+	public void memberExTicketDelete(int seq);
+	public void memberPerTicketDelete(int seq);
 	
 	//사업자 정보
 	public List<CompanyDTO> getCompanyList(Map<String, Integer> map);
@@ -198,6 +202,7 @@ public interface CustomerServiceDAO {
 	
 	public List<Book_exhibition_membersDTO> getExhibitionView(String M_Id);	//박람회 상세정보
 	public List<Book_exhibition_membersDTO> getPerformanceView(String M_Id); //연극 상세정보
+	
 	
 	
 	

@@ -44,7 +44,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!--공연 예매자 등록(예매자 DB)-->
 	<insert id="bookPlayMembers" parameterType="bookboard">
-		insert into book_play_members values(#{imageName},#{playDate},#{memberId},#{ticketQty})
+		insert into book_play_members values(seq_book_play_members.nextval
+											,#{imageName}
+											,#{playDate}
+											,#{memberId}
+											,#{ticketQty})
 	</insert>
 	
 	<!--예매 수만큼 잔여티켓 감소 -->
@@ -69,7 +73,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!--전시회 예매자 등록(예매자 DB)-->
 	<insert id="bookExhibitionMembers" parameterType="bookboardEx">
-		insert into book_exhibition_members values(#{imageName},#{playDate},#{memberId},#{ticketQty})
+		insert into book_exhibition_members values(seq_book_play_members.nextval,
+													#{imageName}
+													,#{playDate}
+													,#{memberId}
+													,#{ticketQty})
 	</insert>
 	
 	<!--예매 수만큼 잔여티켓 감소 -->

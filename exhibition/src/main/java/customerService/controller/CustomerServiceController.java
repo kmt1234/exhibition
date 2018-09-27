@@ -471,6 +471,23 @@ public class CustomerServiceController {
 
 		return new ModelAndView("redirect:/customerService/C_QnA.do");
 	}
+	
+	//자주 묻는 질문 연락처 삭제
+		@RequestMapping(value = "C_QnA_Delete", method = RequestMethod.POST)
+		public ModelAndView C_QnA_Delete(@RequestParam String[] box, Model model) {
+
+			List<Integer> list = new ArrayList<Integer>();
+			
+			for(String seq : box) {
+				list.add(Integer.parseInt(seq));
+			}
+			
+			customerServiceDAO.C_QnA_Delete(list);
+
+			return new ModelAndView("redirect:/customerService/C_QnA.do");
+		}
+	
+	
 
 	// 주요시설
 	// 연락처~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -491,7 +508,11 @@ public class CustomerServiceController {
 	public ModelAndView C_contactList_Delete(@RequestParam String[] box, Model model) {
 
 		List<Integer> list = new ArrayList<Integer>();
-
+		
+		for(String seq : box) {
+			list.add(Integer.parseInt(seq));
+		}
+		
 		customerServiceDAO.C_contactList_Delete(list);
 
 		return new ModelAndView("redirect:/customerService/C_contactList.do");
@@ -1443,6 +1464,18 @@ public class CustomerServiceController {
 		mav.setViewName("jsonView");
 		return mav;
 	}
+	//회원 예약 삭제
+	@RequestMapping(value="memberTicketDelete", method = RequestMethod.POST)
+	public ModelAndView memberTicketDelete(@RequestParam int seq) {
+		
+		customerServiceDAO.memberExTicketDelete(seq);
+		customerServiceDAO.memberPerTicketDelete(seq);
+		
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");
+		return mav;
+	}
 	
 	//사업자 상세정보
 		@RequestMapping(value="companyView", method = RequestMethod.POST)
@@ -1454,6 +1487,7 @@ public class CustomerServiceController {
 			mav.setViewName("jsonView");
 			return mav;
 		}
+		
 	
 	// 사업자리스트 불러오기
 	@RequestMapping(value ="getCompanyList", method = RequestMethod.POST)

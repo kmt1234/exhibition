@@ -18,6 +18,12 @@
 	text-overflow     : ellipsis;
 }
 
+.today_list_dd {
+	width: 230px;
+	overflow: hidden;
+	display: inline-block;
+}
+
 </style>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 </head>
@@ -49,9 +55,11 @@
 			<!-- <img style="min-width:270; height: 200px " src='../img/B1.jpg'></img> -->
 			<dl class="todays" id="todays">
 				<dt>Today's</dt>
-				<dd id="today_list">
-					<ul class="total_list" id="total_list" style="list-style:none">
+				<dd class="today_list_dd">
+					<ul id="total_list" style="list-style:none;">
 						
+	
+	
 					</ul>
 				</dd>
 			</dl>
@@ -72,35 +80,11 @@
 
 <script>
 $(document).ready(function(){
-	$.ajax({
-		type : 'POST',
-		url : '/exhibition/customerService/getNoticeMainList.do',
-		data :  'pg=${pg}',
-		dataType : 'json',
-		success : function(data){
-			$.each(data.list, function(index, item){
-				$('<ul/>').append($('<p/>',{
-					align : 'center',
-					id : 'subjectA',
-					style: ' width : 250px; height: 35px; margin-left : 20px; text-align: left;',
-					class : 'subjectC',
-					href : 'javascript:void(0)',
-					text : item.subject
-				})).append($('<input>',{
-					type : 'hidden',
-					text : item.seq
-				})).appendTo($('#C_notice_MainList'));
-			});
-		}
-	}); 
-	
-	$('#C_notice_MainList').on('click','#subjectA',function(){
-		var seq = $(this).next().text();
-		location.href="/exhibition/customerService/C_notice_View.do?seq="+seq+"&pg=${pg}";
-	});
-	
-	
-	
+		
+	setInterval(function () {
+		if($('li.ex_item').length > 1){moveExItems()}
+		if($('li.co_item').length > 1){moveCoItems()}
+	}, 2000);
 	
 	
 	$('#mainCal').datepicker({
@@ -123,12 +107,14 @@ $(document).ready(function(){
 				async: false,
 				dataType: 'json',
 				success : function(data) {
-					$('#today_list ul li:gt(0)').remove();
+					$('#today_list ul li').remove();
 					$.each(data.list, function(index, item){
 						if(item.postSelect=='1') {
 							$('<li/>',{
+								style: 'display : inline-block',
 								class : 'ex_item',
 							}).append($('<span/>',{
+								style : 'width = 220px',
 								html : '<img id="ex_img" width="20px" height="20px" src="../img/Ex.png">'+item.imageName+'</img>',
 								style : 'display : block'
 							})).append($('<span/>',{
@@ -142,6 +128,7 @@ $(document).ready(function(){
 							
 						} else if(item.postSelect=='2') {
 							$('<li/>',{
+								style: 'display : inline-block',
 								class : 'co_item',
 							}).append($('<span/>',{
 								html : '<img  id="co_img" width="20px" height="20px" src="../img/Ev.png">'+item.imageName+'</img>',
@@ -165,21 +152,60 @@ $(document).ready(function(){
 	    }
 	});
 	
+
 	
-	$('ul li span img').eq(i).css("visibility","hidden");
-	for(var i = 0; i < $('li.ex_item').size(); i++) {
-		$('li.ex_item').eq(i).css("visibility","hidden");
+	
+	var today = new Date();
+	var todayDate =today.toISOString().substring(0,10);
+	
+	
+	$.ajax({
+		type : 'POST',
+		url : '/exhibition/performance/searchAllList.do',
+		data : {'date' : todayDate},
+		async: false,
+		dataType: 'json',
+		success : function(data) {
+			$('#today_list ul li').remove();
+			$.each(data.list, function(index, item){
+				if(item.postSelect=='1') {
+					$('<li/>',{
+						style: 'display : inline-block',
+						class : 'ex_item',
+					}).append($('<span/>',{
+						html : '<img id="ex_img" width="20px" height="20px" src="../img/Ex.png">'+item.imageName+'</img>',
+						style : 'display : block'
+					})).append($('<span/>',{
+						text : item.startDate.substring(0,10) + '-' + item.endDate.substring(0,10),
+						style : 'display : block'
+					})).append($('<span/>',{
+						text : item.eventPlace,
+						style : 'display : block'
+					})).appendTo($('#total_list'));
+				} else if(item.postSelect=='2') {
+						$('<li/>',{
+							style: 'display : inline-block',
+							class : 'co_item',
+						}).append($('<span/>',{
+							html : '<img  id="co_img" width="20px" height="20px" src="../img/Ev.png">'+item.imageName+'</img>',
+							style : 'display : block'
+						})).append($('<span/>',{
+							text : item.startDate.substring(0,10) + '-' + item.endDate.substring(0,10),
+							style : 'display : block'
+						})).append($('<span/>',{
+							text : item.eventPlace,
+							style : 'display : block'
+						})).appendTo($('#total_list'));
+						
+					}
+					
+				});
+			
+			
+		}
 		
-	}
-	for(var i = 0; i < $('li.co_item').size(); i++) {
-		$('li.co_item').eq(i).css("visibility","hidden");
-	}
+	});
 	
-	
-	setInterval(function () {
-		if($('li.ex_item').size() > 1){moveExItems()}
-		if($('li.co_item').size() > 1){moveCoItems()}
-	}, 3000);
 	
 
 

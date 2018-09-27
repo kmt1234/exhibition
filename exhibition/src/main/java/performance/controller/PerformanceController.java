@@ -364,7 +364,7 @@ public class PerformanceController {
 		mav.addObject("listSize", list.size()+"");
 		mav.addObject("performancePaging", performancePaging);
 		mav.addObject("display", "/performance/P_performanceList.jsp");
-		mav.setViewName("P_performanceForm");
+		mav.setViewName("/performance/P_performanceForm");
 		return mav;
 		
 	}
@@ -470,7 +470,7 @@ public class PerformanceController {
 		mav.addObject("listSize", list.size()+"");
 		mav.addObject("performancePaging", performancePaging);
 		mav.addObject("display", "/performance/P_performanceList.jsp");
-		mav.setViewName("P_performanceForm");
+		mav.setViewName("/performance/P_performanceForm");
 		return mav;
 		
 	}
@@ -576,7 +576,7 @@ public class PerformanceController {
 		mav.addObject("listSize", list.size()+"");
 		mav.addObject("performancePaging", performancePaging);
 		mav.addObject("display", "/performance/P_performanceList.jsp");
-		mav.setViewName("P_performanceForm");
+		mav.setViewName("/performance/P_performanceForm");
 		return mav;
 		
 	}
@@ -661,7 +661,7 @@ public class PerformanceController {
 		mav.addObject("listSize", list.size()+"");
 		mav.addObject("performancePaging", performancePaging);
 		mav.addObject("display", "/performance/P_exhibitionList.jsp");
-		mav.setViewName("P_performanceForm");
+		mav.setViewName("/performance/P_performanceForm");
 		return mav;
 	}
 	
@@ -766,7 +766,7 @@ public class PerformanceController {
 		mav.addObject("listSize", list.size()+"");
 		mav.addObject("performancePaging", performancePaging);
 		mav.addObject("display", "/performance/P_exhibitionList.jsp");
-		mav.setViewName("P_performanceForm");
+		mav.setViewName("/performance/P_performanceForm");
 		return mav;
 		
 	}
@@ -872,7 +872,7 @@ public class PerformanceController {
 		mav.addObject("listSize", list.size()+"");
 		mav.addObject("performancePaging", performancePaging);
 		mav.addObject("display", "/performance/P_exhibitionList.jsp");
-		mav.setViewName("P_performanceForm");
+		mav.setViewName("/performance/P_performanceForm");
 		return mav;
 		
 	}

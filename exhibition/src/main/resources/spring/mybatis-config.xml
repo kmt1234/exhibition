@@ -15,5 +15,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias alias="bookboard" type="performance.bean.Book_performance_membersDTO"/>
 		<typeAlias alias="bookboardEx" type="performance.bean.Book_exhibition_membersDTO"/>
 		<typeAlias alias="exhibition" type="rental.bean.ExhibitionDTO"/>
+		<typeAlias alias="concert" type="rental.bean.ConcertHallDTO"/>
 	</typeAliases>
 </configuration>

@@ -1,0 +1,196 @@
+
+
+create table memberTable(	
+M_Name varchar2(30) not null,	    --이름
+M_Id varchar2(30) primary key,  --아이디 (기본키, unique, not null, 무결성 제약 조건)
+M_Pwd varchar2(30) not null,    --비밀번호
+M_Email varchar2(50),           --이메일		
+M_Phone varchar2(15),	--핸드폰
+code number default(1)	--코드(1=개인, 2=사업자) : 기본값:1
+);	
+
+CREATE TABLE company(
+     C_businessname VARCHAR2(100) NOT NULL,  -- 사업자명
+     C_license VARCHAR2(40) primary key,       -- 사업자등록번호
+     C_password VARCHAR2(40) NOT NULL,     -- 암호
+     C_corporate VARCHAR2(40) NOT NULL,     -- 법인번호
+     C_condition VARCHAR2(40) NOT NULL,     -- 업태
+     C_postnumbox VARCHAR2(40) NOT NULL,      -- 우편번호
+     C_address1 VARCHAR2(100) NOT NULL,      -- 주소1
+     C_address2 VARCHAR2(100) NOT NULL,      -- 주소2
+     C_representative VARCHAR2(40) NOT NULL,-- 대표자
+     C_tel VARCHAR2(40) NOT NULL,           -- 전화번호
+     C_email VARCHAR2(50) NOT NULL,          -- 이메일
+     code number default(2)
+ );
+ 
+ --//문의하기 DB
+create table customerService(
+email varchar2(50) not null,			--이메일
+classify varchar2(50) not null,			--분류
+name varchar2(30) not null,			--이름
+tel varchar2(15),				--핸드폰
+subject varchar2(100) not null,		--제목
+content varchar2(100) not null,		--내용
+logtime DATE DEFAULT SYSDATE);
+
+create table exhibitionRental(
+boothName varchar2(40) not null,
+C_license varchar2(40) not null,
+C_tel varchar2(40) not null,
+C_email varchar2(40) not null,
+totalRent number not null,
+code varchar2(30) not null,
+title varchar2(40) not null,
+startDate date not null,
+endDate date not null
+);
+
+CREATE TABLE customerImageboard(
+     seq NUMBER PRIMARY KEY,         --시퀀스      
+     postSelect number default(0),   --구분(분류) 메인:0
+     imageName VARCHAR2(40) NOT NULL,--제목
+     image1 varchar2(500),          --이미지명
+     startDate1 date,   --날짜1
+     endDate2 date,   --날짜2
+     eventLink varchar2(200)    --링크 
+ );
+ 
+  create sequence seq_customerImageboard  nocache nocycle;
+  
+  CREATE TABLE eventboard(
+     seq NUMBER PRIMARY KEY,            --시퀀스      
+     postSelect number default(1),               --구분(분류) 박람회 : 1 연극 : 2
+     imageName VARCHAR2(40) NOT NULL,   --제목
+     image1 varchar2(500),              --이미지명
+     startDate date,                   --날짜1
+     endDate date,                     --날짜2
+     eventLink varchar2(200),            --링크
+     startTime varchar2(30),		--시작일
+     endTime varchar2(30),		--종료일
+     eventPlace varchar2(100),	--장소
+     eventPrice varchar2(100),	--가격
+     eventSeats varchar2(100),	--관람좌석
+     eventRate varchar2(100),		--관람등급
+     eventContent varchar2(4000)	--소개 글(간단)
+ );
+ 
+ create sequence seq_eventboard  nocache nocycle;
+ 
+ CREATE TABLE eventboard_play(
+     seq NUMBER PRIMARY KEY,            --시퀀스      
+     postSelect number default(2),               --구분(분류) 박람회 : 1 연극 : 2
+     imageName VARCHAR2(500) NOT NULL,   --제목
+     image1 varchar2(500),              --이미지명
+     startDate date,                   --날짜1
+     endDate date,                     --날짜2
+     eventLink varchar2(200),            --링크
+     startTime varchar2(30),		--시작시간
+     endTime varchar2(30),		--종료시간
+     eventPlace varchar2(100),	--장소
+     eventPrice varchar2(100),	--가격
+     eventSeats varchar2(100),	--관람좌석
+     eventRate varchar2(100),		--관람등급
+     eventContent varchar2(4000)	--소개 글(간단)
+ );
+ 
+ create sequence seq_eventboard_play  nocache nocycle;
+ 
+create table C_notice(
+seq number primary key,                 --시퀀스
+subject varchar2(500) not null,          --제목
+content varchar2(4000) not null,         --내용
+logtime date default sysdate);          --날짜
+
+drop table C_notice;
+create sequence seq_C_notice nocycle nocache;
+
+create table C_QnA (
+seq number primary key,                 --시퀀스
+classify varchar2(200),                 --분류
+subject varchar2(500) not null,         --제목
+content varchar2(4000) not null);        --내용
+
+drop table C_qna;
+create sequence seq_C_QnA nocycle nocache;
+
+create table C_inquire(
+seq number primary key,                 --시퀀스
+email varchar2(200),                     --이메일
+classify varchar2(200),                  --분류
+name varchar2(200),                      --작성자
+phone varchar2(200),                     --전화번호
+subject varchar2(200) not null,          --제목
+content varchar2(4000) not null,         --내용
+ref NUMBER NOT NULL,                    --그룹번호
+lev NUMBER DEFAULT 0 NOT NULL,          --단계
+step NUMBER DEFAULT 0 NOT NULL,         --글순서
+pseq NUMBER DEFAULT 0 NOT NULL,         --원글번호
+reply NUMBER DEFAULT 0 NOT NULL,        --답변수
+logtime DATE DEFAULT sysdate);          --날짜
+
+drop table C_inquire;
+create sequence seq_C_inquire nocycle nocache;
+
+create table C_contactList(
+seq number primary key,               --시퀀스
+classify varchar2(200) not null,      --분류
+facility varchar2(200) not null,      --기관&시설
+title varchar2(200) not null,         --명칭
+name varchar2(200) not null,         --담당자
+phone varchar2(200) not null);         --연락처
+
+
+drop table C_contactlist;
+create sequence seq_C_contactList nocycle nocache;
+
+create table hotel_list(
+seq number primary key,
+postSelect number default(3),      --구분(분류) 박람회 : 1 연극 : 2
+imageName VARCHAR2(40) NOT NULL,   --제목
+image1 varchar2(500) NOT NULL,     --이미지파일
+eventLink varchar2(200) NOT NULL,  --링크
+eventPlace varchar2(100) NOT NULL  --TEL
+);
+
+create sequence seq_hotel_list nocycle nocache;
+
+create table eventboard_play_book(
+ seq NUMBER PRIMARY KEY,            --시퀀스    
+num NUMBER,                        --연극시퀀스
+ imageName VARCHAR2(500) NOT NULL,  --공연명
+ playDate date,                     --공연일자(시작/종료)
+ playTicket VARCHAR2(100),           --일별 총 티켓 수
+ remainTicket VARCHAR2(100),         --일별 잔여 티켓 수
+ ticketPrice VARCHAR2(100),          --티켓 가격
+ bookTicket VARCHAR2(100),           --예매된 티켓 수
+ bookMemberId VARCHAR2(300),         --등록한 아이디(삭제예정)
+ bookStatus char(1) CONSTRAINT bookStatus_CK    --예매 상태(0 : 예매X , 1 : 예매완료)
+    check(bookStatus IN ('0','1'))
+);
+
+create sequence seq_eventboard_play_book  nocache nocycle; 
+
+create table Book_Play_Members(
+seq number primary key,
+IMAGENAME	VARCHAR2(500),
+PLAYDATE	DATE,
+MEMBERID	VARCHAR2(100),
+TICKETQTY	VARCHAR2(30));
+
+create sequence seq_Book_Play_Members;
+
+--전시회 예매자 DB
+create table Book_Exhibition_Members(
+seq number primary key,
+IMAGENAME	VARCHAR2(500),
+PLAYDATE	DATE,
+MEMBERID	VARCHAR2(100),
+TICKETQTY	VARCHAR2(30)
+);
+
+create sequence seq_Book_Exhibition_Members;
+
+
+
+commit;
