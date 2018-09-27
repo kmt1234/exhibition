@@ -3,7 +3,7 @@ $(document).ready(function(){
 	 $('#memberSearchDiv').hide();
 	 $('#memberSearchDiv').show();
 	 $('#memberListTable').empty();
-	 
+	 $('#reConfirm').hide();
 		$.ajax({
 			type : 'POST',
 			url : '/exhibition/customerService/getMemberList.do',

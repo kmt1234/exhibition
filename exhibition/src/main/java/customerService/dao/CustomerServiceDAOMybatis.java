@@ -22,6 +22,7 @@ import customerService.bean.SalesExhibitionDTO;
 import member.bean.MemberDTO;
 import performance.bean.Book_exhibition_membersDTO;
 import performance.bean.Book_performance_membersDTO;
+import rental.bean.ConcertHallDTO;
 import rental.bean.ExhibitionDTO;
 
 @Transactional
@@ -37,6 +38,10 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	//공지사항 리스트 불러오기
 	public List<CustomerServiceDTO> getNoticeList(Map<String, Integer> map) {
 		return sqlSession.selectList("customerServiceSQL.getNoticeList", map);
+	}
+	//공지사항 메인화면 리스트 불러오기
+	public List<CustomerServiceDTO> getNoticeMainList(Map<String, Integer> map) {
+		return sqlSession.selectList("customerServiceSQL.getNoticeMainList", map);
 	}
 	//공지사항 검색된 글수
 	public int getTotalC_notice_Search(Map<String, String> map) {
@@ -106,7 +111,10 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	public void C_QnA_checkWrite(Map<String, String> map) {
 		sqlSession.insert("customerServiceSQL.C_QnA_checkWrite", map);		
 	}
-	
+	// 자주 묻는 질문 관리자가 삭제하기
+	public void C_QnA_Delete(List<Integer> list) {
+		sqlSession.delete("customerServiceSQL.C_QnA_Delete", list);
+	}
 	
 	
 	// 주요시설 연락처 관리자가 작성하기
@@ -136,7 +144,7 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	
 	
 	
-	/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~```*/
+	/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 	
 	
 	
@@ -348,8 +356,11 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	}
 	
 	//사업자 뷰
-	public List<ExhibitionDTO> getCompanyView(String C_license) {
-		return sqlSession.selectList("customerServiceSQL.getCompanyView",C_license);
+	public List<ExhibitionDTO> getCompanyExView(String C_license) {
+		return sqlSession.selectList("customerServiceSQL.getCompanyExView",C_license);
+	}
+	public List<ConcertHallDTO> getCompanyConView(String C_license) {
+		return sqlSession.selectList("customerServiceSQL.getCompanyConView",C_license);
 	}
 	
 	//연극수정하기 위해 값 불러오기
@@ -404,13 +415,28 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	public void C_exhibitionboardBookDel(EventboardDTO eventboardDTO) {
 		sqlSession.delete("customerServiceSQL.C_exhibitionboardBookDel", eventboardDTO);	
 	}
-	public List<CustomerServiceDTO> getNoticeMainList(Map<String, Integer> map) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	public List<Book_exhibition_membersDTO> getMemberView(String M_Id) {
 		return sqlSession.selectList("customerServiceSQL.getMemberView",M_Id);
 	}
+	
+	//회원 예약 취소
+	public void memberExTicketDelete(int seq) {
+		sqlSession.delete("customerServiceSQL.memberExTicketDelete",seq);
+	}
+	public void memberPerTicketDelete(int seq) {
+		sqlSession.delete("customerServiceSQL.memberPerTicketDelete",seq);
+		
+	}
+	
+	//사업자 예약 삭제
+	public void companyExDelete(int seq) {
+		sqlSession.delete("customerServiceSQL.companyExDelete",seq);
+	}
+	public void companyConDelete(int seq) {
+		sqlSession.delete("customerServiceSQL.companyConDelete",seq);
+		
+	}
+	
 
 	
 }

@@ -241,8 +241,7 @@ $(document).ready(function(){
 			data : {'pg' : $('#pg').val()},
 			dataType : 'json',
 			success : function(data){
-				/*alert(JSON.stringify(data));*/
-				/*$('#memberListTable td:gt(0)').remove();*/
+				$('#memberListTable td:gt(0)').remove();
 				$.each(data.list,function(index, item){
 					$('<tr/>').append($('<td/>',{
 				 		name : 'M_Name',
@@ -265,9 +264,9 @@ $(document).ready(function(){
 		});
 	});
 	
-
-		$('#memberSearchBtn').click(function(event,str){
-			$('#memberListTable').hide();$('#memberListTable').show();
+		//제발 냅둬주세요
+		/*$('#memberSearchBtn').click(function(event,str){
+			$('#memberListTable').hide();
 			if(str!='trigger') $('#pg').val(1);
 			if($('#memberSearch').val()==''){
 				alert("검색어를 입력하세요");
@@ -281,8 +280,8 @@ $(document).ready(function(){
 						},
 					dataType : 'json',
 					success : function(data){
-						$('#C_memberListFrom div:gt(0)').remove();
-						
+						$('#C_memberListFrom tr:gt(0)').remove();
+						alert(JSON.stringify(data.length));
 						 $.each(data.list,function(index, item){
 							 $('<tr/>').append($('<td/>',{
 							 		name : 'M_Name',
@@ -303,13 +302,14 @@ $(document).ready(function(){
 					}
 				});
 			}
-		});
+		});*/
 	
 		
 	$('#memberListTable').on('click','.C_license',function(){
 		
 		var toDay = year+"-"+month+"-"+day;
 		var ing;
+		var companyDeleteBtn;
 		$.ajax({
 			type : 'POST',
 			url : '/exhibition/customerService/companyView.do',
@@ -317,7 +317,7 @@ $(document).ready(function(){
 			dataType : 'json',
 			success : function(data){
 				$('#companyModalForm tr:gt(0)').remove();
-				/*alert(JSON.stringify(data));*/
+				alert(JSON.stringify(data));
 				$.each(data.list,function(index, item){
 					var startDate = item.startDate.toString().slice(0,10);
 					var endDate = item.endDate.toString().slice(0,10);
@@ -325,16 +325,22 @@ $(document).ready(function(){
 					
 					if(startDate <= toDay && endDate >= toDay ){
 					 ing = "<font color='green'>진행중</font>";
+					 companyDeleteBtn ="";
 					}else if(endDate >toDay){
 						ing = "<font color='blue'>진행 예정</font>";
+						companyDeleteBtn = "<input type='button' value='예약취소' id='companyDeleteBtn' class='middle ui button delete company'>";
 					}else if(startDate < toDay){
 						ing = "<font color='red'>진행 종료</font>";
+						companyDeleteBtn = "";
 					}	
 				
 				
 					$('#companyHeader').text(item.c_license+"님 예약 정보");
 					$('<tr/>').append($('<td/>',{
-				 		name : 'boothName',
+				 		name : 'companySeq',
+				 		text : item.seq
+					})).append($('<td/>',{
+						name : 'boothName',
 				 		text : item.boothName
 				 	})).append($('<td/>',{
 				 		name : 'title',
@@ -344,17 +350,55 @@ $(document).ready(function(){
 				 	})).append($('<td/>',{
 				 		name : 'c_license',
 				 		html : ing
+				 	})).append($('<td/>',{
+				 		name : 'companyDeleteBtn',
+				 		html : companyDeleteBtn
+				 	})).appendTo($('#reservationCompanyTable'));
+					});
+				$.each(data.list2,function(index, item){
+					var startDate = item.startDate.toString().slice(0,10);
+					var endDate = item.endDate.toString().slice(0,10);
+					var allDate = startDate+"~"+endDate;
+					
+					if(startDate <= toDay && endDate >= toDay ){
+					 ing = "<font color='green'>진행중</font>";
+					 companyDeleteBtn ="";
+					}else if(endDate >toDay){
+						ing = "<font color='blue'>진행 예정</font>";
+						companyDeleteBtn = "<input type='button' value='예약취소' id='companyDeleteBtn' class='middle ui button delete company'>";
+					}else if(startDate < toDay){
+						ing = "<font color='red'>진행 종료</font>";
+						companyDeleteBtn = "";
+					}
+					$('<tr/>').append($('<td/>',{
+				 		name : 'companySeq',
+				 		text : item.seq
+					})).append($('<td/>',{
+						name : 'boothName',
+				 		text : item.hallName
+				 	})).append($('<td/>',{
+				 		name : 'title',
+				 		text : item.title
+				 	})).append($('<td/>',{
+				 		text : allDate
+				 	})).append($('<td/>',{
+				 		name : 'c_license',
+				 		html : ing
+				 	})).append($('<td/>',{
+				 		name : 'companyDeleteBtn',
+				 		html : companyDeleteBtn
 				 	})).appendTo($('#reservationCompanyTable'));
 					});
 				$('.ui.modal.member.com').modal('show');
 			}
 		});	
 	});
-	
-	
+	var toDay;
+	var playDate;
 	$('#memberListTable').on('click','.M_Id',function(){
-		var toDay = year+"-"+month+"-"+day;
+		toDay = year+"-"+month+"-"+day;
 		var ing;
+		var deleteBtn
 		$.ajax({
 			type : 'POST',
 			url : '/exhibition/customerService/memberView.do',
@@ -364,27 +408,37 @@ $(document).ready(function(){
 				/*alert(JSON.stringify(data));*/
 				$('#memberModalForm tr:gt(0)').remove();
 				$.each(data.list,function(index, item){
-					var playDate = item.playDate.toString().slice(0,10);
+					playDate = item.playDate.toString().slice(0,10);
+					
 					
 					if(playDate < toDay){
-						ing = "<font color='gray'>기간만료</font>"
+						ing = "<font color='gray'>기간만료</font>";
+						deleteBtn = "";
 					}else if(playDate >= toDay){
-						ing = "<font color='green'>예매완료</font>"
+						ing = "<font color='green'>예매완료</font>";
+						deleteBtn = "<input type='button' value='예매취소' id='memberDeleteBtn' class='middle ui button delete'>";
 					}
-					
 					$('#memberHeader').text(item.memberId+"님 예약 정보");
 					$('<tr/>').append($('<td/>',{
+				 		text : item.seq
+				 	})).append($('<td/>',{
 				 		name : 'imageName',
+				 		id : 'imageName',
 				 		text : item.imageName
 				 	})).append($('<td/>',{
 				 		name : 'playDate',
+				 		id : 'playDate',
 				 		text : playDate
 				 	})).append($('<td/>',{
-				 		name : "Status",
+				 		name : "status",
+				 		id : "status",
 				 		html : ing
 				 	})).append($('<td/>',{
 				 		name : 'tickeyQty',
+				 		id : 'tickeyQty',
 				 		text : item.ticketQty
+				 	})).append($('<td/>',{
+				 		html : deleteBtn
 				 	})).appendTo($('#reservationMemberTable'));
 					
 					});
@@ -393,5 +447,45 @@ $(document).ready(function(){
 		});
 			
 	});
+	/*$('#memberDeleteBtn').click(function(){
+		alert("gggfgf");
+	});*/
+	var memberSeq;
+	$('#reservationMemberTable').on('click','#memberDeleteBtn',function(){
+		if(toDay == playDate){
+			$('.ui.mini.modal.not.member').modal('show');
+		}else{	
+			$('.ui.mini.modal.mem').modal('show');
+			memberSeq = $(this).parent().prev().prev().prev().prev().prev().text();
+		}
+		
+	});
 	
+	$('#memberYesBtn').click(function(){
+		$.ajax({
+			type : 'POST',
+			url : '/exhibition/customerService/memberTicketDelete.do',
+			data : {'seq' : memberSeq},
+			dataType : 'json',
+			success : function(data){
+			}
+		});
+	});
+	var companySeq;
+	$('#reservationCompanyTable').on('click','#companyDeleteBtn',function(){	
+			$('.ui.mini.modal.company').modal('show');
+			companySeq = $(this).parent().prev().prev().prev().prev().prev().text();
+	});
+	
+	$('#companyYesBtn').click(function(){
+		$.ajax({
+			type : 'POST',
+			url : '/exhibition/customerService/companyTicketDelete.do',
+			data : {'seq' : companySeq},
+			dataType : 'json',
+			success : function(data){
+			}
+		});
+	});
+
 });
