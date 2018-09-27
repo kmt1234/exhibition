@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import company.bean.CompanyDTO;
+import rental.bean.ConcertHallDTO;
 import rental.bean.ExhibitionDTO;
 
 @Component
@@ -52,13 +53,23 @@ public class CompanyDAOMybatis implements CompanyDAO {
 	}
 	
 	//박람회 임대 리스트 불러오기
-	public List<ExhibitionDTO> getExhibitionList(String C_license) {
-		return sqlSession.selectList("companySQL.getExhibitionList", C_license);
+	public List<ExhibitionDTO> getExhibitionList(Map<String, String> map) {
+		return sqlSession.selectList("companySQL.getExhibitionList", map);
 	}
 	
 	//공연 임대 리스트 불러오기
-	public List<ExhibitionDTO> getPlayList(String c_license) {
-		return sqlSession.selectList("companySQL.getPlayList", c_license);
+	public List<ConcertHallDTO> getPlayList(Map<String, String> map) {
+		return sqlSession.selectList("companySQL.getPlayList", map);
+	}
+	
+	//모든 임대 리스트 불러오기
+	public List<ExhibitionDTO> getAllRentalList(Map<String, String> map) {
+		return sqlSession.selectList("companySQL.getAllRentalList",map);
+	}
+	
+	//이전 임대 리스트 총갯수
+	public int mypageRentalPastTotal(Map<String, String> map) {
+		return sqlSession.selectOne("companySQL.mypageRentalPastTotal", map);
 	}
 
 

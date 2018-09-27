@@ -1,5 +1,5 @@
 
-
+--회원가입
 create table memberTable(	
 M_Name varchar2(30) not null,	    --이름
 M_Id varchar2(30) primary key,  --아이디 (기본키, unique, not null, 무결성 제약 조건)
@@ -8,6 +8,7 @@ M_Email varchar2(50),           --이메일
 M_Phone varchar2(15),	--핸드폰
 code number default(1)	--코드(1=개인, 2=사업자) : 기본값:1
 );	
+
 
 CREATE TABLE company(
      C_businessname VARCHAR2(100) NOT NULL,  -- 사업자명
@@ -35,6 +36,7 @@ content varchar2(100) not null,		--내용
 logtime DATE DEFAULT SYSDATE);
 
 create table exhibitionRental(
+seq NUMBER PRIMARY KEY,
 boothName varchar2(40) not null,
 C_license varchar2(40) not null,
 C_tel varchar2(40) not null,
@@ -45,6 +47,8 @@ title varchar2(40) not null,
 startDate date not null,
 endDate date not null
 );
+
+create sequence seq_exhibitionRental  nocache nocycle;
 
 CREATE TABLE customerImageboard(
      seq NUMBER PRIMARY KEY,         --시퀀스      
@@ -155,6 +159,19 @@ eventPlace varchar2(100) NOT NULL  --TEL
 
 create sequence seq_hotel_list nocycle nocache;
 
+create table eventboard_exhibition_book(
+ seq NUMBER PRIMARY KEY,            --시퀀스    
+num NUMBER,                        --연극시퀀스
+ imageName VARCHAR2(500) NOT NULL,  --공연명
+ playDate date,                     --공연일자(시작/종료)
+ playTicket VARCHAR2(100),           --일별 총 티켓 수
+ remainTicket VARCHAR2(100),         --일별 잔여 티켓 수
+ ticketPrice VARCHAR2(100),          --티켓 가격
+ bookTicket VARCHAR2(100),           --예매된 티켓 수
+);
+create sequence seq_eventboard_exhibition_book  nocache nocycle; 
+
+
 create table eventboard_play_book(
  seq NUMBER PRIMARY KEY,            --시퀀스    
 num NUMBER,                        --연극시퀀스
@@ -168,8 +185,8 @@ num NUMBER,                        --연극시퀀스
  bookStatus char(1) CONSTRAINT bookStatus_CK    --예매 상태(0 : 예매X , 1 : 예매완료)
     check(bookStatus IN ('0','1'))
 );
-
 create sequence seq_eventboard_play_book  nocache nocycle; 
+
 
 create table Book_Play_Members(
 seq number primary key,
@@ -191,6 +208,28 @@ TICKETQTY	VARCHAR2(30)
 
 create sequence seq_Book_Exhibition_Members;
 
+create table concertHall(
+seq NUMBER PRIMARY KEY,
+hallName varchar2(40) not null,
+C_license varchar2(40) not null,
+C_tel varchar2(40) not null,
+C_email varchar2(40) not null,
+totalRent number not null,
+title varchar2(40) not null,
+startDate date not null,
+endDate date not null
+);
 
+create sequence seq_concertHall start with 1000;
+
+create table businessRoom(
+roomName varchar2(30), 
+M_Id varchar2(30), 
+M_Email varchar2(50), 
+startDate date, 
+first varchar2(10) default 'N', 
+second varchar2(10) default 'N', 
+third varchar2(10) default 'N',
+fourth varchar2(10) default 'N');
 
 commit;

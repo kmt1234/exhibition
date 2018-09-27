@@ -557,9 +557,21 @@
 	</select>
 	
 	<!-- 사업자 상세정보 -->
-	<select id="getCompanyView" resultType="exhibition" parameterType="String">
-		select * from exhibitionrental order by seq desc where C_license like #{C_license}
+	<select id="getCompanyExView" resultType="exhibition" parameterType="String">
+		select * from exhibitionrental  where C_license like #{C_license} order by seq desc
 	</select>
+	<select id="getCompanyConView" resultType="rental.bean.ConcertHallDTO" parameterType="String">
+		select * from concertHall  where C_license like #{C_license} order by seq desc
+	</select>
+	
+	<!-- 사업자 부스 예약 삭제 -->
+	<delete id="companyExDelete" parameterType="int">
+ 		delete exhibitionRental where seq=#{seq}
+ 	</delete>
+ 	
+ 	<delete id="companyConDelete" parameterType="int">
+ 		delete concertHall where seq=#{seq}
+ 	</delete>
  	
  	<!--연극 정보 보기(수정하기 위해)  -->
 	<select id="getPlayboard" parameterType="java.lang.String" resultType="eventboard">

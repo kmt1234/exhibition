@@ -13,7 +13,7 @@
  	</select>
  	
  	<insert id="reservationConcertHall" parameterType="rental.bean.ConcertHallDTO">
- 		insert into concertHall(hallName, C_license, C_tel, C_email, totalRent, title, startDate, endDate) values(#{hallName}, #{C_license}, #{C_tel}, #{C_email}, #{totalRent}, #{title}, #{startDate}, #{endDate})
+ 		insert into concertHall(seq ,hallName, C_license, C_tel, C_email, totalRent, title, startDate, endDate) values(seq_concertHall.nextval,#{hallName}, #{C_license}, #{C_tel}, #{C_email}, #{totalRent}, #{title}, #{startDate}, #{endDate})
  	</insert>
  	
 </mapper>

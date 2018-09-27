@@ -7,6 +7,7 @@ import lombok.Data;
 @Component
 @Data
 public class ExhibitionDTO {
+	private int seq;
 	private String boothName;
 	private String C_license;
 	private String C_tel;

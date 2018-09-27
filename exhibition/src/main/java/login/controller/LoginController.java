@@ -1,10 +1,13 @@
 package login.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.logging.SimpleFormatter;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
@@ -27,6 +30,7 @@ import member.bean.MemberDTO;
 import member.dao.MemberDAO;
 import member.dao.MemberTicketListPaging;
 import performance.bean.Book_performance_membersDTO;
+import rental.bean.ConcertHallDTO;
 import rental.bean.ExhibitionDTO;
 
 @RequestMapping(value = "login")
@@ -189,29 +193,90 @@ public class LoginController {
 			mav.addObject("display","/login/memberMypage.jsp");
 			mav.setViewName("/customerService/C_customerServiceForm"); // 개인마이페이지
 		} else if (code == 2) {
+			mav.addObject("display","/login/companyMypage.jsp");
+			mav.setViewName("/customerService/C_customerServiceForm"); // 법인마이페이지	
+		}
+
+		return mav;
+	}
+	
+	// 임대리스트
+		@RequestMapping(value = "mypageRental", method = RequestMethod.GET)
+		public ModelAndView mypageRental(HttpSession session) {
+		Object DTO = session.getAttribute("homepageMember");
+			session.setAttribute("DTO", DTO);
 			String C_license = (String) session.getAttribute("C_license");
-			List<ExhibitionDTO> list = companyDAO.getExhibitionList(C_license); //박람회 임대 리스트 불러오기
+			Date date = new Date();
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+			String dateM = formatter.format(date);
+			
+			Map<String,String> map = new HashMap<String,String>();
+			map.put("C_license", C_license);
+			map.put("dateM", dateM);
+
+			List<ExhibitionDTO> list = companyDAO.getExhibitionList(map);
 			for(int i = 0; i < list.size(); i++) {
 				list.get(i).setStartDate(list.get(i).getStartDate().substring(0, 10));
 				list.get(i).setEndDate(list.get(i).getEndDate().substring(0, 10));
 			}
 			
-			List<ExhibitionDTO> list2 = companyDAO.getPlayList(C_license); //박람회 임대 리스트 불러오기
+			List<ConcertHallDTO> list2 = companyDAO.getPlayList(map);
 			for(int i = 0; i < list2.size(); i++) {
 				list2.get(i).setStartDate(list2.get(i).getStartDate().substring(0, 10));
 				list2.get(i).setEndDate(list2.get(i).getEndDate().substring(0, 10));
 			}
 			
+			
+			ModelAndView mav = new ModelAndView();
+			
 			mav.addObject("list",list);
 			mav.addObject("list2",list2);
-			mav.addObject("listSize",list.size());
-			mav.addObject("display","/login/companyMypage.jsp");
-			mav.setViewName("/customerService/C_customerServiceForm"); // 법인마이페이지
-			
-		}
+			mav.addObject("display","/login/mypageRental.jsp");
+			mav.setViewName("/customerService/C_customerServiceForm"); // 임대리스트
 
-		return mav;
-	}
+			return mav;
+		}
+		
+		// 임대내역
+		@RequestMapping(value = "mypageRentalPast", method = RequestMethod.GET)
+		public ModelAndView mypageRentalPast(@RequestParam(required = false, defaultValue = "1") String pg,HttpSession session) {
+			Object DTO = session.getAttribute("homepageMember");
+			session.setAttribute("DTO", DTO);
+			int endNum = Integer.parseInt(pg) * 10;
+			int startNum = endNum - 9;
+
+			Date date = new Date();
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+			String dateM = formatter.format(date);
+			
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("startNum", startNum+"");
+			map.put("endNum", endNum+"");
+			map.put("dateM", dateM);
+			
+			int totalA = companyDAO.mypageRentalPastTotal(map);
+			
+			memberTicketListPaging.setCurrentPage(Integer.parseInt(pg));
+			memberTicketListPaging.setPageBlock(3);
+			memberTicketListPaging.setPageSize(10);
+			memberTicketListPaging.setTotalA(totalA);
+			memberTicketListPaging.makePagingHTML();
+	
+			ModelAndView mav = new ModelAndView();
+			List<ExhibitionDTO> list = companyDAO.getAllRentalList(map);
+			for(int i = 0; i < list.size(); i++) {
+				list.get(i).setStartDate(list.get(i).getStartDate().substring(0, 10));
+				list.get(i).setEndDate(list.get(i).getEndDate().substring(0, 10));
+			}
+			
+			mav.addObject("pg", pg);
+			mav.addObject("memberTicketListPaging", memberTicketListPaging);
+			mav.addObject("list",list);
+			mav.addObject("display","/login/mypageRentalPast.jsp");
+			mav.setViewName("/customerService/C_customerServiceForm"); // 지난 임대 내역
+ 
+			return mav;
+		}
 
 	// 임시비밀번호 수령 시, 사업자등록번호의 비밀번호 변경
 	@RequestMapping(value = "changeCpwd", method = RequestMethod.POST)

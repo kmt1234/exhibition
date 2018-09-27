@@ -54,13 +54,30 @@
 	</delete>
 	
 	<!--박람회 임대리스트-->
- 	<select id="getExhibitionList" parameterType="java.lang.String" resultType="exhibition">
- 		select * from EXHIBITIONRENTAL where C_license = #{C_license}
+ 	<select id="getExhibitionList" parameterType="java.util.Map" resultType="exhibition">
+ 		select * from EXHIBITIONRENTAL where C_license = #{C_license} and enddate <![CDATA[>=]]> #{dateM} order by startdate
  	</select>
  	
  	<!--공연 임대리스트-->
- 	<select id="getPlayList" parameterType="java.lang.String" resultType="concert">
- 		select * from concertHall where C_license = #{C_license}
+ 	<select id="getPlayList" parameterType="java.util.Map" resultType="concert">
+ 		select * from concertHall where C_license = #{C_license} and enddate <![CDATA[>=]]> #{dateM} order by startdate
+ 	</select>
+ 	
+ 	<!--모든 임대리스트-->
+ 	<select id="getAllRentalList" parameterType="java.util.Map" resultType="exhibition">
+ 		select * from(
+		select  rownum rn, tt.* from(select boothname,c_license,c_tel,c_email,title,startdate,enddate from EXHIBITIONRENTAL  where enddate <![CDATA[<]]> #{dateM}
+		union
+		select hallname as boothname,c_license,c_tel,c_email,title,startdate,enddate from CONCERTHALL where enddate <![CDATA[<]]> #{dateM})tt
+		)where rn <![CDATA[>=]]> #{startNum} and rn <![CDATA[<=]]> #{endNum} order by startdate asc
+ 	</select>
+ 	
+ 	<!--이전 임대리스트 총글-->
+ 	<select id="mypageRentalPastTotal" resultType="Integer">
+ 		(select count(*) from
+ 		(select boothname,c_license,c_tel,c_email,title,startdate,enddate from EXHIBITIONRENTAL
+		union
+		select hallname as boothname,c_license,c_tel,c_email,title,startdate,enddate from CONCERTHALL) where enddate <![CDATA[<=]]> #{dateM})
  	</select>
 	
 </mapper>
