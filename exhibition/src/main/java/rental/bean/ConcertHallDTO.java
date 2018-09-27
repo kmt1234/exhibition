@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class ConcertHallDTO {
+	private int seq;
 	private String hallName;
 	private String C_license;
 	private String C_tel;

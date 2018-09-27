@@ -45,6 +45,7 @@ logtime DATE DEFAULT SYSDATE);      --날짜
 
 //부스 예약테이블
 create table exhibitionRental(
+seq NUMBER PRIMARY KEY,
 boothName varchar2(40) not null,
 C_license varchar2(40) not null,
 C_tel varchar2(40) not null,
@@ -55,6 +56,8 @@ title varchar2(40) not null,
 startDate date not null,
 endDate date not null
 );
+
+create sequence seq_exhibitionRental  nocache nocycle;
 
 //메인 이미지 보드 DB
 CREATE TABLE customerImageboard(
@@ -219,6 +222,7 @@ fourth varchar2(10) default 'N'); --18시~21시
 
 --콘서트홀 예약테이블
 create table concertHall(
+seq NUMBER PRIMARY KEY,
 hallName varchar2(40) not null,
 C_license varchar2(40) not null,
 C_tel varchar2(40) not null,
@@ -228,4 +232,6 @@ title varchar2(40) not null,
 startDate date not null,
 endDate date not null
 );
+
+create sequence seq_condertHall start with 1000; --콘서트홀 seq
 

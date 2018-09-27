@@ -241,7 +241,6 @@ $(document).ready(function(){
 			data : {'pg' : $('#pg').val()},
 			dataType : 'json',
 			success : function(data){
-				alert(JSON.stringify(data));
 				$('#memberListTable td:gt(0)').remove();
 				$.each(data.list,function(index, item){
 					$('<tr/>').append($('<td/>',{
@@ -310,6 +309,7 @@ $(document).ready(function(){
 		
 		var toDay = year+"-"+month+"-"+day;
 		var ing;
+		var companyDeleteBtn;
 		$.ajax({
 			type : 'POST',
 			url : '/exhibition/customerService/companyView.do',
@@ -317,7 +317,7 @@ $(document).ready(function(){
 			dataType : 'json',
 			success : function(data){
 				$('#companyModalForm tr:gt(0)').remove();
-				/*alert(JSON.stringify(data));*/
+				alert(JSON.stringify(data));
 				$.each(data.list,function(index, item){
 					var startDate = item.startDate.toString().slice(0,10);
 					var endDate = item.endDate.toString().slice(0,10);
@@ -325,16 +325,22 @@ $(document).ready(function(){
 					
 					if(startDate <= toDay && endDate >= toDay ){
 					 ing = "<font color='green'>진행중</font>";
+					 companyDeleteBtn ="";
 					}else if(endDate >toDay){
 						ing = "<font color='blue'>진행 예정</font>";
+						companyDeleteBtn = "<input type='button' value='예약취소' id='companyDeleteBtn' class='middle ui button delete company'>";
 					}else if(startDate < toDay){
 						ing = "<font color='red'>진행 종료</font>";
+						companyDeleteBtn = "";
 					}	
 				
 				
 					$('#companyHeader').text(item.c_license+"님 예약 정보");
 					$('<tr/>').append($('<td/>',{
-				 		name : 'boothName',
+				 		name : 'companySeq',
+				 		text : item.seq
+					})).append($('<td/>',{
+						name : 'boothName',
 				 		text : item.boothName
 				 	})).append($('<td/>',{
 				 		name : 'title',
@@ -344,6 +350,43 @@ $(document).ready(function(){
 				 	})).append($('<td/>',{
 				 		name : 'c_license',
 				 		html : ing
+				 	})).append($('<td/>',{
+				 		name : 'companyDeleteBtn',
+				 		html : companyDeleteBtn
+				 	})).appendTo($('#reservationCompanyTable'));
+					});
+				$.each(data.list2,function(index, item){
+					var startDate = item.startDate.toString().slice(0,10);
+					var endDate = item.endDate.toString().slice(0,10);
+					var allDate = startDate+"~"+endDate;
+					
+					if(startDate <= toDay && endDate >= toDay ){
+					 ing = "<font color='green'>진행중</font>";
+					 companyDeleteBtn ="";
+					}else if(endDate >toDay){
+						ing = "<font color='blue'>진행 예정</font>";
+						companyDeleteBtn = "<input type='button' value='예약취소' id='companyDeleteBtn' class='middle ui button delete company'>";
+					}else if(startDate < toDay){
+						ing = "<font color='red'>진행 종료</font>";
+						companyDeleteBtn = "";
+					}
+					$('<tr/>').append($('<td/>',{
+				 		name : 'companySeq',
+				 		text : item.seq
+					})).append($('<td/>',{
+						name : 'boothName',
+				 		text : item.hallName
+				 	})).append($('<td/>',{
+				 		name : 'title',
+				 		text : item.title
+				 	})).append($('<td/>',{
+				 		text : allDate
+				 	})).append($('<td/>',{
+				 		name : 'c_license',
+				 		html : ing
+				 	})).append($('<td/>',{
+				 		name : 'companyDeleteBtn',
+				 		html : companyDeleteBtn
 				 	})).appendTo($('#reservationCompanyTable'));
 					});
 				$('.ui.modal.member.com').modal('show');
@@ -410,7 +453,7 @@ $(document).ready(function(){
 	var memberSeq;
 	$('#reservationMemberTable').on('click','#memberDeleteBtn',function(){
 		if(toDay == playDate){
-			$('.ui.mini.modal.not').modal('show');
+			$('.ui.mini.modal.not.member').modal('show');
 		}else{	
 			$('.ui.mini.modal.mem').modal('show');
 			memberSeq = $(this).parent().prev().prev().prev().prev().prev().text();
@@ -418,11 +461,27 @@ $(document).ready(function(){
 		
 	});
 	
-	$('#yesBtn').click(function(){
+	$('#memberYesBtn').click(function(){
 		$.ajax({
 			type : 'POST',
 			url : '/exhibition/customerService/memberTicketDelete.do',
 			data : {'seq' : memberSeq},
+			dataType : 'json',
+			success : function(data){
+			}
+		});
+	});
+	var companySeq;
+	$('#reservationCompanyTable').on('click','#companyDeleteBtn',function(){	
+			$('.ui.mini.modal.company').modal('show');
+			companySeq = $(this).parent().prev().prev().prev().prev().prev().text();
+	});
+	
+	$('#companyYesBtn').click(function(){
+		$.ajax({
+			type : 'POST',
+			url : '/exhibition/customerService/companyTicketDelete.do',
+			data : {'seq' : companySeq},
 			dataType : 'json',
 			success : function(data){
 			}

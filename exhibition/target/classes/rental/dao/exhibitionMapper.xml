@@ -8,7 +8,17 @@
  	</select>
  	
  	<insert id="reservationHoll" parameterType="exhibition">
- 		insert into exhibitionRental(boothName, C_license, C_tel, C_email, totalRent, code, title, startDate, endDate) values(#{boothName}, #{C_license}, #{C_tel}, #{C_email}, #{totalRent}, #{code}, #{title}, #{startDate}, #{endDate})
+ 		insert into exhibitionRental(seq,boothName, C_license, C_tel, C_email, totalRent, code, title, startDate, endDate) 
+ 									values(seq_exhibitionRental.nextval
+ 											,#{boothName}
+ 											, #{C_license}
+ 											, #{C_tel}
+ 											, #{C_email}
+ 											, #{totalRent}
+ 											, #{code}
+ 											, #{title}
+ 											, #{startDate}
+ 											, #{endDate})
  	</insert>
  	
  	<select id="getCalendar" resultType="exhibition">

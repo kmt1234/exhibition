@@ -46,6 +46,7 @@ import customerService.dao.CustomerServiceDAO;
 import member.bean.MemberDTO;
 import performance.bean.Book_exhibition_membersDTO;
 import performance.bean.Book_performance_membersDTO;
+import rental.bean.ConcertHallDTO;
 import rental.bean.ExhibitionDTO;
 
 @RequestMapping(value = "customerService")
@@ -1432,13 +1433,13 @@ public class CustomerServiceController {
 	@RequestMapping(value="memberView", method = RequestMethod.POST)
 	public ModelAndView memberView(@RequestParam String M_Id) {
 		
-		List<Book_exhibition_membersDTO> exhibitionList = customerServiceDAO.getExhibitionView(M_Id);
-		List<Book_exhibition_membersDTO> performanceList = customerServiceDAO.getPerformanceView(M_Id);
-		exhibitionList.addAll(performanceList);
+		List<Book_exhibition_membersDTO> exhibitionMemberList = customerServiceDAO.getExhibitionView(M_Id);
+		List<Book_exhibition_membersDTO> performanceMemberList = customerServiceDAO.getPerformanceView(M_Id);
+		exhibitionMemberList.addAll(performanceMemberList);
 		
 		ModelAndView mav = new ModelAndView();
 		
-		mav.addObject("list",exhibitionList);
+		mav.addObject("list",exhibitionMemberList);
 		
 		mav.setViewName("jsonView");
 		return mav;
@@ -1459,10 +1460,12 @@ public class CustomerServiceController {
 	//사업자 상세정보
 		@RequestMapping(value="companyView", method = RequestMethod.POST)
 		public ModelAndView companyView(@RequestParam String C_license) {
-			List<ExhibitionDTO> list = customerServiceDAO.getCompanyView(C_license);
+			List<ExhibitionDTO> exhibitionCompanyList = customerServiceDAO.getCompanyExView(C_license);
+			List<ConcertHallDTO> ConcertCompanyList = customerServiceDAO.getCompanyConView(C_license);
 			
 			ModelAndView mav = new ModelAndView();
-			mav.addObject("list",list);
+			mav.addObject("list",exhibitionCompanyList);
+			mav.addObject("list2",ConcertCompanyList);
 			mav.setViewName("jsonView");
 			return mav;
 		}
@@ -1522,6 +1525,19 @@ public class CustomerServiceController {
 		mav.addObject("list",list);
 		mav.addObject("customerServicePaging",customerServicePaging);
 		
+		mav.setViewName("jsonView");
+		return mav;
+	}
+	
+	//사업자 예약 삭제
+	@RequestMapping(value="companyTicketDelete", method = RequestMethod.POST)
+	public ModelAndView companyTicketDelete(@RequestParam int seq) {
+		
+		customerServiceDAO.companyExDelete(seq);
+		customerServiceDAO.companyConDelete(seq);
+		
+		
+		ModelAndView mav = new ModelAndView();
 		mav.setViewName("jsonView");
 		return mav;
 	}

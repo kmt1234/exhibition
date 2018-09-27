@@ -20,6 +20,7 @@
 
 </style>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
 </head>
 <body>
 <header>
@@ -37,8 +38,8 @@
 <!--메인화면 아래 부분(일정)  -->
 	<div class="ui container" style="margin-top: 20px; min-width:1170px; height:200px;  ">
 		<!-- 공연포스터 슬라이드?? -->
-		<div style=" margin-left:15px; width:270px; height:200px;  display: inline-block; float: left;" >
-			<img style="min-width:270; height: 200px " src='../img/B1.jpg'></img>
+		<div style=" margin-left:15px; width:270px; height:200px;  display: inline-block; float: left;">
+			<jsp:include page="../main/slide.jsp" ></jsp:include>
 		</div>
 		<!-- 달력  -->
 		<div style=" margin-left:20px; width:270px; height:200px;  display: inline-block; float: left;" >
@@ -203,13 +204,19 @@ $(document).ready(function(){
 		next_item.fadeIn("slow");
 		current_item.hide();
 	}
-
 	
-
-	  
+	$('.bxslider').bxSlider({
+   	 	auto: true,
+        speed: 500,
+        pause: 4000,
+        mode:'fade',
+        autoControls: true,
+        pager:true,
+   });
+	   
 	
 });
 </script>
-  <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script><!--달력-->
+ <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script><!--달력-->
 </body>
 </html>
