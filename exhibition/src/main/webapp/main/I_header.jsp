@@ -37,7 +37,7 @@ a:active{
 #T_Atag:link {color:black; text-decoration: none;}	<!--일반 링크 검정 -->
 #T_Atag:visited {color:black; text-decoration: none;}
 #T_Atag:hover {color:black; text-decoration: underline;} <!--마우스 올렸을 때 그린색에 언더바 생성. -->
-#T_Atag:active {color:black; text-decoration: none;}
+#T_Atag:active {background-color:black; text-decoration: none;}
 #T_Atag{
  font-color:black;
 }

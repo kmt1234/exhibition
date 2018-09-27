@@ -17,6 +17,7 @@ import customerService.bean.SalesExhibitionDTO;
 import member.bean.MemberDTO;
 import performance.bean.Book_exhibition_membersDTO;
 import performance.bean.Book_performance_membersDTO;
+import rental.bean.ConcertHallDTO;
 import rental.bean.ExhibitionDTO;
 
 public interface CustomerServiceDAO {
@@ -175,8 +176,13 @@ public interface CustomerServiceDAO {
 	public List<CompanyDTO> CompanyListSearch(Map<String, String> map);
 	//사업자 검색 페이징
 	public int getCompanyListSearchTotal(Map<String, String> map);
-
-	public List<ExhibitionDTO> getCompanyView(String C_license);
+	//사업자 삭제
+	public void companyExDelete(int seq);
+	public void companyConDelete(int seq);
+	
+	//사업자 상세뷰
+	public List<ExhibitionDTO> getCompanyExView(String C_license);
+	public List<ConcertHallDTO> getCompanyConView(String C_license);
 
 	public ImageboardDTO getImageboard(String seq);//메인이미지 내용 보기(수정하기 위해)
 	
@@ -202,6 +208,9 @@ public interface CustomerServiceDAO {
 	
 	public List<Book_exhibition_membersDTO> getExhibitionView(String M_Id);	//박람회 상세정보
 	public List<Book_exhibition_membersDTO> getPerformanceView(String M_Id); //연극 상세정보
+	
+
+	
 	
 	
 	
