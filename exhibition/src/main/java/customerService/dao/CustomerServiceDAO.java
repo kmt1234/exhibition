@@ -209,6 +209,9 @@ public interface CustomerServiceDAO {
 	public List<Book_exhibition_membersDTO> getExhibitionView(String M_Id);	//박람회 상세정보
 	public List<Book_exhibition_membersDTO> getPerformanceView(String M_Id); //연극 상세정보
 	
+	public EventboardDTO checkReservation_exhibition(Map<String, String> map);	//전시회 예약 중복 체크
+	public EventboardDTO checkReservation_performance(Map<String, String> map);	//연극 예약 중복 체크
+	
 
 	
 	

@@ -1566,6 +1566,37 @@ public class CustomerServiceController {
 		return mav;
 	}
 	
+	//전시회,연극 등록 층 중복 체크*****
+	@RequestMapping(value="checkReservation", method=RequestMethod.POST)
+	public ModelAndView checkReservation(@RequestParam String postSelect, @RequestParam String imageName, @RequestParam String startDate, @RequestParam String endDate, @RequestParam String eventPlace) {
+		
+		Map<String,String> map = new HashMap<String, String>();
+		map.put("postSelect", postSelect);
+		map.put("imageName", imageName);
+		map.put("startDate", startDate);
+		map.put("endDate", endDate);
+		map.put("eventPlace", eventPlace);
+		
+		EventboardDTO eventboardDTO = null;
+		String check = null;
+		
+		//DB
+		if(postSelect.equals("1")) {
+			eventboardDTO = customerServiceDAO.checkReservation_exhibition(map);
+		}else if(postSelect.equals("2")) {
+			eventboardDTO = customerServiceDAO.checkReservation_performance(map);
+		}
+		
+		if(eventboardDTO==null) {
+			check = "no_data";
+		}else {
+			check = "yes_data";
+		} 
+		
+		ModelAndView mav = new ModelAndView();
+		
+		return mav;
+	}
 	
 		
 		
