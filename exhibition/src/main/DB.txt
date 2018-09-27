@@ -220,7 +220,7 @@ startDate date not null,
 endDate date not null
 );
 
-create sequence seq_condertHall start with 1000;
+create sequence seq_concertHall start with 1000;
 
 create table businessRoom(
 roomName varchar2(30), 

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
 .ui.inverted.divider2 {
 	margin: 5px 0;
@@ -20,19 +20,18 @@
 		<div style="font-size:13px; float:right; height: 50px; margin-top:30px ">
 		<img src="../img/house.png" width="15px" height="16px" style="cursor: pointer;" id="houseImg"></img>
 		> 고객센터 > 마이페이지(법인) 
-	</div>
-	<div class="ui divider"></div> 
+		</div>
 	</h2>
+	<!-- 메인메뉴 -->
 	<div style="width: 100%;">
 		<!-- 맨위 메뉴 텝 -->
 		<div style="margin-left: 20px; width:880px; float: left; text-align: left;">
-			<a class="middle ui button" class="active item" id="member-info-modify"> 수정 </a>
-			<a class="middle ui button" class="item"id="member-ticket-list"> 예매리스트 </a>
-			<a class="middle ui button" class="item"id="member-ticket-history"> 예매 내역 </a>
+			<a class="middle ui button" class="active item" id="company-info-modify" style="margin-left:20px; width:150px; float: left;">수정</a>
+			<a class="middle ui button" class="item"id="rental-list"  style=" width:150px; float: left;">임대리스트</a>
+			<a class="middle ui button" class="item"id="rental-history"  style=" width:150px; float: left;">지난 임대 내역</a>
 		</div>
-		<!-- 메인메뉴 -->
+	</div>
 		<div class="" id="modify-Div" style="margin-left: 20px; float: left;" >
-			<div>
 				<div style="width: 100%">
 			  		<div class="content">
 			  			<div class="description" align="left"><br>
@@ -235,22 +234,7 @@
 						</div>
 				</div>
 			</div>
-		</div>
-	</div>
+	</div>		
+
 </div>
-
-	<div class="ui segment" id="Ticket-List-Div">
-	</div>	
-
-	<div class="ui segment" id="Ticket-History-Div">
-		<!-- <a class="ui green left ribbon label">Ticket History</a> -->
-	</div>	
-
-	<div style="display: inline-block; border: 1px solid; margin-top:80px; width: 465px; height: 825px;"></div>	
-</div>
-
-<!--페이지 인클루드 후 삭제해야합니다!!!!******(제이쿼리 충돌 방지 )  -->
-
-<script src="../js/post.js"></script>
-<script src="../js/companyMypage.js?ver=1"></script>
 <jsp:include page="companyOut.jsp"/>

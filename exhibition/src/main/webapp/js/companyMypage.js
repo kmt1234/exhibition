@@ -1,21 +1,9 @@
 $(document).ready(function(){
-	
-	$('#Ticket-List-Div').hide();
-	$('#Ticket-History-Div').hide();
-		
 	//회원정보 수정
-	$('#member-info-modify').click(function(){
-		$('#member-info-modify').addClass('active');
-		$('#member-ticket-list').removeClass('active');
-		$('#member-ticket-history').removeClass('active');
-		
-		$('#modify-Div').show();
-		$('#Ticket-List-Div').hide();
-		$('#Ticket-History-Div').hide();
-		
+	$('#company-info-modify').click(function(){
+		location.href='/exhibition/login/mypage.do';
 	});
-	
-	
+
 	var Mm_regPwd = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-]|.*[0-9]).{6,24}$/;	//6-24자리 영문대소문자or숫자or특수기호
 	var Mm_regEmail = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/; //이메일 양식
 	var Mm_regPhone =  /^((01[1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})$/;
@@ -178,29 +166,14 @@ $(document).ready(function(){
 	});
 	
 	
-	
-	
-	
-	//예매리스트
-	$('#member-ticket-list').click(function(){
-		$('#member-info-modify').removeClass('active');
-		$('#member-ticket-list').addClass('active');
-		$('#member-ticket-history').removeClass('active');
-		
-		$('#modify-Div').hide();
-		$('#Ticket-List-Div').show();
-		$('#Ticket-History-Div').hide();
+	//임대리스트
+	$('#rental-list').click(function(){
+		location.href='/exhibition/login/mypageRental.do';
 	});
 	
-	//예매내역
-	$('#member-ticket-history').click(function(){
-		$('#member-info-modify').removeClass('active');
-		$('#member-ticket-list').removeClass('active');
-		$('#member-ticket-history').addClass('active');
-		
-		$('#modify-Div').hide();
-		$('#Ticket-List-Div').hide();
-		$('#Ticket-History-Div').show();
+	//임대내역
+	$('#rental-history').click(function(){
+		location.href='/exhibition/login/mypageRentalPast.do';
 	});
 	
 });

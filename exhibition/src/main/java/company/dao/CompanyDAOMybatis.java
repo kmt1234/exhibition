@@ -1,5 +1,6 @@
 package company.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -8,6 +9,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import company.bean.CompanyDTO;
+import rental.bean.ConcertHallDTO;
+import rental.bean.ExhibitionDTO;
 
 @Component
 @Transactional
@@ -47,6 +50,26 @@ public class CompanyDAOMybatis implements CompanyDAO {
 	public int deleteCompany(Map<String, String> map) {
 		return sqlSession.delete("companySQL.deleteCompany", map);
 		
+	}
+	
+	//박람회 임대 리스트 불러오기
+	public List<ExhibitionDTO> getExhibitionList(Map<String, String> map) {
+		return sqlSession.selectList("companySQL.getExhibitionList", map);
+	}
+	
+	//공연 임대 리스트 불러오기
+	public List<ConcertHallDTO> getPlayList(Map<String, String> map) {
+		return sqlSession.selectList("companySQL.getPlayList", map);
+	}
+	
+	//모든 임대 리스트 불러오기
+	public List<ExhibitionDTO> getAllRentalList(Map<String, String> map) {
+		return sqlSession.selectList("companySQL.getAllRentalList",map);
+	}
+	
+	//이전 임대 리스트 총갯수
+	public int mypageRentalPastTotal(Map<String, String> map) {
+		return sqlSession.selectOne("companySQL.mypageRentalPastTotal", map);
 	}
 
 
