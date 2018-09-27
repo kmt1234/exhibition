@@ -39,6 +39,14 @@
 	text-decoration: none;
 	cursor: pointer;
 }
+
+/* .contentC {
+	width : 100px; 
+	overflow: hidden;  
+	white-space: nowrap;  
+	text-overflow  : ellipsis;
+} */
+
 </style>
 
 </head>
@@ -59,14 +67,6 @@
 			<table style="width: 880px; height: 40px;" align="center" border="1"
 				bordercolor="#ec008c" cellpadding="2" frame="hsides" rules="rows"
 				id="index_NoticeSearch" class="ui striped table">
-				<tr>
-					<th
-						style="width: 100px; height: 7%; padding-top: 10px; text-align: center;">번호</th>
-					<th
-						style="width: 500px; height: 7%; padding-top: 10px; text-align: center;">제목</th>
-					<th
-						style="width: 100px; height: 7%; padding-top: 10px; text-align: center;">등록일</th>
-				</tr>
 			</table>
 			<br>
 			<!-- <div id="index_PagingDiv" class="ui center pagination menu"></div> -->
@@ -76,14 +76,6 @@
 			<table style="width: 880px; height: 40px;" align="center" border="1"
 				bordercolor="#ec008c" cellpadding="2" frame="hsides" rules="rows"
 				id="index_SearchList" class="ui striped table">
-				<tr>
-					<th
-						style="width: 100px; height: 7%; padding-top: 10px; text-align: center;">번호</th>
-					<th
-						style="width: 500px; height: 7%; padding-top: 10px; text-align: center;">제목</th>
-					<th
-						style="width: 100px; height: 7%; padding-top: 10px; text-align: center;">등록일</th>
-				</tr>
 			</table>
 			<br>
 			<!-- <div id="index_PagingDiv" class="ui center pagination menu"></div> -->
@@ -93,14 +85,6 @@
 			<table style="width: 880px; height: 40px;" align="center" border="1"
 				bordercolor="#ec008c" cellpadding="2" frame="hsides" rules="rows"
 				id="index_SearchList" class="ui striped table">
-				<tr>
-					<th
-						style="width: 100px; height: 7%; padding-top: 10px; text-align: center;">번호</th>
-					<th
-						style="width: 500px; height: 7%; padding-top: 10px; text-align: center;">제목</th>
-					<th
-						style="width: 100px; height: 7%; padding-top: 10px; text-align: center;">등록일</th>
-				</tr>
 			</table>
 			<br>
 			<!-- <div id="index_PagingDiv" class="ui center pagination menu"></div> -->
@@ -110,14 +94,6 @@
 			<table style="width: 880px; height: 40px;" align="center" border="1"
 				bordercolor="#ec008c" cellpadding="2" frame="hsides" rules="rows"
 				id="index_SearchList" class="ui striped table">
-				<tr>
-					<th
-						style="width: 100px; height: 7%; padding-top: 10px; text-align: center;">번호</th>
-					<th
-						style="width: 500px; height: 7%; padding-top: 10px; text-align: center;">제목</th>
-					<th
-						style="width: 100px; height: 7%; padding-top: 10px; text-align: center;">등록일</th>
-				</tr>
 			</table>
 			<br>
 			<!-- <div id="index_PagingDiv" class="ui center pagination menu"></div> -->

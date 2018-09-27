@@ -22,10 +22,8 @@ import rental.bean.ExhibitionDTO;
 
 public interface MainDAO {
 
-	List<MainDTO> index_Search(Map<String, String> map);
+	public List<MainDTO> index_NoticeSearch(Map<String, String> map);
 	
-	
-	
+	public int getTotal_index_NoticeSearch(Map<String, String> map);
 
-	
 }

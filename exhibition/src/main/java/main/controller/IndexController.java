@@ -57,9 +57,12 @@ public class IndexController {
 		return mav;
 	}
 	
-	@RequestMapping(value="index_Search", method=RequestMethod.POST)
-	public ModelAndView index_Search(@RequestParam(required = false) Map<String, String> map) {
-		List<MainDTO> list = mainDAO.index_Search(map);
+	@RequestMapping(value="index_NoticeSearch", method=RequestMethod.POST)
+	public ModelAndView index_NoticeSearch(@RequestParam(required = false) Map<String, String> map) {
+		
+		int totalA = mainDAO.getTotal_index_NoticeSearch(map);
+		
+		List<MainDTO> list = mainDAO.index_NoticeSearch(map);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
 		mav.setViewName("jsonView");

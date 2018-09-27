@@ -4,14 +4,21 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="mainSQL">
  
- 	<!-- 메인 검색 -->
-	<select id="index_Search" parameterType="java.util.Map" resultType="customerService">
-	
+ 	<!-- 메인 공지사항 검색 -->
+	<select id="index_NoticeSearch" parameterType="java.util.Map" resultType="customerService">
  		select * from C_notice where subject like '%'||#{index_keyword}||'%'
  	</select>
  	
+ 	<!-- 메인 공지사항 검색 총글수 -->
+ 	<select id="getTotal_index_NoticeSearch" parameterType="java.util.Map" resultType="int">
+ 		select count(*) from C_notice where subject like '%'||#{index_keyword}||'%'
+ 	</select>
  	
- 	
+ 	<!-- 메인 자주묻는질문 검색 -->
+	<select id="index_QnASearch" parameterType="java.util.Map" resultType="customerService">
+	
+ 		select * from C_QnA where subject like '%'||#{index_keyword}||'%'
+ 	</select>
  	
  </mapper>
  
