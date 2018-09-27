@@ -83,7 +83,7 @@ $(document).ready(function(){
 		}
 		
 
-	/*	if($('#postSelect').val()=='0'){
+	if($('#postSelect').val()=='0'){
 			if($('#imageName').val()=='')
 				$('#imageNameDiv').text('제목을 입력하세요').css('color','red').css('font-size','9pt').css('font-weight','bold');
 			else if($('#img').val()=='') 
@@ -106,7 +106,6 @@ $(document).ready(function(){
 				alert('날짜2 입력해야함');
 			else if($('.datepicker2').datepicker().val() < $('.datepicker1').datepicker().val())
 				alert('날짜2가 날짜1 보다 작음');
-			
 			//유효성 다시 해야함
 			else if($('.timepicker1').val() < $('.timepicker2').val()){
 				alert('시간2가 시간1 보다 작음');
@@ -133,7 +132,7 @@ $(document).ready(function(){
 				$('#telDiv').text('전화번호 양식에 맞지 않습니다').css('color','red').css('font-size','9pt').css('font-weight','bold');
 			}else
 				$('#imageboardWriteForm').attr({action:'/exhibition/customerService/C_hotelInfoWrite.do', method:'post'}).submit();
-		}*/
+		}
 		
 	});
 	

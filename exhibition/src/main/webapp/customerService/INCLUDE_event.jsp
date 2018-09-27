@@ -150,7 +150,7 @@
 				<span>박람회내용</span>
 			</div>	
 		  	<div class="ui inverted input" style="width: 100%;">
-				<div class="ui left icon input " >
+				<div class="ui left icon input focus" style="width: 400px;" >
 					<textarea rows="5" cols="78" name="eventContent" id="eventContent" style="resize: none;" placeholder="박람회 정보"></textarea>
 				</div>
 		  	</div>

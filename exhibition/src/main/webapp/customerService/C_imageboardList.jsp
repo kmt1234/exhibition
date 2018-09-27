@@ -13,7 +13,6 @@
 #subjectA:visited{color:black; text-decoration: none;}
 #subjectA:hover{color:green; text-decoration: underline;}
 #subjectA:active{color:black; text-decoration: none;}
-
 #currentPaging{
 	color: red;
 	text-decoration: underline;
@@ -24,31 +23,40 @@
 	text-decoration: none;
 	cursor: pointer;
 }
-
 </style>
-
 </head>
 <body>
-<div>
-<div align="left"><input type="button" class="eventUploadBtn" value="업로드"></div>
-<form name="imageboardListForm" id="imageboardListForm"method="post">
-<table id="imageboardListTab" border="1" frame="hsides" rules="rows" cellpadding="3" cellspacing="0">
-<tr>
-	<th width="100"><input type="checkbox" id="checkAll">번 호</th>
-	<th width="150">이미지</th>
-	<th width="100">상품명</th>
-</tr>
-</table>
-<div style=" float:left; width:500px" align="center" id="imagePaging" name="imagePaging"></div><br>
-
-<div style="float:left;">
-	<input type="button" value="메인등록" id="imageSelectBtn">
-	<input type="button" value="선택삭제" id="imageDeleteBtn">
+<div style="width: 100%; text-align: left;">
+	<h2 class="box-container" style="float: center; width: 100%; height:126px; text-align: left;">
+		<span>메인</span>
+		<span class="h-light">화면</span>
+		<div style="font-size:13px; float:right; height: 50px; margin-top:30px ">
+			<img src="../img/house.png" width="15px" height="16px" style="cursor: pointer;" id="houseImg"></img>
+			> 고객센터 > 게시판추가 > 목록
+		</div>
+		<div class="ui divider"></div> 
+	</h2>
+	<div style="width: 600px; float: left; margin-left: 165px;">
+		<div align="left">
+			<input type="button" class="eventUploadBtn" value="업로드">
+		</div>
+		<form name="imageboardListForm" id="imageboardListForm"method="post">
+			<table id="imageboardListTab" border="1" frame="hsides" rules="rows" cellpadding="3" cellspacing="0">
+				<tr>
+					<th width="100"><input type="checkbox" id="checkAll">번호</th>
+					<th width="150">이미지</th>
+					<th width="100">제목</th>
+				</tr>
+			</table>
+			<div style=" margin-top: 10px;" align="center" id="imagePaging" ></div><br>
+			<div style="float:left;">
+				<a class="middle ui button"  id="imageSelectBtn">메인등록</a>
+				<a class="middle ui button" id="imageDeleteBtn">선택삭제</a>
+			</div>
+			<input type="hidden" id="code" value="2">
+		</form>
+	</div>
 </div>
-<input type="hidden" id="code" value="2">
-</form>
-</div>
-<!-- <script src="http://code.jquery.com/jquery-3.3.1.min.js" type="text/javascript"></script> -->
 <script>	
 function imageboardPaging(pg){
 	location.href="/exhibition/customerService/C_mainImageboardListForm.do?pg="+pg 	//이거는 paging에서 보낸 pg값을 가져온 것이다.
@@ -63,7 +71,7 @@ $(document).ready(function(){
 		dataType : 'json',
 		success : function(data){
 			$.each(data.list,function(index,item){
-				var img = '<img src="../storage/'+item.image1+'" width="700" height="210">';
+				var img = '<img src="../storage/'+item.image1+'" width="400px;" height="180px;">';
 				$('<tr/>',{align:'center'})
 				.append($('<td/>',{	//tr , 뒤에 align하면 tr안에서 align이 다 먹힌다.
 					}).append($('<input/>',{

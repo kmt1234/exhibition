@@ -6,7 +6,7 @@
 </div>
 <br>
 <div style="width: 500px;">
-<input type="hidden" name="postSelect" id="postSelect" value="1">
+<input type="hidden" name="postSelect" id="postSelect" value="2">
 	<!-- 제목 -->
 	<div style="width: 100%; text-align: left; margin-top: 20px;display: inline-block; ">
 		<div class="ui labeled input " >
@@ -143,7 +143,7 @@
   		</div>
   	</div>
   	<br>
-  	<!-- 박람회 정보  -->
+  	<!-- 공연 정보  -->
   	<div style="width: 100%; text-align: left; margin-top: 20px;display: inline-block; ">
 		<div class="ui labeled input " >
 			<div class="ui label " style="width: 100px; text-align: center;">
