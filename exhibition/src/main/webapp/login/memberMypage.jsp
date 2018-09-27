@@ -33,7 +33,8 @@
 		    	예매 내역
 		  	</a>
 		</div>
-		
+	</div>
+</div>		
 		<!-- 메인메뉴 -->
 		<div class="" id="modify-Div" style="margin-left: 20px; float: left;" >
 			<div>
@@ -130,12 +131,6 @@
 					</div><!--class="content"  -->
 				</div><!--class="ui card"-->
 			</div><!--align="center"  -->
-		</div><!--id="modify-Div"  -->
-	
-	<div class="ui segment" id="Ticket-History-Div">
-	  
-	</div>		
-</div><!-- 전체 -->
-</div>
+		</div><!--id="modify-Div"  -->	  
 
 <script src="../js/memberMypage.js?ver=1"></script>

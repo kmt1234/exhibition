@@ -38,7 +38,32 @@ public class MemberTicketListPaging {
 		if(endPage < totalP)
 			pagingHTML.append("[<span id=paging onclick=MemberTicketListPaging("+(endPage+1)+")>이전</span>]");
 	}
+	
+	//예매내역(과거) 페이징
+	public void makePagingHTML_past() {
+		pagingHTML = new StringBuffer();
+		
+		int totalP = (totalA+pageSize-1)/pageSize;
+		
+		int startPage =(currentPage-1)/pageBlock*pageBlock+1;
 
+		
+		int endPage = startPage+pageBlock-1;
+		if(endPage > totalP) endPage = totalP;
+		
+		if(startPage>pageBlock)	
+			pagingHTML.append("[<span id=paging onclick=TicketHistoryListPaging("+(startPage-1)+")>다음</span>]");
+	
+		for(int i = startPage; i<=endPage; i++) {
+			if(i==currentPage) {
+				pagingHTML.append("[<span id=currentPaging onclick=TicketHistoryListPaging("+i+")>"+i+"</span>]");
+			}else {
+				pagingHTML.append("[<span id=paging onclick=TicketHistoryListPaging("+i+")>"+i+"</span>]");
+			}
+		}
+		if(endPage < totalP)
+			pagingHTML.append("[<span id=paging onclick=TicketHistoryListPaging("+(endPage+1)+")>이전</span>]");
+	}
 }
 
 

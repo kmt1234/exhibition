@@ -72,25 +72,93 @@
 	  </div><!--class="extra content"-->
 	</div><!--class="ui card"  -->
 
+<!--예매 취소하기 위해 필요한 값들-->	
+<input type="hidden" id="hiddenImageName" value="${imageName }">
+<input type="hidden" id="hiddenPlayDate" value="${playDate }">
+<input type="hidden" id="hiddenTicketQty" value="${ticketQty }">
 
 </body>
 <script>
 $(document).ready(function(){
+	
+	//get Month 0붙이기
+	function getMonth(date) {
+	  var month = date.getMonth() + 1;
+	  return month < 10 ? '0' + month : '' + month; // ('' + month) for string result
+	}  
+	
 	//현재 날짜
 	var Now = new Date();
 	var NowTime = Now.getFullYear();
-	NowTime += ''+(Now.getMonth() + 1);
+	NowTime += ''+getMonth(Now);
 	NowTime += ''+Now.getDate();
 	
 	//당일 취소 불가
-	if(parseInt($('#playDate2').val()) <= parseInt(NowTime)){
+	if(parseInt($('#playDate2').val()) <= parseInt(NowTime)){		
 		$('#cancel').text('당일 취소 불가');
 		$('#cancel').addClass('disabled');
 	} 
 	
 	//예매취소
 	$('#cancel').click(function(){
-		alert('취소');
+		
+		var result = confirm('정말 취소 하시겠습니까?');
+		
+		if(result){
+			alert('취소하였습니다.');
+			
+			var form = document.createElement('form');
+			
+			var objs1;
+			objs1 = document.createElement('input');
+			objs1.setAttribute('type', 'hidden');
+			objs1.setAttribute('name', 'imageName');
+			objs1.setAttribute('value', $('#hiddenImageName').val());
+			
+			var objs2;
+			objs2 = document.createElement('input');
+			objs2.setAttribute('type', 'hidden');
+			objs2.setAttribute('name','playDate');
+			objs2.setAttribute('value', $('#hiddenPlayDate').val());
+					
+			var objs3;
+			objs3 = document.createElement('input');
+			objs3.setAttribute('type', 'hidden');
+			objs3.setAttribute('name', 'ticketQty');
+			objs3.setAttribute('value', $('#hiddenTicketQty').val());
+
+			form.appendChild(objs1);
+			form.appendChild(objs2);
+			form.appendChild(objs3);
+			
+			form.setAttribute('method', 'post');
+			form.setAttribute('action', "/exhibition/login/ticketCancel.do");
+
+			document.body.appendChild(form);
+			
+			form.submit();
+	
+		}else{
+			
+		}
+	
+				
+	});
+	
+	//회원정보 수정 메뉴
+	$('#member-info-modify').click(function(){
+		location.href="/exhibition/login/mypage.do";
+		
+	});
+
+	// 예매리스트 탭 
+	$('#member-ticket-list').click(function(){
+		location.href="/exhibition/login/memerMypage_ticketList.do";
+	});
+
+	//예매내역 탭
+	$('#member-ticket-history').click(function(){
+		location.href="/exhibition/login/ticketHistory.do";
 	});
 });
 </script>

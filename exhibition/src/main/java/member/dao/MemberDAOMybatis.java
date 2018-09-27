@@ -80,6 +80,39 @@ public class MemberDAOMybatis implements MemberDAO {
 		return sqlSession.selectOne("memberSQL.getExhibitionInfo", map);
 	}
 	
+	//과거 예매내역 수 가져오는 메소드 
+	public int getTicketHistoryListTotalA(Map<String, String> map) {
+		return sqlSession.selectOne("memberSQL.getTicketHistoryListTotalA", map);
+	}
+	
+	//과거 예매내역 가져오는 메소드
+	public List<Book_performance_membersDTO> getTicketHistoryList(Map<String, String> map) {
+		return sqlSession.selectList("memberSQL.getTicketHistoryList",map);
+	}
+
+	//연극 예매 취소
+	public int cancelPerformance(Map<String, String> map) {
+		return sqlSession.delete("memberSQL.cancelPerformance", map);
+	}
+	
+	//연극 예매티켓 수정
+	public int backPerformance(Map<String, String> map) {
+		return sqlSession.update("memberSQL.backPerformance", map);
+	}
+	
+	//전시회 예매 취소
+	public int cancelExhibition(Map<String, String> map) {
+		return sqlSession.delete("memberSQL.cancelExhibition", map);
+		
+	}
+	
+	//전시회 예매티켓 수정
+	public int backExhibition(Map<String, String> map) {
+		return sqlSession.update("memberSQL.backExhibition", map);
+	}
+
+	
+	
 	
 	
 }
