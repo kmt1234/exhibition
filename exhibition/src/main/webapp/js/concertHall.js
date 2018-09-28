@@ -1,4 +1,33 @@
 $(document).ready(function(){
+	$('#concertHall2Div').hide();
+	$('#concertHall3Div').hide();
+	$('#concertHall4Div').hide();
+	
+	$('#concertHall1').click(function(){
+		$('#concertHall1Div').show();
+		$('#concertHall2Div').hide();
+		$('#concertHall3Div').hide();
+		$('#concertHall4Div').hide();
+	});
+	$('#concertHall2').click(function(){
+		$('#concertHall2Div').show();
+		$('#concertHall1Div').hide();
+		$('#concertHall3Div').hide();
+		$('#concertHall4Div').hide();
+	});
+	$('#concertHall3').click(function(){
+		$('#concertHall3Div').show();
+		$('#concertHall1Div').hide();
+		$('#concertHall2Div').hide();
+		$('#concertHall4Div').hide();
+	});
+	$('#concertHall4').click(function(){
+		$('#concertHall4Div').show();
+		$('#concertHall1Div').hide();
+		$('#concertHall2Div').hide();
+		$('#concertHall3Div').hide();
+	});
+	
 	
 	$('#C_room1').click(function(){
 		location.href="/exhibition/rental/R_concertHallDecision.do?hallName="+$('#C_room1').text().replace(/ /gi, '');

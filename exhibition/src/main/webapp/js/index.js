@@ -87,7 +87,7 @@ $(document).ready(function(){
 	/*고객센터(공지사항&고객의소리&자주묻는질마누&주요시설열락처 분리 되어 있음)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 	//고객센터 정보
 	$('#C_customerServiceForm').click(function(){
-		location.href="/exhibition/customerService/C_customerServiceForm.do";
+		location.href="/exhibition/customerService/C_notice.do";
 	});
 	//공지사항
 	$('#C_notice').click(function(){

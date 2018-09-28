@@ -64,5 +64,6 @@ left: 0px;
 </footer>
 <script src="../js/slidbar.js"></script>
 <script src="../js/companyMypage.js?ver=1"></script>
+<script src="../js/introduction.js"></script>
 </body>
 </html>
