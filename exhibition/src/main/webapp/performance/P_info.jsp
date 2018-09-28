@@ -21,35 +21,37 @@
 .active.step.size{
 	width: 450px;
 }
-img{
-	margin-left: 105px;
+.img1{
+	margin-left: 200px;
 	margin-right:20px;
 	margin-top: 14px;
+}
+#houseImg{
+	margin:-3px;
 }
 </style>
 </head>
 <body>
-
-	<!-- 타이틀 -->
-	<h2 class="box-container"  style="float: left; width:100%; text-align: left;">
-			<span>일정</span>
-			<span class="h-light">정보</span>
-			<div style="font-size:13px; float:right; height: 50px; margin-top:30px ">
-				<img src="../img/house.png" width="15px" height="16px" style="cursor: pointer;" id="houseImg"></img>
-				> 고객센터 > 게시판추가 > 작성
-			</div>
-			<div class="ui divider"></div> 
-		</h2>
-	
-	  <div style="margin-top:160px;text-align: left;">
-	  <div class="ui divider" style="margin-top: -50px;"></div>
-	  <div>
-	  <h1 align="center">주최전시별 기간</h1><br>
-	<p align="center">  IPEX는 지난 30여년간 매년 다양한 전시를 직접 주최하며 <strong>세계적인 전문 전시 주최 기업으로 성장해왔습니다.</strong><br>
-		더 많은 전시와 더 많은 감동으로 참가업체와 관람객 모두에게 코엑스 그 이상을 선사하겠습니다.</p>
-	  </div>
-	  <h2>박람회</h2>
-	 <img src="../img/step.png" width="80px" height="80px"  align="center">
+<!-- 타이틀 -->
+<h2 class="box-container"  style="float: left; width:100%; text-align: left;">
+	<span>일정</span>
+	<span class="h-light">정보</span>
+	<div style="font-size:13px; float:right; height: 50px; margin-top:30px ">
+		<img src="../img/house.png" width="15px" height="16px" style="cursor: pointer;" id="houseImg"></img>
+		> 일정 > 정보
+	</div>
+	<div class="ui divider"></div> 
+</h2>
+<div style="text-align: left;">
+	<div style="margin-left: 120px;">
+		<h1>주최 전시별 <span >기간 정보</span></h1>
+			<p style="margin-left: 10px;"><strong><span style="font-size: 15pt; color: #8258FA">IPEX</span></strong>는 지난 30여년간 매년 다양한 전시를 직접 주최하며 <strong><span style="font-size: 12pt;">세계적인 전문 전시 주최 기업으로 성장해왔습니다.</span></strong><br>
+			더 많은 전시와 더 많은 감동으로 참가업체와 관람객 모두에게 코엑스 그 이상을 선사하겠습니다.</p>
+	</div>
+	<div style="margin-left: 120px; margin-top: 50px;">
+		<h2>박람회</h2>
+	</div>
+	 <img class="img1"  src="../img/step.png" width="80px" height="80px"  align="center">
 		  <div class="ui steps">
 			  <div class="active step size">
 			    <div class="content" align="center">
@@ -58,7 +60,7 @@ img{
 			    </div>
 			  </div>
 			</div><br>
-			<img src="../img/step2.png" width="80px" height="80px" align="center">
+			<img class="img1" src="../img/step2.png" width="80px" height="80px" align="center">
 			<div class="ui steps">
 			  <div class="active step size">
 			    <div class="content" align="center">
@@ -67,7 +69,7 @@ img{
 			    </div>
 			  </div>
 			</div><br>
-			<img src="../img/step3.png" width="80px" height="80px" align="center">
+			<img class="img1"  src="../img/step3.png" width="80px" height="80px" align="center">
 			<div class="ui steps">
 			  <div class="active step size">
 			    <div class="content" align="center">
@@ -76,7 +78,7 @@ img{
 			    </div>
 			  </div>
 			</div><br>
-			<img src="../img/step4.png" width="80px" height="80px" align="center">
+			<img class="img1" src="../img/step4.png" width="80px" height="80px" align="center">
 			<div class="ui steps">
 			  <div class="active step size">
 			    <div class="content" align="center">
@@ -85,7 +87,7 @@ img{
 			    </div>
 			  </div>
 			</div><br>
-			<img src="../img/step5.png" width="80px" height="80px" align="center">
+			<img class="img1"  src="../img/step5.png" width="80px" height="80px" align="center">
 			<div class="ui steps">
 			  <div class="active step size">
 			    <div class="content" align="center">
@@ -94,7 +96,7 @@ img{
 			    </div>
 			  </div>
 			</div><br>
-			<img src="../img/step6.png" width="80px" height="80px" align="center">
+			<img class="img1" src="../img/step6.png" width="80px" height="80px" align="center">
 			<div class="ui steps">
 			  <div class="active step size">
 			    <div class="content" align="center">
@@ -103,8 +105,10 @@ img{
 			    </div>
 			  </div>
 			</div><br>
-	  <h2>연극&공연</h2>
-	  <img src="../img/event.png" width="80px" height="80px" align="center">
+	  <div style="margin-left: 120px; margin-top: 50px;">
+	  	<h2>연극&공연</h2>
+	  </div>
+	  <img class="img1" src="../img/event.png" width="80px" height="80px" align="center">
 		  <div class="ui steps">
 			  <div class="active step size">
 			    <div class="content" align="center">
@@ -114,8 +118,10 @@ img{
 			  </div>
 			</div>
 		</div><br>
-		<h2>비즈니스룸</h2>
-		<img src="../img/business.png" width="80px" height="80px" align="center">
+		<div style="margin-left: 120px; margin-top: 50px;">
+			<h2>비즈니스룸</h2>
+		</div>
+		<img class="img1" src="../img/business.png" width="80px" height="80px" align="center">
 		  <div class="ui steps">
 			  <div class="active step size">
 			    <div class="content" align="center">
@@ -125,9 +131,6 @@ img{
 			  </div>
 			</div>
 		</div><br>
-	</div>
-	
-
-
+</div>
 </body>
 </html>

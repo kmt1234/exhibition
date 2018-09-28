@@ -9,7 +9,6 @@
 <link href='../calendar2/fullcalendar.print.css' rel='stylesheet' media='print' />
 <script src='../calendar2/lib/moment.min.js'></script>
 <script src='../calendar2/fullcalendar.min.js'></script>
-
 <script type="text/javascript">
 var date = new Date(); 
 var year = date.getFullYear(); 
@@ -62,21 +61,8 @@ var dataSet = [
 			</c:if> 
 		</c:forEach>
 	];
-	
-
 
 	$(document).ready(function() {
-	    	 /*  $.ajax({
-	        	  type : 'GET',
-	        	  url : '/exhibition/performance/getPerformance.do',
-	        	  dataType : 'text',
-	        	  success : function(data){
-	
-	        	  }
-	        	  
-	        	});  */
-
-	    	  
 		$('#calendar').fullCalendar({
 			defaultDate: date,
 			editable: false,
@@ -94,24 +80,29 @@ var dataSet = [
 	 });
 </script>
 <style>
-	body {
-		margin: 40px 10px;
-		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
-		font-size: 14px;
-	}
-	#calendar {
-		max-width: 880px;
-		margin: 0 auto;
-	}
+body {
+	margin: 40px 10px;
+	font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+	font-size: 14px;
+}
+#calendar {
+	max-width: 880px;
+	margin: 0 auto;
+}
 </style>
 </head>
 
 <body>
 	<!-- 메인 화면 -->
-	<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
-		전체
-		<span class="h-light">일정</span>
-	</h2>
+<h2 class="box-container"  style="float: left; width:100%; text-align: left;">
+	<span>전체</span>
+	<span class="h-light">일정</span>
+	<div style="font-size:13px; float:right; height: 50px; margin-top:30px ">
+		<img src="../img/house.png" width="15px" height="16px" style="cursor: pointer;" id="houseImg"></img>
+		> 일정 > 전체일정
+	</div>
+	<div class="ui divider"></div> 
+</h2>
 	<!-- 버튼 -->
 	<div>
 		<table style="margin-left:20px; width: 40%;">
@@ -129,10 +120,10 @@ var dataSet = [
 			</tr>
 		</table>
 		 <span style="float: right; margin-right:30px; ">
-		 <img src="../img/Ex.png" style="width:25px; height: 25px; " align='absmiddle'> 전시회
+		 	<img src="../img/Ex.png" style="width:25px; height: 25px; " align='absmiddle'> 전시회
 		 </span>
 		 
-		 <span style="float: right; margin-right:30px; ">
+		 <span style="float: right; ">
 		 	<img src="../img/Ev.png" style="width:25px; height: 25px;" align='absmiddle'> 공연  &ensp;&ensp;
 		 </span>
 	</div>
