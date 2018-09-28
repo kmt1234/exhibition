@@ -125,17 +125,7 @@ $(document).ready(function(){
 		$('#imgDiv').empty();
 		$('#hotelDiv').empty();
 		$('#telDiv').empty();
-		
-		 var date1 = $("#startTime").val();
-	     var date2 = $("#endTime").val();
-	     
-	     var cutDate1 = date1.split(':');
-	     var cutDate2 = date2.split(':');
-	     
-	     console.log(cutDate1[0]);
-	     console.log(cutDate2[0]);
-	     
-	   
+
 		if($('#postSelect').val()=='0'){
 			if($('#imageName').val()=='')
 				$('#imageNameDiv').text('제목을 입력하세요').css('color','red').css('font-size','9pt').css('font-weight','bold');
@@ -146,7 +136,16 @@ $(document).ready(function(){
 		}
 		
 		else if($('#postSelect').val()=='1' || $('#postSelect').val()=='2'){
-				
+			
+			var date1 = $("#startTime").val();
+		     var date2 = $("#endTime").val();
+		     
+		     var cutDate1 = date1.split(':');
+		     var cutDate2 = date2.split(':');
+		     
+		     console.log(cutDate1[0]);
+		     console.log(cutDate2[0]);
+			
 			if($('#imageName').val()=='')
 				$('#imageNameDiv').text('제목을 입력하세요').css('color','red').css('font-size','9pt').css('font-weight','bold');
 			else if($('#img').val()=='') 

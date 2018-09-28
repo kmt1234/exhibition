@@ -64,43 +64,67 @@
 			</div>
 			<div class="ui divider"></div> 
 		</h2>
-		<div><span align="left">공지 사항</span></div>
-		<div style="width: 100%;" align="center"><a align="right">더보기</a>
+		
+		<div style="width: 400px; display: inline-block; text-align: left; font-size: 25px"><span>공지 사항</span></div>
+		<div style="width: 460px; display: inline-block; text-align: right;"><a>더보기</a></div>
+		<div style="width: 100%;" align="center">
 			<table style="width: 880px; height: 40px;" align="center" border="1"
 				bordercolor="#ec008c" cellpadding="2" frame="hsides" rules="rows"
-				id="index_NoticeSearch" class="ui striped table">
+				id="index_Notice_SearchList" class="ui striped table">
 			</table>
 			<br>
 			<!-- <div id="index_PagingDiv" class="ui center pagination menu"></div> -->
 			<br><br> 
 		</div>
-		<div style="width: 100%;" align="center">자주 묻는 질문
+		
+		<div style="width: 400px; display: inline-block; text-align: left; font-size: 25px"><span>자주 묻는 질문</span></div>
+		<div style="width: 460px; display: inline-block; text-align: right;"><a>더보기</a></div>
+		<div style="width: 100%;" align="center">
 			<table style="width: 880px; height: 40px;" align="center" border="1"
 				bordercolor="#ec008c" cellpadding="2" frame="hsides" rules="rows"
-				id="index_QnASearch" class="ui striped table">
+				id="index_QnA_SearchList" class="ui striped table">
 			</table>
 			<br>
 			<!-- <div id="index_PagingDiv" class="ui center pagination menu"></div> -->
 			<br><br> 
 		</div>
-		<div style="width: 100%;" align="center">주요 시설 연락처
+		
+		<div style="width: 400px; display: inline-block; text-align: left; font-size: 25px"><span>주요 시설 연락처</span></div>
+		<div style="width: 460px; display: inline-block; text-align: right;"><a>더보기</a></div>
+		<div style="width: 100%;" align="center">
 			<table style="width: 880px; height: 40px;" align="center" border="1"
 				bordercolor="#ec008c" cellpadding="2" frame="hsides" rules="rows"
-				id="index_contactListSearch" class="ui striped table">
+				id="index_contactList_SearchList" class="ui striped table">
 			</table>
 			<br>
 			<!-- <div id="index_PagingDiv" class="ui center pagination menu"></div> -->
 			<br><br>
 		</div>
+		
+		<div style="width: 400px; display: inline-block; text-align: left; font-size: 25px"><span>박람회</span></div>
+		<div style="width: 460px; display: inline-block; text-align: right;"><a>더보기</a></div>
 		<div style="width: 100%;" align="center">
 			<table style="width: 880px; height: 40px;" align="center" border="1"
 				bordercolor="#ec008c" cellpadding="2" frame="hsides" rules="rows"
-				id="index_Search" class="ui striped table">
+				id="index_eventboard_SearchList" class="ui striped table">
 			</table>
 			<br>
 			<!-- <div id="index_PagingDiv" class="ui center pagination menu"></div> -->
-			<br><br> 
+			<br><br>
 		</div>
+		
+		<div style="width: 400px; display: inline-block; text-align: left; font-size: 25px"><span>연극</span></div>
+		<div style="width: 460px; display: inline-block; text-align: right;"><a>더보기</a></div>
+		<div style="width: 100%;" align="center">
+			<table style="width: 880px; height: 40px;" align="center" border="1"
+				bordercolor="#ec008c" cellpadding="2" frame="hsides" rules="rows"
+				id="index_eventboard_play_SearchList" class="ui striped table">
+			</table>
+			<br>
+			<!-- <div id="index_PagingDiv" class="ui center pagination menu"></div> -->
+			<br><br>
+		</div>
+		
 		<input type="hidden" name="index_keyword" id="index_keyword" value="index_keyword">
 		<input type="hidden" name="pg" id="pg" value="1"> <br>
 		<div style="height: 40px;"></div>

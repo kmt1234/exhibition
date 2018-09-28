@@ -22,6 +22,19 @@ public class MainDTO {
 	private String title;		//명칭
 	private String keyword;
 	
+	private int postselect;
+	private String imagename;
+	private String image1;
+	private String eventlink;
+	private String starttime;
+	private String endtime;
+	private String eventplace;
+	private String eventprice;
+	private String eventseats;
+	private String eventrate;
+	private String eventcontent;
+	
+	
 	private int ref;			//그룹번호
     private int lev;			//단계
     private int step;			//글순서
@@ -30,5 +43,7 @@ public class MainDTO {
  
     private int hit;			//조회수
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    private Date logtime;		//등록일 
-}	
+    private Date startdate;
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private Date enddate;
+}

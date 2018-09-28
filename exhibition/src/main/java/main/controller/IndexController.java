@@ -48,6 +48,7 @@ public class IndexController {
 		return "/main/index";
 	}
 	
+	// 통합 검색 폼
 	@RequestMapping(value = "index_SearchForm", method=RequestMethod.GET)
 	public ModelAndView index_SearchForm(@RequestParam String index_keyword, Model model) {
 		ModelAndView mav = new ModelAndView();
@@ -57,46 +58,83 @@ public class IndexController {
 		return mav;
 	}
 	
-	@RequestMapping(value="index_NoticeSearch", method=RequestMethod.POST)
+	// 메인 검색시 검색된 공지사항 리스트 불러옴
+	@RequestMapping(value="index_Notice_Search", method=RequestMethod.POST)
 	public ModelAndView index_NoticeSearch(@RequestParam(required = false) Map<String, String> map) {
 		
-		int totalA = mainDAO.getTotal_index_NoticeSearch(map);
-		
-		List<MainDTO> list = mainDAO.index_NoticeSearch(map);
+		int totalA = mainDAO.getTotal_index_Notice_Search(map);
+		List<MainDTO> list = mainDAO.index_Notice_Search(map);
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("totalA", totalA);
 		mav.addObject("list", list);
 		mav.setViewName("jsonView");
 		
 		return mav; 
 	}
 	
-	@RequestMapping(value="index_QnASearch", method=RequestMethod.POST)
+	// 메인 검색시 검색된 자주묻는 질문 리스트 불러옴
+	@RequestMapping(value="index_QnA_Search", method=RequestMethod.POST)
 	public ModelAndView index_QnASearch(@RequestParam(required = false) Map<String, String> map) {
 		
-		int totalA = mainDAO.getTotal_index_QnASearch(map);
+		int totalA = mainDAO.getTotal_index_QnA_Search(map);
 		
-		List<MainDTO> list = mainDAO.index_QnASearch(map);
-		
+		List<MainDTO> list = mainDAO.index_QnA_Search(map);
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("totalA", totalA);
 		mav.addObject("list", list);
 		mav.setViewName("jsonView");
 		
 		return mav; 
 	}
 	
-	@RequestMapping(value="index_contactListSearch", method=RequestMethod.POST)
+	// 메인 검색시 검색된 주요시설 연락처 리스트 불러옴
+	@RequestMapping(value="index_contactList_Search", method=RequestMethod.POST)
 	public ModelAndView index_contactListSearch(@RequestParam(required = false) Map<String, String> map) {
 		
-		int totalA = mainDAO.getTotal_index_contactListSearch(map);
+		int totalA = mainDAO.getTotal_index_contactList_Search(map);
 		
-		List<MainDTO> list = mainDAO.index_contactListSearch(map);
-		
+		List<MainDTO> list = mainDAO.index_contactList_Search(map);
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("totalA", totalA);
+		
 		mav.addObject("list", list);
 		mav.setViewName("jsonView");
 		
 		return mav; 
 	}
 	
+	// 메인 검색시 검색된 박람회 리스트 불러옴
+	@RequestMapping(value="index_eventboard_Search", method=RequestMethod.POST)
+	public ModelAndView index_eventboard_Search(@RequestParam(required = false) Map<String, String> map) {
+		
+		int totalA = mainDAO.getTotal_index_eventboard_Search(map);
+		
+		List<MainDTO> list = mainDAO.index_eventboard_Search(map);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("totalA", totalA);
+		System.out.println(totalA);
+		mav.addObject("list", list);
+		mav.setViewName("jsonView");
+		
+		return mav; 
+	}
+	
+	// 메인 검색시 검색된 연극 리스트 불러옴
+	@RequestMapping(value="index_eventboard_play_Search", method=RequestMethod.POST)
+	public ModelAndView index_eventboard_play_Search(@RequestParam(required = false) Map<String, String> map) {
+		
+		int totalA = mainDAO.getTotal_index_eventboard_play_Search(map);
+		
+		List<MainDTO> list = mainDAO.index_eventboard_play_Search(map);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("totalA", totalA);
+		System.out.println(totalA);
+		mav.addObject("list", list);
+		mav.setViewName("jsonView");
+		
+		return mav; 
+	}
 	
 }

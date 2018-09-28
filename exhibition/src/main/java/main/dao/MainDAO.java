@@ -22,17 +22,25 @@ import rental.bean.ExhibitionDTO;
 
 public interface MainDAO {
 
-	public List<MainDTO> index_NoticeSearch(Map<String, String> map);
+	public List<MainDTO> index_Notice_Search(Map<String, String> map);
 	
-	public int getTotal_index_NoticeSearch(Map<String, String> map);
+	public int getTotal_index_Notice_Search(Map<String, String> map);
 
-	public List<MainDTO> index_QnASearch(Map<String, String> map);
+	public List<MainDTO> index_QnA_Search(Map<String, String> map);
 	
-	public int getTotal_index_QnASearch(Map<String, String> map);
+	public int getTotal_index_QnA_Search(Map<String, String> map);
 
-	public List<MainDTO> index_contactListSearch(Map<String, String> map);
+	public List<MainDTO> index_contactList_Search(Map<String, String> map);
 
-	public int getTotal_index_contactListSearch(Map<String, String> map);
+	public int getTotal_index_contactList_Search(Map<String, String> map);
+
+	public List<MainDTO> index_eventboard_Search(Map<String, String> map);
+
+	public int getTotal_index_eventboard_Search(Map<String, String> map);
+	
+	public List<MainDTO> index_eventboard_play_Search(Map<String, String> map);
+
+	public int getTotal_index_eventboard_play_Search(Map<String, String> map);
 
 	
 }

@@ -5,43 +5,82 @@
  <mapper namespace="mainSQL">
  
  	<!-- 메인 공지사항 검색 -->
-	<select id="index_NoticeSearch" parameterType="java.util.Map" resultType="customerService">
+	<select id="index_Notice_Search" parameterType="java.util.Map" resultType="customerService">
  		select * from C_notice where subject like '%'||#{index_keyword}||'%' or content like '%'||#{index_keyword}||'%'
  	</select>
  	
  	<!-- 메인 공지사항 검색 총글수 -->
- 	<select id="getTotal_index_NoticeSearch" parameterType="java.util.Map" resultType="int">
+ 	<select id="getTotal_index_Notice_Search" parameterType="java.util.Map" resultType="int">
  		select count(*) from C_notice where subject like '%'||#{index_keyword}||'%' or content like '%'||#{index_keyword}||'%'
  	</select>
  	
  	<!-- 메인 자주묻는 질문 검색 -->
-	<select id="index_QnASearch" parameterType="java.util.Map" resultType="customerService">
+	<select id="index_QnA_Search" parameterType="java.util.Map" resultType="customerService">
  		select * from C_QnA where subject like '%'||#{index_keyword}||'%' or content like '%'||#{index_keyword}||'%'
  	</select>
  	
  	 <!-- 메인 자주묻는 질문 검색 총글수 -->
- 	<select id="getTotal_index_QnASearch" parameterType="java.util.Map" resultType="int">
+ 	<select id="getTotal_index_QnA_Search" parameterType="java.util.Map" resultType="int">
  		select count(*) from C_QnA where subject like '%'||#{index_keyword}||'%' or content like '%'||#{index_keyword}||'%'
  	</select>
  	
  	<!-- 메인 주요 시설 연락처 검색 -->
-	<select id="index_contactListSearch" parameterType="java.util.Map" resultType="customerService">
- 		select * from C_contactList where classify like '%'||#{index_keyword}||'%' or facility like '%'||#{index_keyword}||'%' or title like '%'||#{index_keyword}||'%' or name like '%'||#{index_keyword}||'%' or phone like '%'||#{index_keyword}||'%'
+	<select id="index_contactList_Search" parameterType="java.util.Map" resultType="customerService">
+ 		select * from C_contactList where classify like '%'||#{index_keyword}||'%' or 
+ 		facility like '%'||#{index_keyword}||'%' or title like '%'||#{index_keyword}||'%' or 
+ 		name like '%'||#{index_keyword}||'%' or phone like '%'||#{index_keyword}||'%'
  	</select>
  	
  	 <!-- 메인 주요시설 연락처 검색 총글수 -->
- 	<select id="getTotal_index_contactListSearch" parameterType="java.util.Map" resultType="int">
- 		select count(*) from C_contactList where classify like '%'||#{index_keyword}||'%' or facility like '%'||#{index_keyword}||'%' or title like '%'||#{index_keyword}||'%' or name like '%'||#{index_keyword}||'%' or phone like '%'||#{index_keyword}||'%'
+ 	<select id="getTotal_index_contactList_Search" parameterType="java.util.Map" resultType="int">
+ 		select count(*) from C_contactList where classify like '%'||#{index_keyword}||'%' or 
+ 		facility like '%'||#{index_keyword}||'%' or title like '%'||#{index_keyword}||'%' or 
+ 		name like '%'||#{index_keyword}||'%' or phone like '%'||#{index_keyword}||'%'
  	</select>
  	
- 	<!-- 메인 주요 시설 연락처 검색 -->
-	<select id="index_contactListSearch" parameterType="java.util.Map" resultType="customerService">
- 		select * from C_contactList where classify like '%'||#{index_keyword}||'%' or facility like '%'||#{index_keyword}||'%' or title like '%'||#{index_keyword}||'%' or name like '%'||#{index_keyword}||'%' or phone like '%'||#{index_keyword}||'%'
+ 	<!-- 메인 박람회 검색 -->
+	<select id="index_eventboard_Search" parameterType="java.util.Map" resultType="customerService">
+ 		select * from eventboard where 
+ 		 imageName like '%'||#{index_keyword}||'%' or image1 like '%'||#{index_keyword}||'%' or
+ 		  startDate like '%'||#{index_keyword}||'%' or endDate like '%'||#{index_keyword}||'%' or
+ 		  eventLink like '%'||#{index_keyword}||'%' or startTime like '%'||#{index_keyword}||'%' or
+ 		  endTime like '%'||#{index_keyword}||'%' or eventPlace like '%'||#{index_keyword}||'%' or
+ 		  eventPrice like '%'||#{index_keyword}||'%' or eventSeats like '%'||#{index_keyword}||'%' or
+ 		  eventRate like '%'||#{index_keyword}||'%' or eventContent like '%'||#{index_keyword}||'%'
  	</select>
  	
- 	 <!-- 메인 주요시설 연락처 검색 총글수 -->
- 	<select id="getTotal_index_contactListSearch" parameterType="java.util.Map" resultType="int">
- 		select count(*) from C_contactList where classify like '%'||#{index_keyword}||'%' or facility like '%'||#{index_keyword}||'%' or title like '%'||#{index_keyword}||'%' or name like '%'||#{index_keyword}||'%' or phone like '%'||#{index_keyword}||'%'
+ 	 <!-- 메인 박람회 검색 총글수 -->
+ 	<select id="getTotal_index_eventboard_Search" parameterType="java.util.Map" resultType="int">
+ 		select count(*) from eventboard where 
+ 		 imageName like '%'||#{index_keyword}||'%' or image1 like '%'||#{index_keyword}||'%' or
+ 		  startDate like '%'||#{index_keyword}||'%' or endDate like '%'||#{index_keyword}||'%' or
+ 		  eventLink like '%'||#{index_keyword}||'%' or startTime like '%'||#{index_keyword}||'%' or
+ 		  endTime like '%'||#{index_keyword}||'%' or eventPlace like '%'||#{index_keyword}||'%' or
+ 		  eventPrice like '%'||#{index_keyword}||'%' or eventSeats like '%'||#{index_keyword}||'%' or
+ 		  eventRate like '%'||#{index_keyword}||'%' or eventContent like '%'||#{index_keyword}||'%'
+ 	</select>
+ 	
+ 	
+ 	<!-- 메인 연극 검색 -->
+	<select id="index_eventboard_play_Search" parameterType="java.util.Map" resultType="customerService">
+ 		select * from eventboard_play where 
+ 		 imageName like '%'||#{index_keyword}||'%' or image1 like '%'||#{index_keyword}||'%' or
+ 		  startDate like '%'||#{index_keyword}||'%' or endDate like '%'||#{index_keyword}||'%' or
+ 		  eventLink like '%'||#{index_keyword}||'%' or startTime like '%'||#{index_keyword}||'%' or
+ 		  endTime like '%'||#{index_keyword}||'%' or eventPlace like '%'||#{index_keyword}||'%' or
+ 		  eventPrice like '%'||#{index_keyword}||'%' or eventSeats like '%'||#{index_keyword}||'%' or
+ 		  eventRate like '%'||#{index_keyword}||'%' or eventContent like '%'||#{index_keyword}||'%'
+ 	</select>
+ 	
+ 	 <!-- 메인 연극 검색 총글수 -->
+ 	<select id="getTotal_index_eventboard_play_Search" parameterType="java.util.Map" resultType="int">
+ 		select count(*) from eventboard_play where 
+ 		 imageName like '%'||#{index_keyword}||'%' or image1 like '%'||#{index_keyword}||'%' or
+ 		  startDate like '%'||#{index_keyword}||'%' or endDate like '%'||#{index_keyword}||'%' or
+ 		  eventLink like '%'||#{index_keyword}||'%' or startTime like '%'||#{index_keyword}||'%' or
+ 		  endTime like '%'||#{index_keyword}||'%' or eventPlace like '%'||#{index_keyword}||'%' or
+ 		  eventPrice like '%'||#{index_keyword}||'%' or eventSeats like '%'||#{index_keyword}||'%' or
+ 		  eventRate like '%'||#{index_keyword}||'%' or eventContent like '%'||#{index_keyword}||'%'
  	</select>
  </mapper>
  
