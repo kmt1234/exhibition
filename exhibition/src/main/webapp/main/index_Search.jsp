@@ -40,12 +40,13 @@
 	cursor: pointer;
 }
 
-/* .contentC {
-	width : 100px; 
+.contentC {
+	display : block;
+	width : 200px; 
 	overflow: hidden;  
 	white-space: nowrap;  
 	text-overflow  : ellipsis;
-} */
+}
 
 </style>
 
@@ -63,7 +64,8 @@
 			</div>
 			<div class="ui divider"></div> 
 		</h2>
-		<div style="width: 100%;" align="center">
+		<div><span align="left">공지 사항</span></div>
+		<div style="width: 100%;" align="center"><a align="right">더보기</a>
 			<table style="width: 880px; height: 40px;" align="center" border="1"
 				bordercolor="#ec008c" cellpadding="2" frame="hsides" rules="rows"
 				id="index_NoticeSearch" class="ui striped table">
@@ -72,28 +74,28 @@
 			<!-- <div id="index_PagingDiv" class="ui center pagination menu"></div> -->
 			<br><br> 
 		</div>
-		<div style="width: 100%;" align="center">
+		<div style="width: 100%;" align="center">자주 묻는 질문
 			<table style="width: 880px; height: 40px;" align="center" border="1"
 				bordercolor="#ec008c" cellpadding="2" frame="hsides" rules="rows"
-				id="index_SearchList" class="ui striped table">
+				id="index_QnASearch" class="ui striped table">
 			</table>
 			<br>
 			<!-- <div id="index_PagingDiv" class="ui center pagination menu"></div> -->
 			<br><br> 
 		</div>
-		<div style="width: 100%;" align="center">
+		<div style="width: 100%;" align="center">주요 시설 연락처
 			<table style="width: 880px; height: 40px;" align="center" border="1"
 				bordercolor="#ec008c" cellpadding="2" frame="hsides" rules="rows"
-				id="index_SearchList" class="ui striped table">
+				id="index_contactListSearch" class="ui striped table">
 			</table>
 			<br>
 			<!-- <div id="index_PagingDiv" class="ui center pagination menu"></div> -->
-			<br><br> 
+			<br><br>
 		</div>
 		<div style="width: 100%;" align="center">
 			<table style="width: 880px; height: 40px;" align="center" border="1"
 				bordercolor="#ec008c" cellpadding="2" frame="hsides" rules="rows"
-				id="index_SearchList" class="ui striped table">
+				id="index_Search" class="ui striped table">
 			</table>
 			<br>
 			<!-- <div id="index_PagingDiv" class="ui center pagination menu"></div> -->

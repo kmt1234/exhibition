@@ -70,6 +70,33 @@ public class IndexController {
 		return mav; 
 	}
 	
+	@RequestMapping(value="index_QnASearch", method=RequestMethod.POST)
+	public ModelAndView index_QnASearch(@RequestParam(required = false) Map<String, String> map) {
+		
+		int totalA = mainDAO.getTotal_index_QnASearch(map);
+		
+		List<MainDTO> list = mainDAO.index_QnASearch(map);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.setViewName("jsonView");
+		
+		return mav; 
+	}
+	
+	@RequestMapping(value="index_contactListSearch", method=RequestMethod.POST)
+	public ModelAndView index_contactListSearch(@RequestParam(required = false) Map<String, String> map) {
+		
+		int totalA = mainDAO.getTotal_index_contactListSearch(map);
+		
+		List<MainDTO> list = mainDAO.index_contactListSearch(map);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.setViewName("jsonView");
+		
+		return mav; 
+	}
 	
 	
 }

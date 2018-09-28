@@ -26,4 +26,13 @@ public interface MainDAO {
 	
 	public int getTotal_index_NoticeSearch(Map<String, String> map);
 
+	public List<MainDTO> index_QnASearch(Map<String, String> map);
+	
+	public int getTotal_index_QnASearch(Map<String, String> map);
+
+	public List<MainDTO> index_contactListSearch(Map<String, String> map);
+
+	public int getTotal_index_contactListSearch(Map<String, String> map);
+
+	
 }

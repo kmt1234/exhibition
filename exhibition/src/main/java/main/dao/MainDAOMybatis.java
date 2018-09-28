@@ -39,4 +39,19 @@ public class MainDAOMybatis implements MainDAO {
 		return sqlSession.selectOne("mainSQL.getTotal_index_NoticeSearch", map);
 	}
 	
+	public List<MainDTO> index_QnASearch(Map<String, String> map) {
+		return sqlSession.selectList("mainSQL.index_QnASearch", map);
+	}
+
+	public int getTotal_index_QnASearch(Map<String, String> map) {
+		return sqlSession.selectOne("mainSQL.getTotal_index_QnASearch", map);
+	}
+
+	public List<MainDTO> index_contactListSearch(Map<String, String> map) {
+		return sqlSession.selectList("mainSQL.index_contactListSearch", map);
+	}
+
+	public int getTotal_index_contactListSearch(Map<String, String> map) {
+		return sqlSession.selectOne("mainSQL.getTotal_index_contactListSearch", map);
+	}
 }
