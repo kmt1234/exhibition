@@ -44,8 +44,10 @@ import customerService.bean.SalesConcertHallDTO;
 import customerService.bean.SalesExhibitionDTO;
 import customerService.dao.CustomerServiceDAO;
 import member.bean.MemberDTO;
+import member.dao.MemberDAO;
 import performance.bean.Book_exhibition_membersDTO;
 import performance.bean.Book_performance_membersDTO;
+import rental.bean.BusinessRoomDTO;
 import rental.bean.ConcertHallDTO;
 import rental.bean.ExhibitionDTO;
 
@@ -65,6 +67,8 @@ public class CustomerServiceController {
 	private PlayBookDTO playBookDTO;
 	@Autowired
 	private ExhibitionBookDTO exhibitionBookDTO;
+	@Autowired
+	private MemberDAO memberDAO;
 
 
 	// 고객센터 설명페이지
@@ -1463,21 +1467,48 @@ public class CustomerServiceController {
 		
 		List<Book_exhibition_membersDTO> exhibitionMemberList = customerServiceDAO.getExhibitionView(M_Id);
 		List<Book_exhibition_membersDTO> performanceMemberList = customerServiceDAO.getPerformanceView(M_Id);
+		List<BusinessRoomDTO> businessRoomMemberList = customerServiceDAO.getBusinessRoomView(M_Id);
 		exhibitionMemberList.addAll(performanceMemberList);
 		
 		ModelAndView mav = new ModelAndView();
 		
-		mav.addObject("list",exhibitionMemberList);
 		
+		
+		mav.addObject("list",exhibitionMemberList);
+		mav.addObject("list2",businessRoomMemberList);
 		mav.setViewName("jsonView");
 		return mav;
 	}
 	//회원 예약 삭제
 	@RequestMapping(value="memberTicketDelete", method = RequestMethod.POST)
-	public ModelAndView memberTicketDelete(@RequestParam int seq) {
+	public ModelAndView memberTicketDelete(@RequestParam int seq,
+											@RequestParam String imageName,
+											@RequestParam String playDate,
+											@RequestParam String ticketQty,
+											@RequestParam String memberId
+											) {
 		
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("imageName",imageName);
+		map.put("playDate",playDate);
+		map.put("ticketQty",ticketQty);
+		map.put("memberId",memberId);
+		
+		//DB
+		int resultPD = memberDAO.cancelPerformance(map);	//연극 예매 취소
+		int resultPC = memberDAO.backPerformance(map);	//연극 예매티켓 수정
+		
+		//연극취소 아니라면 전시회 취소
+		if(resultPD==0 || resultPC==0) {
+			int resultED = memberDAO.cancelExhibition(map);	//전시회 예매 취소
+			int resultEC = memberDAO.backExhibition(map);	//전시회 예매티켓 수정
+			
+		}
+				
 		customerServiceDAO.memberExTicketDelete(seq);
 		customerServiceDAO.memberPerTicketDelete(seq);
+		customerServiceDAO.memberBusinessTicketDelete(seq);
+		System.out.println(seq);
 		
 		
 		ModelAndView mav = new ModelAndView();

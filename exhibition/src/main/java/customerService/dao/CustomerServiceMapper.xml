@@ -522,12 +522,22 @@
 	<select id="getExhibitionView" resultType="performance.bean.Book_exhibition_membersDTO" parameterType="String">
 		select * from Book_exhibition_Members where memberid like #{M_Id}  order by seq desc
 	</select>
+	
+	<select id="getBusinessRoomView" resultType="rental.bean.BusinessRoomDTO" parameterType="String">
+		select * from businessRoom where M_id like #{M_Id}  order by seq desc
+	</select>
+	
+	
+	
 	<!-- 회원 예매 삭제 -->
 	<delete id="memberExTicketDelete" parameterType="int">
  		delete Book_exhibition_Members where seq=#{seq}
  	</delete>
  	<delete id="memberPerTicketDelete" parameterType="int">
  		delete Book_play_Members where seq=#{seq}
+ 	</delete>
+ 	<delete id="memberBusinessTicketDelete" parameterType="int">
+ 		delete businessRoom where seq=#{seq}
  	</delete>
 	
  	<!-- 사업자정보  -->

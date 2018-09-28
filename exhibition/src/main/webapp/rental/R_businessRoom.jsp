@@ -41,7 +41,7 @@ ul{
 </style>
 </head>
 <body>
-<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
+<h2 class="box-container" style="float: center; width: 100%; text-align: left; padding-bottom: 0px;">
 	비즈니스 
 	<span class="h-light">룸</span>
 	<div style="font-size:13px; float:right; height: 50px; margin-top:30px ">
