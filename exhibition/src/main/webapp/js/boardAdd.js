@@ -107,7 +107,7 @@ $(document).ready(function(){
 				dataType : 'text',
 				success : function(data){
 					if(data=='no_data'){
-						alert('등록가능합니다');
+						//alert('등록가능합니다');
 						checkReservation = true;
 					} 
 					else if(data=='yes_data') alert('일정이 중복됩니다');
@@ -166,8 +166,8 @@ $(document).ready(function(){
 			else if (parseInt(cutDate2[0]) - parseInt(cutDate1[0]) <= 0){
 			    $('#timeDiv').text('시작 및 종료시간을 확인하세요').css('color','red').css('font-size','9pt').css('font-weight','bold');
 		    }
-			else if($('#eventPlace').val()==''){
-				$('#placeDiv').text('전시회는 1층 또는 2층 / 공연은 부스 번호를 입력하세요 (ex.1층 또는 Booth10)').css('color','red').css('font-size','9pt').css('font-weight','bold');
+			else if($('#eventPlace').val()=='' || $('#eventPlace').val()!='1층' && $('#eventPlace').val()!='2층'&& $('#eventPlace').val()!='Booth1' && $('#eventPlace').val()!='Booth2' && $('#eventPlace').val()!='Booth3' && $('#eventPlace').val()!='Booth3' && $('#eventPlace').val()!='Booth4' && $('#eventPlace').val()!='Booth5' && $('#eventPlace').val()!='Booth6' && $('#eventPlace').val()!='Booth7' && $('#eventPlace').val()!='Booth8' && $('#eventPlace').val()!='Booth9' && $('#eventPlace').val()!='Booth10'){
+				$('#placeDiv').text('전시회는 1층 또는 2층 / 공연은 부스 번호(대문자)를 입력하세요 (ex.1층 또는 Booth10)').css('color','red').css('font-size','9pt').css('font-weight','bold');
 			}
 			else if(checkP == false || checkS == false){
 				$('#priceDiv').text('티켓 가격 및 관람인원에는 숫자만 입력하세요(ex. 3,000원 -> 3000 / 120석 -> 120)').css('color','red').css('font-size','9pt').css('font-weight','bold');
