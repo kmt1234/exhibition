@@ -58,7 +58,7 @@ public class CustomerServiceController {
 	private JavaMailSenderImpl emailSender;
 	@Autowired
 	private ImageboardPaging imageboardPaging;
-	private String filePath = "C:\\workspace\\projectGit\\exhibition2\\exhibition\\src\\main\\webapp\\storage";
+	private String filePath = "C:\\lim\\spring\\exhibition\\exhibition\\src\\main\\webapp\\storage";
 	@Autowired
 	private CustomerServicePaging customerServicePaging;
 	@Autowired

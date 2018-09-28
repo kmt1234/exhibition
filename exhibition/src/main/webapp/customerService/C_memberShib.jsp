@@ -126,6 +126,7 @@ function memberSearch(pg){
 		    <th>부스명</th>
 		    <th>사용일자</th>
 		    <th>진행상황</th>
+		    <th>예매 티켓 수</th>
 		    <th>취소</th>
 	  </tr></thead>
 	  <tbody id="reservationCompanyTable" align="center">
@@ -204,6 +205,7 @@ function memberSearch(pg){
 
 <div id="dialog-confirm"></div>
 
+<input type="file" value="확인">
 </body>
 <script src="../js/customerService.js?ver=1"></script>
 <script src="../js/customerMember.js?ver=1"></script>

@@ -62,5 +62,6 @@ left: 0px;
 	</div>
 
 <script src="../js/slidbar.js"></script>
+<script src="../js/introduction.js"></script>
 </body>
 </html>

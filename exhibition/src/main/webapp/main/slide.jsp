@@ -12,22 +12,30 @@
 <script>
 $(document).ready(function(){
     $('.bxslider').bxSlider({
+    	autoHover: true,
     	 auto: true,
          speed: 500,
          pause: 4000,
          mode:'fade',
          autoControls: false,
-         pager:true,
+         pager: true,
+         responsive: false
     });
 });
+
 </script>
+<style>
+.bx-pager.bx-default-pager{
+	top:166px;
+}
+</style>
 </head>
 <body>
 <ul class="bxslider">
-    <li><img src="../storage/poster1.jpg" /></li>
-    <li><img src="../storage/poster2.jpg" /></li>
-    <li><img src="../storage/poster3.jpg" /></li>
-    <li><img src="../storage/poster4.jpg" /></li>
+    <li><img src="../storage/lier.jpg" height="200px" width="280px"/></li>
+    <li><img src="../storage/summer.jpg" height="200px" width="280px"/></li>
+    <li><img src="../storage/elephant.jpg" height="200px" width="280px"/></li>
+    <li><img src="../storage/moon.jpg" height="200px" width="280px"/></li>
 </ul>
 </body>
 </html>

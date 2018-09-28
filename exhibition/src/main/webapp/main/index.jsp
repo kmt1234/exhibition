@@ -38,8 +38,8 @@
 <!--메인화면 아래 부분(일정)  -->
 	<div class="ui container" style="margin-top: 20px; min-width:1170px; height:200px;  ">
 		<!-- 공연포스터 슬라이드?? -->
-		<div style=" margin-left:15px; width:270px; height:200px;  display: inline-block; float: left;">
-			<jsp:include page="../main/slide.jsp" ></jsp:include>
+		<div style=" margin-left:15px; width:270px; height:200px;  display: inline-block; float: left;"id="bxSlider"  align="center">
+			<jsp:include page="../main/slide.jsp"></jsp:include>
 		</div>
 		<!-- 달력  -->
 		<div style=" margin-left:20px; width:270px; height:200px;  display: inline-block; float: left;" >
@@ -213,6 +213,8 @@ $(document).ready(function(){
         autoControls: true,
         pager:true,
    });
+	
+	
 	   
 	
 });
