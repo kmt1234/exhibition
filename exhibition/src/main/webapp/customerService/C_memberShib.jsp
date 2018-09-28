@@ -17,44 +17,21 @@
 }
 
 </style>
-<script type="text/javascript">
-//사업자 페이지
-function CompanyList(pg){
-	/* location.href="/exhibition/customerService/C_memberShib.do?pg="+pg */
-	$('#pg').val(pg);
-	$('#companyBtn').trigger('click','trigger');
-}
-//사업자 검색
-function CompanySearch(pg){
-	$('#pg').val(pg);
-	$('#companySearchBtn').trigger('click','trigger');
-	
-}
-
-function memberList(pg){
-	$('#pg').val(pg);
-	$('#memberBtn').trigger('click','trigger');
-}
-//사업자 검색
-function memberSearch(pg){
-	$('#pg').val(pg);
-	$('#memberSearchBtn').trigger('click','trigger');
-	
-}
-
-
-</script>
 </head>
 <body>
 <input type="hidden" id="PG" value="${pg}">
-<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
-	회원 
-	<span class="h-light">사항</span>
+<h2 class="box-container" style="float: center; width: 100%; height:126px; text-align: left;">
+	<span>회원</span>
+	<span class="h-light">정보</span>
+	<div style="font-size:13px; float:right; height: 50px; margin-top:30px ">
+		<img src="../img/house.png" width="15px" height="16px" style="cursor: pointer;" id="houseImg"></img>
+		> 고객센터 > 회원정보 
+	</div>
+	<div class="ui divider"></div> 
 </h2>
 <div style="width: 100%; ">
 	<!-- 맨위 메뉴 텝 -->
 	<div class="">
-		
 		<a class="middle ui button" class="active item" id="memberBtn" style="margin-left:20px; width:150px; float: left;" >
 			회원정보
 	  	</a>
@@ -73,22 +50,20 @@ function memberSearch(pg){
 		<div id="C_memberListFrom" style="margin-top: 35px;"></div>
 	</div>
 </div> -->
-<table class="ui striped table">
-  <thead>
-    <tr  align="center">
-	    <th>이름(사업자명)</th>
-	    <th>아이디(사업자번호)</th>
-	    <th>이메일</th>
-	    <th>핸드폰(대표번호)</th>
- 	</tr>
- </thead>
-  <tbody id="memberListTable" align="center">
-  
-  </tbody>
- </table>
+<table class="ui striped table" style="width: 880px; margin-left: 20px;">
+	<thead>
+		<tr align="center">
+			<th>이름(사업자명)</th>
+			<th>아이디(사업자번호)</th>
+			<th>이메일</th>
+			<th>핸드폰(대표번호)</th>
+		</tr>
+	</thead>
+		<tbody id="memberListTable" align="center">
+	</tbody>
+</table>
 
 <div name="paging" id="paging"></div>
-
 <!-- 사업자 검색 -->
 <div id="companySearchDiv" class="ui input" align="center" style="margin-top:70px">
 	<input type="hidden" name="pg" id="pg" value="1">
@@ -101,8 +76,6 @@ function memberSearch(pg){
 		<input type="button" class="middle ui button"  value="검색" id="companySearchBtn">
 	</div>	
 </div>
-
-
 <!-- 회원검색 -->
 <div id="memberSearchDiv" class="ui input" align="center" style="margin-top:70px">
 	<input type="hidden" name="pg" id="pg" value="1">
@@ -201,9 +174,30 @@ function memberSearch(pg){
 	  </div>
 	</div>
 </div>
-
 <div id="dialog-confirm"></div>
-
+<script type="text/javascript">
+//사업자 페이지
+function CompanyList(pg){
+	/* location.href="/exhibition/customerService/C_memberShib.do?pg="+pg */
+	$('#pg').val(pg);
+	$('#companyBtn').trigger('click','trigger');
+}
+//사업자 검색
+function CompanySearch(pg){
+	$('#pg').val(pg);
+	$('#companySearchBtn').trigger('click','trigger');
+}
+function memberList(pg){
+	$('#pg').val(pg);
+	$('#memberBtn').trigger('click','trigger');
+}
+//사업자 검색
+function memberSearch(pg){
+	$('#pg').val(pg);
+	$('#memberSearchBtn').trigger('click','trigger');
+	
+}
+</script>
 </body>
 <script src="../js/customerService.js?ver=1"></script>
 <script src="../js/customerMember.js?ver=1"></script>
