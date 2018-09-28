@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 <style>
  .content.size{
-
  }
  .ui.steps{
  	align: left;
@@ -19,34 +18,28 @@
  	font-size: 18px;
  	margin-bottom: 15px;
  }
-
-
 .active.step.size{
 	width: 450px;
 }
-
 img{
 	margin-left: 105px;
 	margin-right:20px;
 	margin-top: 14px;
 }
-
-h2{
-	margin-left: 30px;
-}
-
-
 </style>
 </head>
 <body>
 
 	<!-- 타이틀 -->
-	<div>
-	<h2 class="box-container" style="float: left; text-align: left;">
-		일정
-		<span class="h-light">정보</span>
-	</h2>
-	</div>
+	<h2 class="box-container"  style="float: left; width:100%; text-align: left;">
+			<span>일정</span>
+			<span class="h-light">정보</span>
+			<div style="font-size:13px; float:right; height: 50px; margin-top:30px ">
+				<img src="../img/house.png" width="15px" height="16px" style="cursor: pointer;" id="houseImg"></img>
+				> 고객센터 > 게시판추가 > 작성
+			</div>
+			<div class="ui divider"></div> 
+		</h2>
 	
 	  <div style="margin-top:160px;text-align: left;">
 	  <div class="ui divider" style="margin-top: -50px;"></div>
