@@ -7,8 +7,7 @@ $(document).ready(function(){
 //	} else {
 //		$('#C_boardAdd').hide();
 //	}
-	
-	
+		
 	$('#M_member').click(function(){
 		$('.ui.member1.dropdown').dropdown('show');
 	});
