@@ -93,7 +93,6 @@ $(document).ready(function(){
 			$('#imagePaging').html(data.imageboardPaging.pagingHTML);
 		}
 	})//ajax
-	
 	//전체선택
 	$('#checkAll').click(function(){
 		//alert($('.check').length);		//클래스를 나타낼때는 앞에 .을 찍는다.
@@ -103,7 +102,6 @@ $(document).ready(function(){
 			$('.check').prop('checked',false);
 		}
 	});
-	
 	//선택삭제
 	$('#imageDeleteBtn').click(function(){
 		var count=$('.check:checked').length;
@@ -113,7 +111,6 @@ $(document).ready(function(){
 		else
 			$('#imageboardListForm').attr('action','/exhibition/customerService/C_imageboardDelete.do').submit();
 	});
-	
 	//메인등록
 	$('#imageSelectBtn').click(function(){
 		var count=$('.check:checked').length;
@@ -121,13 +118,11 @@ $(document).ready(function(){
 			alert("항목을 선택해주세요");
 		else
 			$('#imageboardListForm').attr('action','/exhibition/main/I_body.do').submit();
-			
 	});
 	//업로드 버튼
 	$('.eventUploadBtn').click(function(){
 		location.href='/exhibition/customerService/C_mainImageboardForm.do?postSelect=0';
 	});
-
 	$('#imageboardListTab').on('click','.play_detail',function(){
 			var seq = $(this).parent().prev().text();
 			location.href="/exhibition/customerService/C_imageDetail.do?seq="+seq+"";
