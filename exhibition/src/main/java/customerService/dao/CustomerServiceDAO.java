@@ -136,6 +136,9 @@ public interface CustomerServiceDAO {
 	//박람회 부스 총 매출액
 	public int getSalesTotalRentExhibition(String salesMon);
 	
+	//박람회 년 월 부스별 매출 가져오기
+	public List<SalesExhibitionDTO> getYearMonthSalesExhibition(Map<String, String> map);
+	
 	//콘서트 홀 매출현황
 	public List<SalesConcertHallDTO> getSalesConcertHall(String salesMon);
 	
@@ -198,6 +201,7 @@ public interface CustomerServiceDAO {
 	
 	public List<Book_exhibition_membersDTO> getExhibitionView(String M_Id);	//박람회 상세정보
 	public List<Book_exhibition_membersDTO> getPerformanceView(String M_Id); //연극 상세정보
+	
 	
 	
 	

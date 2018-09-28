@@ -263,6 +263,12 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 		}
 	}
 	
+	//박람회 년 월 부스별 총 매출 가져오기
+	public List<SalesExhibitionDTO> getYearMonthSalesExhibition(Map<String, String> map) {
+		return sqlSession.selectList("customerServiceSQL.getYearMonthSalesExhibition", map);
+		
+	}
+	
 	//콘서트 홀 매출 가져오기
 	public List<SalesConcertHallDTO> getSalesConcertHall(String salesMon) {
 		return sqlSession.selectList("customerServiceSQL.getSalesConcertHall", salesMon);
@@ -411,6 +417,7 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	public List<Book_exhibition_membersDTO> getMemberView(String M_Id) {
 		return sqlSession.selectList("customerServiceSQL.getMemberView",M_Id);
 	}
+	
 
 	
 }

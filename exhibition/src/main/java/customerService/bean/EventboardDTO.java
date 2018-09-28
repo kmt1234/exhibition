@@ -24,4 +24,5 @@ public class EventboardDTO {			//박람회,연극  DTO
 	private String[] days;              //시작일과 종료일 사이 날짜
 	private int daysSize;
 	private int totalRent;
+	private int start;
 }

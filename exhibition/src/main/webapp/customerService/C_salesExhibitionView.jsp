@@ -3,6 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<script src="http://code.highcharts.com/highcharts.js"></script>
+	<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 </head>
 <body>
 <div>
@@ -68,6 +70,8 @@
 	</table>
 	<!-- 매출 연월 선택 -->
 	
+	<div id="monthSaleChart" style="width: 550px; height: 400px; margin: 0 auto"></div>
+	
 	
 </div>
 
@@ -101,7 +105,6 @@
 		//셀렉트 연월 선택 세팅
 
 		
-		
 		//박람회 부스 매출 현황
 		$('.middle.ui.button.booth').click(function(){
 			
@@ -116,8 +119,8 @@
 			
 			$('#C_salesViewBtn').attr('id', 'C_salesExhibitionViewBtn');
 			$('#C_salesconcertHallViewBtn').attr('id', 'C_salesExhibitionViewBtn');
-			$('#C_salesBusinessRoomViewBtn').attr('id', 'C_salesconcertHallViewBtn');
-			$('#C_salesConcertTicketViewBtn').attr('id', 'C_salesconcertHallViewBtn');
+			$('#C_salesBusinessRoomViewBtn').attr('id', 'C_salesExhibitionViewBtn');
+			$('#C_salesConcertTicketViewBtn').attr('id', 'C_salesExhibitionViewBtn');
 			
 			$('#C_salesExhibitionViewBtn').click(function(){
 				$('#salesDate').show();
@@ -129,6 +132,7 @@
 					dataType: "json",
 					success: function(data) {
 						alert(JSON.stringify(data));
+						alert(JSON.stringify(data.yearMonthSaleListAll));
 						$('#salesList').show();
 						$('#salesName').text('부스명');
 						$('#salesList tr:gt(0)').remove();
@@ -143,6 +147,47 @@
 							})).appendTo($('#salesList'));       
 							
 						});
+						
+					   var title = {
+					      text: '박람회 연 부스별 매출액'   
+					   };
+					   var xAxis = {
+					      categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+					         'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+					   };
+					   var yAxis = {
+					      title: {
+					         text: '매출액 (\xB0C)'
+					      },
+					      plotLines: [{
+					         value: 0,
+					         width: 1,
+					         color: '#808080'
+					      }]
+					   };   
+					   var tooltip = {
+					      valueSuffix: '\xB0C'
+					   }
+					   var legend = {
+					      layout: 'vertical',
+					      align: 'right',
+					      verticalAlign: 'middle',
+					      borderWidth: 0
+					   };
+						
+					  
+					   var series = data.yearMonthSaleListAll;
+					   
+					   var json = {};
+
+					   json.title = title;
+					   json.xAxis = xAxis;
+					   json.yAxis = yAxis;
+					   json.tooltip = tooltip;
+					   json.series = series;
+
+					   $('#"monthSaleChart"').highcharts(json);
+						
 						
 						var salesTotalRent = data.salesTotalRent;
 			           

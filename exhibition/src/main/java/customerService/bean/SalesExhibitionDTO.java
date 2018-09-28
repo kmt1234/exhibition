@@ -15,6 +15,9 @@ public class SalesExhibitionDTO {
 	private String[] days;
 	private int daysSize;
 	private int saleDays;
+	private String yearMonth;
+	private String name;
+	private String[] data;
 
 }
 

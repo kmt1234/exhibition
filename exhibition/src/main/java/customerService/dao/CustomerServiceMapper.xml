@@ -457,6 +457,10 @@
  	<select id="getSalesTotalRentExhibition" parameterType="java.lang.String" resultType="int">
  		select sum(totalrent) as salesTotalRent from EXHIBITIONRENTAL where STARTDATE BETWEEN #{salesMon} and (select last_day(#{salesMon}) from dual)
  	</select>
+ 	<!-- 박람회 연 월 부스별 총 매출 -->
+ 	<select id="getYearMonthSalesExhibition" parameterType="java.util.Map" resultType="salesExhibitionDTO">
+		select sum(totalrent) as totalRent, SUBSTR(startDate,0,5) as yearMonth, BOOTHNAME from EXHIBITIONRENTAL where STARTDATE BETWEEN #{start} and (select last_day(#{end}) from dual) group by SUBSTR(startDate,0,5), BOOTHNAME 	
+ 	</select>
  	<!-- 콘서트 홀 매출현황 -->
  	<select id="getSalesConcertHall" parameterType="java.lang.String" resultType="customerService.bean.SalesConcertHallDTO">
  		select sum((select last_day(#{salesMon}) from dual)-startDate) as saleDays, sum(totalrent) as totalRent, hallName from concertHall where STARTDATE BETWEEN #{salesMon} and (select last_day(#{salesMon}) from dual) group by hallName
