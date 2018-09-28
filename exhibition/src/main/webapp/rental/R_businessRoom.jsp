@@ -25,7 +25,19 @@
 #houseImg{
 	margin:-3px;
 }
-	
+.hallImage{
+	display: inline-block;
+	width: 120px;
+	height: 60px;
+	cursor: pointer;
+}
+ul{
+	line-height: 20px;
+	display: inline-block;
+}
+.backColor{
+	margin-right:3px;
+}	
 </style>
 </head>
 <body>
@@ -48,6 +60,20 @@
 	</tr>
 </table>
 <br><br>
+<h2 align="left" style="margin-left: 46px; color: #610170;">
+	<i class="camera icon"></i>
+		내부 전경
+</h2>
+<div id="businessRoom1Div"><img src="../img/room1,4.jpg" width="90%"></div>
+	<div id="businessRoom2Div"><img src="../img/room2.jpg" width="90%"></div>
+	<div id="businessRoom3Div"><img src="../img/room3.jpg" width="90%"></div>
+	<div id="businessRoom4Div"><img src="../img/room5,6.jpg" width="90%"></div>
+	<div style="padding:7px; background-color:#eee; border:1px solid #dcdcdc; display:inline-block; width:90%">
+		<span class="backColor"><img src="../img/room1,4.jpg" class="hallImage" id="businessRoom1"></span>
+		<span class="backColor"><img src="../img/room2.jpg" class="hallImage" id="businessRoom2"></span>
+		<span class="backColor"><img src="../img/room3.jpg" class="hallImage" id="businessRoom3"></span>
+		<span class="backColor"><img src="../img/room5,6.jpg" class="hallImage" id="businessRoom4"></span>
+	</div><br><br>
 <!-- 3층 -->
 <h2 align="left" style="margin-left: 46px; color: #610170;">
 	<i class="book icon"></i>
