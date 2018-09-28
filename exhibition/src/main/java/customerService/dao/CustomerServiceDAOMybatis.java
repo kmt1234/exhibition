@@ -438,13 +438,13 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	}
 	
 	//전시회 층 예약 중복 체크
-	public EventboardDTO checkReservation_exhibition(Map<String, String> map) {
-		return sqlSession.selectOne("customerServiceSQL.checkReservation_exhibition", map);
+	public List<EventboardDTO> checkReservation_exhibition(Map<String, String> map) {
+		return sqlSession.selectList("customerServiceSQL.checkReservation_exhibition", map);
 	}
 	
 	//연극 공연장 예약 중복 체크
-	public EventboardDTO checkReservation_performance(Map<String, String> map) {
-		return sqlSession.selectOne("customerServiceSQL.checkReservation_performance", map);
+	public List<EventboardDTO> checkReservation_performance(Map<String, String> map) {
+		return sqlSession.selectList("customerServiceSQL.checkReservation_performance", map);
 	}
 	
 

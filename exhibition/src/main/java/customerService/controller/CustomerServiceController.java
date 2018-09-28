@@ -1568,7 +1568,7 @@ public class CustomerServiceController {
 	
 	//전시회,연극 등록 층 중복 체크*****
 	@RequestMapping(value="checkReservation", method=RequestMethod.POST)
-	public ModelAndView checkReservation(@RequestParam String postSelect, @RequestParam String imageName, @RequestParam String startDate, @RequestParam String endDate, @RequestParam String eventPlace) {
+	public @ResponseBody String checkReservation(@RequestParam String postSelect, @RequestParam String imageName, @RequestParam String startDate, @RequestParam String endDate, @RequestParam String eventPlace) {
 		
 		Map<String,String> map = new HashMap<String, String>();
 		map.put("postSelect", postSelect);
@@ -1580,22 +1580,28 @@ public class CustomerServiceController {
 		EventboardDTO eventboardDTO = null;
 		String check = null;
 		
+		List<EventboardDTO> list = new ArrayList<EventboardDTO>();
+		
 		//DB
 		if(postSelect.equals("1")) {
-			eventboardDTO = customerServiceDAO.checkReservation_exhibition(map);
+			list = customerServiceDAO.checkReservation_exhibition(map);
 		}else if(postSelect.equals("2")) {
-			eventboardDTO = customerServiceDAO.checkReservation_performance(map);
+			list = customerServiceDAO.checkReservation_performance(map);
 		}
 		
-		if(eventboardDTO==null) {
+		System.out.println("ya : "+ list.toString());
+		
+		if(list.size()==0) {
 			check = "no_data";
 		}else {
 			check = "yes_data";
 		} 
 		
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("eventboardDTO", list);
+		mav.setViewName("jsonView");
 		
-		return mav;
+		return check;
 	}
 	
 		
