@@ -51,6 +51,7 @@
 		  	</div>
   		</div>
   	</div>
+  	<div id="dateDiv"></div>
   	<br>
   	<!-- 클릭시를 위한것 아직은 시행안했음 -->
   	<div style="width: 100%; text-align: left; margin-top: 20px;display: inline-block; ">
@@ -82,6 +83,7 @@
 		  	</div>
   		</div>
   	</div>
+  	<div id="timeDiv"></div>
   	<br>
   	<!-- 부스번호 -->
   	<div style="width: 100%; text-align: left; margin-top: 20px;display: inline-block; ">
@@ -97,6 +99,7 @@
 		  	</div>
   		</div>
   	</div>
+  	<div id="placeDiv"></div>
   	<br>
   	<!-- 티켓 금액-->
   	<div style="width: 100%; text-align: left; margin-top: 20px;display: inline-block; ">
@@ -112,6 +115,7 @@
 		  	</div>
   		</div>
   	</div>
+  	<div id="priceDiv"></div>
   	<br>
   	<!-- 관람인원 -->
   	<div style="width: 100%; text-align: left; margin-top: 20px;display: inline-block; ">
@@ -127,6 +131,7 @@
 		  	</div>
   		</div>
   	</div>
+  	<div id="seatsDiv"></div>
   	<br>
   	<!-- 관람등급 -->
   	<div style="width: 100%; text-align: left; margin-top: 20px;display: inline-block; ">
@@ -136,7 +141,7 @@
 			</div>	
 		  	<div class="ui inverted input" style="width: 100%;">
 				<div class="ui left icon input focus" style="width: 400px; height: 50px;">
-					<input type="text" name="eventRate" placeholder="관람등급">
+					<input type="text" name="eventRate" placeholder="ex. 15세">
 					<i class="user icon"></i>
 				</div>
 		  	</div>
@@ -156,5 +161,6 @@
 		  	</div>
   		</div>
   	</div>
+  	<div id="warnningDiv"></div>
   	<br><br>
 </div><!--수정영역 텍스트필드-->
