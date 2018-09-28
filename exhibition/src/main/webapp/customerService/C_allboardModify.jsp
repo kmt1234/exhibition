@@ -72,6 +72,7 @@ left: 0px;
 	<jsp:include page="../main/I_footer.jsp" ></jsp:include>
 </div>
 <script src="../js/slidbar.js"></script>
-	
+<script src="http://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script><!-- 시간 -->
+<script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script><!--달력-->	
 </body>
 </html>

@@ -940,7 +940,8 @@ public class CustomerServiceController {
 			mav.addObject("imageboardDTO", imageboardDTO);
 			mav.addObject("postSelect", "0");
 			mav.addObject("modify", "1");
-			mav.setViewName("/customerService/C_imageDetail");
+			mav.addObject("display","/customerService/C_imageDetail.jsp");
+			mav.setViewName("/customerService/C_allboardModify");
 			return mav;
 		}
 
@@ -956,7 +957,8 @@ public class CustomerServiceController {
 		mav.addObject("eventboardDTO", eventboardDTO);
 		mav.addObject("postSelect", "1");
 		mav.addObject("modify", "1");
-		mav.setViewName("/customerService/C_eventDetail");
+		mav.addObject("display","/customerService/C_eventDetail.jsp");
+		mav.setViewName("/customerService/C_allboardModify");
 		return mav;
 	}
 
@@ -1023,7 +1025,8 @@ public class CustomerServiceController {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("eventboardDTO", eventboardDTO);
 		mav.addObject("postSelect", "2");
-		mav.setViewName("/customerService/C_playDetail");
+		mav.addObject("display","/customerService/C_playDetail.jsp");
+		mav.setViewName("/customerService/C_allboardModify");
 		return mav;
 	}
 
@@ -1127,7 +1130,8 @@ public class CustomerServiceController {
 	public String C_hotel_modify(@RequestParam String seq, Model model) {
 		HotelboardDTO hotelboardDTO = customerServiceDAO.getHotelInfo(seq);
 		model.addAttribute("hotelboardDTO", hotelboardDTO);
-		return "/customerService/C_hotel_modify";
+		model.addAttribute("display","/customerService/C_hotel_modify.jsp");
+		return "/customerService/C_allboardModify";
 	}
 	// 메인이미지 수정완료 클릭시 DB내용 수정
 	@RequestMapping(value = "C_imageboardMod", method = RequestMethod.POST)
