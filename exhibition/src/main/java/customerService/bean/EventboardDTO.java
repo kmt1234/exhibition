@@ -25,4 +25,5 @@ public class EventboardDTO {			//박람회,연극  DTO
 	private int daysSize;
 	private int totalRent;
 	private int start;
+	private String yearMonth;
 }

@@ -161,6 +161,13 @@
  		select * from C_QnA where classify=#{classify}
  	</select>
  	
+ 	<!-- 자주 묻는 질문 삭제 -->
+ 	<delete id="C_QnA_Delete" parameterType="java.util.List">
+ 		delete C_QnA where seq in 
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
  	
  	
  	
@@ -469,6 +476,10 @@
  	<select id="getSalesTotalRentConcertHall" parameterType="java.lang.String" resultType="int">
  		select sum(totalrent) as salesTotalRent from concertHall where STARTDATE BETWEEN #{salesMon} and (select last_day(#{salesMon}) from dual)
  	</select>
+ 	<!-- 콘서트 홀 연 월 홀별 총 매출 -->
+ 	<select id="getYearMonthSalesConcertHall" parameterType="java.util.Map" resultType="customerService.bean.SalesConcertHallDTO">
+ 		select sum(totalrent) as totalRent, SUBSTR(startDate,0,5) as yearMonth, hallName from CONCERTHALL where STARTDATE BETWEEN #{start} and (select last_day(#{end}) from dual) group by SUBSTR(startDate,0,5), hallNAME
+ 	</select>
  	<!-- 비즈니스룸 매출현황 -->
  	<select id="getSalesBusinessRoom" parameterType="java.lang.String" resultType="customerService.bean.SalesBusinessRoomDTO">
  		select sum(totalRent) as totalRent, roomName from businessRoom where STARTDATE BETWEEN #{salesMon} and (select last_day(#{salesMon}) from dual) group by roomName
@@ -476,6 +487,10 @@
  	<!-- 비즈니스룸 총 매출현황 -->
  	<select id="getSalesTotalRentBusinessRoom" parameterType="java.lang.String" resultType="int">
  		select sum(totalrent) as salesTotalRent from businessRoom where STARTDATE BETWEEN #{salesMon} and (select last_day(#{salesMon}) from dual)
+ 	</select>
+ 	<!-- 비즈니스 룸 연월 룸 별 총 매출 -->
+ 	<select id="getYearMonthBusinessRoom" parameterType="java.util.Map" resultType="customerService.bean.SalesBusinessRoomDTO">
+ 		select sum(totalrent) as totalRent, SUBSTR(startDate,0,5) as yearMonth, roomName from businessRoom where STARTDATE BETWEEN #{start} and (select last_day(#{end}) from dual) group by SUBSTR(startDate,0,5), roomNAME
  	</select>
  	<!-- 콘서트 티켓 매출현황 -->
  	<select id="getSalesConcertTicket"  parameterType="java.lang.String" resultType="eventboard">
@@ -485,17 +500,36 @@
 	<select id="getSalesTotalRentConcertTicket" parameterType="java.lang.String" resultType="int">
 		select sum(sum(ticketPrice*bookTicket)) as salesTotalRent from EVENTBOARD_PLAY_BOOK where playDATE BETWEEN #{salesMon} and (select last_day(#{salesMon}) from dual) group by BOOKMEMBERID
 	</select> 	 	
+	<!-- 콘서트 티켓 연월 총 매출 -->
+	<select id="getYearMonthConcertTicket" parameterType="java.util.Map" resultType="eventboard">
+		select sum(ticketPrice*bookTicket) as totalRent, SUBSTR(playDate,0,5) as yearMonth, imageName from EVENTBOARD_PLAY_BOOK where playDate BETWEEN #{start} and (select last_day(#{end}) from dual) group by SUBSTR(playDate,0,5), imageName
+	</select>
+	<!-- 박람회 티켓 매출현황 -->
+	<select id="getSalesExhibitionTicket"  parameterType="java.lang.String" resultType="eventboard">
+ 		select sum(ticketPrice*bookTicket) as totalRent, IMAGENAME from EVENTBOARD_EXHIBITION_BOOK where playDATE BETWEEN #{salesMon} and (select last_day(#{salesMon}) from dual) group by IMAGENAME
+ 	</select>
+	
+	<!-- 박람회 티켓 총 매출 -->
+	<select id="getSalesTotalRentExhibitionTicket" parameterType="java.lang.String" resultType="int">
+		select sum(sum(ticketPrice*bookTicket)) as salesTotalRent from EVENTBOARD_EXHIBITION_BOOK where playDATE BETWEEN #{salesMon} and (select last_day(#{salesMon}) from dual) GROUP BY seq hAVING seq > 0
+	</select>
+	
+	<!-- 박람회 티켓 연월 총 매출 -->
+	<select id="getYearMonthExhibitionTicket" parameterType="java.util.Map" resultType="eventboard">
+		select sum(ticketPrice*bookTicket) as totalRent, SUBSTR(playDate,0,5) as yearMonth, imageName from EVENTBOARD_EXHIBITION_BOOK where playDate BETWEEN #{start} and (select last_day(#{end}) from dual) group by SUBSTR(playDate,0,5), imageName
+	</select>
+	
 	<!-- 회원정보  -->
  	<select id="getMemberList" resultType="member" parameterType="java.util.Map">
  		select * from(
 		select rownum rn, tt.* from(
 		select * from membertable)tt
-		)where rn <![CDATA[ >= ]]> #{startNum} and rn<![CDATA[<=]]> #{endNum}	
+		)where rn <![CDATA[ >= ]]> #{startNum} and rn<![CDATA[<=]]> #{endNum} and code=1
  	</select>
  	
 	<!-- 회원 정보 페이징처리 -->
 	<select id="getMemberListTotal" parameterType="java.util.Map" resultType="int">
-		select count(*) from membertable
+		select count(*) from membertable where code=1
 	</select>
 	
  	<!-- 회원 검색 -->
@@ -503,22 +537,28 @@
 		select * from (
 		select rownum rn, tt.* from(
 		select * from membertable where ${memberSearchOption} like '%'||#{memberSearch}||'%')tt
-		)where rn <![CDATA[ >= ]]> #{startNum} and rn<![CDATA[<=]]> #{endNum}
+		)where rn <![CDATA[ >= ]]> #{startNum} and rn<![CDATA[<=]]> #{endNum} and code=1
 	</select>
 	
  	<!-- 회원 검색 페이징-->
  	<select id="getMemberListSearchTotal" parameterType="java.util.Map" resultType="int">
-		select count(*) from membertable where ${memberSearchOption} like '%'||#{memberSearch}||'%'
+		select count(*) from membertable where ${memberSearchOption} like '%'||#{memberSearch}||'%' and code=1
 	</select>
 	
 	<!-- 회원 상세정보 -->
 	<select id="getPerformanceView" resultType="performance.bean.Book_exhibition_membersDTO" parameterType="String">
-		select * from Book_play_Members where memberid like #{M_Id}
+		select * from Book_play_Members where memberid like #{M_Id} order by seq desc 
 	</select>
-	
 	<select id="getExhibitionView" resultType="performance.bean.Book_exhibition_membersDTO" parameterType="String">
-		select * from Book_exhibition_Members where memberid like #{M_Id}
+		select * from Book_exhibition_Members where memberid like #{M_Id}  order by seq desc
 	</select>
+	<!-- 회원 예매 삭제 -->
+	<delete id="memberExTicketDelete" parameterType="int">
+ 		delete Book_exhibition_Members where seq=#{seq}
+ 	</delete>
+ 	<delete id="memberPerTicketDelete" parameterType="int">
+ 		delete Book_play_Members where seq=#{seq}
+ 	</delete>
 	
  	<!-- 사업자정보  -->
  	<select id="getCompanyList" resultType="company" parameterType="java.util.Map">
@@ -545,10 +585,23 @@
  	<select id="getCompanyListSearchTotal" parameterType="java.util.Map" resultType="int">
 		select count(*) from company where ${companySearchOption} like '%'||#{companySearch}||'%'
 	</select>
+	
 	<!-- 사업자 상세정보 -->
-	<select id="getCompanyView" resultType="exhibition" parameterType="String">
-		select * from exhibitionrental where C_license like #{C_license}
+	<select id="getCompanyExView" resultType="exhibition" parameterType="String">
+		select * from exhibitionrental  where C_license like #{C_license} order by seq desc
 	</select>
+	<select id="getCompanyConView" resultType="rental.bean.ConcertHallDTO" parameterType="String">
+		select * from concertHall  where C_license like #{C_license} order by seq desc
+	</select>
+	
+	<!-- 사업자 부스 예약 삭제 -->
+	<delete id="companyExDelete" parameterType="int">
+ 		delete exhibitionRental where seq=#{seq}
+ 	</delete>
+ 	
+ 	<delete id="companyConDelete" parameterType="int">
+ 		delete concertHall where seq=#{seq}
+ 	</delete>
  	
  	<!--연극 정보 보기(수정하기 위해)  -->
 	<select id="getPlayboard" parameterType="java.lang.String" resultType="eventboard">
@@ -636,6 +689,15 @@
 		delete eventboard_exhibition_book where num=#{seq}
 	</delete>
  	
+ 	<!--전시회 층 예약 중복 체크  -->
+ 	<select id="checkReservation_exhibition" parameterType="java.util.Map" resultType="eventboard">
+ 		select * from eventboard where imageName = #{imageName} and startDate = #{startDate} and endDate = #{endDate} and eventPlace = #{eventPlace}
+ 	</select>
+ 	
+ 	<!--연극 공연장 예약 중복 체크  -->
+ 	<select id="checkReservation_performance" parameterType="java.util.Map" resultType="eventboard">
+ 		select * from eventboard_play where imageName = #{imageName} and startDate = #{startDate} and endDate = #{endDate} and eventPlace = #{eventPlace}
+ 	</select>
  	
  </mapper>
  

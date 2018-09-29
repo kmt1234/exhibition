@@ -9,6 +9,13 @@
 	text-decoration: none;
 	cursor: pointer;
 }
+.C_license{
+  cursor: pointer;
+}
+.M_Id{
+	cursor: pointer;
+}
+
 </style>
 <script type="text/javascript">
 //사업자 페이지
@@ -114,11 +121,12 @@ function memberSearch(pg){
 	<table class="ui striped table">
 	  <thead>
 	    <tr align="center">
+	    	<th>번호</th>
 		    <th>부스 장소</th>
 		    <th>부스명</th>
 		    <th>사용일자</th>
 		    <th>진행상황</th>
-		    <th>구매 티켓 수</th>
+		    <th>취소</th>
 	  </tr></thead>
 	  <tbody id="reservationCompanyTable" align="center">
 	  
@@ -131,16 +139,70 @@ function memberSearch(pg){
 	<table class="ui striped table">
 	  <thead>
 	    <tr align="center">
+	    	<th>번호</th>
 		    <th>예약명</th>
 		    <th>예매 날짜</th>
 		    <th>예매 현황</th>
 		    <th>예매 티켓 수</th>
+		    <th>취소</th>
 	  </tr></thead>
 	  <tbody id="reservationMemberTable" align="center">
 	  
 	  </tbody>
  </table>
 </div>
+<div id="reConfirm">
+	<div class="ui mini modal mem" >
+	  <div class="header">예매 취소</div>
+	  <div class="content" style="width:100%">
+	    <div>정말 예매를 취소 하시겠습니까?</div>
+	  </div>
+	  <div class="actions">
+	    <div class="ui negative button">
+	        No
+	      </div>
+	      <div class="ui positive right labeled icon button" id ="memberYesBtn">
+	        Yes
+	        <i class="checkmark icon"></i>
+	      </div>
+	  </div>
+	</div>
+</div>
+
+<div id="notReConfirm">
+	<div class="ui mini modal not member">
+	  <div class="header">예매 취소</div>
+	  <div class="content" style="width:100%">
+	    <div>당일 예매 취소는 불가능 합니다.</div>
+	  </div>
+	  <div class="actions">
+	      <div class="ui positive right labeled icon button" id ="notYesBtn">
+	        Yes
+	        <i class="checkmark icon"></i>
+	      </div>
+	  </div>
+	</div>
+</div>
+
+<div id="reConfirmCompany">
+	<div class="ui mini modal company" >
+	  <div class="header">예약 취소</div>
+	  <div class="content" style="width:100%">
+	    <div>정말 예약를 취소 하시겠습니까?</div>
+	  </div>
+	  <div class="actions">
+	    <div class="ui negative button">
+	        No
+	      </div>
+	      <div class="ui positive right labeled icon button" id ="companyYesBtn">
+	        Yes
+	        <i class="checkmark icon"></i>
+	      </div>
+	  </div>
+	</div>
+</div>
+
+<div id="dialog-confirm"></div>
 
 </body>
 <script src="../js/customerService.js?ver=1"></script>

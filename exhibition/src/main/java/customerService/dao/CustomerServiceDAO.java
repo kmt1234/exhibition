@@ -17,6 +17,7 @@ import customerService.bean.SalesExhibitionDTO;
 import member.bean.MemberDTO;
 import performance.bean.Book_exhibition_membersDTO;
 import performance.bean.Book_performance_membersDTO;
+import rental.bean.ConcertHallDTO;
 import rental.bean.ExhibitionDTO;
 
 public interface CustomerServiceDAO {
@@ -62,7 +63,8 @@ public interface CustomerServiceDAO {
 	public List<CustomerServiceDTO> getQnA_Classify(String classify);				
 	// 자주묻는 질문 관리자가 작성하기
 	public void C_QnA_checkWrite(Map<String, String> map);							
-	
+	// 자주묻는 질문 관리자가 삭제하기
+	public void C_QnA_Delete(List<Integer> list);
 	
 	
 	// 주요시설 연락처 관리자가 작성하기
@@ -145,17 +147,35 @@ public interface CustomerServiceDAO {
 	//콘서트 홀 총 매출액
 	public int getSalesTotalRentConcertHall(String salesMon);
 	
+	//콘서트 홀 년 월 홀별 매출 가져오기
+	public List<SalesConcertHallDTO> getYearMonthSalesConcertHall(Map<String, String> map);
+	
 	//비즈니스룸 부스 매출현황
 	public List<SalesBusinessRoomDTO> getSalesBusinessRoom(String salesMon);
 	
 	//비즈니스룸 총 매출액
 	public int getSalesTotalRentBusinessRoom(String salesMon);
 	
+	//비즈니스룸 년 월 룸별 매출 가져오기
+	public List<SalesBusinessRoomDTO> getYearMonthBusinessRoom(Map<String, String> map);
+	
 	//콘서트 티켓 매출현황
 	public List<EventboardDTO> getSalesConcertTicket(String salesMon);
 	
 	//콘서트 티켓 총 매출액
 	public int getSalesTotalRentConcertTicket(String salesMon);
+	
+	//콘서트 티켓 년 월 매출 가져오기
+	public List<EventboardDTO> getYearMonthConcertTicket(Map<String, String> map);
+	
+	//박람회 티켓 매출현황
+	public List<EventboardDTO> getSalesExhibitionTicket(String salesMon);
+	
+	//박람회 티켓 총 매출액
+	public int getSalesTotalRentExhibitionTicket(String salesMon);
+	
+	//박람회 티켓 년 월 매출 가져오기
+	public List<EventboardDTO> getYearMonthExhibitionTicket(Map<String, String> map);
 
 	//회원정보
 	public List<MemberDTO> getMemberList(Map<String, Integer> map);
@@ -165,6 +185,9 @@ public interface CustomerServiceDAO {
 	public List<MemberDTO> memberListSearch(Map<String, String> map);
 	//회원정보 검색 토탈 페이징
 	public int getMemberListSearchTotal(Map<String, String> map);
+	//회원 예매 삭제
+	public void memberExTicketDelete(int seq);
+	public void memberPerTicketDelete(int seq);
 	
 	//사업자 정보
 	public List<CompanyDTO> getCompanyList(Map<String, Integer> map);
@@ -174,8 +197,13 @@ public interface CustomerServiceDAO {
 	public List<CompanyDTO> CompanyListSearch(Map<String, String> map);
 	//사업자 검색 페이징
 	public int getCompanyListSearchTotal(Map<String, String> map);
-
-	public List<ExhibitionDTO> getCompanyView(String C_license);
+	//사업자 삭제
+	public void companyExDelete(int seq);
+	public void companyConDelete(int seq);
+	
+	//사업자 상세뷰
+	public List<ExhibitionDTO> getCompanyExView(String C_license);
+	public List<ConcertHallDTO> getCompanyConView(String C_license);
 
 	public ImageboardDTO getImageboard(String seq);//메인이미지 내용 보기(수정하기 위해)
 	
@@ -201,6 +229,19 @@ public interface CustomerServiceDAO {
 	
 	public List<Book_exhibition_membersDTO> getExhibitionView(String M_Id);	//박람회 상세정보
 	public List<Book_exhibition_membersDTO> getPerformanceView(String M_Id); //연극 상세정보
+	
+	public EventboardDTO checkReservation_exhibition(Map<String, String> map);	//전시회 예약 중복 체크
+	public EventboardDTO checkReservation_performance(Map<String, String> map);	//연극 예약 중복 체크
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
 	
 	
 	

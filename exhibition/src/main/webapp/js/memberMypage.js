@@ -1,18 +1,19 @@
 $(document).ready(function(){
 	
-	$('#Ticket-List-Div').hide();
-	$('#Ticket-History-Div').hide();
-		
-	//회원정보 수정
+	//회원정보 수정 메뉴
 	$('#member-info-modify').click(function(){
-		$('#member-info-modify').addClass('active');
-		$('#member-ticket-list').removeClass('active');
-		$('#member-ticket-history').removeClass('active');
+		location.href="/exhibition/login/mypage.do";
 		
-		$('#modify-Div').show();
-		$('#Ticket-List-Div').hide();
-		$('#Ticket-History-Div').hide();
-		
+	});
+	
+	// 예매리스트 탭 
+	$('#member-ticket-list').click(function(){
+		location.href="/exhibition/login/memerMypage_ticketList.do";
+	});
+	
+	//예매내역 탭
+	$('#member-ticket-history').click(function(){
+		location.href="/exhibition/login/ticketHistory.do";
 	});
 	
 	
@@ -156,24 +157,7 @@ $(document).ready(function(){
 	
 	//예매리스트
 	$('#member-ticket-list').click(function(){
-		$('#member-info-modify').removeClass('active');
-		$('#member-ticket-list').addClass('active');
-		$('#member-ticket-history').removeClass('active');
-		
-		$('#modify-Div').hide();
-		$('#Ticket-List-Div').show();
-		$('#Ticket-History-Div').hide();
-		
-		alert('hey');
-		//회원의 예매 리스트를 가져오는 ajax 
-		$.ajax({
-			type : 'GET',
-			url : "/exhibition/login/getMemberTicketList.do",
-			dataType : 'json',
-			success : function(data){
-				alert(JSON.stringify(data));
-			}//success
-		});//ajax
+		location.href="/exhibition/login/memerMypage_ticketList.do";
 	});
 	
 	//예매내역

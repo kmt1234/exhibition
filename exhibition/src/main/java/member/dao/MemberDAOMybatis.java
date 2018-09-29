@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import customerService.bean.EventboardDTO;
 import member.bean.MemberDTO;
 import performance.bean.Book_performance_membersDTO;
 
@@ -60,9 +61,57 @@ public class MemberDAOMybatis implements MemberDAO {
 	}
 	
 	//회원의 예매 리스트를 가져오는 메소드
-	public List<Book_performance_membersDTO> getMemberTicketList(String id) {
-		return sqlSession.selectList("memberSQL.getMemberTicketList", id);
+	public List<Book_performance_membersDTO> getMemberTicketList(Map<String, String> map) {
+		return sqlSession.selectList("memberSQL.getMemberTicketList", map);
 	}
+	
+	//회원의 예매 리스트를 가져오는 메소드
+	public int getMemberTicketListTotalA(Map<String, String> map) {
+		return sqlSession.selectOne("memberSQL.getMemberTicketListTotalA",map);
+	}
+	
+	//연극 정보 가져오는 메소드
+	public EventboardDTO getPerformanceInfo(Map<String, String> map) {
+		return sqlSession.selectOne("memberSQL.getPerformanceInfo", map);
+	}
+	
+	//전시회 정보 가져오는 메소드
+	public EventboardDTO getExhibitionInfo(Map<String, String> map) {
+		return sqlSession.selectOne("memberSQL.getExhibitionInfo", map);
+	}
+	
+	//과거 예매내역 수 가져오는 메소드 
+	public int getTicketHistoryListTotalA(Map<String, String> map) {
+		return sqlSession.selectOne("memberSQL.getTicketHistoryListTotalA", map);
+	}
+	
+	//과거 예매내역 가져오는 메소드
+	public List<Book_performance_membersDTO> getTicketHistoryList(Map<String, String> map) {
+		return sqlSession.selectList("memberSQL.getTicketHistoryList",map);
+	}
+
+	//연극 예매 취소
+	public int cancelPerformance(Map<String, String> map) {
+		return sqlSession.delete("memberSQL.cancelPerformance", map);
+	}
+	
+	//연극 예매티켓 수정
+	public int backPerformance(Map<String, String> map) {
+		return sqlSession.update("memberSQL.backPerformance", map);
+	}
+	
+	//전시회 예매 취소
+	public int cancelExhibition(Map<String, String> map) {
+		return sqlSession.delete("memberSQL.cancelExhibition", map);
+		
+	}
+	
+	//전시회 예매티켓 수정
+	public int backExhibition(Map<String, String> map) {
+		return sqlSession.update("memberSQL.backExhibition", map);
+	}
+
+	
 	
 	
 	

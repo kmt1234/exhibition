@@ -17,6 +17,7 @@
 			- C_notice.jsp : 공지사항 리스트
 			- C_notice_Write.jsp : 공지사항 작성(관리자)
 			- C_notice_Modify.jsp : 공지사항 수정(관리자)
+			- C_notice_Delete.jsp : 공지사항 삭제(관리자)
 
 		고객의 소리
 			- C_emailConfirm.jsp : 고객의소리 이메일인증

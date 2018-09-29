@@ -1,10 +1,13 @@
 package login.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.logging.SimpleFormatter;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
@@ -23,14 +26,19 @@ import org.springframework.web.servlet.ModelAndView;
 
 import company.bean.CompanyDTO;
 import company.dao.CompanyDAO;
+import customerService.bean.EventboardDTO;
 import member.bean.MemberDTO;
 import member.dao.MemberDAO;
+import member.dao.MemberTicketListPaging;
 import performance.bean.Book_performance_membersDTO;
+import rental.bean.ConcertHallDTO;
+import rental.bean.ExhibitionDTO;
 
 @RequestMapping(value = "login")
 @Component
 public class LoginController {
 
+	private static final String SimpleFormatDate  = null;
 	@Autowired
 	private MemberDAO memberDAO;
 	@Autowired
@@ -39,6 +47,8 @@ public class LoginController {
 	private JavaMailSenderImpl emailSender;
 	@Autowired
 	private Book_performance_membersDTO book_performance_membersDTO;
+	@Autowired
+	private MemberTicketListPaging memberTicketListPaging;
 
 	// 개인회원-로그인
 	@RequestMapping(value = "login", method = RequestMethod.POST)
@@ -173,7 +183,6 @@ public class LoginController {
 	// 마이페이지
 	@RequestMapping(value = "mypage", method = RequestMethod.GET)
 	public ModelAndView mypage(HttpSession session) {
-
 		int code = (Integer) session.getAttribute("code");
 
 		Object DTO = session.getAttribute("homepageMember");
@@ -186,12 +195,89 @@ public class LoginController {
 			mav.setViewName("/customerService/C_customerServiceForm"); // 개인마이페이지
 		} else if (code == 2) {
 			mav.addObject("display","/login/companyMypage.jsp");
-			mav.setViewName("/customerService/C_customerServiceForm"); // 법인마이페이지
-			
+			mav.setViewName("/customerService/C_customerServiceForm"); // 법인마이페이지	
 		}
 
 		return mav;
 	}
+	
+	// 임대리스트
+		@RequestMapping(value = "mypageRental", method = RequestMethod.GET)
+		public ModelAndView mypageRental(HttpSession session) {
+		Object DTO = session.getAttribute("homepageMember");
+			session.setAttribute("DTO", DTO);
+			String C_license = (String) session.getAttribute("C_license");
+			Date date = new Date();
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+			String dateM = formatter.format(date);
+			
+			Map<String,String> map = new HashMap<String,String>();
+			map.put("C_license", C_license);
+			map.put("dateM", dateM);
+
+			List<ExhibitionDTO> list = companyDAO.getExhibitionList(map);
+			for(int i = 0; i < list.size(); i++) {
+				list.get(i).setStartDate(list.get(i).getStartDate().substring(0, 10));
+				list.get(i).setEndDate(list.get(i).getEndDate().substring(0, 10));
+			}
+			
+			List<ConcertHallDTO> list2 = companyDAO.getPlayList(map);
+			for(int i = 0; i < list2.size(); i++) {
+				list2.get(i).setStartDate(list2.get(i).getStartDate().substring(0, 10));
+				list2.get(i).setEndDate(list2.get(i).getEndDate().substring(0, 10));
+			}
+			
+			
+			ModelAndView mav = new ModelAndView();
+			
+			mav.addObject("list",list);
+			mav.addObject("list2",list2);
+			mav.addObject("display","/login/mypageRental.jsp");
+			mav.setViewName("/customerService/C_customerServiceForm"); // 임대리스트
+
+			return mav;
+		}
+		
+		// 임대내역
+		@RequestMapping(value = "mypageRentalPast", method = RequestMethod.GET)
+		public ModelAndView mypageRentalPast(@RequestParam(required = false, defaultValue = "1") String pg,HttpSession session) {
+			Object DTO = session.getAttribute("homepageMember");
+			session.setAttribute("DTO", DTO);
+			int endNum = Integer.parseInt(pg) * 10;
+			int startNum = endNum - 9;
+
+			Date date = new Date();
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+			String dateM = formatter.format(date);
+			
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("startNum", startNum+"");
+			map.put("endNum", endNum+"");
+			map.put("dateM", dateM);
+			
+			int totalA = companyDAO.mypageRentalPastTotal(map);
+			
+			memberTicketListPaging.setCurrentPage(Integer.parseInt(pg));
+			memberTicketListPaging.setPageBlock(3);
+			memberTicketListPaging.setPageSize(10);
+			memberTicketListPaging.setTotalA(totalA);
+			memberTicketListPaging.makePagingHTML();
+	
+			ModelAndView mav = new ModelAndView();
+			List<ExhibitionDTO> list = companyDAO.getAllRentalList(map);
+			for(int i = 0; i < list.size(); i++) {
+				list.get(i).setStartDate(list.get(i).getStartDate().substring(0, 10));
+				list.get(i).setEndDate(list.get(i).getEndDate().substring(0, 10));
+			}
+			
+			mav.addObject("pg", pg);
+			mav.addObject("memberTicketListPaging", memberTicketListPaging);
+			mav.addObject("list",list);
+			mav.addObject("display","/login/mypageRentalPast.jsp");
+			mav.setViewName("/customerService/C_customerServiceForm"); // 지난 임대 내역
+ 
+			return mav;
+		}
 
 	// 임시비밀번호 수령 시, 사업자등록번호의 비밀번호 변경
 	@RequestMapping(value = "changeCpwd", method = RequestMethod.POST)
@@ -210,27 +296,171 @@ public class LoginController {
 			return "0";
 	}
 	
+	//회원 예매리스트
+	@RequestMapping(value="memerMypage_ticketList", method=RequestMethod.GET)
+	public ModelAndView memerMypage_ticketList(@RequestParam(required = false, defaultValue = "1") String pg, HttpSession session) {
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("pg", pg);
+		mav.addObject("display","/login/memberMypage_ticketList.jsp");
+		mav.setViewName("/customerService/C_customerServiceForm");
+		return mav;
+	}
+	
 	//회원의 예매 리스트를 가져오는 ajax
 	@RequestMapping(value="getMemberTicketList", method=RequestMethod.GET)
-	public ModelAndView getMemberTicketList(HttpSession session) {
+	public ModelAndView getMemberTicketList(@RequestParam(required = false, defaultValue = "1") String pg, HttpSession session) {
 		MemberDTO memberDTO = (MemberDTO)session.getAttribute("homepageMember");
 		String id = memberDTO.getM_Id();
 		
-		System.out.println("아이디는 : "+id);
+		//페이징 처리(5개씩 출력)	
+		int endNum = Integer.parseInt(pg) * 10;
+		int startNum = endNum - 9;
+
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("startNum", startNum+"");
+		map.put("endNum", endNum+"");
+		map.put("id", id);
+		
+		int totalA = memberDAO.getMemberTicketListTotalA(map);
+		
+		memberTicketListPaging.setCurrentPage(Integer.parseInt(pg));
+		memberTicketListPaging.setPageBlock(10);
+		memberTicketListPaging.setPageSize(10);
+		memberTicketListPaging.setTotalA(totalA);
+		memberTicketListPaging.makePagingHTML();
 		
 		//DB
 		List<Book_performance_membersDTO> list = new ArrayList<Book_performance_membersDTO>();
-		list = memberDAO.getMemberTicketList(id);
+		list = memberDAO.getMemberTicketList(map);
 		
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("pg", pg);
 		mav.addObject("list", list);
+		mav.addObject("memberTicketListPaging", memberTicketListPaging);
 		mav.setViewName("jsonView");
 		
 		if(list==null) {
 			mav.addObject("no_data", "no_data");
 			return mav;
 		} 
-		else return mav;
+		else {
+			return mav;
+		} 
+	}
+	
+	//회원의 예매정보 상세보기
+	@RequestMapping(value="eventDetail", method=RequestMethod.POST)
+	public ModelAndView eventDetail(@RequestParam String memberId, @RequestParam String imageName, @RequestParam String playDate, @RequestParam String ticketQty) {
+		
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("imageName", imageName);
+		
+		EventboardDTO eventboardDTO = null;
+		
+		//DB(연극)
+		eventboardDTO = memberDAO.getPerformanceInfo(map);
+		
+		if(eventboardDTO==null) {
+			//DB(전시회)
+			eventboardDTO = memberDAO.getExhibitionInfo(map);
+		}
+		
+		String playDate2=playDate.replace("-", "");
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("memberId", memberId);
+		mav.addObject("imageName", imageName);
+		mav.addObject("playDate2", playDate2);
+		mav.addObject("playDate", playDate);
+		mav.addObject("ticketQty", ticketQty);
+		mav.addObject("eventboardDTO", eventboardDTO);
+		mav.addObject("display","/login/memberMypage_ticketInfo.jsp");
+		mav.setViewName("/customerService/C_customerServiceForm");
+		return mav;
+	}
+	
+	//예매내역 이동
+	@RequestMapping(value="ticketHistory", method=RequestMethod.GET)
+	public ModelAndView ticketHistory(@RequestParam(required = false, defaultValue = "1") String pg, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("pg",pg);
+		mav.addObject("display","/login/memberMypage_ticketHistory.jsp");
+		mav.setViewName("/customerService/C_customerServiceForm");
+		return mav;
+	}
+	
+	//과거 예매내역 가져오는 메소드(ajax) 
+	@RequestMapping(value="getTicketHistory", method=RequestMethod.GET)
+	public ModelAndView getTicketHistory(@RequestParam(required = false, defaultValue = "1") String pg, HttpSession session) {
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("homepageMember");
+		String id = memberDTO.getM_Id();
+		
+		//페이징 처리(5개씩 출력)	
+		int endNum = Integer.parseInt(pg) * 10;
+		int startNum = endNum - 9;
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("startNum", startNum+"");
+		map.put("endNum", endNum+"");
+		map.put("id", id);
+		
+		int totalA = memberDAO.getTicketHistoryListTotalA(map);
+		
+		memberTicketListPaging.setCurrentPage(Integer.parseInt(pg));
+		memberTicketListPaging.setPageBlock(10);
+		memberTicketListPaging.setPageSize(10);
+		memberTicketListPaging.setTotalA(totalA);
+		memberTicketListPaging.makePagingHTML_past();
+		
+		//DB
+		List<Book_performance_membersDTO> list = new ArrayList<Book_performance_membersDTO>();
+		list = memberDAO.getTicketHistoryList(map);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("pg", pg);
+		mav.addObject("list", list);
+		mav.addObject("TicketHistoryListPaging", memberTicketListPaging);
+		mav.setViewName("jsonView");
+		
+		if(list==null) {
+			mav.addObject("no_data", "no_data");
+			return mav;
+		} 
+		else {
+			return mav;
+		}
+	}
+	
+	//예매 취소
+	@RequestMapping(value="ticketCancel", method=RequestMethod.POST)
+	public ModelAndView ticketCancel(@RequestParam String imageName, @RequestParam String playDate, @RequestParam String ticketQty, @RequestParam(required = false, defaultValue = "1") String pg, HttpSession session) {
+		
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("homepageMember");
+		String id = memberDTO.getM_Id();
+		
+		Map<String,String> map = new HashMap<String, String>();
+		map.put("imageName", imageName);
+		map.put("playDate", playDate);
+		map.put("ticketQty", ticketQty);
+		map.put("memberId", id);
+		
+		//DB
+		int resultPD = memberDAO.cancelPerformance(map);	//연극 예매 취소
+		int resultPC = memberDAO.backPerformance(map);	//연극 예매티켓 수정
+		
+		//연극취소 아니라면 전시회 취소
+		if(resultPD==0 || resultPC==0) {
+			int resultED = memberDAO.cancelExhibition(map);	//전시회 예매 취소
+			int resultEC = memberDAO.backExhibition(map);	//전시회 예매티켓 수정
+			
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("pg", pg);
+		mav.addObject("display","/login/memberMypage_ticketList.jsp");
+		mav.setViewName("/customerService/C_customerServiceForm");
+		return mav;
 	}
 	
 }

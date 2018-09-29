@@ -30,11 +30,14 @@
 #T_inform{
  font-size: 18px;
 }
+a:active{
+ background-color: red;
+}
 
 #T_Atag:link {color:black; text-decoration: none;}	<!--일반 링크 검정 -->
 #T_Atag:visited {color:black; text-decoration: none;}
 #T_Atag:hover {color:black; text-decoration: underline;} <!--마우스 올렸을 때 그린색에 언더바 생성. -->
-#T_Atag:active {color:black; text-decoration: none;}
+#T_Atag:active {background-color:black; text-decoration: none;}
 #T_Atag{
  font-color:black;
 }
@@ -50,8 +53,9 @@
 			<div  style="width: 49%;  display: inline-block;">
 				<div class="ui input" style="width: 100%; ">
 					<div class="ui action input"  style="width: 100%; ">
-						<input type="text" placeholder="Search..." style="width: 30%;">
-						<button class="ui icon button">
+						<input type="text" id="index_keyword" placeholder="Search..." style="width: 30%;" >
+						<input type="hidden" id="indexkeyword" value="${index_keyword}">
+						<button class="ui icon button" id="index_searchBtn">
 							<i class="search icon"></i>
 						</button>
 					</div>
@@ -175,6 +179,7 @@
 	integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
 	crossorigin="anonymous"></script>
 <script src="../semantic/semantic.min.js?ver=1"></script>
+<script src="../js/index_Search.js?ver=1" charset="UTF-8"></script>
 <script src="../js/index.js?ver=1" charset="UTF-8"></script> 
 <script src="../js/member.js" charset="UTF-8"></script> 
 <script src="../js/company.js" charset="UTF-8"></script>

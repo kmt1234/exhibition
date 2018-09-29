@@ -13,12 +13,10 @@ public interface ExhibitionDAO {
 
 	public String searchRentDay(Map<String, String> map);
 
-
 	public List<ExhibitionDTO> getCalendar(String booth);
 
 	public List<ExhibitionDTO> getAllCalendar();
-
-
+	
 	public void reservationHoll(ExhibitionDTO exhibitionDTO);
 
 
