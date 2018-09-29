@@ -22,6 +22,7 @@ import customerService.bean.SalesExhibitionDTO;
 import member.bean.MemberDTO;
 import performance.bean.Book_exhibition_membersDTO;
 import performance.bean.Book_performance_membersDTO;
+import rental.bean.BusinessRoomDTO;
 import rental.bean.ConcertHallDTO;
 import rental.bean.ExhibitionDTO;
 
@@ -337,6 +338,10 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	public List<Book_exhibition_membersDTO> getPerformanceView(String M_Id) {
 		return sqlSession.selectList("customerServiceSQL.getPerformanceView",M_Id);
 	}
+	//비즈니스뷰
+	public List<BusinessRoomDTO> getBusinessRoomView(String M_Id) {
+		return sqlSession.selectList("customerServiceSQL.getBusinessRoomView",M_Id);
+	}
 	
 	//사업자 정보 불러오기
 	public List<CompanyDTO> getCompanyList(Map<String, Integer> map) {
@@ -425,6 +430,10 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	}
 	public void memberPerTicketDelete(int seq) {
 		sqlSession.delete("customerServiceSQL.memberPerTicketDelete",seq);
+	}
+	public void memberBusinessTicketDelete(int seq) {
+		System.out.println(seq);
+		sqlSession.delete("customerServiceSQL.memberBusinessTicketDelete",seq);
 		
 	}
 	
@@ -446,7 +455,5 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	public List<EventboardDTO> checkReservation_performance(Map<String, String> map) {
 		return sqlSession.selectList("customerServiceSQL.checkReservation_performance", map);
 	}
-	
-
 	
 }

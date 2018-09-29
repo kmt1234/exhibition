@@ -168,6 +168,10 @@ $(document).ready(function(){
 		else location.href='/exhibition/main/index_SearchForm.do?index_keyword='+index_keyword;
 		
 	});
+	
+	
+	
+	
 
 /*BODY 설명*/	
 });

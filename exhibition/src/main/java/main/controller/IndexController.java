@@ -34,6 +34,9 @@ public class IndexController {
 	public String index(@RequestParam(required = false, defaultValue = "1") String code, Model model) {
 		model.addAttribute("code", code);
 		model.addAttribute("display", "/main/I_body.jsp");
+		List<EventboardDTO> list = mainDAO.index_exSlider();
+		
+		model.addAttribute("list",list);
 		return "/main/index";
 	}
 	
@@ -69,7 +72,6 @@ public class IndexController {
 		
 		return mav; 
 	}
-	
-	
+
 	
 }
