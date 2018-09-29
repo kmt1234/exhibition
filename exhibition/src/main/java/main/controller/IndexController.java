@@ -137,4 +137,20 @@ public class IndexController {
 		return mav; 
 	}
 	
+	// 메인 검색시 검색된 연극 리스트 불러옴
+		@RequestMapping(value="index_hotel_list_Search", method=RequestMethod.POST)
+		public ModelAndView index_hotel_list_Search(@RequestParam(required = false) Map<String, String> map) {
+			
+			int totalA = mainDAO.getTotal_index_hotel_list_Search(map);
+			
+			List<MainDTO> list = mainDAO.index_hotel_list_Search(map);
+			
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("totalA", totalA);
+			System.out.println(totalA);
+			mav.addObject("list", list);
+			mav.setViewName("jsonView");
+			
+			return mav; 
+		}
 }

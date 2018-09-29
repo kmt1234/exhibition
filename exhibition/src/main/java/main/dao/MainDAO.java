@@ -42,5 +42,9 @@ public interface MainDAO {
 
 	public int getTotal_index_eventboard_play_Search(Map<String, String> map);
 
+	public List<MainDTO> index_hotel_list_Search(Map<String, String> map);
+
+	public int getTotal_index_hotel_list_Search(Map<String, String> map);
+
 	
 }

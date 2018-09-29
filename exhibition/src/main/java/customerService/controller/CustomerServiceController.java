@@ -59,7 +59,7 @@ public class CustomerServiceController {
 	@Autowired
 	private ImageboardPaging imageboardPaging;
 	private String filePath = "C:\\Users\\user\\git\\exhibition\\exhibition\\src\\main\\webapp\\storage\\";
-	@Autowired
+	@Autowired					
 	private CustomerServicePaging customerServicePaging;
 	@Autowired
 	private PlayBookDTO playBookDTO;

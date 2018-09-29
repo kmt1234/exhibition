@@ -215,7 +215,6 @@ $(document).ready(function(event, str){
 				
 			} else if(data.totalA!='0'){
 				$.each(data.list, function(index, item){
-					alert(item.eventlink)
 					$('<tr/>').append($('<td/>',{
 						rowspan : '9',
 						style : 'width : 100px; '
@@ -320,6 +319,49 @@ $(document).ready(function(event, str){
 					$('<tr/>').append($('<td/>',{
 						text : item.eventcontent
 					})).appendTo($('#index_eventboard_play_SearchList'));
+				});
+			}
+		}
+	});
+	
+	// 메인 검색시 검색된 숙박 리스트 불러옴
+	$.ajax({
+		type : 'POST',
+		url : '/exhibition/main/index_hotel_list_Search.do',
+		data : {'index_keyword': index_keyword },
+		dataType : 'json',
+		success : function(data){
+			if(data.totalA=='0'){
+				$('<tr/>',{
+					align: 'center'
+				}).append($('<td/>',{
+					align : 'center',
+					text : '검색된 결과가 없습니다.'
+				})).appendTo($('#index_hotel_list_SearchList'));  
+				
+			} else if(data.totalA!='0'){
+				$.each(data.list, function(index, item){
+					$('<tr/>').append($('<td/>',{
+						rowspan : '3',
+						style : 'width : 100px; '
+					}).append($('<img>',{
+						src : '../storage/'+item.image1+'',
+						style : 'width : 100px; height : 80px;'
+					}))).append($('<td/>',{
+						text : item.imagename
+					})).appendTo($('#index_hotel_list_SearchList'));
+					
+					$('<tr/>').append($('<td/>',{
+						text : item.eventplace
+					})).appendTo($('#index_hotel_list_SearchList'));
+					
+					$('<tr/>').append($('<td/>',{
+						text : item.eventlink
+					})).appendTo($('#index_hotel_list_SearchList'));
+					
+					
+					
+					
 				});
 			}
 		}

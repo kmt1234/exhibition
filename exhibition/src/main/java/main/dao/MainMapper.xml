@@ -60,7 +60,6 @@
  		  eventRate like '%'||#{index_keyword}||'%' or eventContent like '%'||#{index_keyword}||'%'
  	</select>
  	
- 	
  	<!-- 메인 연극 검색 -->
 	<select id="index_eventboard_play_Search" parameterType="java.util.Map" resultType="customerService">
  		select * from eventboard_play where 
@@ -81,6 +80,20 @@
  		  endTime like '%'||#{index_keyword}||'%' or eventPlace like '%'||#{index_keyword}||'%' or
  		  eventPrice like '%'||#{index_keyword}||'%' or eventSeats like '%'||#{index_keyword}||'%' or
  		  eventRate like '%'||#{index_keyword}||'%' or eventContent like '%'||#{index_keyword}||'%'
+ 	</select>
+
+ 	<!-- 메인 숙박 검색 -->
+	<select id="index_hotel_list_Search" parameterType="java.util.Map" resultType="customerService">
+ 		select * from hotel_list where 
+ 		 imageName like '%'||#{index_keyword}||'%' or image1 like '%'||#{index_keyword}||'%' or
+ 		  eventLink like '%'||#{index_keyword}||'%' or eventPlace like '%'||#{index_keyword}||'%'
+ 	</select>
+ 	
+ 	 <!-- 메인 숙박 검색 총글수 -->
+ 	<select id="getTotal_index_hotel_list_Search" parameterType="java.util.Map" resultType="int">
+ 		select count(*) from hotel_list where 
+ 		 imageName like '%'||#{index_keyword}||'%' or image1 like '%'||#{index_keyword}||'%' or
+ 		  eventLink like '%'||#{index_keyword}||'%' or eventPlace like '%'||#{index_keyword}||'%'
  	</select>
  </mapper>
  
