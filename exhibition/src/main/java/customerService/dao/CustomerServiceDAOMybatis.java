@@ -392,6 +392,7 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	public int getCompanyListSearchTotal(Map<String, String> map) {
 		return sqlSession.selectOne("customerServiceSQL.getCompanyListSearchTotal",map);
 	}
+
 	
 	//사업자 뷰
 	public List<ExhibitionDTO> getCompanyExView(String C_license) {
