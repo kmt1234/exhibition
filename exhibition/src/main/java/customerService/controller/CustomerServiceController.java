@@ -7,6 +7,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -1551,27 +1552,81 @@ public class CustomerServiceController {
 		
 		List<EventboardDTO> yearMonthList = customerServiceDAO.getYearMonthConcertTicket(map);
 		List<ChartDTO> yearMonth = new ArrayList<ChartDTO>();
+		List<EventboardDTO> yearMonthSaleList = new ArrayList<EventboardDTO>();
 		
-		ChartDTO chartDTO = null;
+		EventboardDTO salesEvDTOre = null;
+		for (int i = 0; i < yearMonthList.size(); i++) {
+			for (int j = 1; j <= 12; j++) {
+				if (j < 10) {
+					salesEvDTOre = new EventboardDTO();
+					salesEvDTOre.setImageName(yearMonthList.get(i).getImageName());
+					salesEvDTOre.setYearMonth(year.substring(2) + "/0" + j);
+					salesEvDTOre.setTotalRent(0);
+					yearMonthSaleList.add(salesEvDTOre);
+				} else {
+					salesEvDTOre = new EventboardDTO();
+					salesEvDTOre.setImageName(yearMonthList.get(i).getImageName());
+					salesEvDTOre.setYearMonth(year.substring(2) + "/" + j);
+					salesEvDTOre.setTotalRent(0);
+					yearMonthSaleList.add(salesEvDTOre);
+				}
+			}
+		}
+		
+		List<EventboardDTO> duplicateRemoveList = new ArrayList<EventboardDTO>(new LinkedHashSet<EventboardDTO>(yearMonthSaleList));
+
 		
 		for(int i = 0; i < yearMonthList.size(); i++) {
-			chartDTO = new ChartDTO();
-			chartDTO.setName(yearMonthList.get(i).getImageName());
-			chartDTO.setData(new int[12]);
-			if(yearMonthList.get(i).getImageName().equals(chartDTO.getName())) {
-			for(int k = 1; k <= 12; k++) {
-				if(k < 10) {
-					if(yearMonthList.get(i).getYearMonth().substring(3,5).equals("0"+k)) {
-						chartDTO.getData()[k-1] = yearMonthList.get(i).getTotalRent();
-					}
-				} else {
-					if(yearMonthList.get(i).getYearMonth().substring(3,5).equals(k+"")) {
-						chartDTO.getData()[k-1] = yearMonthList.get(i).getTotalRent();
+			for(int j = 0; j < duplicateRemoveList.size(); j++) {
+				if(yearMonthList.get(i).getImageName().equals(duplicateRemoveList.get(j).getImageName())) {
+					if(yearMonthList.get(i).getYearMonth().equals(duplicateRemoveList.get(j).getYearMonth())) {
+						duplicateRemoveList.get(j).setTotalRent(yearMonthList.get(i).getTotalRent());
 						}
 					}
 				}
 			}
+		
+		
+		
+		ChartDTO chartDTO = null;
+		for(int i = 0; i < duplicateRemoveList.size(); i++) {
+			chartDTO = new ChartDTO();
+			chartDTO.setName(duplicateRemoveList.get(i).getImageName());
+			chartDTO.setData(new int[12]);
+			for(int k = 1; k <= 12; k++) {
+				if(k < 10) {
+					if(duplicateRemoveList.get(i).getYearMonth().substring(3,5).equals("0"+k)) {
+						chartDTO.getData()[k-1] = duplicateRemoveList.get(i).getTotalRent();
+					}
+				} else {
+					if(duplicateRemoveList.get(i).getYearMonth().substring(3,5).equals(k+"")) {
+						chartDTO.getData()[k-1] = duplicateRemoveList.get(i).getTotalRent();
+					}
+				}
+			}
+			
 			yearMonth.add(chartDTO);
+		}
+		
+		
+		
+		List<ChartDTO> dtoList = new ArrayList<ChartDTO>();
+		ChartDTO dto = null;
+		for (int i = 0; i < yearMonthList.size(); i++) {
+			dto = new ChartDTO();
+			dto.setName(yearMonthList.get(i).getImageName());
+			dto.setData(new int[12]);
+			dtoList.add(dto);
+		}
+		
+		List<ChartDTO> duplicateList = new ArrayList<ChartDTO>(new LinkedHashSet<ChartDTO>(dtoList));
+		
+		int cnt = 0;
+		for(int i = 0; i < duplicateList.size(); i++) {
+			for(int j = 0; j < 12; j++) {
+				duplicateList.get(i).getData()[j] = yearMonth.get(cnt).getData()[j];
+				cnt++;
+			}
 		}
 		
 
@@ -1624,43 +1679,67 @@ public class CustomerServiceController {
 			}
 		}
 		
-		for(int i = 0; i < yearMonthList.size(); i++) {
-			for(int j = 0; j < yearMonthSaleList.size(); j++) {
-				if(yearMonthList.get(i).getImageName().equals(yearMonthSaleList.get(j).getImageName())) {
-					if(yearMonthList.get(i).getYearMonth().equals(yearMonthSaleList.get(j).getYearMonth())) {
-						yearMonthSaleList.get(j).setTotalRent(yearMonthList.get(i).getTotalRent());
-					}
-				}
-			}
-		}
+		List<EventboardDTO> duplicateRemoveList = new ArrayList<EventboardDTO>(new LinkedHashSet<EventboardDTO>(yearMonthSaleList));
+
 		
-		ChartDTO chartDTO = null;
 		for(int i = 0; i < yearMonthList.size(); i++) {
-			chartDTO = new ChartDTO();
-			chartDTO.setName(yearMonthList.get(i).getImageName());
-			chartDTO.setData(new int[12]);
-			for(int j = 0; j < yearMonthSaleList.size(); j++) {
-				if(yearMonthList.get(i).getImageName().equals(yearMonthSaleList.get(j).getImageName())) {
-				for(int k = 1; k <= 12; k++) {
-						if(k < 10) {
-							if(yearMonthList.get(i).getYearMonth().substring(3,5).equals("0"+k)) {
-								chartDTO.getData()[k-1] = yearMonthList.get(i).getTotalRent();
-							}
-						} else {
-							if(yearMonthList.get(i).getYearMonth().substring(3,5).equals(k+"")) {
-								chartDTO.getData()[k-1] = yearMonthList.get(i).getTotalRent();
-							}
+			for(int j = 0; j < duplicateRemoveList.size(); j++) {
+				if(yearMonthList.get(i).getImageName().equals(duplicateRemoveList.get(j).getImageName())) {
+					if(yearMonthList.get(i).getYearMonth().equals(duplicateRemoveList.get(j).getYearMonth())) {
+						duplicateRemoveList.get(j).setTotalRent(yearMonthList.get(i).getTotalRent());
 						}
 					}
 				}
 			}
+		
+		
+		
+		ChartDTO chartDTO = null;
+		for(int i = 0; i < duplicateRemoveList.size(); i++) {
+			chartDTO = new ChartDTO();
+			chartDTO.setName(duplicateRemoveList.get(i).getImageName());
+			chartDTO.setData(new int[12]);
+			for(int k = 1; k <= 12; k++) {
+				if(k < 10) {
+					if(duplicateRemoveList.get(i).getYearMonth().substring(3,5).equals("0"+k)) {
+						chartDTO.getData()[k-1] = duplicateRemoveList.get(i).getTotalRent();
+					}
+				} else {
+					if(duplicateRemoveList.get(i).getYearMonth().substring(3,5).equals(k+"")) {
+						chartDTO.getData()[k-1] = duplicateRemoveList.get(i).getTotalRent();
+					}
+				}
+			}
+			
 			yearMonth.add(chartDTO);
 		}
+		
+		
+		
+		List<ChartDTO> dtoList = new ArrayList<ChartDTO>();
+		ChartDTO dto = null;
+		for (int i = 0; i < yearMonthList.size(); i++) {
+			dto = new ChartDTO();
+			dto.setName(yearMonthList.get(i).getImageName());
+			dto.setData(new int[12]);
+			dtoList.add(dto);
+		}
+		
+		List<ChartDTO> duplicateList = new ArrayList<ChartDTO>(new LinkedHashSet<ChartDTO>(dtoList));
+		
+		int cnt = 0;
+		for(int i = 0; i < duplicateList.size(); i++) {
+			for(int j = 0; j < 12; j++) {
+				duplicateList.get(i).getData()[j] = yearMonth.get(cnt).getData()[j];
+				cnt++;
+			}
+		}
+		
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
 		mav.addObject("salesTotalRent", salesTotalRentstr);
-		mav.addObject("yearMonth", yearMonth);
+		mav.addObject("yearMonth", duplicateList);
 		mav.setViewName("jsonView");
 		return mav;
 	}

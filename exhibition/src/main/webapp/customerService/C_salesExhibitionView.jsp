@@ -561,7 +561,8 @@
 					data: {'year':$('#year option:selected').val(), 'month': $('#month option:selected').val()},
 					dataType: "json",
 					success: function(data) {
-						alert(JSON.stringify(data));
+						alert(JSON.stringify(data.yearMonth));
+						console.log(JSON.stringify(data.yearMonth));
 						$('#salesList').show();
 						$('#salesName').text('박람회 이름');
 						$('#salesList tr:gt(0)').remove();
