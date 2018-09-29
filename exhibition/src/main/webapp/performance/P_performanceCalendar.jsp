@@ -90,10 +90,15 @@ var dataSet = [
 </head>
 <body>
 <!-- 메인 화면 -->
-	<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
-		공연
-		<span class="h-light">일정</span>
-	</h2>
+<h2 class="box-container"  style="float: left; width:100%; text-align: left;">
+	<span>공연 </span>
+	<span class="h-light">일정</span>
+	<div style="font-size:13px; float:right; height: 50px; margin-top:30px ">
+		<img src="../img/house.png" width="15px" height="16px" style="cursor: pointer;" id="houseImg"></img>
+		> 일정 > 공연일정
+	</div>
+	<div class="ui divider"></div> 
+</h2>	
 	<!-- 버튼 -->
 	<div>
 		<table style="margin-left:20px; width: 40%;">
@@ -114,7 +119,7 @@ var dataSet = [
 		 <img src="../img/Ex.png" style="width:25px; height: 25px; " align='absmiddle'> 전시회
 		 </span>
 		 
-		 <span style="float: right; margin-right:30px; ">
+		 <span style="float: right;  ">
 		 	<img src="../img/Ev.png" style="width:25px; height: 25px;" align='absmiddle'> 공연  &ensp;&ensp;
 		 </span>
 	</div>

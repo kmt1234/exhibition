@@ -223,13 +223,18 @@ endDate date not null
 create sequence seq_concertHall start with 1000;
 
 create table businessRoom(
+seq NUMBER PRIMARY KEY,
 roomName varchar2(30), 
 M_Id varchar2(30), 
-M_Email varchar2(50), 
+M_Email varchar2(50),
+numberPeople number, 
 startDate date, 
 first varchar2(10) default 'N', 
 second varchar2(10) default 'N', 
 third varchar2(10) default 'N',
-fourth varchar2(10) default 'N');
+fourth varchar2(10) default 'N',
+totalRent number);
+
+create sequence seq_businessRoom start with 1000;
 
 commit;

@@ -10,35 +10,28 @@
 <title>연극</title>
 
 <style>
-
 img{
 	width: 367px;
 	height: 425px;
 	border-radius: 10px;
 }
-
 td{
 	text-align: left;
    	padding-left: 6%;
     padding-top: 2px;
 }
-
 .bookWrapper{
 	float: left;
 }
-
 .ui.divider{
 	margin: 5rem 0 0 0;
 }
-
 .playContentHeader{
 	float: left;
 }
-
 .playContent{
 	display: grid;
 }
-
 .bookPlayTitle{
    	margin-right: 40%;
     margin-top: 2%;
@@ -46,7 +39,6 @@ td{
     font-size: 3rem;
     width: 710px;
 }
-
 .bookPlayTitleDiv {
     margin-top: 25px;
 }
