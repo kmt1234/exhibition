@@ -49,10 +49,10 @@ left: 0px;
 		<!-- 사이드바 메뉴 -->
 		<div style="width:230px; height:900px auto; display: inline-block;">
 			<div class="ui compact menu" id="slidbar" style="display: inline-block;">
-			<a class="item" style="border: none; width: 227px;" href="C_notice.do">공지사항</a> 
-			<a class="item" href="C_emailConfirm.do">고객의 소리</a> 
-			<a class="item" href="C_QnA.do">자주묻는 질문</a>
-			<a class="item" href="C_contactList.do">주요시설 연락처</a>
+				<a class="item" style="border: none; width: 227px;" href="C_notice.do">공지사항</a> 
+				<a class="item" href="C_emailConfirm.do">고객의 소리</a> 
+				<a class="item" href="C_QnA.do">자주묻는 질문</a>
+				<a class="item" href="C_contactList.do">주요시설 연락처</a>
 			<c:if test="${code == '1' || code == '2' }">
             	<a class="item" href="/exhibition/login/mypage.do">마이페이지</a>
             </c:if>
@@ -61,7 +61,7 @@ left: 0px;
            		<a class="item" href="C_salesExhibitionView.do">매출 현황</a>
            		<a class="item" href="C_memberShib.do">회원리스트</a>
            	</c:if>	
-		</div>
+			</div>
 		</div>
 		<!-- 메인 화면 -->
 	<div class="ui compact menu" style="width: 930px; min-height:900px auto;  display: inline-block;" >
@@ -83,7 +83,6 @@ left: 0px;
 					<a class="middle ui button" class="item" id="PlayTap">연극 </a>
 					<a class="middle ui button" class="item" id="HotelTap">숙박 </a>
 				</div>
-				
 				<div style="float: left; margin-left: 20px; margin-top: 10px;">
 					<jsp:include page="${display}"></jsp:include>
 				    <div class="ui two buttons">
@@ -93,13 +92,16 @@ left: 0px;
 				    	<div style="width: 5%;">&nbsp;</div>
 				    	<div class="middle ui button" id="imageboardList" style="width: 30%;">목록</div>
 					</div>
+					<div style="margin-top: 40px;"></div>
 				</div>
+				
 			</form>
 			</div>	
 		</div>
+	
 	</div>
 	<!-- footer -->
-	<div class="ui compact menu" style="width: 100%; float: right; ">
+	<div class="ui container" style="margin-top: 20px; min-width:1170px; position: relative; ">
 		<jsp:include page="../main/I_footer.jsp" ></jsp:include>
 	</div>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script><!-- 시간 -->

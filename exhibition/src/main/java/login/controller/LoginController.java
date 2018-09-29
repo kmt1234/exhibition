@@ -26,6 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import company.bean.CompanyDTO;
 import company.dao.CompanyDAO;
+import customerService.bean.EventboardDTO;
 import member.bean.MemberDTO;
 import member.dao.MemberDAO;
 import member.dao.MemberTicketListPaging;
@@ -193,6 +194,7 @@ public class LoginController {
 			mav.addObject("display","/login/memberMypage.jsp");
 			mav.setViewName("/customerService/C_customerServiceForm"); // 개인마이페이지
 		} else if (code == 2) {
+			mav.addObject("c_license", (String)session.getAttribute("C_license"));
 			mav.addObject("display","/login/companyMypage.jsp");
 			mav.setViewName("/customerService/C_customerServiceForm"); // 법인마이페이지	
 		}
@@ -201,82 +203,151 @@ public class LoginController {
 	}
 	
 	// 임대리스트
-		@RequestMapping(value = "mypageRental", method = RequestMethod.GET)
-		public ModelAndView mypageRental(HttpSession session) {
+	@RequestMapping(value = "mypageRental", method = RequestMethod.GET)
+	public ModelAndView mypageRental(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("c_license", (String)session.getAttribute("C_license"));
+		mav.addObject("display","/login/mypageRental.jsp");
+		mav.setViewName("/customerService/C_customerServiceForm"); // 임대리스트
+
+		return mav;
+	}
+	// 임대리스트ajax
+	@RequestMapping(value = "getmypageRental", method = RequestMethod.POST)
+	public ModelAndView getmypageRental(HttpSession session) {
 		Object DTO = session.getAttribute("homepageMember");
-			session.setAttribute("DTO", DTO);
-			String C_license = (String) session.getAttribute("C_license");
-			Date date = new Date();
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
-			String dateM = formatter.format(date);
-			
-			Map<String,String> map = new HashMap<String,String>();
-			map.put("C_license", C_license);
-			map.put("dateM", dateM);
+		session.setAttribute("DTO", DTO);
+		String C_license = (String) session.getAttribute("C_license");
+		Date date = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+		String dateM = formatter.format(date);
+		
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("C_license", C_license);
+		map.put("dateM", dateM);
 
-			List<ExhibitionDTO> list = companyDAO.getExhibitionList(map);
-			for(int i = 0; i < list.size(); i++) {
-				list.get(i).setStartDate(list.get(i).getStartDate().substring(0, 10));
-				list.get(i).setEndDate(list.get(i).getEndDate().substring(0, 10));
-			}
-			
-			List<ConcertHallDTO> list2 = companyDAO.getPlayList(map);
-			for(int i = 0; i < list2.size(); i++) {
-				list2.get(i).setStartDate(list2.get(i).getStartDate().substring(0, 10));
-				list2.get(i).setEndDate(list2.get(i).getEndDate().substring(0, 10));
-			}
-			
-			
-			ModelAndView mav = new ModelAndView();
-			
-			mav.addObject("list",list);
-			mav.addObject("list2",list2);
-			mav.addObject("display","/login/mypageRental.jsp");
-			mav.setViewName("/customerService/C_customerServiceForm"); // 임대리스트
-
-			return mav;
+		List<ExhibitionDTO> list = companyDAO.getExhibitionList(map);
+		for(int i = 0; i < list.size(); i++) {
+			list.get(i).setStartDate(list.get(i).getStartDate().substring(0, 10));
+			list.get(i).setEndDate(list.get(i).getEndDate().substring(0, 10));
 		}
 		
-		// 임대내역
-		@RequestMapping(value = "mypageRentalPast", method = RequestMethod.GET)
-		public ModelAndView mypageRentalPast(@RequestParam(required = false, defaultValue = "1") String pg,HttpSession session) {
-			Object DTO = session.getAttribute("homepageMember");
-			session.setAttribute("DTO", DTO);
-			int endNum = Integer.parseInt(pg) * 10;
-			int startNum = endNum - 9;
-
-			Date date = new Date();
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
-			String dateM = formatter.format(date);
-			
-			Map<String, String> map = new HashMap<String, String>();
-			map.put("startNum", startNum+"");
-			map.put("endNum", endNum+"");
-			map.put("dateM", dateM);
-			
-			int totalA = companyDAO.mypageRentalPastTotal(map);
-			
-			memberTicketListPaging.setCurrentPage(Integer.parseInt(pg));
-			memberTicketListPaging.setPageBlock(3);
-			memberTicketListPaging.setPageSize(10);
-			memberTicketListPaging.setTotalA(totalA);
-			memberTicketListPaging.makePagingHTML();
-	
-			ModelAndView mav = new ModelAndView();
-			List<ExhibitionDTO> list = companyDAO.getAllRentalList(map);
-			for(int i = 0; i < list.size(); i++) {
-				list.get(i).setStartDate(list.get(i).getStartDate().substring(0, 10));
-				list.get(i).setEndDate(list.get(i).getEndDate().substring(0, 10));
-			}
-			
-			mav.addObject("pg", pg);
-			mav.addObject("memberTicketListPaging", memberTicketListPaging);
-			mav.addObject("list",list);
-			mav.addObject("display","/login/mypageRentalPast.jsp");
-			mav.setViewName("/customerService/C_customerServiceForm"); // 지난 임대 내역
- 
-			return mav;
+		List<ConcertHallDTO> list2 = companyDAO.getPlayList(map);
+		for(int i = 0; i < list2.size(); i++) {
+			list2.get(i).setStartDate(list2.get(i).getStartDate().substring(0, 10));
+			list2.get(i).setEndDate(list2.get(i).getEndDate().substring(0, 10));
 		}
+
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("list",list);
+		mav.addObject("list2",list2);
+		mav.setViewName("jsonView");
+		return mav;
+	}
+		
+	// 임대내역
+	@RequestMapping(value = "mypageRentalPast", method = RequestMethod.GET)
+	public ModelAndView mypageRentalPast(@RequestParam(required = false, defaultValue = "1") String pg,HttpSession session) {
+		Date date = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+		String dateM = formatter.format(date);
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("dateM", dateM);
+		
+		int totalA = companyDAO.mypageRentalPastTotal(map);
+
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("listSize",totalA);
+		mav.addObject("pg",pg);
+		mav.addObject("display","/login/mypageRentalPast.jsp");
+		mav.setViewName("/customerService/C_customerServiceForm"); // 지난 임대 내역
+ 
+		return mav;
+	}
+	// 임대내역ajax
+	@RequestMapping(value = "getAllRental", method = RequestMethod.POST)
+	public ModelAndView getAllRental(@RequestParam(required = false, defaultValue = "1") String pg,HttpSession session) {
+		Object DTO = session.getAttribute("homepageMember");
+		session.setAttribute("DTO", DTO);
+		int endNum = Integer.parseInt(pg) * 10;
+		int startNum = endNum - 9;
+
+		Date date = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+		String dateM = formatter.format(date);
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("startNum", startNum+"");
+		map.put("endNum", endNum+"");
+		map.put("dateM", dateM);
+		
+		int totalA = companyDAO.mypageRentalPastTotal(map);
+		
+		memberTicketListPaging.setCurrentPage(Integer.parseInt(pg));
+		memberTicketListPaging.setPageBlock(3);
+		memberTicketListPaging.setPageSize(10);
+		memberTicketListPaging.setTotalA(totalA);
+		memberTicketListPaging.makePagingHTML();
+		
+		ModelAndView mav = new ModelAndView();
+		List<ExhibitionDTO> list = companyDAO.getAllRentalList(map);
+		for(int i = 0; i < list.size(); i++) {
+			list.get(i).setStartDate(list.get(i).getStartDate().substring(0, 10));
+			list.get(i).setEndDate(list.get(i).getEndDate().substring(0, 10));
+		}
+
+		mav.addObject("pg", pg);
+		mav.addObject("memberTicketListPaging", memberTicketListPaging);
+		mav.addObject("list",list);
+		mav.setViewName("jsonView");
+		return mav;
+	}
+	
+	//날짜비교
+	@RequestMapping(value = "DateCompare", method = RequestMethod.POST)
+	public @ResponseBody String DateCompare(@RequestParam String startDate,@RequestParam String endDate) {
+		Date date = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+		String dateM = formatter.format(date);
+		startDate = startDate.replace("-", "");
+		endDate = endDate.replace("-", "");
+		int dateS = Integer.parseInt(dateM);
+		int startDateS = Integer.parseInt(startDate);
+		int endDateS = Integer.parseInt(endDate);
+		
+		if(startDateS<=dateS && dateS <=endDateS) {
+			return "exist";
+		}else {
+			return "not_exist";
+		}
+	}
+	
+	@RequestMapping(value = "deleteGOGO", method = RequestMethod.POST)
+	public ModelAndView deleteGOGO(@RequestParam String boothName,@RequestParam String title,@RequestParam String startDate,@RequestParam String endDate,HttpSession session) {
+		startDate = startDate.replace("-", "/");
+		endDate = endDate.replace("-", "/");
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("boothName", boothName);
+		map.put("title", title);
+		map.put("startDate", startDate);
+		map.put("endDate", endDate);
+		System.out.println(boothName+title+startDate+endDate);
+		companyDAO.deleteExBooth(map);
+		companyDAO.deleteCoBooth(map);
+		
+		
+		ModelAndView mav = new ModelAndView();
+
+//		mav.addObject("display","/login/mypageRental.jsp");
+//		mav.setViewName("/customerService/C_customerServiceForm"); // 임대리스트
+		
+		mav.setViewName("jsonView");
+		return mav;
+	}
+	
 
 	// 임시비밀번호 수령 시, 사업자등록번호의 비밀번호 변경
 	@RequestMapping(value = "changeCpwd", method = RequestMethod.POST)
@@ -348,16 +419,117 @@ public class LoginController {
 		} 
 	}
 	
-	//회원의 예매내역 상세보기
+	//회원의 예매정보 상세보기
 	@RequestMapping(value="eventDetail", method=RequestMethod.POST)
 	public ModelAndView eventDetail(@RequestParam String memberId, @RequestParam String imageName, @RequestParam String playDate, @RequestParam String ticketQty) {
 		
-		System.out.println("내역 아이디 :" + memberId);
-		System.out.println("내역 연극명 :" + imageName);
-		System.out.println("내역 날짜 :" + playDate);
-		System.out.println("내역 티켓수 :" + ticketQty);
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("imageName", imageName);
+		
+		EventboardDTO eventboardDTO = null;
+		
+		//DB(연극)
+		eventboardDTO = memberDAO.getPerformanceInfo(map);
+		
+		if(eventboardDTO==null) {
+			//DB(전시회)
+			eventboardDTO = memberDAO.getExhibitionInfo(map);
+		}
+		
+		String playDate2=playDate.replace("-", "");
 		
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("memberId", memberId);
+		mav.addObject("imageName", imageName);
+		mav.addObject("playDate2", playDate2);
+		mav.addObject("playDate", playDate);
+		mav.addObject("ticketQty", ticketQty);
+		mav.addObject("eventboardDTO", eventboardDTO);
+		mav.addObject("display","/login/memberMypage_ticketInfo.jsp");
+		mav.setViewName("/customerService/C_customerServiceForm");
+		return mav;
+	}
+	
+	//예매내역 이동
+	@RequestMapping(value="ticketHistory", method=RequestMethod.GET)
+	public ModelAndView ticketHistory(@RequestParam(required = false, defaultValue = "1") String pg, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("pg",pg);
+		mav.addObject("display","/login/memberMypage_ticketHistory.jsp");
+		mav.setViewName("/customerService/C_customerServiceForm");
+		return mav;
+	}
+	
+	//과거 예매내역 가져오는 메소드(ajax) 
+	@RequestMapping(value="getTicketHistory", method=RequestMethod.GET)
+	public ModelAndView getTicketHistory(@RequestParam(required = false, defaultValue = "1") String pg, HttpSession session) {
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("homepageMember");
+		String id = memberDTO.getM_Id();
+		
+		//페이징 처리(5개씩 출력)	
+		int endNum = Integer.parseInt(pg) * 10;
+		int startNum = endNum - 9;
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("startNum", startNum+"");
+		map.put("endNum", endNum+"");
+		map.put("id", id);
+		
+		int totalA = memberDAO.getTicketHistoryListTotalA(map);
+		
+		memberTicketListPaging.setCurrentPage(Integer.parseInt(pg));
+		memberTicketListPaging.setPageBlock(10);
+		memberTicketListPaging.setPageSize(10);
+		memberTicketListPaging.setTotalA(totalA);
+		memberTicketListPaging.makePagingHTML_past();
+		
+		//DB
+		List<Book_performance_membersDTO> list = new ArrayList<Book_performance_membersDTO>();
+		list = memberDAO.getTicketHistoryList(map);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("pg", pg);
+		mav.addObject("list", list);
+		mav.addObject("TicketHistoryListPaging", memberTicketListPaging);
+		mav.setViewName("jsonView");
+		
+		if(list==null) {
+			mav.addObject("no_data", "no_data");
+			return mav;
+		} 
+		else {
+			return mav;
+		}
+	}
+	
+	//예매 취소
+	@RequestMapping(value="ticketCancel", method=RequestMethod.POST)
+	public ModelAndView ticketCancel(@RequestParam String imageName, @RequestParam String playDate, @RequestParam String ticketQty, @RequestParam(required = false, defaultValue = "1") String pg, HttpSession session) {
+		
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("homepageMember");
+		String id = memberDTO.getM_Id();
+		
+		Map<String,String> map = new HashMap<String, String>();
+		map.put("imageName", imageName);
+		map.put("playDate", playDate);
+		map.put("ticketQty", ticketQty);
+		map.put("memberId", id);
+		
+		//DB
+		int resultPD = memberDAO.cancelPerformance(map);	//연극 예매 취소
+		int resultPC = memberDAO.backPerformance(map);	//연극 예매티켓 수정
+		
+		//연극취소 아니라면 전시회 취소
+		if(resultPD==0 || resultPC==0) {
+			int resultED = memberDAO.cancelExhibition(map);	//전시회 예매 취소
+			int resultEC = memberDAO.backExhibition(map);	//전시회 예매티켓 수정
+			
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("pg", pg);
+		mav.addObject("display","/login/memberMypage_ticketList.jsp");
+		mav.setViewName("/customerService/C_customerServiceForm");
 		return mav;
 	}
 	

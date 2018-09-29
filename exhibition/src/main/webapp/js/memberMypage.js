@@ -1,18 +1,19 @@
 $(document).ready(function(){
 	
-	$('#Ticket-List-Div').hide();
-	$('#Ticket-History-Div').hide();
-		
-	//회원정보 수정
+	//회원정보 수정 메뉴
 	$('#member-info-modify').click(function(){
-		$('#member-info-modify').addClass('active');
-		$('#member-ticket-list').removeClass('active');
-		$('#member-ticket-history').removeClass('active');
+		location.href="/exhibition/login/mypage.do";
 		
-		$('#modify-Div').show();
-		$('#Ticket-List-Div').hide();
-		$('#Ticket-History-Div').hide();
-		
+	});
+	
+	// 예매리스트 탭 
+	$('#member-ticket-list').click(function(){
+		location.href="/exhibition/login/memerMypage_ticketList.do";
+	});
+	
+	//예매내역 탭
+	$('#member-ticket-history').click(function(){
+		location.href="/exhibition/login/ticketHistory.do";
 	});
 	
 	

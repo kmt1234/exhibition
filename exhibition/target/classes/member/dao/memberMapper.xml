@@ -50,21 +50,67 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 	
 	<!--회원의 예매 리스트를 가져오는 메소드-->
-	<select id="getMemberTicketList" parameterType="java.util.Map" resultType="performance.bean.Book_performance_membersDTO">                     
-        SELECT * FROM (
+	<select id="getMemberTicketList" parameterType="java.util.Map" resultType="performance.bean.Book_performance_membersDTO">                      				  
+    	 SELECT * FROM (
 		    			select rownum rn, tt. * from(
-		                	(select imageName,to_char(playDate,'YYYY-MM-DD') as playDate,memberId,ticketQty from BOOK_PLAY_MEMBERS where memberid = #{id})
+		                	(select imageName,to_char(playDate,'YYYY-MM-DD') as playDate,memberId,ticketQty from BOOK_PLAY_MEMBERS where memberid = #{id} and playDate > sysdate)
 		                	 UNION ALL
-		                	(select imageName,to_char(playDate,'YYYY-MM-DD') as playDate,memberId,ticketQty from BOOK_EXHIBITION_MEMBERS where memberid = #{id}) ORDER BY playDate DESC)tt
-    				  )where rn <![CDATA[>=]]> #{startNum} and rn <![CDATA[<=]]> #{endNum}
+		                	(select imageName,to_char(playDate,'YYYY-MM-DD') as playDate,memberId,ticketQty from BOOK_EXHIBITION_MEMBERS where memberid = #{id} and playDate > sysdate) ORDER BY playDate DESC)tt
+    				  )where rn <![CDATA[>=]]> #{startNum} and rn <![CDATA[<=]]> #{endNum}		  
 	</select>
 	
-	<!--회원의 예매 리스트를 가져오는 메소드 -->
+	<!--회원의 예매 리스트 수를 가져오는 메소드 -->
 	<select id="getMemberTicketListTotalA" parameterType="java.util.Map" resultType="int">
 		SELECT count(*) FROM (
-                select * from (select imageName,to_char(playDate,'YYYY-MM-DD') as playDate,memberId,ticketQty from BOOK_PLAY_MEMBERS where memberid = #{id} ) UNION ALL
-                select * from (select imageName,to_char(playDate,'YYYY-MM-DD') as playDate,memberId,ticketQty from BOOK_EXHIBITION_MEMBERS where memberid = #{id})
+                select * from (select imageName,to_char(playDate,'YYYY-MM-DD') as playDate,memberId,ticketQty from BOOK_PLAY_MEMBERS where memberid = #{id} and playDate > sysdate) UNION ALL
+                select * from (select imageName,to_char(playDate,'YYYY-MM-DD') as playDate,memberId,ticketQty from BOOK_EXHIBITION_MEMBERS where memberid = #{id} and playDate > sysdate)
               )ORDER BY playDate DESC
 	</select>
+	
+	<!--예매한 연극정보 가져오는 메소드  -->
+	<select id="getPerformanceInfo" parameterType="java.util.Map" resultType="eventboard">
+		select * from eventboard_play where imageName = #{imageName}
+	</select>
+	
+	<!--예매한 전시회정보 가져오는 메소드  -->
+	<select id="getExhibitionInfo" parameterType="java.util.Map" resultType="eventboard">
+		select * from eventboard where imageName = #{imageName}
+	</select>
+	
+	<!--과거 예매내역 수 가져오는 메소드   -->
+	<select id="getTicketHistoryListTotalA" parameterType="java.util.Map" resultType="int">
+		SELECT count(*) FROM (
+                select * from (select imageName,to_char(playDate,'YYYY-MM-DD') as playDate,memberId,ticketQty from BOOK_PLAY_MEMBERS where memberid = #{id} and playDate <![CDATA[<=]]> sysdate) UNION ALL
+                select * from (select imageName,to_char(playDate,'YYYY-MM-DD') as playDate,memberId,ticketQty from BOOK_EXHIBITION_MEMBERS where memberid = #{id} and playDate <![CDATA[<=]]> sysdate)
+              )ORDER BY playDate DESC 
+	</select>
+	
+	<!--과거 예매내역 가져오는 메소드 -->
+	<select id="getTicketHistoryList" parameterType="java.util.Map" resultType="performance.bean.Book_performance_membersDTO">
+		SELECT * FROM (
+                select * from (select imageName,to_char(playDate,'YYYY-MM-DD') as playDate,memberId,ticketQty from BOOK_PLAY_MEMBERS where memberid = #{id} and playDate <![CDATA[<=]]> sysdate) UNION ALL
+                select * from (select imageName,to_char(playDate,'YYYY-MM-DD') as playDate,memberId,ticketQty from BOOK_EXHIBITION_MEMBERS where memberid = #{id} and playDate <![CDATA[<=]]> sysdate)
+              )ORDER BY playDate DESC
+	</select>
+	
+	<!--연극 예매 취소 -->
+	<delete id="cancelPerformance" parameterType="java.util.Map">
+		delete from book_play_members where memberId = #{memberId} and imageName = #{imageName} and ticketQty = #{ticketQty}
+	</delete>
+	
+	<!--연극 예매티켓 수정 -->
+	<update id="backPerformance" parameterType="java.util.Map">
+		update eventboard_play_book set remainticket = remainticket+#{ticketQty}, bookticket = bookticket-#{ticketQty} where imagename=#{imageName} and playdate = #{playDate}
+	</update>
+	
+	<!--전시회 예매 취소-->
+	<delete id="cancelExhibition" parameterType="java.util.Map">
+		delete from book_exhibition_members where memberId = #{memberId} and imageName = #{imageName} and ticketQty = #{ticketQty}
+	</delete>
+	
+	<!--전시회 예매티켓 수정 -->
+	<update id="backExhibition" parameterType="java.util.Map">
+		update eventboard_exhibition_book set remainticket = remainticket+#{ticketQty}, bookticket = bookticket-#{ticketQty} where imagename=#{imageName} and playdate = #{playDate}
+	</update>
 	
 </mapper>

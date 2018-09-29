@@ -139,9 +139,6 @@
 				</div><!--class="ui card"-->
 			</div><!--align="center"  -->
 		</div><!--id="modify-Div"  -->
-	<div class="ui segment" id="Ticket-History-Div">
-	  
-	</div>	
 	<div style="display: inline-block; border: 1px solid; margin-top:80px; width: 465px; height: 385px;"></div>
 </div><!-- 전체 -->
 </div>

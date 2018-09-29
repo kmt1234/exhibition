@@ -338,7 +338,7 @@ public class CustomerServiceController {
 		mav.setViewName("jsonView");
 		return mav;
 	}
-
+	
 	// 고객의 소리 문의받은글 검색 & 페이징
 	@RequestMapping(value = "C_inquire_Search", method = RequestMethod.POST)
 	public ModelAndView C_inquire_Search(@RequestParam(required = false) Map<String, String> map) {
@@ -458,7 +458,7 @@ public class CustomerServiceController {
 		mav.setViewName("/customerService/C_customerServiceForm");
 		return mav;
 	}
-
+	
 	// 자주묻는 질문 - 작성등록
 	@RequestMapping(value = "C_QnA_checkWrite", method = RequestMethod.POST)
 	public ModelAndView C_QnA_checkWrite(@RequestParam String C_qty, @RequestParam String subject,
@@ -649,6 +649,7 @@ public class CustomerServiceController {
 	public String imageboardListForm(@RequestParam(required = false, defaultValue = "1") String pg, Model model) {
 
 		model.addAttribute("pg", pg);
+		model.addAttribute("display","/customerService/C_imageboardList.jsp");
 		return "/customerService/C_mainImageboardListForm";
 	}
 
@@ -922,7 +923,8 @@ public class CustomerServiceController {
 		mav.addObject("imageboardPaging", imageboardPaging);
 		mav.addObject("listSize", list.size() + "");
 		mav.addObject("list", list);
-		mav.setViewName("/customerService/C_eventboardListForm");
+		mav.addObject("display","/customerService/C_eventboardListForm.jsp");
+		mav.setViewName("/customerService/C_mainImageboardListForm");
 		return mav;
 	}
 	
@@ -1006,7 +1008,8 @@ public class CustomerServiceController {
 		mav.addObject("imageboardPaging", imageboardPaging);
 		mav.addObject("listSize", list.size() + "");
 		mav.addObject("list", list);
-		mav.setViewName("/customerService/C_eventboardList_playForm");
+		mav.addObject("display","/customerService/C_eventboardList_playForm.jsp");
+		mav.setViewName("/customerService/C_mainImageboardListForm");
 		return mav;
 	}
 	
@@ -1092,7 +1095,8 @@ public class CustomerServiceController {
 		mav.addObject("imageboardPaging", imageboardPaging);
 		mav.addObject("listSize", list.size() + "");
 		mav.addObject("list", list);
-		mav.setViewName("/customerService/C_hotelListForm");
+		mav.addObject("display","/customerService/C_hotelListForm.jsp");
+		mav.setViewName("/customerService/C_mainImageboardListForm");
 		return mav;
 	}
 
@@ -1562,6 +1566,37 @@ public class CustomerServiceController {
 		return mav;
 	}
 	
+	//전시회,연극 등록 층 중복 체크*****
+	@RequestMapping(value="checkReservation", method=RequestMethod.POST)
+	public ModelAndView checkReservation(@RequestParam String postSelect, @RequestParam String imageName, @RequestParam String startDate, @RequestParam String endDate, @RequestParam String eventPlace) {
+		
+		Map<String,String> map = new HashMap<String, String>();
+		map.put("postSelect", postSelect);
+		map.put("imageName", imageName);
+		map.put("startDate", startDate);
+		map.put("endDate", endDate);
+		map.put("eventPlace", eventPlace);
+		
+		EventboardDTO eventboardDTO = null;
+		String check = null;
+		
+		//DB
+		if(postSelect.equals("1")) {
+			eventboardDTO = customerServiceDAO.checkReservation_exhibition(map);
+		}else if(postSelect.equals("2")) {
+			eventboardDTO = customerServiceDAO.checkReservation_performance(map);
+		}
+		
+		if(eventboardDTO==null) {
+			check = "no_data";
+		}else {
+			check = "yes_data";
+		} 
+		
+		ModelAndView mav = new ModelAndView();
+		
+		return mav;
+	}
 	
 		
 		
