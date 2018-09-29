@@ -26,7 +26,6 @@
 
 </style>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
 </head>
 <body>
 <header>
@@ -231,17 +230,6 @@ $(document).ready(function(){
 		current_item.hide();
 	}
 	
-	$('.bxslider').bxSlider({
-   	 	auto: true,
-        speed: 500,
-        pause: 4000,
-        mode:'fade',
-        autoControls: true,
-        pager:true,
-   });
-	
-	
-	   
 	
 });
 </script>

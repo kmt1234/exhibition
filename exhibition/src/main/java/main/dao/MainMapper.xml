@@ -20,6 +20,9 @@
  		select * from C_QnA where subject like '%'||#{index_keyword}||'%'
  	</select>
  	
+ 	<select id="index_exSlider" resultType="eventboard">
+ 		select * from eventboard_play where startDate >= sysdate-1
+ 	</select>
  </mapper>
  
  

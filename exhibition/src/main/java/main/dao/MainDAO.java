@@ -26,4 +26,6 @@ public interface MainDAO {
 	
 	public int getTotal_index_NoticeSearch(Map<String, String> map);
 
+	public List<EventboardDTO> index_exSlider();
+
 }
