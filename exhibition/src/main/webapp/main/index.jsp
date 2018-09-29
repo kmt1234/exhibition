@@ -41,31 +41,27 @@
 		<jsp:include page="${display }"/>
 	</div>
 <!--메인화면 아래 부분(일정)  -->
-	<div class="ui container" style="margin-top: 20px; min-width:1170px; height:200px;  ">
+	<div class="ui container" style="margin-top: 20px; border:1px ridge rgb(155,155,155,.6); min-width:1170px; height:300px;  ">
 		<!-- 공연포스터 슬라이드?? -->
-		<div style=" margin-left:15px; width:270px; height:200px;  display: inline-block; float: left;"id="bxSlider"  align="center">
+		<div style=" margin-left:15px; width:270px; height:220px; border:1px ridge rgb(155,155,155,.6); display: inline-block; float: left;"id="bxSlider"  align="center">
 			<jsp:include page="../main/slide.jsp"></jsp:include>
 		</div>
 		<!-- 달력  -->
-		<div style=" margin-left:20px; width:270px; height:200px;  display: inline-block; float: left;" >
+		<div style=" margin-left:20px; width:270px; height:220px; border:1px ridge rgb(155,155,155,.6); display: inline-block; float: left;" >
 			<div id="mainCal" style="min-width:270; height: 200px "></div>
 		</div>
 		<!-- today -->
-		<div style=" margin-left:20px; width:270px; height:200px;  display: inline-block; float: left; overflow: scroll;" >
-			<!-- <img style="min-width:270; height: 200px " src='../img/B1.jpg'></img> -->
+		<div style=" margin-left:20px; width:270px; height:220px; border:1px ridge rgb(155,155,155,.6); display: inline-block; float: left; overflow: scroll;" >
 			<dl class="todays" id="todays">
 				<dt>Today's</dt>
 				<dd class="today_list_dd">
 					<ul id="total_list" style="list-style:none;">
-						
-	
-	
 					</ul>
 				</dd>
 			</dl>
 		</div>
 		<!-- 공지사항  -->
-		<div style="margin-left:20px; width:270px; height:200px;  display: inline-block; float: left;" >
+		<div style="margin-left:20px; width:270px; height:220px; border:1px ridge rgb(155,155,155,.6); display: inline-block; float: left;" >
 			<div style="height : 50px; font-weight: bold; font-size: x-large;" >공지사항</div>
 			<div id="C_notice_MainList" style="height : 170px;"></div>
 		</div>
