@@ -13,6 +13,6 @@ public class SalesBusinessRoomDTO {
 	private String second;
 	private String third;
 	private String fourth;
-
+	private String yearMonth;
 }
 

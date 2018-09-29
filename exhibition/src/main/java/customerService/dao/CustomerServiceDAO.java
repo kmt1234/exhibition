@@ -139,11 +139,17 @@ public interface CustomerServiceDAO {
 	//박람회 부스 총 매출액
 	public int getSalesTotalRentExhibition(String salesMon);
 	
+	//박람회 년 월 부스별 매출 가져오기
+	public List<SalesExhibitionDTO> getYearMonthSalesExhibition(Map<String, String> map);
+	
 	//콘서트 홀 매출현황
 	public List<SalesConcertHallDTO> getSalesConcertHall(String salesMon);
 	
 	//콘서트 홀 총 매출액
 	public int getSalesTotalRentConcertHall(String salesMon);
+	
+	//콘서트 홀 년 월 홀별 매출 가져오기
+	public List<SalesConcertHallDTO> getYearMonthSalesConcertHall(Map<String, String> map);
 	
 	//비즈니스룸 부스 매출현황
 	public List<SalesBusinessRoomDTO> getSalesBusinessRoom(String salesMon);
@@ -151,11 +157,26 @@ public interface CustomerServiceDAO {
 	//비즈니스룸 총 매출액
 	public int getSalesTotalRentBusinessRoom(String salesMon);
 	
+	//비즈니스룸 년 월 룸별 매출 가져오기
+	public List<SalesBusinessRoomDTO> getYearMonthBusinessRoom(Map<String, String> map);
+	
 	//콘서트 티켓 매출현황
 	public List<EventboardDTO> getSalesConcertTicket(String salesMon);
 	
 	//콘서트 티켓 총 매출액
 	public int getSalesTotalRentConcertTicket(String salesMon);
+	
+	//콘서트 티켓 년 월 매출 가져오기
+	public List<EventboardDTO> getYearMonthConcertTicket(Map<String, String> map);
+	
+	//박람회 티켓 매출현황
+	public List<EventboardDTO> getSalesExhibitionTicket(String salesMon);
+	
+	//박람회 티켓 총 매출액
+	public int getSalesTotalRentExhibitionTicket(String salesMon);
+	
+	//박람회 티켓 년 월 매출 가져오기
+	public List<EventboardDTO> getYearMonthExhibitionTicket(Map<String, String> map);
 
 	//회원정보
 	public List<MemberDTO> getMemberList(Map<String, Integer> map);
@@ -216,7 +237,14 @@ public interface CustomerServiceDAO {
 	public List<EventboardDTO> checkReservation_performance(Map<String, String> map);	//연극 예약 중복 체크
 	
 	
+	
+	
+	
+	
+	
+	
 
+	
 	
 	
 	
