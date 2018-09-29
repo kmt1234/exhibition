@@ -455,5 +455,33 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	public List<EventboardDTO> checkReservation_performance(Map<String, String> map) {
 		return sqlSession.selectList("customerServiceSQL.checkReservation_performance", map);
 	}
+	public List<SalesExhibitionDTO> getYearMonthSalesExhibition(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public List<SalesConcertHallDTO> getYearMonthSalesConcertHall(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public List<SalesBusinessRoomDTO> getYearMonthBusinessRoom(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public List<EventboardDTO> getYearMonthConcertTicket(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public List<EventboardDTO> getSalesExhibitionTicket(String salesMon) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public int getSalesTotalRentExhibitionTicket(String salesMon) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	public List<EventboardDTO> getYearMonthExhibitionTicket(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

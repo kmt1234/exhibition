@@ -7,6 +7,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -31,6 +32,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import company.bean.CompanyDTO;
+import customerService.bean.ChartDTO;
 import customerService.bean.CustomerServiceDTO;
 import customerService.bean.CustomerServicePaging;
 import customerService.bean.EventboardDTO;
@@ -1318,13 +1320,79 @@ public class CustomerServiceController {
 		int salesTotalRent = customerServiceDAO.getSalesTotalRentExhibition(salesMon);
 		String salesTotalRentstr = String.format("%,d", salesTotalRent);
 
+		// 부스 별 연 월 매출 가져오기
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("start", year.substring(2) + "-01-01");
+		map.put("end", year.substring(2) + "-12-01");
+		
+		
+		List<SalesExhibitionDTO> yearMonthList = customerServiceDAO.getYearMonthSalesExhibition(map);
+		List<SalesExhibitionDTO> yearMonthSaleList = new ArrayList<SalesExhibitionDTO>();
+		
+		SalesExhibitionDTO salesExDTOre = null;
+		for (int i = 1; i <= 14; i++) {
+			for (int j = 1; j <= 12; j++) {
+				if (j < 10) {
+					salesExDTOre = new SalesExhibitionDTO();
+					salesExDTOre.setBoothName("Booth" + i);
+					salesExDTOre.setYearMonth(year.substring(2) + "/0" + j);
+					salesExDTOre.setTotalRent(0);
+					yearMonthSaleList.add(salesExDTOre);
+				} else {
+					salesExDTOre = new SalesExhibitionDTO();
+					salesExDTOre.setBoothName("Booth" + i);
+					salesExDTOre.setYearMonth(year.substring(2) + "/" + j);
+					salesExDTOre.setTotalRent(0);
+					yearMonthSaleList.add(salesExDTOre);
+				}
+			}
+		}
+		for(int i = 0; i < yearMonthList.size(); i++) {
+			for(int j = 0; j < yearMonthSaleList.size(); j++) {
+				if(yearMonthList.get(i).getBoothName().equals(yearMonthSaleList.get(j).getBoothName())) {
+					if(yearMonthList.get(i).getYearMonth().equals(yearMonthSaleList.get(j).getYearMonth())) {
+						yearMonthSaleList.get(j).setTotalRent(yearMonthList.get(i).getTotalRent());
+					}
+				}
+			}
+		}
+		
+		ChartDTO chartDTO = null;
+		
+		List<ChartDTO> yearMonth = new ArrayList<ChartDTO>();
+		for(int i = 1; i <= 14; i++) {
+			chartDTO = new ChartDTO();
+			chartDTO.setName("Booth"+i);
+			chartDTO.setData(new int[12]);
+			for(int j = 0; j < yearMonthSaleList.size(); j++) {
+				if(yearMonthSaleList.get(j).getBoothName().equals("Booth"+i)) {
+					for(int k = 1; k <= 12; k++) {
+						if(k < 10) {
+							if(yearMonthSaleList.get(j).getYearMonth().substring(3,5).equals("0"+k)) {
+								chartDTO.getData()[k-1] = yearMonthSaleList.get(j).getTotalRent();
+							}
+						} else {
+							if(yearMonthSaleList.get(j).getYearMonth().substring(3,5).equals(k+"")) {
+								chartDTO.getData()[k-1] = yearMonthSaleList.get(j).getTotalRent();
+							}
+						}
+						
+					}
+				}
+			}
+			yearMonth.add(chartDTO);
+		}
+		
+
+
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
 		mav.addObject("salesTotalRent", salesTotalRentstr);
+		mav.addObject("yearMonth", yearMonth);
 		mav.setViewName("jsonView");
 		return mav;
 	}
-	
+
 	// 콘서트 홀 총 매출액 보여주는 컨트롤
 	@RequestMapping(value = "C_salesConcertHall", method = RequestMethod.POST)
 	public ModelAndView C_salesConcertHall(@RequestParam String year, @RequestParam String month) {
@@ -1335,49 +1403,368 @@ public class CustomerServiceController {
 
 		int salesTotalRent = customerServiceDAO.getSalesTotalRentConcertHall(salesMon);
 		String salesTotalRentstr = String.format("%,d", salesTotalRent);
+		
+		// 홀 별 연 월 매출 가져오기
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("start", year.substring(2) + "-01-01");
+		map.put("end", year.substring(2) + "-12-01");
+		
+		
+		List<SalesConcertHallDTO> yearMonthList = customerServiceDAO.getYearMonthSalesConcertHall(map);
+		List<SalesConcertHallDTO> yearMonthSaleList = new ArrayList<SalesConcertHallDTO>();
+		
+		SalesConcertHallDTO salesEvDTOre = null;
+		for (int i = 1; i <= 4; i++) {
+			for (int j = 1; j <= 12; j++) {
+				if (j < 10) {
+					salesEvDTOre = new SalesConcertHallDTO();
+					salesEvDTOre.setHallName("P_Room" + i);
+					salesEvDTOre.setYearMonth(year.substring(2) + "/0" + j);
+					salesEvDTOre.setTotalRent(0);
+					yearMonthSaleList.add(salesEvDTOre);
+				} else {
+					salesEvDTOre = new SalesConcertHallDTO();
+					salesEvDTOre.setHallName("P_Room" + i);
+					salesEvDTOre.setYearMonth(year.substring(2) + "/" + j);
+					salesEvDTOre.setTotalRent(0);
+					yearMonthSaleList.add(salesEvDTOre);
+				}
+			}
+		}
+		for(int i = 0; i < yearMonthList.size(); i++) {
+			for(int j = 0; j < yearMonthSaleList.size(); j++) {
+				if(yearMonthList.get(i).getHallName().equals(yearMonthSaleList.get(j).getHallName())) {
+					if(yearMonthList.get(i).getYearMonth().equals(yearMonthSaleList.get(j).getYearMonth())) {
+						yearMonthSaleList.get(j).setTotalRent(yearMonthList.get(i).getTotalRent());
+					}
+				}
+			}
+		}
+		
+		ChartDTO chartDTO = null;
+		
+		List<ChartDTO> yearMonth = new ArrayList<ChartDTO>();
+		for(int i = 1; i <= 4; i++) {
+			chartDTO = new ChartDTO();
+			chartDTO.setName("P_Room"+i);
+			chartDTO.setData(new int[12]);
+			for(int j = 0; j < yearMonthSaleList.size(); j++) {
+				if(yearMonthSaleList.get(j).getHallName().equals("P_Room" + i)) {
+					for(int k = 1; k <= 12; k++) {
+						if(k < 10) {
+							if(yearMonthSaleList.get(j).getYearMonth().substring(3,5).equals("0"+k)) {
+								chartDTO.getData()[k-1] = yearMonthSaleList.get(j).getTotalRent();
+							}
+						} else {
+							if(yearMonthSaleList.get(j).getYearMonth().substring(3,5).equals(k+"")) {
+								chartDTO.getData()[k-1] = yearMonthSaleList.get(j).getTotalRent();
+							}
+						}
+						
+					}
+				}
+			}
+			yearMonth.add(chartDTO);
+		}
+		
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
 		mav.addObject("salesTotalRent", salesTotalRentstr);
+		mav.addObject("yearMonth", yearMonth);
 		mav.setViewName("jsonView");
 		return mav;
 	}
-	
-	
-	// 비즈니스룸 총 매출액 보여주는 컨트롤 
+
+	// 비즈니스룸 총 매출액 보여주는 컨트롤
 	@RequestMapping(value = "C_salesBusinessRoom", method = RequestMethod.POST)
 	public ModelAndView C_salesBusinessRoom(@RequestParam String year, @RequestParam String month) {
 		String salesMon = year.substring(2) + "-" + month + "-" + "01";
 
-		// 홀 이름, 예약점유 일수, 총 매출액 가져오는 sql
+		// 비즈니스룸 이름, 예약점유 일수, 총 매출액 가져오는 sql
 		List<SalesBusinessRoomDTO> list = customerServiceDAO.getSalesBusinessRoom(salesMon);
 
 		int salesTotalRent = customerServiceDAO.getSalesTotalRentBusinessRoom(salesMon);
 		String salesTotalRentstr = String.format("%,d", salesTotalRent);
+		
+		// 비즈니스룸 별 연 월 매출 가져오기
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("start", year.substring(2) + "-01-01");
+		map.put("end", year.substring(2) + "-12-01");
+		
+		List<SalesBusinessRoomDTO> yearMonthList = customerServiceDAO.getYearMonthBusinessRoom(map);
+		List<SalesBusinessRoomDTO> yearMonthSaleList = new ArrayList<SalesBusinessRoomDTO>();
+		
+		SalesBusinessRoomDTO salesBrDTOre = null;
+		for (int i = 1; i <= 6; i++) {
+			for (int j = 1; j <= 12; j++) {
+				if (j < 10) {
+					salesBrDTOre = new SalesBusinessRoomDTO();
+					salesBrDTOre.setRoomName("Room" + i);
+					salesBrDTOre.setYearMonth(year.substring(2) + "/0" + j);
+					salesBrDTOre.setTotalRent(0);
+					yearMonthSaleList.add(salesBrDTOre);
+				} else {
+					salesBrDTOre = new SalesBusinessRoomDTO();
+					salesBrDTOre.setRoomName("Room" + i);
+					salesBrDTOre.setYearMonth(year.substring(2) + "/" + j);
+					salesBrDTOre.setTotalRent(0);
+					yearMonthSaleList.add(salesBrDTOre);
+				}
+			}
+		}
+		for(int i = 0; i < yearMonthList.size(); i++) {
+			for(int j = 0; j < yearMonthSaleList.size(); j++) {
+				if(yearMonthList.get(i).getRoomName().equals(yearMonthSaleList.get(j).getRoomName())) {
+					if(yearMonthList.get(i).getYearMonth().equals(yearMonthSaleList.get(j).getYearMonth())) {
+						yearMonthSaleList.get(j).setTotalRent(yearMonthList.get(i).getTotalRent());
+					}
+				}
+			}
+		}
+		
+		ChartDTO chartDTO = null;
+		
+		List<ChartDTO> yearMonth = new ArrayList<ChartDTO>();
+		for(int i = 1; i <= 6; i++) {
+			chartDTO = new ChartDTO();
+			chartDTO.setName("Room"+i);
+			chartDTO.setData(new int[12]);
+			for(int j = 0; j < yearMonthSaleList.size(); j++) {
+				if(yearMonthSaleList.get(j).getRoomName().equals("Room" + i)) {
+					for(int k = 1; k <= 12; k++) {
+						if(k < 10) {
+							if(yearMonthSaleList.get(j).getYearMonth().substring(3,5).equals("0"+k)) {
+								chartDTO.getData()[k-1] = yearMonthSaleList.get(j).getTotalRent();
+							}
+						} else {
+							if(yearMonthSaleList.get(j).getYearMonth().substring(3,5).equals(k+"")) {
+								chartDTO.getData()[k-1] = yearMonthSaleList.get(j).getTotalRent();
+							}
+						}
+						
+					}
+				}
+			}
+			yearMonth.add(chartDTO);
+		}
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
 		mav.addObject("salesTotalRent", salesTotalRentstr);
+		mav.addObject("yearMonth", yearMonth);
 		mav.setViewName("jsonView");
 		return mav;
 	}
-	
-	//콘서트 티켓 매출
+
+	// 콘서트 티켓 매출
 	@RequestMapping(value = "C_salesConcertTicket", method = RequestMethod.POST)
 	public ModelAndView C_salesConcertTicket(@RequestParam String year, @RequestParam String month) {
 		String salesMon = year.substring(2) + "-" + month + "-" + "01";
-		
+
 		System.out.println(salesMon);
-		
-		// 홀 이름, 예약점유 일수, 총 매출액 가져오는 sql
+
+		// 콘서트 티켓 이름, 예약점유 일수, 총 매출액 가져오는 sql
 		List<EventboardDTO> list = customerServiceDAO.getSalesConcertTicket(salesMon);
 
 		int salesTotalRent = customerServiceDAO.getSalesTotalRentConcertTicket(salesMon);
 		String salesTotalRentstr = String.format("%,d", salesTotalRent);
+		
+		// 콘서트 티켓 별 연 월 매출 가져오기
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("start", year.substring(2) + "-01-01");
+		map.put("end", year.substring(2) + "-12-01");
+		
+		List<EventboardDTO> yearMonthList = customerServiceDAO.getYearMonthConcertTicket(map);
+		List<ChartDTO> yearMonth = new ArrayList<ChartDTO>();
+		List<EventboardDTO> yearMonthSaleList = new ArrayList<EventboardDTO>();
+		
+		EventboardDTO salesEvDTOre = null;
+		for (int i = 0; i < yearMonthList.size(); i++) {
+			for (int j = 1; j <= 12; j++) {
+				if (j < 10) {
+					salesEvDTOre = new EventboardDTO();
+					salesEvDTOre.setImageName(yearMonthList.get(i).getImageName());
+					salesEvDTOre.setYearMonth(year.substring(2) + "/0" + j);
+					salesEvDTOre.setTotalRent(0);
+					yearMonthSaleList.add(salesEvDTOre);
+				} else {
+					salesEvDTOre = new EventboardDTO();
+					salesEvDTOre.setImageName(yearMonthList.get(i).getImageName());
+					salesEvDTOre.setYearMonth(year.substring(2) + "/" + j);
+					salesEvDTOre.setTotalRent(0);
+					yearMonthSaleList.add(salesEvDTOre);
+				}
+			}
+		}
+		
+		List<EventboardDTO> duplicateRemoveList = new ArrayList<EventboardDTO>(new LinkedHashSet<EventboardDTO>(yearMonthSaleList));
+
+		
+		for(int i = 0; i < yearMonthList.size(); i++) {
+			for(int j = 0; j < duplicateRemoveList.size(); j++) {
+				if(yearMonthList.get(i).getImageName().equals(duplicateRemoveList.get(j).getImageName())) {
+					if(yearMonthList.get(i).getYearMonth().equals(duplicateRemoveList.get(j).getYearMonth())) {
+						duplicateRemoveList.get(j).setTotalRent(yearMonthList.get(i).getTotalRent());
+						}
+					}
+				}
+			}
+		
+		
+		
+		ChartDTO chartDTO = null;
+		for(int i = 0; i < duplicateRemoveList.size(); i++) {
+			chartDTO = new ChartDTO();
+			chartDTO.setName(duplicateRemoveList.get(i).getImageName());
+			chartDTO.setData(new int[12]);
+			for(int k = 1; k <= 12; k++) {
+				if(k < 10) {
+					if(duplicateRemoveList.get(i).getYearMonth().substring(3,5).equals("0"+k)) {
+						chartDTO.getData()[k-1] = duplicateRemoveList.get(i).getTotalRent();
+					}
+				} else {
+					if(duplicateRemoveList.get(i).getYearMonth().substring(3,5).equals(k+"")) {
+						chartDTO.getData()[k-1] = duplicateRemoveList.get(i).getTotalRent();
+					}
+				}
+			}
+			
+			yearMonth.add(chartDTO);
+		}
+		
+		
+		
+		List<ChartDTO> dtoList = new ArrayList<ChartDTO>();
+		ChartDTO dto = null;
+		for (int i = 0; i < yearMonthList.size(); i++) {
+			dto = new ChartDTO();
+			dto.setName(yearMonthList.get(i).getImageName());
+			dto.setData(new int[12]);
+			dtoList.add(dto);
+		}
+		
+		List<ChartDTO> duplicateList = new ArrayList<ChartDTO>(new LinkedHashSet<ChartDTO>(dtoList));
+		
+		int cnt = 0;
+		for(int i = 0; i < duplicateList.size(); i++) {
+			for(int j = 0; j < 12; j++) {
+				duplicateList.get(i).getData()[j] = yearMonth.get(cnt).getData()[j];
+				cnt++;
+			}
+		}
+		
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
 		mav.addObject("salesTotalRent", salesTotalRentstr);
+		mav.addObject("yearMonth", yearMonth);
+		mav.setViewName("jsonView");
+		return mav;
+	}
+	
+	//박람회 티켓 매출
+	@RequestMapping(value = "C_salesExhibitionTicket", method = RequestMethod.POST)
+	public ModelAndView C_salesExhibitionTicket(@RequestParam String year, @RequestParam String month) {
+		String salesMon = year.substring(2) + "-" + month + "-" + "01";
+
+		System.out.println(salesMon);
+
+		// 박람회 티켓 이름, 예약점유 일수, 총 매출액 가져오는 sql
+		List<EventboardDTO> list = customerServiceDAO.getSalesExhibitionTicket(salesMon);
+
+		int salesTotalRent = customerServiceDAO.getSalesTotalRentExhibitionTicket(salesMon);
+		String salesTotalRentstr = String.format("%,d", salesTotalRent);
+		
+		// 박람회 티켓 별 연 월 매출 가져오기
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("start", year.substring(2) + "-01-01");
+		map.put("end", year.substring(2) + "-12-01");
+		
+		List<EventboardDTO> yearMonthList = customerServiceDAO.getYearMonthExhibitionTicket(map);
+		List<ChartDTO> yearMonth = new ArrayList<ChartDTO>();
+		List<EventboardDTO> yearMonthSaleList = new ArrayList<EventboardDTO>();
+		
+		EventboardDTO salesEvDTOre = null;
+		for (int i = 0; i < yearMonthList.size(); i++) {
+			for (int j = 1; j <= 12; j++) {
+				if (j < 10) {
+					salesEvDTOre = new EventboardDTO();
+					salesEvDTOre.setImageName(yearMonthList.get(i).getImageName());
+					salesEvDTOre.setYearMonth(year.substring(2) + "/0" + j);
+					salesEvDTOre.setTotalRent(0);
+					yearMonthSaleList.add(salesEvDTOre);
+				} else {
+					salesEvDTOre = new EventboardDTO();
+					salesEvDTOre.setImageName(yearMonthList.get(i).getImageName());
+					salesEvDTOre.setYearMonth(year.substring(2) + "/" + j);
+					salesEvDTOre.setTotalRent(0);
+					yearMonthSaleList.add(salesEvDTOre);
+				}
+			}
+		}
+		
+		List<EventboardDTO> duplicateRemoveList = new ArrayList<EventboardDTO>(new LinkedHashSet<EventboardDTO>(yearMonthSaleList));
+
+		
+		for(int i = 0; i < yearMonthList.size(); i++) {
+			for(int j = 0; j < duplicateRemoveList.size(); j++) {
+				if(yearMonthList.get(i).getImageName().equals(duplicateRemoveList.get(j).getImageName())) {
+					if(yearMonthList.get(i).getYearMonth().equals(duplicateRemoveList.get(j).getYearMonth())) {
+						duplicateRemoveList.get(j).setTotalRent(yearMonthList.get(i).getTotalRent());
+						}
+					}
+				}
+			}
+		
+		
+		
+		ChartDTO chartDTO = null;
+		for(int i = 0; i < duplicateRemoveList.size(); i++) {
+			chartDTO = new ChartDTO();
+			chartDTO.setName(duplicateRemoveList.get(i).getImageName());
+			chartDTO.setData(new int[12]);
+			for(int k = 1; k <= 12; k++) {
+				if(k < 10) {
+					if(duplicateRemoveList.get(i).getYearMonth().substring(3,5).equals("0"+k)) {
+						chartDTO.getData()[k-1] = duplicateRemoveList.get(i).getTotalRent();
+					}
+				} else {
+					if(duplicateRemoveList.get(i).getYearMonth().substring(3,5).equals(k+"")) {
+						chartDTO.getData()[k-1] = duplicateRemoveList.get(i).getTotalRent();
+					}
+				}
+			}
+			
+			yearMonth.add(chartDTO);
+		}
+		
+		
+		
+		List<ChartDTO> dtoList = new ArrayList<ChartDTO>();
+		ChartDTO dto = null;
+		for (int i = 0; i < yearMonthList.size(); i++) {
+			dto = new ChartDTO();
+			dto.setName(yearMonthList.get(i).getImageName());
+			dto.setData(new int[12]);
+			dtoList.add(dto);
+		}
+		
+		List<ChartDTO> duplicateList = new ArrayList<ChartDTO>(new LinkedHashSet<ChartDTO>(dtoList));
+		
+		int cnt = 0;
+		for(int i = 0; i < duplicateList.size(); i++) {
+			for(int j = 0; j < 12; j++) {
+				duplicateList.get(i).getData()[j] = yearMonth.get(cnt).getData()[j];
+				cnt++;
+			}
+		}
+		
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.addObject("salesTotalRent", salesTotalRentstr);
+		mav.addObject("yearMonth", duplicateList);
 		mav.setViewName("jsonView");
 		return mav;
 	}

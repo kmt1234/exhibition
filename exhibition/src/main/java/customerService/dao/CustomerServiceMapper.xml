@@ -464,6 +464,10 @@
  	<select id="getSalesTotalRentExhibition" parameterType="java.lang.String" resultType="int">
  		select sum(totalrent) as salesTotalRent from EXHIBITIONRENTAL where STARTDATE BETWEEN #{salesMon} and (select last_day(#{salesMon}) from dual)
  	</select>
+ 	<!-- 박람회 연 월 부스별 총 매출 -->
+ 	<select id="getYearMonthSalesExhibition" parameterType="java.util.Map" resultType="salesExhibitionDTO">
+		select sum(totalrent) as totalRent, SUBSTR(startDate,0,5) as yearMonth, BOOTHNAME from EXHIBITIONRENTAL where STARTDATE BETWEEN #{start} and (select last_day(#{end}) from dual) group by SUBSTR(startDate,0,5), BOOTHNAME 	
+ 	</select>
  	<!-- 콘서트 홀 매출현황 -->
  	<select id="getSalesConcertHall" parameterType="java.lang.String" resultType="customerService.bean.SalesConcertHallDTO">
  		select sum((select last_day(#{salesMon}) from dual)-startDate) as saleDays, sum(totalrent) as totalRent, hallName from concertHall where STARTDATE BETWEEN #{salesMon} and (select last_day(#{salesMon}) from dual) group by hallName
@@ -471,6 +475,10 @@
  	<!-- 콘서트 홀 총 매출현황 -->
  	<select id="getSalesTotalRentConcertHall" parameterType="java.lang.String" resultType="int">
  		select sum(totalrent) as salesTotalRent from concertHall where STARTDATE BETWEEN #{salesMon} and (select last_day(#{salesMon}) from dual)
+ 	</select>
+ 	<!-- 콘서트 홀 연 월 홀별 총 매출 -->
+ 	<select id="getYearMonthSalesConcertHall" parameterType="java.util.Map" resultType="customerService.bean.SalesConcertHallDTO">
+ 		select sum(totalrent) as totalRent, SUBSTR(startDate,0,5) as yearMonth, hallName from CONCERTHALL where STARTDATE BETWEEN #{start} and (select last_day(#{end}) from dual) group by SUBSTR(startDate,0,5), hallNAME
  	</select>
  	<!-- 비즈니스룸 매출현황 -->
  	<select id="getSalesBusinessRoom" parameterType="java.lang.String" resultType="customerService.bean.SalesBusinessRoomDTO">
@@ -480,6 +488,10 @@
  	<select id="getSalesTotalRentBusinessRoom" parameterType="java.lang.String" resultType="int">
  		select sum(totalrent) as salesTotalRent from businessRoom where STARTDATE BETWEEN #{salesMon} and (select last_day(#{salesMon}) from dual)
  	</select>
+ 	<!-- 비즈니스 룸 연월 룸 별 총 매출 -->
+ 	<select id="getYearMonthBusinessRoom" parameterType="java.util.Map" resultType="customerService.bean.SalesBusinessRoomDTO">
+ 		select sum(totalrent) as totalRent, SUBSTR(startDate,0,5) as yearMonth, roomName from businessRoom where STARTDATE BETWEEN #{start} and (select last_day(#{end}) from dual) group by SUBSTR(startDate,0,5), roomNAME
+ 	</select>
  	<!-- 콘서트 티켓 매출현황 -->
  	<select id="getSalesConcertTicket"  parameterType="java.lang.String" resultType="eventboard">
  		select sum(ticketPrice*bookTicket) as totalRent, IMAGENAME from EVENTBOARD_PLAY_BOOK where playDATE BETWEEN #{salesMon} and (select last_day(#{salesMon}) from dual) group by IMAGENAME
@@ -488,6 +500,24 @@
 	<select id="getSalesTotalRentConcertTicket" parameterType="java.lang.String" resultType="int">
 		select sum(sum(ticketPrice*bookTicket)) as salesTotalRent from EVENTBOARD_PLAY_BOOK where playDATE BETWEEN #{salesMon} and (select last_day(#{salesMon}) from dual) group by BOOKMEMBERID
 	</select> 	 	
+	<!-- 콘서트 티켓 연월 총 매출 -->
+	<select id="getYearMonthConcertTicket" parameterType="java.util.Map" resultType="eventboard">
+		select sum(ticketPrice*bookTicket) as totalRent, SUBSTR(playDate,0,5) as yearMonth, imageName from EVENTBOARD_PLAY_BOOK where playDate BETWEEN #{start} and (select last_day(#{end}) from dual) group by SUBSTR(playDate,0,5), imageName
+	</select>
+	<!-- 박람회 티켓 매출현황 -->
+	<select id="getSalesExhibitionTicket"  parameterType="java.lang.String" resultType="eventboard">
+ 		select sum(ticketPrice*bookTicket) as totalRent, IMAGENAME from EVENTBOARD_EXHIBITION_BOOK where playDATE BETWEEN #{salesMon} and (select last_day(#{salesMon}) from dual) group by IMAGENAME
+ 	</select>
+	
+	<!-- 박람회 티켓 총 매출 -->
+	<select id="getSalesTotalRentExhibitionTicket" parameterType="java.lang.String" resultType="int">
+		select sum(sum(ticketPrice*bookTicket)) as salesTotalRent from EVENTBOARD_EXHIBITION_BOOK where playDATE BETWEEN #{salesMon} and (select last_day(#{salesMon}) from dual) GROUP BY seq hAVING seq > 0
+	</select>
+	
+	<!-- 박람회 티켓 연월 총 매출 -->
+	<select id="getYearMonthExhibitionTicket" parameterType="java.util.Map" resultType="eventboard">
+		select sum(ticketPrice*bookTicket) as totalRent, SUBSTR(playDate,0,5) as yearMonth, imageName from EVENTBOARD_EXHIBITION_BOOK where playDate BETWEEN #{start} and (select last_day(#{end}) from dual) group by SUBSTR(playDate,0,5), imageName
+	</select>
 	
 	<!-- 회원정보  -->
  	<select id="getMemberList" resultType="member" parameterType="java.util.Map">

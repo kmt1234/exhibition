@@ -18,12 +18,6 @@
 	text-overflow     : ellipsis;
 }
 
-.today_list_dd {
-	width: 230px;
-	overflow: hidden;
-	display: inline-block;
-}
-
 </style>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 </head>
@@ -41,27 +35,29 @@
 		<jsp:include page="${display }"/>
 	</div>
 <!--메인화면 아래 부분(일정)  -->
-	<div class="ui container" style="margin-top: 20px; border:1px ridge rgb(155,155,155,.6); min-width:1170px; height:300px;  ">
+	<div class="ui container" style="margin-top: 20px; min-width:1170px; height:200px;  ">
 		<!-- 공연포스터 슬라이드?? -->
-		<div style=" margin-left:15px; width:270px; height:220px; border:1px ridge rgb(155,155,155,.6); display: inline-block; float: left;"id="bxSlider"  align="center">
-			<jsp:include page="../main/slide.jsp"></jsp:include>
+		<div style=" margin-left:15px; width:270px; height:200px;  display: inline-block; float: left;">
+			<jsp:include page="../main/slide.jsp" ></jsp:include>
 		</div>
 		<!-- 달력  -->
-		<div style=" margin-left:20px; width:270px; height:220px; border:1px ridge rgb(155,155,155,.6); display: inline-block; float: left;" >
+		<div style=" margin-left:20px; width:270px; height:200px;  display: inline-block; float: left;" >
 			<div id="mainCal" style="min-width:270; height: 200px "></div>
 		</div>
 		<!-- today -->
-		<div style=" margin-left:20px; width:270px; height:220px; border:1px ridge rgb(155,155,155,.6); display: inline-block; float: left; overflow: scroll;" >
+		<div style=" margin-left:20px; width:270px; height:200px;  display: inline-block; float: left;" >
 			<dl class="todays" id="todays">
 				<dt>Today's</dt>
-				<dd class="today_list_dd">
-					<ul id="total_list" style="list-style:none;">
+				<dd id="today_list" style="margin-left: 20px">
+					<ul class="total_list" id="total_list" style="list-style:none;">
+						
+	
 					</ul>
 				</dd>
 			</dl>
 		</div>
 		<!-- 공지사항  -->
-		<div style="margin-left:20px; width:270px; height:220px; border:1px ridge rgb(155,155,155,.6); display: inline-block; float: left;" >
+		<div style="margin-left:20px; width:270px; height:200px;  display: inline-block; float: left;" >
 			<div style="height : 50px; font-weight: bold; font-size: x-large;" >공지사항</div>
 			<div id="C_notice_MainList" style="height : 170px;"></div>
 		</div>
@@ -76,11 +72,32 @@
 
 <script>
 $(document).ready(function(){
-		
-	setInterval(function () {
-		if($('li.ex_item').length > 1){moveExItems()}
-		if($('li.co_item').length > 1){moveCoItems()}
-	}, 2000);
+	$.ajax({
+		type : 'POST',
+		url : '/exhibition/customerService/getNoticeMainList.do',
+		data :  'pg=${pg}',
+		dataType : 'json',
+		success : function(data){
+			$.each(data.list, function(index, item){
+				$('<ul/>').append($('<p/>',{
+					align : 'center',
+					id : 'subjectA',
+					style: ' width : 250px; height: 35px; margin-left : 20px; text-align: left;',
+					class : 'subjectC',
+					href : 'javascript:void(0)',
+					text : item.subject
+				})).append($('<input>',{
+					type : 'hidden',
+					text : item.seq
+				})).appendTo($('#C_notice_MainList'));
+			});
+		}
+	}); 
+	
+	$('#C_notice_MainList').on('click','#subjectA',function(){
+		var seq = $(this).next().text();
+		location.href="/exhibition/customerService/C_notice_View.do?seq="+seq+"&pg=${pg}";
+	});
 	
 	
 	$('#mainCal').datepicker({
@@ -103,57 +120,111 @@ $(document).ready(function(){
 				async: false,
 				dataType: 'json',
 				success : function(data) {
+					alert(JSON.stringify(data));
 					$('#today_list ul li').remove();
 					$.each(data.list, function(index, item){
 						if(item.postSelect=='1') {
-							$('<li/>',{
-								style: 'display : inline-block',
-								class : 'ex_item',
-							}).append($('<span/>',{
-								style : 'width = 220px',
-								html : '<img id="ex_img" width="20px" height="20px" src="../img/Ex.png">'+item.imageName+'</img>',
-								style : 'display : block'
-							})).append($('<span/>',{
-								text : item.startDate.substring(0,10) + '-' + item.endDate.substring(0,10),
-								style : 'display : block'
-							})).append($('<span/>',{
-								text : item.eventPlace,
-								style : 'display : block'
-							})).appendTo($('#total_list'));
+							if(item.start==1) {
+								$('<li/>',{
+									class : 'ex_item',
+									html : '<br>'
+								}).append($('<span/>',{
+									style : 'width = 220px',
+									html : '<img id="ex_img" width="20px" height="20px" src="../img/Ex.png">'+item.imageName+'</img>',
+									style : 'display : block'
+								})).append($('<span/>',{
+									text : item.startDate.substring(0,10) + '-' + item.endDate.substring(0,10),
+									style : 'display : block'
+								})).append($('<span/>',{
+									text : item.eventPlace,
+									style : 'display : block'
+								})).appendTo($('#total_list'));
+							} else if(item.start==10) {
+								$('<li/>',{
+									class : 'ex_item',
+									html : '<br>'
+								}).append($('<span/>',{
+									style : 'width = 220px',
+									html : '<img id="ex_img" width="20px" height="20px" src="../img/Ex.png">'+'일정이 없습니다.'+'</img>',
+									style : 'display : block'
+								})).appendTo($('#total_list'));
+							} else {
+								$('<li/>',{
+									style: 'display: none',
+									class : 'ex_item',
+									html : '<br>'
+								}).append($('<span/>',{
+									style : 'width = 220px',
+									html : '<img id="ex_img" width="20px" height="20px" src="../img/Ex.png">'+item.imageName+'</img>',
+									style : 'display : block'
+								})).append($('<span/>',{
+									text : item.startDate.substring(0,10) + '-' + item.endDate.substring(0,10),
+									style : 'display : block'
+								})).append($('<span/>',{
+									text : item.eventPlace,
+									style : 'display : block'
+								})).appendTo($('#total_list'));
+							}
+							
 							
 							
 						} else if(item.postSelect=='2') {
-							$('<li/>',{
-								style: 'display : inline-block',
-								class : 'co_item',
-							}).append($('<span/>',{
-								html : '<img  id="co_img" width="20px" height="20px" src="../img/Ev.png">'+item.imageName+'</img>',
-								style : 'display : block'
-							})).append($('<span/>',{
-								class : 't-tit ellipsis',
-								text : item.startDate.substring(0,10) + '-' + item.endDate.substring(0,10),
-								style : 'display : block'
-							})).append($('<span/>',{
-								class : 't-tit ellipsis',
-								text : item.eventPlace,
-								style : 'display : block'
-							})).appendTo($('#total_list'));
+							if(item.start==2) {
+								$('<li/>',{
+									class : 'co_item',
+									html : '<br>'
+								}).append($('<span/>',{
+									html : '<img  id="co_img" width="20px" height="20px" src="../img/Ev.png">'+item.imageName+'</img>',
+									style : 'display : block'
+								})).append($('<span/>',{
+									class : 't-tit ellipsis',
+									text : item.startDate.substring(0,10) + '-' + item.endDate.substring(0,10),
+									style : 'display : block'
+								})).append($('<span/>',{
+									class : 't-tit ellipsis',
+									text : item.eventPlace,
+									style : 'display : block'
+								})).appendTo($('#total_list'));
+							} else if(item.start==10) {
+								$('<li/>',{
+									class : 'co_item',
+									html : '<br>'
+								}).append($('<span/>',{
+									style : 'width = 220px',
+									html : '<img id="co_img" width="20px" height="20px" src="../img/Ev.png">'+'일정이 없습니다.'+'</img>',
+									style : 'display : block'
+								})).appendTo($('#total_list'));
+							} else {
+								$('<li/>',{
+									style: 'display: none',
+									class : 'co_item',
+									html : '<br>'
+								}).append($('<span/>',{
+									html : '<img  id="co_img" width="20px" height="20px" src="../img/Ev.png">'+item.imageName+'</img>',
+									style : 'display : block'
+								})).append($('<span/>',{
+									class : 't-tit ellipsis',
+									text : item.startDate.substring(0,10) + '-' + item.endDate.substring(0,10),
+									style : 'display : block'
+								})).append($('<span/>',{
+									class : 't-tit ellipsis',
+									text : item.eventPlace,
+									style : 'display : block'
+								})).appendTo($('#total_list'));
+							}
+							
 						}
+
 					});
-					
-					
 				}
 	    		
 	    	});
 	    }
 	});
 	
-
-	
 	
 	var today = new Date();
 	var todayDate =today.toISOString().substring(0,10);
-	
 	
 	$.ajax({
 		type : 'POST',
@@ -162,26 +233,59 @@ $(document).ready(function(){
 		async: false,
 		dataType: 'json',
 		success : function(data) {
+			console.log(JSON.stringify(data));
 			$('#today_list ul li').remove();
+		
 			$.each(data.list, function(index, item){
+				
+				
 				if(item.postSelect=='1') {
-					$('<li/>',{
-						style: 'display : inline-block',
-						class : 'ex_item',
-					}).append($('<span/>',{
-						html : '<img id="ex_img" width="20px" height="20px" src="../img/Ex.png">'+item.imageName+'</img>',
-						style : 'display : block'
-					})).append($('<span/>',{
-						text : item.startDate.substring(0,10) + '-' + item.endDate.substring(0,10),
-						style : 'display : block'
-					})).append($('<span/>',{
-						text : item.eventPlace,
-						style : 'display : block'
-					})).appendTo($('#total_list'));
-				} else if(item.postSelect=='2') {
+					if(item.start==1) {
 						$('<li/>',{
-							style: 'display : inline-block',
+							class : 'ex_item',
+							html : '<br>'
+						}).append($('<span/>',{
+							html : '<img id="ex_img" width="20px" height="20px" src="../img/Ex.png">'+item.imageName+'</img>',
+							style : 'display : block'
+						})).append($('<span/>',{
+							text : item.startDate.substring(0,10) + '-' + item.endDate.substring(0,10),
+							style : 'display : block'
+						})).append($('<span/>',{
+							text : item.eventPlace,
+							style : 'display : block'
+						})).appendTo($('#total_list'));
+					} else if(item.start==10) {
+						$('<li/>',{
+							class : 'ex_item',
+							html : '<br>'
+						}).append($('<span/>',{
+							style : 'width = 220px',
+							html : '<img id="ex_img" width="20px" height="20px" src="../img/Ex.png">'+'일정이 없습니다.'+'</img><br><br>',
+							style : 'display : block'
+						})).appendTo($('#total_list'));
+					} else {
+						$('<li/>',{
+							style: 'display: none',
+							class : 'ex_item',
+							html : '<br>'
+						}).append($('<span/>',{
+							html : '<img id="ex_img" width="20px" height="20px" src="../img/Ex.png">'+item.imageName+'</img>',
+							style : 'display : block'
+						})).append($('<span/>',{
+							text : item.startDate.substring(0,10) + '-' + item.endDate.substring(0,10),
+							style : 'display : block'
+						})).append($('<span/>',{
+							text : item.eventPlace,
+							style : 'display : block'
+						})).appendTo($('#total_list'));
+					}
+					
+					
+				} else if(item.postSelect=='2') {
+					if(item.start==2) {
+						$('<li/>',{
 							class : 'co_item',
+							html : '<br>'
 						}).append($('<span/>',{
 							html : '<img  id="co_img" width="20px" height="20px" src="../img/Ev.png">'+item.imageName+'</img>',
 							style : 'display : block'
@@ -192,19 +296,43 @@ $(document).ready(function(){
 							text : item.eventPlace,
 							style : 'display : block'
 						})).appendTo($('#total_list'));
-						
+					} else if(item.start==10) {
+						$('<li/>',{
+							class : 'co_item',
+							html : '<br>'
+						}).append($('<span/>',{
+							style : 'width = 220px',
+							html : '<img id="co_img" width="20px" height="20px" src="../img/Ev.png">'+'일정이 없습니다.'+'</img><br><br>',
+							style : 'display : block'
+						})).appendTo($('#total_list'));
+					} else {
+						$('<li/>',{
+							style: 'display: none',
+							class : 'co_item',
+							html : '<br>'
+						}).append($('<span/>',{
+							html : '<img  id="co_img" width="20px" height="20px" src="../img/Ev.png">'+item.imageName+'</img>',
+							style : 'display : block'
+						})).append($('<span/>',{
+							text : item.startDate.substring(0,10) + '-' + item.endDate.substring(0,10),
+							style : 'display : block'
+						})).append($('<span/>',{
+							text : item.eventPlace,
+							style : 'display : block'
+						})).appendTo($('#total_list'));
 					}
-					
-				});
-			
-			
+				}
+				
+			});
 		}
-		
 	});
 	
 	
-
-
+	setInterval(function () {
+		if($('li.ex_item').length > 1){moveExItems()}
+		if($('li.co_item').length > 1){moveCoItems()}
+	}, 3000)
+	
 	function moveExItems() {
 		
 		var current_item = $('li.ex_item:visible');
@@ -224,8 +352,18 @@ $(document).ready(function(){
 		}
 		next_item.fadeIn("slow");
 		current_item.hide();
-	}
-	
+	}		
+
+
+	$('.bxslider').bxSlider({
+   	 	auto: true,
+        speed: 500,
+        pause: 4000,
+        mode:'fade',
+        autoControls: true,
+        pager:true,
+   });
+	   
 	
 });
 </script>
