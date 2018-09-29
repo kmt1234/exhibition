@@ -519,10 +519,10 @@
 	
 	<!-- 회원정보  -->
  	<select id="getMemberList" resultType="member" parameterType="java.util.Map">
- 		select * from(
+		select * from(
 		select rownum rn, tt.* from(
-		select * from membertable)tt
-		)where rn <![CDATA[ >= ]]> #{startNum} and rn<![CDATA[<=]]> #{endNum} and code=1
+		select * from membertable where code=1 order by M_name)tt
+		)where rn <![CDATA[ >= ]]> #{startNum} and rn <![CDATA[<=]]> #{endNum}
  	</select>
  	
 	<!-- 회원 정보 페이징처리 -->
@@ -534,8 +534,8 @@
  	<select id="memberListSearch" parameterType="java.util.Map" resultType="member">
 		select * from (
 		select rownum rn, tt.* from(
-		select * from membertable where ${memberSearchOption} like '%'||#{memberSearch}||'%')tt
-		)where rn <![CDATA[ >= ]]> #{startNum} and rn<![CDATA[<=]]> #{endNum} and code=1
+		select * from membertable where ${memberSearchOption} like '%'||#{memberSearch}||'%' and code=1 order by M_name)tt
+		)where rn <![CDATA[ >= ]]> #{startNum} and rn<![CDATA[<=]]> #{endNum} 
 	</select>
 	
  	<!-- 회원 검색 페이징-->
@@ -572,8 +572,8 @@
  	<select id="getCompanyList" resultType="company" parameterType="java.util.Map">
  		select * from(
 		select rownum rn, tt.* from(
-		select * from company)tt
-		)where rn <![CDATA[ >= ]]> #{startNum} and rn<![CDATA[<=]]> #{endNum}	
+		select * from company order by C_businessname)tt
+		)where rn <![CDATA[ >= ]]> #{startNum} and rn<![CDATA[<=]]> #{endNum}  
  	</select>
  	
 	<!-- 사업자 페이징처리 -->
@@ -585,8 +585,8 @@
  	<select id="CompanyListSearch" parameterType="java.util.Map" resultType="company">
 		select * from (
 		select rownum rn, tt.* from(
-		select * from company where ${companySearchOption} like '%'||#{companySearch}||'%')tt
-		)where rn <![CDATA[ >= ]]> #{startNum} and rn<![CDATA[<=]]> #{endNum}
+		select * from company where ${companySearchOption} like '%'||#{companySearch}||'%' order by C_businessname)tt
+		)where rn <![CDATA[ >= ]]> #{startNum} and rn<![CDATA[<=]]> #{endNum} 
 	</select>
 	
  	<!-- 사업자 검색토탈 페이징-->

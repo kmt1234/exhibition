@@ -30,10 +30,10 @@ var dataSet = [
 		<c:if test="${listView.startDate != ''}">
 		    <c:forEach var="i" begin="0" end="${listView.daysSize-1}" step="1" varStatus="dayStatus">
 		   // <c:if test="${listView.days[dayStatus.index] eq listView.days[dayStatus.index]}">
-		    	{"title" : '전시',
+		    	{"title" : '박람회',
 		    	"start" : '<c:out value="${listView.days[dayStatus.index]}"/>',
 		    	"imageurl" : "../img/Ex.png",
-		    	"url" : "/exhibition/main/index.do",
+		    	"url" : "/exhibition/performance/P_exhibitionList.do",
 		    	"color" : "#ffffff",
 		    	"textColor" : "#000000"
 		    	
@@ -52,6 +52,7 @@ var dataSet = [
 			    	{"title" : '공연',
 			    	"start" : '<c:out value="${listView.days[dayStatus.index]}"/>',
 			    	"imageurl" : "../img/Ev.png",
+			    	"url" : "/exhibition/performance/P_performanceList.do",
 			    	"color" : "#ffffff",
 			    	"textColor" : "#000000"
 			    	} <c:if test="${!dayStatus.last}">,</c:if>
@@ -67,7 +68,7 @@ var dataSet = [
 			defaultDate: date,
 			editable: false,
 			
-			eventLimit: false, // allow "more" link when too many events
+			eventLimit: true, // allow "more" link when too many events
 			eventRender:function(event, eventElement) {
                 if(event.imageurl) {
                     eventElement.find("span.fc-title").prepend("<img src='" + event.imageurl +	"'width='25px' height='25px'  align='absmiddle'> &ensp;");
@@ -120,7 +121,7 @@ body {
 			</tr>
 		</table>
 		 <span style="float: right; margin-right:30px; ">
-		 	<img src="../img/Ex.png" style="width:25px; height: 25px; " align='absmiddle'> 전시회
+		 	<img src="../img/Ex.png" style="width:25px; height: 25px; " align='absmiddle'> 박람회
 		 </span>
 		 
 		 <span style="float: right; ">

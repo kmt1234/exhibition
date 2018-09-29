@@ -33,7 +33,7 @@ var dataSet = [
 		    <c:forEach begin="0" end="${listView.daysSize-1}" step="1" varStatus="dayStatus">
 		    	{"title" : '<c:out value="${listView.imageName}"/>',
 		    	"start" : '<c:out value="${listView.days[dayStatus.index]}"/>',
-		    	"url" : "/exhibition/main/index.do",
+		    	"url" : "/exhibition/performance/performanceBook.do?seq=${listView.seq }",
 		    	"imageurl" : "../img/Ev.png",
 		    	"color" : "#ffffff",
 			    "textColor" : "#000000"
