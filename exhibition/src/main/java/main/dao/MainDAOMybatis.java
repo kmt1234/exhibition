@@ -31,12 +31,12 @@ public class MainDAOMybatis implements MainDAO {
 	@Autowired
 	private SqlSession sqlSession;
 
-	public List<MainDTO> index_Notice_Search(Map<String, String> map) {
-		return sqlSession.selectList("mainSQL.index_Notice_Search", map);
+	public List<MainDTO> index_notice_Search(Map<String, String> map) {
+		return sqlSession.selectList("mainSQL.index_notice_Search", map);
 	}
 
-	public int getTotal_index_Notice_Search(Map<String, String> map) {
-		return sqlSession.selectOne("mainSQL.getTotal_index_Notice_Search", map);
+	public int getTotal_index_notice_Search(Map<String, String> map) {
+		return sqlSession.selectOne("mainSQL.getTotal_index_notice_Search", map);
 	}
 	
 	public List<MainDTO> index_QnA_Search(Map<String, String> map) {

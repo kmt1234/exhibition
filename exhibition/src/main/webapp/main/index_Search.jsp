@@ -64,76 +64,70 @@
 			</div>
 			<div class="ui divider"></div> 
 		</h2>
-		
+		<div style="width: 100%;" align="center" id="index_notice_div">
 		<div style="width: 400px; display: inline-block; text-align: left; font-size: 25px"><span>공지 사항</span></div>
-		<div style="width: 460px; display: inline-block; text-align: right;"><a>더보기</a></div>
-		<div style="width: 100%;" align="center">
+		<div style="width: 460px; display: inline-block; text-align: right;"><a id="index_notice_SearchPlus">더보기</a></div>
 			<table style="width: 880px; height: 40px;" align="center" border="1"
 				bordercolor="#ec008c" cellpadding="2" frame="hsides" rules="rows"
-				id="index_Notice_SearchList" class="ui striped table">
+				id="index_notice_SearchList" class="ui striped table">
 			</table>
 			<br>
-			<!-- <div id="index_PagingDiv" class="ui center pagination menu"></div> -->
 			<br><br> 
 		</div>
 		
+		<div style="width: 100%;" align="center" id="index_QnA_div">
 		<div style="width: 400px; display: inline-block; text-align: left; font-size: 25px"><span>자주 묻는 질문</span></div>
-		<div style="width: 460px; display: inline-block; text-align: right;"><a>더보기</a></div>
-		<div style="width: 100%;" align="center">
+		<div style="width: 460px; display: inline-block; text-align: right;"><a id="index_QnA_SearchPlus">더보기</a></div>
 			<table style="width: 880px; height: 40px;" align="center" border="1"
 				bordercolor="#ec008c" cellpadding="2" frame="hsides" rules="rows"
 				id="index_QnA_SearchList" class="ui striped table">
 			</table>
 			<br>
-			<!-- <div id="index_PagingDiv" class="ui center pagination menu"></div> -->
 			<br><br> 
 		</div>
 		
+		
+		<div style="width: 100%;" align="center" id="index_contactList_div">
 		<div style="width: 400px; display: inline-block; text-align: left; font-size: 25px"><span>주요 시설 연락처</span></div>
-		<div style="width: 460px; display: inline-block; text-align: right;"><a>더보기</a></div>
-		<div style="width: 100%;" align="center">
+		<div style="width: 460px; display: inline-block; text-align: right;"><a id="index_contactList_SearchPlus">더보기</a></div>
 			<table style="width: 880px; height: 40px;" align="center" border="1"
 				bordercolor="#ec008c" cellpadding="2" frame="hsides" rules="rows"
 				id="index_contactList_SearchList" class="ui striped table">
 			</table>
 			<br>
-			<!-- <div id="index_PagingDiv" class="ui center pagination menu"></div> -->
 			<br><br>
 		</div>
 		
+		<div style="width: 100%;" align="center" id="index_eventboard_div">
 		<div style="width: 400px; display: inline-block; text-align: left; font-size: 25px"><span>박람회</span></div>
-		<div style="width: 460px; display: inline-block; text-align: right;"><a>더보기</a></div>
-		<div style="width: 100%;" align="center">
+		<div style="width: 460px; display: inline-block; text-align: right;"><a id="index_eventboard_SearchPlus">더보기</a></div>
 			<table style="width: 880px; height: 40px;" align="center" border="1"
 				bordercolor="#ec008c" cellpadding="2" frame="hsides" rules="rows"
 				id="index_eventboard_SearchList" class="ui striped table">
 			</table>
 			<br>
-			<!-- <div id="index_PagingDiv" class="ui center pagination menu"></div> -->
 			<br><br>
 		</div>
 		
+		<div style="width: 100%;" align="center" id="index_eventboard_play_div">
 		<div style="width: 400px; display: inline-block; text-align: left; font-size: 25px"><span>연극</span></div>
-		<div style="width: 460px; display: inline-block; text-align: right;"><a>더보기</a></div>
-		<div style="width: 100%;" align="center">
+		<div style="width: 460px; display: inline-block; text-align: right;"><a id="index_eventboard_play_SearchPlus">더보기</a></div>
 			<table style="width: 880px; height: 40px;" align="center" border="1"
 				bordercolor="#ec008c" cellpadding="2" frame="hsides" rules="rows"
 				id="index_eventboard_play_SearchList" class="ui striped table">
 			</table>
 			<br>
-			<!-- <div id="index_PagingDiv" class="ui center pagination menu"></div> -->
 			<br><br>
 		</div>
 		
+		<div style="width: 100%;" align="center" id="index_hotel_list_div">
 		<div style="width: 400px; display: inline-block; text-align: left; font-size: 25px"><span>숙박</span></div>
-		<div style="width: 460px; display: inline-block; text-align: right;"><a>더보기</a></div>
-		<div style="width: 100%;" align="center">
+		<div style="width: 460px; display: inline-block; text-align: right;"><a id="index_hotel_list_SearchPlus">더보기</a></div>
 			<table style="width: 880px; height: 40px;" align="center" border="1"
 				bordercolor="#ec008c" cellpadding="2" frame="hsides" rules="rows"
 				id="index_hotel_list_SearchList" class="ui striped table">
 			</table>
 			<br>
-			<!-- <div id="index_PagingDiv" class="ui center pagination menu"></div> -->
 			<br><br>
 		</div>
 		

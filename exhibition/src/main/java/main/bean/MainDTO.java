@@ -20,7 +20,7 @@ public class MainDTO {
 	private String content;		//내용
 	private String facility;	//기관&시설
 	private String title;		//명칭
-	private String keyword;
+	private String index_keyword;
 	
 	private int postselect;
 	private String imagename;

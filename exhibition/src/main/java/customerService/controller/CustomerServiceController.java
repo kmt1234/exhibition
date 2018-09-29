@@ -171,9 +171,9 @@ public class CustomerServiceController {
 		CustomerServiceDTO customerServiceDTO = customerServiceDAO.getNoticeInfo(seq);
 
 		model.addAttribute("customerServiceDTO", customerServiceDTO);
-		model.addAttribute("pg", pg);
 
 		ModelAndView mav = new ModelAndView();
+		model.addAttribute("pg", pg);
 		mav.addObject("display", "/customerService/C_notice_View.jsp");
 		mav.setViewName("/customerService/C_customerServiceForm");
 

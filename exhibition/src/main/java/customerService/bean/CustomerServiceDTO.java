@@ -25,7 +25,7 @@ public class CustomerServiceDTO {
 	private int postselect;
 	private String imagename;
 	private String image1;
-	private String eventling;
+	private String eventlink;
 	private String starttime;
 	private String endtime;
 	private String eventplace;
@@ -34,7 +34,7 @@ public class CustomerServiceDTO {
 	private String eventrate;
 	private String eventcontent;
 	
-	
+
 	private int ref;			//그룹번호
     private int lev;			//단계
     private int step;			//글순서

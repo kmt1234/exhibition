@@ -1,21 +1,25 @@
-$(document).ready(function(event, str){
+$(document).ready(function(){
 	var index_keyword = $('#indexkeyword').val();
 	var code = $('#hiddenCode').val();
 	
 	// 메인 검색시 검색된 공지사항 리스트 불러옴
 	$.ajax({
 		type : 'POST',
-		url : '/exhibition/main/index_Notice_Search.do',
-		data : {'index_keyword' : index_keyword},
+		url : '/exhibition/main/index_notice_Search.do',
+		data : {'pg':$('#pg').val(),
+				'index_keyword' : index_keyword},
 		dataType : 'json',
 		success : function(data){
+			if(data.totalA<'4'){
+				$('#index_notice_SearchPlus').remove();
+			}
 			if(data.totalA=='0'){
 				$('<tr/>',{
 					align: 'center'
 				}).append($('<td/>',{
 					align : 'center',
 					text : '검색된 결과가 없습니다.'
-				})).appendTo($('#index_Notice_SearchList'));  
+				})).appendTo($('#index_notice_SearchList'));  
 				
 			}else if(data.totalA!='0'){
 				$.each(data.list, function(index, item){
@@ -28,7 +32,7 @@ $(document).ready(function(event, str){
 						style: 'width: 880px; text-align: left;',
 						id : 'subjectA',
 						text : item.subject
-					})).appendTo($('#index_Notice_SearchList'));
+					})).appendTo($('#index_notice_SearchList'));
 					
 					$('<tr/>',{
 						style: 'width: 880px; height: 35px; text-align: left;'
@@ -37,25 +41,31 @@ $(document).ready(function(event, str){
 						class : 'contentC',
 						href : 'javascript:void(0)',
 						text : item.content
-					})).appendTo($('#index_Notice_SearchList'));
+					})).appendTo($('#index_notice_SearchList'));
 				});
 			}
 		}
+				
 	});
+	
 	// 공지사항 제목 클릭시 내용보여줌
-	$('#index_NoticeSearch').on('click','#subjectA',function(){
+	$('#index_notice_SearchList').on('click','#subjectA',function(){
 		var seq = $(this).prev().text();
 		location.href='/exhibition/customerService/C_notice_View.do?seq='+seq+'&pg='+$('#pg').val();
 	});
+	
 	
 	// 메인 검색시 검색된 자주묻는 질문 리스트 불러옴
 	$.ajax({
 		type : 'POST',
 		url : '/exhibition/main/index_QnA_Search.do',
-		data : {'index_keyword' : index_keyword},
+		data : {'pg':$('#pg').val(),
+				'index_keyword' : index_keyword},
 		dataType : 'json',
 		success : function(data){
-			
+			if(data.totalA<'4'){
+				$('#index_QnA_SearchPlus').remove();
+			}
 			if(data.totalA=='0'){
 				$('<tr/>',{
 					align: 'center'
@@ -67,13 +77,17 @@ $(document).ready(function(event, str){
 			} else if(data.totalA!='0'){
 				$.each(data.list, function(index, item){
 					$('<tr/>').append($('<input/>',{
+						type : 'hidden',
+						text : item.classify
+					})).append($('<input/>',{
+						
 						align : 'center',
 						style: 'width: 880px; text-align: left;',
 						type : 'hidden',
 						text : item.seq
 					})).append($('<td/>',{
 						style: 'width: 880px; text-align: left;',
-						id : 'subjectA',
+						id : 'QnA_subject',
 						text : item.subject
 					})).appendTo($('#index_QnA_SearchList'));
 				
@@ -91,7 +105,7 @@ $(document).ready(function(event, str){
 	});
 	
 	//
-	$('#index_QnASearch').on('click','#subjectA',function(){
+	$('#index_QnA_SearchList').on('click','#QnA_subject',function(){
 		var seq = $(this).prev().text();
 		location.href='/exhibition/customerService/C_QnA.do';
 	});
@@ -100,9 +114,13 @@ $(document).ready(function(event, str){
 	$.ajax({
 		type : 'POST',
 		url : '/exhibition/main/index_contactList_Search.do',
-		data : {'index_keyword': index_keyword },
+		data : {'pg':$('#pg').val(),
+				'index_keyword': index_keyword },
 		dataType : 'json',
 		success : function(data){
+			if(data.totalA<'4'){
+				$('#index_contactList_SearchPlus').remove();
+			}
 			if(data.totalA=='0'){
 				$('<tr/>',{
 					align: 'center'
@@ -194,7 +212,6 @@ $(document).ready(function(event, str){
 					}
 				});
 			}
-			/*$('#C_contactList_PagingDiv').html(data.customerServicePaging.pagingHTML);*/
 		}
 	});
 	
@@ -202,9 +219,13 @@ $(document).ready(function(event, str){
 	$.ajax({
 		type : 'POST',
 		url : '/exhibition/main/index_eventboard_Search.do',
-		data : {'index_keyword': index_keyword },
+		data : {'pg':$('#pg').val(),
+				'index_keyword': index_keyword },
 		dataType : 'json',
 		success : function(data){
+			if(data.totalA<'4'){
+				$('#index_eventboard_SearchPlus').remove();
+			}
 			if(data.totalA=='0'){
 				$('<tr/>',{
 					align: 'center'
@@ -215,14 +236,19 @@ $(document).ready(function(event, str){
 				
 			} else if(data.totalA!='0'){
 				$.each(data.list, function(index, item){
-					$('<tr/>').append($('<td/>',{
+					$('<tr/>').append($('<input/>',{
+						type : 'hidden',
+						text : item.seq
+					})).append($('<td/>',{
 						rowspan : '9',
 						style : 'width : 100px; '
 					}).append($('<img>',{
 						src : '../storage/'+item.image1+'',
-						style : 'width : 100px; height : 80px;'
+						style : 'width : 100px; height : 80px;',
+						id : 'eventboard_image'
 					}))).append($('<td/>',{
-						text : item.imagename
+						text : item.imagename,
+						id : 'eventboard_name'
 					})).appendTo($('#index_eventboard_SearchList'));
 					
 					$('<tr/>').append($('<td/>',{
@@ -261,13 +287,28 @@ $(document).ready(function(event, str){
 		}
 	});
 	
+	$('#index_eventboard_SearchList').on('click','#eventboard_name',function(){
+		var seq = $(this).prev().prev().text();
+		location.href='/exhibition//performance/exhibitionBook.do?seq='+seq;
+	});
+	
+	$('#index_eventboard_SearchList').on('click','#eventboard_image',function(){
+		var seq = $(this).prev().text();
+		location.href='/exhibition//performance/exhibitionBook.do?seq='+seq;
+	});
+	
+	
 	// 메인 검색시 검색된 연극 리스트 불러옴
 	$.ajax({
 		type : 'POST',
 		url : '/exhibition/main/index_eventboard_play_Search.do',
-		data : {'index_keyword': index_keyword },
+		data : {'pg':$('#pg').val(),
+				'index_keyword': index_keyword },
 		dataType : 'json',
 		success : function(data){
+			if(data.totalA<'4'){
+				$('#index_eventboard_play_SearchPlus').remove();
+			}
 			if(data.totalA=='0'){
 				$('<tr/>',{
 					align: 'center'
@@ -278,14 +319,20 @@ $(document).ready(function(event, str){
 				
 			} else if(data.totalA!='0'){
 				$.each(data.list, function(index, item){
-					$('<tr/>').append($('<td/>',{
+					console.log(JSON.stringify(item));
+					$('<tr/>').append($('<input/>',{
+						type : 'hidden',
+						text : item.seq
+					})).append($('<td/>',{
 						rowspan : '9',
 						style : 'width : 100px; '
 					}).append($('<img>',{
 						src : '../storage/'+item.image1+'',
-						style : 'width : 100px; height : 80px;'
+						style : 'width : 100px; height : 80px;',
+						id : 'eventboard_play_image'
 					}))).append($('<td/>',{
-						text : item.imagename
+						text : item.imagename,
+						id : 'eventboard_play_name'
 					})).appendTo($('#index_eventboard_play_SearchList'));
 					
 					$('<tr/>').append($('<td/>',{
@@ -324,13 +371,27 @@ $(document).ready(function(event, str){
 		}
 	});
 	
+	$('#index_eventboard_play_SearchList').on('click','#eventboard_play_name',function(){
+		var seq = $(this).prev().prev().text();
+		location.href='/exhibition//performance/performanceBook.do?seq='+seq;
+	});
+	$('#index_eventboard_play_SearchList').on('click','#eventboard_play_image',function(){
+		var seq = $(this).prev().text();
+		location.href='/exhibition//performance/performanceBook.do?seq='+seq;
+	});
+	
+	var eventlink;
 	// 메인 검색시 검색된 숙박 리스트 불러옴
 	$.ajax({
 		type : 'POST',
 		url : '/exhibition/main/index_hotel_list_Search.do',
-		data : {'index_keyword': index_keyword },
+		data : {'pg':$('#pg').val(),
+				'index_keyword': index_keyword },
 		dataType : 'json',
 		success : function(data){
+			if(data.totalA<'4'){
+				$('#index_hotel_list_SearchPlus').remove();
+			}
 			if(data.totalA=='0'){
 				$('<tr/>',{
 					align: 'center'
@@ -346,6 +407,7 @@ $(document).ready(function(event, str){
 						style : 'width : 100px; '
 					}).append($('<img>',{
 						src : '../storage/'+item.image1+'',
+						class : 'hotel_image',
 						style : 'width : 100px; height : 80px;'
 					}))).append($('<td/>',{
 						text : item.imagename
@@ -360,12 +422,109 @@ $(document).ready(function(event, str){
 					})).appendTo($('#index_hotel_list_SearchList'));
 					
 					
-					
+					eventlink = item.eventlink;
 					
 				});
 			}
 		}
 	});
 	
+	$('#index_hotel_list_SearchList').on('click','.hotel_image',function(){
+		location.href=''+eventlink+'';
+	});
+	
+	$('#index_notice_SearchPlus').on('click',function(event, str){
+		if(str!='trigger') $('#pg').val(1);
+		
+		$.ajax({
+			type : 'POST',
+			url : '/exhibition/main/index_notice_Search.do',
+			data : {'pg':$('#pg').val(),
+					'index_keyword' : index_keyword},
+			dataType : 'json',
+			success : function(data){
+				$('#index_notice_SearchList tr:gt(0)').remove();
+				if(data.totalA=='0'){
+					$('<tr/>',{
+						align: 'center'
+					}).append($('<td/>',{
+						align : 'center',
+						text : '검색된 결과가 없습니다.'
+					})).appendTo($('#index_notice_SearchList'));  
+					
+				}else if(data.totalA!='0'){
+					$.each(data.list, function(index, item){
+						$('<tr/>').append($('<input/>',{
+							align : 'center',
+							style: 'width: 880px; text-align: left;',
+							type : 'hidden',
+							text : item.seq
+						})).append($('<td/>',{
+							style: 'width: 880px; text-align: left;',
+							id : 'subjectA',
+							text : item.subject
+						})).appendTo($('#index_notice_SearchList'));
+						
+						$('<tr/>',{
+							style: 'width: 880px; height: 35px; text-align: left;'
+						}).append($('<td/>',{
+							style: 'width: 880px;  height: 35px; text-align: left;',
+							class : 'contentC',
+							href : 'javascript:void(0)',
+							text : item.content
+						})).appendTo($('#index_notice_SearchList'));
+					});
+				}
+			}
+		});
+	});
+	
+	$('#index_notice_SearchPlus').click(function(){
+		$('#index_QnA_div').remove();
+		$('#index_contactList_div').remove();
+		$('#index_eventboard_div').remove();
+		$('#index_eventboard_play_div').remove();
+		$('#index_hotel_list_div').remove();
+	});
+
+	$('#index_QnA_SearchPlus').click(function(){
+		$('#index_notice_div').remove();
+		$('#index_contactList_div').remove();
+		$('#index_eventboard_div').remove();
+		$('#index_eventboard_play_div').remove();
+		$('#index_hotel_list_div').remove();
+	});
+	
+	$('#index_contactList_SearchPlus').click(function(){
+		$('#index_notice_div').remove();
+		$('#index_QnAt_div').remove();
+		$('#index_eventboard_div').remove();
+		$('#index_eventboard_play_div').remove();
+		$('#index_hotel_list_div').remove();
+	});
+	
+	$('#index_eventboard_SearchPlus').click(function(){
+		$('#index_notice_div').remove();
+		$('#index_QnA_div').remove();
+		$('#index_contactList_div').remove();
+		$('#index_eventboard_play_div').remove();
+		$('#index_hotel_list_div').remove();
+	});
+	
+	$('#index_eventboard_play_SearchPlus').click(function(){
+		$('#index_notice_div').remove();
+		$('#index_QnA_div').remove();
+		$('#index_contactList_div').remove();
+		$('#index_eventboard_div').remove();
+		$('#index_hotel_list_div').remove();
+	});
+	
+	$('#index_hotel_list_SearchPlus').click(function(){
+		$('#index_notice_div').remove();
+		$('#index_QnA_div').remove();
+		$('#index_contactList_div').remove();
+		$('#index_eventboard_div').remove();
+		$('#index_eventboard_play_div').remove();
+	});
 
 });
