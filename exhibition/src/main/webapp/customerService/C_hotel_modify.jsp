@@ -34,6 +34,8 @@
 	<form name="hotelboardModForm" id="hotelboardModForm" method="POST"
 		enctype="multipart/form-data">
 		<div style="width: 500px; margin-left: 20px;">
+		<input type="hidden" name="seq" value="${hotelboardDTO.seq}">
+		<input type="hidden" name="image1" value="${hotelboardDTO.image1}">
 		<!-- 제목 -->
 		<div style="width: 100%; text-align: left; margin-top: 20px;display: inline-block; ">
 			<div class="ui labeled input " >
@@ -95,7 +97,7 @@
 	  	<div id="telDiv"></div>
 	  	<!-- 버튼 -->
 	  	<div class="ui two buttons" style="margin-top: 20px;">
-		    	<div class="middle ui button" id="hotelboardModForm" style="width: 15%;">수정</div>
+		    	<div class="middle ui button" id="hotelboardModBtn" style="width: 15%;">수정</div>
 		    	<div style="width: 5%;">&nbsp;</div>
 		    	<button class="middle ui button" type="reset" id="writeReset" style="width: 15%;">다시작성</button>
 		    	<div style="width: 5%;">&nbsp;</div>
@@ -108,60 +110,17 @@
 </body>
 <script>
 $(document).ready(function(){
-	/* $('#inputHotel').hide();
-	$('#imageHotel').hide();
-	
-	//확인 클릭시 텍스트 박스내용으로 변경
-	$('#inputHotelBtn').click(function(){
-		if($('#selectHotel').text()=='호텔명'){
-			$('#selectImageName').text($('#inputTextHotel').val());
-			$('#imageName_H').val($('#inputTextHotel').val());
-		}else if($('#selectHotel').text()=='호텔링크'){
-			$('#selectEventLink').text($('#inputTextHotel').val());
-			$('#eventLink_H').val($('#inputTextHotel').val());
-		}else if($('#selectHotel').text()=='전화번호'){
-			$('#selectEventPlace').text($('#inputTextHotel').val());
-			$('#eventPlace_H').val($('#inputTextHotel').val());
-		}
-		$('#inputHotel').hide();
-		$('#completeTR').show();
-	});
-	
-	//수정할 내용들의 제목 가져가기
-	$('#selectImageName').click(function(){
-		$('#inputHotel').show();
-		$('#completeTR').hide();
-		$('#selectHotel').text('호텔명');
-		$('#inputTextHotel').val($('#selectImageName').text());
-	});
-	$('#selectEventLink').click(function(){
-		$('#inputHotel').show();
-		$('#completeTR').hide();
-		$('#selectHotel').text('호텔링크');
-		$('#inputTextHotel').val($('#selectEventLink').text());
-	});
-	$('#selectEventPlace').click(function(){
-		$('#inputHotel').show();
-		$('#completeTR').hide();
-		$('#selectHotel').text('전화번호');
-		$('#inputTextHotel').val($('#selectEventPlace').text());
-	});
-	$('#selectImageFile').click(function(){
-		$('#inputHotel').hide();
-		$('#completeTR').show();
-		$('#imageHotel').show();
-	}); */
 	//수정완료 클릭시
-	$('#completeHotelBtn').click(function(){
+	$('#hotelboardModBtn').click(function(){
 		var reg = /^https?\:\/\/.+/;
 		var tel = /^((01[1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})|(02|0[3-9]+[0-9])(\d{3,4})(\d{4})$/;
-		if($('#selectEventPlace').text()=='')
+		if($('#telPlace').val()=='')
 			$('#telDiv').text('전화번호를 입력하세요').css('color','red').css('font-size','9pt').css('font-weight','bold');
-		else if(!tel.test($('#selectEventPlace').text())){
+		else if(!tel.test($('#telPlace').val())){
 			$('#telDiv').text('전화번호 양식에 맞지 않습니다').css('color','red').css('font-size','9pt').css('font-weight','bold');
-		}else if($('#selectEventLink').text()=='')
+		}else if($('#eventLink').val()=='')
 			$('#hotelDiv').text('호텔 링크를 입력하세요').css('color','red').css('font-size','9pt').css('font-weight','bold');
-		else if(!reg.test($('#selectEventLink').text())){
+		else if(!reg.test($('#eventLink').val())){
 			$('#hotelDiv').text('호텔 링크 앞에는 http://가 입력되어야 합니다').css('color','red').css('font-size','9pt').css('font-weight','bold');
 		}else 
 			$('#hotelboardModForm').attr('action','/exhibition/customerService/C_hotelboardMod.do').submit();
