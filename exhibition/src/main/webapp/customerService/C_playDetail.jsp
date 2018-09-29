@@ -21,6 +21,7 @@
 	<form id="playboardModForm" method="POST" enctype="multipart/form-data">
 		<input type="hidden" name="postSelect" value="2">
 		<input type="hidden" name="seq" value="${eventboardDTO.seq}">
+		<input type="hidden" name="image1" value="${eventboardDTO.image1}">
 	<!-- 내용 입력 -->
 		<div style="width: 520px; margin-left: 20px;">
 			<!--제목  -->

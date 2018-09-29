@@ -58,7 +58,7 @@ public class CustomerServiceController {
 	private JavaMailSenderImpl emailSender;
 	@Autowired
 	private ImageboardPaging imageboardPaging;
-	private String filePath = "C:\\Users\\user\\git\\exhibition\\exhibition\\src\\main\\webapp\\storage\\";
+	private String filePath = "C:\\Users\\kmtab\\git\\exhibition\\exhibition\\src\\main\\webapp\\storage\\";
 	@Autowired
 	private CustomerServicePaging customerServicePaging;
 	@Autowired
@@ -1181,14 +1181,7 @@ public class CustomerServiceController {
 			eventboardDTO.setImage1(fileName);
 			customerServiceDAO.C_eventboardMod(eventboardDTO);
 		} else {
-			String fileName = img.getOriginalFilename();
-			File file = new File(filePath, fileName);
-			try {
-				FileCopyUtils.copy(img.getInputStream(), new FileOutputStream(file));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			eventboardDTO.setImage1(fileName);
+			eventboardDTO.setImage1(eventboardDTO.getImage1());
 			customerServiceDAO.C_eventboardMod(eventboardDTO);
 		}
 		return new ModelAndView("redirect:/customerService/C_eventboardListForm.do");
@@ -1212,14 +1205,7 @@ public class CustomerServiceController {
 			eventboardDTO.setImage1(fileName);
 			customerServiceDAO.C_playboardMod(eventboardDTO);
 		}else {
-			String fileName = img.getOriginalFilename();
-			File file = new File(filePath, fileName);
-			try {
-				FileCopyUtils.copy(img.getInputStream(), new FileOutputStream(file));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			eventboardDTO.setImage1(fileName);
+			eventboardDTO.setImage1(eventboardDTO.getImage1());
 			customerServiceDAO.C_playboardMod(eventboardDTO);
 		}
 		customerServiceDAO.C_playboardBookDel(eventboardDTO);
@@ -1284,7 +1270,7 @@ public class CustomerServiceController {
 	
 	// 호텔 수정완료 클릭시 DB내용 수정
 	@RequestMapping(value = "C_hotelboardMod", method = RequestMethod.POST)
-	public ModelAndView C_hotelboardMod(@ModelAttribute HotelboardDTO hotelboardDTO, @RequestParam MultipartFile img) {
+	public ModelAndView C_hotelboardMod(@ModelAttribute HotelboardDTO hotelboardDTO, @RequestParam MultipartFile img) {		
 		if (!img.isEmpty()) {
 			File fileDelete = new File(filePath + hotelboardDTO.getImage1());
 			if (fileDelete.exists())
@@ -1297,8 +1283,11 @@ public class CustomerServiceController {
 				e.printStackTrace();
 			}
 			hotelboardDTO.setImage1(fileName);
+			customerServiceDAO.C_hotelboardMod(hotelboardDTO);
+		}else {
+			hotelboardDTO.setImage1(hotelboardDTO.getImage1());
+			customerServiceDAO.C_hotelboardMod(hotelboardDTO);
 		}
-		customerServiceDAO.C_hotelboardMod(hotelboardDTO);
 
 		return new ModelAndView("redirect:/customerService/C_hotelListForm.do");
 	}

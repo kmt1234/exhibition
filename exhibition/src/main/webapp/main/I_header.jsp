@@ -151,7 +151,7 @@ a:active{
 	                  </c:if>
 	                  <c:if test="${code=='3' }">
 	                 	 <div class="item" id="C_boardAdd">게시판 추가</div><!--세션값에 따라 보이게 할 예정-->
-	               	  	 <div class="item" id="C_salesExhibition">메출현황</div><!--세션값에 따라 보이게 할 예정-->
+	               	  	 <div class="item" id="C_salesExhibition">매출현황</div><!--세션값에 따라 보이게 할 예정-->
 	               	  	 <div class="item" id="C_memberShib">회원리스트</div><!--세션값에 따라 보이게 할 예정-->
 	               	  </c:if>	
 	               </div>

@@ -201,6 +201,7 @@ public class PerformanceController {
 			String beforeMonth = formatter.format(cal.getTime()).substring(2,4);
 			
 			String dateS= beforeYear+beforeMonth;
+			System.out.println(dateS);
 			Map<String,Integer> map = new HashMap<String,Integer>();
 			map.put("endNum", endNum);
 			map.put("startNum", startNum);
