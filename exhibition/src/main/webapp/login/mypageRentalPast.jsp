@@ -19,6 +19,9 @@
 	text-decoration: none;
 	cursor: pointer;
 }
+th {
+    border: 1px solid #444444;
+  }
 </style>
 <body>
 <div class="ui segment" id="Ticket-List-Div" align="center">
@@ -29,45 +32,67 @@
 		<img src="../img/house.png" width="15px" height="16px" style="cursor: pointer;" id="houseImg"></img>
 		> 고객센터 > 마이페이지(법인) 
 		</div>
+		<div class="ui divider"></div>
 	</h2>
 	<!-- 메인메뉴 -->
 	<div style="width: 100%;">
 		<!-- 맨위 메뉴 텝 -->
 		<div style="margin-left: 20px; width:880px; float: left; text-align: left;">
-			<a class="middle ui button" class="active item" id="member-info-modify" style="margin-left:20px; width:150px; float: left;">수정</a>
-			<a class="middle ui button" class="item"id="member-ticket-list"  style=" width:150px; float: left;">임대리스트 </a>
-			<a class="middle ui button" class="item"id="member-ticket-history"  style=" width:150px; float: left;">지난 임대 내역</a>
+			<a class="middle ui button" class="active item" id="company-info-modify" style="margin-left:20px; width:150px; float: left;">수정</a>
+			<a class="middle ui button" class="item"id="rental-list"  style=" width:150px; float: left;">임대리스트 </a>
+			<a class="middle ui button" class="item"id="rental-history"  style=" width:150px; float: left;">지난 임대 내역</a>
 		</div>
 	</div>
 	<br><br>
-	
-	<div class="ui segment" id="Ticket-History-Div">
-		 <table border="1" style="align:center;width:80%;border-collapse: collapse;">
-		  	<tr>
-			  	<th>부스명</th>
-			  	<th>행사명</th>
-			  	<th>행사시작일</th>
-			  	<th>행사종료일</th>
-			  	<th>이메일</th>
-			  	<th>연락처</th>
-		  	</tr>
-		  	<c:forEach items="${list}" var="list">
-		  		<tr>
-				  	<td>${list.getBoothName()}</td>
-				  	<td>${list.getTitle()}</td>
-				  	<td>${list.getStartDate()}</td>
-				  	<td>${list.getEndDate()}</td>
-				  	<td>${list.getC_email()}</td>
-				  	<td>${list.getC_tel()}</td>
-			  	 </tr>
-			  </c:forEach>		 
-		  </table>
-		  <br><div align="center">${memberTicketListPaging.pagingHTML}</div><br>
+	<div class="ui rental All" id="Ticket-History-Div">
+		 <table class="ui striped table">
+	  <thead>
+	  	<tr align="center">
+		  	<th>부스명</th>
+		  	<th>행사명</th>
+		  	<th>행사시작일</th>
+		  	<th>행사종료일</th>
+	  	</tr></thead>
+	  	<tbody id="rental_All" align="center">
+  		<c:if test="${listSize eq '0'}">
+  		<tr><td colspan="6">지난 임대 내역이 없습니다.</td></tr>
+  		</c:if>
+  		</tbody>
+	  </table>
+	  <div name="paging" id="paging"></div>
 	</div>
 </div>
+<input type="hidden" name="pg" id="pg" value="${pg}">
 <script>
+$(document).ready(function(){
+	$.ajax({
+		type : 'POST',
+		url : '/exhibition/login/getAllRental.do',
+		data : {'C_license':$('#license_here').val(),'pg':$('#pg').val()},
+		dataType : 'json',
+		success : function(data){
+			$.each(data.list,function(index, item){
+				$('<tr/>').append($('<td/>',{
+			 		name : 'boothName',
+			 		text : item.boothName
+			 	})).append($('<td/>',{
+			 		name : 'title',
+			 		text : item.title
+			 	})).append($('<td/>',{
+			 		name : 'startDate',
+			 		text : item.startDate
+			 	})).append($('<td/>',{
+			 		name : 'endDate',
+			 		text : item.endDate
+			 	})).appendTo($('#rental_All'));
+			});
+			$('#paging').html(data.memberTicketListPaging.pagingHTML);
+		}
+	});
+
+});
 function MemberTicketListPaging(pg){
-	location.href="/exhibition/login/mypageRentalPast.do?pg="+pg;
+	location.href="/exhibition/login/mypageRentalPast.do?pg="+pg+"";
 }
 </script>
 </body>

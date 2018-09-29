@@ -23,7 +23,7 @@
 		</div>
 	<div class="ui divider"></div> 
 	</h2>
-	<!-- 메인메뉴 -->
+	<!-- 메인메뉴 --><input type="hidden" id="license_here" value="${c_license}">
 	<div style="width: 100%;">
 		<!-- 맨위 메뉴 텝 -->
 		<div style=" width:880px; float: left; text-align: left;">
