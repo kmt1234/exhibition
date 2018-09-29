@@ -35,7 +35,7 @@
 		<jsp:include page="${display }"/>
 	</div>
 <!--메인화면 아래 부분(일정)  -->
-	<div class="ui container" style="margin-top: 20px; min-width:1170px; height:200px;  ">
+	<div class="ui container" style="margin-top: 20px; border:1px ridge rgb(155,155,155,.6); min-width:1170px; height:300px;  ">
 		<!-- 공연포스터 슬라이드?? -->
 		<div style=" margin-left:15px; width:270px; height:200px;  display: inline-block; float: left;">
 			<jsp:include page="../main/slide.jsp" ></jsp:include>
