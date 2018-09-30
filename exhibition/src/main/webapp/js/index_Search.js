@@ -1,19 +1,23 @@
-$(document).ready(function(){
+$(document).ready(function(event, str){
 	var index_keyword = $('#indexkeyword').val();
+	var pg = $('#pg').val();
 	var code = $('#hiddenCode').val();
 	
 	// 메인 검색시 검색된 공지사항 리스트 불러옴
+	
 	$.ajax({
 		type : 'POST',
 		url : '/exhibition/main/index_notice_Search.do',
-		data : {'pg':$('#pg').val(),
+		data : {'pg': $('#pg').val(),
 				'index_keyword' : index_keyword},
 		dataType : 'json',
 		success : function(data){
+			$('#index_notice_PagingDiv').remove();
 			if(data.totalA<'4'){
 				$('#index_notice_SearchPlus').remove();
 			}
 			if(data.totalA=='0'){
+				
 				$('<tr/>',{
 					align: 'center'
 				}).append($('<td/>',{
@@ -48,21 +52,77 @@ $(document).ready(function(){
 				
 	});
 	
+	$('#index_notice_SearchPlus').click(function(){
+		$('#index_notice_SearchList tr:gt(0)').remove();
+		
+		$('#index_QnA_div').remove();
+		$('#index_contactList_div').remove();
+		$('#index_eventboard_div').remove();
+		$('#index_eventboard_play_div').remove();
+		$('#index_hotel_list_div').remove();
+		$('#index_notice_SearchPlus').remove();
+		
+
+		
+		$.ajax({
+			type : 'POST',
+			url : '/exhibition/main/index_notice_SearchPlus.do',
+			data : {'pg': $('#pg').val(),
+					'index_keyword' : index_keyword},
+			dataType : 'json',
+			success : function(data){
+				$('<div/>',{
+					text : '공지사항'
+				});
+				$.each(data.list, function(index, item){
+					
+					$('<tr/>').append($('<input/>',{
+						align : 'center',
+						style: 'width: 880px; text-align: left;',
+						type : 'hidden',
+						text : item.seq
+					})).append($('<td/>',{
+						style: 'width: 880px; text-align: left;',
+						id : 'subjectA',
+						text : item.subject
+					})).appendTo($('#index_notice_SearchList'));
+					
+					$('<tr/>',{
+						style: 'width: 880px; height: 35px; text-align: left;'
+					}).append($('<td/>',{
+						style: 'width: 880px;  height: 35px; text-align: left;',
+						class : 'contentC',
+						href : 'javascript:void(0)',
+						text : item.content
+					})).appendTo($('#index_notice_SearchList'));
+				});
+				$('#index_notice_PagingDiv').html(data.mainPaging.pagingHTML);
+			}
+					
+		});
+	});
+	
 	// 공지사항 제목 클릭시 내용보여줌
 	$('#index_notice_SearchList').on('click','#subjectA',function(){
 		var seq = $(this).prev().text();
 		location.href='/exhibition/customerService/C_notice_View.do?seq='+seq+'&pg='+$('#pg').val();
 	});
 	
+	function index_notice_Search(pg){
+		$('#pg').val(pg);
+		$('#C_notice_SearchBtn').trigger('click','trigger');
+	}
+	
 	
 	// 메인 검색시 검색된 자주묻는 질문 리스트 불러옴
 	$.ajax({
 		type : 'POST',
 		url : '/exhibition/main/index_QnA_Search.do',
-		data : {'pg':$('#pg').val(),
+		data : {'pg': $('#pg').val(),
 				'index_keyword' : index_keyword},
 		dataType : 'json',
 		success : function(data){
+			$('#index_QnA_PagingDiv').remove();
 			if(data.totalA<'4'){
 				$('#index_QnA_SearchPlus').remove();
 			}
@@ -104,6 +164,58 @@ $(document).ready(function(){
 		}
 	});
 	
+	$('#index_QnA_SearchPlus').click(function(){
+		$('#index_QnA_div tr:gt(0)').remove();
+		
+		$('#index_notice_div').remove();
+		$('#index_contactList_div').remove();
+		$('#index_eventboard_div').remove();
+		$('#index_eventboard_play_div').remove();
+		$('#index_hotel_list_div').remove();
+		$('#index_QnA_SearchPlus').remove();
+		
+		$.ajax({
+			type : 'POST',
+			url : '/exhibition/main/index_QnA_SearchPlus.do',
+			data : {'pg': $('#pg').val(),
+					'index_keyword' : index_keyword},
+			dataType : 'json',
+			success : function(data){
+				
+				$('<div/>',{
+					
+					text : '자주 묻는 질문'
+				});
+				$.each(data.list, function(index, item){
+					$('<tr/>').append($('<input/>',{
+						type : 'hidden',
+						text : item.classify
+					})).append($('<input/>',{
+						
+						align : 'center',
+						style: 'width: 880px; text-align: left;',
+						type : 'hidden',
+						text : item.seq
+					})).append($('<td/>',{
+						style: 'width: 880px; text-align: left;',
+						id : 'QnA_subject',
+						text : item.subject
+					})).appendTo($('#index_QnA_SearchList'));
+				
+					$('<tr/>',{
+						style: 'width: 880px; height: 35px; text-align: left;'
+					}).append($('<td/>',{
+						style: 'width: 880px;  height: 35px; text-align: left;',
+						class : 'contentC',
+						href : 'javascript:void(0)',
+						text : item.content
+					})).appendTo($('#index_QnA_SearchList'));
+				});
+			}
+		});
+	});
+	
+	
 	//
 	$('#index_QnA_SearchList').on('click','#QnA_subject',function(){
 		var seq = $(this).prev().text();
@@ -114,10 +226,11 @@ $(document).ready(function(){
 	$.ajax({
 		type : 'POST',
 		url : '/exhibition/main/index_contactList_Search.do',
-		data : {'pg':$('#pg').val(),
+		data : {'pg': $('#pg').val(),
 				'index_keyword': index_keyword },
 		dataType : 'json',
 		success : function(data){
+			$('#index_contactList_PagingDiv').remove();
 			if(data.totalA<'4'){
 				$('#index_contactList_SearchPlus').remove();
 			}
@@ -148,6 +261,88 @@ $(document).ready(function(){
 					text : '연락처'
 				})).appendTo($('#index_contactList_SearchList'));
 				
+				$.each(data.list, function(index, item){
+					if(code!=3){
+						$('<tr/>').append($('<td/>',{
+							align : 'center',
+							style: 'width: 20%; height: 9%; text-align: center;',
+							text : item.classify,
+						})).append($('<td/>',{
+							align : 'center',
+							style: 'width: 20%; height: 9%; text-align: center;',
+							text : item.facility,
+						})).append($('<td/>',{
+							align : 'center',
+							style: 'width: 20%; height: 9%; text-align: center;',
+							text : item.title,
+						})).append($('<td/>',{
+							align : 'center',
+							style: 'width: 20%; height: 9%; text-align: center;',
+							text : item.name,
+						})).append($('<td/>',{
+							align : 'center',
+							style: 'width: 20%; height: 9%; text-align: center;',
+							text : item.phone,
+						})).appendTo($('#index_contactList_SearchList'));
+						
+					} else if(code==3){
+						$('<tr/>').append($('<td/>').append($('<input/>',{
+							type : 'checkbox',
+							value : item.seq,
+							name : 'box',
+							class : 'box'
+						}))).append($('<td/>',{
+							align : 'center',
+							style: 'width: 20%; height: 9%; text-align: center;',
+							text : item.classify,
+						})).append($('<td/>',{
+							align : 'center',
+							style: 'width: 20%; height: 9%; text-align: center;',
+							text : item.facility,
+						})).append($('<td/>',{
+							align : 'center',
+							style: 'width: 20%; height: 9%; text-align: center;',
+							text : item.title,
+						})).append($('<td/>',{
+							align : 'center',
+							style: 'width: 20%; height: 9%; text-align: center;',
+							text : item.name,
+						})).append($('<td/>',{
+							align : 'center',
+							style: 'width: 20%; height: 9%; text-align: center;',
+							text : item.phone,
+						})).appendTo($('#index_contactList_SearchList'));	
+					}
+				});
+				$('#index_contactList_PagingDiv').html(data.mainPaging.pagingHTML);
+			}
+		}
+	});
+	
+	
+	$('#index_contactList_SearchPlus').click(function(){
+		$('#index_contactList_SearchList tr:gt(0)').remove();
+		
+		$('#index_notice_div').remove();
+		$('#index_QnA_div').remove();
+		$('#index_eventboard_div').remove();
+		$('#index_eventboard_play_div').remove();
+		$('#index_hotel_list_div').remove();
+		$('#index_contactList_SearchPlus').remove();
+		
+
+		
+		$.ajax({
+			type : 'POST',
+			url : '/exhibition/main/index_contactList_SearchPlus.do',
+			data : {'pg': $('#pg').val(),
+					'index_keyword': index_keyword },
+			dataType : 'json',
+			success : function(data){
+				$('<div/>',{
+									
+					text : '주요 시설 연락처'
+				});
 				$.each(data.list, function(index, item){
 					if(code!=3){
 						$('<tr/>').append($('<td/>',{
@@ -212,17 +407,19 @@ $(document).ready(function(){
 					}
 				});
 			}
-		}
+		});
 	});
+	
 	
 	// 메인 검색시 검색된 박람회 리스트 불러옴
 	$.ajax({
 		type : 'POST',
 		url : '/exhibition/main/index_eventboard_Search.do',
-		data : {'pg':$('#pg').val(),
+		data : {'pg': $('#pg').val(),
 				'index_keyword': index_keyword },
 		dataType : 'json',
 		success : function(data){
+			$('#index_eventboard_PagingDiv').remove();
 			if(data.totalA<'4'){
 				$('#index_eventboard_SearchPlus').remove();
 			}
@@ -302,10 +499,11 @@ $(document).ready(function(){
 	$.ajax({
 		type : 'POST',
 		url : '/exhibition/main/index_eventboard_play_Search.do',
-		data : {'pg':$('#pg').val(),
+		data : {'pg': $('#pg').val(),
 				'index_keyword': index_keyword },
 		dataType : 'json',
 		success : function(data){
+			$('#index_eventboard_play_PagingDiv').remove();
 			if(data.totalA<'4'){
 				$('#index_eventboard_play_SearchPlus').remove();
 			}
@@ -385,10 +583,11 @@ $(document).ready(function(){
 	$.ajax({
 		type : 'POST',
 		url : '/exhibition/main/index_hotel_list_Search.do',
-		data : {'pg':$('#pg').val(),
+		data : {'pg': $('#pg').val(),
 				'index_keyword': index_keyword },
 		dataType : 'json',
 		success : function(data){
+			$('#index_hotel_list_PagingDiv').remove();
 			if(data.totalA<'4'){
 				$('#index_hotel_list_SearchPlus').remove();
 			}
@@ -434,16 +633,14 @@ $(document).ready(function(){
 	});
 	
 	$('#index_notice_SearchPlus').on('click',function(event, str){
-		if(str!='trigger') $('#pg').val(1);
 		
 		$.ajax({
 			type : 'POST',
 			url : '/exhibition/main/index_notice_Search.do',
-			data : {'pg':$('#pg').val(),
+			data : {'pg': $('#pg').val(),
 					'index_keyword' : index_keyword},
 			dataType : 'json',
 			success : function(data){
-				$('#index_notice_SearchList tr:gt(0)').remove();
 				if(data.totalA=='0'){
 					$('<tr/>',{
 						align: 'center'
@@ -479,34 +676,19 @@ $(document).ready(function(){
 		});
 	});
 	
-	$('#index_notice_SearchPlus').click(function(){
-		$('#index_QnA_div').remove();
-		$('#index_contactList_div').remove();
-		$('#index_eventboard_div').remove();
-		$('#index_eventboard_play_div').remove();
-		$('#index_hotel_list_div').remove();
-	});
-
-	$('#index_QnA_SearchPlus').click(function(){
-		$('#index_notice_div').remove();
-		$('#index_contactList_div').remove();
-		$('#index_eventboard_div').remove();
-		$('#index_eventboard_play_div').remove();
-		$('#index_hotel_list_div').remove();
-	});
 	
-	$('#index_contactList_SearchPlus').click(function(){
-		$('#index_notice_div').remove();
-		$('#index_QnAt_div').remove();
-		$('#index_eventboard_div').remove();
-		$('#index_eventboard_play_div').remove();
-		$('#index_hotel_list_div').remove();
-	});
+	
+	
+
+	
+	
+	
 	
 	$('#index_eventboard_SearchPlus').click(function(){
 		$('#index_notice_div').remove();
 		$('#index_QnA_div').remove();
 		$('#index_contactList_div').remove();
+		$('#index_eventboard_div').remove();
 		$('#index_eventboard_play_div').remove();
 		$('#index_hotel_list_div').remove();
 	});
@@ -516,6 +698,7 @@ $(document).ready(function(){
 		$('#index_QnA_div').remove();
 		$('#index_contactList_div').remove();
 		$('#index_eventboard_div').remove();
+		$('#index_eventboard_play_div').remove();
 		$('#index_hotel_list_div').remove();
 	});
 	
@@ -525,6 +708,7 @@ $(document).ready(function(){
 		$('#index_contactList_div').remove();
 		$('#index_eventboard_div').remove();
 		$('#index_eventboard_play_div').remove();
+		$('#index_hotel_list_div').remove();
 	});
 
 });

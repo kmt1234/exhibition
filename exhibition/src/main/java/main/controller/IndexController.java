@@ -61,7 +61,7 @@ public class IndexController {
 	
 	// 메인 검색시 검색된 공지사항 리스트 불러옴
 	@RequestMapping(value="index_notice_Search", method=RequestMethod.POST)
-	public ModelAndView index_notice_Search(@RequestParam(required = false, defaultValue = "1") Map<String, String> map) {
+	public ModelAndView index_notice_Search(@RequestParam(required = false) Map<String, String> map) {
 		int endNum = Integer.parseInt(map.get("pg")) * 3;
 		int startNum = endNum - 2;
 		
@@ -87,9 +87,37 @@ public class IndexController {
 		return mav; 
 	}
 	
+	// 메인 검색후  공지사항 더보기 버튼 클릭시 리스트 불러옴
+	@RequestMapping(value="index_notice_SearchPlus", method=RequestMethod.POST)
+	public ModelAndView index_notice_SearchPlus(@RequestParam(required = false) Map<String, String> map) {
+		int endNum = Integer.parseInt(map.get("pg")) * 10;
+		int startNum = endNum - 9;
+		
+		map.put("startNum", startNum + "");
+		map.put("endNum", endNum + "");
+
+		List<MainDTO> list = mainDAO.index_notice_Search(map);
+		
+		int totalA = mainDAO.getTotal_index_notice_Search(map);
+		
+		mainPaging.setCurrentPage(Integer.parseInt(map.get("pg")));
+		mainPaging.setPageBlock(10);
+		mainPaging.setPageSize(10);
+		mainPaging.setTotalA(totalA);
+		mainPaging.index_notice_searchPlusPagingHTML();
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("totalA", totalA);
+		mav.addObject("list", list);
+		mav.addObject("mainPaging", mainPaging);
+		mav.setViewName("jsonView");
+		
+		return mav; 
+	}
+	
 	// 메인 검색시 검색된 자주묻는 질문 리스트 불러옴
 	@RequestMapping(value="index_QnA_Search", method=RequestMethod.POST)
-	public ModelAndView index_QnA_Search(@RequestParam(required = false, defaultValue = "1") Map<String, String> map) {
+	public ModelAndView index_QnA_Search(@RequestParam(required = false) Map<String, String> map) {
 		int endNum = Integer.parseInt(map.get("pg")) * 3;
 		int startNum = endNum - 2;
 		
@@ -115,9 +143,37 @@ public class IndexController {
 		return mav; 
 	}
 	
+	// 메인 검색후  자주묻는 질문 더보기 버튼 클릭시 리스트 불러옴
+	@RequestMapping(value="index_QnA_SearchPlus", method=RequestMethod.POST)
+	public ModelAndView index_QnA_SearchPlus(@RequestParam(required = false) Map<String, String> map) {
+		int endNum = Integer.parseInt(map.get("pg")) * 10;
+		int startNum = endNum - 9;
+		
+		map.put("startNum", startNum + "");
+		map.put("endNum", endNum + "");
+
+		List<MainDTO> list = mainDAO.index_QnA_Search(map);
+		
+		int totalA = mainDAO.getTotal_index_QnA_Search(map);
+		
+		mainPaging.setCurrentPage(Integer.parseInt(map.get("pg")));
+		mainPaging.setPageBlock(10);
+		mainPaging.setPageSize(10);
+		mainPaging.setTotalA(totalA);
+		mainPaging.index_notice_searchPlusPagingHTML();
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("totalA", totalA);
+		mav.addObject("list", list);
+		mav.addObject("mainPaging", mainPaging);
+		mav.setViewName("jsonView");
+		
+		return mav; 
+	}
+	
 	// 메인 검색시 검색된 주요시설 연락처 리스트 불러옴
 	@RequestMapping(value="index_contactList_Search", method=RequestMethod.POST)
-	public ModelAndView index_contactList_Search(@RequestParam(required = false, defaultValue = "1") Map<String, String> map) {
+	public ModelAndView index_contactList_Search(@RequestParam(required = false) Map<String, String> map) {
 		int endNum = Integer.parseInt(map.get("pg")) * 3;
 		int startNum = endNum - 2;
 		
@@ -143,9 +199,37 @@ public class IndexController {
 		return mav; 
 	}
 	
+	//
+	@RequestMapping(value="index_contactList_SearchPlus", method=RequestMethod.POST)
+	public ModelAndView index_contactList_SearchPlus(@RequestParam(required = false) Map<String, String> map) {
+		int endNum = Integer.parseInt(map.get("pg")) * 10;
+		int startNum = endNum - 9;
+		
+		map.put("startNum", startNum + "");
+		map.put("endNum", endNum + "");
+		
+		List<MainDTO> list = mainDAO.index_contactList_Search(map);
+		
+		int totalA = mainDAO.getTotal_index_contactList_Search(map);
+		
+		mainPaging.setCurrentPage(Integer.parseInt(map.get("pg")));
+		mainPaging.setPageBlock(10);
+		mainPaging.setPageSize(10);
+		mainPaging.setTotalA(totalA);
+		mainPaging.index_contactList_searchPlusPagingHTML();
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("totalA", totalA);
+		mav.addObject("list", list);
+		mav.addObject("mainPaging", mainPaging);
+		mav.setViewName("jsonView");
+		
+		return mav; 
+	}
+	
 	// 메인 검색시 검색된 박람회 리스트 불러옴
 	@RequestMapping(value="index_eventboard_Search", method=RequestMethod.POST)
-	public ModelAndView index_eventboard_Search(@RequestParam(required = false, defaultValue = "1") Map<String, String> map) {
+	public ModelAndView index_eventboard_Search(@RequestParam(required = false) Map<String, String> map) {
 		int endNum = Integer.parseInt(map.get("pg")) * 3;
 		int startNum = endNum - 2;
 		
@@ -174,7 +258,7 @@ public class IndexController {
 	
 	// 메인 검색시 검색된 연극 리스트 불러옴
 	@RequestMapping(value="index_eventboard_play_Search", method=RequestMethod.POST)
-	public ModelAndView index_eventboard_play_Search(@RequestParam(required = false, defaultValue = "1") Map<String, String> map) {
+	public ModelAndView index_eventboard_play_Search(@RequestParam(required = false) Map<String, String> map) {
 		int endNum = 3;
 		int startNum = endNum - 2;
 		
@@ -203,9 +287,11 @@ public class IndexController {
 	
 	// 메인 검색시 검색된 연극 리스트 불러옴
 		@RequestMapping(value="index_hotel_list_Search", method=RequestMethod.POST)
-		public ModelAndView index_hotel_list_Search(@RequestParam(required = false, defaultValue = "1") Map<String, String> map) {
+		public ModelAndView index_hotel_list_Search(@RequestParam(required = false) Map<String, String> map) {
 			int endNum = Integer.parseInt(map.get("pg")) * 3;
 			int startNum = endNum - 2;
+			
+			System.out.println(endNum);
 			
 			map.put("startNum", startNum + "");
 			map.put("endNum", endNum + "");
