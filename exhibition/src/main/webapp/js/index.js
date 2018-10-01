@@ -299,10 +299,7 @@ $(document).ready(function(){
 		success : function(data) {
 			console.log(JSON.stringify(data));
 			$('#today_list ul li').remove();
-		
 			$.each(data.list, function(index, item){
-				
-				
 				if(item.postSelect=='1') {
 					if(item.start==1) {
 						$('<li/>',{
@@ -351,7 +348,7 @@ $(document).ready(function(){
 							class : 'co_item',
 							html : '<br>'
 						}).append($('<span/>',{
-							html : '<img  id="co_img" width="20px" height="20px" src="../img/Ev.png">'+item.imageName+'</img>',
+							html : '<img style="margin-top:5px;" id="co_img" width="20px" height="20px" src="../img/Ev.png">'+item.imageName+'</img>',
 							style : 'display : block'
 						})).append($('<span/>',{
 							text : item.startDate.substring(0,10) + '-' + item.endDate.substring(0,10),
@@ -366,7 +363,7 @@ $(document).ready(function(){
 							html : '<br>'
 						}).append($('<span/>',{
 							style : 'width = 220px',
-							html : '<img id="co_img" width="20px" height="20px" src="../img/Ev.png">'+'일정이 없습니다.'+'</img><br><br>',
+							html : '<img style="margin-top:5px;" id="co_img" width="20px" height="20px" src="../img/Ev.png">'+'일정이 없습니다.'+'</img><br><br>',
 							style : 'display : block'
 						})).appendTo($('#total_list'));
 					} else {
@@ -375,7 +372,7 @@ $(document).ready(function(){
 							class : 'co_item',
 							html : '<br>'
 						}).append($('<span/>',{
-							html : '<img  id="co_img" width="20px" height="20px" src="../img/Ev.png">'+item.imageName+'</img>',
+							html : '<img style="margin-top:5px;" id="co_img" width="20px" height="20px" src="../img/Ev.png">'+item.imageName+'</img>',
 							style : 'display : block'
 						})).append($('<span/>',{
 							text : item.startDate.substring(0,10) + '-' + item.endDate.substring(0,10),
@@ -390,7 +387,6 @@ $(document).ready(function(){
 			});
 		}
 	});
-	
 	setInterval(function () {
 		if($('li.ex_item').length > 1){moveExItems()}
 		if($('li.co_item').length > 1){moveCoItems()}
@@ -413,8 +409,8 @@ $(document).ready(function(){
 		}
 		next_item.fadeIn("slow");
 		current_item.hide();
-	}		
-
+	}	
+	//공연포스터 슬라이더
 	$('.bxslider').bxSlider({
    	 	auto: true,
         speed: 500,

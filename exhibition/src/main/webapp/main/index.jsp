@@ -47,7 +47,7 @@
 		</div>
 		<!-- 공지사항  -->
 		<div class="main_section2">
-			<div style="height : 50px; padding:10px; font-weight: bold; font-size: x-large;" >공지사항</div>
+			<div style="height : 50px; padding:10px; font-weight: bold; font-size: x-large; margin-top: " >공지사항</div>
 			<div id="C_notice_MainList" style="height : 170px;"></div><!--index.js참조-->
 		</div>
 	</div>

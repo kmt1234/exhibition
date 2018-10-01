@@ -43,6 +43,7 @@ p:hover{
 	padding-top:3px; 
 	font-size: 9pt; 
 	font-family: inherit;
+	overflow: auto;
 }
 .content1{
 	float:left; 
