@@ -19,7 +19,9 @@ $(document).ready(function(){
 	     mode:'fade',
 	     autoControls: false,
 	     pager: true,
-	     responsive: false
+	     responsive: false,
+	     controls: false,
+	     
 	});
 });
 </script>

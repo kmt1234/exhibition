@@ -99,6 +99,10 @@ $(document).ready(function(){
 	$('#C_mypage').click(function(){
 		location.href="/exhibition/login/mypage.do";
 	});
+	//마이페이지(개인정보)
+	$('#memberList').click(function(){
+		location.href="/exhibition/customerService/C_memberShib.do";
+	});
 	//게시판 추가
 	$('#C_boardAdd').click(function(){
 		location.href="/exhibition/customerService/C_mainImageboardForm.do?postSelect=0";

@@ -81,7 +81,7 @@ a:active{
 					</div>
 				</c:if>
 				
-				<c:if test="${homepageMember == nul}">
+				<c:if test="${homepageMember == null}">
 					<div class="circular ui icon button" id="L_login"><i class="dropdown icon"></i>로그인
 						<div class="ui member2 dropdown">
 							<div class="menu" class="info1" style="width: 10px ; height:80px ;">
@@ -92,15 +92,22 @@ a:active{
 					</div>
 				</c:if>
 			
-			<c:if test="${homepageMember != nul}">
+			<c:if test="${homepageMember != null}">
 				<div align="center" style="text-align: right;">
 				<div>${homepageMemberName} 님 접속중입니다</div>
 					<div class="circular ui icon button" id="logout">
 						<i class="power off icon"></i>로그아웃
 					</div>
+					<c:if test="${homepageMemberName != 'master'}">
 					<div class="circular ui icon button" id="mypage">
 						<i class="user circle icon"></i>마이페이지
 					</div>
+					</c:if>
+					<c:if test="${homepageMemberName == 'master'}">
+					<div class="circular ui icon button" id="memberList">
+						<i class="user circle icon"></i>회원리스트
+					</div>
+					</c:if>
 				</div>
 			</c:if>				
 				
