@@ -61,6 +61,7 @@ left: 0px;
 <div class="ui container" style="margin-top: 20px; min-width:1170px; position: relative; ">
 	<jsp:include page="../main/I_footer.jsp" ></jsp:include>
 </div>
+<input type="hidden" id="masterCode" value="${code}">
 <script src="../js/slidbar.js"></script>
 	
 </body>

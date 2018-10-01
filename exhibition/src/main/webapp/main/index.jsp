@@ -4,12 +4,16 @@
 <html>
 <head>
 <style type="text/css">
-/* #subjectA:hover{
+#subjectA:hover{
 	cursor: pointer;
 	font-weight: bold;
-} */
-#C_notice_MainList{
-	font-weight: bold;
+	
+}
+#subjectA{
+width: 215px;
+   overflow: hidden;
+   white-space: nowrap;
+   text-overflow: ellipsis;
 }
 </style>
 <link rel="stylesheet" href="../css/main.css">
@@ -33,12 +37,12 @@
 			<jsp:include page="../main/slide.jsp" />
 		</div>
 		<!-- 달력&일정 -->
-		<div class="main_section2" style="width:540px;" ><!--index.js참조-->
+		<div class="main_section2" style="width:540px;  " ><!--index.js참조-->
 			<!-- 달력  -->
-			<div class="main_section3" id="mainCal" ></div>
+			<div class="main_section3" id="mainCal" style="margin-top: 15px;" ></div>
 			<!-- today -->
 			<dl class="todays main_section3" id="todays">
-				<dt>Today's</dt>
+				<dt style="margin-left: 20px; font-size: 13pt">Today's</dt>
 				<dd id="today_list" >
 					<ul class="total_list" id="total_list" style="list-style:none;">
 					</ul>
@@ -47,8 +51,8 @@
 		</div>
 		<!-- 공지사항  -->
 		<div class="main_section2">
-			<div style="height : 50px; padding:10px; font-weight: bold; font-size: x-large; margin-top: " >공지사항</div>
-			<div id="C_notice_MainList" style="height : 170px;"></div><!--index.js참조-->
+			<div style="height : 50px; padding:10px;  font-size: 13pt;" >공지사항</div>
+			<div id="C_notice_MainList" style="height : 220px;  "></div><!--index.js참조-->
 		</div>
 	</div>
 </section>

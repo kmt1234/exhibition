@@ -130,6 +130,5 @@ body {
 	</div>
 		<br><br><br><br>
 		<div  id='calendar'></div>
-
 </body>
 </html>

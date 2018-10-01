@@ -138,7 +138,7 @@ $(document).ready(function(){
 				$('<ul/>').append($('<p/>',{
 					align : 'center',
 					id : 'subjectA',
-					style: ' width : 250px; height: 35px; margin-left : 20px; text-align: left;',
+					style: ' width : 215px; height: 25px; margin-left:35px; text-align:left; border-bottom: 1px ridge rgb(155,155,155,.6)',
 					class : 'subjectC',
 					href : 'javascript:void(0)',
 					text : item.subject
@@ -184,7 +184,6 @@ $(document).ready(function(){
 				async: false,
 				dataType: 'json',
 				success : function(data) {
-					alert(JSON.stringify(data));
 					$('#today_list ul li').remove();
 					$.each(data.list, function(index, item){
 						if(item.postSelect=='1') {
@@ -209,7 +208,7 @@ $(document).ready(function(){
 									html : '<br>'
 								}).append($('<span/>',{
 									style : 'width = 220px',
-									html : '<img id="ex_img" width="20px" height="20px" src="../img/Ex.png">'+'일정이 없습니다.'+'</img>',
+									html : '<img  id="ex_img" width="20px" height="20px" src="../img/Ex.png">'+'일정이 없습니다.'+'</img>',
 									style : 'display : block'
 								})).appendTo($('#total_list'));
 							} else {
@@ -229,9 +228,6 @@ $(document).ready(function(){
 									style : 'display : block'
 								})).appendTo($('#total_list'));
 							}
-							
-							
-							
 						} else if(item.postSelect=='2') {
 							if(item.start==2) {
 								$('<li/>',{
@@ -297,7 +293,6 @@ $(document).ready(function(){
 		async: false,
 		dataType: 'json',
 		success : function(data) {
-			console.log(JSON.stringify(data));
 			$('#today_list ul li').remove();
 			$.each(data.list, function(index, item){
 				if(item.postSelect=='1') {
@@ -306,7 +301,7 @@ $(document).ready(function(){
 							class : 'ex_item',
 							html : '<br>'
 						}).append($('<span/>',{
-							html : '<img id="ex_img" width="20px" height="20px" src="../img/Ex.png">'+item.imageName+'</img>',
+							html : '<img style="padding-top:2px;" id="ex_img" width="20px" height="20px" src="../img/Ex.png">'+item.imageName+'</img>',
 							style : 'display : block'
 						})).append($('<span/>',{
 							text : item.startDate.substring(0,10) + '-' + item.endDate.substring(0,10),
@@ -321,7 +316,7 @@ $(document).ready(function(){
 							html : '<br>'
 						}).append($('<span/>',{
 							style : 'width = 220px',
-							html : '<img id="ex_img" width="20px" height="20px" src="../img/Ex.png">'+'일정이 없습니다.'+'</img><br><br>',
+							html : '<img style="padding-top:2px;" id="ex_img" width="20px" height="20px" src="../img/Ex.png">'+'일정이 없습니다.'+'</img><br><br>',
 							style : 'display : block'
 						})).appendTo($('#total_list'));
 					} else {
@@ -330,7 +325,7 @@ $(document).ready(function(){
 							class : 'ex_item',
 							html : '<br>'
 						}).append($('<span/>',{
-							html : '<img id="ex_img" width="20px" height="20px" src="../img/Ex.png">'+item.imageName+'</img>',
+							html : '<img style="padding-top:2px;" id="ex_img" width="20px" height="20px" src="../img/Ex.png">'+item.imageName+'</img>',
 							style : 'display : block'
 						})).append($('<span/>',{
 							text : item.startDate.substring(0,10) + '-' + item.endDate.substring(0,10),
@@ -348,7 +343,7 @@ $(document).ready(function(){
 							class : 'co_item',
 							html : '<br>'
 						}).append($('<span/>',{
-							html : '<img style="margin-top:5px;" id="co_img" width="20px" height="20px" src="../img/Ev.png">'+item.imageName+'</img>',
+							html : '<img  style="padding-top:2px;" id="co_img" width="20px" height="20px" src="../img/Ev.png">'+item.imageName+'</img>',
 							style : 'display : block'
 						})).append($('<span/>',{
 							text : item.startDate.substring(0,10) + '-' + item.endDate.substring(0,10),
@@ -363,7 +358,7 @@ $(document).ready(function(){
 							html : '<br>'
 						}).append($('<span/>',{
 							style : 'width = 220px',
-							html : '<img style="margin-top:5px;" id="co_img" width="20px" height="20px" src="../img/Ev.png">'+'일정이 없습니다.'+'</img><br><br>',
+							html : '<img style="padding-top:2px;" id="co_img" width="20px" height="20px" src="../img/Ev.png">'+'일정이 없습니다.'+'</img><br><br>',
 							style : 'display : block'
 						})).appendTo($('#total_list'));
 					} else {
@@ -372,7 +367,7 @@ $(document).ready(function(){
 							class : 'co_item',
 							html : '<br>'
 						}).append($('<span/>',{
-							html : '<img style="margin-top:5px;" id="co_img" width="20px" height="20px" src="../img/Ev.png">'+item.imageName+'</img>',
+							html : '<img style="padding-top:2px;" id="co_img" width="20px" height="20px" src="../img/Ev.png">'+item.imageName+'</img>',
 							style : 'display : block'
 						})).append($('<span/>',{
 							text : item.startDate.substring(0,10) + '-' + item.endDate.substring(0,10),
@@ -410,13 +405,4 @@ $(document).ready(function(){
 		next_item.fadeIn("slow");
 		current_item.hide();
 	}	
-	//공연포스터 슬라이더
-	$('.bxslider').bxSlider({
-   	 	auto: true,
-        speed: 500,
-        pause: 4000,
-        mode:'fade',
-        autoControls: true,
-        pager:true,
-   });
 });

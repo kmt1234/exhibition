@@ -1,0 +1,39 @@
+테이블
+drop table memberTable;
+drop table company;
+drop table exhibitionRental;
+drop table customerImageboard;
+drop table eventboard;
+drop table eventboard_play;
+drop table C_notice;
+drop table C_inquire;
+drop table C_QnA;
+drop table C_contactList;
+drop table hotel_list;
+drop table businessRoom;
+drop table eventboard_exhibition_book
+drop table eventboard_play_book;
+drop table Book_Play_Members;
+drop table Book_Exhibition_Members;
+drop table concertHall;
+drop table customerService;
+drop table businessRoom;
+
+시퀀스
+drop sequence seq_exhibitionRental;
+drop sequence seq_customerImageboard;
+drop sequence seq_eventboard;
+drop sequence seq_C_notice;
+drop sequence seq_C_QnA;
+drop sequence seq_C_inquire;
+drop sequence seq_C_contactList;
+drop sequence seq_hotel_list;
+drop sequence seq_eventboard_exhibition_book;
+drop sequence seq_eventboard_play_book;
+drop sequence seq_Book_Play_Members;
+drop sequence seq_hotel_list;
+drop sequence seq_concertHall;
+drop sequence seq_businessRoom;
+
+
+

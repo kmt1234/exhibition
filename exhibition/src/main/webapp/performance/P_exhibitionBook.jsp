@@ -6,100 +6,40 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>전시회</title>
-
+<link rel="stylesheet" href="../css/P_allScheduleList.css" ><!-- 리스트보기 -->
 <style>
-
-img{
-	width: 367px;
-	height: 425px;
-	border-radius: 10px;
-}
-
-td{
-	text-align: left;
-   	padding-left: 6%;
-    padding-top: 2px;
-}
-
-.bookWrapper{
-	float: left;
-}
-
-.ui.divider{
-	margin: 5rem 0 0 0;
-}
-
 .playContentHeader{
 	float: left;
 }
-
-.playContent{
-	display: grid;
-}
-
-.bookPlayTitle{
-   	margin-right: 30%;
-    margin-top: 2%;
-    margin-bottom: 2%;
-    font-size: 3rem;
-    width: 710px;
-}
-
-.bookPlayTitleDiv {
-    margin-top: 25px;
-}
-
 .book_play_confirm {
     display: flex;
 }
-
 .playTableWrapper{
 	margin-left: 33px;
 }
-
 #modalImage1{
 	margin-left: 20px;
 }
-
 #bookInfo{
-	margin-left: 30px;
+	margin-left: 10px;
+	font-size: 12pt;
 }
-
 </style>
-
 </head>
 <body>
-	<body>
-	<!-- 메인 화면 -->
-	<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
-		전시회
-		<span class="h-light">예약하기</span>
-	</h2>
-	
-	<!--메뉴-->
-	<div class="bookWrapper">
-		<div class="ui steps">
-		  
-		  <div class="active step">
-		    <div class="content">
-		      <div class="title">예매하기</div>
-		    </div>
-		  </div>
-		  	  	  
-		</div><!--class="ui ordered steps"-->
-		
-	</div><!--class="bookWrapper"-->
-	
-<div class="ui divider"></div>	
-
+<h2 class="box-container"  style="float: left; width:100%; text-align: left;">
+	<span>박람회 </span>
+	<span class="h-light">예약하기</span>
+	<div style="font-size:13px; float:right; height: 50px; margin-top:30px ">
+		<img src="../img/house.png" width="15px" height="16px" style="cursor: pointer;" id="houseImg"></img>
+		> 일정 > 목록 > 예약하기 
+	</div>
+	<div class="ui divider"></div> 
+</h2>
 <!--내용 : 예매하기-->
-<div id="Book_play_div">
-
-	<div class="playContentHeader">
-		<div><img src="../storage/${eventboardDTO.image1}"></div>
-		
+<div style="width: 880px; display: inline-block; text-align: left;">
+	<div class="playContentHeader" style="border: 1px solid; ">
+		<div><img style="width: 350px;height: 400px; border-radius: 10px;" src="../storage/${eventboardDTO.image1}"></div>
 	</div>
 	
 	<!--날짜 비교(기본 : 오늘날짜)-->
