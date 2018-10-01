@@ -108,7 +108,9 @@ $(document).ready(function(){
 	$('.datepicker1').datepicker('setDate', startDate1);
 	$('.datepicker2').datepicker('setDate', endDate2);
 	
+	//수정 버튼
 	$('#ModeButton').click(function(){
+		
 		$('#imageboardModForm').attr('action','/exhibition/customerService/C_imageboardMod.do').submit();
 	});
 });

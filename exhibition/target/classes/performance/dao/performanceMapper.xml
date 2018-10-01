@@ -99,13 +99,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getNextPlayList" parameterType="java.util.Map" resultType="eventboard">
          select * from(
                 select rownum rn, tt.* from(
-                select * from eventboard_play where startDate <![CDATA[>]]> (select sysdate from dual) and endDate <![CDATA[<=]]> (select add_months(sysdate,3) from dual) order by startDate desc)tt
+                select * from eventboard_play where startDate <![CDATA[>]]> (select sysdate from dual) and startDate <![CDATA[<=]]> (select add_months(sysdate,3) from dual) order by startDate desc)tt
              )where rn <![CDATA[>=]]> ${startNum} and rn <![CDATA[<=]]> ${endNum}     
 	</select>
 	
 	<!--연극 3개월 후 일정 수 가져오는 메소드-->
 	<select id="getNextPlayListTotalA" parameterType="java.util.Map" resultType="int">
-		select count(*) from eventboard_play where startDate <![CDATA[>]]> (select sysdate from dual) and endDate <![CDATA[<=]]> (select add_months(sysdate,3) from dual)
+		select count(*) from eventboard_play where startDate <![CDATA[>]]> (select sysdate from dual) and startDate <![CDATA[<=]]> (select add_months(sysdate,3) from dual)
 	</select>
 	
 	<!--연극 3개월 전 일정 가져오는 메소드-->
@@ -123,14 +123,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!--전시회 3개월 후 일정 수 가져오는 메소드 -->
 	<select id="getNextExhibitionListTotalA" parameterType="java.util.Map" resultType="int">
-		select count(*) from eventboard where startDate <![CDATA[>]]> (select sysdate from dual) and endDate <![CDATA[<=]]> (select add_months(sysdate,3) from dual)
+		select count(*) from eventboard where startDate <![CDATA[>]]> (select sysdate from dual) and startDate <![CDATA[<=]]> (select add_months(sysdate,3) from dual)
 	</select>
 	
 	<!--전시회 3개월 후 일정 가져오는 메소드-->
 	<select id="getNextExhibitionList" parameterType="java.util.Map" resultType="eventboard">
         select * from(
                 select rownum rn, tt.* from(
-                select * from eventboard where startDate <![CDATA[>]]> (select sysdate from dual) and endDate <![CDATA[<=]]> (select add_months(sysdate,3) from dual) order by startDate desc)tt
+                select * from eventboard where startDate <![CDATA[>]]> (select sysdate from dual) and startDate <![CDATA[<=]]> (select add_months(sysdate,3) from dual) order by startDate desc)tt
              )where rn <![CDATA[>=]]> ${startNum} and rn <![CDATA[<=]]> ${endNum}       
 	</select>
 	
@@ -232,7 +232,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select postSelect,imageName,image1,startDate,endDate,eventLink,eventContent
 		,to_char(startDate,'YYMM') as startdateM,to_char(endDate,'YYMM') as enddateM 
 		from eventboard_play order by startDate
-		) where startDateM <![CDATA[>]]> #{dateM} and enddateM <![CDATA[<=]]> #{dateS})tt
+		) where startDateM <![CDATA[>]]> #{dateM} and startDateM <![CDATA[<=]]> #{dateS})tt
 		)
 	</select>
 	
@@ -248,7 +248,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select postSelect,imageName,image1,startDate,endDate,eventLink,eventContent
 		,to_char(startDate,'YYMM') as startdateM,to_char(endDate,'YYMM') as enddateM 
 		from eventboard_play order by startDate
-		) where startDateM <![CDATA[>]]> #{dateM} and enddateM <![CDATA[<=]]> #{dateS})tt
+		) where startDateM <![CDATA[>]]> #{dateM} and startDateM <![CDATA[<=]]> #{dateS})tt
 		) where rn <![CDATA[>=]]> #{startNum} and rn <![CDATA[<=]]> #{endNum}
 	</select>
 </mapper>

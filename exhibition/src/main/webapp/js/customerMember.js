@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	//개인회원정보 불러오기
-	 $('#memberSearchDiv').hide();
+	 $('#companySearchDiv').hide();
 	 $('#memberSearchDiv').show();
 	 $('#memberListTable').empty();
 	 $('#reConfirm').hide();

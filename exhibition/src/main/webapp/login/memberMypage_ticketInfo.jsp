@@ -14,63 +14,79 @@
 #uiStatistics{
 	display: inherit;
 }
-	
+
+#contentId {
+    display: contents;
+}
+
+span.header {
+    text-align: center;
+}	
+
+.meta {
+    text-align: center;
+}
+
+.description {
+    text-align: center;
+}
+
+div#uiStatistics {
+    text-align: center;
+}
 </style>
 
 </head>
 <body>
-<div class="ui compact menu" style="width: 930px; height:900px auto;  display: inline-block;" >
-	<h2 class="box-container" style="float: center; width: 100%; height:126px; text-align: left;">
-		<span>마이</span>
-		<span class="h-light">페이지</span>
-		<div style="font-size:13px; float:right; height: 50px; margin-top:30px ">
-		<img src="../img/house.png" width="15px" height="16px" style="cursor: pointer;" id="houseImg"></img>
-		> 고객센터 > 마이페이지 
-	</div>
-	
-	<div class="ui divider"></div> 
-	
-	</h2>
-	
-	<div style="width: 100%;">
-		<!-- 맨위 메뉴 텝 -->
-		<div style="margin-left: 20px; width:880px; float: left; text-align: left;">
-			<a class="middle ui button" class="active item" id="member-info-modify">
-				수정
-		  	</a>
-		  	<a class="middle ui button" class="item" id="member-ticket-list">
-		    	예매리스트
-		 	</a>
-		  	<a class="middle ui button" class="item" id="member-ticket-history">
-		    	예매 내역
-		  	</a>
-		</div>
-	</div>
-</div><!--class="ui compact menu"   -->
 
-	<div class="ui card" id="uiCard">
-	  <div class="image">
-	    <img src="../storage/${eventboardDTO.image1}">
-	  </div>
-	  <div class="content">
-	    <span class="header">${imageName }</span>
-	    <div class="meta">		<input type="hidden" id="playDate2" value="${playDate2}">
-	      <span class="date">${playDate } / ${eventboardDTO.startTime} ~ ${eventboardDTO.endTime}</span>
-	    </div>
-	    <div class="description">
-	      ${eventboardDTO.eventContent}
-	    </div>
-	  </div>
-	  <div class="extra content">
-		  <div class="ui statistics" id="uiStatistics">
-			  <div class="blue statistic">
-			    <div class="value">${ticketQty }</div>	
-			    <div class="label">예매 티켓 수</div>
-			  </div>
-			  <button class="ui negative basic button" id="cancel">예매취소</button>
-		  </div><!--class="ui statistics"-->
-	  </div><!--class="extra content"-->
-	</div><!--class="ui card"  -->
+
+<jsp:include page="memberMypage.jsp"/>
+
+
+<div class="ui small modal" style="text-align:center;">
+	<div class="ui icon header"><i class="archive icon"></i>
+			예매 취소
+	</div>
+	
+	<div class="content" id="contentId" >
+  		<div class="ui card" id="uiCard">
+		  <div class="image">
+		    <img src="../storage/${eventboardDTO.image1}">
+		  </div>
+		  <div class="content">
+		    <span class="header">${imageName }</span>
+		    <div class="meta">		<input type="hidden" id="playDate2" value="${playDate2}">
+		      <span class="date">${playDate } / ${eventboardDTO.startTime} ~ ${eventboardDTO.endTime}</span>
+		    </div>
+		    <div class="description">
+		      ${eventboardDTO.eventContent}
+		    </div>
+		  </div>
+		  <div class="extra content">
+			  <div class="ui statistics" id="uiStatistics">
+				  <div class="blue statistic">
+				    <div class="value">${ticketQty }</div>	
+				    <div class="label">예매 티켓 수</div>
+				  </div>
+			  </div><!--class="ui statistics"-->
+		  </div><!--class="extra content"-->
+		</div><!--class="ui card"  -->
+	</div>
+	
+	<div class="actions">
+	  	<div class="ui red basic cancel inverted button"><i class="remove icon"></i>
+	    		아니오
+	  	</div>
+  		<div class="ui green ok inverted button" id="cancel"><i class="checkmark icon"></i>
+    			예
+  		</div>
+	</div>
+</div>
+
+
+
+
+	
 
 <!--예매 취소하기 위해 필요한 값들-->	
 <input type="hidden" id="hiddenImageName" value="${imageName }">
@@ -80,6 +96,13 @@
 </body>
 <script>
 $(document).ready(function(){
+	
+	$('.ui.small.modal')
+	  .modal({
+			closable : false,
+            duration : 460,
+		}).modal('show');
+	
 	
 	//get Month 0붙이기
 	function getMonth(date) {
@@ -145,21 +168,6 @@ $(document).ready(function(){
 				
 	});
 	
-	//회원정보 수정 메뉴
-	$('#member-info-modify').click(function(){
-		location.href="/exhibition/login/mypage.do";
-		
-	});
-
-	// 예매리스트 탭 
-	$('#member-ticket-list').click(function(){
-		location.href="/exhibition/login/memerMypage_ticketList.do";
-	});
-
-	//예매내역 탭
-	$('#member-ticket-history').click(function(){
-		location.href="/exhibition/login/ticketHistory.do";
-	});
 });
 </script>
 </html>

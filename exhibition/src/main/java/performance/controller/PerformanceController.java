@@ -201,6 +201,7 @@ public class PerformanceController {
 			String beforeMonth = formatter.format(cal.getTime()).substring(2,4);
 			
 			String dateS= beforeYear+beforeMonth;
+			System.out.println(dateS);
 			Map<String,Integer> map = new HashMap<String,Integer>();
 			map.put("endNum", endNum);
 			map.put("startNum", startNum);
@@ -1422,7 +1423,27 @@ public class PerformanceController {
 	public ModelAndView searchAllList(@RequestParam String date) {
 		
 		List<EventboardDTO> list = performanceDAO.getAllListExhibition(date);
+		for(int i = 0; i < list.size(); i++) {
+			list.get(0).setStart(1);
+		}
+		if(list.size()==0) {
+			EventboardDTO eventboardDTOEx = new EventboardDTO();
+			eventboardDTOEx.setPostSelect("1");
+			eventboardDTOEx.setStart(10);
+			list.add(eventboardDTOEx);
+		}
+		
 		List<EventboardDTO> consertList = performanceDAO.getAllListConcert(date);
+		for(int i = 0; i < consertList.size(); i++) {
+			consertList.get(0).setStart(2);
+		}
+		if(consertList.size()==0) {
+			EventboardDTO eventboardDTOCo = new EventboardDTO();
+			eventboardDTOCo.setPostSelect("2");
+			eventboardDTOCo.setStart(10);
+			consertList.add(eventboardDTOCo);
+		}
+		
 		
 		list.addAll(consertList);
 		

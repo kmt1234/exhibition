@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -131,17 +131,26 @@ $('#member-info-modify').click(function(){
 
 // 예매리스트 탭 
 $('#member-ticket-list').click(function(){
-	location.href="/exhibition/login/memerMypage_ticketList.do";
+	location.href="/exhibition/login/mypage.do";
 });
 
 //예매내역 탭
 $('#member-ticket-history').click(function(){
-	location.href="/exhibition/login/ticketHistory.do";
+	//location.href="/exhibition/login/ticketHistory.do";
 });
 
 $('#ticketList').on('click','.imageName',function(){
-	alert('기간만료된 티켓 및 당일 행사는 취소 불가능합니다');
+	 $.alertable.alert('당일 취소 불가능합니다(지난 이벤트 포함)', {
+	      show: function() {
+	        $(this.overlay).velocity('transition.fadeIn', 300);        
+	        $(this.modal).velocity('transition.shrinkIn', 300);
+	      },
+	      hide: function() {
+	        $(this.overlay).velocity('transition.fadeOut', 300);
+	        $(this.modal).velocity('transition.shrinkOut', 300);
+	      } 
+	    });
 });
 
 </script>
-</html>
+</html> --%>

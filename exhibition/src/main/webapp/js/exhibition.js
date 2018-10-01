@@ -4,6 +4,7 @@
  */
 $(document).ready(function(){
 	$('#exhibition2F').hide();
+	
 	$('#hall2Div').hide();
 	$('#hall3Div').hide();
 	$('#hall4Div').hide();

@@ -52,7 +52,7 @@ ul{
 </style>
 </head>
 <body>
-<h2 class="box-container" style="float: center; width: 100%; text-align: left;padding-bottom: 0px;">
+<h2 class="box-container" style="float: center; width: 100%; text-align: left; padding-bottom: 0px;">
 	공연 
 	<span class="h-light">홀</span>
 	<div style="font-size:13px; float:right; height: 50px; margin-top:30px">
