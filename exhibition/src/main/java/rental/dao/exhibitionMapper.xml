@@ -28,4 +28,12 @@
  		select * from exhibitionRental
  	</select>
  	
+ 	<select id="getRateExhibition" parameterType="String" resultType="int">
+ 		select rate from boothRate where boothName=#{booth}
+ 	</select>
+ 	
+ 	<update id="updateExhibitionRate" parameterType="java.util.Map">
+ 		update boothRate set rate=${rate} where boothName=#{booth} 
+ 	</update>
+ 	
 </mapper>

@@ -2,7 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<!DOCTYPE html>
 <html>
 <head>
 <style>
@@ -70,7 +71,7 @@
 							<td width="100px" align="center">${list.seq}</td>
 							<td width="380px" align="center"><a class="exhibition_detail"><img src="../storage/${list.image1}" width="300" height="150"></a></td>
 							<td width="100px" align="center">${list.imageName}</td>
-							<td width="150px" align="center" >${list.startDate } ~ ${list.endDate}</td>
+							<td width="150px" align="center" >${fn:substring(list.startDate, 0, 10)} ~ ${fn:substring(list.endDate, 0, 10)}</td>
 						</tr>
 						<input type="hidden" class="hidden_seq" value="${list.seq}">
 					</c:if>

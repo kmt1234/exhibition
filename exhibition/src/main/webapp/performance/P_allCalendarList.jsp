@@ -4,41 +4,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<link rel="stylesheet" href="../css/P_allScheduleList.css" ><!-- 리스트보기 -->
 </head>
-<style>
-body {
-	margin: 40px 10px;
-	font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
-	font-size: 14px;
-}
-#calendar {
-	max-width: 880px;
-	margin: 0 auto;
-}
-#currentPaging{
-	color: red;
-	text-decoration: none;
-	cursor: pointer;
-}
-#sub-high{
-	color:#999999;
-	font-size:23px;
-}
-#paging{
-	color: black;
-	text-decoration: none;
-	cursor: pointer;
-}
-
-</style>
 <body>
-	<!-- 메인 화면 -->
-	<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
-		전체
-		<span class="h-light">일정</span>
-		<span id="sub-high">- 이번달 행사 리스트</span>
-	</h2>
+<!-- 메인 화면 -->
+<h2 class="box-container"  style="float: left; width:100%; text-align: left;">
+	<span>전체 </span>
+	<span class="h-light">일정</span>
+	<div style="font-size:13px; float:right; height: 50px; margin-top:30px ">
+		<img src="../img/house.png" width="15px" height="16px" style="cursor: pointer;" id="houseImg"></img>
+		> 일정 > 전체일정 > 목록
+	</div>
+	<div class="ui divider"></div> 
+</h2>
 	<!-- 버튼 -->
 	<div>
 		<table style="margin-left:20px; width: 40%;">
@@ -57,71 +35,65 @@ body {
 		</table>
 	</div>
 <br><br>
-		<div align="center">
-		<table style="align:center; width: 70%;">
-			<tr>
-				<td>
-					<button class="ui inverted pink button" style="width: 100%;" id="P_allLsintBtn_Prev">
-						◀이전 행사 리스트(3개월)
-					</button> 
-				</td>
-				<td>
-					<button class="ui inverted pink button" style="width: 100%;" id="P_allLsintBtn_Now">
-						이번달 행사 리스트
-					</button> 
-				</td>
-				<td>
-					<button class="ui inverted pink button" style="width: 100%;" id="P_allLsintBtn_After">
-						이후 행사 리스트(3개월)▶
-					</button> 
-				</td>
-			</tr>
-		</table>
+	<div style="width: 880px; display: inline-block; text-align: left;">
+		<div style="width: 80px; display: inline-block;">
+			<p id="P_allLsintBtn_Prev">◀ 3개월 전	</p> 
+		</div>
+			<div style="width: 80px; display: inline-block; ">
+			<p id="P_allLsintBtn_Now">행사 리스트</p> 
+		</div>
+			<div style="width: 80px; display: inline-block; ">
+			<p id="P_allLsintBtn_After">3개월 후▶</a> 
+		</div>
 	</div><br>
 	<!-- 전체일정 리스트 -->
-	<div align="center" style="margin-left:20px; width: 880px;">
-		<form name="AllCalendarListForm" id="AllCalendarListForm" method="post">
-			<table  frame="hsides" border="1px" cellpadding="3" cellspacing="0" width="100%"><!-- rules="rows" -->
-				<tr>
-					<th class="event_performanceTh" width="250px"  style="background-color: #FF99FF;">이미지</th>
-					<th class="event_performanceTh" colspan="2" style="background-color: #FF99FF;">행사  정보</th>
-				</tr>
-				<!--등록된 정보가 없을 때  -->								
-				<c:if test="${listSize eq '0'}">	
-					<tr>
-						<td colspan="3" align="center">현재 계획된 일정이 없습니다</td>
-					</tr>
-				</c:if>			
-				<c:forEach items="${list}" var="list">		
-					<tr>
-						<td rowspan="5"><a target="event_blank" href="${list.eventLink}"><img class="event_img" src="../storage/${list.image1}" width="200px" height="250px"></a></td>
-						<td colspan="2" width="60px" align="left">
-							<c:if test="${list.postSelect eq '1'}">박람회</c:if>
-							<c:if test="${list.postSelect eq '2'}">공연</c:if>
-						</td>
-					</tr>
-					
-					<tr>
-						<td align="center"><span class="event_Title_content">제 목</span></td>
-						<td><pre>${list.imageName}</pre></td>
-					</tr>
-					<tr>
-						<td align="center">정 보</td>
-						<td><pre>${list.eventContent}</pre></td>
-					</tr>
-					<tr>
-						<td align="center">일 시</td>
-						<td><span>${list.startDate}</span> ~ <span>${list.endDate}</span></td>
-					</tr>
-					<tr>
-						<td align="center">링 크</td>
-						<td><span><a target="_blank" href="${list.eventLink}">홈페이지 방문</a></span></td>
-					</tr>
-				</c:forEach>
-			</table>	
-			<br><div align="center">${performancePaging.pagingHTML}</div><br>
-		</form>
-	</div>
+	<div style="margin-left:20px; margin-top:10px; width: 880px; ">
+		<c:if test="${listSize eq '0'}">	
+			<div>
+				<p>현재 계획된 일정이 없습니다</p>
+			</div>
+		</c:if>			
+		<c:forEach items="${list}" var="list">		
+		<div  style="width:auto;height:auto; border-top:1px ridge rgb(155,155,155,.6); display: inline-block;">
+			<div style="display: inline-block; float:left; width: 880px; height:20px; "></div>
+			<div style="display: inline-block; float: left; border: 1px ridge rgb(155,155,155,.6);">
+				<a target="event_blank" href="${list.eventLink}"><img class="event_img" src="../storage/${list.image1}" width="200px;" height="200px;"></a>
+			</div>
+			<div style="display: inline-block; float: left; width: 650px; height:40px; margin-left:20px; margin-top:10px; text-align: left; font-size: 14pt">
+				<div >
+					<c:if test="${list.postSelect eq '1'}">박람회</c:if>
+					<c:if test="${list.postSelect eq '2'}">공연</c:if>
+				</div> 
+			</div>
+			<div class="from">
+				<div class="content">제 목 </div>
+			</div>
+			<div class="from1">
+				<div class="content1">${list.imageName}</div>
+			</div>
+			<div class="from">
+				<div class="content" >정 보 </div>
+			</div>
+			<div class="from1">
+				<div class="content1">${list.eventContent}</div>
+			</div>
+			<div class="from">
+				<div class="content" >일 시  </div>
+			</div>
+			<div class="from1">
+				<div class="content1"><span>${list.startDate}</span> ~ <span>${list.endDate}</span></div>
+			</div>
+			<div class="from">
+				<div class="content">사이트 </div>
+			</div>
+			<div class="from1">
+				<div class="content1"><a target="_blank" href="${list.eventLink}">${list.eventLink}</a></div>
+			</div>
+			<div style="display: inline-block; float:left; width: 880px; height:20px; "></div>
+		</div>
+		</c:forEach>
+	</div>	
+<div style="margin:20px; width:880px; " align="center">${performancePaging.pagingHTML}</div>
 <script>
 function performancePaging(pg){
 	location.href="/exhibition/performance/P_allScheduleList.do?pg="+pg;

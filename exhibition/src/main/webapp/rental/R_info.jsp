@@ -9,11 +9,6 @@
  .content.size{
 
  }
- .ui.steps{
- 	align: left;
- 	font-size: 18px;
- 	margin-bottom: 15px;
- }
   .ui.steps{
  	align: left;
  	font-size: 18px;

@@ -38,5 +38,9 @@ public class MainDAOMybatis implements MainDAO {
 	public int getTotal_index_NoticeSearch(Map<String, String> map) {
 		return sqlSession.selectOne("mainSQL.getTotal_index_NoticeSearch", map);
 	}
+
+	public List<EventboardDTO> index_exSlider() {
+		return sqlSession.selectList("mainSQL.index_exSlider");
+	}
 	
 }

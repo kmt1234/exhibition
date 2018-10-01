@@ -1,0 +1,39 @@
+@charset "UTF-8";
+.main_header{
+	margin-top: 20px;
+	min-width:1170px; 
+	position: relative;
+}
+.main_section{
+	margin-top: 7px; 
+	min-width:1170px; 
+	position: relative;
+}
+.main_section1{
+	margin-top: 20px;  
+	background-color:#E6E6E6; 
+	min-width:1170px; 
+	height:300px;
+}
+.main_section2{
+	margin-left:20px; 
+	width:270px; 
+	height:220px; 
+	border:1px ridge rgb(155,155,155,.6); 
+	background-color:white; 
+	margin-top:45px; 
+	display:inline-block; 
+	float: left;
+}
+.main_section3{
+	min-width:255; 
+	height: 220px; 
+	margin-left: 10px ; 
+	float:left; 
+	display: inline-block;
+}
+.main_footer{
+	margin-top: 20px; 
+	min-width:1170px; 
+	position: relative;
+}

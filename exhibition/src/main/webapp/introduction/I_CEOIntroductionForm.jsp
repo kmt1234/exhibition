@@ -56,13 +56,13 @@
 				CEO
 				<span class="h-light">인사말</span>
 				<div style="font-size:13px; float:right; height: 50px; margin-top:30px ">
-					<img src="../img/house.png" width="15px" height="16px" style="cursor: pointer; " id="houseImg"></img>
+					<img src="../img/house.png" width="15px" height="16px" style="cursor: pointer; " id="houseImg">
 					> 소개 > CEO인사말
 				</div>
 				<div class="ui divider"></div> 
 			</h2>
 			<div style="width: 880px; margin-left: 20px;">
-			<div style="font-size:20px; text-align: left;"><!-- 이미지  넣으면 됨 -->
+			<div style="font-size:20px; text-align: left;">
 			<img src="../img/bujin.jpg" align="left" height="505px">
 			<p style="color: #ec008c; font-size: 30px;"><strong>IPEX와 함께 큰 꿈을 이루세요!</strong></p>
 			<p> <strong>안녕하십니까? IPEX 홈페이지를 찾아주셔서 감사합니다.</strong></p>
@@ -124,5 +124,6 @@
 	</div>
 	
 <script src="../js/slidbar.js"></script>
+<script src="../js/introduction.js"></script>
 </body>
 </html>

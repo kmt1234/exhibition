@@ -12,6 +12,6 @@
  	</select>
  	
  	<select id="rentalBusinessRoom" parameterType="rental.bean.BusinessRoomDTO">
- 		insert into BUSINESSROOM(roomName, M_Id, M_Email, numberPeople, startDate, ${time}, totalRent) values(#{roomName}, #{M_Id}, #{M_Email}, #{numberPeople}, #{startDate}, 'Y', #{totalRent}) 
+ 		insert into BUSINESSROOM(seq, roomName, M_Id, M_Email, numberPeople, startDate, ${time}, totalRent) values(seq_businessroom.nextval,#{roomName}, #{M_Id}, #{M_Email}, #{numberPeople}, #{startDate}, 'Y', #{totalRent}) 
  	</select>
 </mapper>

@@ -143,7 +143,7 @@ function memberSearch(pg){
 		    <th>예약명</th>
 		    <th>예매 날짜</th>
 		    <th>예매 현황</th>
-		    <th>예매 티켓 수</th>
+		    <th>예매 티켓 수(인원 수)</th>
 		    <th>취소</th>
 	  </tr></thead>
 	  <tbody id="reservationMemberTable" align="center">

@@ -395,6 +395,7 @@ $(document).ready(function(){
 	});
 	var toDay;
 	var playDate;
+	var memberId;
 	$('#memberListTable').on('click','.M_Id',function(){
 		toDay = year+"-"+month+"-"+day;
 		var ing;
@@ -409,7 +410,7 @@ $(document).ready(function(){
 				$('#memberModalForm tr:gt(0)').remove();
 				$.each(data.list,function(index, item){
 					playDate = item.playDate.toString().slice(0,10);
-					
+					memberId = item.memberId;
 					
 					if(playDate < toDay){
 						ing = "<font color='gray'>기간만료</font>";
@@ -442,6 +443,51 @@ $(document).ready(function(){
 				 	})).appendTo($('#reservationMemberTable'));
 					
 					});
+				var time;
+				$.each(data.list2,function(index, item){
+					playDate = item.startDate.toString().slice(0,10);
+					
+					if(playDate < toDay){
+						ing = "<font color='gray'>기간만료</font>";
+						deleteBtn = "";
+					}else if(playDate >= toDay){
+						ing = "<font color='green'>예매완료</font>";
+						deleteBtn = "<input type='button' value='예매취소' id='memberDeleteBtn' class='middle ui button delete'>";
+					}
+					
+					if(item.first=="Y"){
+						time = "09:00~12:00";	
+					}else if(item.second=="Y"){
+						time = "12:00~15:00";
+					}else if(item.third=="Y"){
+						time = "15:00~18:00";
+					}else if(item.fourth=="Y"){
+						time = "18:00~21:00";
+					}
+					
+					$('<tr/>').append($('<td/>',{
+				 		text : item.seq
+				 	})).append($('<td/>',{
+				 		name : 'imageName',
+				 		id : 'imageName',
+				 		text : item.roomName
+				 	})).append($('<td/>',{
+				 		name : 'playDate',
+				 		id : 'playDate',
+				 		text : playDate+"("+time+")"
+				 	})).append($('<td/>',{
+				 		name : "status",
+				 		id : "status",
+				 		html : ing
+				 	})).append($('<td/>',{
+				 		name : 'tickeyQty',
+				 		id : 'tickeyQty',
+				 		text : item.numberPeople
+				 	})).append($('<td/>',{
+				 		html : deleteBtn
+				 	})).appendTo($('#reservationMemberTable'));
+					
+					});
 				$('.ui.modal.member.mem').modal('show');
 			}
 		});
@@ -451,21 +497,33 @@ $(document).ready(function(){
 		alert("gggfgf");
 	});*/
 	var memberSeq;
+	var imageName;
+	var playDate;
+	var ticketQty;
 	$('#reservationMemberTable').on('click','#memberDeleteBtn',function(){
 		if(toDay == playDate){
 			$('.ui.mini.modal.not.member').modal('show');
 		}else{	
 			$('.ui.mini.modal.mem').modal('show');
 			memberSeq = $(this).parent().prev().prev().prev().prev().prev().text();
+			imageName =	$(this).parent().prev().prev().prev().prev().text();
+			playDate = 	$(this).parent().prev().prev().prev().text();
+			ticketQty = $(this).parent().prev().text();
+			
 		}
 		
+		
 	});
-	
+	/*alert(memberSeq+","+imageName+","+playDate+","+ticketQty);*/
 	$('#memberYesBtn').click(function(){
 		$.ajax({
 			type : 'POST',
 			url : '/exhibition/customerService/memberTicketDelete.do',
-			data : {'seq' : memberSeq},
+			data : {'seq' : memberSeq,
+					'imageName' : imageName,
+					'playDate' : playDate,
+					'ticketQty' : ticketQty,
+					'memberId' : memberId},
 			dataType : 'json',
 			success : function(data){
 			}
@@ -486,6 +544,10 @@ $(document).ready(function(){
 			success : function(data){
 			}
 		});
+	});
+	
+	$('#houseImg').click(function(){
+		location.href='/exhibition/main/index.do';
 	});
 
 });

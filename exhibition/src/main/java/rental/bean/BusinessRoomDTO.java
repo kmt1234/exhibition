@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class BusinessRoomDTO {
+	private int seq;
 	private String roomName;
 	private String M_Id;
 	private String M_Email;

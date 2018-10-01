@@ -3,169 +3,172 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE >
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" type="text/css" href="../semantic/semantic.min.css">
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
-<style>
-.box-container{
-	display: inline-block;
-	padding-bottom: 40px;
-	padding-left: 20px;
-	padding-right: 20px;
-	padding-top: 20px;
-	font-weight:normal;
-	font-size: 50px;
-}
-.h-light{
-	color: #ec008c;
-
-}
-
-.eventUploadBtn{
-	margin-right: 8%;
-}
-
-</style>
-
 </head>
 <body>
-	<header>
-		<jsp:include page="../main/I_header.jsp"></jsp:include>
-	</header>
-	<br>
-	<br>
-	<div class="ui five column grid container">
-		<!-- 사이드바 메뉴 -->
-		<div class="ui compact menu" style="width: 20%; height: 977px; ">
-			<a class="item" href="P_allScheduleForm.jsp">전체일정</a> 
-			<a class="item" href="P_performanceScheduleForm.jsp">공연일정</a> 
-			<a class="item" href="P_exhibitionScheduleForm.jsp">전시회일정</a>
+<div style="width: 100%; text-align: left;">
+	<h2 class="box-container" style="float: center; width: 100%; height:126px; text-align: left;">
+		<span>공연정보</span>
+		<span class="h-light">수정</span>
+		<div style="font-size:13px; float:right; height: 50px; margin-top:30px ">
+			<img src="../img/house.png" width="15px" height="16px" style="cursor: pointer;" id="houseImg"></img>
+			> 고객센터 > 게시판추가 > 목록 > 수정
 		</div>
-		<!-- 메인 화면 -->
-		<div class="ui compact menu" style="width: 80%; height: 900px;" >
-			<!-- 타이틀 -->
-			<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
-				연극
-				<span class="h-light">수정</span>
-			</h2>
-<form id="playboardModForm" method="POST"
-	enctype="multipart/form-data">
-	<input type="hidden" name="postSelect" value="2">
-	<input type="hidden" name="seq" value="${eventboardDTO.seq}">
-			<!-- 내용 입력 -->
-<div style="width: 60%;align:left">
-	<br>
-	<div class="ui labeled input" style="width: 100%;height: 50px;">
-		<div class="ui label">
-			제목
-		</div>
-		<input type="text" name="imageName" id="imageName" value="${eventboardDTO.imageName}">
-  	</div>
-  	<br><br>
-  	<div class="ui inverted input" style="width: 200px; height: 150px;">
-  		<div class="ui left icon input" style="width: 100%; height: 50px;">
-			<img src="../storage/${eventboardDTO.image1}" name="imaView" id="imaView" width="200px" height="150px">
-	 	</div>
-	</div>
-	<div class="ui inverted input" style="width: 100%;">
-			<input type="file" name="img" id="img" style="width:100%;">
-  	</div>
-	<div id="imgDiv"></div>
-	<br>
-	
-	<div class="ui inverted input" style="width: 100%;">
-		<div class="ui left icon input" style="width: 100%; height: 50px;">
-			<input type="text" name="startDate" id="datepicker_1" class="datepicker1">
-			<input type="hidden" id="startDate" value="${eventboardDTO.startDate}">
-			<div style="width: 5%;">&nbsp;</div>
-			<input type="text" name="endDate" id="datepicker_2" class="datepicker2">
-			<input type="hidden" id="endDate" value="${eventboardDTO.endDate}">
-		</div>
-  	</div>
-  	<br><br>
-  	<div class="ui labeled input" style="width: 100%;height:50px;">
-		<div class="ui label">
-			링크
-		</div>
-		<input type="text" name="eventLink" id="eventLink" value="${eventboardDTO.eventLink}">
-  	</div>
-  	<br><br>
-  	
-  	<div class="ui inverted input" style="width: 100%;">
-		<div class="ui left icon input" style="width: 100%; height: 50px;">
-			<input type="text" name="startTime" class="timepicker1">
-			<input type="hidden" id="timepicker1" value="${eventboardDTO.startTime}">
-			<div style="width: 5%;">&nbsp;</div>
-			<input type="text" name="endTime" class="timepicker2">
-			<input type="hidden" id="timepicker2" value="${eventboardDTO.endTime}">
-		</div>
-  	</div>
-  	<br><br>
-  
-  	<div class="ui labeled input" style="width: 100%; height: 50px;">
-		<div class="ui label">
-			장소
-		</div>
-		<input type="text" name="eventPlace" value="${eventboardDTO.eventPlace}">
-  	</div>
-  	<br><br>
-  	
-  	<div class="ui labeled input" style="width: 100%; height: 50px;">
-		<div class="ui label">
-			가격
-		</div>
-		<input type="text" name="eventPrice" value="${eventboardDTO.eventPrice}">
-  	</div>
-  	<br><br>
-  		
-  	<div class="ui labeled input" style="width: 100%; height: 50px;">
-		<div class="ui label">
-			좌석	
-		</div>
-		<input type="text" name="eventSeats" value="${eventboardDTO.eventSeats}">
-  	</div>
-  	<br><br>
-  	
-  	<div class="ui labeled input" style="width: 100%; height: 50px;">
-		<div class="ui label">
-			관람등급
-		</div>
-		<input type="text" name="eventRate" value="${eventboardDTO.eventRate}">
-  	</div>
-  	
-  	<br><br>
-  	<div class="ui inverted input" style="width: 100%;">
-		<div class="ui left icon input" >
-			<textarea rows="5" cols="78" name="eventContent" id="eventContent" style="resize: none;"><c:out value="${eventboardDTO.eventContent}"/></textarea>
-		</div>
-  	</div>
-  	
-    <div class="ui two buttons">
-    	<div class="middle ui button" id="ModeButton" style="width: 15%;">수정</div>
-    	<div style="width: 5%;">&nbsp;</div>
-    	<button class="middle ui button" type="reset" id="writeReset" style="width: 15%;">다시작성</button>
-    	<div style="width: 5%;">&nbsp;</div>
-    	<div class="middle ui button" id="imageboardList" style="width: 15%;"
-    	onclick="location.href='/exhibition/customerService/C_eventboardList_playForm.do'">목록</div>
-	</div>
-  
-</div><!--수정영역 텍스트필드-->
-</form>
-		</div>
-		
-		<!-- footer -->
-		<div class="ui compact menu" style="width: 100%; float: right; ">
-			<jsp:include page="../main/I_footer.jsp" ></jsp:include>
-		</div>
-	</div>
-
+		<div class="ui divider"></div> 
+	</h2>
+	<form id="playboardModForm" method="POST" enctype="multipart/form-data">
+		<input type="hidden" name="postSelect" id="postSelect" value="2">
+		<input type="hidden" name="seq" value="${eventboardDTO.seq}">
+		<input type="hidden" name="image1" value="${eventboardDTO.image1}">
+	<!-- 내용 입력 -->
+		<div style="width: 520px; margin-left: 20px;">
+			<!--제목  -->
+			<div class="ui labeled input " >
+				<div class="ui label " style="width: 100px; text-align: center;">
+					<span>제목</span>
+				</div>
+				<div class="ui inverted input" style="width: 100%;">
+					<div class="ui left icon input focus" style="width: 420px; height: 50px;">
+						<input type="text" name="imageName" id="imageName" value="${eventboardDTO.imageName}">
+		  				<i class="user icon"></i>
+		  			</div>
+		  		</div>
+		  	</div>
+		  	<div id="imageNameDiv"></div>
+		  	<!-- 포스터 -->
+		  	<div class="ui labeled input " style="margin-top: 20px;">
+				<div class="ui label " style="width: 100px; text-align: center;">
+					<span>포스터</span>
+				</div>
+				<div class="ui inverted input" style="width: 100%;">
+					<div class="ui left icon input focus" style="width: 420px; height: 50px;">
+						<input type="file" name="img" id="img" style="width:100%;">
+		  			</div>
+		  		</div>
+		  	</div>
+			<div id="imgDiv"></div>
+			<!-- 날짜  -->
+			<div class="ui labeled input " style="margin-top: 20px;">
+				<div class="ui label " style="width: 100px; text-align: center;">
+					<span>날짜선택</span>
+				</div>
+				<div class="ui inverted input" style="width: 100%;">
+					<div class="ui left icon input focus" style="width: 100%; height: 50px;">
+						<input type="text" name="startDate" id="datepicker_1" class="datepicker1" style="width:205px;">
+						<input type="hidden" id="startDate" value="${eventboardDTO.startDate}" >
+						<div style="width: 10px;">&nbsp;</div>
+						<input type="text" name="endDate" id="datepicker_2" class="datepicker2" style="width:205px;">
+						<input type="hidden" id="endDate" value="${eventboardDTO.endDate}">
+					</div>
+			  	</div>
+			</div>
+			<div id="dateDiv"></div>
+		  	<!-- 홈페이지 -->
+		  	<div class="ui labeled input " style="margin-top: 20px;">
+				<div class="ui label " style="width: 100px; text-align: center;">
+					<span>홈페이지</span>
+				</div>
+				<div class="ui inverted input" style="width: 100%;">
+					<div class="ui left icon input  focus" style="width: 420px;  height: 50px;">
+						<input type="text" name="eventLink" id="eventLink" value="${eventboardDTO.eventLink}">
+						<i class="user icon"></i>
+					</div>
+				</div>
+		  	</div>
+		  	<!-- 시간  -->
+		  	<div class="ui labeled input " style="margin-top: 20px;" >
+				<div class="ui label " style="width: 100px; text-align: center;">
+					<span>시간선택</span>
+				</div>
+			  	<div class="ui inverted input" style="width: 100%;">
+					<div class="ui left icon input focus" style="width: 100%; height: 50px;">
+						<input type="text" name="startTime" class="timepicker1" id="startTime">
+						<input type="hidden" id="timepicker1" value="${eventboardDTO.startTime}" style="width:195px;">
+						<div style="width: 10px;">&nbsp;</div>
+						<input type="text" name="endTime" class="timepicker2" id="endTime">
+						<input type="hidden" id="timepicker2" value="${eventboardDTO.endTime}" style="width:195px;">
+					</div>
+			  	</div>
+			</div>
+			<div id="timeDiv"></div>
+			<!-- 공연홀 -->
+		  	<div class="ui labeled input " style="margin-top: 20px;" >
+				<div class="ui label " style="width: 100px; text-align: center;">
+					<span>공연위치</span>
+				</div>
+				<div class="ui inverted input" style="width: 100%;">
+					<div class="ui left icon input focus" style="width: 420px;  height: 50px;">
+						<input type="text" name="eventPlace" id="eventPlace" value="${eventboardDTO.eventPlace}">
+				  		<i class="user icon"></i>
+				  	</div>
+				 </div>
+		  	</div>
+		  	<div id="placeDiv"></div>
+		  	<!-- 금액  -->
+		  	<div class="ui labeled input " style="margin-top: 20px;" >
+				<div class="ui label " style="width: 100px; text-align: center;">
+					<span>티켓금액</span>
+				</div>
+				<div class="ui inverted input" style="width: 100%;">
+					<div class="ui left icon input focus" style="width: 420px; height: 50px;">
+						<input type="text" name="eventPrice" id="eventPrice" value="${eventboardDTO.eventPrice}">
+		  				<i class="user icon"></i>
+		  			</div>
+		  		</div>
+		  	</div>
+		  	<div id="priceDiv"></div>
+		  	<!-- 관람인원 -->
+		  	<div class="ui labeled input " style="margin-top: 20px;">
+				<div class="ui label " style="width: 100px; text-align: center;">
+					<span>관람인원</span>
+				</div>
+				<div class="ui inverted input" style="width: 100%;">
+					<div class="ui left icon input focus" style="width: 420px; height: 50px;">	
+						<input type="text" name="eventSeats" id="eventSeats" value="${eventboardDTO.eventSeats}">
+						<i class="user icon"></i>
+					</div>
+				</div>
+		  	</div>
+		  	<div id="seatsDiv"></div>
+		  	<!-- 관람등급  -->
+		  	<div class="ui labeled input " style="margin-top: 20px;">
+				<div class="ui label " style="width: 100px; text-align: center;">
+					<span>관람등급</span>
+				</div>
+				<div class="ui inverted input" style="width: 100%;">
+					<div class="ui left icon input focus" style="width: 420px; height: 50px;">	
+						<input type="text" name="eventRate" value="${eventboardDTO.eventRate}">
+						<i class="user icon"></i>
+					</div>
+				</div>
+		  	</div>
+		  	<!-- 공연정보 -->
+		  	<div class="ui labeled input " style="margin-top: 20px;">
+				<div class="ui label " style="width: 100px; text-align: center;">
+					<span>공연내용</span>
+				</div>	
+		   		<div class="ui inverted input" style="width: 100%;">
+					<div class="ui left icon input focus" style="width: 420px;" >
+						<textarea rows="5" cols="78" name="eventContent" id="eventContent" style="resize: none;"><c:out value="${eventboardDTO.eventContent}"/></textarea>
+					</div>
+				</div>
+		  	</div>
+		  	
+		    <div class="ui two buttons" style="margin-top: 20px;">
+		    	<div class="middle ui button" id="ModeButton" style="width: 15%;">수정</div>
+		    	<div style="width: 5%;">&nbsp;</div>
+		    	<button class="middle ui button" type="reset" id="writeReset" style="width: 15%;">다시작성</button>
+		    	<div style="width: 5%;">&nbsp;</div>
+		    	<div class="middle ui button" id="imageboardList" style="width: 15%;"
+		    	onclick="location.href='/exhibition/customerService/C_eventboardList_playForm.do'">목록</div>
+			</div>
+		</div><!--수정영역 텍스트필드-->
+		<div id="warnningDiv"></div>
+	</form>
+</div>
 </body>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
-<script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 <script>
 $(document).ready(function(){
 	var startDate = $('#startDate').val().substring(0,4)+"/"+$('#startDate').val().substring(5,7)+"/"+$('#startDate').val().substring(8,10);
@@ -176,21 +179,21 @@ $(document).ready(function(){
 	$('.timepicker1').timepicker({
 		timeFormat : 'H:mm',
 	    interval: 60,
-	    minTime: '08',
+	    minTime: '09',
 	    maxTime: '10:00pm',
-	    defaultTime: startTime,
-	   	startTime: '08:00am',
+	    defaultTime: '09',
+	    startTime: '09:00am',
 	    dynamic: false,
 	    dropdown: true,
 	    scrollbar: false	
 	});
+		
 	$('.timepicker2').timepicker({
 		timeFormat : 'H:mm',
 	    interval: 60,
-	    minTime: '08',
+	    minTime: $('.timepicker1').val(),
 	    maxTime: '10:00pm',
-	    defaultTime: endTime,
-	   	startTime: '08:00am',
+	    defaultTime: $('.timepicker1').val(),
 	    dynamic: false,
 	    dropdown: true,
 	    scrollbar: false	
@@ -214,11 +217,106 @@ $(document).ready(function(){
 	$('.datepicker1').datepicker('setDate', startDate);
 	$('.datepicker2').datepicker('setDate', endDate);
 	
-	$('#ModeButton').click(function(){
-		$('#playboardModForm').attr('action','/exhibition/customerService/C_playboardMod.do').submit();
+	
+	
+	//행사위치 유효성
+	var checkReservation = false;
+	$('#eventPlace').blur(function(){
+		
+		if($('#eventPlace').val()==''){
+			checkReservation = false;
+		}else if($('#eventPlace').val()!=''){
+			//예약 중복 확인
+			$.ajax({
+				type : 'POST',
+				url : '/exhibition/customerService/checkReservation.do',
+				data : {'postSelect':$('#postSelect').val(), 'imageName' : $('#imageName').val(), 'startDate' : $('.datepicker1').val(), 'endDate' : $('.datepicker2').val(),'eventPlace' : $('#eventPlace').val()},
+				dataType : 'text',
+				success : function(data){
+					if(data=='no_data'){
+						//alert('등록가능합니다');
+						checkReservation = true;
+					} 
+					else if(data=='yes_data'){
+						$.alertable.alert('일정이 중복됩니다', {
+					      show: function() {
+					        $(this.overlay).velocity('transition.fadeIn', 300);        
+					        $(this.modal).velocity('transition.shrinkIn', 300);
+					      },
+					      hide: function() {
+					        $(this.overlay).velocity('transition.fadeOut', 300);
+					        $(this.modal).velocity('transition.shrinkOut', 300);
+					      } 
+					    });
+					} 
+				}
+			});//ajax
+		}
 	});
 	
+	//전시회 티켓 금액 유효성
+	var checkP = true;
+	$('#eventPrice').blur(function(){
+		//숫자 유효성
+		var test = $('#eventPrice').val();
+		console.log(test);
+		if ($.isNumeric(test)) checkP = true;
+		else checkP = false;
+	});
 	
+	//관람인원 유효성
+	var checkS = true;
+	$('#eventSeats').blur(function(){
+		//숫자 유효성
+		var test = $('#eventSeats').val();
+		console.log(test);
+		if ($.isNumeric(test)) checkS = true;
+		else checkS = false;
+	});
+	
+	$('#ModeButton').click(function(){
+		//시간 비교
+		var date1 = $("#startTime").val();
+	    var date2 = $("#endTime").val();
+	     
+	    var cutDate1 = date1.split(':');
+	    var cutDate2 = date2.split(':');
+	     
+	    console.log(cutDate1[0]);
+	    console.log(cutDate2[0]);
+	    
+		$('#imageNameDiv').empty();
+		$('#imgDiv').empty();
+		$('#dateDiv').empty();
+		$('#placeDiv').empty();
+		$('#priceDiv').empty();
+		$('#timeDiv').empty();
+		$('#warnningDiv').empty();
+		
+		if($('#imageName').val()==''){
+			$('#imageNameDiv').text('제목은 필수입니다').css('color','red').css('font-size','9pt').css('font-weight','bold');
+		}else if($('#img').val()==''){
+			$('#imgDiv').text('파일을 선택해 주세요').css('color','magenta').css('font-size','9pt').css('font-weight','bold');	
+		}else if($('.datepicker1').datepicker().val()==''){
+			$('#dateDiv').text('날짜는 필수입니다').css('color','red').css('font-size','9pt').css('font-weight','bold');
+		}else if($('.datepicker2').datepicker().val()==''){
+			$('#dateDiv').text('날짜는 필수입니다').css('color','red').css('font-size','9pt').css('font-weight','bold');
+		}else if($('.datepicker2').datepicker().val() < $('.datepicker1').datepicker().val()){
+			$('#dateDiv').text('시작 및 종료일자를 확인하세요').css('color','red').css('font-size','9pt').css('font-weight','bold');
+		}else if (parseInt(cutDate2[0]) - parseInt(cutDate1[0]) <= 0){
+		    $('#timeDiv').text('시작 및 종료시간을 확인하세요').css('color','red').css('font-size','9pt').css('font-weight','bold');
+	    }else if($('#eventPlace').val()=='' || $('#eventPlace').val()!='1층' && $('#eventPlace').val()!='2층'&& $('#eventPlace').val()!='P_Room1' && $('#eventPlace').val()!='P_Room2' && $('#eventPlace').val()!='P_Room3' && $('#eventPlace').val()!='P_Room4'){
+			$('#placeDiv').text('전시회는 1층 또는 2층 / 공연은 공연 위치(대문자 : P_Room1 ~ P_Room4)를 입력하세요 (ex.1층 또는 P_Room1)').css('color','red').css('font-size','7pt').css('font-weight','bold');
+		}else if(checkP == false || checkS == false){
+			$('#priceDiv').text('티켓 가격 및 관람인원에는 숫자만 입력하세요(ex. 3,000원 -> 3000 / 120석 -> 120)').css('color','red').css('font-size','9pt').css('font-weight','bold');
+		}else if(checkReservation==false){
+			 $('#warnningDiv').text('행사 기간이 겹칩니다. 날짜를 다시 확인하세요').css('color','red').css('font-size','9pt').css('font-weight','bold');
+		}
+		
+		else{
+			$('#playboardModForm').attr('action','/exhibition/customerService/C_playboardMod.do').submit();
+		}
+	});
 });
 </script>
 </html>
