@@ -177,7 +177,7 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	}
 	
 	//메인(슬라이드 이미지 불러오기)
-	public List<ImageboardDTO> getImageboardSlide(List<String> list) {
+	public List<ImageboardDTO> getImageboardSlide(List<Integer> list) {
 		return sqlSession.selectList("customerServiceSQL.getImageboardSlide",list);
 	}
 	

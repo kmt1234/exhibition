@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.plaf.synth.SynthSeparatorUI;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import customerService.bean.EventboardDTO;
+import customerService.bean.ImageboardDTO;
 import customerService.dao.CustomerServiceDAO;
 import rental.bean.ConcertHallDTO;
 import rental.dao.ConcertHallDAO;
@@ -28,11 +31,13 @@ public class IndexController {
 	private CustomerServiceDAO customerServiceDAO;
 	@Autowired
 	private MainDAO mainDAO;
+	@Autowired
+	private List<ImageboardDTO> imageboardList;
 
 	/* 메인페이지 이동~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 	@RequestMapping(value = "index", method = RequestMethod.GET)
 	public String index(@RequestParam(required = false, defaultValue = "1") String code, Model model) {
-		model.addAttribute("code", code);
+		model.addAttribute("code_slide", code);
 		model.addAttribute("display", "/main/I_body.jsp");
 		List<EventboardDTO> list = mainDAO.index_exSlider();
 		
@@ -41,13 +46,20 @@ public class IndexController {
 	}
 	
 	@RequestMapping(value = "I_body", method = RequestMethod.POST)
-	public String I_body(@RequestParam String[] check ,Model model) {
+	public String I_body(@RequestParam String[] check ,Model model,String code) {
+		System.out.println("체크이다 " + check.toString());
+		
 		List<Integer> list = new ArrayList<Integer>();
-		for (String seq : check) {
-			list.add(Integer.parseInt(seq));
+		for(String seq : check) {
+			list.add(Integer.parseInt(seq));			
+			System.out.println(list);
 		}
-		model.addAttribute("list",list);
-		model.addAttribute("display", "/main/I_body.jsp");
+		
+		List<ImageboardDTO> list1= customerServiceDAO.getImageboardSlide(list);
+		System.out.println(list1.get(0).getImage1());
+		
+		model.addAttribute("list1",list1);
+		model.addAttribute("display", "/main/I_body_1.jsp");
 		return "/main/index";
 	}
 	

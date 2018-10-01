@@ -62,7 +62,7 @@ public class CustomerServiceController {
 	private JavaMailSenderImpl emailSender;
 	@Autowired
 	private ImageboardPaging imageboardPaging;
-	private String filePath = "C:\\Users\\kmtab\\git\\exhibition\\exhibition\\src\\main\\webapp\\storage\\";
+	private String filePath = "C:\\Users\\user\\git\\exhibition\\exhibition\\src\\main\\webapp\\storage\\";
 	@Autowired
 	private CustomerServicePaging customerServicePaging;
 	@Autowired
@@ -71,6 +71,7 @@ public class CustomerServiceController {
 	private ExhibitionBookDTO exhibitionBookDTO;
 	@Autowired
 	private MemberDAO memberDAO;
+
 
 
 	// 고객센터 설명페이지
@@ -698,6 +699,7 @@ public class CustomerServiceController {
 		List<Integer> list = new ArrayList<Integer>();
 		for (String seq : check) {
 			list.add(Integer.parseInt(seq));
+			System.out.println(list);
 		}
 
 		customerServiceDAO.imageboardDelete(list);
@@ -888,13 +890,12 @@ public class CustomerServiceController {
 	}
 
 	@RequestMapping(value = "getImageboardSlide1", method = RequestMethod.POST)
-	public ModelAndView getImageboardSlide1(@RequestParam List<String> list) {
+	public ModelAndView getImageboardSlide1(@RequestParam List<String> list, @RequestParam List<ImageboardDTO> list1, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		for (String data : list) {
-			
-		}
-		List<ImageboardDTO> list1 = customerServiceDAO.getImageboardSlide(list);
 
+//		List<ImageboardDTO> list1 = customerServiceDAO.getImageboardSlide(list);
+       
+		session.setAttribute("imageboardList", list1);
 		mav.addObject("list", list1);
 		mav.setViewName("jsonView");
 
@@ -975,6 +976,7 @@ public class CustomerServiceController {
 		List<Integer> list = new ArrayList<Integer>();
 		for (String seq : check) {
 			list.add(Integer.parseInt(seq));
+		
 		}
 		List<Integer> list2 = new ArrayList<Integer>();
 		for (String seq : check) {

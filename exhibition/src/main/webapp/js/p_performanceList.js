@@ -7,9 +7,9 @@ $(document).ready(function(){
 	
 	
 	//예약하기 버튼
-	$('#performance_bookBtn').click(function(){
+	$('.middle.ui.button.reser').click(function(){
 		//시퀀스 번호 얻기 
-		var seq = $('#seqID').val();
+		var seq = $(this).val();
 		location.href="/exhibition/performance/performanceBook.do?seq="+seq;
 	});
 	

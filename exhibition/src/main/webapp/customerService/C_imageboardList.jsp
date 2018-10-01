@@ -53,7 +53,7 @@
 				<a class="middle ui button"  id="imageSelectBtn">메인등록</a>
 				<a class="middle ui button" id="imageDeleteBtn">선택삭제</a>
 			</div>
-			<input type="hidden" id="code" value="2">
+			<input type="hidden" name="code" value="6">
 		</form>
 	</div>
 </div>
@@ -103,7 +103,7 @@ $(document).ready(function(){
 		}
 	});
 	//선택삭제
-	$('#imageDeleteBtn').click(function(){
+	$('#imageDeleteBtn').on('click',function(){
 		var count=$('.check:checked').length;
 
 		if(count==0) 
@@ -112,11 +112,13 @@ $(document).ready(function(){
 			$('#imageboardListForm').attr('action','/exhibition/customerService/C_imageboardDelete.do').submit();
 	});
 	//메인등록
-	$('#imageSelectBtn').click(function(){
+	$('#imageSelectBtn').on('click',function(){
 		var count=$('.check:checked').length;
+		
 		if(count==0) 
 			alert("항목을 선택해주세요");
 		else
+			
 			$('#imageboardListForm').attr('action','/exhibition/main/I_body.do').submit();
 	});
 	//업로드 버튼
