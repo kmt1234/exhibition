@@ -10,13 +10,11 @@
 .fc-toolbar {
 	height: 53px;
 }
-
 td.empty {
     padding: 50px 0 !important;
     text-align: center;
     background-color: #fff !important;
 }
-
 </style>
 </head>
 <body>
@@ -26,8 +24,6 @@ td.empty {
 <div>
 	<div id='calendar' style="width: 63%"></div>
 </div>
-
-<div>
 <h3>
 	<span id="timeListTitle">비즈니스룸 이용 시간 선택</span>
 </h3>
@@ -121,9 +117,6 @@ var dataset = [
 	var code = $('#code').val(); //로그인 코드 받아오기
 	
 	$(document).ready(function(){
-		
-		alert(JSON.stringify('${listView}'));
-		
 		$('#calendar').fullCalendar({
 			header: {
 	            left: 'prev,next today',
@@ -137,9 +130,7 @@ var dataset = [
 	        events: dataset,
 			dayClick: function(date) { //예약되어있지 않는 날짜 클릭 이벤트
 				var startDate = date.format("YYYY") + '-' + date.format("MM") + '-' + date.format("DD");
-				alert(startDate);
 				var defaultDay = new Date().toISOString().slice(0,10);
-				alert(defaultDay);
 				if(startDate <= defaultDay) { //오늘 날짜보다 이전 날짜 예약 못하게 함
 					$('.ui.mini.modal.day').modal('show');
 					return;
@@ -221,9 +212,6 @@ var dataset = [
 				            	id: 'fourth',
 				               text : '예약가능'
 				            })).appendTo('#time_list');
-						
-						alert(JSON.stringify(data));
-						
 						$.each(data.list, function(index, item){ //예약되어있는 시간대는 예약불가능이라고 써주고 체크박스 제거
 							
 							if(item.first=='Y') {
@@ -251,9 +239,7 @@ var dataset = [
 			},//밑에는 예약되어있는 날짜 클릭이벤트
 			eventClick: function(event){
 				var startDate = event.start.format("YYYY") + '-' + event.start.format("MM") + '-' + event.start.format("DD");
-				alert(startDate);
 				var defaultDay = new Date().toISOString().slice(0,10);
-				alert(defaultDay);
 				if(startDate <= defaultDay) { //오늘 날짜보다 이전 날짜 예약 못하게 막는 것
 					$('.ui.mini.modal.day').modal('show');
 					return;
@@ -334,9 +320,6 @@ var dataset = [
 				            	id: 'fourth',
 				               text : '예약가능'
 				            })).appendTo('#time_list');
-						
-						alert(JSON.stringify(data));
-						
 						$.each(data.list, function(index, item){ //예약되어있는 시간대는 예약불가능이라고 써주고 체크박스 제거
 							
 							if(item.first=='Y') {
@@ -372,9 +355,6 @@ var dataset = [
 				cbox[i].checked = $('#checkAll').is(':checked') ;
 			}
 		});
-		
-		
-		
 			//예약하기 버튼
 			$('#rentalBusinessRoomBtn').on('click', function(){
 				//개인으로 로그인 할때만 submit

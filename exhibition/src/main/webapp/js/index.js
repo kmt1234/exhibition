@@ -176,7 +176,6 @@ $(document).ready(function(){
 	    showMonthAfterYear: true,
 	    yearSuffix: '년',
 	    onSelect: function (date) {
-	    	alert(date);
 	    	$.ajax({
 	    		type : 'POST',
 				url : '/exhibition/performance/searchAllList.do',

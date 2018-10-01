@@ -111,8 +111,6 @@
 	var code = $('#code').val();
 	
 	$(document).ready(function(){
-		
-		alert('${C_email}');
 		$('#rentBtn').click(function(){
 			if($('#startDate').val() < '${date}') {
 				$('#writeDiv').text('현재일로부터 한달 이후 부터 예약가능합니다.');
@@ -125,8 +123,6 @@
 			}
 			
 			var diff_days = diff_day($('#startDate').val(), $('#endDate').val());
-			alert(diff_days);
-			
 			if(diff_days < 30) {
 				$('#writeDiv').text('한달 이상 예약하셔야 합니다.');
 				return;
@@ -134,9 +130,6 @@
 			
 			var stDate = new Date($('#startDate').val());
 		    var endDate = new Date($('#endDate').val());
-		 
-			alert('${price}');
-		    
 		    var totalRent = ${price} * diff_days;
 		    var hallName = '${hallName}';
 		    

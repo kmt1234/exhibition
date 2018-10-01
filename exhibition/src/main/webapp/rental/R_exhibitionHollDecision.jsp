@@ -8,7 +8,7 @@
 <link href='../calendar2/fullcalendar.print.css' rel='stylesheet' media='print' />
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"><!--달력 ui-->
 <style type="text/css">
-.fc-toolbar {
+.fc-toolbar {/*달력위치  */
 	height: 53px;
 }
 </style>
@@ -97,8 +97,6 @@
 	var code = $('#code').val();
 	
 	$(document).ready(function(){
-		alert('${C_email}');
-		
 		$('#rentBtn').click(function(){
 			if($('#startDate').val() < '${date}') {
 				$('#writeDiv').text('예약 시작일을 다시 설정해주세요.');
