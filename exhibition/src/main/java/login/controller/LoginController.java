@@ -182,18 +182,20 @@ public class LoginController {
 
 	// 마이페이지
 	@RequestMapping(value = "mypage", method = RequestMethod.GET)
-	public ModelAndView mypage(HttpSession session) {
+	public ModelAndView mypage(@RequestParam(required=false, defaultValue="1") String pg, HttpSession session) {
 		int code = (Integer) session.getAttribute("code");
-
+		System.out.println("pg의 값은 : "+pg);
 		Object DTO = session.getAttribute("homepageMember");
 		session.setAttribute("DTO", DTO);
 
 		ModelAndView mav = new ModelAndView();
 		
 		if (code == 1) {
+			mav.addObject("pg", pg);
 			mav.addObject("display","/login/memberMypage.jsp");
 			mav.setViewName("/customerService/C_customerServiceForm"); // 개인마이페이지
 		} else if (code == 2) {
+			mav.addObject("pg", pg);
 			mav.addObject("c_license", (String)session.getAttribute("C_license"));
 			mav.addObject("display","/login/companyMypage.jsp");
 			mav.setViewName("/customerService/C_customerServiceForm"); // 법인마이페이지	
@@ -382,7 +384,7 @@ public class LoginController {
 	public ModelAndView getMemberTicketList(@RequestParam(required = false, defaultValue = "1") String pg, HttpSession session) {
 		MemberDTO memberDTO = (MemberDTO)session.getAttribute("homepageMember");
 		String id = memberDTO.getM_Id();
-		
+		System.out.println("예매리스트 pg의 값은 : "+pg);
 		//페이징 처리(5개씩 출력)	
 		int endNum = Integer.parseInt(pg) * 10;
 		int startNum = endNum - 9;
@@ -528,7 +530,7 @@ public class LoginController {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("pg", pg);
-		mav.addObject("display","/login/memberMypage_ticketList.jsp");
+		mav.addObject("display","/login/memberMypage.jsp");
 		mav.setViewName("/customerService/C_customerServiceForm");
 		return mav;
 	}
