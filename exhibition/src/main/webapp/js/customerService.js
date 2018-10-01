@@ -351,9 +351,6 @@ $(document).ready(function(){
 				 		name : 'c_license',
 				 		html : ing
 				 	})).append($('<td/>',{
-				 		name : 'ticket',
-				 		text : '예매 티켓 수 추가 예정'
-				 	})).append($('<td/>',{
 				 		name : 'companyDeleteBtn',
 				 		html : companyDeleteBtn
 				 	})).appendTo($('#reservationCompanyTable'));
@@ -387,9 +384,6 @@ $(document).ready(function(){
 				 	})).append($('<td/>',{
 				 		name : 'c_license',
 				 		html : ing
-				 	})).append($('<td/>',{
-				 		name : 'ticket',
-				 		text : '예매 티켓 수 추가 예정'
 				 	})).append($('<td/>',{
 				 		name : 'companyDeleteBtn',
 				 		html : companyDeleteBtn

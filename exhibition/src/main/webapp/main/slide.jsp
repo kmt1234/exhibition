@@ -10,17 +10,6 @@
 <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 <script>
 $(document).ready(function(){
-	/* $.ajax({
-		type : 'GET',
-		url : '/exhibition/main/index_exSlider.do',
-		dataType : 'json',
-		success : function(data){
-			//alert(JSON.stringify(data));
-			$.each(data.list, function(index, item){
-			});
-		}
-	});  */
-
 	//메인화면 연극 슬라이드
 	$('.bxslider').bxSlider({
 		autoHover: true,
@@ -30,7 +19,9 @@ $(document).ready(function(){
 	     mode:'fade',
 	     autoControls: false,
 	     pager: true,
-	     responsive: false
+	     responsive: false,
+	     controls: false,
+	     
 	});
 });
 </script>
@@ -45,9 +36,6 @@ $(document).ready(function(){
 <c:forEach items="${list }" var="list">
 	<li><a href="/exhibition/performance/performanceBook.do?seq=${list.seq }"><img src="../storage/${list.image1 }" height="200px" width="280px"/></a></li>
 </c:forEach>
-	<!-- <li><img src="../storage/summer.jpg" height="200px" width="280px"/></li>
-    <li><img src="../storage/elephant.jpg" height="200px" width="280px"/></li>
-    <li><img src="../storage/moon.jpg" height="200px" width="280px"/></li> -->
 </ul>
 
 </body>
