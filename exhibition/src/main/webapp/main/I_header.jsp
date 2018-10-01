@@ -12,7 +12,6 @@
 }
 .item {
    text-align: center;
-   
 }
 /* #main {
    height: 200px;
@@ -44,7 +43,7 @@
 	<header>
 		<div id="main" style="width: 1170px; " class="ui container" >
 			<div  style="width: 25%;  display: inline-block;">
-				<a href="http://localhost:8080/exhibition/main/index.do">
+				<a style="cursor:pointer;" onclick="location.href='/exhibition/main/index.do'">
 					<img alt="" src="../img/ipecLogo.png" style="width: 90px; height: 90px;  ">
 				</a>
 			</div>
