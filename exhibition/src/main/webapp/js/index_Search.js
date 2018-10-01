@@ -4,7 +4,7 @@ $(document).ready(function(event, str){
 	var code = $('#hiddenCode').val();
 	
 	// 메인 검색시 검색된 공지사항 리스트 불러옴
-	
+	if(str!='trigger') $('#pg').val(1);
 	$.ajax({
 		type : 'POST',
 		url : '/exhibition/main/index_notice_Search.do',
@@ -12,7 +12,7 @@ $(document).ready(function(event, str){
 				'index_keyword' : index_keyword},
 		dataType : 'json',
 		success : function(data){
-			$('#index_notice_PagingDiv').remove();
+			$('#index_notice_PagingDiv').hide();
 			if(data.totalA<'4'){
 				$('#index_notice_SearchPlus').remove();
 			}
@@ -49,11 +49,10 @@ $(document).ready(function(event, str){
 				});
 			}
 		}
-				
 	});
 	
 	$('#index_notice_SearchPlus').click(function(){
-		$('#index_notice_SearchList tr:gt(0)').remove();
+		$('#index_notice_div table').empty();
 		
 		$('#index_QnA_div').remove();
 		$('#index_contactList_div').remove();
@@ -62,7 +61,7 @@ $(document).ready(function(event, str){
 		$('#index_hotel_list_div').remove();
 		$('#index_notice_SearchPlus').remove();
 		
-
+		$('#index_notice_PagingDiv').show();
 		
 		$.ajax({
 			type : 'POST',
@@ -108,10 +107,7 @@ $(document).ready(function(event, str){
 		location.href='/exhibition/customerService/C_notice_View.do?seq='+seq+'&pg='+$('#pg').val();
 	});
 	
-	function index_notice_Search(pg){
-		$('#pg').val(pg);
-		$('#C_notice_SearchBtn').trigger('click','trigger');
-	}
+	
 	
 	
 	// 메인 검색시 검색된 자주묻는 질문 리스트 불러옴
@@ -165,7 +161,7 @@ $(document).ready(function(event, str){
 	});
 	
 	$('#index_QnA_SearchPlus').click(function(){
-		$('#index_QnA_div tr:gt(0)').remove();
+		$('#index_QnA_SearchList table:gt(0)').empty();
 		
 		$('#index_notice_div').remove();
 		$('#index_contactList_div').remove();
@@ -321,7 +317,7 @@ $(document).ready(function(event, str){
 	
 	
 	$('#index_contactList_SearchPlus').click(function(){
-		$('#index_contactList_SearchList tr:gt(0)').remove();
+		$('#index_contactList_SearchList table:gt(0)').empty();
 		
 		$('#index_notice_div').remove();
 		$('#index_QnA_div').remove();
@@ -712,3 +708,8 @@ $(document).ready(function(event, str){
 	});
 
 });
+
+function index_notice_Search(pg){
+	$('#pg').val(pg);
+	$('#index_notice_SearchBtn').trigger('click','trigger');
+}

@@ -1,3 +1,19 @@
+drop table C_notice;
+drop table C_inquire;
+drop table C_QnA;
+drop table C_contactList;
+drop table memberTable;
+drop table company;
+drop table exhibitionRental;
+drop table customerImageboard;
+drop table eventboard;
+drop table eventboard_play;
+drop table hotel_list;
+drop table businessRoom;
+drop table eventboard_play_book;
+drop table Book_Play_Members;
+drop table Book_Exhibition_Members;
+drop table concertHall;
 
 --회원가입
 create table memberTable(	
@@ -177,7 +193,7 @@ num NUMBER,                        --연극시퀀스
 );
 create sequence seq_eventboard_play_book  nocache nocycle; 
 
-
+businessRoomeventboard_play_bookBook_Play_MembersBook_Exhibition_MembersconcertHall
 create table Book_Play_Members(
 seq number primary key,
 IMAGENAME	VARCHAR2(500),
@@ -223,3 +239,4 @@ third varchar2(10) default 'N',
 fourth varchar2(10) default 'N');
 
 commit;
+

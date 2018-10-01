@@ -96,6 +96,7 @@ public class IndexController {
 		map.put("startNum", startNum + "");
 		map.put("endNum", endNum + "");
 
+		
 		List<MainDTO> list = mainDAO.index_notice_Search(map);
 		
 		int totalA = mainDAO.getTotal_index_notice_Search(map);
@@ -148,7 +149,7 @@ public class IndexController {
 	public ModelAndView index_QnA_SearchPlus(@RequestParam(required = false) Map<String, String> map) {
 		int endNum = Integer.parseInt(map.get("pg")) * 10;
 		int startNum = endNum - 9;
-		
+		System.out.println(endNum);
 		map.put("startNum", startNum + "");
 		map.put("endNum", endNum + "");
 
@@ -207,7 +208,7 @@ public class IndexController {
 		
 		map.put("startNum", startNum + "");
 		map.put("endNum", endNum + "");
-		
+		System.out.println(endNum);
 		List<MainDTO> list = mainDAO.index_contactList_Search(map);
 		
 		int totalA = mainDAO.getTotal_index_contactList_Search(map);
@@ -290,8 +291,6 @@ public class IndexController {
 		public ModelAndView index_hotel_list_Search(@RequestParam(required = false) Map<String, String> map) {
 			int endNum = Integer.parseInt(map.get("pg")) * 3;
 			int startNum = endNum - 2;
-			
-			System.out.println(endNum);
 			
 			map.put("startNum", startNum + "");
 			map.put("endNum", endNum + "");

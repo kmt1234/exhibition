@@ -52,15 +52,15 @@ public class MainPaging {
 		if(endPage > totalP) endPage = totalP;
 		
 		if(startPage!=1) 
-			pagingHTML.append("<span class='item' id=paging onclick=C_contactList_Search("+(startPage-1)+")>이전</span>");
+			pagingHTML.append("<span class='item'>이전</span>");
 		for(int i=startPage; i<=endPage; i++) {
 			if(i==currentPage)
-				pagingHTML.append("<span class='item' id=currentPaging onclick=C_contactList_Search("+i+")>"+i+"</span>");
+				pagingHTML.append("<span class='item'>"+i+"</span>");
 			else
-				pagingHTML.append("<span class='item' id=paging onclick=C_contactList_Search("+i+")>"+i+"</span>");
+				pagingHTML.append("<span class='item'>"+i+"</span>");
 		}
 		if(endPage!=totalP) 
-			pagingHTML.append("<span class='item' id=paging onclick=C_contactList_Search("+(endPage+1)+")>다음</span>");
+			pagingHTML.append("<span class='item'>다음</span>");
 	}
 }
 
