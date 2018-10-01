@@ -1,8 +1,9 @@
 $(document).ready(function(){
+	$('.ui.selection.dropdown').dropdown();
+	
 	//개인회원정보 불러오기
 	 $('#companySearchDiv').hide();
 	 $('#memberSearchDiv').show();
-	 $('#memberListTable').empty();
 	 $('#reConfirm').hide();
 		$.ajax({
 			type : 'POST',
@@ -10,8 +11,6 @@ $(document).ready(function(){
 			data : {'pg' : $('#pg').val()},
 			dataType : 'json',
 			success : function(data){
-				/*alert(JSON.stringify(data));*/
-				/*$('#memberListTable td:gt(0)').remove();*/
 				$.each(data.list,function(index, item){
 				 	$('<tr/>').append($('<td/>',{
 				 		name : 'M_Name',
@@ -34,11 +33,11 @@ $(document).ready(function(){
 	
 
 		$('#memberSearchBtn').click(function(event,str){
-			$('#memberListTable').empty();
 			if(str!='trigger') $('#pg').val(1);
 			if($('#memberSearch').val()==''){
 				alert("검색어를 입력하세요");
 			}else{
+				$('#memberListTable').empty();
 				$.ajax({
 					type: 'POST',
 					url : '/exhibition/customerService/memberListSearch.do',
@@ -48,8 +47,6 @@ $(document).ready(function(){
 						},
 					dataType : 'json',
 					success : function(data){
-						$('#C_memberListFrom div:gt(0)').remove();
-						
 						 $.each(data.list,function(index, item){
 							 $('<tr/>').append($('<td/>',{
 							 		name : 'M_Name',

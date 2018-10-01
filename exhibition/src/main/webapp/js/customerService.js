@@ -163,7 +163,7 @@ $(document).ready(function(){
 			data : {'pg' : $('#pg').val()},
 			dataType : 'json',
 			success : function(data){
-				/* $('#C_memberListFrom div:gt(0)').remove(); */
+				$('#memberListTable tr:gt(0)').remove();
 				$.each(data.list,function(index, item){
 					$('<tr/>').append($('<td/>',{
 				 		name : 'C_businessname',
@@ -187,11 +187,12 @@ $(document).ready(function(){
 		
 		//사업자 검색
 		$('#companySearchBtn').click(function(event,str){
-			$('#memberListTable').empty();
+			
 			if(str!='trigger') $('#pg').val(1);
 			if($('#companySearch').val()==''){
 				alert("검색어를 입력하세요");
 			}else{
+				$('#memberListTable').empty();
 				$.ajax({
 					type: 'POST',
 					url : '/exhibition/customerService/CompanySearch.do',
@@ -201,7 +202,6 @@ $(document).ready(function(){
 						},
 					dataType : 'json',
 					success : function(data){
-						$('#C_memberListFrom div:gt(0)').remove();
 						/*  alert(JSON.stringify(data)); */
 						 $.each(data.list,function(index, item){
 							 $('<tr/>').append($('<td/>',{
@@ -228,12 +228,10 @@ $(document).ready(function(){
 	
 	
 	//개인회원정보 불러오기
-	 $('#memberSearchDiv').hide();
 	$('#memberBtn').click(function(event,str){
 		if(str!='trigger') $('#pg').val(1);
 		$('#companySearchDiv').hide();
 		$('#memberSearchDiv').show();
-		$('#memberListTable').empty();
 		
 		$.ajax({
 			type : 'POST',
@@ -241,7 +239,7 @@ $(document).ready(function(){
 			data : {'pg' : $('#pg').val()},
 			dataType : 'json',
 			success : function(data){
-				$('#memberListTable td:gt(0)').remove();
+				$('#memberListTable').empty();
 				$.each(data.list,function(index, item){
 					$('<tr/>').append($('<td/>',{
 				 		name : 'M_Name',
@@ -501,6 +499,11 @@ $(document).ready(function(){
 	var playDate;
 	var ticketQty;
 	$('#reservationMemberTable').on('click','#memberDeleteBtn',function(){
+		if($('#masterCode').val()!='3') {
+			alert('권한이 없습니다.');
+			return;
+		}
+		
 		if(toDay == playDate){
 			$('.ui.mini.modal.not.member').modal('show');
 		}else{	
@@ -530,7 +533,11 @@ $(document).ready(function(){
 		});
 	});
 	var companySeq;
-	$('#reservationCompanyTable').on('click','#companyDeleteBtn',function(){	
+	$('#reservationCompanyTable').on('click','#companyDeleteBtn',function(){
+		if($('#masterCode').val()!='3') {
+			alert('권한이 없습니다.');
+			return;
+		}
 			$('.ui.mini.modal.company').modal('show');
 			companySeq = $(this).parent().prev().prev().prev().prev().prev().text();
 	});
