@@ -80,7 +80,7 @@
 				<input type="button" class="middle ui button" id="C_notice_WriteBtn" value="관리자 작성">
 			</c:if>
 		</div>
-		<input type="hidden" name="pg" id="pg" value="1"> <br>
+		<input type="hidden" name="pg" id="pg" value="${pg}"> <br>
 		<div style="height: 40px;"></div>
 	</div>
 <script src="../semantic/semantic.min.js"></script>

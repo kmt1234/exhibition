@@ -54,7 +54,7 @@
 	</table>
 	<br>
 	<div id="C_contactList_PagingDiv" class="ui center pagination menu"></div>
-	<input type="hidden" name="pg" id="pg" value="1">
+	<input type="hidden" name="pg" id="pg" value="${pg}">
 	<br><br>
 
 	<select class="ui selection dropdown" id="searchOption">

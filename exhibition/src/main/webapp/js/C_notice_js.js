@@ -50,8 +50,57 @@ $(document).ready(function(){
 	
 	//공지사항 작성중 돌아가기(뒤로)
 	$('#C_notice_WriteBack').click(function(){
-		location.href="/exhibition/customerService/C_notice.do?pg=${pg}";
+		if(str=='trigger') {
+			$('#pg').val(1);
+			$.ajax({
+				type : 'POST',
+				url : '/exhibition/customerService/C_notice_Search.do',
+				data : {'pg':$('#pg').val(),
+						'subject' : $('#subject').val(),
+						'keyword':$('#keyword').val()},
+				dataType : 'json',
+				success : function(data){
+					$('#C_notice_List tr:gt(0)').remove();
+					if(data.totalA=='0'){
+						$('<tr/>',{
+							align: 'center'
+						}).append($('<td/>',{
+							colspan: '3',
+							align : 'center',
+							text : '검색된 결과가 없습니다.'
+						})).appendTo($('#C_notice_List'));  
+						$('#C_notice_PagingDiv').remove();
+					}else if(data.tataA!='0'){
+					
+						$.each(data.list, function(index, item){
+							$('<tr/>').append($('<td/>',{
+								align : 'center',
+								style: 'width: 20%; height: 9%; text-align: center;',
+								text : item.seq
+							})).append($('<td/>',{
+								id : 'subjectB',
+								style: 'width: 45%; height: 7%;text-align: center;',
+								href : 'javascript:void(0)',
+								text : item.subject
+							})).append($('<td/>',{
+								align : 'center',
+								style: 'width: 20%; height: 7%;text-align: center;',
+								text : item.logtime
+							})).appendTo($('#C_notice_List'));     
+						
+						});
+					}
+								
+					$('#C_notice_PagingDiv').html(data.customerServicePaging.pagingHTML);
+				}
+			
+			});
+		} else{
+			location.href="/exhibition/customerService/C_notice.do?pg=${pg}";
+		}
 	});
+	
+	
 	
 	// 공지사항 리스트 불러오기
 	$.ajax({
@@ -100,6 +149,7 @@ $(document).ready(function(){
 						'keyword':$('#keyword').val()},
 				dataType : 'json',
 				success : function(data){
+					alert($('#pg').val());
 					$('#C_notice_List tr:gt(0)').remove();
 					if(data.totalA=='0'){
 						$('<tr/>',{
@@ -118,7 +168,7 @@ $(document).ready(function(){
 								style: 'width: 20%; height: 9%; text-align: center;',
 								text : item.seq
 							})).append($('<td/>',{
-								id : 'subjectA',
+								id : 'subjectB',
 								style: 'width: 45%; height: 7%;text-align: center;',
 								href : 'javascript:void(0)',
 								text : item.subject
@@ -142,6 +192,12 @@ $(document).ready(function(){
 	// 공지사항 리스트 제목 클릭시 내용 보여줌
 	$('#C_notice_List').on('click','#subjectA',function(){
 		var seq = $(this).prev().text();
+		location.href='/exhibition/customerService/C_notice_View.do?seq='+seq+'&pg='+$('#pg').val();
+	});
+	
+	$('#C_notice_List').on('click','#subjectB',function(){
+		var seq = $(this).prev().text();
+		var cnt = 1;
 		location.href='/exhibition/customerService/C_notice_View.do?seq='+seq+'&pg='+$('#pg').val();
 	});
 });

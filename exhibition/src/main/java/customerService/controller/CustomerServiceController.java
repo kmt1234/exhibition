@@ -79,10 +79,10 @@ public class CustomerServiceController {
 
 	// 공지사항 페이지 오픈과 동시에 getNoticeList 불러온다.
 	@RequestMapping(value = "C_notice", method = RequestMethod.GET)
-	public ModelAndView C_notice(@RequestParam(required = false, defaultValue = "1") String pg, Model model) {
-		model.addAttribute("pg", Integer.parseInt(pg));
+	public ModelAndView C_notice(@RequestParam(required = false, defaultValue = "1") int pg, Model model) {
+		model.addAttribute("pg", pg);
+		
 		ModelAndView mav = new ModelAndView();
-
 		mav.addObject("display", "/customerService/C_notice.jsp");
 		mav.setViewName("/customerService/C_customerServiceForm");
 		return mav;
@@ -495,8 +495,8 @@ public class CustomerServiceController {
 
 	// 주요시설 연락처
 	@RequestMapping(value = "C_contactList", method = RequestMethod.GET)
-	public ModelAndView C_contactList(@RequestParam(required = false, defaultValue = "1") String pg, Model model) {
-		model.addAttribute("pg", Integer.parseInt(pg));
+	public ModelAndView C_contactList(@RequestParam(required = false, defaultValue = "1") int pg, Model model) {
+		model.addAttribute("pg", pg);
 		ModelAndView mav = new ModelAndView();
 
 		mav.addObject("display", "/customerService/C_contactList.jsp");

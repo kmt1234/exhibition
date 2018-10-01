@@ -4,7 +4,6 @@ $(document).ready(function(event, str){
 	var code = $('#hiddenCode').val();
 	
 	// 메인 검색시 검색된 공지사항 리스트 불러옴
-	if(str!='trigger') $('#pg').val(1);
 	$.ajax({
 		type : 'POST',
 		url : '/exhibition/main/index_notice_Search.do',
@@ -513,7 +512,6 @@ $(document).ready(function(event, str){
 				
 			} else if(data.totalA!='0'){
 				$.each(data.list, function(index, item){
-					console.log(JSON.stringify(item));
 					$('<tr/>').append($('<input/>',{
 						type : 'hidden',
 						text : item.seq
