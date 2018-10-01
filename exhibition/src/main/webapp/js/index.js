@@ -1,13 +1,4 @@
 $(document).ready(function(){
-/*HEADER 설명*/	
-	/*회원가입 클릭시 2가지로 분류(개인&사업자)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/	
-	//회원가입 클릭 시,
-//	if($('#codeName').val()=='3') {
-//		$('#C_boardAdd').show();
-//	} else {
-//		$('#C_boardAdd').hide();
-//	}
-		
 	$('#M_member').click(function(){
 		$('.ui.member1.dropdown').dropdown('show');
 	});

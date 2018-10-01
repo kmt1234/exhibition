@@ -1,5 +1,4 @@
 $(document).ready(function(){
-
 	//시간
 	$('.timepicker1').timepicker({
 		timeFormat : 'H:mm',
@@ -79,7 +78,6 @@ $(document).ready(function(){
 	$('#eventPrice').blur(function(){
 		//숫자 유효성
 		var test = $('#eventPrice').val();
-		console.log(test);
 		if ($.isNumeric(test)) checkP = true;
 	});
 	
@@ -89,7 +87,6 @@ $(document).ready(function(){
 	$('#eventSeats').blur(function(){
 		//숫자 유효성
 		var test = $('#eventSeats').val();
-		console.log(test);
 		if ($.isNumeric(test)) checkS = true;
 	});
 	

@@ -23,47 +23,43 @@
 </head>
 <body>
 <header>
-<div style="margin-top: 20px; min-width:1170px; position: relative;   ">
-	<jsp:include page="I_header.jsp"></jsp:include>
-</div>
+	<div style="margin-top: 20px; min-width:1170px; position: relative;   ">
+		<jsp:include page="I_header.jsp"></jsp:include>
+	</div>
 </header>
-
 <!--메인화면  -->
-<div >
 <section>
 	<div style="margin-top: 7px; min-width:1170px; position: relative;" class="ui container" >
 		<jsp:include page="${display }"/>
 	</div>
 <!--메인화면 아래 부분(일정)  -->
-	<div class="ui container" style="margin-top: 20px; border:1px ridge rgb(155,155,155,.6); min-width:1170px; height:300px;  ">
+	<div class="ui container" style="margin-top: 20px;  background-color:#E6E6E6; min-width:1170px; height:300px;  ">
 		<!-- 공연포스터 슬라이드?? -->
-		<div style=" margin-left:15px; width:270px; height:200px;  display: inline-block; float: left;">
+		<div style=" margin-left:15px; width:270px; height:220px; border:1px ridge rgb(155,155,155,.6);  margin-top:45px; display: inline-block; float: left;">
 			<jsp:include page="../main/slide.jsp" ></jsp:include>
 		</div>
-		<!-- 달력  -->
-		<div style=" margin-left:20px; width:270px; height:200px;  display: inline-block; float: left;" >
-			<div id="mainCal" style="min-width:270; height: 200px "></div>
-		</div>
-		<!-- today -->
-		<div style=" margin-left:20px; width:270px; height:200px;  display: inline-block; float: left;" >
-			<dl class="todays" id="todays">
+		<!-- 달력&일정 -->
+		<div style=" margin-left:20px; width:540px; height:220px; border:1px ridge rgb(155,155,155,.6);  background-color:white; margin-top:45px; display: inline-block; float: left;" >
+			<!-- 달력  -->
+			<div id="mainCal" style="min-width:260; height: 200px; float:left; display: inline-block; "></div>
+		
+			<!-- today -->
+			<dl class="todays" id="todays" style="min-width:260; margin-left: 10px ;display: inline-block;">
 				<dt>Today's</dt>
-				<dd id="today_list" style="margin-left: 20px">
+				<dd id="today_list" >
 					<ul class="total_list" id="total_list" style="list-style:none;">
-						
-	
 					</ul>
 				</dd>
 			</dl>
 		</div>
 		<!-- 공지사항  -->
-		<div style="margin-left:20px; width:270px; height:200px;  display: inline-block; float: left;" >
+		<div style="margin-left:20px; width:270px; height:220px; border:1px ridge rgb(155,155,155,.6);  background-color:white; margin-top:45px; display: inline-block; float: left;" >
 			<div style="height : 50px; font-weight: bold; font-size: x-large;" >공지사항</div>
 			<div id="C_notice_MainList" style="height : 170px;"></div>
 		</div>
 	</div>
 </section>
-</div>
+
 <footer>
 	<div class="ui container" style="margin-top: 20px; min-width:1170px; position: relative; ">
 		<jsp:include page="../main/I_footer.jsp" ></jsp:include>
@@ -305,7 +301,6 @@ $(document).ready(function(){
 	}, 3000)
 	
 	function moveExItems() {
-		
 		var current_item = $('li.ex_item:visible');
 		var next_item = current_item.next();
 		if(next_item.attr('class') != 'ex_item') {
@@ -325,7 +320,6 @@ $(document).ready(function(){
 		current_item.hide();
 	}		
 
-
 	$('.bxslider').bxSlider({
    	 	auto: true,
         speed: 500,
@@ -334,10 +328,8 @@ $(document).ready(function(){
         autoControls: true,
         pager:true,
    });
-	   
-	
 });
 </script>
- <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script><!--달력-->
+<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script><!-- 달력  -->
 </body>
 </html>

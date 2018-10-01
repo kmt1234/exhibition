@@ -10,8 +10,6 @@ $(document).ready(function(){
 	$('#performance_bookBtn').click(function(){
 		//시퀀스 번호 얻기 
 		var seq = $('#seqID').val();
-		console.log(seq);
-		//alert(seq);
 		location.href="/exhibition/performance/performanceBook.do?seq="+seq;
 	});
 	

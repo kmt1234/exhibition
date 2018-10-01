@@ -21,7 +21,7 @@
  	</select>
  	
  	<select id="index_exSlider" resultType="eventboard">
- 		select * from eventboard_play where startDate >= sysdate-1
+ 		select * from eventboard_play where endDate >= sysdate order by startDate asc
  	</select>
  </mapper>
  

@@ -186,9 +186,9 @@ a:active{
 <script src="https://rawgit.com/claviska/jquery-alertable/master/jquery.alertable.min.js"></script>
 <script src="../js/index_Search.js?ver=1" charset="UTF-8"></script>
 <script src="../js/index.js?ver=1" charset="UTF-8"></script> 
-<script src="../js/member.js" charset="UTF-8"></script> 
-<script src="../js/company.js" charset="UTF-8"></script>
-<script src="../js/login.js" charset="UTF-8"></script>	
-<script src="../js/post.js" charset="UTF-8"></script>
+<script src="../js/member.js?ver=1" charset="UTF-8"></script> 
+<script src="../js/company.js?ver=1" charset="UTF-8"></script>
+<script src="../js/login.js?ver=1" charset="UTF-8"></script>	
+<script src="../js/post.js?ver=1" charset="UTF-8"></script>
 
 
