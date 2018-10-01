@@ -237,4 +237,24 @@ totalRent number);
 
 create sequence seq_businessRoom start with 1000;
 
+--부스 평당 테이블
+create table boothRate(
+boothName varchar2(30),
+rate number);
+
+insert into BOOTHRATE values('Booth1', 1000);
+insert into BOOTHRATE values('Booth2', 1000);
+insert into BOOTHRATE values('Booth3', 1000);
+insert into BOOTHRATE values('Booth4', 1000);
+insert into BOOTHRATE values('Booth5', 1000);
+insert into BOOTHRATE values('Booth6', 1000);
+insert into BOOTHRATE values('Booth7', 1000);
+insert into BOOTHRATE values('Booth8', 1000);
+insert into BOOTHRATE values('Booth9', 1000);
+insert into BOOTHRATE values('Booth10', 1000);
+insert into BOOTHRATE values('Booth11', 1000);
+insert into BOOTHRATE values('Booth12', 1500);
+insert into BOOTHRATE values('Booth13', 1500);
+insert into BOOTHRATE values('Booth14', 1500);
+
 commit;
