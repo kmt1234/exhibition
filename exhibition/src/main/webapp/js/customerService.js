@@ -304,7 +304,10 @@ $(document).ready(function(){
 	
 		
 	$('#memberListTable').on('click','.C_license',function(){
-		
+		if($('#masterCode').val()!='3') {
+			alert('권한이 없습니다.');
+			return;
+		}
 		var toDay = year+"-"+month+"-"+day;
 		var ing;
 		var companyDeleteBtn;
@@ -395,6 +398,10 @@ $(document).ready(function(){
 	var playDate;
 	var memberId;
 	$('#memberListTable').on('click','.M_Id',function(){
+		if($('#masterCode').val()!='3') {
+			alert('권한이 없습니다.');
+			return;
+		}
 		toDay = year+"-"+month+"-"+day;
 		var ing;
 		var deleteBtn
@@ -499,10 +506,6 @@ $(document).ready(function(){
 	var playDate;
 	var ticketQty;
 	$('#reservationMemberTable').on('click','#memberDeleteBtn',function(){
-		if($('#masterCode').val()!='3') {
-			alert('권한이 없습니다.');
-			return;
-		}
 		
 		if(toDay == playDate){
 			$('.ui.mini.modal.not.member').modal('show');
@@ -534,10 +537,6 @@ $(document).ready(function(){
 	});
 	var companySeq;
 	$('#reservationCompanyTable').on('click','#companyDeleteBtn',function(){
-		if($('#masterCode').val()!='3') {
-			alert('권한이 없습니다.');
-			return;
-		}
 			$('.ui.mini.modal.company').modal('show');
 			companySeq = $(this).parent().prev().prev().prev().prev().prev().text();
 	});

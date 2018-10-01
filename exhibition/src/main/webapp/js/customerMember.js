@@ -1,4 +1,8 @@
 $(document).ready(function(){
+	if($('#masterCode').val()!='3') {
+		location.href="/exhibition/main/index.do"
+	}
+	
 	$('.ui.selection.dropdown').dropdown();
 	
 	//개인회원정보 불러오기
