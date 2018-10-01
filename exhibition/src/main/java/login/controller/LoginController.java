@@ -182,18 +182,26 @@ public class LoginController {
 
 	// 마이페이지
 	@RequestMapping(value = "mypage", method = RequestMethod.GET)
-	public ModelAndView mypage(HttpSession session) {
+	public ModelAndView mypage(@RequestParam(required = false, defaultValue = "1") String pg,HttpSession session) {
 		int code = (Integer) session.getAttribute("code");
-
 		Object DTO = session.getAttribute("homepageMember");
 		session.setAttribute("DTO", DTO);
-
+		Date date = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+		String dateM = formatter.format(date);
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("dateM", dateM);
+		
+		int totalA = companyDAO.mypageRentalPastTotal(map);
 		ModelAndView mav = new ModelAndView();
 		
 		if (code == 1) {
 			mav.addObject("display","/login/memberMypage.jsp");
 			mav.setViewName("/customerService/C_customerServiceForm"); // 개인마이페이지
 		} else if (code == 2) {
+			mav.addObject("listSize",totalA);
+			mav.addObject("pg",pg);
 			mav.addObject("c_license", (String)session.getAttribute("C_license"));
 			mav.addObject("display","/login/companyMypage.jsp");
 			mav.setViewName("/customerService/C_customerServiceForm"); // 법인마이페이지	
@@ -202,16 +210,6 @@ public class LoginController {
 		return mav;
 	}
 	
-	// 임대리스트
-	@RequestMapping(value = "mypageRental", method = RequestMethod.GET)
-	public ModelAndView mypageRental(HttpSession session) {
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("c_license", (String)session.getAttribute("C_license"));
-		mav.addObject("display","/login/mypageRental.jsp");
-		mav.setViewName("/customerService/C_customerServiceForm"); // 임대리스트
-
-		return mav;
-	}
 	// 임대리스트ajax
 	@RequestMapping(value = "getmypageRental", method = RequestMethod.POST)
 	public ModelAndView getmypageRental(HttpSession session) {
@@ -245,27 +243,7 @@ public class LoginController {
 		mav.setViewName("jsonView");
 		return mav;
 	}
-		
-	// 임대내역
-	@RequestMapping(value = "mypageRentalPast", method = RequestMethod.GET)
-	public ModelAndView mypageRentalPast(@RequestParam(required = false, defaultValue = "1") String pg,HttpSession session) {
-		Date date = new Date();
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
-		String dateM = formatter.format(date);
-		
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("dateM", dateM);
-		
-		int totalA = companyDAO.mypageRentalPastTotal(map);
 
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("listSize",totalA);
-		mav.addObject("pg",pg);
-		mav.addObject("display","/login/mypageRentalPast.jsp");
-		mav.setViewName("/customerService/C_customerServiceForm"); // 지난 임대 내역
- 
-		return mav;
-	}
 	// 임대내역ajax
 	@RequestMapping(value = "getAllRental", method = RequestMethod.POST)
 	public ModelAndView getAllRental(@RequestParam(required = false, defaultValue = "1") String pg,HttpSession session) {
