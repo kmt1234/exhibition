@@ -93,7 +93,7 @@ public class RentalController {
 		
 		Date date = new Date(cal.getTimeInMillis());
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 
 		model.addAttribute("price", price);
 		model.addAttribute("hallName", hallName);
@@ -131,18 +131,25 @@ public class RentalController {
 		double rate = 0;
 		if (booth.equals("Booth1") || booth.equals("Booth2") || booth.equals("Booth3") || booth.equals("Booth4")
 				|| booth.equals("Booth7") || booth.equals("Booth8") || booth.equals("Booth9")
-				|| booth.equals("Booth10")) {
+				|| booth.equals("Booth10") || booth.equals("Booth11") || booth.equals("Booth12") || booth.equals("Booth13") || booth.equals("Booth14")) {
 			rate = 2350 * 1.0 * 1.0 * 3/* 2.592 */;
 		} else if (booth.equals("Booth5") || booth.equals("Booth6")) {
 			rate = 2350 * 1.0 * 1.2 * 5/* 6.343 */;
 		}
 
 		Date date = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		
+		Calendar cal = Calendar.getInstance();
+
+        cal.setTime(date);
+
+        cal.add(Calendar.DATE, 1);
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 
 		model.addAttribute("rate", rate);
 		model.addAttribute("booth", booth);
-		model.addAttribute("date", sdf.format(date));
+		model.addAttribute("date", sdf.format(cal.getTime()));
 
 		List<ExhibitionDTO> list = exhibitionDAO.getCalendar(booth);
 		for (ExhibitionDTO data : list) {
@@ -175,10 +182,16 @@ public class RentalController {
 	public ModelAndView businessRoomDecision(@RequestParam String businessRoom, Model model, ModelMap modelMap) {
 
 		Date date = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+		
+		Calendar cal = Calendar.getInstance();
+
+        cal.setTime(date);
+
+        cal.add(Calendar.DATE, 1);
 
 		model.addAttribute("businessRoom", businessRoom);
-		model.addAttribute("date", sdf.format(date));
+		model.addAttribute("date", sdf.format(cal.getTime()));
 
 		List<BusinessRoomDTO> list = businessRoomDAO.getCalendar(businessRoom);
 

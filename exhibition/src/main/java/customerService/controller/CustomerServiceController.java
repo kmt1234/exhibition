@@ -1658,7 +1658,7 @@ public class CustomerServiceController {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
 		mav.addObject("salesTotalRent", salesTotalRentstr);
-		mav.addObject("yearMonth", yearMonth);
+		mav.addObject("yearMonth", duplicateList);
 		mav.setViewName("jsonView");
 		return mav;
 	}
