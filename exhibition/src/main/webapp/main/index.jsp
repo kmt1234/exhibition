@@ -10,10 +10,16 @@
 	
 }
 #subjectA{
-width: 215px;
+	width: 215px;
    overflow: hidden;
    white-space: nowrap;
    text-overflow: ellipsis;
+}
+.calSubject {
+	width: 215px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 </style>
 <link rel="stylesheet" href="../css/main.css">

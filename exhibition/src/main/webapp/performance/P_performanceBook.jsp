@@ -137,7 +137,7 @@
 	  <div class="header" id="bookConfirmHeader">예매확인 및 결제하기</div>
 	  <div class="book_play_confirm">
 	  	<div>
-	      <img img style="width: 350px;height: 400px; border-radius: 10px;" src="../storage/${eventboardDTO.image1}" id="modalImage1">
+	      <img style="width: 350px;height: 400px; border-radius: 10px;" src="../storage/${eventboardDTO.image1}" id="modalImage1">
 	    </div>
 	    <div >
 	    	<div class="bookPlayTitleDiv" style="margin-left:20px; height:50px; font-size: 20pt; margin-top: 20px;">${eventboardDTO.imageName}</div>

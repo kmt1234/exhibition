@@ -192,6 +192,7 @@ $(document).ready(function(){
 									class : 'ex_item',
 									html : '<br>'
 								}).append($('<span/>',{
+									class : 'calSubject',
 									style : 'width = 220px',
 									html : '<img id="ex_img" width="20px" height="20px" src="../img/Ex.png">'+item.imageName+'</img>',
 									style : 'display : block'
@@ -217,6 +218,7 @@ $(document).ready(function(){
 									class : 'ex_item',
 									html : '<br>'
 								}).append($('<span/>',{
+									class : 'calSubject',
 									style : 'width = 220px',
 									html : '<img id="ex_img" width="20px" height="20px" src="../img/Ex.png">'+item.imageName+'</img>',
 									style : 'display : block'
@@ -234,6 +236,7 @@ $(document).ready(function(){
 									class : 'co_item',
 									html : '<br>'
 								}).append($('<span/>',{
+									class : 'calSubject',
 									html : '<img  id="co_img" width="20px" height="20px" src="../img/Ev.png">'+item.imageName+'</img>',
 									style : 'display : block'
 								})).append($('<span/>',{
@@ -260,6 +263,7 @@ $(document).ready(function(){
 									class : 'co_item',
 									html : '<br>'
 								}).append($('<span/>',{
+									class : 'calSubject',
 									html : '<img  id="co_img" width="20px" height="20px" src="../img/Ev.png">'+item.imageName+'</img>',
 									style : 'display : block'
 								})).append($('<span/>',{
@@ -301,7 +305,8 @@ $(document).ready(function(){
 							class : 'ex_item',
 							html : '<br>'
 						}).append($('<span/>',{
-							html : '<img style="padding-top:2px;" id="ex_img" width="20px" height="20px" src="../img/Ex.png">'+item.imageName+'</img>',
+							class : 'calSubject',
+							html : '<img id="ex_img" width="20px" height="20px" src="../img/Ex.png">'+item.imageName+'</img>',
 							style : 'display : block'
 						})).append($('<span/>',{
 							text : item.startDate.substring(0,10) + '-' + item.endDate.substring(0,10),
@@ -316,7 +321,7 @@ $(document).ready(function(){
 							html : '<br>'
 						}).append($('<span/>',{
 							style : 'width = 220px',
-							html : '<img style="padding-top:2px;" id="ex_img" width="20px" height="20px" src="../img/Ex.png">'+'일정이 없습니다.'+'</img><br><br>',
+							html : '<img  id="ex_img" width="20px" height="20px" src="../img/Ex.png">'+'일정이 없습니다.'+'</img><br><br>',
 							style : 'display : block'
 						})).appendTo($('#total_list'));
 					} else {
@@ -325,7 +330,8 @@ $(document).ready(function(){
 							class : 'ex_item',
 							html : '<br>'
 						}).append($('<span/>',{
-							html : '<img style="padding-top:2px;" id="ex_img" width="20px" height="20px" src="../img/Ex.png">'+item.imageName+'</img>',
+							class : 'calSubject',
+							html : '<img id="ex_img" width="20px" height="20px" src="../img/Ex.png">'+item.imageName+'</img>',
 							style : 'display : block'
 						})).append($('<span/>',{
 							text : item.startDate.substring(0,10) + '-' + item.endDate.substring(0,10),
@@ -343,7 +349,8 @@ $(document).ready(function(){
 							class : 'co_item',
 							html : '<br>'
 						}).append($('<span/>',{
-							html : '<img  style="padding-top:2px;" id="co_img" width="20px" height="20px" src="../img/Ev.png">'+item.imageName+'</img>',
+							class : 'calSubject',
+							html : '<img  id="co_img" width="20px" height="20px" src="../img/Ev.png">'+item.imageName+'</img>',
 							style : 'display : block'
 						})).append($('<span/>',{
 							text : item.startDate.substring(0,10) + '-' + item.endDate.substring(0,10),
@@ -358,7 +365,7 @@ $(document).ready(function(){
 							html : '<br>'
 						}).append($('<span/>',{
 							style : 'width = 220px',
-							html : '<img style="padding-top:2px;" id="co_img" width="20px" height="20px" src="../img/Ev.png">'+'일정이 없습니다.'+'</img><br><br>',
+							html : '<img id="co_img" width="20px" height="20px" src="../img/Ev.png">'+'일정이 없습니다.'+'</img><br><br>',
 							style : 'display : block'
 						})).appendTo($('#total_list'));
 					} else {

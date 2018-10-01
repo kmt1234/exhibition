@@ -23,10 +23,11 @@ td.empty {
 <h2 class="box-container" style="float: center; width: 100%; text-align: left;">
 	${businessRoom} 
 </h2>
-	
+<div>
 	<div id='calendar' style="width: 63%"></div>
-<br><br>
+</div>
 
+<div>
 <h3>
 	<span id="timeListTitle">비즈니스룸 이용 시간 선택</span>
 </h3>
@@ -117,8 +118,6 @@ var dataset = [
 		    </c:if>
 		</c:forEach>
 		];  
-
-
 	var code = $('#code').val(); //로그인 코드 받아오기
 	
 	$(document).ready(function(){
