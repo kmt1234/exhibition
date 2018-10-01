@@ -295,8 +295,6 @@ $(document).ready(function(){
 		
 		if($('#imageName').val()==''){
 			$('#imageNameDiv').text('제목은 필수입니다').css('color','red').css('font-size','9pt').css('font-weight','bold');
-		}else if($('#img').val()==''){
-			$('#imgDiv').text('파일을 선택해 주세요').css('color','magenta').css('font-size','9pt').css('font-weight','bold');	
 		}else if($('.datepicker1').datepicker().val()==''){
 			$('#dateDiv').text('날짜는 필수입니다').css('color','red').css('font-size','9pt').css('font-weight','bold');
 		}else if($('.datepicker2').datepicker().val()==''){
