@@ -42,7 +42,7 @@ $(document).ready(function(){
 </head>
 <body>
 <ul class="bxslider">
-<c:forEach items="${list }" var="list">
+<c:forEach items="${list}" var="list">
 	<li><a href="/exhibition/performance/performanceBook.do?seq=${list.seq }"><img src="../storage/${list.image1 }" height="200px" width="280px"/></a></li>
 </c:forEach>
 	<!-- <li><img src="../storage/summer.jpg" height="200px" width="280px"/></li>
