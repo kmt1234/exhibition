@@ -506,7 +506,7 @@ public class LoginController {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("pg", pg);
-		mav.addObject("display","/login/memberMypage_ticketList.jsp");
+		mav.addObject("display","/login/memberMypage.jsp");
 		mav.setViewName("/customerService/C_customerServiceForm");
 		return mav;
 	}
