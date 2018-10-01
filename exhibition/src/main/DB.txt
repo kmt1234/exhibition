@@ -106,7 +106,7 @@ subject varchar2(500) not null,          --제목
 content varchar2(4000) not null,         --내용
 logtime date default sysdate);          --날짜
 
-drop table C_notice;
+
 create sequence seq_C_notice nocycle nocache;
 
 create table C_QnA (
@@ -115,7 +115,7 @@ classify varchar2(200),                 --분류
 subject varchar2(500) not null,         --제목
 content varchar2(4000) not null);        --내용
 
-drop table C_qna;
+
 create sequence seq_C_QnA nocycle nocache;
 
 create table C_inquire(
@@ -133,7 +133,7 @@ pseq NUMBER DEFAULT 0 NOT NULL,         --원글번호
 reply NUMBER DEFAULT 0 NOT NULL,        --답변수
 logtime DATE DEFAULT sysdate);          --날짜
 
-drop table C_inquire;
+
 create sequence seq_C_inquire nocycle nocache;
 
 create table C_contactList(
@@ -145,7 +145,7 @@ name varchar2(200) not null,         --담당자
 phone varchar2(200) not null);         --연락처
 
 
-drop table C_contactlist;
+
 create sequence seq_C_contactList nocycle nocache;
 
 create table hotel_list(

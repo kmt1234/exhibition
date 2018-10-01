@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href='../calendar2/fullcalendar.css' rel='stylesheet' />
 <link href='../calendar2/fullcalendar.print.css' rel='stylesheet' media='print' />
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"><!--달력 ui-->
 <style type="text/css">
 .fc-toolbar {
 	height: 53px;
@@ -35,13 +36,13 @@
 			<h4>
 				예약 시작일 :
 				<span>
-					<input type="date" name="startDate" id="startDate" value="${date}">
+					<input type="text" name="startDate" class="datepicker3" id="startDate" value="${date}">
 				</span>
 			</h4>
 			<h4>
 				예약 종료일 :
 				<span>
-					<input type="date" name="endDate" id="endDate" value="${date}">
+					<input type="text" name="endDate" class="datepicker4" id="endDate" value="${date}">
 				</span>
 			</h4>
 		    <c:if test="${code== '2'}">
@@ -196,7 +197,26 @@
 	        
 		});
 
+		//날짜
+		$(".datepicker3, .datepicker4").datepicker({
+			dateFormat : "yy/mm/dd",
+		    prevText: '이전 달',
+		    nextText: '다음 달',
+		    monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+		    monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+		    dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+		    dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+		    dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+		    showMonthAfterYear: true,
+		    minDate : 1,
+		    yearSuffix: '년'
+		});
+				
+		
 	});
+	
+	
 </script>
+<script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script><!--달력-->
 </body>
 </html>
