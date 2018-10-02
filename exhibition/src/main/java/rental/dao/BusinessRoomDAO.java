@@ -13,4 +13,8 @@ public interface BusinessRoomDAO {
 
 	void rentalBusinessRoom(BusinessRoomDTO businessRoomDTO);
 
+	int getRateBusinessRoom(String businessRoom);
+
+	void updateBusinessRoomRate(Map<String, String> map);
+
 }

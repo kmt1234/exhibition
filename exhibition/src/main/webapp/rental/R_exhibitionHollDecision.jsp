@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href='../calendar2/fullcalendar.css' rel='stylesheet' />
 <link href='../calendar2/fullcalendar.print.css' rel='stylesheet' media='print' />
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"><!--달력 ui-->
 <style type="text/css">
-.fc-toolbar {
+.fc-toolbar {/*달력위치  */
 	height: 53px;
 }
 </style>
@@ -18,19 +18,11 @@
 	${booth} 
 </h2>
 <form id="exhibitionHollDecisionForm" method="post" action="/exhibition/rental/reservationHoll.do" style="height: 600px;">
-	
-	
-	
-	
-	
-	
-	
 	<div style="width: 35%; float: right;">
-		
 		<br><br>
 		<div style="width: 100%; float: right;">
 			<h4 style="text-align: left; padding-left: 35px ">부스 총 면적 : 100㎡</h4>
-			<h4 style="text-align: left; padding-left: 35px ">부스 단위 면적 당 금액 : ${rate}원</h4>
+			<h4 style="text-align: left; padding-left: 35px ">부스 단위 면적 당 금액 : <fmt:formatNumber value="${rate}" pattern="#,###"/>원</h4>
 			<h4 style="text-align: left; padding-left: 35px ">1일 기준 이용 시간 : 08:00 ~ 20:00</h4>
 			
 			<h4>
@@ -82,6 +74,18 @@
   </div>
 </div>
 
+<div class="ui mini modal successBooth"> <!-- 예약성공 모달 -->
+  <div class="header">
+  	<i class="huge home icon"></i>
+  </div>
+  <div class="content" style="width: 100%">
+    <span>예약성공</span>
+  </div>
+  <div class="actions">
+    <div class="ui approve button successBooth">확인</div>
+  </div>
+</div>
+
 <input type="hidden" id="code" value="${code}">
 
 <script src='../calendar2/lib/moment.min.js'></script>
@@ -105,8 +109,6 @@
 	var code = $('#code').val();
 	
 	$(document).ready(function(){
-		alert('${C_email}');
-		
 		$('#rentBtn').click(function(){
 			if($('#startDate').val() < '${date}') {
 				$('#writeDiv').text('예약 시작일을 다시 설정해주세요.');
@@ -115,6 +117,12 @@
 			
 			if($('#startDate').val() > $('#endDate').val()) {
 				$('#writeDiv').text('예약 종료일이 시작일보다 빠릅니다.');
+				return;
+			}
+			
+			var diff_days = diff_day($('#startDate').val(), $('#endDate').val());
+			if(diff_days < 30) {
+				$('#writeDiv').text('한달 이상 예약하셔야 합니다.');
 				return;
 			}
 			
@@ -167,7 +175,15 @@
 					success : function(data){
 						
 						if(data==='not_exist') {
-							$('#exhibitionHollDecisionForm').submit();
+							$('.ui.mini.modal.successBooth').modal({
+								closable : false,
+					            duration : 460,
+							}).modal('show');
+							
+							$('.ui.approve.button.successBooth').on('click', function(){
+								$('#exhibitionHollDecisionForm').submit();
+							});
+							
 						} else if(data==='exist') {
 							$('#writeDiv').text('예약불가능');
 							$('#rentDiv').text('');
@@ -213,7 +229,20 @@
 		    minDate : 1,
 		    yearSuffix: '년'
 		});
-				
+		
+		
+		function diff_day(value1, value2) {
+			var arr1 = value1.split('/');
+			var arr2 = value2.split('/');
+			
+			var dt1 = new Date(arr1[0], arr1[1], arr1[2]);
+			var dt2 = new Date(arr2[0], arr2[1], arr2[2]);
+			
+			var diff = dt2 - dt1;
+			var day = 1000 * 60 * 60 * 24;//밀리세컨 초 * 초 * 분 * 시간
+			
+			return parseInt(diff/day);
+		}
 		
 	});
 	

@@ -34,5 +34,14 @@ public class ConcertHallDAOMybatis implements ConcertHallDAO {
 		sqlSession.insert("concertHallSQL.reservationConcertHall", concertHallDTO);
 		
 	}
+
+	public int getRateConcertHall(String hallName) {
+		return sqlSession.selectOne("concertHallSQL.getRateConcertHall", hallName);
+	}
+
+	public void updateConcertHallRate(Map<String, String> map) {
+		sqlSession.update("concertHallSQL.updateConcertHallRate", map);
+		
+	}
 	
 }

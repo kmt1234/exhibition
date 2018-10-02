@@ -37,7 +37,6 @@ $(document).ready(function(){
 				url : '/exhibition/customerService/C_notice_checkModify.do',
 				data : {'seq' : $('#seq').val() , 'subject' : $('#subject').val() , 'content' : $('#content').val() },
 				success : function(data){
-					//alert(JSON.stringify(data));
 					location.href="/exhibition/customerService/C_notice.do";
 				}
 			});

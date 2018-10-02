@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href='../calendar2/fullcalendar.css' rel='stylesheet' />
@@ -10,23 +11,20 @@
 .fc-toolbar {
 	height: 53px;
 }
-
 td.empty {
     padding: 50px 0 !important;
     text-align: center;
     background-color: #fff !important;
 }
-
 </style>
 </head>
 <body>
 <h2 class="box-container" style="float: center; width: 100%; text-align: left;">
 	${businessRoom} 
 </h2>
-	
+<div>
 	<div id='calendar' style="width: 63%"></div>
-<br><br>
-
+</div>
 <h3>
 	<span id="timeListTitle">비즈니스룸 이용 시간 선택</span>
 </h3>
@@ -54,9 +52,11 @@ td.empty {
 	<c:if test="${code == '1'}">
 	<input type="hidden" name="M_Id" value="${homepageMember.getM_Id()}">
 	<input type="hidden" name="M_Email" value="${homepageMember.getM_Email()}">
+	
 	</c:if>
 	<input type="hidden" id="startDate" name="startDate" value="">
 	<input type="hidden" name="roomName" value="${businessRoom}">
+	<input type="hidden" id="rate" name="rate" value="${rate}">
 	<input type="button" value="예약하기" id="rentalBusinessRoomBtn">
 </form>
 </div>	
@@ -107,6 +107,11 @@ td.empty {
 <script src="../semantic/semantic.min.js"></script>
 <script>
 
+//숫자 세자리 콤마찍기 함수
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 //호출한 roomName의 예약현황을 달력에 표시가하기 위해 해당 페이지 호출하는 동시에 listView를 
 var dataset = [
 		<c:forEach var="listView" items="${listView}" varStatus="status">
@@ -117,14 +122,10 @@ var dataset = [
 		    </c:if>
 		</c:forEach>
 		];  
-
-
 	var code = $('#code').val(); //로그인 코드 받아오기
+	var rate = numberWithCommas($('#rate').val());
 	
 	$(document).ready(function(){
-		
-		alert(JSON.stringify('${listView}'));
-		
 		$('#calendar').fullCalendar({
 			header: {
 	            left: 'prev,next today',
@@ -138,9 +139,7 @@ var dataset = [
 	        events: dataset,
 			dayClick: function(date) { //예약되어있지 않는 날짜 클릭 이벤트
 				var startDate = date.format("YYYY") + '-' + date.format("MM") + '-' + date.format("DD");
-				alert(startDate);
 				var defaultDay = new Date().toISOString().slice(0,10);
-				alert(defaultDay);
 				if(startDate <= defaultDay) { //오늘 날짜보다 이전 날짜 예약 못하게 함
 					$('.ui.mini.modal.day').modal('show');
 					return;
@@ -169,7 +168,7 @@ var dataset = [
 				            }))).append($('<td/>',{
 				               text : '09 : 00 ~ 12 : 00'
 				            })).append($('<td/>',{
-				               text : '12,000'
+				               text : rate
 				            })).append($('<td/>',{
 				               id: 'first',
 				               text : '예약가능'
@@ -185,7 +184,7 @@ var dataset = [
 				            }))).append($('<td/>',{
 				               text : '12 : 00 ~ 15 : 00'
 				            })).append($('<td/>',{
-				               text : '12,000'
+				               text : rate
 				            })).append($('<td/>',{
 				            	id: 'second',
 				               text : '예약가능'
@@ -201,7 +200,7 @@ var dataset = [
 				            }))).append($('<td/>',{
 				               text : '15 : 00 ~ 18 : 00'
 				            })).append($('<td/>',{
-				               text : '12,000'
+				               text : rate
 				            })).append($('<td/>',{
 				            	id: 'third',
 				               text : '예약가능'
@@ -217,14 +216,11 @@ var dataset = [
 				            }))).append($('<td/>',{
 				               text : '18 : 00 ~ 21 : 00'
 				            })).append($('<td/>',{
-				               text : '12,000'
+				               text : rate
 				            })).append($('<td/>',{
 				            	id: 'fourth',
 				               text : '예약가능'
 				            })).appendTo('#time_list');
-						
-						alert(JSON.stringify(data));
-						
 						$.each(data.list, function(index, item){ //예약되어있는 시간대는 예약불가능이라고 써주고 체크박스 제거
 							
 							if(item.first=='Y') {
@@ -252,9 +248,7 @@ var dataset = [
 			},//밑에는 예약되어있는 날짜 클릭이벤트
 			eventClick: function(event){
 				var startDate = event.start.format("YYYY") + '-' + event.start.format("MM") + '-' + event.start.format("DD");
-				alert(startDate);
 				var defaultDay = new Date().toISOString().slice(0,10);
-				alert(defaultDay);
 				if(startDate <= defaultDay) { //오늘 날짜보다 이전 날짜 예약 못하게 막는 것
 					$('.ui.mini.modal.day').modal('show');
 					return;
@@ -282,7 +276,7 @@ var dataset = [
 				            }))).append($('<td/>',{
 				               text : '09 : 00 ~ 12 : 00'
 				            })).append($('<td/>',{
-				               text : '12,000'
+				               text : rate
 				            })).append($('<td/>',{
 				               id: 'first',
 				               text : '예약가능'
@@ -298,7 +292,7 @@ var dataset = [
 				            }))).append($('<td/>',{
 				               text : '12 : 00 ~ 15 : 00'
 				            })).append($('<td/>',{
-				               text : '12,000'
+				               text : rate
 				            })).append($('<td/>',{
 				            	id: 'second',
 				               text : '예약가능'
@@ -314,7 +308,7 @@ var dataset = [
 				            }))).append($('<td/>',{
 				               text : '15 : 00 ~ 18 : 00'
 				            })).append($('<td/>',{
-				               text : '12,000'
+				               text : rate
 				            })).append($('<td/>',{
 				            	id: 'third',
 				               text : '예약가능'
@@ -330,14 +324,11 @@ var dataset = [
 				            }))).append($('<td/>',{
 				               text : '18 : 00 ~ 21 : 00'
 				            })).append($('<td/>',{
-				               text : '12,000'
+				               text : rate
 				            })).append($('<td/>',{
 				            	id: 'fourth',
 				               text : '예약가능'
 				            })).appendTo('#time_list');
-						
-						alert(JSON.stringify(data));
-						
 						$.each(data.list, function(index, item){ //예약되어있는 시간대는 예약불가능이라고 써주고 체크박스 제거
 							
 							if(item.first=='Y') {
@@ -374,27 +365,28 @@ var dataset = [
 			}
 		});
 		
-		
-		
-			//예약하기 버튼
-			$('#rentalBusinessRoomBtn').on('click', function(){
-				//개인으로 로그인 할때만 submit
-				if($('#code').val()=='1') {
+		//예약하기 버튼
+		$('#rentalBusinessRoomBtn').on('click', function(){
+			//개인으로 로그인 할때만 submit
+			if($('#code').val()=='1') {
+			
+				$('.ui.mini.modal.success').modal({
+					closable : false,
+		            duration : 460,
+				}).modal('show');
 				
-					$('.ui.mini.modal.success').modal({
-						closable : false,
-			            duration : 460,
-					}).modal('show');
-					
-					$('.ui.approve.button.success').on('click', function(){
-						$('#businessRoomForm').submit();
-					});
-				} else {
-					$('.ui.mini.modal.rental').modal('show');
-				}
-				
-			});
+				$('.ui.approve.button.success').on('click', function(){
+					$('#businessRoomForm').submit();
+				});
+			} else {
+				$('.ui.mini.modal.rental').modal('show');
+			}
+			
+		});
 		
+		
+
+
 
 	});
 </script>

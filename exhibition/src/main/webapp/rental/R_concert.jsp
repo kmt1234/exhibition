@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
+<!DOCTYPE html">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -70,6 +71,22 @@ ul{
 		</td>
 	</tr>
 </table>
+
+<c:if test="${code == '3'}">
+<div style="position:absolute; width: 500px; margin-left: 360px; margin-top: 5px;">
+	<form id="modifyRateConcertHallForm" action="/exhibition/rental/modifyRateConcertHall.do" method="post">
+		<select id="hallNameSel" name="hallNameSel">
+			<option value="P_Room1">P_Room1</option>
+			<option value="P_Room2">P_Room2</option>
+			<option value="P_Room3">P_Room3</option>
+			<option value="P_Room4">P_Room4</option>
+		</select>
+		<input type="text" name="hallRate" id="hallRate">
+		<button id="modifyHallRateBtn">평당 가격 수정</button>
+	</form>
+</div>
+</c:if>
+
 <br><br>
 	<h2 align="left" style="margin-left: 46px; color: #610170;">
 		<i class="camera icon"></i>

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href='../calendar2/fullcalendar.css' rel='stylesheet' />
@@ -24,7 +24,7 @@
 		<br><br>
 		<div style="width: 100%; float: right;">
 			<h4 style="text-align: left; padding-left: 35px ">홀 총 면적 : 100㎡</h4>
-			<h4 style="text-align: left; padding-left: 35px ">홀 단위 면적 당 금액 : 1,000원</h4>
+			<h4 style="text-align: left; padding-left: 35px ">홀 단위 면적 당 금액 : <fmt:formatNumber value="${rate}" pattern="#,###"/>원</h4>
 			<h4 style="text-align: left; padding-left: 35px ">1일 기준 이용 시간 : 08:00 ~ 20:00</h4>
 			
 			<h4>
@@ -111,8 +111,6 @@
 	var code = $('#code').val();
 	
 	$(document).ready(function(){
-		
-		alert('${C_email}');
 		$('#rentBtn').click(function(){
 			if($('#startDate').val() < '${date}') {
 				$('#writeDiv').text('현재일로부터 한달 이후 부터 예약가능합니다.');
@@ -125,8 +123,6 @@
 			}
 			
 			var diff_days = diff_day($('#startDate').val(), $('#endDate').val());
-			alert(diff_days);
-			
 			if(diff_days < 30) {
 				$('#writeDiv').text('한달 이상 예약하셔야 합니다.');
 				return;
@@ -134,10 +130,7 @@
 			
 			var stDate = new Date($('#startDate').val());
 		    var endDate = new Date($('#endDate').val());
-		 
-			alert('${price}');
-		    
-		    var totalRent = ${price} * diff_days;
+		    var totalRent = ${rate} * diff_days * ${width};
 		    var hallName = '${hallName}';
 		    
 		    $('#rentDiv').text(hallName + '의 총 임대료 : ' + totalRent.toLocaleString() + '원');
@@ -190,6 +183,7 @@
 							});
 						} else if(data==='exist') {
 							$('#writeDiv').text('예약불가능');
+							$('#rentDiv').text('');
 						}  
 						
 					}
