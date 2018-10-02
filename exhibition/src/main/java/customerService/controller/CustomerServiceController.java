@@ -954,14 +954,20 @@ public class CustomerServiceController {
 	// 박람회 정보 보기(이미지 클릭 시, -> 수정하기 위해서)***잠시 대기중************************
 	@RequestMapping(value = "C_eventDetail", method = RequestMethod.GET)
 	public ModelAndView C_eventDetail(@RequestParam String seq) {
-
+		ModelAndView mav = new ModelAndView();
 		// DB
 		EventboardDTO eventboardDTO = customerServiceDAO.getEventboard(seq);
-
-		ModelAndView mav = new ModelAndView();
-		System.out.println(eventboardDTO.getStartDate());
+		
+		
+		String startDate = eventboardDTO.getStartDate();
+		String enddate = eventboardDTO.getEndDate();
+		customerServiceDAO.eventboardModDelete(seq);
+		customerServiceDAO.C_exhibitionboardBookDel(eventboardDTO);
+	
 		mav.addObject("eventboardDTO", eventboardDTO);
 		mav.addObject("postSelect", "1");
+		mav.addObject("startDate", startDate);
+		mav.addObject("enddate", enddate);
 		mav.addObject("modify", "1");
 		mav.addObject("display","/customerService/C_eventDetail.jsp");
 		mav.setViewName("/customerService/C_allboardModify");
@@ -1186,9 +1192,11 @@ public class CustomerServiceController {
 			}
 			eventboardDTO.setImage1(fileName);
 			customerServiceDAO.C_eventboardMod(eventboardDTO);
+			customerServiceDAO.eventInfoWrite_exhibition_bookDB(exhibitionBookDTO);
 		} else {
 			eventboardDTO.setImage1(eventboardDTO.getImage1());
 			customerServiceDAO.C_eventboardMod(eventboardDTO);
+			customerServiceDAO.eventInfoWrite_exhibition_bookDB(exhibitionBookDTO);
 		}
 		return new ModelAndView("redirect:/customerService/C_eventboardListForm.do");
 	}

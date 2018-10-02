@@ -148,10 +148,10 @@
 	                  <div class="item" id="C_emailConfirm">고객의 소리</div>
 	                  <div class="item" id="C_QnA">자주묻는 질문</div>
 	                  <div class="item" id="C_contactList">주요시설 연락처</div>
-	                  <c:if test="${code=='1' || code == '2' }">
+	                  <c:if test="${code eq '1' || code eq '2' }">
 	                  	<div class="item" id="C_mypage">마이페이지</div>
 	                  </c:if>
-	                  <c:if test="${code=='3' }">
+	                  <c:if test="${code eq '3' }">
 	                 	 <div class="item" id="C_boardAdd">게시판 추가</div><!--세션값에 따라 보이게 할 예정-->
 	               	  	 <div class="item" id="C_salesExhibition">매출현황</div><!--세션값에 따라 보이게 할 예정-->
 	               	  	 <div class="item" id="C_memberShib">회원리스트</div><!--세션값에 따라 보이게 할 예정-->

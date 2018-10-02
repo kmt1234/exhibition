@@ -73,7 +73,6 @@ public class LoginController {
 			session.setAttribute("homepageMember", memberDTO); // 회원 전체 정보
 			session.setAttribute("homepageMemberName", memberDTO.getM_Id()); // 회원 이름
 			session.setAttribute("code", memberDTO.getCode()); // 코드 정보 넣어야함(1은 개인)
-			System.out.println(memberDTO.getCode());
 			return "exist";
 		}
 	}

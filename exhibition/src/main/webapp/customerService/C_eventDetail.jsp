@@ -55,11 +55,11 @@
 			</div>
 			<div class="ui inverted input" style="width: 100%;">
 				<div class="ui left icon input focus" style="width: 100%; height: 50px;">
-					<input type="text" name="startDate" class="datepicker1">
-					<input type="hidden" id="startDate" value="${eventboardDTO.startDate}" style="width:195px;">
+					<input type="text" name="startDate" id="startMod" class="datepicker1">
+					<input type="hidden" id="startDate" value="${startDate}" style="width:195px;">
 					<div style="width: 10px;"></div>
-					<input type="text" name="endDate" class="datepicker2">
-					<input type="hidden" id="endDate" value="${eventboardDTO.endDate}" style="width:195px;">
+					<input type="text" name="endDate" id="endMod"  class="datepicker2">
+					<input type="hidden" id="endDate" value="${endDate}" style="width:195px;">
 				</div>
 		  	</div>
 	  	</div>
@@ -159,8 +159,7 @@
 	    	<div style="width: 5%;">&nbsp;</div>
 	    	<button class="middle ui button" type="reset" id="writeReset" style="width: 15%;">다시작성</button>
 	    	<div style="width: 5%;">&nbsp;</div>
-	    	<div class="middle ui button" id="imageboardList" style="width: 15%;"
-	    	onclick="location.href='/exhibition/customerService/C_eventboardListForm.do'">목록</div>
+	    	<div class="middle ui button" id="imageboardList" style="width: 15%;">목록</div>
 		</div>
 	</div><!--수정영역 텍스트필드-->
 	<div id="warnningDiv"></div>
@@ -233,7 +232,6 @@ $(document).ready(function(){
 				dataType : 'text',
 				success : function(data){
 					if(data=='no_data'){
-						//alert('등록가능합니다');
 						checkReservation = true;
 					} 
 					else if(data=='yes_data'){
@@ -314,6 +312,13 @@ $(document).ready(function(){
 		else{
 			$('#eventboardModForm').attr('action','/exhibition/customerService/C_eventboardMod.do').submit();
 		}
+		
+		//목록 버튼클릭
+		$('#imageboardList').click(function(){
+			$('#startMod').val($('#startDate').val());
+			$('#endMod').val($('#endDate').val());
+			$('#eventboardModForm').attr('action','/exhibition/customerService/C_eventboardMod.do').submit();
+		});
 		
 	});
 });

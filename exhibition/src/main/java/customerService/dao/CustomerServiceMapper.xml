@@ -713,6 +713,16 @@
 						select * from eventboard_play where endDate between #{startDate} and #{endDate} and eventPlace = #{eventPlace})
  	</select>
  	
+ 	<!-- 박람회 수정하기위해 일단 날짜 초기화 -->
+ 	<update id="eventboardModDelete" parameterType="String">
+ 		update eventboard set startDate='1900-01-01' , endDate ='1900-01-01' where seq=#{seq}
+ 	</update>
+ 	
+ 	<!-- 박람회 수정하기위해 예매일자 초기화 -->
+ 	<delete id="eventboardModDelete_book" parameterType="String">
+ 		delete from EVENTBOARD_EXHIBITION_BOOK where num=#{seq}
+ 	</delete>
+ 	
  </mapper>
  
  

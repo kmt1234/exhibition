@@ -217,12 +217,10 @@ $(document).ready(function(){
 	$('.datepicker1').datepicker('setDate', startDate);
 	$('.datepicker2').datepicker('setDate', endDate);
 	
-	
-	
+
 	//행사위치 유효성
 	var checkReservation = false;
 	$('#eventPlace').blur(function(){
-		
 		if($('#eventPlace').val()==''){
 			checkReservation = false;
 		}else if($('#eventPlace').val()!=''){
@@ -234,7 +232,6 @@ $(document).ready(function(){
 				dataType : 'text',
 				success : function(data){
 					if(data=='no_data'){
-						//alert('등록가능합니다');
 						checkReservation = true;
 					} 
 					else if(data=='yes_data'){
@@ -248,7 +245,7 @@ $(document).ready(function(){
 					        $(this.modal).velocity('transition.shrinkOut', 300);
 					      } 
 					    });
-					} 
+					}
 				}
 			});//ajax
 		}
@@ -295,8 +292,6 @@ $(document).ready(function(){
 		
 		if($('#imageName').val()==''){
 			$('#imageNameDiv').text('제목은 필수입니다').css('color','red').css('font-size','9pt').css('font-weight','bold');
-		}else if($('#img').val()==''){
-			$('#imgDiv').text('파일을 선택해 주세요').css('color','magenta').css('font-size','9pt').css('font-weight','bold');	
 		}else if($('.datepicker1').datepicker().val()==''){
 			$('#dateDiv').text('날짜는 필수입니다').css('color','red').css('font-size','9pt').css('font-weight','bold');
 		}else if($('.datepicker2').datepicker().val()==''){
@@ -312,7 +307,6 @@ $(document).ready(function(){
 		}else if(checkReservation==false){
 			 $('#warnningDiv').text('행사 기간이 겹칩니다. 날짜를 다시 확인하세요').css('color','red').css('font-size','9pt').css('font-weight','bold');
 		}
-		
 		else{
 			$('#playboardModForm').attr('action','/exhibition/customerService/C_playboardMod.do').submit();
 		}
