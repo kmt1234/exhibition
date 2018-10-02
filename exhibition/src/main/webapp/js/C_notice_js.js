@@ -135,21 +135,19 @@ $(document).ready(function(){
 	
 	// 공지사항 검색한 값 불러오기
 	$('#C_notice_SearchBtn').click(function(event, str){
-		
+		var pg = $('#pg').val();
+		var subject = $('#subject').val();
+		var keyword = $('#keyword').val();
 		if(str!='trigger') $('#pg').val(1);
 		
 		if($('#keyword').val()=='')
 			alert("검색어를 입력하세요");
 		else{
 			$.ajax({
-				type : 'POST',
-				url : '/exhibition/customerService/C_notice_Search.do',
-				data : {'pg':$('#pg').val(),
-						'subject' : $('#subject').val(),
-						'keyword':$('#keyword').val()},
+				type : 'GET',
+				url : '/exhibition/customerService/C_notice_Search.do?pg='+encodeURI($('#pg').val())+'&subject='+encodeURI( $('#subject').val())+'&keyword='+encodeURI( $('#keyword').val()),
 				dataType : 'json',
 				success : function(data){
-					alert($('#pg').val());
 					$('#C_notice_List tr:gt(0)').remove();
 					if(data.totalA=='0'){
 						$('<tr/>',{
@@ -168,7 +166,7 @@ $(document).ready(function(){
 								style: 'width: 20%; height: 9%; text-align: center;',
 								text : item.seq
 							})).append($('<td/>',{
-								id : 'subjectB',
+								id : 'subjectA',
 								style: 'width: 45%; height: 7%;text-align: center;',
 								href : 'javascript:void(0)',
 								text : item.subject
@@ -180,7 +178,6 @@ $(document).ready(function(){
 						
 						});
 					}
-								
 					$('#C_notice_PagingDiv').html(data.customerServicePaging.pagingHTML);
 				}
 			

@@ -59,6 +59,16 @@ public class IndexController {
 		return mav;
 	}
 	
+	// 통합 검색 폼
+	@RequestMapping(value = "index_Search", method=RequestMethod.GET)
+	public ModelAndView index_Search(@RequestParam String index_keyword, Model model) {
+		ModelAndView mav = new ModelAndView();
+		model.addAttribute("index_keyword", index_keyword);
+		mav.addObject("display", "/main/index_Search.jsp");
+		mav.setViewName("/main/index_SearchForm");
+		return mav;
+	}
+	
 	// 메인 검색시 검색된 공지사항 리스트 불러옴
 	@RequestMapping(value="index_notice_Search", method=RequestMethod.POST)
 	public ModelAndView index_notice_Search(@RequestParam(required = false) Map<String, String> map) {
@@ -87,8 +97,19 @@ public class IndexController {
 		return mav; 
 	}
 	
+	@RequestMapping(value="index_notice_Plus", method=RequestMethod.GET)
+	public ModelAndView index_notice_Plus(@RequestParam(required = false, defaultValue = "1") int pg, @RequestParam String index_keyword, Model model) {
+		model.addAttribute("pg", pg);
+		model.addAttribute("index_keyword", index_keyword);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("display", "/main/index_notice_Plus.jsp");
+		mav.setViewName("/main/index_SearchForm");
+		return mav;
+	}
+	
 	// 메인 검색후  공지사항 더보기 버튼 클릭시 리스트 불러옴
-	@RequestMapping(value="index_notice_SearchPlus", method=RequestMethod.POST)
+	@RequestMapping(value="index_notice_SearchPlus", method=RequestMethod.GET)
 	public ModelAndView index_notice_SearchPlus(@RequestParam(required = false) Map<String, String> map) {
 		int endNum = Integer.parseInt(map.get("pg")) * 10;
 		int startNum = endNum - 9;

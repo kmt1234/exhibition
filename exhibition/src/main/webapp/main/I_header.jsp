@@ -55,7 +55,7 @@ a:active{
 					<div class="ui action input"  style="width: 100%; ">
 						<input type="text" id="index_keyword" placeholder="Search..." style="width: 30%;" >
 						<input type="hidden" id="indexkeyword" value="${index_keyword}">
-						<button class="ui icon button" id="index_searchBtn">
+						<input type="hidden" name="pg" id="pg" value="${pg}">						<button class="ui icon button" id="index_searchBtn">
 							<i class="search icon"></i>
 						</button>
 					</div>
@@ -180,6 +180,7 @@ a:active{
 	crossorigin="anonymous"></script>
 <script src="../semantic/semantic.min.js?ver=1"></script>
 <script src="../js/index_Search.js?ver=1" charset="UTF-8"></script>
+<script src="../js/index_notice_Search.js?ver=1" charset="UTF-8"></script>
 <script src="../js/index.js?ver=1" charset="UTF-8"></script> 
 <script src="../js/member.js" charset="UTF-8"></script> 
 <script src="../js/company.js" charset="UTF-8"></script>

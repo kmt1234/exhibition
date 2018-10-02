@@ -137,7 +137,7 @@ public class CustomerServiceController {
 		}
 
 	// 검색내용 찾아오기
-	@RequestMapping(value = "C_notice_Search", method = RequestMethod.POST)
+	@RequestMapping(value = "C_notice_Search", method = RequestMethod.GET)
 	public ModelAndView C_notice_Search(@RequestParam(required = false) Map<String, String> map) {
 		int endNum = Integer.parseInt(map.get("pg")) * 10;
 		int startNum = endNum - 9;

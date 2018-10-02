@@ -164,10 +164,11 @@ $(document).ready(function(){
 	
 	$('#index_searchBtn').click(function(event, str){
 		var index_keyword = $('#index_keyword').val();
+		var pg = $('#pg').val();
 		if(str!='trigger') $('#pg').val(1);
 		if($('#index_keyword').val()=='')
 			alert("검색어를 입력하세요");
-		else location.href='/exhibition/main/index_SearchForm.do?index_keyword='+index_keyword;
+		else location.href="/exhibition/main/index_Search.do?pg="+pg+"&index_keyword="+index_keyword;
 		
 	});
 

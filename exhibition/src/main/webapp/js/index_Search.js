@@ -11,7 +11,6 @@ $(document).ready(function(event, str){
 				'index_keyword' : index_keyword},
 		dataType : 'json',
 		success : function(data){
-			$('#index_notice_PagingDiv').hide();
 			if(data.totalA<'4'){
 				$('#index_notice_SearchPlus').remove();
 			}
@@ -50,55 +49,10 @@ $(document).ready(function(event, str){
 		}
 	});
 	
-	$('#index_notice_SearchPlus').click(function(){
-		$('#index_notice_div table').empty();
-		
-		$('#index_QnA_div').remove();
-		$('#index_contactList_div').remove();
-		$('#index_eventboard_div').remove();
-		$('#index_eventboard_play_div').remove();
-		$('#index_hotel_list_div').remove();
-		$('#index_notice_SearchPlus').remove();
-		
-		$('#index_notice_PagingDiv').show();
-		
-		$.ajax({
-			type : 'POST',
-			url : '/exhibition/main/index_notice_SearchPlus.do',
-			data : {'pg': $('#pg').val(),
-					'index_keyword' : index_keyword},
-			dataType : 'json',
-			success : function(data){
-				$('<div/>',{
-					text : '공지사항'
-				});
-				$.each(data.list, function(index, item){
-					
-					$('<tr/>').append($('<input/>',{
-						align : 'center',
-						style: 'width: 880px; text-align: left;',
-						type : 'hidden',
-						text : item.seq
-					})).append($('<td/>',{
-						style: 'width: 880px; text-align: left;',
-						id : 'subjectA',
-						text : item.subject
-					})).appendTo($('#index_notice_SearchList'));
-					
-					$('<tr/>',{
-						style: 'width: 880px; height: 35px; text-align: left;'
-					}).append($('<td/>',{
-						style: 'width: 880px;  height: 35px; text-align: left;',
-						class : 'contentC',
-						href : 'javascript:void(0)',
-						text : item.content
-					})).appendTo($('#index_notice_SearchList'));
-				});
-				$('#index_notice_PagingDiv').html(data.mainPaging.pagingHTML);
-			}
-					
-		});
+	$('#index_notice_SearchPlusBtn').click(function(){
+		location.href="/exhibition/main/index_notice_Plus.do?pg="+pg+"&index_keyword="+index_keyword;
 	});
+	
 	
 	// 공지사항 제목 클릭시 내용보여줌
 	$('#index_notice_SearchList').on('click','#subjectA',function(){
@@ -106,9 +60,7 @@ $(document).ready(function(event, str){
 		location.href='/exhibition/customerService/C_notice_View.do?seq='+seq+'&pg='+$('#pg').val();
 	});
 	
-	
-	
-	
+
 	// 메인 검색시 검색된 자주묻는 질문 리스트 불러옴
 	$.ajax({
 		type : 'POST',
@@ -626,56 +578,6 @@ $(document).ready(function(event, str){
 		location.href=''+eventlink+'';
 	});
 	
-	$('#index_notice_SearchPlus').on('click',function(event, str){
-		
-		$.ajax({
-			type : 'POST',
-			url : '/exhibition/main/index_notice_Search.do',
-			data : {'pg': $('#pg').val(),
-					'index_keyword' : index_keyword},
-			dataType : 'json',
-			success : function(data){
-				if(data.totalA=='0'){
-					$('<tr/>',{
-						align: 'center'
-					}).append($('<td/>',{
-						align : 'center',
-						text : '검색된 결과가 없습니다.'
-					})).appendTo($('#index_notice_SearchList'));  
-					
-				}else if(data.totalA!='0'){
-					$.each(data.list, function(index, item){
-						$('<tr/>').append($('<input/>',{
-							align : 'center',
-							style: 'width: 880px; text-align: left;',
-							type : 'hidden',
-							text : item.seq
-						})).append($('<td/>',{
-							style: 'width: 880px; text-align: left;',
-							id : 'subjectA',
-							text : item.subject
-						})).appendTo($('#index_notice_SearchList'));
-						
-						$('<tr/>',{
-							style: 'width: 880px; height: 35px; text-align: left;'
-						}).append($('<td/>',{
-							style: 'width: 880px;  height: 35px; text-align: left;',
-							class : 'contentC',
-							href : 'javascript:void(0)',
-							text : item.content
-						})).appendTo($('#index_notice_SearchList'));
-					});
-				}
-			}
-		});
-	});
-	
-	
-	
-	
-
-	
-	
 	
 	
 	$('#index_eventboard_SearchPlus').click(function(){
@@ -706,8 +608,3 @@ $(document).ready(function(event, str){
 	});
 
 });
-
-function index_notice_Search(pg){
-	$('#pg').val(pg);
-	$('#index_notice_SearchBtn').trigger('click','trigger');
-}
