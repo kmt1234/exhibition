@@ -6,8 +6,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style>
- .content.size{
- }
  .ui.steps{
  	align: left;
  	font-size: 18px;

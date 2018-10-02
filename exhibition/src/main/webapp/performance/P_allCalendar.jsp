@@ -21,9 +21,6 @@ if(month.length == 1){
 if(day.length == 1){ 
   day = "0" + day; 
 }
-
-//alert(JASON.stringify('${listView}'));
-
 var dataSet = [
 	<c:forEach var="listView" items="${listView}" varStatus="status">
 		<c:if test="${listView.postSelect == '1'}">
@@ -130,6 +127,5 @@ body {
 	</div>
 		<br><br><br><br>
 		<div  id='calendar'></div>
-
 </body>
 </html>

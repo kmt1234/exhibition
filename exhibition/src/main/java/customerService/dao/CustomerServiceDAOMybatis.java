@@ -496,5 +496,11 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 		sqlSession.update("customerServiceSQL.eventboardModDelete",seq);
 	}
 	
+	//공연 수정하기위해 일단 날짜 초기화
+	public void eventboard_playModDelete(String seq) {
+		sqlSession.update("customerServiceSQL.eventboard_playModDelete",seq);
+	}
+	
+	
 	
 }

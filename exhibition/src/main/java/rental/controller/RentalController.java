@@ -128,14 +128,26 @@ public class RentalController {
 	// 진시회&박람회 부스 클릭하면 값을 가지고 다음 페이지로 이동
 	@RequestMapping(value = "R_exhibitionHollDecision", method = RequestMethod.GET)
 	public ModelAndView R_exhibitionHollDecision(@RequestParam String booth, Model model, ModelMap modelMap) {
-		double rate = 0;
+		/*double rate = 0;
 		if (booth.equals("Booth1") || booth.equals("Booth2") || booth.equals("Booth3") || booth.equals("Booth4")
 				|| booth.equals("Booth7") || booth.equals("Booth8") || booth.equals("Booth9")
 				|| booth.equals("Booth10") || booth.equals("Booth11") || booth.equals("Booth12") || booth.equals("Booth13") || booth.equals("Booth14")) {
-			rate = 2350 * 1.0 * 1.0 * 3/* 2.592 */;
+			rate = 2350 * 1.0 * 1.0 * 3 2.592 ;
 		} else if (booth.equals("Booth5") || booth.equals("Booth6")) {
-			rate = 2350 * 1.0 * 1.2 * 5/* 6.343 */;
+			rate = 2350 * 1.0 * 1.2 * 5 6.343 ;
+		}*/
+		
+		int rate = exhibitionDAO.getRateExhibition(booth);
+		int width = 0;
+		
+		if (booth.equals("Booth1") || booth.equals("Booth2") || booth.equals("Booth3") || booth.equals("Booth4")
+				|| booth.equals("Booth7") || booth.equals("Booth8") || booth.equals("Booth9")
+				|| booth.equals("Booth10") || booth.equals("Booth11") || booth.equals("Booth5") || booth.equals("Booth6")) {
+			width = 100;
+		} else if (booth.equals("Booth12") || booth.equals("Booth13") || booth.equals("Booth14")) {
+			width = 120;
 		}
+		
 
 		Date date = new Date();
 		
@@ -148,6 +160,7 @@ public class RentalController {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 
 		model.addAttribute("rate", rate);
+		model.addAttribute("width", width);
 		model.addAttribute("booth", booth);
 		model.addAttribute("date", sdf.format(cal.getTime()));
 
@@ -262,16 +275,9 @@ public class RentalController {
 	@RequestMapping(value = "rentalBusinessRoom", method = RequestMethod.POST)
 	public ModelAndView rentalBusinessRoom(@ModelAttribute BusinessRoomDTO businessRoomDTO) {
 		businessRoomDTO.setTotalRent(businessRoomDTO.getNumberPeople() * 12000);
-
-		System.out.println(businessRoomDTO.getM_Id());
-		System.out.println(businessRoomDTO.getRoomName());
-		System.out.println(businessRoomDTO.getStartDate());
-		System.out.println(businessRoomDTO.getNumberPeople());
-		System.out.println(businessRoomDTO.getTotalRent());
+		
 		for (int i = 0; i < businessRoomDTO.getCheckRow().length; i++) {
 			businessRoomDTO.setTime(businessRoomDTO.getCheckRow()[i]);
-			;
-			System.out.println(businessRoomDTO.getTime());
 		}
 
 		businessRoomDAO.rentalBusinessRoom(businessRoomDTO);
@@ -287,7 +293,6 @@ public class RentalController {
 	public String reservationHoll(@RequestParam String booth, @RequestParam String startDate,
 			@RequestParam String endDate, @RequestParam String C_email, @RequestParam String C_license,
 			@RequestParam String C_tel, @RequestParam String title, @RequestParam int totalRent) {
-		System.out.println(C_email);
 		ExhibitionDTO exhibitionDTO = new ExhibitionDTO();
 		exhibitionDTO.setBoothName(booth);
 		exhibitionDTO.setC_email(C_email);
@@ -324,6 +329,21 @@ public class RentalController {
 	 * @param toDate   yyyyMMdd 형식의 종료일
 	 * @return yyyyMMdd 형식의 날짜가 담긴 배열
 	 */
+	
+	@RequestMapping(value = "modifyRateExhibition", method = RequestMethod.POST)
+	public ModelAndView modifyRateExhibition(@RequestParam String boothNameSel, @RequestParam int boothRate) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("booth", boothNameSel);
+		map.put("rate", String.valueOf(boothRate));
+		
+		exhibitionDAO.updateExhibitionRate(map);
+	
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("display", "/rental/R_exhibition.jsp");
+		mav.setViewName("/rental/R_rentalForm");
+	
+		return mav;
+	}
 
 	public static String[] getDiffDays(String fromDate, String toDate) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");

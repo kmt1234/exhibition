@@ -545,10 +545,10 @@
 	
 	<!-- 회원 상세정보 -->
 	<select id="getPerformanceView" resultType="performance.bean.Book_exhibition_membersDTO" parameterType="String">
-		select * from Book_play_Members where memberid like #{M_Id} order by seq desc 
+		select * from Book_play_Members where memberid like #{M_Id}
 	</select>
 	<select id="getExhibitionView" resultType="performance.bean.Book_exhibition_membersDTO" parameterType="String">
-		select * from Book_exhibition_Members where memberid like #{M_Id}  order by seq desc
+		select * from Book_exhibition_Members where memberid like #{M_Id}
 	</select>
 	
 	<select id="getBusinessRoomView" resultType="rental.bean.BusinessRoomDTO" parameterType="String">
@@ -596,10 +596,10 @@
 	
 	<!-- 사업자 상세정보 -->
 	<select id="getCompanyExView" resultType="exhibition" parameterType="String">
-		select * from exhibitionrental  where C_license like #{C_license} order by seq desc
+		select * from exhibitionrental  where C_license like #{C_license}
 	</select>
 	<select id="getCompanyConView" resultType="rental.bean.ConcertHallDTO" parameterType="String">
-		select * from concertHall  where C_license like #{C_license} order by seq desc
+		select * from concertHall  where C_license like #{C_license}
 	</select>
 	
 	<!-- 사업자 부스 예약 삭제 -->
@@ -700,17 +700,17 @@
  	<!--전시회 층 예약 중복 체크  -->
  	<select id="checkReservation_exhibition" parameterType="java.util.Map" resultType="eventboard">
  		select * from(
-						select * from eventboard where startDate between #{startDate} and #{endDate} and eventPlace = #{eventPlace}
-					 union
-						select * from eventboard where endDate between #{startDate} and #{endDate} and eventPlace = #{eventPlace})
+		select * from eventboard where startDate <![CDATA[ <= ]]> #{startDate} and enddate <![CDATA[ >= ]]> #{endDate} and eventPlace = #{eventPlace}
+		union
+		select * from eventboard where endDate <![CDATA[ <= ]]> #{startDate} and enddate <![CDATA[ >= ]]> #{endDate} and eventPlace = #{eventPlace})
  	</select>
  	
  	<!--연극 공연장 예약 중복 체크  -->
  	<select id="checkReservation_performance" parameterType="java.util.Map" resultType="eventboard">
  		select * from(
-						select * from eventboard_play where startDate between #{startDate} and #{endDate} and eventPlace = #{eventPlace}
-					 union
-						select * from eventboard_play where endDate between #{startDate} and #{endDate} and eventPlace = #{eventPlace})
+		select * from eventboard_play where startDate <![CDATA[ <= ]]> #{startDate} and enddate <![CDATA[ >= ]]> #{endDate} and eventPlace = #{eventPlace}
+		union
+		select * from eventboard_play where endDate <![CDATA[ <= ]]> #{startDate} and enddate <![CDATA[ >= ]]> #{endDate} and eventPlace = #{eventPlace})
  	</select>
  	
  	<!-- 박람회 수정하기위해 일단 날짜 초기화 -->
@@ -722,6 +722,11 @@
  	<delete id="eventboardModDelete_book" parameterType="String">
  		delete from EVENTBOARD_EXHIBITION_BOOK where num=#{seq}
  	</delete>
+ 	
+ 	<!-- 공연 수정하기위해 일단 날짜 초기화 -->
+ 	<update id="eventboard_playModDelete" parameterType="String">
+ 		update eventboard_play set startDate='1900-01-01' , endDate ='1900-01-01' where seq=#{seq}
+ 	</update>
  	
  </mapper>
  

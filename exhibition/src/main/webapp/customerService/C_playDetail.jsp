@@ -114,6 +114,7 @@
 				<div class="ui inverted input" style="width: 100%;">
 					<div class="ui left icon input focus" style="width: 420px; height: 50px;">
 						<input type="text" name="eventPrice" id="eventPrice" value="${eventboardDTO.eventPrice}">
+		  				<input type="hidden" id="Pricehidden" value="${eventboardDTO.eventPrice}">
 		  				<i class="user icon"></i>
 		  			</div>
 		  		</div>
@@ -161,8 +162,7 @@
 		    	<div style="width: 5%;">&nbsp;</div>
 		    	<button class="middle ui button" type="reset" id="writeReset" style="width: 15%;">다시작성</button>
 		    	<div style="width: 5%;">&nbsp;</div>
-		    	<div class="middle ui button" id="imageboardList" style="width: 15%;"
-		    	onclick="location.href='/exhibition/customerService/C_eventboardList_playForm.do'">목록</div>
+		    	<div class="middle ui button" id="imageboardList2" style="width: 15%;">목록</div>
 			</div>
 		</div><!--수정영역 텍스트필드-->
 		<div id="warnningDiv"></div>
@@ -182,7 +182,7 @@ $(document).ready(function(){
 	    minTime: '09',
 	    maxTime: '10:00pm',
 	    defaultTime: '09',
-	    startTime: '09:00am',
+	    startTime: startTime,
 	    dynamic: false,
 	    dropdown: true,
 	    scrollbar: false	
@@ -193,7 +193,7 @@ $(document).ready(function(){
 	    interval: 60,
 	    minTime: $('.timepicker1').val(),
 	    maxTime: '10:00pm',
-	    defaultTime: $('.timepicker1').val(),
+	    defaultTime: endTime,
 	    dynamic: false,
 	    dropdown: true,
 	    scrollbar: false	
@@ -310,6 +310,16 @@ $(document).ready(function(){
 		else{
 			$('#playboardModForm').attr('action','/exhibition/customerService/C_playboardMod.do').submit();
 		}
+	});
+	
+	//목록 클릭
+	$('#imageboardList2').click(function(){
+		startDate = $('#startDate').val().substring(0,4)+"/"+$('#startDate').val().substring(5,7)+"/"+$('#startDate').val().substring(8,10);
+		endDate = $('#endDate').val().substring(0,4)+"/"+$('#endDate').val().substring(5,7)+"/"+$('#endDate').val().substring(8,10);
+		$('.datepicker1').datepicker('setDate', startDate);
+		$('.datepicker2').datepicker('setDate', endDate);
+		$('#eventPrice').val($('#Pricehidden').val());
+		$('#playboardModForm').attr('action','/exhibition/customerService/C_playboardMod.do').submit();
 	});
 });
 </script>

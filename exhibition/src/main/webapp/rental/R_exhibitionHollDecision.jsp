@@ -8,7 +8,7 @@
 <link href='../calendar2/fullcalendar.print.css' rel='stylesheet' media='print' />
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"><!--달력 ui-->
 <style type="text/css">
-.fc-toolbar {
+.fc-toolbar {/*달력위치  */
 	height: 53px;
 }
 </style>
@@ -18,19 +18,11 @@
 	${booth} 
 </h2>
 <form id="exhibitionHollDecisionForm" method="post" action="/exhibition/rental/reservationHoll.do" style="height: 600px;">
-	
-	
-	
-	
-	
-	
-	
 	<div style="width: 35%; float: right;">
-		
 		<br><br>
 		<div style="width: 100%; float: right;">
 			<h4 style="text-align: left; padding-left: 35px ">부스 총 면적 : 100㎡</h4>
-			<h4 style="text-align: left; padding-left: 35px ">부스 단위 면적 당 금액 : 1,000원</h4>
+			<h4 style="text-align: left; padding-left: 35px ">부스 단위 면적 당 금액 : ${rate}원</h4>
 			<h4 style="text-align: left; padding-left: 35px ">1일 기준 이용 시간 : 08:00 ~ 20:00</h4>
 			
 			<h4>
@@ -105,8 +97,6 @@
 	var code = $('#code').val();
 	
 	$(document).ready(function(){
-		alert('${C_email}');
-		
 		$('#rentBtn').click(function(){
 			if($('#startDate').val() < '${date}') {
 				$('#writeDiv').text('예약 시작일을 다시 설정해주세요.');
@@ -123,7 +113,7 @@
 		 
 		    var btMs = endDate.getTime() - stDate.getTime();
 		    var btDay = btMs / (1000*60*60*24) + 1;
-		    var totalRent = ${rate} * btDay + 1;
+		    var totalRent = ${rate} * (btDay) * ${width};
 		    var booth = '${booth}';
 		    
 		    $('#rentDiv').text(booth + '의 총 임대료 : ' + totalRent.toLocaleString() + '원');
@@ -152,6 +142,7 @@
 				
 				if($('#title').val()=='') {
 					$('#writeDiv').text('행사 이름을 입력해주세요.');
+					$('#rentDiv').text('');
 					return;
 				}
 				
@@ -169,6 +160,7 @@
 							$('#exhibitionHollDecisionForm').submit();
 						} else if(data==='exist') {
 							$('#writeDiv').text('예약불가능');
+							$('#rentDiv').text('');
 						}  
 						
 					}

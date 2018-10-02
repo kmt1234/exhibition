@@ -63,13 +63,10 @@ public class LoginController {
 
 		// DB
 		MemberDTO memberDTO = memberDAO.memberLogin(map);
-
 		if (memberDTO == null)
 			return "not_exist";
 		else {
 			// 세션 설정
-			System.out.println("아이디 : " + memberDTO.getM_Id() + " 로그인 성공");
-
 			session.setAttribute("homepageMember", memberDTO); // 회원 전체 정보
 			session.setAttribute("homepageMemberName", memberDTO.getM_Id()); // 회원 이름
 			session.setAttribute("code", memberDTO.getCode()); // 코드 정보 넣어야함(1은 개인)
@@ -96,8 +93,6 @@ public class LoginController {
 			return "not_exist";
 		else {
 			// 세션 설정
-			System.out.println("기업명 : " + companyDTO.getC_businessname() + " 로그인 성공");
-			System.out.println("코드 : " + companyDTO.getCode());
 			session.setAttribute("homepageMemberName", companyDTO.getC_license());
 			session.setAttribute("homepageMember", companyDTO); // 회원 전체 정보
 			session.setAttribute("code", companyDTO.getCode());
@@ -311,7 +306,6 @@ public class LoginController {
 		map.put("title", title);
 		map.put("startDate", startDate);
 		map.put("endDate", endDate);
-		System.out.println(boothName+title+startDate+endDate);
 		companyDAO.deleteExBooth(map);
 		companyDAO.deleteCoBooth(map);
 		

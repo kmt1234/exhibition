@@ -173,6 +173,8 @@ $(document).ready(function(){
 	var endDate = $('#endDate').val().substring(0,4)+"/"+$('#endDate').val().substring(5,7)+"/"+$('#endDate').val().substring(8,10);
 	var startTime = $('#timepicker1').val().substring(0,2);
 	var endTime = $('#timepicker2').val().substring(0,2);
+	
+	
 	//시간
 	$('.timepicker1').timepicker({
 		timeFormat : 'H:mm',
@@ -180,7 +182,7 @@ $(document).ready(function(){
 	    minTime: '09',
 	    maxTime: '10:00pm',
 	    defaultTime: '09',
-	    startTime: '09:00am',
+	    startTime: startTime,
 	    dynamic: false,
 	    dropdown: true,
 	    scrollbar: false	
@@ -191,14 +193,14 @@ $(document).ready(function(){
 	    interval: 60,
 	    minTime: $('.timepicker1').val(),
 	    maxTime: '10:00pm',
-	    defaultTime: $('.timepicker1').val(),
+	    defaultTime: endTime,
 	    dynamic: false,
 	    dropdown: true,
 	    scrollbar: false	
 	});
 	//날짜
-	$(".datepicker1, .datepicker2").datepicker({
-		dateFormat : "yy/mm/dd",
+	$('.datepicker1, .datepicker2').datepicker({
+		dateFormat : 'yy/mm/dd',
 	    prevText: '이전 달',
 	    nextText: '다음 달',
 	    monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
@@ -210,17 +212,16 @@ $(document).ready(function(){
 	    minDate: 0,
 	    yearSuffix: '년'
 	});
-	
 	//시작일과 마지막날짜 설정
 	$('.datepicker1').datepicker('setDate', startDate);
 	$('.datepicker2').datepicker('setDate', endDate);
 	
 	
 	
+	
 	//행사위치 유효성
 	var checkReservation = false;
 	$('#eventPlace').blur(function(){
-		
 		if($('#eventPlace').val()==''){
 			checkReservation = false;
 		}else if($('#eventPlace').val()!=''){
@@ -228,7 +229,9 @@ $(document).ready(function(){
 			$.ajax({
 				type : 'POST',
 				url : '/exhibition/customerService/checkReservation.do',
-				data : {'postSelect':$('#postSelect').val(), 'imageName' : $('#imageName').val(), 'startDate' : $('.datepicker1').val(), 'endDate' : $('.datepicker2').val(),'eventPlace' : $('#eventPlace').val()},
+				data : {'postSelect':$('#postSelect').val(), 'imageName':$('#imageName').val(), 
+					    'startDate':$('.datepicker1').val(), 'endDate':$('.datepicker2').val(),
+					    'eventPlace':$('#eventPlace').val()},
 				dataType : 'text',
 				success : function(data){
 					if(data=='no_data'){
@@ -273,6 +276,7 @@ $(document).ready(function(){
 	
 	//수정 버튼 클릭
 	$('#ModeButton').click(function(){
+
 		//시간 비교
 		var date1 = $("#startTime").val();
 	    var date2 = $("#endTime").val();
@@ -308,18 +312,18 @@ $(document).ready(function(){
 		}else if(checkReservation==false){
 			 $('#warnningDiv').text('행사 기간이 겹칩니다. 날짜를 다시 확인하세요').css('color','red').css('font-size','9pt').css('font-weight','bold');
 		}
-		
 		else{
 			$('#eventboardModForm').attr('action','/exhibition/customerService/C_eventboardMod.do').submit();
 		}
-		
-		//목록 버튼클릭
-		$('#imageboardList').click(function(){
-			$('#startMod').val($('#startDate').val());
-			$('#endMod').val($('#endDate').val());
-			$('#eventboardModForm').attr('action','/exhibition/customerService/C_eventboardMod.do').submit();
-		});
-		
+	});
+	
+	//목록 버튼클릭
+	$('#imageboardList').click(function(){
+		startDate = $('#startDate').val().substring(0,4)+"/"+$('#startDate').val().substring(5,7)+"/"+$('#startDate').val().substring(8,10);
+		endDate = $('#endDate').val().substring(0,4)+"/"+$('#endDate').val().substring(5,7)+"/"+$('#endDate').val().substring(8,10);
+		$('.datepicker1').datepicker('setDate', startDate);
+		$('.datepicker2').datepicker('setDate', endDate);
+		$('#eventboardModForm').attr('action','/exhibition/customerService/C_eventboardMod.do').submit();
 	});
 });
 </script>
