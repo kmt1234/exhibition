@@ -3,8 +3,6 @@
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="customerServiceSQL">
- 	
- 	
  	<!-- 공지사항 총글수 -->
  	<select id="getTotalC_notice" resultType="int">
  		select count(*) from C_notice
@@ -521,10 +519,10 @@
 	
 	<!-- 회원정보  -->
  	<select id="getMemberList" resultType="member" parameterType="java.util.Map">
- 		select * from(
+		select * from(
 		select rownum rn, tt.* from(
-		select * from membertable)tt
-		)where rn <![CDATA[ >= ]]> #{startNum} and rn<![CDATA[<=]]> #{endNum} and code=1
+		select * from membertable where code=1 order by M_name)tt
+		)where rn <![CDATA[ >= ]]> #{startNum} and rn <![CDATA[<=]]> #{endNum}
  	</select>
  	
 	<!-- 회원 정보 페이징처리 -->
@@ -536,8 +534,8 @@
  	<select id="memberListSearch" parameterType="java.util.Map" resultType="member">
 		select * from (
 		select rownum rn, tt.* from(
-		select * from membertable where ${memberSearchOption} like '%'||#{memberSearch}||'%')tt
-		)where rn <![CDATA[ >= ]]> #{startNum} and rn<![CDATA[<=]]> #{endNum} and code=1
+		select * from membertable where ${memberSearchOption} like '%'||#{memberSearch}||'%' and code=1 order by M_name)tt
+		)where rn <![CDATA[ >= ]]> #{startNum} and rn<![CDATA[<=]]> #{endNum} 
 	</select>
 	
  	<!-- 회원 검색 페이징-->
@@ -552,6 +550,13 @@
 	<select id="getExhibitionView" resultType="performance.bean.Book_exhibition_membersDTO" parameterType="String">
 		select * from Book_exhibition_Members where memberid like #{M_Id}  order by seq desc
 	</select>
+	
+	<select id="getBusinessRoomView" resultType="rental.bean.BusinessRoomDTO" parameterType="String">
+		select * from businessRoom where M_id like #{M_Id}  order by seq desc
+	</select>
+	
+	
+	
 	<!-- 회원 예매 삭제 -->
 	<delete id="memberExTicketDelete" parameterType="int">
  		delete Book_exhibition_Members where seq=#{seq}
@@ -559,13 +564,16 @@
  	<delete id="memberPerTicketDelete" parameterType="int">
  		delete Book_play_Members where seq=#{seq}
  	</delete>
+ 	<delete id="memberBusinessTicketDelete" parameterType="int">
+ 		delete businessRoom where seq=#{seq}
+ 	</delete>
 	
  	<!-- 사업자정보  -->
  	<select id="getCompanyList" resultType="company" parameterType="java.util.Map">
  		select * from(
 		select rownum rn, tt.* from(
-		select * from company)tt
-		)where rn <![CDATA[ >= ]]> #{startNum} and rn<![CDATA[<=]]> #{endNum}	
+		select * from company order by C_businessname)tt
+		)where rn <![CDATA[ >= ]]> #{startNum} and rn<![CDATA[<=]]> #{endNum}  
  	</select>
  	
 	<!-- 사업자 페이징처리 -->
@@ -577,8 +585,8 @@
  	<select id="CompanyListSearch" parameterType="java.util.Map" resultType="company">
 		select * from (
 		select rownum rn, tt.* from(
-		select * from company where ${companySearchOption} like '%'||#{companySearch}||'%')tt
-		)where rn <![CDATA[ >= ]]> #{startNum} and rn<![CDATA[<=]]> #{endNum}
+		select * from company where ${companySearchOption} like '%'||#{companySearch}||'%' order by C_businessname)tt
+		)where rn <![CDATA[ >= ]]> #{startNum} and rn<![CDATA[<=]]> #{endNum} 
 	</select>
 	
  	<!-- 사업자 검색토탈 페이징-->
@@ -691,12 +699,18 @@
  	
  	<!--전시회 층 예약 중복 체크  -->
  	<select id="checkReservation_exhibition" parameterType="java.util.Map" resultType="eventboard">
- 		select * from eventboard where imageName = #{imageName} and startDate = #{startDate} and endDate = #{endDate} and eventPlace = #{eventPlace}
+ 		select * from(
+						select * from eventboard where startDate between #{startDate} and #{endDate} and eventPlace = #{eventPlace}
+					 union
+						select * from eventboard where endDate between #{startDate} and #{endDate} and eventPlace = #{eventPlace})
  	</select>
  	
  	<!--연극 공연장 예약 중복 체크  -->
  	<select id="checkReservation_performance" parameterType="java.util.Map" resultType="eventboard">
- 		select * from eventboard_play where imageName = #{imageName} and startDate = #{startDate} and endDate = #{endDate} and eventPlace = #{eventPlace}
+ 		select * from(
+						select * from eventboard_play where startDate between #{startDate} and #{endDate} and eventPlace = #{eventPlace}
+					 union
+						select * from eventboard_play where endDate between #{startDate} and #{endDate} and eventPlace = #{eventPlace})
  	</select>
  	
  </mapper>

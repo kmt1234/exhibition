@@ -69,7 +69,7 @@
 		select  rownum rn, tt.* from(select boothname,c_license,c_tel,c_email,title,startdate,enddate from EXHIBITIONRENTAL  where enddate <![CDATA[<]]> #{dateM}
 		union
 		select hallname as boothname,c_license,c_tel,c_email,title,startdate,enddate from CONCERTHALL where enddate <![CDATA[<]]> #{dateM})tt
-		)where rn <![CDATA[>=]]> #{startNum} and rn <![CDATA[<=]]> #{endNum} order by startdate asc
+		)where rn <![CDATA[>=]]> #{startNum} and rn <![CDATA[<=]]> #{endNum} order by startdate desc
  	</select>
  	
  	<!--이전 임대리스트 총글-->
@@ -79,5 +79,15 @@
 		union
 		select hallname as boothname,c_license,c_tel,c_email,title,startdate,enddate from CONCERTHALL) where enddate <![CDATA[<=]]> #{dateM})
  	</select>
+ 	
+ 	<!-- 임대한 박람회 부스 삭제 -->
+ 	<delete id="deleteExBooth" parameterType="java.util.Map">
+ 		delete from EXHIBITIONRENTAL where boothName=#{boothName} and title=#{title} and startDate=#{startDate} and endDate=#{endDate}
+ 	</delete>
+ 	
+ 	<!-- 임대한 콘서트 부스 삭제 -->
+ 	<delete id="deleteCoBooth" parameterType="java.util.Map">
+ 		delete from CONCERTHALL where hallName=#{boothName} and title=#{title} and startDate=#{startDate} and endDate=#{endDate}
+ 	</delete>
 	
 </mapper>

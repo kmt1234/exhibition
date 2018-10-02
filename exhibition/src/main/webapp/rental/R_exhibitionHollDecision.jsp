@@ -30,7 +30,7 @@
 		<br><br>
 		<div style="width: 100%; float: right;">
 			<h4 style="text-align: left; padding-left: 35px ">부스 총 면적 : 100㎡</h4>
-			<h4 style="text-align: left; padding-left: 35px ">부스 단위 면적 당 금액 : 1,000원</h4>
+			<h4 style="text-align: left; padding-left: 35px ">부스 단위 면적 당 금액 : ${rate}원</h4>
 			<h4 style="text-align: left; padding-left: 35px ">1일 기준 이용 시간 : 08:00 ~ 20:00</h4>
 			
 			<h4>
@@ -123,7 +123,7 @@
 		 
 		    var btMs = endDate.getTime() - stDate.getTime();
 		    var btDay = btMs / (1000*60*60*24) + 1;
-		    var totalRent = ${rate} * btDay + 1;
+		    var totalRent = ${rate} * (btDay) * ${width};
 		    var booth = '${booth}';
 		    
 		    $('#rentDiv').text(booth + '의 총 임대료 : ' + totalRent.toLocaleString() + '원');
@@ -152,6 +152,7 @@
 				
 				if($('#title').val()=='') {
 					$('#writeDiv').text('행사 이름을 입력해주세요.');
+					$('#rentDiv').text('');
 					return;
 				}
 				
@@ -169,6 +170,7 @@
 							$('#exhibitionHollDecisionForm').submit();
 						} else if(data==='exist') {
 							$('#writeDiv').text('예약불가능');
+							$('#rentDiv').text('');
 						}  
 						
 					}

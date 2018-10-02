@@ -165,15 +165,4 @@ $(document).ready(function(){
 			});
 	});
 	
-	
-	//임대리스트
-	$('#rental-list').click(function(){
-		location.href='/exhibition/login/mypageRental.do';
-	});
-	
-	//임대내역
-	$('#rental-history').click(function(){
-		location.href='/exhibition/login/mypageRentalPast.do';
-	});
-	
 });
