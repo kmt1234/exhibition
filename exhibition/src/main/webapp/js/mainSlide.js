@@ -1,11 +1,10 @@
  $(document).ready(function(){
-	 var code = $('#code').val()
-	 
-	 if(code == '1'){
+	 var slideCode = $('#slideCode').val()
+	 if(slideCode == '5'){
 	 //슬라이더 이미지 불러오기
 	 $.ajax({
 		type : 'GET',
-		url : '/exhibition/customerService/getImageboardSlide.do?code='+$("#code").val(),
+		url : '/exhibition/customerService/getImageboardSlide.do?slideCode='+$("#slideCode").val(),
 		dataType : 'json',
 		success : function(data){
 			if(data.list.length==0) alert('메인 이미지 없습니다. 관리자에게 문의하십시오');
@@ -57,7 +56,7 @@
 			}//else
 		}//success
 	 });//ajax
-	 }else if(code == ''){
+	 }else if(slideCode == ''){
 		$.ajax({
 		type : 'POST',
 		url : '/exhibition/customerService/getImageboardSlide1.do',

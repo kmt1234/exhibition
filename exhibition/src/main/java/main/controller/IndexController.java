@@ -31,8 +31,8 @@ public class IndexController {
 
 	/* 메인페이지 이동~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 	@RequestMapping(value = "index", method = RequestMethod.GET)
-	public String index(@RequestParam(required = false, defaultValue = "1") String code, Model model) {
-		model.addAttribute("code", code);
+	public String index(@RequestParam(required = false, defaultValue = "5") String slideCode, Model model) {
+		model.addAttribute("slideCode", slideCode);
 		model.addAttribute("display", "/main/I_body.jsp");
 		List<EventboardDTO> list = mainDAO.index_exSlider();
 		

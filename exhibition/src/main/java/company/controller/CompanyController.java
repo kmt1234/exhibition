@@ -27,7 +27,6 @@ public class CompanyController {
 	@RequestMapping(value="companyWrite",method=RequestMethod.POST)
 	public ModelAndView write(@ModelAttribute CompanyDTO companyDTO, HttpSession session) {
 		companyDAO.write(companyDTO);
-		
 		//회원가입 축하 메세지
 		session.setAttribute("registerMessage", companyDTO.getC_businessname() +"님 회원가입을 축하합니다");
 		session.setMaxInactiveInterval(60);//1분 간 메세지 유효
@@ -44,7 +43,6 @@ public class CompanyController {
 		if(companyDTO==null) return "not_exist";
 		else return "exist";
 	}
-	
 	//비밀번호찾기-이메일 체크
 	@RequestMapping(value="checkEmail", method=RequestMethod.POST)
 	public @ResponseBody String checkEmail(@RequestParam String email, @RequestParam String sNum) {

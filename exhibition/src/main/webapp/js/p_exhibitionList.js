@@ -6,7 +6,7 @@ $(document).ready(function(){
 	//예약하기 
 	$('.exhibitionBookBtn').click(function(){
 		//시퀀스 번호 얻기 
-		var seq = $(this).parent().parent().parent().prev().prev().prev().prev().prev().text();
+		var seq = $('#seqId').val();
 		location.href="/exhibition/performance/exhibitionBook.do?seq="+seq;
 	});
 	//이전 전시회

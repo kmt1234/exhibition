@@ -22,7 +22,6 @@
 <script type="text/javascript">
 //사업자 페이지
 function CompanyList(pg){
-	/* location.href="/exhibition/customerService/C_memberShib.do?pg="+pg */
 	$('#pg').val(pg);
 	$('#companyBtn').trigger('click','trigger');
 }

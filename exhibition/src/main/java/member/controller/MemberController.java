@@ -74,7 +74,6 @@ public class MemberController {
 		
 		if(memberDTO == null) return "not_exist";
 		else {
-			System.out.println(memberDTO.getM_Id());
 			return memberDTO.getM_Id();
 		}  
 	}
