@@ -79,7 +79,7 @@ $(document).ready(function(event, str){
 				}).append($('<td/>',{
 					align : 'center',
 					text : '검색된 결과가 없습니다.'
-				})).appendTo($('#index_QnA_SearchList'));  
+				})).appendTo($('#index_QnA_SearchList'));
 				
 			} else if(data.totalA!='0'){
 				$.each(data.list, function(index, item){
@@ -94,8 +94,8 @@ $(document).ready(function(event, str){
 						text : item.seq
 					})).append($('<td/>',{
 						style: 'width: 880px; text-align: left;',
-						id : 'QnA_subject',
-						text : item.subject
+						id : 'subjectA',
+						text : "["+item.classify+"]   "+item.subject
 					})).appendTo($('#index_QnA_SearchList'));
 				
 					$('<tr/>',{
@@ -111,57 +111,9 @@ $(document).ready(function(event, str){
 		}
 	});
 	
-	$('#index_QnA_SearchPlus').click(function(){
-		$('#index_QnA_SearchList table:gt(0)').empty();
-		
-		$('#index_notice_div').remove();
-		$('#index_contactList_div').remove();
-		$('#index_eventboard_div').remove();
-		$('#index_eventboard_play_div').remove();
-		$('#index_hotel_list_div').remove();
-		$('#index_QnA_SearchPlus').remove();
-		
-		$.ajax({
-			type : 'POST',
-			url : '/exhibition/main/index_QnA_SearchPlus.do',
-			data : {'pg': $('#pg').val(),
-					'index_keyword' : index_keyword},
-			dataType : 'json',
-			success : function(data){
-				
-				$('<div/>',{
-					
-					text : '자주 묻는 질문'
-				});
-				$.each(data.list, function(index, item){
-					$('<tr/>').append($('<input/>',{
-						type : 'hidden',
-						text : item.classify
-					})).append($('<input/>',{
-						
-						align : 'center',
-						style: 'width: 880px; text-align: left;',
-						type : 'hidden',
-						text : item.seq
-					})).append($('<td/>',{
-						style: 'width: 880px; text-align: left;',
-						id : 'QnA_subject',
-						text : item.subject
-					})).appendTo($('#index_QnA_SearchList'));
-				
-					$('<tr/>',{
-						style: 'width: 880px; height: 35px; text-align: left;'
-					}).append($('<td/>',{
-						style: 'width: 880px;  height: 35px; text-align: left;',
-						class : 'contentC',
-						href : 'javascript:void(0)',
-						text : item.content
-					})).appendTo($('#index_QnA_SearchList'));
-				});
-			}
-		});
+	$('#index_QnA_SearchPlusBtn').click(function(){
+		location.href="/exhibition/main/index_QnA_Plus.do?pg="+pg+"&index_keyword="+index_keyword;
 	});
-	
 	
 	//
 	$('#index_QnA_SearchList').on('click','#QnA_subject',function(){
@@ -267,94 +219,8 @@ $(document).ready(function(event, str){
 	});
 	
 	
-	$('#index_contactList_SearchPlus').click(function(){
-		$('#index_contactList_SearchList table:gt(0)').empty();
-		
-		$('#index_notice_div').remove();
-		$('#index_QnA_div').remove();
-		$('#index_eventboard_div').remove();
-		$('#index_eventboard_play_div').remove();
-		$('#index_hotel_list_div').remove();
-		$('#index_contactList_SearchPlus').remove();
-		
-
-		
-		$.ajax({
-			type : 'POST',
-			url : '/exhibition/main/index_contactList_SearchPlus.do',
-			data : {'pg': $('#pg').val(),
-					'index_keyword': index_keyword },
-			dataType : 'json',
-			success : function(data){
-				$('<div/>',{
-									
-					text : '주요 시설 연락처'
-				});
-				$.each(data.list, function(index, item){
-					if(code!=3){
-						$('<tr/>').append($('<td/>',{
-							align : 'center',
-							style: 'width: 20%; height: 9%; text-align: center;',
-							text : item.classify,
-							id : 'classifyA'
-						})).append($('<td/>',{
-							align : 'center',
-							style: 'width: 20%; height: 9%; text-align: center;',
-							text : item.facility,
-							id : 'facilityA'
-						})).append($('<td/>',{
-							align : 'center',
-							style: 'width: 20%; height: 9%; text-align: center;',
-							text : item.title,
-							id : 'titleA'
-						})).append($('<td/>',{
-							align : 'center',
-							style: 'width: 20%; height: 9%; text-align: center;',
-							text : item.name,
-							id : 'nameA'
-						})).append($('<td/>',{
-							align : 'center',
-							style: 'width: 20%; height: 9%; text-align: center;',
-							text : item.phone,
-							id : 'phoneA'
-						})).appendTo($('#index_contactList_SearchList'));
-						
-					} else if(code==3){
-						$('<tr/>').append($('<td/>').append($('<input/>',{
-							type : 'checkbox',
-							value : item.seq,
-							name : 'box',
-							class : 'box'
-						}))).append($('<td/>',{
-							align : 'center',
-							style: 'width: 20%; height: 9%; text-align: center;',
-							text : item.classify,
-							id : 'classifyA'
-						})).append($('<td/>',{
-							align : 'center',
-							style: 'width: 20%; height: 9%; text-align: center;',
-							text : item.facility,
-							id : 'facilityA'
-						})).append($('<td/>',{
-							align : 'center',
-							style: 'width: 20%; height: 9%; text-align: center;',
-							text : item.title,
-							id : 'titleA'
-						})).append($('<td/>',{
-							align : 'center',
-							style: 'width: 20%; height: 9%; text-align: center;',
-							text : item.name,
-							id : 'nameA'
-						})).append($('<td/>',{
-							align : 'center',
-							style: 'width: 20%; height: 9%; text-align: center;',
-							text : item.phone,
-							id : 'phoneA'
-						})).appendTo($('#index_contactList_SearchList'));	
-					}
-				});
-			}
-		});
+	$('#index_contactList_SearchPlusBtn').click(function(){
+		location.href="/exhibition/main/index_contactList_Plus.do?pg="+pg+"&index_keyword="+index_keyword;
 	});
 	
 	
@@ -434,6 +300,10 @@ $(document).ready(function(event, str){
 	$('#index_eventboard_SearchList').on('click','#eventboard_name',function(){
 		var seq = $(this).prev().prev().text();
 		location.href='/exhibition//performance/exhibitionBook.do?seq='+seq;
+	});
+	
+	$('#index_eventboard_SearchList').click(function(){
+		location.href="/exhibition/main/index_notice_Plus.do?pg="+pg+"&index_keyword="+index_keyword;
 	});
 	
 	$('#index_eventboard_SearchList').on('click','#eventboard_image',function(){

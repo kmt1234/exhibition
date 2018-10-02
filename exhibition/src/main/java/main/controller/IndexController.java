@@ -59,11 +59,12 @@ public class IndexController {
 		return mav;
 	}
 	
-	// 통합 검색 폼
+	// 
 	@RequestMapping(value = "index_Search", method=RequestMethod.GET)
 	public ModelAndView index_Search(@RequestParam String index_keyword, Model model) {
 		ModelAndView mav = new ModelAndView();
 		model.addAttribute("index_keyword", index_keyword);
+		
 		mav.addObject("display", "/main/index_Search.jsp");
 		mav.setViewName("/main/index_SearchForm");
 		return mav;
@@ -71,7 +72,7 @@ public class IndexController {
 	
 	// 메인 검색시 검색된 공지사항 리스트 불러옴
 	@RequestMapping(value="index_notice_Search", method=RequestMethod.POST)
-	public ModelAndView index_notice_Search(@RequestParam(required = false) Map<String, String> map) {
+	public ModelAndView index_notice_Search(@RequestParam(required = false, defaultValue = "1") Map<String, String> map) {
 		int endNum = Integer.parseInt(map.get("pg")) * 3;
 		int startNum = endNum - 2;
 		
@@ -126,7 +127,7 @@ public class IndexController {
 		mainPaging.setPageBlock(10);
 		mainPaging.setPageSize(10);
 		mainPaging.setTotalA(totalA);
-		mainPaging.index_notice_searchPlusPagingHTML();
+		mainPaging.index_notice_searchPlusPagingHTML(map.get("index_keyword"));
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("totalA", totalA);
@@ -165,12 +166,22 @@ public class IndexController {
 		return mav; 
 	}
 	
+	@RequestMapping(value="index_QnA_Plus", method=RequestMethod.GET)
+	public ModelAndView index_QnA_Plus(@RequestParam(required = false, defaultValue = "1") int pg, @RequestParam String index_keyword, Model model) {
+		model.addAttribute("pg", pg);
+		model.addAttribute("index_keyword", index_keyword);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("display", "/main/index_QnA_Plus.jsp");
+		mav.setViewName("/main/index_SearchForm");
+		return mav;
+	}
+	
 	// 메인 검색후  자주묻는 질문 더보기 버튼 클릭시 리스트 불러옴
 	@RequestMapping(value="index_QnA_SearchPlus", method=RequestMethod.POST)
 	public ModelAndView index_QnA_SearchPlus(@RequestParam(required = false) Map<String, String> map) {
 		int endNum = Integer.parseInt(map.get("pg")) * 10;
 		int startNum = endNum - 9;
-		System.out.println(endNum);
 		map.put("startNum", startNum + "");
 		map.put("endNum", endNum + "");
 
@@ -182,7 +193,7 @@ public class IndexController {
 		mainPaging.setPageBlock(10);
 		mainPaging.setPageSize(10);
 		mainPaging.setTotalA(totalA);
-		mainPaging.index_notice_searchPlusPagingHTML();
+		mainPaging.index_QnA_searchPlusPagingHTML(map.get("index_keyword"));
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("totalA", totalA);
@@ -192,6 +203,8 @@ public class IndexController {
 		
 		return mav; 
 	}
+	
+	
 	
 	// 메인 검색시 검색된 주요시설 연락처 리스트 불러옴
 	@RequestMapping(value="index_contactList_Search", method=RequestMethod.POST)
@@ -221,15 +234,25 @@ public class IndexController {
 		return mav; 
 	}
 	
+	@RequestMapping(value="index_contactList_Plus", method=RequestMethod.GET)
+	public ModelAndView index_contactList_Plus(@RequestParam(required = false, defaultValue = "1") int pg, @RequestParam String index_keyword, Model model) {
+		model.addAttribute("pg", pg);
+		model.addAttribute("index_keyword", index_keyword);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("display", "/main/index_contactList_Plus.jsp");
+		mav.setViewName("/main/index_SearchForm");
+		return mav;
+	}
+	
 	//
-	@RequestMapping(value="index_contactList_SearchPlus", method=RequestMethod.POST)
+	@RequestMapping(value="index_contactList_SearchPlus", method=RequestMethod.GET)
 	public ModelAndView index_contactList_SearchPlus(@RequestParam(required = false) Map<String, String> map) {
 		int endNum = Integer.parseInt(map.get("pg")) * 10;
 		int startNum = endNum - 9;
 		
 		map.put("startNum", startNum + "");
 		map.put("endNum", endNum + "");
-		System.out.println(endNum);
 		List<MainDTO> list = mainDAO.index_contactList_Search(map);
 		
 		int totalA = mainDAO.getTotal_index_contactList_Search(map);
@@ -238,7 +261,7 @@ public class IndexController {
 		mainPaging.setPageBlock(10);
 		mainPaging.setPageSize(10);
 		mainPaging.setTotalA(totalA);
-		mainPaging.index_contactList_searchPlusPagingHTML();
+		mainPaging.index_contactList_searchPlusPagingHTML(map.get("index_keyword"));
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("totalA", totalA);

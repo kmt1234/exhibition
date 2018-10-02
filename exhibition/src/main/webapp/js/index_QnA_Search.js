@@ -2,15 +2,26 @@ $(document).ready(function(event, str){
 	var index_keyword = $('#indexkeyword').val();
 	var pg = $('#pg').val();
 	var code = $('#hiddenCode').val();
-
-	// 메인 검색시 검색된 공지사항 리스트 불러옴
+	
+	// 메인 검색시 검색된 주요시설 연락처 리스트 불러옴
 	$.ajax({
-		type : 'GET',
-		url : '/exhibition/main/index_notice_SearchPlus.do?pg='+encodeURI(pg)+'&index_keyword='+encodeURI(index_keyword),
+		type : 'POST',
+		url : '/exhibition/main/index_QnA_SearchPlus.do',
+		data : {'pg': $('#pg').val(),
+				'index_keyword' : index_keyword},
 		dataType : 'json',
 		success : function(data){
+			
+			$('<div/>',{
+				
+				text : '자주 묻는 질문'
+			});
 			$.each(data.list, function(index, item){
 				$('<tr/>').append($('<input/>',{
+					type : 'hidden',
+					text : item.classify
+				})).append($('<input/>',{
+					
 					align : 'center',
 					style: 'width: 880px; text-align: left;',
 					type : 'hidden',
@@ -18,9 +29,9 @@ $(document).ready(function(event, str){
 				})).append($('<td/>',{
 					style: 'width: 880px; text-align: left;',
 					id : 'subjectA',
-					text : item.subject
-				})).appendTo($('#index_notice_PlusList'));
-				
+					text : "["+item.classify+"]   "+item.subject
+				})).appendTo($('#index_QnA_PlusList'));
+			
 				$('<tr/>',{
 					style: 'width: 880px; height: 35px; text-align: left;'
 				}).append($('<td/>',{
@@ -28,14 +39,14 @@ $(document).ready(function(event, str){
 					class : 'contentC',
 					href : 'javascript:void(0)',
 					text : item.content
-				})).appendTo($('#index_notice_PlusList'));
+				})).appendTo($('#index_QnA_PlusList'));
 			});
-			$('#index_notice_PlusPagingDiv').html(data.mainPaging.pagingHTML);
+			$('#index_QnA_PlusPagingDiv').html(data.mainPaging.pagingHTML);
 		}
-	
 	});
-	$('#index_notice_PlusList').on('click','#subjectA',function(){
+	
+	$('#index_QnA_PlusList').on('click','#subjectA',function(){
 		var seq = $(this).prev().text();
-		location.href='/exhibition/customerService/C_notice_View.do?seq='+seq+'&pg='+$('#pg').val();
+		location.href='/exhibition/customerService/C_QnA.do';
 	});
 });

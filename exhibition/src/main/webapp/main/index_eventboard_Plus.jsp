@@ -55,7 +55,6 @@
 }
 
 </style>
-<title>Insert title here</title>
 </head>
 <body>
 <!-- 타이틀 -->
@@ -70,19 +69,19 @@
 			<div class="ui divider"></div> 
 		</h2>
 		<div style="width: 100%;" align="center" id="index_notice_div">
-		<div style="width: 400px; display: inline-block; text-align: left; font-size: 25px"><span>공지 사항</span></div>
-		<div style="width: 460px; display: inline-block; text-align: right;"><span id="index_notice_SearchPlus" class="plus">더보기</span></div>
+		<div style="width: 400px; display: inline-block; text-align: left; font-size: 25px"><span>박람회</span></div>
+		<div style="width: 460px; display: inline-block; text-align: right;"><span id="index_eventboard_SearchPlus" class="plus">더보기</span></div>
 			<table style="width: 880px; height: 40px;" align="center" border="1"
 				bordercolor="#ec008c" cellpadding="2" frame="hsides" rules="rows"
-				id="index_notice_PlusList" class="ui striped table">
+				id="index_eventboard_PlusList" class="ui striped table">
 			</table>
 			<br>
-			<div id="index_notice_PlusPagingDiv" class="ui center pagination menu"></div>
+			<div id="index_eventboard_PlusPagingDiv" class="ui center pagination menu"></div>
 			<br><br> 
 		</div>
 		</div>
 		<input type="hidden" name="index_keyword" id="index_keyword" value="${index_keyword}">
 		<input type="hidden" name="pg" id="pg" value="${pg}"> <br>
-<script src="../js/index_notice_Search.js?ver=1" charset="UTF-8"></script>
+<script src="../js/index_eventboard_Search.js?ver=1" charset="UTF-8"></script>
 </body>
 </html>

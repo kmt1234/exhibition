@@ -79,7 +79,6 @@
 				id="index_notice_SearchList" class="ui striped table">
 			</table>
 			<br>
-			<div id="index_notice_PagingDiv" class="ui center pagination menu"></div>
 			<br><br> 
 		</div>
 		
@@ -91,7 +90,6 @@
 				id="index_QnA_SearchList" class="ui striped table">
 			</table>
 			<br>
-			<div id="index_QnA_PagingDiv" class="ui center pagination menu"></div>
 			<br><br> 
 		</div>
 		
@@ -104,7 +102,6 @@
 				id="index_contactList_SearchList" class="ui striped table">
 			</table>
 			<br>
-			<div id="index_contactList_PagingDiv" class="ui center pagination menu"></div>
 			<br><br>
 		</div>
 		
@@ -116,7 +113,6 @@
 				id="index_eventboard_SearchList" class="ui striped table">
 			</table>
 			<br>
-			<div id="index_eventboard_PagingDiv" class="ui center pagination menu"></div>
 			<br><br>
 		</div>
 		
@@ -128,7 +124,6 @@
 				id="index_eventboard_play_SearchList" class="ui striped table">
 			</table>
 			<br>
-			<div id="index_eventboard_play_PagingDiv" class="ui center pagination menu"></div>
 			<br><br>
 		</div>
 		
@@ -140,14 +135,12 @@
 				id="index_hotel_list_SearchList" class="ui striped table">
 			</table>
 			<br>
-			<div id="index_hotel_list_PagingDiv" class="ui center pagination menu"></div>
 			<br><br>
 		</div>
 		
-		<input type="hidden" name="index_keyword" id="index_keyword" value="index_keyword">
+		<input type="hidden" name="index_keyword" id="index_keyword" value="${index_keyword}">
 		<input type="hidden" name="pg" id="pg" value="1"> <br>
 		<div style="height: 40px;"></div>
 	</div>
-<script src="../semantic/semantic.min.js"></script>
 </body>
 </html>
