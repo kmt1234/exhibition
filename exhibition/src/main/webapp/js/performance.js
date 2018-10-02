@@ -22,7 +22,6 @@ if(day.length == 1){
 		        	  url : '/exhibition/performance/getPerformance.do',
 		        	  dataType : 'json',
 		        	  success : function(data){
-		        		 //alert(JSON.stringify(data.list));
 		        		  var events = [];
 		        		 
 		        		  $.each(data.list,function(index,item){

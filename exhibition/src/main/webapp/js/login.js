@@ -289,7 +289,6 @@ $(document).ready(function(){
 				data : {'email': $('#verify-Email').val()},
 				dataType : 'text',
 				success : function(data){
-				//	alert("인증번호는 "+JSON.stringify(data));
 					verifyNum = data;
 					$('.verify-Number-hidden').val(verifyNum);
 				}//success
@@ -313,7 +312,6 @@ $(document).ready(function(){
 				data : {'email' : $('#verify-Email').val()},
 				dataType : 'text',
 				success : function(data){
-					//alert("임시비밀번호는 "+JSON.stringify(data));
 					temPwd = data;
 				}//success
 			});//ajax
@@ -333,7 +331,6 @@ $(document).ready(function(){
 		           data: {'temPwd': temPwd, 'M_Id' : $('#verify-M-Id').val()},
 		           dataType : 'text',
 		           success: function(data){
-		        	//   alert("변경된 건 수 : "+JSON.stringify(data));
 		        	   $('#find-M-Result').text('임시 비밀번호로 로그인 하세요').css('color','blue');
 			        	 location.href='/exhibition/main/index.do';
 		           }//success
@@ -425,7 +422,6 @@ $(document).ready(function(){
 				data : {'email': $('#verify-C-Email').val()},
 				dataType : 'text',
 				success : function(data){
-				//	alert("인증번호는 "+JSON.stringify(data));
 					verifyNum2 = data;
 					$('.verify-Number2-hidden').val(verifyNum2);
 				}//success
@@ -468,7 +464,6 @@ $(document).ready(function(){
 		           data: {'temPwd2': temPwd2, 'C_license' : $('#verify-C-Id').val()},
 		           dataType : 'text',
 		           success: function(data){
-		        	//   alert("변경된 건 수 : "+JSON.stringify(data));
 		        	   alert('임시비밀번호로 변경되었습니다.');
 		        	   location.href='/exhibition/main/index.do';
 		           }//success

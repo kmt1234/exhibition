@@ -5,9 +5,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href='../calendar2/fullcalendar.css' rel='stylesheet' />
-<link href='../calendar2/fullcalendar.print.css' rel='stylesheet' media='print' />
+<link href='../calendar2/fullcalendar.print.css' rel='stylesheet' media='print'/>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"><!--달력 ui-->
 <style type="text/css">
-.fc-toolbar {
+.fc-toolbar {/*달력위치  */
 	height: 53px;
 }
 </style>
@@ -17,25 +18,25 @@
 	${hallName} 
 </h2>
 <form id="concertHallDecisionForm" method="post" action="/exhibition/rental/reservationConcertHall.do" style="height: 600px;">
-	
-	<div style="width: 35%; float: right;">
-		
+	<!-- 달력 -->
+	<div id='calendar' style="width: 520px; display: inline-block; float: left; margin-left: 20px;"></div>
+	<!-- 문구 -->
+	<div style="width: 350px; float: left; display: inline-block;">
 		<br><br>
-		<div style="width: 100%; float: right;">
+		<div style="width: 100%; margin-top: 30px;">
 			<h4 style="text-align: left; padding-left: 35px ">홀 총 면적 : 100㎡</h4>
 			<h4 style="text-align: left; padding-left: 35px ">홀 단위 면적 당 금액 : 1,000원</h4>
 			<h4 style="text-align: left; padding-left: 35px ">1일 기준 이용 시간 : 08:00 ~ 20:00</h4>
-			
-			<h4>
+			<h4 style="text-align: left; padding-left: 35px ">
 				예약 시작일 :
 				<span>
-					<input type="date" name="startDate" id="startDate" value="${date}">
+					<input type="text" name="startDate" class="datepicker5" id="startDate" value="${date}">
 				</span>
 			</h4>
-			<h4>
+			<h4 style="text-align: left; padding-left: 35px ">
 				예약 종료일 :
 				<span>
-					<input type="date" name="endDate" id="endDate" value="${date}">
+					<input type="text" name="endDate" class="datepicker6" id="endDate" value="${date}">
 				</span>
 			</h4>
 			<c:if test="${code== '2'}">
@@ -45,12 +46,14 @@
 			</c:if>
 			<input type="hidden" id="totalRent" name="totalRent" value="">
 			<input type="hidden" id="hallName" name="hallName" value="${hallName}">
-			<h4>
+			<h4 style="text-align: left; padding-left: 35px ">
 				공연 이름 : 
-				<input type="text" id="title" name="title">
+				<input type="text" style="width: 185px;" id="title" name="title">
 			</h4>
-			<input class="middle ui button" type="button" id="rentBtn" value="임대료 계산하기">
-			<input class="middle ui button" type="button" id="reservationBtn" value="예약하기">
+			<div style="text-align: left; padding-left: 35px ">
+				<input class="middle ui button" type="button" id="rentBtn" value="임대료 계산하기">
+				<input class="middle ui button" type="button" style="width: 110px;" id="reservationBtn" value="예약하기">
+			</div>S
 			<div id="rentDiv"></div>
 			<div id="writeDiv"></div>
 		</div>
@@ -59,7 +62,7 @@
 	
 	</div>
 	
-	<div id='calendar' style="width: 63%"></div>
+	
 </form>
 <br><br>
 
@@ -110,8 +113,6 @@
 	var code = $('#code').val();
 	
 	$(document).ready(function(){
-		
-		alert('${C_email}');
 		$('#rentBtn').click(function(){
 			if($('#startDate').val() < '${date}') {
 				$('#writeDiv').text('현재일로부터 한달 이후 부터 예약가능합니다.');
@@ -124,8 +125,6 @@
 			}
 			
 			var diff_days = diff_day($('#startDate').val(), $('#endDate').val());
-			alert(diff_days);
-			
 			if(diff_days < 30) {
 				$('#writeDiv').text('한달 이상 예약하셔야 합니다.');
 				return;
@@ -133,9 +132,6 @@
 			
 			var stDate = new Date($('#startDate').val());
 		    var endDate = new Date($('#endDate').val());
-		 
-			alert('${price}');
-		    
 		    var totalRent = ${price} * diff_days;
 		    var hallName = '${hallName}';
 		    
@@ -221,9 +217,32 @@
 	        
 		});
 		
+		
+		
+		
+		//날짜
+		$(".datepicker5, .datepicker6").datepicker({
+			dateFormat : "yy/mm/dd",
+		    prevText: '이전 달',
+		    nextText: '다음 달',
+		    monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+		    monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+		    dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+		    dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+		    dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+		    showMonthAfterYear: true,
+		    minDate : 0,
+		    yearSuffix: '년'
+		});
+		
+		//시작일과 마지막날짜 설정
+		$('.datepicker5').datepicker('setDate', $('#startDate').val());
+		$('.datepicker6').datepicker('setDate', $('#endDate').val());
+		
+		
 		function diff_day(value1, value2) {
-			var arr1 = value1.split('-');
-			var arr2 = value2.split('-');
+			var arr1 = value1.split('/');
+			var arr2 = value2.split('/');
 			
 			var dt1 = new Date(arr1[0], arr1[1], arr1[2]);
 			var dt2 = new Date(arr2[0], arr2[1], arr2[2]);
@@ -233,12 +252,9 @@
 			
 			return parseInt(diff/day);
 		}
-		
-		
-		
-		
 
 	});
 </script>
+<script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script><!--달력-->
 </body>
 </html>

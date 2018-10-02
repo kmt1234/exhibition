@@ -95,7 +95,6 @@ $(document).ready(function(){
 	})//ajax
 	//전체선택
 	$('#checkAll').click(function(){
-		//alert($('.check').length);		//클래스를 나타낼때는 앞에 .을 찍는다.
 		if($('#checkAll').prop('checked')){
 			$('.check').prop('checked',true);
 		}else{
