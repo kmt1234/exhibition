@@ -70,7 +70,7 @@
 		</h2>
 		<div style="width: 100%;" align="center" id="index_notice_div">
 		<div style="width: 400px; display: inline-block; text-align: left; font-size: 25px"><span>박람회</span></div>
-		<div style="width: 460px; display: inline-block; text-align: right;"><span id="index_eventboard_SearchPlus" class="plus">더보기</span></div>
+		<div style="width: 460px; display: inline-block; text-align: right;"></div>
 			<table style="width: 880px; height: 40px;" align="center" border="1"
 				bordercolor="#ec008c" cellpadding="2" frame="hsides" rules="rows"
 				id="index_eventboard_PlusList" class="ui striped table">

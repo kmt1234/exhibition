@@ -58,15 +58,5 @@
 	<div style="height: 80px;"></div>
 </div>
 
-<script>
-$(document).ready(function(){
-	$('#C_notice_ListBtn').on('click', function(){
-		location.href="/exhibition/customerService/C_notice.do?pg="+$('#pg').val();
-	});
-	
-});
-
-
-</script>
 <script src="../js/C_notice_js.js?ver=1"></script></body>
 </html>

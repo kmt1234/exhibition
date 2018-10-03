@@ -12,7 +12,7 @@ $(document).ready(function(event, str){
 		dataType : 'json',
 		success : function(data){
 			if(data.totalA<'4'){
-				$('#index_notice_SearchPlus').remove();
+				$('#index_notice_SearchPlusBtn').hide();
 			}
 			if(data.totalA=='0'){
 				
@@ -69,9 +69,8 @@ $(document).ready(function(event, str){
 				'index_keyword' : index_keyword},
 		dataType : 'json',
 		success : function(data){
-			$('#index_QnA_PagingDiv').remove();
 			if(data.totalA<'4'){
-				$('#index_QnA_SearchPlus').remove();
+				$('#index_QnA_SearchPlusBtn').hide();
 			}
 			if(data.totalA=='0'){
 				$('<tr/>',{
@@ -129,9 +128,8 @@ $(document).ready(function(event, str){
 				'index_keyword': index_keyword },
 		dataType : 'json',
 		success : function(data){
-			$('#index_contactList_PagingDiv').remove();
 			if(data.totalA<'4'){
-				$('#index_contactList_SearchPlus').remove();
+				$('#index_contactList_SearchPlusBtn').hide();
 			}
 			if(data.totalA=='0'){
 				$('<tr/>',{
@@ -232,9 +230,8 @@ $(document).ready(function(event, str){
 				'index_keyword': index_keyword },
 		dataType : 'json',
 		success : function(data){
-			$('#index_eventboard_PagingDiv').remove();
 			if(data.totalA<'4'){
-				$('#index_eventboard_SearchPlus').remove();
+				$('#index_eventboard_SearchPlusBtn').hide();
 			}
 			if(data.totalA=='0'){
 				$('<tr/>',{
@@ -303,7 +300,7 @@ $(document).ready(function(event, str){
 	});
 	
 	$('#index_eventboard_SearchList').click(function(){
-		location.href="/exhibition/main/index_notice_Plus.do?pg="+pg+"&index_keyword="+index_keyword;
+		location.href="/exhibition/main/index_eventboard_Plus.do?pg="+pg+"&index_keyword="+index_keyword;
 	});
 	
 	$('#index_eventboard_SearchList').on('click','#eventboard_image',function(){
@@ -320,9 +317,8 @@ $(document).ready(function(event, str){
 				'index_keyword': index_keyword },
 		dataType : 'json',
 		success : function(data){
-			$('#index_eventboard_play_PagingDiv').remove();
 			if(data.totalA<'4'){
-				$('#index_eventboard_play_SearchPlus').remove();
+				$('#index_eventboard_play_SearchPlusBtn').hide();
 			}
 			if(data.totalA=='0'){
 				$('<tr/>',{
@@ -385,6 +381,10 @@ $(document).ready(function(event, str){
 		}
 	});
 	
+	$('#index_eventboard_play_SearchPlusBtn').click(function(){
+		location.href="/exhibition/main/index_eventboard_play_Plus.do?pg="+pg+"&index_keyword="+index_keyword;
+	});
+	
 	$('#index_eventboard_play_SearchList').on('click','#eventboard_play_name',function(){
 		var seq = $(this).prev().prev().text();
 		location.href='/exhibition//performance/performanceBook.do?seq='+seq;
@@ -403,9 +403,8 @@ $(document).ready(function(event, str){
 				'index_keyword': index_keyword },
 		dataType : 'json',
 		success : function(data){
-			$('#index_hotel_list_PagingDiv').remove();
 			if(data.totalA<'4'){
-				$('#index_hotel_list_SearchPlus').remove();
+				$('#index_hotel_list_SearchPlusBtn').hide();
 			}
 			if(data.totalA=='0'){
 				$('<tr/>',{
@@ -444,37 +443,11 @@ $(document).ready(function(event, str){
 		}
 	});
 	
+	$('#index_hotel_list_SearchPlusBtn').click(function(){
+		location.href="/exhibition/main/index_hotel_list_Plus.do?pg="+pg+"&index_keyword="+index_keyword;
+	});
+	
 	$('#index_hotel_list_SearchList').on('click','.hotel_image',function(){
 		location.href=''+eventlink+'';
 	});
-	
-	
-	
-	$('#index_eventboard_SearchPlus').click(function(){
-		$('#index_notice_div').remove();
-		$('#index_QnA_div').remove();
-		$('#index_contactList_div').remove();
-		$('#index_eventboard_div').remove();
-		$('#index_eventboard_play_div').remove();
-		$('#index_hotel_list_div').remove();
-	});
-	
-	$('#index_eventboard_play_SearchPlus').click(function(){
-		$('#index_notice_div').remove();
-		$('#index_QnA_div').remove();
-		$('#index_contactList_div').remove();
-		$('#index_eventboard_div').remove();
-		$('#index_eventboard_play_div').remove();
-		$('#index_hotel_list_div').remove();
-	});
-	
-	$('#index_hotel_list_SearchPlus').click(function(){
-		$('#index_notice_div').remove();
-		$('#index_QnA_div').remove();
-		$('#index_contactList_div').remove();
-		$('#index_eventboard_div').remove();
-		$('#index_eventboard_play_div').remove();
-		$('#index_hotel_list_div').remove();
-	});
-
 });

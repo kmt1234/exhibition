@@ -117,28 +117,39 @@ public class CustomerServiceController {
 	}
 	
 	// 공지사항 리스트 데이터 베이스에서 불러와 index.jsp로 리스트 보내주기
-		@RequestMapping(value = "getNoticeMainList", method = RequestMethod.POST)
-		public ModelAndView getNoticeMainList(@RequestParam(required = false, defaultValue = "1") String pg) {
-			// DB - 1페이지당 10개씩
-			int endNum = Integer.parseInt(pg) * 4;
-			int startNum = endNum - 3;
+	@RequestMapping(value = "getNoticeMainList", method = RequestMethod.POST)
+	public ModelAndView getNoticeMainList(@RequestParam(required = false, defaultValue = "1") String pg) {
+		// DB - 1페이지당 10개씩
+		int endNum = Integer.parseInt(pg) * 4;
+		int startNum = endNum - 3;
 
-			Map<String, Integer> map = new HashMap<String, Integer>();
-			map.put("startNum", startNum);
-			map.put("endNum", endNum);
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("startNum", startNum);
+		map.put("endNum", endNum);
 
-			List<CustomerServiceDTO> list = customerServiceDAO.getNoticeMainList(map);
+		List<CustomerServiceDTO> list = customerServiceDAO.getNoticeMainList(map);
 
-			ModelAndView mav = new ModelAndView();
+		ModelAndView mav = new ModelAndView();
 
-			mav.addObject("list", list);
-			mav.setViewName("jsonView");
-			return mav;
-		}
+		mav.addObject("list", list);
+		mav.setViewName("jsonView");
+		return mav;
+	}
+	
+	@RequestMapping(value = "C_notice_Search", method = RequestMethod.GET)
+	public ModelAndView C_notice_Search(@RequestParam(required = false, defaultValue = "1") int pg, @RequestParam String keyword, Model model) {
+		model.addAttribute("pg", pg);
+		model.addAttribute("keyword", keyword);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("display", "/customerService/C_notice_Search.jsp");
+		mav.setViewName("/customerService/C_customerServiceForm");
+		return mav;
+	}
 
 	// 검색내용 찾아오기
-	@RequestMapping(value = "C_notice_Search", method = RequestMethod.GET)
-	public ModelAndView C_notice_Search(@RequestParam(required = false) Map<String, String> map) {
+	@RequestMapping(value = "C_notice_SearchList", method = RequestMethod.GET)
+	public ModelAndView C_notice_SearchList(@RequestParam(required = false) Map<String, String> map) {
 		int endNum = Integer.parseInt(map.get("pg")) * 10;
 		int startNum = endNum - 9;
 
@@ -155,7 +166,7 @@ public class CustomerServiceController {
 		customerServicePaging.setPageBlock(10);
 		customerServicePaging.setPageSize(10);
 		customerServicePaging.setTotalA(totalA);
-		customerServicePaging.C_notice_searchPagingHTML();
+		customerServicePaging.C_notice_searchPagingHTML(map.get("keyword"));
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
@@ -339,8 +350,23 @@ public class CustomerServiceController {
 		return mav;
 	}
 	
+	
+	
+	@RequestMapping(value = "C_inquire_SearchList", method = RequestMethod.GET)
+	public ModelAndView C_inquire_SearchList(@RequestParam(required = false, defaultValue = "1") String pg, @RequestParam String keyword, @RequestParam String searchOption, Model model) {
+		model.addAttribute("pg", Integer.parseInt(pg));
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("searchOption", searchOption);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("display", "/customerService/C_inquire_SearchList.jsp");
+		mav.setViewName("/customerService/C_customerServiceForm");
+		return mav;
+	}
+	
+	
 	// 고객의 소리 문의받은글 검색 & 페이징
-	@RequestMapping(value = "C_inquire_Search", method = RequestMethod.POST)
+	@RequestMapping(value = "C_inquire_Search", method = RequestMethod.GET)
 	public ModelAndView C_inquire_Search(@RequestParam(required = false) Map<String, String> map) {
 		int endNum = Integer.parseInt(map.get("pg")) * 10;
 		int startNum = endNum - 9;
@@ -358,7 +384,7 @@ public class CustomerServiceController {
 		customerServicePaging.setPageBlock(10);
 		customerServicePaging.setPageSize(10);
 		customerServicePaging.setTotalA(totalA);
-		customerServicePaging.C_inquire_searchPagingHTML();
+		customerServicePaging.C_inquire_searchPagingHTML(map.get("keyword"),map.get("searchOption"));
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
@@ -370,12 +396,13 @@ public class CustomerServiceController {
 
 	// 고객의소리 내용보기(관리자
 	@RequestMapping(value = "C_inquire_View", method = RequestMethod.GET)
-	public ModelAndView C_inquire_View(@RequestParam int seq, @RequestParam String pg, Model model) {
+	public ModelAndView C_inquire_View(@RequestParam int seq, @RequestParam String pg, @RequestParam(required = false, defaultValue = "") String keyword, Model model) {
 
 		CustomerServiceDTO customerServiceDTO = customerServiceDAO.getInquireInfo(seq);
 
 		model.addAttribute("customerServiceDTO", customerServiceDTO);
 		model.addAttribute("pg", pg);
+		model.addAttribute("keyword", keyword);
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("display", "/customerService/C_inquire_View.jsp");
@@ -571,9 +598,21 @@ public class CustomerServiceController {
 
 		return new ModelAndView("redirect:/customerService/C_contactList.do");
 	}
+	
+	@RequestMapping(value = "C_contactList_SearchList", method = RequestMethod.GET)
+	public ModelAndView C_contactList_SearchList(@RequestParam(required = false, defaultValue = "1") int pg, @RequestParam String keyword, @RequestParam String searchOption, Model model) {
+		model.addAttribute("pg", pg);
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("searchOption", searchOption);
+		ModelAndView mav = new ModelAndView();
+
+		mav.addObject("display", "/customerService/C_contactList_SearchList.jsp");
+		mav.setViewName("/customerService/C_customerServiceForm");
+		return mav;
+	}
 
 	// 주요시설 연락처 검색
-	@RequestMapping(value = "C_contactList_Search", method = RequestMethod.POST)
+	@RequestMapping(value = "C_contactList_Search", method = RequestMethod.GET)
 	public ModelAndView C_contactList_Search(@RequestParam(required = false) Map<String, String> map) {
 		int endNum = Integer.parseInt(map.get("pg")) * 10;
 		int startNum = endNum - 9;
@@ -591,7 +630,7 @@ public class CustomerServiceController {
 		customerServicePaging.setPageBlock(10);
 		customerServicePaging.setPageSize(10);
 		customerServicePaging.setTotalA(totalA);
-		customerServicePaging.C_contactList_searchPagingHTML();
+		customerServicePaging.C_contactList_searchPagingHTML(map.get("keyword"), map.get("searchOption"));
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);

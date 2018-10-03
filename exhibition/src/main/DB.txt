@@ -65,7 +65,7 @@ CREATE TABLE customerImageboard(
      endDate2 date,   --날짜2
      eventLink varchar2(200)    --링크 
  );
- 
+
   create sequence seq_customerImageboard  nocache nocycle;
   
   CREATE TABLE eventboard(

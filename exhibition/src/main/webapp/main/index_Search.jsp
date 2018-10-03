@@ -129,7 +129,7 @@
 		
 		<div style="width: 100%;" align="center" id="index_hotel_list_div">
 		<div style="width: 400px; display: inline-block; text-align: left; font-size: 25px"><span>숙박</span></div>
-		<div style="width: 460px; display: inline-block; text-align: right;"><a id="index_hotel_list_SearchPlusBtn" class="plus">더보기</a></div>
+		<div style="width: 460px; display: inline-block; text-align: right;"><span id="index_hotel_list_SearchPlusBtn" class="plus">더보기</span></div>
 			<table style="width: 880px; height: 40px;" align="center" border="1"
 				bordercolor="#ec008c" cellpadding="2" frame="hsides" rules="rows"
 				id="index_hotel_list_SearchList" class="ui striped table">
