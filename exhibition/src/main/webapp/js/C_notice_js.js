@@ -37,7 +37,6 @@ $(document).ready(function(){
 				url : '/exhibition/customerService/C_notice_checkModify.do',
 				data : {'seq' : $('#seq').val() , 'subject' : $('#subject').val() , 'content' : $('#content').val() },
 				success : function(data){
-					//alert(JSON.stringify(data));
 					location.href="/exhibition/customerService/C_notice.do";
 				}
 			});
@@ -55,7 +54,11 @@ $(document).ready(function(){
 	});
 	
 	$('#C_notice_ListBtn').on('click', function(){
-		location.href="/exhibition/customerService/C_notice.do?pg="+$('#pg').val();
+		if($('#keyword').val()==''){
+			location.href="/exhibition/customerService/C_notice_SearchList.do?pg="+$('#pg').val();
+		}else{
+			location.href='/exhibition/customerService/C_notice_SearchList.do?pg='+$('#pg').val()+'&subject='+"subject"+'&keyword='+$('#keyword').val();
+		}
 	});
 	
 	// 공지사항 리스트 불러오기
@@ -102,14 +105,9 @@ $(document).ready(function(){
 	// 공지사항 리스트 제목 클릭시 내용 보여줌
 	$('#C_notice_List').on('click','#subjectA',function(){
 		var seq = $(this).prev().text();
-		location.href='/exhibition/customerService/C_notice_View.do?seq='+seq+'&pg='+$('#pg').val();
+		location.href='/exhibition/customerService/C_notice_View.do?seq='+seq+'&pg='+$('#pg').val()+'&keyword='+$('#keyword').val();
 	});
 	
-	$('#C_notice_List').on('click','#subjectB',function(){
-		var seq = $(this).prev().text();
-		var cnt = 1;
-		location.href='/exhibition/customerService/C_notice_View.do?seq='+seq+'&pg='+$('#pg').val();
-	});
 });
 $('.ui.compact.selection.dropdown').dropdown();
 	

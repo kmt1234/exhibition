@@ -178,13 +178,14 @@ public class CustomerServiceController {
 
 	// 공지사항 페이지에서 제목을 클리하면 내용을 보여준다.
 	@RequestMapping(value = "C_notice_View", method = RequestMethod.GET)
-	public ModelAndView C_notice_View(@RequestParam String seq, @RequestParam String pg, Model model) {
+	public ModelAndView C_notice_View(@RequestParam String seq, @RequestParam String pg, @RequestParam(required = false, defaultValue = "") String keyword, Model model) {
 		CustomerServiceDTO customerServiceDTO = customerServiceDAO.getNoticeInfo(seq);
 
 		model.addAttribute("customerServiceDTO", customerServiceDTO);
 
 		ModelAndView mav = new ModelAndView();
 		model.addAttribute("pg", pg);
+		model.addAttribute("keyword", keyword);
 		mav.addObject("display", "/customerService/C_notice_View.jsp");
 		mav.setViewName("/customerService/C_customerServiceForm");
 

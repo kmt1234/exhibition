@@ -133,8 +133,17 @@ $(document).ready(function(){
 	
 	// 고객의 소리 문의 받은 글 제목 클릭시 내용 보여주기
 	$('#C_inquire_List').on('click','#subjectA',function(){
+		alert($('#keyword').val())
 		var seq = $(this).prev().prev().text();
 		location.href='/exhibition/customerService/C_inquire_View.do?seq='+seq+'&pg='+$('#pg').val()+'&keyword='+$('#keyword').val();
+	});
+	
+	$('#C_inquire_ListBtn').on('click', function(){
+		if($('#keyword').val()==''){
+			location.href="/exhibition/customerService/C_inquire_List.do?pg="+$('#pg').val();
+		} else {
+			location.href="/exhibition/customerService/C_inquire_SearchList.do?pg="+$('#pg').val()+'&searchOption='+$('#searchOption').val()+"&keyword="+$('#keyword').val();
+		}
 	});
 	
 
