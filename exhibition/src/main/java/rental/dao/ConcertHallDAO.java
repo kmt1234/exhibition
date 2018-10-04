@@ -13,4 +13,8 @@ public interface ConcertHallDAO {
 
 	void reservationConcertHall(ConcertHallDTO concertHallDTO);
 
+	int getRateConcertHall(String hallName);
+
+	void updateConcertHallRate(Map<String, String> map);
+
 }

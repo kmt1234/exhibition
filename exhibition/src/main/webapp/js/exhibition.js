@@ -207,8 +207,6 @@ $(document).ready(function(){
 			$('#modifyRateExhibitionForm').submit();
 		}
 		
-		
-		
 	});
 	
 });

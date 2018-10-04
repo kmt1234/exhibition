@@ -43,4 +43,13 @@ $(document).ready(function(){
 	});
 	
 	
+	$('#modifyHallRateBtn').click(function(){
+		if($('#hallRate').val()=='') {
+			alert('평당 가격을 입력하세요');
+			return;
+		} else {
+			$('#modifyRateConcertHallForm').submit();
+		}
+	});
+	
 });

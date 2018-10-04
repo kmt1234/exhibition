@@ -198,7 +198,7 @@ $(document).ready(function(){
 									html : '<img id="ex_img" width="20px" height="20px" src="../img/Ex.png">'+item.imageName+'</img>',
 									style : 'display : block'
 								})).append($('<span/>',{
-									text : item.startDate.substring(0,10) + '-' + item.endDate.substring(0,10),
+									text : item.startDate.substring(0,10) + ' ~ ' + item.endDate.substring(0,10),
 									style : 'display : block'
 								})).append($('<span/>',{
 									text : item.eventPlace,
@@ -224,7 +224,7 @@ $(document).ready(function(){
 									html : '<img id="ex_img" width="20px" height="20px" src="../img/Ex.png">'+item.imageName+'</img>',
 									style : 'display : block'
 								})).append($('<span/>',{
-									text : item.startDate.substring(0,10) + '-' + item.endDate.substring(0,10),
+									text : item.startDate.substring(0,10) + ' ~ ' + item.endDate.substring(0,10),
 									style : 'display : block'
 								})).append($('<span/>',{
 									text : item.eventPlace,
@@ -242,7 +242,7 @@ $(document).ready(function(){
 									style : 'display : block'
 								})).append($('<span/>',{
 									class : 't-tit ellipsis',
-									text : item.startDate.substring(0,10) + '-' + item.endDate.substring(0,10),
+									text : item.startDate.substring(0,10) + ' ~ ' + item.endDate.substring(0,10),
 									style : 'display : block'
 								})).append($('<span/>',{
 									class : 't-tit ellipsis',
@@ -269,7 +269,7 @@ $(document).ready(function(){
 									style : 'display : block'
 								})).append($('<span/>',{
 									class : 't-tit ellipsis',
-									text : item.startDate.substring(0,10) + '-' + item.endDate.substring(0,10),
+									text : item.startDate.substring(0,10) + ' ~ ' + item.endDate.substring(0,10),
 									style : 'display : block'
 								})).append($('<span/>',{
 									class : 't-tit ellipsis',
@@ -310,7 +310,7 @@ $(document).ready(function(){
 							html : '<img id="ex_img" width="20px" height="20px" src="../img/Ex.png">'+item.imageName+'</img>',
 							style : 'display : block'
 						})).append($('<span/>',{
-							text : item.startDate.substring(0,10) + '-' + item.endDate.substring(0,10),
+							text : item.startDate.substring(0,10) + ' ~ ' + item.endDate.substring(0,10),
 							style : 'display : block'
 						})).append($('<span/>',{
 							text : item.eventPlace,
@@ -335,7 +335,7 @@ $(document).ready(function(){
 							html : '<img id="ex_img" width="20px" height="20px" src="../img/Ex.png">'+item.imageName+'</img>',
 							style : 'display : block'
 						})).append($('<span/>',{
-							text : item.startDate.substring(0,10) + '-' + item.endDate.substring(0,10),
+							text : item.startDate.substring(0,10) + ' ~ ' + item.endDate.substring(0,10),
 							style : 'display : block'
 						})).append($('<span/>',{
 							text : item.eventPlace,
@@ -354,7 +354,7 @@ $(document).ready(function(){
 							html : '<img  id="co_img" width="20px" height="20px" src="../img/Ev.png">'+item.imageName+'</img>',
 							style : 'display : block'
 						})).append($('<span/>',{
-							text : item.startDate.substring(0,10) + '-' + item.endDate.substring(0,10),
+							text : item.startDate.substring(0,10) + ' ~ ' + item.endDate.substring(0,10),
 							style : 'display : block'
 						})).append($('<span/>',{
 							text : item.eventPlace,
@@ -378,7 +378,7 @@ $(document).ready(function(){
 							html : '<img style="padding-top:2px;" id="co_img" width="20px" height="20px" src="../img/Ev.png">'+item.imageName+'</img>',
 							style : 'display : block'
 						})).append($('<span/>',{
-							text : item.startDate.substring(0,10) + '-' + item.endDate.substring(0,10),
+							text : item.startDate.substring(0,10) + ' ~ ' + item.endDate.substring(0,10),
 							style : 'display : block'
 						})).append($('<span/>',{
 							text : item.eventPlace,

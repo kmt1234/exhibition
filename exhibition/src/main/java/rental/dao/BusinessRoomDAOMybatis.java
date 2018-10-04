@@ -31,6 +31,15 @@ public class BusinessRoomDAOMybatis implements BusinessRoomDAO {
 		}
 		
 	}
+
+	public int getRateBusinessRoom(String businessRoom) {
+		return sqlSession.selectOne("businessRoomSQL.getRateBusinessRoom", businessRoom);
+	}
+
+	public void updateBusinessRoomRate(Map<String, String> map) {
+		sqlSession.update("businessRoomSQL.updateBusinessRoomRate", map);
+		
+	}
 	
 	
 }

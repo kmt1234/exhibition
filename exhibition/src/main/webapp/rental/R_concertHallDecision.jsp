@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href='../calendar2/fullcalendar.css' rel='stylesheet' />
@@ -25,7 +25,7 @@
 		<br><br>
 		<div style="width: 100%; margin-top: 30px;">
 			<h4 style="text-align: left; padding-left: 35px ">홀 총 면적 : 100㎡</h4>
-			<h4 style="text-align: left; padding-left: 35px ">홀 단위 면적 당 금액 : 1,000원</h4>
+			<h4 style="text-align: left; padding-left: 35px ">홀 단위 면적 당 금액 : <fmt:formatNumber value="${rate}" pattern="#,###"/>원</h4>
 			<h4 style="text-align: left; padding-left: 35px ">1일 기준 이용 시간 : 08:00 ~ 20:00</h4>
 			<h4 style="text-align: left; padding-left: 35px ">
 				예약 시작일 :
@@ -132,7 +132,7 @@
 			
 			var stDate = new Date($('#startDate').val());
 		    var endDate = new Date($('#endDate').val());
-		    var totalRent = ${price} * diff_days;
+		    var totalRent = ${rate} * diff_days * ${width};
 		    var hallName = '${hallName}';
 		    
 		    $('#rentDiv').text(hallName + '의 총 임대료 : ' + totalRent.toLocaleString() + '원');
@@ -185,6 +185,7 @@
 							});
 						} else if(data==='exist') {
 							$('#writeDiv').text('예약불가능');
+							$('#rentDiv').text('');
 						}  
 						
 					}
