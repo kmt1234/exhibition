@@ -264,7 +264,7 @@ public class IndexController {
 		return mav;
 	}
 	
-	//
+	// 메인 검색후  주요시설 연락처 더보기 버튼 클릭시 리스트 불러옴
 	@RequestMapping(value="index_contactList_SearchPlus", method=RequestMethod.GET)
 	public ModelAndView index_contactList_SearchPlus(@RequestParam(required = false) Map<String, String> map) {
 		int endNum = Integer.parseInt(map.get("pg")) * 10;
@@ -321,6 +321,7 @@ public class IndexController {
 		return mav; 
 	}
 	
+	// 메인 검색후 박람회 더보기 버튼 클릭시 리스트 폼
 	@RequestMapping(value="index_eventboard_Plus", method=RequestMethod.GET)
 	public ModelAndView index_eventboard_Plus(@RequestParam(required = false, defaultValue = "1") int pg, @RequestParam String index_keyword, Model model) {
 		model.addAttribute("pg", pg);
@@ -332,7 +333,7 @@ public class IndexController {
 		return mav;
 	}
 	
-	// 메인 검색후  공지사항 더보기 버튼 클릭시 리스트 불러옴
+	// 메인 검색후  박람회 더보기 버튼 클릭시 리스트 불러옴
 	@RequestMapping(value="index_eventboard_SearchPlus", method=RequestMethod.GET)
 	public ModelAndView index_eventboard_SearchPlus(@RequestParam(required = false) Map<String, String> map) {
 		int endNum = Integer.parseInt(map.get("pg")) * 10;
@@ -468,7 +469,7 @@ public class IndexController {
 			mav.setViewName("/main/index_SearchForm");
 			return mav;
 		}
-		
+		// 메인 검색후  숙박 더보기 버튼 클릭시 리스트 불러옴
 		@RequestMapping(value="index_hotel_list_SearchPlus", method=RequestMethod.GET)
 		public ModelAndView index_hotel_list_SearchPlus(@RequestParam(required = false) Map<String, String> map) {
 			int endNum = Integer.parseInt(map.get("pg")) * 10;

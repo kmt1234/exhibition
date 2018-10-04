@@ -48,6 +48,25 @@
 	font-weight: bold;
 	cursor: pointer;
 }
+#eventboard_name:hover{
+	color: green;
+	text-decoration: underline;
+	font-weight: bold;
+	cursor: pointer;
+}
+#eventboard_image:hover{
+	cursor: pointer;
+}
+#eventboard_play_name:hover{
+	color: green;
+	text-decoration: underline;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+#eventboard_play_image:hover{
+	cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -64,16 +83,18 @@
 		</h2>
 		
 		<div style="width: 100%;" align="center" id="index_notice_div">
-			<div style="width: 400px; display: inline-block; text-align: left; font-size: 25px"><span>공지 사항</span></div>
-			<div style="width: 460px; display: inline-block; text-align: right;"><span id="index_notice_SearchPlusBtn" class="plus">더보기</span></div>
+		<div style="width: 121px; display: inline-block; text-align: left; font-size: 25px"><span>공지 사항</span></div>
+		<div style="width: 279px; display: inline-block; text-align: left; font-size: 105x" id="index_notice_total"></div>
+		<div style="width: 460px; display: inline-block; text-align: right;"><span id="index_notice_SearchPlusBtn" class="plus">더보기</span></div>
 				<div style="width: 880px; height: auto; align:center;  "
 					id="index_notice_SearchList" >
 				</div>
 		</div>
 		<div style="width:885px; margin-left:20px;  border-top:1px ridge rgb(155,155,155,.6); margin-top: 20px; "></div>
 		
-		<div style="width: 100%; margin-top: 50px;" align="center" id="index_QnA_div">
-		<div style="width: 400px; display: inline-block; text-align: left; font-size: 25px"><span>자주 묻는 질문</span></div>
+		<div style="width: 100%;" align="center" id="index_QnA_div">
+		<div style="width: 175px; display: inline-block; text-align: left; font-size: 25px"><span>자주 묻는 질문</span></div>
+		<div style="width: 225px; display: inline-block; text-align: left; font-size: 105x" id="index_QnA_total"></div>
 		<div style="width: 460px; display: inline-block; text-align: right;"><span id="index_QnA_SearchPlusBtn" class="plus">더보기</span></div>
 			<div style="width: 880px; height: auto; align:center; border: 1px solid; border-color=#ec008c; "
 				
@@ -85,7 +106,8 @@
 		
 		
 		<div style="width: 100%;" align="center" id="index_contactList_div">
-		<div style="width: 400px; display: inline-block; text-align: left; font-size: 25px"><span>주요 시설 연락처</span></div>
+		<div style="width: 198px; display: inline-block; text-align: left; font-size: 25px"><span>주요 시설 연락처</span></div>
+		<div style="width: 202px; display: inline-block; text-align: left; font-size: 105x" id="index_contactList_total"></div>
 		<div style="width: 460px; display: inline-block; text-align: right;"><span id="index_contactList_SearchPlusBtn" class="plus">더보기</span></div>
 			<table style="width: 880px; height: 40px;" align="center" border="1"
 				bordercolor="#ec008c" cellpadding="2" frame="hsides" rules="rows"
@@ -96,7 +118,8 @@
 		</div>
 		
 		<div style="width: 100%;" align="center" id="index_eventboard_div">
-		<div style="width: 400px; display: inline-block; text-align: left; font-size: 25px"><span>박람회</span></div>
+		<div style="width: 90px; display: inline-block; text-align: left; font-size: 25px"><span>박람회</span></div>
+		<div style="width: 310px; display: inline-block; text-align: left; font-size: 105x" id="index_eventboard_total"></div>
 		<div style="width: 460px; display: inline-block; text-align: right;"><span id="index_eventboard_SearchPlusBtn" class="plus">더보기</span></div>
 			<table style="width: 880px; height: 40px;" align="center" border="1"
 				bordercolor="#ec008c" cellpadding="2" frame="hsides" rules="rows"
@@ -107,7 +130,8 @@
 		</div>
 		
 		<div style="width: 100%;" align="center" id="index_eventboard_play_div">
-		<div style="width: 400px; display: inline-block; text-align: left; font-size: 25px"><span>연극</span></div>
+		<div style="width: 67px; display: inline-block; text-align: left; font-size: 25px"><span>연극</span></div>
+		<div style="width: 333px; display: inline-block; text-align: left; font-size: 105x" id="index_eventboard_play_total"></div>
 		<div style="width: 460px; display: inline-block; text-align: right;"><span id="index_eventboard_play_SearchPlusBtn" class="plus">더보기</span></div>
 			<table style="width: 880px; height: 40px;" align="center" border="1"
 				bordercolor="#ec008c" cellpadding="2" frame="hsides" rules="rows"
@@ -118,7 +142,8 @@
 		</div>
 		
 		<div style="width: 100%;" align="center" id="index_hotel_list_div">
-		<div style="width: 400px; display: inline-block; text-align: left; font-size: 25px"><span>숙박</span></div>
+		<div style="width: 67px; display: inline-block; text-align: left; font-size: 25px"><span>숙박</span></div>
+		<div style="width: 333px; display: inline-block; text-align: left; font-size: 105x" id="index_hotel_list_total"></div>
 		<div style="width: 460px; display: inline-block; text-align: right;"><span id="index_hotel_list_SearchPlusBtn" class="plus">더보기</span></div>
 			<table style="width: 880px; height: 40px;" align="center" border="1"
 				bordercolor="#ec008c" cellpadding="2" frame="hsides" rules="rows"

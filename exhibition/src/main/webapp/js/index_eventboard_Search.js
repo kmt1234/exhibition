@@ -9,6 +9,7 @@ $(document).ready(function(event, str){
 		url : '/exhibition/main/index_eventboard_SearchPlus.do?pg='+encodeURI(pg)+'&index_keyword='+encodeURI(index_keyword),
 		dataType : 'json',
 		success : function(data){
+			alert(JSON.stringify(data))
 			$.each(data.list, function(index, item){
 				$('<tr/>').append($('<input/>',{
 					type : 'hidden',
@@ -59,5 +60,14 @@ $(document).ready(function(event, str){
 			});
 			$('#index_eventboard_PlusPagingDiv').html(data.mainPaging.pagingHTML);
 		}
+	});
+	$('#index_eventboard_SearchList').on('click','#eventboard_name',function(){
+		var seq = $(this).prev().prev().text();
+		location.href='/exhibition//performance/exhibitionBook.do?seq='+seq;
+	});
+
+	$('#index_eventboard_SearchList').on('click','#eventboard_image',function(){
+		var seq = $(this).prev().text();
+		location.href='/exhibition//performance/exhibitionBook.do?seq='+seq;
 	});
 });
