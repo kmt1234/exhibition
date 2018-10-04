@@ -54,7 +54,7 @@ $(document).ready(function(){
 						 $.each(data.list,function(index, item){
 							 $('<tr/>').append($('<td/>',{
 							 		name : 'M_Name',
-							 		text : item.m_Name
+							 		html : item.m_Name
 							 	})).append($('<td/>',{
 							 		name : 'M_Id',
 							 		class : 'M_Id',

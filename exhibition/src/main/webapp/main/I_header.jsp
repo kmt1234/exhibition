@@ -60,9 +60,9 @@
 			</div>
 			<div style="width: 23%; text-align: right; padding-top: 30px;  display: inline-block;">
 			<!--회원가입 시, 축하메세지 출력(1분 동안)-->
-				<c:if test="${registerMessage != null}">
+				<%-- <c:if test="${registerMessage != null}">
 					<div>${registerMessage}</div>
-				</c:if>
+				</c:if> --%>
 				
 				<c:if test="${homepageMember == null}">
 					<div>&nbsp;</div>
@@ -169,7 +169,9 @@
 				</div>
 			</div>
 		</div>
+	
 	</header>
+	
 	<%-- <input type="hidden" value="${code}" id="codeName"> --%>
 <!--개인회원 회원가입 양식 페이지 인클루드-->
 <jsp:include page="../member/writeForm.jsp"/>

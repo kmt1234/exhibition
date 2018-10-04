@@ -15,6 +15,7 @@ import java.util.Map;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
+import javax.swing.plaf.synth.SynthSeparatorUI;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
@@ -62,7 +63,7 @@ public class CustomerServiceController {
 	private JavaMailSenderImpl emailSender;
 	@Autowired
 	private ImageboardPaging imageboardPaging;
-	private String filePath = "C:\\Users\\user\\git\\exhibition\\exhibition\\src\\main\\webapp\\storage";
+	private String filePath = "C:\\Users\\user\\git\\exhibition\\exhibition\\src\\main\\webapp\\storage\\";
 	@Autowired
 	private CustomerServicePaging customerServicePaging;
 	@Autowired
@@ -830,21 +831,20 @@ public class CustomerServiceController {
 
 		customerServiceDAO.eventInfoWrite_play(eventboardDTO);
 		EventboardDTO second = customerServiceDAO.eventInfoWrite_play2(eventboardDTO);
-
+		
 		List<PlayBookDTO> list = new ArrayList<PlayBookDTO>();
 		// 예매DB
 		for (int i = 0; i <= diffDays; i++) {
 			playBookDTO.setNum(second.getSeq()); // 공연시퀀스번호
 			playBookDTO.setImageName(eventboardDTO.getImageName()); // 공연명 등록
+			playBookDTO.setPlayDate(listDate.get(i));
 			playBookDTO.setPlayTicket(Integer.parseInt(eventboardDTO.getEventSeats())); // 일별 총 티켓 수 등록
 			playBookDTO.setRemainTicket(0); // 일별 잔여 티켓 수 등록
 			playBookDTO.setTicketPrice(Integer.parseInt(eventboardDTO.getEventPrice())); // 티켓 가격
 			playBookDTO.setBookTicket(0); // 예매된 티켓 수
 			playBookDTO.setBookMemberId(id + ""); // 예매자 아이디(세션값에서)
 			playBookDTO.setBookStatus('0'); // 예매 구분자 (0:예매X, 1:예매완료)
-
-			playBookDTO.setPlayDate(listDate.get(i));
-
+			
 			list.add(playBookDTO);
 			customerServiceDAO.eventInfoWrite_play_bookDB(playBookDTO); // 예매 DB에 연극 정보 넣는 메소드(예매DB)
 		}
@@ -854,12 +854,12 @@ public class CustomerServiceController {
 
 	// 이미지 슬라이드 가져오는 컨트롤러
 	@RequestMapping(value = "getImageboardSlide", method = RequestMethod.GET)
-	public ModelAndView getImageboardSlide(@RequestParam String code) {
+	public ModelAndView getImageboardSlide(@RequestParam String slideCode) {
 		ArrayList<ImageboardDTO> list = new ArrayList<ImageboardDTO>();
 		ModelAndView mav = new ModelAndView();
 		String[] str = { "mainPoster.jpg", "poster2.jpg", "poster4.jpg", "poster1.jpg", "poster3.jpg" };
 
-		if (code.equals("1")) {
+		if (slideCode.equals("5")) {
 			for (int i = 0; i < str.length; i++) {
 				ImageboardDTO imageboardDTO = new ImageboardDTO();
 				imageboardDTO.setImage1(str[i]);
@@ -870,7 +870,7 @@ public class CustomerServiceController {
 			mav.setViewName("jsonView");
 		}
 		/*
-		 * }else if(code.equals("null")) { List<ImageboardDTO> list1 =
+		 * }else if(slideCode.equals("null")) { List<ImageboardDTO> list1 =
 		 * customerServiceDAO.getImageboardSlide();
 		 * 
 		 * mav.addObject("list", list1); mav.setViewName("jsonView");
@@ -1754,8 +1754,8 @@ public class CustomerServiceController {
 	// 회원리스트 불러오기
 	@RequestMapping(value = "getMemberList", method = RequestMethod.POST)
 	public ModelAndView getMemberList(@RequestParam(required = false, defaultValue = "1") String pg) {
-		int endNum = Integer.parseInt(pg) * 3;
-		int startNum = endNum - 2;
+		int endNum = Integer.parseInt(pg) * 10;
+		int startNum = endNum - 9;
 
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("endNum", endNum);
@@ -1766,8 +1766,8 @@ public class CustomerServiceController {
 		int totalA = customerServiceDAO.getMemberListTotal();
 
 		customerServicePaging.setCurrentPage(Integer.parseInt(pg));
-		customerServicePaging.setPageBlock(3);
-		customerServicePaging.setPageSize(3);
+		customerServicePaging.setPageBlock(10);
+		customerServicePaging.setPageSize(10);
 		customerServicePaging.setTotalA(totalA);
 		customerServicePaging.member_pagingHTML();
 
@@ -1785,8 +1785,8 @@ public class CustomerServiceController {
 	@RequestMapping(value = "memberListSearch", method = RequestMethod.POST)
 	public ModelAndView memberListSearch(@RequestParam Map<String, String> map) {
 
-		int endNum = Integer.parseInt(map.get("pg")) * 3;
-		int startNum = endNum - 2;
+		int endNum = Integer.parseInt(map.get("pg")) * 10;
+		int startNum = endNum - 9;
 		map.put("endNum", endNum + "");
 		map.put("startNum", startNum + "");
 
@@ -1795,8 +1795,8 @@ public class CustomerServiceController {
 		int totalA = customerServiceDAO.getMemberListSearchTotal(map);
 
 		customerServicePaging.setCurrentPage(Integer.parseInt(map.get("pg")));
-		customerServicePaging.setPageBlock(3);
-		customerServicePaging.setPageSize(3);
+		customerServicePaging.setPageBlock(10);
+		customerServicePaging.setPageSize(10);
 		customerServicePaging.setTotalA(totalA);
 		customerServicePaging.memberSearch_pagingHTML();
 
@@ -1872,8 +1872,8 @@ public class CustomerServiceController {
 	// 사업자리스트 불러오기
 	@RequestMapping(value = "getCompanyList", method = RequestMethod.POST)
 	public ModelAndView getCompanyList(@RequestParam(required = false, defaultValue = "1") String pg) {
-		int endNum = Integer.parseInt(pg) * 3;
-		int startNum = endNum - 2;
+		int endNum = Integer.parseInt(pg) * 10;
+		int startNum = endNum - 9;
 
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("endNum", endNum);
@@ -1884,8 +1884,8 @@ public class CustomerServiceController {
 		int totalA = customerServiceDAO.getCompanyTotal();
 
 		customerServicePaging.setCurrentPage(Integer.parseInt(pg));
-		customerServicePaging.setPageBlock(3);
-		customerServicePaging.setPageSize(3);
+		customerServicePaging.setPageBlock(10);
+		customerServicePaging.setPageSize(10);
 		customerServicePaging.setTotalA(totalA);
 		customerServicePaging.company_pagingHTML();
 
@@ -1903,8 +1903,8 @@ public class CustomerServiceController {
 	@RequestMapping(value = "CompanySearch", method = RequestMethod.POST)
 	public ModelAndView CompanySearch(@RequestParam Map<String, String> map) {
 
-		int endNum = Integer.parseInt(map.get("pg")) * 3;
-		int startNum = endNum - 2;
+		int endNum = Integer.parseInt(map.get("pg")) * 10;
+		int startNum = endNum - 9;
 		map.put("endNum", endNum + "");
 		map.put("startNum", startNum + "");
 
@@ -1913,8 +1913,8 @@ public class CustomerServiceController {
 		int totalA = customerServiceDAO.getCompanyListSearchTotal(map);
 
 		customerServicePaging.setCurrentPage(Integer.parseInt(map.get("pg")));
-		customerServicePaging.setPageBlock(3);
-		customerServicePaging.setPageSize(3);
+		customerServicePaging.setPageBlock(10);
+		customerServicePaging.setPageSize(10);
 		customerServicePaging.setTotalA(totalA);
 		customerServicePaging.companySearch_pagingHTML();
 
