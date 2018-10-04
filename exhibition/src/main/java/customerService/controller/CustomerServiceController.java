@@ -15,6 +15,7 @@ import java.util.Map;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
+import javax.swing.plaf.synth.SynthSeparatorUI;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
@@ -62,7 +63,7 @@ public class CustomerServiceController {
 	private JavaMailSenderImpl emailSender;
 	@Autowired
 	private ImageboardPaging imageboardPaging;
-	private String filePath = "C:\\Users\\user\\git\\exhibition\\exhibition\\src\\main\\webapp\\storage";
+	private String filePath = "C:\\Users\\user\\git\\exhibition\\exhibition\\src\\main\\webapp\\storage\\";
 	@Autowired
 	private CustomerServicePaging customerServicePaging;
 	@Autowired
@@ -140,6 +141,18 @@ public class CustomerServiceController {
 		mav.setViewName("jsonView");
 		return mav;
 	}
+	
+		@RequestMapping(value = "C_notice_Search", method = RequestMethod.GET)
+	public ModelAndView C_notice_Search(@RequestParam(required = false, defaultValue = "1") int pg, @RequestParam String keyword, Model model) {
+		model.addAttribute("pg", pg);
+		model.addAttribute("keyword", keyword);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("display", "/customerService/C_notice_Search.jsp");
+		mav.setViewName("/customerService/C_customerServiceForm");
+		return mav;
+	}
+	
 
 	// 검색내용 찾아오기
 	@RequestMapping(value = "C_notice_Search", method = RequestMethod.POST)
@@ -160,7 +173,7 @@ public class CustomerServiceController {
 		customerServicePaging.setPageBlock(10);
 		customerServicePaging.setPageSize(10);
 		customerServicePaging.setTotalA(totalA);
-		customerServicePaging.C_notice_searchPagingHTML();
+		customerServicePaging.C_notice_searchPagingHTML(map.get("keyword"));
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
@@ -176,9 +189,9 @@ public class CustomerServiceController {
 		CustomerServiceDTO customerServiceDTO = customerServiceDAO.getNoticeInfo(seq);
 
 		model.addAttribute("customerServiceDTO", customerServiceDTO);
-		model.addAttribute("pg", pg);
-
+		
 		ModelAndView mav = new ModelAndView();
+		model.addAttribute("pg", pg);
 		mav.addObject("display", "/customerService/C_notice_View.jsp");
 		mav.setViewName("/customerService/C_customerServiceForm");
 
@@ -343,7 +356,23 @@ public class CustomerServiceController {
 		mav.setViewName("jsonView");
 		return mav;
 	}
-
+	
+	@RequestMapping(value = "C_inquire_SearchList", method = RequestMethod.GET)
+	public ModelAndView C_inquire_SearchList(@RequestParam(required = false, defaultValue = "1") String pg, @RequestParam String keyword, @RequestParam String searchOption, Model model) {
+		model.addAttribute("pg", Integer.parseInt(pg));
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("searchOption", searchOption);
+	
+		
+		
+		
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("display", "/customerService/C_inquire_SearchList.jsp");
+		mav.setViewName("/customerService/C_customerServiceForm");
+		return mav;
+	}
+	
 	// 고객의 소리 문의받은글 검색 & 페이징
 	@RequestMapping(value = "C_inquire_Search", method = RequestMethod.POST)
 	public ModelAndView C_inquire_Search(@RequestParam(required = false) Map<String, String> map) {
@@ -363,7 +392,7 @@ public class CustomerServiceController {
 		customerServicePaging.setPageBlock(10);
 		customerServicePaging.setPageSize(10);
 		customerServicePaging.setTotalA(totalA);
-		customerServicePaging.C_inquire_searchPagingHTML();
+		customerServicePaging.C_inquire_searchPagingHTML(map.get("keyword"), map.get("searchOption"));
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
@@ -576,9 +605,21 @@ public class CustomerServiceController {
 
 		return new ModelAndView("redirect:/customerService/C_contactList.do");
 	}
+	
+	@RequestMapping(value = "C_contactList_SearchList", method = RequestMethod.GET)
+	public ModelAndView C_contactList_SearchList(@RequestParam(required = false, defaultValue = "1") int pg, @RequestParam String keyword, @RequestParam String searchOption, Model model) {
+		model.addAttribute("pg", pg);
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("searchOption", searchOption);
+		ModelAndView mav = new ModelAndView();
 
+		mav.addObject("display", "/customerService/C_contactList_SearchList.jsp");
+		mav.setViewName("/customerService/C_customerServiceForm");
+		return mav;
+	}
+	
 	// 주요시설 연락처 검색
-	@RequestMapping(value = "C_contactList_Search", method = RequestMethod.POST)
+	@RequestMapping(value = "C_contactList_Search", method = RequestMethod.GET)
 	public ModelAndView C_contactList_Search(@RequestParam(required = false) Map<String, String> map) {
 		int endNum = Integer.parseInt(map.get("pg")) * 10;
 		int startNum = endNum - 9;
@@ -596,7 +637,7 @@ public class CustomerServiceController {
 		customerServicePaging.setPageBlock(10);
 		customerServicePaging.setPageSize(10);
 		customerServicePaging.setTotalA(totalA);
-		customerServicePaging.C_contactList_searchPagingHTML();
+		customerServicePaging.C_contactList_searchPagingHTML(map.get("keyword"), map.get("searchOption"));
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
@@ -605,7 +646,6 @@ public class CustomerServiceController {
 		mav.setViewName("jsonView");
 		return mav;
 	}
-
 	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 	// 이미지 boardWriteForm
@@ -830,21 +870,20 @@ public class CustomerServiceController {
 
 		customerServiceDAO.eventInfoWrite_play(eventboardDTO);
 		EventboardDTO second = customerServiceDAO.eventInfoWrite_play2(eventboardDTO);
-
+		
 		List<PlayBookDTO> list = new ArrayList<PlayBookDTO>();
 		// 예매DB
 		for (int i = 0; i <= diffDays; i++) {
 			playBookDTO.setNum(second.getSeq()); // 공연시퀀스번호
 			playBookDTO.setImageName(eventboardDTO.getImageName()); // 공연명 등록
+			playBookDTO.setPlayDate(listDate.get(i));
 			playBookDTO.setPlayTicket(Integer.parseInt(eventboardDTO.getEventSeats())); // 일별 총 티켓 수 등록
 			playBookDTO.setRemainTicket(0); // 일별 잔여 티켓 수 등록
 			playBookDTO.setTicketPrice(Integer.parseInt(eventboardDTO.getEventPrice())); // 티켓 가격
 			playBookDTO.setBookTicket(0); // 예매된 티켓 수
 			playBookDTO.setBookMemberId(id + ""); // 예매자 아이디(세션값에서)
 			playBookDTO.setBookStatus('0'); // 예매 구분자 (0:예매X, 1:예매완료)
-
-			playBookDTO.setPlayDate(listDate.get(i));
-
+			
 			list.add(playBookDTO);
 			customerServiceDAO.eventInfoWrite_play_bookDB(playBookDTO); // 예매 DB에 연극 정보 넣는 메소드(예매DB)
 		}
@@ -949,11 +988,15 @@ public class CustomerServiceController {
 	public ModelAndView C_eventDetail(@RequestParam String seq) {
 
 		// DB
-		EventboardDTO eventboardDTO = customerServiceDAO.getEventboard(seq);
-
+		EventboardDTO eventboardDTO = customerServiceDAO.getEventboard(seq);//정보가져오기
+		String startDate = eventboardDTO.getStartDate();
+		String endDate = eventboardDTO.getEndDate();
+		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("eventboardDTO", eventboardDTO);
 		mav.addObject("postSelect", "1");
+		mav.addObject("startDate", startDate);
+		mav.addObject("endDate", endDate);
 		mav.addObject("modify", "1");
 		mav.addObject("display", "/customerService/C_eventDetail.jsp");
 		mav.setViewName("/customerService/C_allboardModify");
@@ -1019,9 +1062,14 @@ public class CustomerServiceController {
 
 		// DB
 		EventboardDTO eventboardDTO = customerServiceDAO.getPlayboard(seq);
+		String startDate = eventboardDTO.getStartDate();
+		String endDate = eventboardDTO.getEndDate();		
+		
 		// 날짜,시간
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("eventboardDTO", eventboardDTO);
+		mav.addObject("startDate", startDate);
+		mav.addObject("endDate", endDate);
 		mav.addObject("postSelect", "2");
 		mav.addObject("display", "/customerService/C_playDetail.jsp");
 		mav.setViewName("/customerService/C_allboardModify");
@@ -1164,6 +1212,7 @@ public class CustomerServiceController {
 	// 박람회 수정완료 클릭시 DB내용 수정
 	@RequestMapping(value = "C_eventboardMod", method = RequestMethod.POST)
 	public ModelAndView C_eventboardMod(@ModelAttribute EventboardDTO eventboardDTO, @RequestParam MultipartFile img) {
+		customerServiceDAO.C_exhibitionboardBookDel(eventboardDTO);//수정하기 위해 예매 날려버리기
 		if (!img.isEmpty()) {
 			File fileDelete = new File(filePath + eventboardDTO.getImage1());
 			if (fileDelete.exists())
@@ -1188,6 +1237,7 @@ public class CustomerServiceController {
 	@RequestMapping(value = "C_playboardMod", method = RequestMethod.POST)
 	public ModelAndView C_playboardMod(@ModelAttribute EventboardDTO eventboardDTO, @RequestParam MultipartFile img,
 			HttpSession session) {
+		customerServiceDAO.C_playboardBookDel(eventboardDTO);//수정하기 위해 예매 날려버리기
 		if (!img.isEmpty()) {
 			File fileDelete = new File(filePath + eventboardDTO.getImage1());
 			if (fileDelete.exists())
@@ -1940,7 +1990,7 @@ public class CustomerServiceController {
 
 	// 전시회,연극 등록 층 중복 체크*****
 	@RequestMapping(value = "checkReservation", method = RequestMethod.POST)
-	public @ResponseBody String checkReservation(@RequestParam String postSelect, @RequestParam String imageName,
+	public @ResponseBody String checkReservation(@RequestParam String seq, @RequestParam String postSelect, @RequestParam String imageName,
 			@RequestParam String startDate, @RequestParam String endDate, @RequestParam String eventPlace) {
 
 		Map<String, String> map = new HashMap<String, String>();
@@ -1956,9 +2006,12 @@ public class CustomerServiceController {
 		List<EventboardDTO> list = new ArrayList<EventboardDTO>();
 
 		// DB
+		// DB
 		if (postSelect.equals("1")) {
+			customerServiceDAO.eventboardModDelete(seq);//날짜 초기화
 			list = customerServiceDAO.checkReservation_exhibition(map);
 		} else if (postSelect.equals("2")) {
+			customerServiceDAO.eventboard_playModDelete(seq);//날짜 초기화
 			list = customerServiceDAO.checkReservation_performance(map);
 		}
 

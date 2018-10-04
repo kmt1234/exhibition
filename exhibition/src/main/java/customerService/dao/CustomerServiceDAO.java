@@ -235,8 +235,9 @@ public interface CustomerServiceDAO {
 	
 	public List<EventboardDTO> checkReservation_exhibition(Map<String, String> map);	//전시회 예약 중복 체크
 	public List<EventboardDTO> checkReservation_performance(Map<String, String> map);	//연극 예약 중복 체크
-	
-	
+	public void eventboardModDelete(String seq);//박람회 수정하기위해 일단 날짜 초기화	
+	public void eventboard_playModDelete(String seq);//공연 수정하기위해 일단 날짜 초기화	
+
 	
 	
 	

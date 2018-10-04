@@ -81,6 +81,11 @@ public class CompanyDAOMybatis implements CompanyDAO {
 	public void deleteCoBooth(Map<String, String> map) {
 		sqlSession.delete("companySQL.deleteCoBooth",map);
 	}
+	
+	//법인번호 중복체크
+	public CompanyDTO checkId2(String sNum2) {
+		return sqlSession.selectOne("companySQL.checkId2", sNum2);
+	}
 
 
 }

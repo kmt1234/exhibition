@@ -36,14 +36,14 @@
 	</div>
 <br><br>
 	<div style="width: 880px; display: inline-block; text-align: left;">
-		<div style="width: 80px; display: inline-block;">
-			<p id="P_allLsintBtn_Prev">◀ 3개월 전	</p> 
+		<div style="width: 100px; display: inline-block;">
+			<p id="P_allLsintBtn_Prev">◀ 지난 리스트	</p> 
 		</div>
-			<div style="width: 80px; display: inline-block; ">
-			<p id="P_allLsintBtn_Now">행사 리스트</p> 
+			<div style="width: 100px; display: inline-block; ">
+			<p id="P_allLsintBtn_Now">이달 리스트</p> 
 		</div>
-			<div style="width: 80px; display: inline-block; ">
-			<p id="P_allLsintBtn_After">3개월 후▶</a> 
+			<div style="width: 100px; display: inline-block; ">
+			<p id="P_allLsintBtn_After">예정 리스트▶</a> 
 		</div>
 	</div><br>
 	<!-- 전체일정 리스트 -->
