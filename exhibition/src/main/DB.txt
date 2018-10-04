@@ -1,4 +1,3 @@
-
 --회원가입
 create table memberTable(	
 M_Name varchar2(30) not null,	    --이름

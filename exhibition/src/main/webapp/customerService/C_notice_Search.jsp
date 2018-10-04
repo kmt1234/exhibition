@@ -58,7 +58,7 @@
 		<div style="width: 100%;" align="center">
 			<table style="width: 880px; height: 40px;" align="center" border="1"
 				bordercolor="#ec008c" cellpadding="2" frame="hsides" rules="rows"
-				id="C_notice_List" class="ui striped table">
+				id="C_notice_SearchList" class="ui striped table">
 				<tr>
 					<th
 						style="width: 100px; height: 7%; padding-top: 10px; text-align: center;">번호</th>
@@ -69,7 +69,7 @@
 				</tr>
 			</table>
 			<br>
-			<div id="C_notice_PagingDiv" class="ui center pagination menu"></div>
+			<div id="C_notice_SearchPagingDiv" class="ui center pagination menu"></div>
 			<br><br> 
 			<input type="hidden" id="subject" value="subject">
 			<div class="ui input" style="width: 30%;">
@@ -84,6 +84,6 @@
 		<div style="height: 40px;"></div>
 	</div>
 <script src="../semantic/semantic.min.js"></script>
-<script src="../js/C_notice_js.js?ver=1"></script>
+<script src="../js/C_notice_Search_js.js?ver=1"></script>
 </body>
 </html>

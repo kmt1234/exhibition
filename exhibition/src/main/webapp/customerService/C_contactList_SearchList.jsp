@@ -38,7 +38,7 @@
 	</h2>
 <div style="width: 880px; margin-left: 20px;" align="center">
 	<table style="width: 100%; height: 40px; " align="center" border="1" bordercolor="#ec008c" cellpadding="4" frame="hsides" rules="rows"
-		id="C_contactList_List" class="ui striped table" >
+		id="C_contactList_SearchList" class="ui striped table" >
 			<tr>
 				 <c:if test="${code=='3' }"> 
 				<th style="width: 2%; height: 7%; padding-top: 10px; text-align: center;">
@@ -53,7 +53,7 @@
 			</tr>
 	</table>
 	<br>
-	<div id="C_contactList_PagingDiv" class="ui center pagination menu"></div>
+	<div id="C_contactList_SearchPagingDiv" class="ui center pagination menu"></div>
 	<input type="hidden" name="pg" id="pg" value="${pg}">
 	<br><br>
 
@@ -65,7 +65,7 @@
 	<div class="ui input" style="width: 40%;">
 		<input type="text" name="keyword" id="keyword" value="${keyword }">
 	</div>
-		<input type="button" class="middle ui button"  value="검색" id="C_contactList_SearchBtn">
+		<input type="button" class="middle ui button"  value="검색" id="C_contactList_SearchBtn2">
 		<c:if test="${code=='3' }"> 
 			<input type="button" class="middle ui button" id="C_contactList_WriteBtn" value="관리자 작성" >
 			<input type="button" class="middle ui button" id="C_contactList_DeleteBtn" value="삭제" >
@@ -77,7 +77,7 @@
 </div>
 <input type="hidden" id="hiddenCode" value="${code}">
 <script src="../semantic/semantic.min.js"></script>
-<script src="../js/C_contactList_js.js?ver=1"></script>
+<script src="../js/C_contactList_Search_js.js?ver=1"></script>
 
 </body>
 </html>
