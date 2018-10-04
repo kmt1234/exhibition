@@ -304,6 +304,7 @@ $(document).ready(function(){
 		var totPrice = $('#hiddenTicketPrice').val() * $('#selectPlayTicket :selected').val();	
 		$('#totalPrice').text(totPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 	});
+	$(window).resize(function (){});
 		
 });
 
