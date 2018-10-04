@@ -15,7 +15,7 @@ td.empty {
     background-color: #fff !important;
 }
 div{
-	 border: 1px solid; 
+	/* border: 1px solid; */
 }
 </style>
 </head>
@@ -26,15 +26,15 @@ div{
 <div>
 	<div id='calendar' style="width: 520px; display: inline-block; float: left; margin-left: 20px;"></div>
 </div>
-<div style="width: 370px; float: left; height:400px; display: inline-block; margin-top: 70px;">
-	<h3>
-		<span id="timeListTitle">비즈니스룸 이용 일자 선택</span>
+<div style="width: 350px; height: 500; float: left;display: inline-block; margin-top: 70px; margin-left: 10px">
+	<h3  style="text-align: left;">
+		<span id="timeListTitleSecond"></span>
 	</h3>
 	<form id="businessRoomForm" method="post" action="/exhibition/rental/rentalBusinessRoom.do">
-		<div style="min-height:100px; ">
+		<!-- <div style="height: 110px  auto;">
 			<div style="display: inline-block; ">
 				<div style="width: 50px; height:25px; float:left; display: inline-block;">
-					<input type="checkbox" id="checkAll">
+					<input type="checkbox" id="checkAll" style="margin-top:5px;">
 					<div id="chechboxDiv" style="width: 50px; height:25px; "></div>
 				</div>
 				<div style="width: 230px; height:25px; float:left;  display: inline-block;">
@@ -46,16 +46,36 @@ div{
 					<div id="stateDiv" style="width: 70px; height:25px; display: inline-block;"></div>
 				</div>
 			</div>
-		</div>
-		<div id="peopleDiv"></div>	
-		<div id="numberPeopleDiv"></div> 
-		<div style="background-color: red;">
-			<!-- <select name="numberPeople">
+			
+			<div id="peopleDiv">인원 : 
+			<select name="numberPeople">
 					<option value="1">1</option>
 					<option value="2">2</option>
 					<option value="3">3</option>
 					<option value="4">4</option>
-				</select> -->
+			</select>
+			</div>	
+			<div id="numberPeopleDiv">
+			
+				
+			</div> 
+		</div> -->
+		<table class="ui striped table" id="businessRoomTable">
+		  <thead>
+		    <tr  align="center">
+			    <th>선택</th>
+			    <th>이용일자</th>
+			    <th>금액</th>
+			    <th>예약현황</th>
+		 	</tr>
+			 </thead>
+			  <tbody id="businessRoomTbody" align="center">
+			  
+			  </tbody>
+		 </table>
+		 <span id="timeListTitle">비즈니스룸 이용 일자를 선택하세요</span>
+			
+			
 			<c:if test="${code == '1'}">
 				<input type="hidden" name="M_Id" value="${homepageMember.getM_Id()}">
 				<input type="hidden" name="M_Email" value="${homepageMember.getM_Email()}">
@@ -63,7 +83,7 @@ div{
 			<input type="hidden" id="startDate" name="startDate" value="">
 			<input type="hidden" name="roomName" value="${businessRoom}">
 			<input type="button" value="예약하기" id="rentalBusinessRoomBtn">
-		</div>	
+	
 	</form>
 </div>
 <div class="ui mini modal rental"> <!-- 사업자 예약 못하게 하는 모달 -->
@@ -121,6 +141,7 @@ var dataset = [
 	var code = $('#code').val(); //로그인 코드 받아오기
 	
 	$(document).ready(function(){
+		$('#rentalBusinessRoomBtn').hide();
 		$('#calendar').fullCalendar({
 			header: {
 	            left: 'prev,next today',
@@ -149,94 +170,75 @@ var dataset = [
 					async: false,
 					dataType: 'json',
 					success : function(data) {  //룸 이름과 클릭한 날짜를 보내 해당 날짜 예약현황 보여주기
-						$('#chechboxDiv').empty();
-						$('#hours_of_useDiv').empty();
-						$('#stateDiv').empty();
-						$('#peopleDiv').empty();
-						$('#numberPeopleDiv').empty();
+						$('#rentalBusinessRoomBtn').show();
+						$('#businessRoomTable tr:gt(0)').remove();
+						$('#timeListTitle').empty();
+						$('#timeListTitleSecond').html('<pre>'+startDate + ' 이용 시간 선택'+'</pre>');
 						
-						$('#timeListTitle').html('<pre>'+startDate + ' 이용 시간 선택'+'</pre>');
-						
-						$('<div/>',{
-				        }).append($('<div/>').append($('<input/>',{
-				              style : "margin-top:10px;",
+						$('<tr/>',{
+				               align : 'center'
+				            }).append($('<td/>').append($('<input/>',{
 				               type : 'checkbox',
 				               name: 'checkRow',
 				               id: 'firstCheck',
 				               value: 'first'
-				            }))).appendTo('#chechboxDiv');
-						$('<div/>',{	
-						}).append($('<div/>',{
-					            text : '09 : 00 ~ 12 : 00'
-						})).appendTo('#hours_of_useDiv');
+				            }))).append($('<td/>',{
+				               text : '09 : 00 ~ 12 : 00'
+				            })).append($('<td/>',{
+				               text : '12000'
+				            })).append($('<td/>',{
+				               id: 'first',
+				               html : "<font color='green'>예약가능<font/>"
+				            })).appendTo('#businessRoomTbody');
 						
-						$('<div/>',{	
-					    }).append($('<div/>',{
-					    	style : "color:green;",
-					            id: 'first',
-					            text : '예약가능'
-					    })).appendTo('#stateDiv');
+						$('<tr/>',{
+				               align : 'center'
+				            }).append($('<td/>').append($('<input/>',{
+				               type : 'checkbox',
+				               name: 'checkRow',
+				               id: 'secondCheck',
+				               value: 'second'
+				            }))).append($('<td/>',{
+				               text : '12 : 00 ~ 15 : 00'
+				            })).append($('<td/>',{
+				               text : '12000'
+				            })).append($('<td/>',{
+				            	id: 'second',
+				            	html : "<font color='green'>예약가능<font/>"
+				            })).appendTo('#businessRoomTbody');
 						
-						$('<div/>',{
-			            }).append($('<div/>').append($('<input/>',{
-			               style : "margin-top:10px;",
-			               type : 'checkbox',
-			               name: 'checkRow',
-			               id: 'secondCheck',
-			               value: 'first'
-			            }))).appendTo('#chechboxDiv');
-						$('<div/>',{	
-						}).append($('<div/>',{
-							    style: "margin-top:10px;",
-					            text : '12 : 00 ~ 15 : 00'
-						})).appendTo('#hours_of_useDiv');
-						$('<div/>',{	
-					    }).append($('<div/>',{
-					    	style : "color:green;",
-					            id: 'second',
-					            text : '예약가능'
-					    })).appendTo('#stateDiv');
+						$('<tr/>',{
+				               align : 'center'
+				            }).append($('<td/>').append($('<input/>',{
+				               type : 'checkbox',
+					           name: 'checkRow',
+					           id: 'thirdCheck',
+					           value: 'third'
+				            }))).append($('<td/>',{
+				               text : '15 : 00 ~ 18 : 00'
+				            })).append($('<td/>',{
+				               text : '12000'
+				            })).append($('<td/>',{
+				            	id: 'third',
+				            	html : "<font color='green'>예약가능<font/>"
+				            })).appendTo('#businessRoomTbody');
 						
-						$('<div/>',{
-			            }).append($('<div/>').append($('<input/>',{
-			               style : "margin-top:10px;",
-			               type : 'checkbox',
-			               name: 'checkRow',
-			               id: 'thirdCheck',
-			               value: 'third'
-			            }))).appendTo('#chechboxDiv');
-						$('<div/>',{	
-						}).append($('<div/>',{
-					            text : '15 : 00 ~ 18 : 00'
-						})).appendTo('#hours_of_useDiv');
-						$('<div/>',{	
-					    }).append($('<div/>',{
-					    	style : "color:green;",
-					            id: 'third',
-					            text : '예약가능'
-					    })).appendTo('#stateDiv');
+						$('<tr/>',{
+				               align : 'center'
+				            }).append($('<td/>').append($('<input/>',{
+				               type : 'checkbox',
+				               name: 'checkRow',
+				               id: 'fourthCheck',
+				               value: 'fourth'
+				            }))).append($('<td/>',{
+				               text : '18 : 00 ~ 21 : 00'
+				            })).append($('<td/>',{
+				               text : '12000'
+				            })).append($('<td/>',{
+				            	id: 'fourth',
+				            	html : "<font color='green'>예약가능<font/>"
+				            })).appendTo('#businessRoomTbody');
 						
-						$('<div/>',{
-			            }).append($('<div/>').append($('<input/>',{
-			               style : "margin-top:10px;",
-			               type : 'checkbox',
-			               name: 'checkRow',
-			               id: 'fourthCheck',
-			               value: 'fourth'
-			            }))).appendTo('#chechboxDiv');
-						$('<div/>',{	
-						}).append($('<div/>',{
-					            text : '18 : 00 ~ 21 : 00'
-						})).appendTo('#hours_of_useDiv');
-						$('<div/>',{	
-					    }).append($('<div/>',{
-					    		style : "color:green;",
-					            id: 'fourth',
-					            text : '예약가능'
-					    })).appendTo('#stateDiv');
-						$('<div/>',{
-							text : '인원'
-						}).appendTo('#peopleDiv')
 						
 						$.each(data.list, function(index, item){ //예약되어있는 시간대는 예약불가능이라고 써주고 체크박스 제거
 							
@@ -272,6 +274,9 @@ var dataset = [
 				}
 				$('#startDate').val(startDate);
 				$.ajax({ //룸 이름과 클릭한 날짜를 보내 해당 날짜 예약현황 보여주기
+					/* $('#businessRoomTable tr:gt(0)').remove(); */
+					/* $('#timeListTitle').empty(); */
+					/* $('#timeListTitleSecond').html('<pre>'+startDate + ' 이용 시간 선택'+'</pre>'); */
 					type : 'POST',
 					url : '/exhibition/rental/searchBusinessRoom.do',
 					data : {'roomName': '${businessRoom}',
@@ -279,9 +284,7 @@ var dataset = [
 					async: false,
 					dataType: 'json',
 					success : function(data) {
-						$('#time_list tr:gt(0)').remove();
-						
-						$('#timeListTitle').html('<pre>'+startDate + ' 이용 시간 선택'+'</pre>');
+						$('#businessRoomTable tr:gt(0)').remove();
 						
 						$('<tr/>',{
 				               align : 'center'
@@ -296,8 +299,8 @@ var dataset = [
 				               text : '12,000'
 				            })).append($('<td/>',{
 				               id: 'first',
-				               text : '예약가능'
-				            })).appendTo('#time_list');
+				               html : "<font color='green'>예약가능<font/>"
+				            })).appendTo('#businessRoomTbody');
 						
 						$('<tr/>',{
 				               align : 'center'
@@ -312,8 +315,8 @@ var dataset = [
 				               text : '12,000'
 				            })).append($('<td/>',{
 				            	id: 'second',
-				               text : '예약가능'
-				            })).appendTo('#time_list');
+				            	html : "<font color='green'>예약가능<font/>"
+				            })).appendTo('#businessRoomTbody');
 						
 						$('<tr/>',{
 				               align : 'center'
@@ -328,8 +331,8 @@ var dataset = [
 				               text : '12,000'
 				            })).append($('<td/>',{
 				            	id: 'third',
-				               text : '예약가능'
-				            })).appendTo('#time_list');
+				            	html : "<font color='green'>예약가능<font/>"
+				            })).appendTo('#businessRoomTbody');
 						
 						$('<tr/>',{
 				               align : 'center'
@@ -344,8 +347,8 @@ var dataset = [
 				               text : '12,000'
 				            })).append($('<td/>',{
 				            	id: 'fourth',
-				               text : '예약가능'
-				            })).appendTo('#time_list');
+				            	html : "<font color='green'>예약가능<font/>"
+				            })).appendTo('#businessRoomTbody');
 						$.each(data.list, function(index, item){ //예약되어있는 시간대는 예약불가능이라고 써주고 체크박스 제거
 							
 							if(item.first=='Y') {
