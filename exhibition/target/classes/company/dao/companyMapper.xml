@@ -89,5 +89,10 @@
  	<delete id="deleteCoBooth" parameterType="java.util.Map">
  		delete from CONCERTHALL where hallName=#{boothName} and title=#{title} and startDate=#{startDate} and endDate=#{endDate}
  	</delete>
+ 	
+ 	<!--법인번호 중복체크-->
+	<select id="checkId2" parameterType="java.lang.String" resultType="company">
+		select * from company where C_corporate = #{sNum2}
+	</select>
 	
 </mapper>

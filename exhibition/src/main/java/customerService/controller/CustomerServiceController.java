@@ -988,11 +988,15 @@ public class CustomerServiceController {
 	public ModelAndView C_eventDetail(@RequestParam String seq) {
 
 		// DB
-		EventboardDTO eventboardDTO = customerServiceDAO.getEventboard(seq);
-
+		EventboardDTO eventboardDTO = customerServiceDAO.getEventboard(seq);//정보가져오기
+		String startDate = eventboardDTO.getStartDate();
+		String endDate = eventboardDTO.getEndDate();
+		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("eventboardDTO", eventboardDTO);
 		mav.addObject("postSelect", "1");
+		mav.addObject("startDate", startDate);
+		mav.addObject("endDate", endDate);
 		mav.addObject("modify", "1");
 		mav.addObject("display", "/customerService/C_eventDetail.jsp");
 		mav.setViewName("/customerService/C_allboardModify");
@@ -1058,9 +1062,14 @@ public class CustomerServiceController {
 
 		// DB
 		EventboardDTO eventboardDTO = customerServiceDAO.getPlayboard(seq);
+		String startDate = eventboardDTO.getStartDate();
+		String endDate = eventboardDTO.getEndDate();		
+		
 		// 날짜,시간
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("eventboardDTO", eventboardDTO);
+		mav.addObject("startDate", startDate);
+		mav.addObject("endDate", endDate);
 		mav.addObject("postSelect", "2");
 		mav.addObject("display", "/customerService/C_playDetail.jsp");
 		mav.setViewName("/customerService/C_allboardModify");
@@ -1203,6 +1212,7 @@ public class CustomerServiceController {
 	// 박람회 수정완료 클릭시 DB내용 수정
 	@RequestMapping(value = "C_eventboardMod", method = RequestMethod.POST)
 	public ModelAndView C_eventboardMod(@ModelAttribute EventboardDTO eventboardDTO, @RequestParam MultipartFile img) {
+		customerServiceDAO.C_exhibitionboardBookDel(eventboardDTO);//수정하기 위해 예매 날려버리기
 		if (!img.isEmpty()) {
 			File fileDelete = new File(filePath + eventboardDTO.getImage1());
 			if (fileDelete.exists())
@@ -1227,6 +1237,7 @@ public class CustomerServiceController {
 	@RequestMapping(value = "C_playboardMod", method = RequestMethod.POST)
 	public ModelAndView C_playboardMod(@ModelAttribute EventboardDTO eventboardDTO, @RequestParam MultipartFile img,
 			HttpSession session) {
+		customerServiceDAO.C_playboardBookDel(eventboardDTO);//수정하기 위해 예매 날려버리기
 		if (!img.isEmpty()) {
 			File fileDelete = new File(filePath + eventboardDTO.getImage1());
 			if (fileDelete.exists())
@@ -1979,7 +1990,7 @@ public class CustomerServiceController {
 
 	// 전시회,연극 등록 층 중복 체크*****
 	@RequestMapping(value = "checkReservation", method = RequestMethod.POST)
-	public @ResponseBody String checkReservation(@RequestParam String postSelect, @RequestParam String imageName,
+	public @ResponseBody String checkReservation(@RequestParam String seq, @RequestParam String postSelect, @RequestParam String imageName,
 			@RequestParam String startDate, @RequestParam String endDate, @RequestParam String eventPlace) {
 
 		Map<String, String> map = new HashMap<String, String>();
@@ -1995,9 +2006,12 @@ public class CustomerServiceController {
 		List<EventboardDTO> list = new ArrayList<EventboardDTO>();
 
 		// DB
+		// DB
 		if (postSelect.equals("1")) {
+			customerServiceDAO.eventboardModDelete(seq);//날짜 초기화
 			list = customerServiceDAO.checkReservation_exhibition(map);
 		} else if (postSelect.equals("2")) {
+			customerServiceDAO.eventboard_playModDelete(seq);//날짜 초기화
 			list = customerServiceDAO.checkReservation_performance(map);
 		}
 
