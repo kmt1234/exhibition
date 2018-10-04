@@ -201,7 +201,6 @@ public class PerformanceController {
 			String beforeMonth = formatter.format(cal.getTime()).substring(2,4);
 			
 			String dateS= beforeYear+beforeMonth;
-			System.out.println(dateS);
 			Map<String,Integer> map = new HashMap<String,Integer>();
 			map.put("endNum", endNum);
 			map.put("startNum", startNum);
@@ -287,10 +286,6 @@ public class PerformanceController {
 		} catch (Exception e) {
 			
 		}
-		
-		System.out.println("회원의 코드 : "+object);
-		
-		
 		//회원의 아이디 값 얻기
 		MemberDTO memberDTO = null;
 		CompanyDTO companyDTO = null;
@@ -299,19 +294,15 @@ public class PerformanceController {
 		try {
 			if(object.toString().equals("1")) {
 				memberDTO = (MemberDTO)session.getAttribute("homepageMember");
-				System.out.println("얻은 아이디 : "+memberDTO.getM_Id());
 				id = memberDTO.getM_Id();
 				
 			}else if(object.toString().equals("2")) {
 				companyDTO = (CompanyDTO)session.getAttribute("homepageMember");
-				System.out.println("얻은 아이디 : "+companyDTO.getC_license());
 				id = companyDTO.getC_license();
 				
 			}else if(object.toString().equals("3")) {
-				System.out.println("얻은 아이디 : manager");
 				id = "manager";
 			}else {
-				System.out.println("얻은 아이디 : guest");
 				id = "guest";
 			}
 		} catch (Exception e) {
@@ -326,12 +317,8 @@ public class PerformanceController {
 		Date currentDate = new Date();
 			
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
-		
 		String startDateC = formatter.format(currentDate);
-		
 		String selMonth = startDateC.substring(0, 8) + "01";
-		
-		System.out.println("월 : "+ selMonth);
 		
 		Map<String,String> map = new HashMap<String,String>();
 		map.put("endNum", endNum+"");
@@ -395,9 +382,6 @@ public class PerformanceController {
 			
 		}
 		
-		System.out.println("회원의 코드 : "+object);
-		
-		
 		//회원의 아이디 값 얻기
 		MemberDTO memberDTO = null;
 		CompanyDTO companyDTO = null;
@@ -406,19 +390,15 @@ public class PerformanceController {
 		try {
 			if(object.toString().equals("1")) {
 				memberDTO = (MemberDTO)session.getAttribute("homepageMember");
-				System.out.println("얻은 아이디 : "+memberDTO.getM_Id());
 				id = memberDTO.getM_Id();
 				
 			}else if(object.toString().equals("2")) {
 				companyDTO = (CompanyDTO)session.getAttribute("homepageMember");
-				System.out.println("얻은 아이디 : "+companyDTO.getC_license());
 				id = companyDTO.getC_license();
 				
 			}else if(object.toString().equals("3")) {
-				System.out.println("얻은 아이디 : manager");
 				id = "manager";
 			}else {
-				System.out.println("얻은 아이디 : guest");
 				id = "guest";
 			}
 		} catch (Exception e) {
@@ -437,7 +417,6 @@ public class PerformanceController {
 		String startDateC = formatter.format(currentDate);
 
 		String selMonth = startDateC.substring(0, 8) + "01";
-		System.out.println("월 : "+ selMonth);	//현재 월
 		
 		Map<String,String> map = new HashMap<String,String>();
 		map.put("endNum", endNum+"");
@@ -501,9 +480,6 @@ public class PerformanceController {
 			
 		}
 		
-		System.out.println("회원의 코드 : "+object);
-		
-		
 		//회원의 아이디 값 얻기
 		MemberDTO memberDTO = null;
 		CompanyDTO companyDTO = null;
@@ -512,19 +488,15 @@ public class PerformanceController {
 		try {
 			if(object.toString().equals("1")) {
 				memberDTO = (MemberDTO)session.getAttribute("homepageMember");
-				System.out.println("얻은 아이디 : "+memberDTO.getM_Id());
 				id = memberDTO.getM_Id();
 				
 			}else if(object.toString().equals("2")) {
 				companyDTO = (CompanyDTO)session.getAttribute("homepageMember");
-				System.out.println("얻은 아이디 : "+companyDTO.getC_license());
 				id = companyDTO.getC_license();
 				
 			}else if(object.toString().equals("3")) {
-				System.out.println("얻은 아이디 : manager");
 				id = "manager";
 			}else {
-				System.out.println("얻은 아이디 : guest");
 				id = "guest";
 			}
 		} catch (Exception e) {
@@ -539,11 +511,8 @@ public class PerformanceController {
 		Date currentDate = new Date();
 			
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
-		
 		String startDateC = formatter.format(currentDate);
-
 		String selMonth = startDateC.substring(0, 8) + "01";
-		System.out.println("월 : "+ selMonth);	//현재 월
 		
 		Map<String,String> map = new HashMap<String,String>();
 		map.put("endNum", endNum+"");
@@ -629,9 +598,6 @@ public class PerformanceController {
 		
 		String selMonth = startDateC.substring(0, 8) + "01";
 		
-		System.out.println("월 : "+ selMonth);
-		
-		
 		Map<String,String> map = new HashMap<String,String>();
 		map.put("endNum", endNum+"");
 		map.put("startNum", startNum+"");
@@ -691,9 +657,6 @@ public class PerformanceController {
 			
 		}
 		
-		System.out.println("회원의 코드 : "+object);
-		
-		
 		//회원의 아이디 값 얻기
 		MemberDTO memberDTO = null;
 		CompanyDTO companyDTO = null;
@@ -702,19 +665,15 @@ public class PerformanceController {
 		try {
 			if(object.toString().equals("1")) {
 				memberDTO = (MemberDTO)session.getAttribute("homepageMember");
-				System.out.println("얻은 아이디 : "+memberDTO.getM_Id());
 				id = memberDTO.getM_Id();
 				
 			}else if(object.toString().equals("2")) {
 				companyDTO = (CompanyDTO)session.getAttribute("homepageMember");
-				System.out.println("얻은 아이디 : "+companyDTO.getC_license());
 				id = companyDTO.getC_license();
 				
 			}else if(object.toString().equals("3")) {
-				System.out.println("얻은 아이디 : manager");
 				id = "manager";
 			}else {
-				System.out.println("얻은 아이디 : guest");
 				id = "guest";
 			}
 		} catch (Exception e) {
@@ -729,11 +688,8 @@ public class PerformanceController {
 		Date currentDate = new Date();
 			
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
-		
 		String startDateC = formatter.format(currentDate);
-
 		String selMonth = startDateC.substring(0, 8) + "01";
-		System.out.println("월 : "+ selMonth);	//현재 월
 		
 		Map<String,String> map = new HashMap<String,String>();
 		map.put("endNum", endNum+"");
@@ -797,9 +753,6 @@ public class PerformanceController {
 			
 		}
 		
-		System.out.println("회원의 코드 : "+object);
-		
-		
 		//회원의 아이디 값 얻기
 		MemberDTO memberDTO = null;
 		CompanyDTO companyDTO = null;
@@ -808,19 +761,15 @@ public class PerformanceController {
 		try {
 			if(object.toString().equals("1")) {
 				memberDTO = (MemberDTO)session.getAttribute("homepageMember");
-				System.out.println("얻은 아이디 : "+memberDTO.getM_Id());
 				id = memberDTO.getM_Id();
 				
 			}else if(object.toString().equals("2")) {
 				companyDTO = (CompanyDTO)session.getAttribute("homepageMember");
-				System.out.println("얻은 아이디 : "+companyDTO.getC_license());
 				id = companyDTO.getC_license();
 				
 			}else if(object.toString().equals("3")) {
-				System.out.println("얻은 아이디 : manager");
 				id = "manager";
 			}else {
-				System.out.println("얻은 아이디 : guest");
 				id = "guest";
 			}
 		} catch (Exception e) {
@@ -839,7 +788,6 @@ public class PerformanceController {
 		String startDateC = formatter.format(currentDate);
 
 		String selMonth = startDateC.substring(0, 8) + "01";
-		System.out.println("월 : "+ selMonth);	//현재 월
 		
 		Map<String,String> map = new HashMap<String,String>();
 		map.put("endNum", endNum+"");
@@ -902,8 +850,6 @@ public class PerformanceController {
 			
 		}
 		
-		System.out.println("회원의 코드 : "+object);
-		
 		//회원의 아이디 값 얻기
 		MemberDTO memberDTO = null;
 		CompanyDTO companyDTO = null;
@@ -912,19 +858,15 @@ public class PerformanceController {
 		try {
 			if(object.toString().equals("1")) {
 				memberDTO = (MemberDTO)session.getAttribute("homepageMember");
-				System.out.println("얻은 아이디 : "+memberDTO.getM_Id());
 				id = memberDTO.getM_Id();
 				
 			}else if(object.toString().equals("2")) {
 				companyDTO = (CompanyDTO)session.getAttribute("homepageMember");
-				System.out.println("얻은 아이디 : "+companyDTO.getC_license());
 				id = companyDTO.getC_license();
 				
 			}else if(object.toString().equals("3")) {
-				System.out.println("얻은 아이디 : manager");
 				id = "manager";
 			}else {
-				System.out.println("얻은 아이디 : guest");
 				id = "guest";
 			}
 		} catch (Exception e) {
@@ -937,9 +879,6 @@ public class PerformanceController {
 		//String 타입 날짜를 Date 형식으로 변환
 		eventboardDTO.setStartDate(eventboardDTO.getStartDate().substring(0, 10));
 		eventboardDTO.setEndDate(eventboardDTO.getEndDate().substring(0, 10));
-		
-		System.out.println(eventboardDTO.getStartDate());
-		System.out.println(eventboardDTO.getEndDate());
 		
 		String startDate = eventboardDTO.getStartDate();
 		String endDate = eventboardDTO.getEndDate();
@@ -1005,8 +944,6 @@ public class PerformanceController {
 			
 		}
 		
-		System.out.println("회원의 코드 : "+object);
-		
 		//회원의 아이디 값 얻기
 		MemberDTO memberDTO = null;
 		CompanyDTO companyDTO = null;
@@ -1015,19 +952,15 @@ public class PerformanceController {
 		try {
 			if(object.toString().equals("1")) {
 				memberDTO = (MemberDTO)session.getAttribute("homepageMember");
-				System.out.println("얻은 아이디 : "+memberDTO.getM_Id());
 				id = memberDTO.getM_Id();
 				
 			}else if(object.toString().equals("2")) {
 				companyDTO = (CompanyDTO)session.getAttribute("homepageMember");
-				System.out.println("얻은 아이디 : "+companyDTO.getC_license());
 				id = companyDTO.getC_license();
 				
 			}else if(object.toString().equals("3")) {
-				System.out.println("얻은 아이디 : manager");
 				id = "manager";
 			}else {
-				System.out.println("얻은 아이디 : guest");
 				id = "guest";
 			}
 		} catch (Exception e) {
@@ -1038,11 +971,6 @@ public class PerformanceController {
 		playDate=playDate.replace("년", "");
 		playDate=playDate.replace("월", "");
 		playDate=playDate.replace("일", "");
-		
-		System.out.println("공연명 : "+imageName);
-		System.out.println("공연 날짜 : "+playDate);
-		System.out.println("예매 아이디 : "+id);
-		System.out.println("티켓 수 : " + ticketQty);
 		
 		//예매자 정보 DTO 담기
 		book_exhibition_membersDTO.setImageName(imageName);
@@ -1083,8 +1011,6 @@ public class PerformanceController {
 			
 		}
 		
-		System.out.println("회원의 코드 : "+object);
-		
 		//회원의 아이디 값 얻기
 		MemberDTO memberDTO = null;
 		CompanyDTO companyDTO = null;
@@ -1093,19 +1019,15 @@ public class PerformanceController {
 		try {
 			if(object.toString().equals("1")) {
 				memberDTO = (MemberDTO)session.getAttribute("homepageMember");
-				System.out.println("얻은 아이디 : "+memberDTO.getM_Id());
 				id = memberDTO.getM_Id();
 				
 			}else if(object.toString().equals("2")) {
 				companyDTO = (CompanyDTO)session.getAttribute("homepageMember");
-				System.out.println("얻은 아이디 : "+companyDTO.getC_license());
 				id = companyDTO.getC_license();
 				
 			}else if(object.toString().equals("3")) {
-				System.out.println("얻은 아이디 : manager");
 				id = "manager";
 			}else {
-				System.out.println("얻은 아이디 : guest");
 				id = "guest";
 			}
 		} catch (Exception e) {
@@ -1118,9 +1040,6 @@ public class PerformanceController {
 		//String 타입 날짜를 Date 형식으로 변환
 		eventboardDTO.setStartDate(eventboardDTO.getStartDate().substring(0, 10));
 		eventboardDTO.setEndDate(eventboardDTO.getEndDate().substring(0, 10));
-		
-		System.out.println(eventboardDTO.getStartDate());
-		System.out.println(eventboardDTO.getEndDate());
 		
 		String startDate = eventboardDTO.getStartDate();
 		String endDate = eventboardDTO.getEndDate();
@@ -1188,8 +1107,6 @@ public class PerformanceController {
 			
 		}
 		
-		System.out.println("회원의 코드 : "+object);
-		
 		//회원의 아이디 값 얻기
 		MemberDTO memberDTO = null;
 		CompanyDTO companyDTO = null;
@@ -1198,19 +1115,15 @@ public class PerformanceController {
 		try {
 			if(object.toString().equals("1")) {
 				memberDTO = (MemberDTO)session.getAttribute("homepageMember");
-				System.out.println("얻은 아이디 : "+memberDTO.getM_Id());
 				id = memberDTO.getM_Id();
 				
 			}else if(object.toString().equals("2")) {
 				companyDTO = (CompanyDTO)session.getAttribute("homepageMember");
-				System.out.println("얻은 아이디 : "+companyDTO.getC_license());
 				id = companyDTO.getC_license();
 				
 			}else if(object.toString().equals("3")) {
-				System.out.println("얻은 아이디 : manager");
 				id = "manager";
 			}else {
-				System.out.println("얻은 아이디 : guest");
 				id = "guest";
 			}
 		} catch (Exception e) {
@@ -1221,12 +1134,6 @@ public class PerformanceController {
 		playDate=playDate.replace("년", "");
 		playDate=playDate.replace("월", "");
 		playDate=playDate.replace("일", "");
-		
-				
-		System.out.println("공연명 : "+imageName);
-		System.out.println("공연 날짜 : "+playDate);
-		System.out.println("예매 아이디 : "+id);
-		System.out.println("티켓 수 : " + ticketQty);
 		
 		//예매자 정보 DTO 담기
 		book_performance_membersDTO.setImageName(imageName);
@@ -1245,11 +1152,6 @@ public class PerformanceController {
 	//연극 잔여좌석 확인하기(ajax)
 	@RequestMapping(value="book_performance_remainSeats", method=RequestMethod.POST)
 	public @ResponseBody String book_performance_remainSeats(@RequestParam int totalSeats, @RequestParam String imageName, @RequestParam String playDate) {
-
-		System.out.println("총 좌석 수 : "+ totalSeats);
-		System.out.println("연극 명 : "+ imageName);
-		System.out.println("연극 날짜 : "+playDate);
-				
 		if(playDate.equals("날짜선택")) {
 			playDate = "2000년01월01일";
 		}
@@ -1267,9 +1169,6 @@ public class PerformanceController {
 		//DB
 		String remainSeats = performanceDAO.checkRemainSeats(map);	//선택일자의 해당 연극 전체좌석 가져오기(기본값:일별 티켓 발행 수)
 		String usedSeats = performanceDAO.checkUsedSeats(map);		//선택일자의  해당 연극 예매된 티켓 수 가져오기
-		
-		System.out.println("전체석 : "+remainSeats);
-		System.out.println("예매석 : "+usedSeats);
 		
 		if(remainSeats==null) remainSeats = 0+"";
 		if(usedSeats==null) usedSeats = 0+"";
@@ -1299,11 +1198,6 @@ public class PerformanceController {
 	//전시회 잔여좌석 확인하기(ajax)
 	@RequestMapping(value="book_exhibition_remainSeats", method=RequestMethod.POST)
 	public @ResponseBody String book_exhibition_remainSeats(@RequestParam int totalSeats, @RequestParam String imageName, @RequestParam String playDate) {
-
-		System.out.println("총 좌석 수 : "+ totalSeats);
-		System.out.println("연극 명 : "+ imageName);
-		System.out.println("연극 날짜 : "+playDate);
-				
 		if(playDate.equals("날짜선택")) {
 			playDate = "2000년01월01일";
 		}
@@ -1321,9 +1215,6 @@ public class PerformanceController {
 		//DB
 		String remainSeats = performanceDAO.checkRemainSeats_ex(map);	//선택일자의 해당 연극 전체좌석 가져오기(기본값:일별 티켓 발행 수)
 		String usedSeats = performanceDAO.checkUsedSeats_ex(map);		//선택일자의  해당 연극 예매된 티켓 수 가져오기
-		
-		System.out.println("전체석 : "+remainSeats);
-		System.out.println("예매석 : "+usedSeats);
 		
 		if(remainSeats==null) remainSeats = 0+"";
 		if(usedSeats==null) usedSeats = 0+"";

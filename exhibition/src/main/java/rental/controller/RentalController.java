@@ -81,11 +81,13 @@ public class RentalController {
 	@RequestMapping(value = "R_concertHallDecision", method = RequestMethod.GET)
 	public ModelAndView R_concertHallDecision(@RequestParam String hallName, Model model, ModelMap modelMap) {
 		
-		int price = 0;
+		int rate = concertHallDAO.getRateConcertHall(hallName);
+		int width = 0;
+		
 		if (hallName.equals("P_Room1") || hallName.equals("P_Room2")) {
-			price = 100000;
+			width = 100;
 		} else if (hallName.equals("P_Room3") || hallName.equals("P_Room4")) {
-			price = 120000;
+			width = 120;
 		}
 		
 		Calendar cal = Calendar.getInstance();
@@ -95,7 +97,8 @@ public class RentalController {
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 
-		model.addAttribute("price", price);
+		model.addAttribute("rate", rate);
+		model.addAttribute("width", width);
 		model.addAttribute("hallName", hallName);
 		model.addAttribute("date", sdf.format(date));
 
@@ -193,7 +196,9 @@ public class RentalController {
 	// 비지니스룸 예약하는 페이지로 이동
 	@RequestMapping(value = "R_businessRoomDecision", method = RequestMethod.GET)
 	public ModelAndView businessRoomDecision(@RequestParam String businessRoom, Model model, ModelMap modelMap) {
-
+		
+		int rate = businessRoomDAO.getRateBusinessRoom(businessRoom);
+		
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 		
@@ -204,6 +209,7 @@ public class RentalController {
         cal.add(Calendar.DATE, 1);
 
 		model.addAttribute("businessRoom", businessRoom);
+		model.addAttribute("rate", rate);
 		model.addAttribute("date", sdf.format(cal.getTime()));
 
 		List<BusinessRoomDTO> list = businessRoomDAO.getCalendar(businessRoom);
@@ -273,18 +279,11 @@ public class RentalController {
 
 	// 비지니스룸 예약
 	@RequestMapping(value = "rentalBusinessRoom", method = RequestMethod.POST)
-	public ModelAndView rentalBusinessRoom(@ModelAttribute BusinessRoomDTO businessRoomDTO) {
-		businessRoomDTO.setTotalRent(businessRoomDTO.getNumberPeople() * 12000);
-
-		System.out.println(businessRoomDTO.getM_Id());
-		System.out.println(businessRoomDTO.getRoomName());
-		System.out.println(businessRoomDTO.getStartDate());
-		System.out.println(businessRoomDTO.getNumberPeople());
-		System.out.println(businessRoomDTO.getTotalRent());
+	public ModelAndView rentalBusinessRoom(@ModelAttribute BusinessRoomDTO businessRoomDTO, @RequestParam int rate) {
+		businessRoomDTO.setTotalRent(rate);
+		
 		for (int i = 0; i < businessRoomDTO.getCheckRow().length; i++) {
 			businessRoomDTO.setTime(businessRoomDTO.getCheckRow()[i]);
-			;
-			System.out.println(businessRoomDTO.getTime());
 		}
 
 		businessRoomDAO.rentalBusinessRoom(businessRoomDTO);
@@ -300,7 +299,6 @@ public class RentalController {
 	public String reservationHoll(@RequestParam String booth, @RequestParam String startDate,
 			@RequestParam String endDate, @RequestParam String C_email, @RequestParam String C_license,
 			@RequestParam String C_tel, @RequestParam String title, @RequestParam int totalRent) {
-		System.out.println(C_email);
 		ExhibitionDTO exhibitionDTO = new ExhibitionDTO();
 		exhibitionDTO.setBoothName(booth);
 		exhibitionDTO.setC_email(C_email);
@@ -338,6 +336,7 @@ public class RentalController {
 	 * @return yyyyMMdd 형식의 날짜가 담긴 배열
 	 */
 	
+	//부스 평당 가격 수정
 	@RequestMapping(value = "modifyRateExhibition", method = RequestMethod.POST)
 	public ModelAndView modifyRateExhibition(@RequestParam String boothNameSel, @RequestParam int boothRate) {
 		Map<String, String> map = new HashMap<String, String>();
@@ -348,6 +347,38 @@ public class RentalController {
 	
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("display", "/rental/R_exhibition.jsp");
+		mav.setViewName("/rental/R_rentalForm");
+	
+		return mav;
+	}
+	
+	//콘서트홀 평당 가격 수정
+	@RequestMapping(value = "modifyRateConcertHall", method = RequestMethod.POST)
+	public ModelAndView modifyRateConcertHall(@RequestParam String hallNameSel, @RequestParam int hallRate) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("hallName", hallNameSel);
+		map.put("rate", String.valueOf(hallRate));
+		
+		concertHallDAO.updateConcertHallRate(map);
+	
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("display", "/rental/R_concert.jsp");
+		mav.setViewName("/rental/R_rentalForm");
+	
+		return mav;
+	}
+	
+	//비지니스룸 방 가격 수정
+	@RequestMapping(value = "modifyRateBusinessRoom", method = RequestMethod.POST)
+	public ModelAndView modifyRateBusinessRoom(@RequestParam String roomNameSel, @RequestParam int roomRate) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("roomName", roomNameSel);
+		map.put("rate", String.valueOf(roomRate));
+		
+		businessRoomDAO.updateBusinessRoomRate(map);
+	
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("display", "/rental/R_businessRoom.jsp");
 		mav.setViewName("/rental/R_rentalForm");
 	
 		return mav;

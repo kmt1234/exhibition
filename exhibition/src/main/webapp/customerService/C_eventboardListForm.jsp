@@ -93,7 +93,6 @@ function eventboardPaging(pg){
 $(document).ready(function(){
 	//전체선택
 	$('#checkAll').click(function(){
-		//alert($('.check').length);		//클래스를 나타낼때는 앞에 .을 찍는다.
 		if($('#checkAll').prop('checked')){
 			$('.check').prop('checked',true);
 		}else{
@@ -103,7 +102,6 @@ $(document).ready(function(){
 	//선택삭제
 	$('#eventDeleteBtn').click(function(){
 		var count=$('.check:checked').length;
-
 		if(count==0) 
 			alert("항목을 선택해주세요");
 		else

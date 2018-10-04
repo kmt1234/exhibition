@@ -234,7 +234,6 @@ $(document).ready(function(){
 				dataType : 'text',
 				success : function(data){
 					if(data=='no_data'){
-						//alert('등록가능합니다');
 						checkReservation = true;
 					} 
 					else if(data=='yes_data'){

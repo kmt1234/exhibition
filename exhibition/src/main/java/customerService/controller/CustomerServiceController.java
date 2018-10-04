@@ -72,7 +72,6 @@ public class CustomerServiceController {
 	@Autowired
 	private MemberDAO memberDAO;
 
-
 	// 고객센터 설명페이지
 	@RequestMapping(value = "C_customerServiceForm", method = RequestMethod.GET)
 	public ModelAndView C_customerServiceForm() {
@@ -121,26 +120,26 @@ public class CustomerServiceController {
 		mav.setViewName("jsonView");
 		return mav;
 	}
-	
+
 	// 공지사항 리스트 데이터 베이스에서 불러와 index.jsp로 리스트 보내주기
-		@RequestMapping(value = "getNoticeMainList", method = RequestMethod.POST)
-		public ModelAndView getNoticeMainList(@RequestParam(required = false, defaultValue = "1") String pg) {
-			// DB - 1페이지당 10개씩
-			int endNum = Integer.parseInt(pg) * 4;
-			int startNum = endNum - 3;
+	@RequestMapping(value = "getNoticeMainList", method = RequestMethod.POST)
+	public ModelAndView getNoticeMainList(@RequestParam(required = false, defaultValue = "1") String pg) {
+		// DB - 1페이지당 10개씩
+		int endNum = Integer.parseInt(pg) * 4;
+		int startNum = endNum - 3;
 
-			Map<String, Integer> map = new HashMap<String, Integer>();
-			map.put("startNum", startNum);
-			map.put("endNum", endNum);
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("startNum", startNum);
+		map.put("endNum", endNum);
 
-			List<CustomerServiceDTO> list = customerServiceDAO.getNoticeMainList(map);
+		List<CustomerServiceDTO> list = customerServiceDAO.getNoticeMainList(map);
 
-			ModelAndView mav = new ModelAndView();
+		ModelAndView mav = new ModelAndView();
 
-			mav.addObject("list", list);
-			mav.setViewName("jsonView");
-			return mav;
-		}
+		mav.addObject("list", list);
+		mav.setViewName("jsonView");
+		return mav;
+	}
 
 	// 검색내용 찾아오기
 	@RequestMapping(value = "C_notice_Search", method = RequestMethod.POST)
@@ -275,7 +274,7 @@ public class CustomerServiceController {
 				helper.setText(content, true);
 			}
 		};
-		
+
 		emailSender.send(preparator);
 		return authNum;
 	}
@@ -344,7 +343,7 @@ public class CustomerServiceController {
 		mav.setViewName("jsonView");
 		return mav;
 	}
-	
+
 	// 고객의 소리 문의받은글 검색 & 페이징
 	@RequestMapping(value = "C_inquire_Search", method = RequestMethod.POST)
 	public ModelAndView C_inquire_Search(@RequestParam(required = false) Map<String, String> map) {
@@ -391,7 +390,8 @@ public class CustomerServiceController {
 
 	// 고객의 소리 - 문의 답하기 폼
 	@RequestMapping(value = "C_inquire_Reply", method = RequestMethod.POST)
-	public ModelAndView C_inquire_Reply(@ModelAttribute CustomerServiceDTO customerServiceDTO, @RequestParam String seq, @RequestParam String email, @RequestParam int pseq, @RequestParam int pg, Model model) {
+	public ModelAndView C_inquire_Reply(@ModelAttribute CustomerServiceDTO customerServiceDTO, @RequestParam String seq,
+			@RequestParam String email, @RequestParam int pseq, @RequestParam int pg, Model model) {
 
 		model.addAttribute("customerServiceDTO", customerServiceDTO);
 
@@ -405,10 +405,11 @@ public class CustomerServiceController {
 
 	// 고객의 소리 답변(관리자)
 	@RequestMapping(value = "C_inquire_checkReply", method = RequestMethod.POST)
-	public @ResponseBody ModelAndView C_inquire_checkReply(@ModelAttribute CustomerServiceDTO customerServiceDTO, @RequestParam final String email,
-										@RequestParam final String subject, @RequestParam final String content, @RequestParam int pg, Model model) {
-		
-		CustomerServiceDTO cDTO = customerServiceDAO.getInquireInfo(customerServiceDTO.getPseq());//원글
+	public @ResponseBody ModelAndView C_inquire_checkReply(@ModelAttribute CustomerServiceDTO customerServiceDTO,
+			@RequestParam final String email, @RequestParam final String subject, @RequestParam final String content,
+			@RequestParam int pg, Model model) {
+
+		CustomerServiceDTO cDTO = customerServiceDAO.getInquireInfo(customerServiceDTO.getPseq());// 원글
 		final MimeMessagePreparator preparator = new MimeMessagePreparator() {
 			public void prepare(MimeMessage mimeMessage) throws Exception {
 				final MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
@@ -422,13 +423,13 @@ public class CustomerServiceController {
 				helper.setText(replyContent, true);
 			}
 		};
-		customerServiceDTO.setRef(cDTO.getRef());//답글ref = 원글ref
-		customerServiceDTO.setLev(cDTO.getLev()+1);//답글lev = 원글lev+1
-		customerServiceDTO.setStep(cDTO.getStep()+1);//답글step = 원글step+1
-		
+		customerServiceDTO.setRef(cDTO.getRef());// 답글ref = 원글ref
+		customerServiceDTO.setLev(cDTO.getLev() + 1);// 답글lev = 원글lev+1
+		customerServiceDTO.setStep(cDTO.getStep() + 1);// 답글step = 원글step+1
+
 		customerServiceDAO.C_inquire_Reply(customerServiceDTO);
 		model.addAttribute("pg", pg);
-		
+
 		emailSender.send(preparator);
 		return new ModelAndView("redirect:/customerService/C_inquire_List.do");
 	}
@@ -464,7 +465,7 @@ public class CustomerServiceController {
 		mav.setViewName("/customerService/C_customerServiceForm");
 		return mav;
 	}
-	
+
 	// 자주묻는 질문 - 작성등록
 	@RequestMapping(value = "C_QnA_checkWrite", method = RequestMethod.POST)
 	public ModelAndView C_QnA_checkWrite(@RequestParam String C_qty, @RequestParam String subject,
@@ -478,23 +479,21 @@ public class CustomerServiceController {
 
 		return new ModelAndView("redirect:/customerService/C_QnA.do");
 	}
-	
-	//자주 묻는 질문 연락처 삭제
-		@RequestMapping(value = "C_QnA_Delete", method = RequestMethod.POST)
-		public ModelAndView C_QnA_Delete(@RequestParam String[] box, Model model) {
 
-			List<Integer> list = new ArrayList<Integer>();
-			
-			for(String seq : box) {
-				list.add(Integer.parseInt(seq));
-			}
-			
-			customerServiceDAO.C_QnA_Delete(list);
+	// 자주 묻는 질문 연락처 삭제
+	@RequestMapping(value = "C_QnA_Delete", method = RequestMethod.POST)
+	public ModelAndView C_QnA_Delete(@RequestParam String[] box, Model model) {
 
-			return new ModelAndView("redirect:/customerService/C_QnA.do");
+		List<Integer> list = new ArrayList<Integer>();
+
+		for (String seq : box) {
+			list.add(Integer.parseInt(seq));
 		}
-	
-	
+
+		customerServiceDAO.C_QnA_Delete(list);
+
+		return new ModelAndView("redirect:/customerService/C_QnA.do");
+	}
 
 	// 주요시설
 	// 연락처~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -510,16 +509,16 @@ public class CustomerServiceController {
 		return mav;
 	}
 
-	//주요시설 연락처 삭제
+	// 주요시설 연락처 삭제
 	@RequestMapping(value = "C_contactList_Delete", method = RequestMethod.POST)
 	public ModelAndView C_contactList_Delete(@RequestParam String[] box, Model model) {
 
 		List<Integer> list = new ArrayList<Integer>();
-		
-		for(String seq : box) {
+
+		for (String seq : box) {
 			list.add(Integer.parseInt(seq));
 		}
-		
+
 		customerServiceDAO.C_contactList_Delete(list);
 
 		return new ModelAndView("redirect:/customerService/C_contactList.do");
@@ -607,21 +606,19 @@ public class CustomerServiceController {
 		return mav;
 	}
 
-	
-	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	
-	
+	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 	// 이미지 boardWriteForm
 	@RequestMapping(value = "C_mainImageboardForm", method = RequestMethod.GET)
 	public ModelAndView imageboardWriteForm(@RequestParam String postSelect) {
 		ModelAndView mav = new ModelAndView();
-		if(postSelect.equals("0")) {
+		if (postSelect.equals("0")) {
 			mav.addObject("display", "/customerService/INCLUDE_imageboard.jsp");
-		}else if(postSelect.equals("1")) {
+		} else if (postSelect.equals("1")) {
 			mav.addObject("display", "/customerService/INCLUDE_event.jsp");
-		}else if(postSelect.equals("2")) {
+		} else if (postSelect.equals("2")) {
 			mav.addObject("display", "/customerService/INCLUDE_play.jsp");
-		}else if(postSelect.equals("3")) {
+		} else if (postSelect.equals("3")) {
 			mav.addObject("display", "/customerService/INCLUDE_hotel.jsp");
 		}
 		mav.setViewName("/customerService/C_mainImageboardForm");
@@ -655,7 +652,7 @@ public class CustomerServiceController {
 	public String imageboardListForm(@RequestParam(required = false, defaultValue = "1") String pg, Model model) {
 
 		model.addAttribute("pg", pg);
-		model.addAttribute("display","/customerService/C_imageboardList.jsp");
+		model.addAttribute("display", "/customerService/C_imageboardList.jsp");
 		return "/customerService/C_mainImageboardListForm";
 	}
 
@@ -752,11 +749,11 @@ public class CustomerServiceController {
 			listDate.add(calStart.getTime());
 			calStart.add(Calendar.DATE, 1);
 		}
-		
-		// DB 
+
+		// DB
 		customerServiceDAO.eventInfoWrite(eventboardDTO);
 		EventboardDTO second = customerServiceDAO.eventInfoWrite2(eventboardDTO);
-		
+
 		List<ExhibitionBookDTO> list = new ArrayList<ExhibitionBookDTO>();
 		// 예매DB
 		for (int i = 0; i <= diffDays; i++) {
@@ -766,15 +763,12 @@ public class CustomerServiceController {
 			exhibitionBookDTO.setRemainTicket(0); // 일별 잔여 티켓 수 등록
 			exhibitionBookDTO.setTicketPrice(Integer.parseInt(eventboardDTO.getEventPrice())); // 티켓 가격
 			exhibitionBookDTO.setBookTicket(0); // 예매된 티켓 수
-			
+
 			exhibitionBookDTO.setPlayDate(listDate.get(i));
 
 			list.add(exhibitionBookDTO);
 			customerServiceDAO.eventInfoWrite_exhibition_bookDB(exhibitionBookDTO); // 예매 DB에 박람회 정보 넣는 메소드(예매DB)
 		}
-		
-		
-		
 
 		return new ModelAndView("redirect:/customerService/C_eventboardListForm.do");
 	}
@@ -834,8 +828,8 @@ public class CustomerServiceController {
 			calStart.add(Calendar.DATE, 1);
 		}
 
-		 customerServiceDAO.eventInfoWrite_play(eventboardDTO);
-		 EventboardDTO second = customerServiceDAO.eventInfoWrite_play2(eventboardDTO);
+		customerServiceDAO.eventInfoWrite_play(eventboardDTO);
+		EventboardDTO second = customerServiceDAO.eventInfoWrite_play2(eventboardDTO);
 
 		List<PlayBookDTO> list = new ArrayList<PlayBookDTO>();
 		// 예매DB
@@ -846,7 +840,7 @@ public class CustomerServiceController {
 			playBookDTO.setRemainTicket(0); // 일별 잔여 티켓 수 등록
 			playBookDTO.setTicketPrice(Integer.parseInt(eventboardDTO.getEventPrice())); // 티켓 가격
 			playBookDTO.setBookTicket(0); // 예매된 티켓 수
-			playBookDTO.setBookMemberId(id+""); // 예매자 아이디(세션값에서)
+			playBookDTO.setBookMemberId(id + ""); // 예매자 아이디(세션값에서)
 			playBookDTO.setBookStatus('0'); // 예매 구분자 (0:예매X, 1:예매완료)
 
 			playBookDTO.setPlayDate(listDate.get(i));
@@ -869,7 +863,7 @@ public class CustomerServiceController {
 			for (int i = 0; i < str.length; i++) {
 				ImageboardDTO imageboardDTO = new ImageboardDTO();
 				imageboardDTO.setImage1(str[i]);
-				
+
 				list.add(imageboardDTO);
 			}
 			mav.addObject("list", list);
@@ -891,7 +885,7 @@ public class CustomerServiceController {
 	public ModelAndView getImageboardSlide1(@RequestParam List<String> list) {
 		ModelAndView mav = new ModelAndView();
 		for (String data : list) {
-			
+
 		}
 		List<ImageboardDTO> list1 = customerServiceDAO.getImageboardSlide(list);
 
@@ -924,16 +918,15 @@ public class CustomerServiceController {
 		List<EventboardDTO> list = customerServiceDAO.eventboardList(map);
 		ModelAndView mav = new ModelAndView();
 
-
 		mav.addObject("pg", pg);
 		mav.addObject("imageboardPaging", imageboardPaging);
 		mav.addObject("listSize", list.size() + "");
 		mav.addObject("list", list);
-		mav.addObject("display","/customerService/C_eventboardListForm.jsp");
+		mav.addObject("display", "/customerService/C_eventboardListForm.jsp");
 		mav.setViewName("/customerService/C_mainImageboardListForm");
 		return mav;
 	}
-	
+
 	// 메인이미지 정보 보기(이미지 클릭 시, -> 수정하기 위해서)
 	@RequestMapping(value = "C_imageDetail", method = RequestMethod.GET)
 	public ModelAndView C_image_Detail(@RequestParam String seq) {
@@ -942,14 +935,14 @@ public class CustomerServiceController {
 		ImageboardDTO imageboardDTO = customerServiceDAO.getImageboard(seq);
 
 		ModelAndView mav = new ModelAndView();
-			
-			mav.addObject("imageboardDTO", imageboardDTO);
-			mav.addObject("postSelect", "0");
-			mav.addObject("modify", "1");
-			mav.addObject("display","/customerService/C_imageDetail.jsp");
-			mav.setViewName("/customerService/C_allboardModify");
-			return mav;
-		}
+
+		mav.addObject("imageboardDTO", imageboardDTO);
+		mav.addObject("postSelect", "0");
+		mav.addObject("modify", "1");
+		mav.addObject("display", "/customerService/C_imageDetail.jsp");
+		mav.setViewName("/customerService/C_allboardModify");
+		return mav;
+	}
 
 	// 박람회 정보 보기(이미지 클릭 시, -> 수정하기 위해서)***잠시 대기중************************
 	@RequestMapping(value = "C_eventDetail", method = RequestMethod.GET)
@@ -959,11 +952,10 @@ public class CustomerServiceController {
 		EventboardDTO eventboardDTO = customerServiceDAO.getEventboard(seq);
 
 		ModelAndView mav = new ModelAndView();
-		System.out.println(eventboardDTO.getStartDate());
 		mav.addObject("eventboardDTO", eventboardDTO);
 		mav.addObject("postSelect", "1");
 		mav.addObject("modify", "1");
-		mav.addObject("display","/customerService/C_eventDetail.jsp");
+		mav.addObject("display", "/customerService/C_eventDetail.jsp");
 		mav.setViewName("/customerService/C_allboardModify");
 		return mav;
 	}
@@ -1016,35 +1008,35 @@ public class CustomerServiceController {
 		mav.addObject("imageboardPaging", imageboardPaging);
 		mav.addObject("listSize", list.size() + "");
 		mav.addObject("list", list);
-		mav.addObject("display","/customerService/C_eventboardList_playForm.jsp");
+		mav.addObject("display", "/customerService/C_eventboardList_playForm.jsp");
 		mav.setViewName("/customerService/C_mainImageboardListForm");
 		return mav;
 	}
-	
+
 	// 연극 정보 보기(이미지 클릭 시, -> 수정하기 위해서)
 	@RequestMapping(value = "C_playDetail", method = RequestMethod.GET)
 	public ModelAndView C_playDetail(@RequestParam String seq) {
 
 		// DB
 		EventboardDTO eventboardDTO = customerServiceDAO.getPlayboard(seq);
-		//날짜,시간
+		// 날짜,시간
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("eventboardDTO", eventboardDTO);
 		mav.addObject("postSelect", "2");
-		mav.addObject("display","/customerService/C_playDetail.jsp");
+		mav.addObject("display", "/customerService/C_playDetail.jsp");
 		mav.setViewName("/customerService/C_allboardModify");
 		return mav;
 	}
 
 	// 연극 업로드 리스트 삭제
 	@RequestMapping(value = "C_eventboardDelete_play", method = RequestMethod.POST)
-		public ModelAndView C_eventboardDelete_play(@RequestParam String[] check) {
+	public ModelAndView C_eventboardDelete_play(@RequestParam String[] check) {
 
 		List<Integer> list = new ArrayList<Integer>();
 		for (String seq : check) {
 			list.add(Integer.parseInt(seq));
 		}
-	List<Integer> list2 = new ArrayList<Integer>();
+		List<Integer> list2 = new ArrayList<Integer>();
 		for (String seq : check) {
 			list2.add(Integer.parseInt(seq));
 		}
@@ -1104,7 +1096,7 @@ public class CustomerServiceController {
 		mav.addObject("imageboardPaging", imageboardPaging);
 		mav.addObject("listSize", list.size() + "");
 		mav.addObject("list", list);
-		mav.addObject("display","/customerService/C_hotelListForm.jsp");
+		mav.addObject("display", "/customerService/C_hotelListForm.jsp");
 		mav.setViewName("/customerService/C_mainImageboardListForm");
 		return mav;
 	}
@@ -1116,7 +1108,6 @@ public class CustomerServiceController {
 		List<Integer> list = new ArrayList<Integer>();
 		for (String seq : check) {
 			list.add(Integer.parseInt(seq));
-			System.out.println(seq);
 		}
 
 		// DB
@@ -1136,13 +1127,13 @@ public class CustomerServiceController {
 	public String C_hotel_modify(@RequestParam String seq, Model model) {
 		HotelboardDTO hotelboardDTO = customerServiceDAO.getHotelInfo(seq);
 		model.addAttribute("hotelboardDTO", hotelboardDTO);
-		model.addAttribute("display","/customerService/C_hotel_modify.jsp");
+		model.addAttribute("display", "/customerService/C_hotel_modify.jsp");
 		return "/customerService/C_allboardModify";
 	}
+
 	// 메인이미지 수정완료 클릭시 DB내용 수정
 	@RequestMapping(value = "C_imageboardMod", method = RequestMethod.POST)
 	public ModelAndView C_imageboardMod(@ModelAttribute ImageboardDTO imageboardDTO, @RequestParam MultipartFile img) {
-		System.out.println(imageboardDTO.getSeq());
 		if (!img.isEmpty()) {
 			File fileDelete = new File(filePath + imageboardDTO.getImage1());
 			if (fileDelete.exists())
@@ -1156,7 +1147,7 @@ public class CustomerServiceController {
 			}
 			imageboardDTO.setImage1(fileName);
 			customerServiceDAO.C_imageboardMod(imageboardDTO);
-		}else {
+		} else {
 			String fileName = img.getOriginalFilename();
 			File file = new File(filePath, fileName);
 			try {
@@ -1169,7 +1160,7 @@ public class CustomerServiceController {
 		}
 		return new ModelAndView("redirect:/customerService/C_mainImageboardListForm.do");
 	}
-	
+
 	// 박람회 수정완료 클릭시 DB내용 수정
 	@RequestMapping(value = "C_eventboardMod", method = RequestMethod.POST)
 	public ModelAndView C_eventboardMod(@ModelAttribute EventboardDTO eventboardDTO, @RequestParam MultipartFile img) {
@@ -1192,7 +1183,7 @@ public class CustomerServiceController {
 		}
 		return new ModelAndView("redirect:/customerService/C_eventboardListForm.do");
 	}
-	
+
 	// 연극 수정완료 클릭시 DB내용 수정
 	@RequestMapping(value = "C_playboardMod", method = RequestMethod.POST)
 	public ModelAndView C_playboardMod(@ModelAttribute EventboardDTO eventboardDTO, @RequestParam MultipartFile img,
@@ -1210,12 +1201,12 @@ public class CustomerServiceController {
 			}
 			eventboardDTO.setImage1(fileName);
 			customerServiceDAO.C_playboardMod(eventboardDTO);
-		}else {
+		} else {
 			eventboardDTO.setImage1(eventboardDTO.getImage1());
 			customerServiceDAO.C_playboardMod(eventboardDTO);
 		}
 		customerServiceDAO.C_playboardBookDel(eventboardDTO);
-		
+
 		// 세션에서 아이디 얻기
 		MemberDTO memberDTO = (MemberDTO) session.getAttribute("homepageMember");
 		String id = memberDTO.getM_Id();
@@ -1262,7 +1253,7 @@ public class CustomerServiceController {
 			playBookDTO.setRemainTicket(0); // 일별 잔여 티켓 수 등록
 			playBookDTO.setTicketPrice(Integer.parseInt(eventboardDTO.getEventPrice())); // 티켓 가격
 			playBookDTO.setBookTicket(0); // 예매된 티켓 수
-			playBookDTO.setBookMemberId(id+""); // 예매자 아이디(세션값에서)
+			playBookDTO.setBookMemberId(id + ""); // 예매자 아이디(세션값에서)
 			playBookDTO.setBookStatus('0'); // 예매 구분자 (0:예매X, 1:예매완료)
 
 			playBookDTO.setPlayDate(listDate.get(i));
@@ -1270,13 +1261,13 @@ public class CustomerServiceController {
 			list.add(playBookDTO);
 			customerServiceDAO.eventInfoWrite_play_bookDB(playBookDTO); // 예매 DB에 연극 정보 넣는 메소드(예매DB)
 		}
-		
+
 		return new ModelAndView("redirect:/customerService/C_eventboardList_playForm.do");
 	}
-	
+
 	// 호텔 수정완료 클릭시 DB내용 수정
 	@RequestMapping(value = "C_hotelboardMod", method = RequestMethod.POST)
-	public ModelAndView C_hotelboardMod(@ModelAttribute HotelboardDTO hotelboardDTO, @RequestParam MultipartFile img) {		
+	public ModelAndView C_hotelboardMod(@ModelAttribute HotelboardDTO hotelboardDTO, @RequestParam MultipartFile img) {
 		if (!img.isEmpty()) {
 			File fileDelete = new File(filePath + hotelboardDTO.getImage1());
 			if (fileDelete.exists())
@@ -1290,7 +1281,7 @@ public class CustomerServiceController {
 			}
 			hotelboardDTO.setImage1(fileName);
 			customerServiceDAO.C_hotelboardMod(hotelboardDTO);
-		}else {
+		} else {
 			hotelboardDTO.setImage1(hotelboardDTO.getImage1());
 			customerServiceDAO.C_hotelboardMod(hotelboardDTO);
 		}
@@ -1324,11 +1315,10 @@ public class CustomerServiceController {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("start", year.substring(2) + "-01-01");
 		map.put("end", year.substring(2) + "-12-01");
-		
-		
+
 		List<SalesExhibitionDTO> yearMonthList = customerServiceDAO.getYearMonthSalesExhibition(map);
 		List<SalesExhibitionDTO> yearMonthSaleList = new ArrayList<SalesExhibitionDTO>();
-		
+
 		SalesExhibitionDTO salesExDTOre = null;
 		for (int i = 1; i <= 14; i++) {
 			for (int j = 1; j <= 12; j++) {
@@ -1347,43 +1337,41 @@ public class CustomerServiceController {
 				}
 			}
 		}
-		for(int i = 0; i < yearMonthList.size(); i++) {
-			for(int j = 0; j < yearMonthSaleList.size(); j++) {
-				if(yearMonthList.get(i).getBoothName().equals(yearMonthSaleList.get(j).getBoothName())) {
-					if(yearMonthList.get(i).getYearMonth().equals(yearMonthSaleList.get(j).getYearMonth())) {
+		for (int i = 0; i < yearMonthList.size(); i++) {
+			for (int j = 0; j < yearMonthSaleList.size(); j++) {
+				if (yearMonthList.get(i).getBoothName().equals(yearMonthSaleList.get(j).getBoothName())) {
+					if (yearMonthList.get(i).getYearMonth().equals(yearMonthSaleList.get(j).getYearMonth())) {
 						yearMonthSaleList.get(j).setTotalRent(yearMonthList.get(i).getTotalRent());
 					}
 				}
 			}
 		}
-		
+
 		ChartDTO chartDTO = null;
-		
+
 		List<ChartDTO> yearMonth = new ArrayList<ChartDTO>();
-		for(int i = 1; i <= 14; i++) {
+		for (int i = 1; i <= 14; i++) {
 			chartDTO = new ChartDTO();
-			chartDTO.setName("Booth"+i);
+			chartDTO.setName("Booth" + i);
 			chartDTO.setData(new int[12]);
-			for(int j = 0; j < yearMonthSaleList.size(); j++) {
-				if(yearMonthSaleList.get(j).getBoothName().equals("Booth"+i)) {
-					for(int k = 1; k <= 12; k++) {
-						if(k < 10) {
-							if(yearMonthSaleList.get(j).getYearMonth().substring(3,5).equals("0"+k)) {
-								chartDTO.getData()[k-1] = yearMonthSaleList.get(j).getTotalRent();
+			for (int j = 0; j < yearMonthSaleList.size(); j++) {
+				if (yearMonthSaleList.get(j).getBoothName().equals("Booth" + i)) {
+					for (int k = 1; k <= 12; k++) {
+						if (k < 10) {
+							if (yearMonthSaleList.get(j).getYearMonth().substring(3, 5).equals("0" + k)) {
+								chartDTO.getData()[k - 1] = yearMonthSaleList.get(j).getTotalRent();
 							}
 						} else {
-							if(yearMonthSaleList.get(j).getYearMonth().substring(3,5).equals(k+"")) {
-								chartDTO.getData()[k-1] = yearMonthSaleList.get(j).getTotalRent();
+							if (yearMonthSaleList.get(j).getYearMonth().substring(3, 5).equals(k + "")) {
+								chartDTO.getData()[k - 1] = yearMonthSaleList.get(j).getTotalRent();
 							}
 						}
-						
+
 					}
 				}
 			}
 			yearMonth.add(chartDTO);
 		}
-		
-
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
@@ -1403,16 +1391,15 @@ public class CustomerServiceController {
 
 		int salesTotalRent = customerServiceDAO.getSalesTotalRentConcertHall(salesMon);
 		String salesTotalRentstr = String.format("%,d", salesTotalRent);
-		
+
 		// 홀 별 연 월 매출 가져오기
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("start", year.substring(2) + "-01-01");
 		map.put("end", year.substring(2) + "-12-01");
-		
-		
+
 		List<SalesConcertHallDTO> yearMonthList = customerServiceDAO.getYearMonthSalesConcertHall(map);
 		List<SalesConcertHallDTO> yearMonthSaleList = new ArrayList<SalesConcertHallDTO>();
-		
+
 		SalesConcertHallDTO salesEvDTOre = null;
 		for (int i = 1; i <= 4; i++) {
 			for (int j = 1; j <= 12; j++) {
@@ -1431,42 +1418,41 @@ public class CustomerServiceController {
 				}
 			}
 		}
-		for(int i = 0; i < yearMonthList.size(); i++) {
-			for(int j = 0; j < yearMonthSaleList.size(); j++) {
-				if(yearMonthList.get(i).getHallName().equals(yearMonthSaleList.get(j).getHallName())) {
-					if(yearMonthList.get(i).getYearMonth().equals(yearMonthSaleList.get(j).getYearMonth())) {
+		for (int i = 0; i < yearMonthList.size(); i++) {
+			for (int j = 0; j < yearMonthSaleList.size(); j++) {
+				if (yearMonthList.get(i).getHallName().equals(yearMonthSaleList.get(j).getHallName())) {
+					if (yearMonthList.get(i).getYearMonth().equals(yearMonthSaleList.get(j).getYearMonth())) {
 						yearMonthSaleList.get(j).setTotalRent(yearMonthList.get(i).getTotalRent());
 					}
 				}
 			}
 		}
-		
+
 		ChartDTO chartDTO = null;
-		
+
 		List<ChartDTO> yearMonth = new ArrayList<ChartDTO>();
-		for(int i = 1; i <= 4; i++) {
+		for (int i = 1; i <= 4; i++) {
 			chartDTO = new ChartDTO();
-			chartDTO.setName("P_Room"+i);
+			chartDTO.setName("P_Room" + i);
 			chartDTO.setData(new int[12]);
-			for(int j = 0; j < yearMonthSaleList.size(); j++) {
-				if(yearMonthSaleList.get(j).getHallName().equals("P_Room" + i)) {
-					for(int k = 1; k <= 12; k++) {
-						if(k < 10) {
-							if(yearMonthSaleList.get(j).getYearMonth().substring(3,5).equals("0"+k)) {
-								chartDTO.getData()[k-1] = yearMonthSaleList.get(j).getTotalRent();
+			for (int j = 0; j < yearMonthSaleList.size(); j++) {
+				if (yearMonthSaleList.get(j).getHallName().equals("P_Room" + i)) {
+					for (int k = 1; k <= 12; k++) {
+						if (k < 10) {
+							if (yearMonthSaleList.get(j).getYearMonth().substring(3, 5).equals("0" + k)) {
+								chartDTO.getData()[k - 1] = yearMonthSaleList.get(j).getTotalRent();
 							}
 						} else {
-							if(yearMonthSaleList.get(j).getYearMonth().substring(3,5).equals(k+"")) {
-								chartDTO.getData()[k-1] = yearMonthSaleList.get(j).getTotalRent();
+							if (yearMonthSaleList.get(j).getYearMonth().substring(3, 5).equals(k + "")) {
+								chartDTO.getData()[k - 1] = yearMonthSaleList.get(j).getTotalRent();
 							}
 						}
-						
+
 					}
 				}
 			}
 			yearMonth.add(chartDTO);
 		}
-		
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
@@ -1486,15 +1472,15 @@ public class CustomerServiceController {
 
 		int salesTotalRent = customerServiceDAO.getSalesTotalRentBusinessRoom(salesMon);
 		String salesTotalRentstr = String.format("%,d", salesTotalRent);
-		
+
 		// 비즈니스룸 별 연 월 매출 가져오기
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("start", year.substring(2) + "-01-01");
 		map.put("end", year.substring(2) + "-12-01");
-		
+
 		List<SalesBusinessRoomDTO> yearMonthList = customerServiceDAO.getYearMonthBusinessRoom(map);
 		List<SalesBusinessRoomDTO> yearMonthSaleList = new ArrayList<SalesBusinessRoomDTO>();
-		
+
 		SalesBusinessRoomDTO salesBrDTOre = null;
 		for (int i = 1; i <= 6; i++) {
 			for (int j = 1; j <= 12; j++) {
@@ -1513,36 +1499,36 @@ public class CustomerServiceController {
 				}
 			}
 		}
-		for(int i = 0; i < yearMonthList.size(); i++) {
-			for(int j = 0; j < yearMonthSaleList.size(); j++) {
-				if(yearMonthList.get(i).getRoomName().equals(yearMonthSaleList.get(j).getRoomName())) {
-					if(yearMonthList.get(i).getYearMonth().equals(yearMonthSaleList.get(j).getYearMonth())) {
+		for (int i = 0; i < yearMonthList.size(); i++) {
+			for (int j = 0; j < yearMonthSaleList.size(); j++) {
+				if (yearMonthList.get(i).getRoomName().equals(yearMonthSaleList.get(j).getRoomName())) {
+					if (yearMonthList.get(i).getYearMonth().equals(yearMonthSaleList.get(j).getYearMonth())) {
 						yearMonthSaleList.get(j).setTotalRent(yearMonthList.get(i).getTotalRent());
 					}
 				}
 			}
 		}
-		
+
 		ChartDTO chartDTO = null;
-		
+
 		List<ChartDTO> yearMonth = new ArrayList<ChartDTO>();
-		for(int i = 1; i <= 6; i++) {
+		for (int i = 1; i <= 6; i++) {
 			chartDTO = new ChartDTO();
-			chartDTO.setName("Room"+i);
+			chartDTO.setName("Room" + i);
 			chartDTO.setData(new int[12]);
-			for(int j = 0; j < yearMonthSaleList.size(); j++) {
-				if(yearMonthSaleList.get(j).getRoomName().equals("Room" + i)) {
-					for(int k = 1; k <= 12; k++) {
-						if(k < 10) {
-							if(yearMonthSaleList.get(j).getYearMonth().substring(3,5).equals("0"+k)) {
-								chartDTO.getData()[k-1] = yearMonthSaleList.get(j).getTotalRent();
+			for (int j = 0; j < yearMonthSaleList.size(); j++) {
+				if (yearMonthSaleList.get(j).getRoomName().equals("Room" + i)) {
+					for (int k = 1; k <= 12; k++) {
+						if (k < 10) {
+							if (yearMonthSaleList.get(j).getYearMonth().substring(3, 5).equals("0" + k)) {
+								chartDTO.getData()[k - 1] = yearMonthSaleList.get(j).getTotalRent();
 							}
 						} else {
-							if(yearMonthSaleList.get(j).getYearMonth().substring(3,5).equals(k+"")) {
-								chartDTO.getData()[k-1] = yearMonthSaleList.get(j).getTotalRent();
+							if (yearMonthSaleList.get(j).getYearMonth().substring(3, 5).equals(k + "")) {
+								chartDTO.getData()[k - 1] = yearMonthSaleList.get(j).getTotalRent();
 							}
 						}
-						
+
 					}
 				}
 			}
@@ -1561,24 +1547,21 @@ public class CustomerServiceController {
 	@RequestMapping(value = "C_salesConcertTicket", method = RequestMethod.POST)
 	public ModelAndView C_salesConcertTicket(@RequestParam String year, @RequestParam String month) {
 		String salesMon = year.substring(2) + "-" + month + "-" + "01";
-
-		System.out.println(salesMon);
-
 		// 콘서트 티켓 이름, 예약점유 일수, 총 매출액 가져오는 sql
 		List<EventboardDTO> list = customerServiceDAO.getSalesConcertTicket(salesMon);
 
 		int salesTotalRent = customerServiceDAO.getSalesTotalRentConcertTicket(salesMon);
 		String salesTotalRentstr = String.format("%,d", salesTotalRent);
-		
+
 		// 콘서트 티켓 별 연 월 매출 가져오기
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("start", year.substring(2) + "-01-01");
 		map.put("end", year.substring(2) + "-12-01");
-		
+
 		List<EventboardDTO> yearMonthList = customerServiceDAO.getYearMonthConcertTicket(map);
 		List<ChartDTO> yearMonth = new ArrayList<ChartDTO>();
 		List<EventboardDTO> yearMonthSaleList = new ArrayList<EventboardDTO>();
-		
+
 		EventboardDTO salesEvDTOre = null;
 		for (int i = 0; i < yearMonthList.size(); i++) {
 			for (int j = 1; j <= 12; j++) {
@@ -1597,44 +1580,40 @@ public class CustomerServiceController {
 				}
 			}
 		}
-		
-		List<EventboardDTO> duplicateRemoveList = new ArrayList<EventboardDTO>(new LinkedHashSet<EventboardDTO>(yearMonthSaleList));
 
-		
-		for(int i = 0; i < yearMonthList.size(); i++) {
-			for(int j = 0; j < duplicateRemoveList.size(); j++) {
-				if(yearMonthList.get(i).getImageName().equals(duplicateRemoveList.get(j).getImageName())) {
-					if(yearMonthList.get(i).getYearMonth().equals(duplicateRemoveList.get(j).getYearMonth())) {
+		List<EventboardDTO> duplicateRemoveList = new ArrayList<EventboardDTO>(
+				new LinkedHashSet<EventboardDTO>(yearMonthSaleList));
+
+		for (int i = 0; i < yearMonthList.size(); i++) {
+			for (int j = 0; j < duplicateRemoveList.size(); j++) {
+				if (yearMonthList.get(i).getImageName().equals(duplicateRemoveList.get(j).getImageName())) {
+					if (yearMonthList.get(i).getYearMonth().equals(duplicateRemoveList.get(j).getYearMonth())) {
 						duplicateRemoveList.get(j).setTotalRent(yearMonthList.get(i).getTotalRent());
-						}
 					}
 				}
 			}
-		
-		
-		
+		}
+
 		ChartDTO chartDTO = null;
-		for(int i = 0; i < duplicateRemoveList.size(); i++) {
+		for (int i = 0; i < duplicateRemoveList.size(); i++) {
 			chartDTO = new ChartDTO();
 			chartDTO.setName(duplicateRemoveList.get(i).getImageName());
 			chartDTO.setData(new int[12]);
-			for(int k = 1; k <= 12; k++) {
-				if(k < 10) {
-					if(duplicateRemoveList.get(i).getYearMonth().substring(3,5).equals("0"+k)) {
-						chartDTO.getData()[k-1] = duplicateRemoveList.get(i).getTotalRent();
+			for (int k = 1; k <= 12; k++) {
+				if (k < 10) {
+					if (duplicateRemoveList.get(i).getYearMonth().substring(3, 5).equals("0" + k)) {
+						chartDTO.getData()[k - 1] = duplicateRemoveList.get(i).getTotalRent();
 					}
 				} else {
-					if(duplicateRemoveList.get(i).getYearMonth().substring(3,5).equals(k+"")) {
-						chartDTO.getData()[k-1] = duplicateRemoveList.get(i).getTotalRent();
+					if (duplicateRemoveList.get(i).getYearMonth().substring(3, 5).equals(k + "")) {
+						chartDTO.getData()[k - 1] = duplicateRemoveList.get(i).getTotalRent();
 					}
 				}
 			}
-			
+
 			yearMonth.add(chartDTO);
 		}
-		
-		
-		
+
 		List<ChartDTO> dtoList = new ArrayList<ChartDTO>();
 		ChartDTO dto = null;
 		for (int i = 0; i < yearMonthList.size(); i++) {
@@ -1643,17 +1622,16 @@ public class CustomerServiceController {
 			dto.setData(new int[12]);
 			dtoList.add(dto);
 		}
-		
+
 		List<ChartDTO> duplicateList = new ArrayList<ChartDTO>(new LinkedHashSet<ChartDTO>(dtoList));
-		
+
 		int cnt = 0;
-		for(int i = 0; i < duplicateList.size(); i++) {
-			for(int j = 0; j < 12; j++) {
+		for (int i = 0; i < duplicateList.size(); i++) {
+			for (int j = 0; j < 12; j++) {
 				duplicateList.get(i).getData()[j] = yearMonth.get(cnt).getData()[j];
 				cnt++;
 			}
 		}
-		
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
@@ -1662,29 +1640,26 @@ public class CustomerServiceController {
 		mav.setViewName("jsonView");
 		return mav;
 	}
-	
-	//박람회 티켓 매출
+
+	// 박람회 티켓 매출
 	@RequestMapping(value = "C_salesExhibitionTicket", method = RequestMethod.POST)
 	public ModelAndView C_salesExhibitionTicket(@RequestParam String year, @RequestParam String month) {
 		String salesMon = year.substring(2) + "-" + month + "-" + "01";
-
-		System.out.println(salesMon);
-
 		// 박람회 티켓 이름, 예약점유 일수, 총 매출액 가져오는 sql
 		List<EventboardDTO> list = customerServiceDAO.getSalesExhibitionTicket(salesMon);
 
 		int salesTotalRent = customerServiceDAO.getSalesTotalRentExhibitionTicket(salesMon);
 		String salesTotalRentstr = String.format("%,d", salesTotalRent);
-		
+
 		// 박람회 티켓 별 연 월 매출 가져오기
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("start", year.substring(2) + "-01-01");
 		map.put("end", year.substring(2) + "-12-01");
-		
+
 		List<EventboardDTO> yearMonthList = customerServiceDAO.getYearMonthExhibitionTicket(map);
 		List<ChartDTO> yearMonth = new ArrayList<ChartDTO>();
 		List<EventboardDTO> yearMonthSaleList = new ArrayList<EventboardDTO>();
-		
+
 		EventboardDTO salesEvDTOre = null;
 		for (int i = 0; i < yearMonthList.size(); i++) {
 			for (int j = 1; j <= 12; j++) {
@@ -1703,44 +1678,40 @@ public class CustomerServiceController {
 				}
 			}
 		}
-		
-		List<EventboardDTO> duplicateRemoveList = new ArrayList<EventboardDTO>(new LinkedHashSet<EventboardDTO>(yearMonthSaleList));
 
-		
-		for(int i = 0; i < yearMonthList.size(); i++) {
-			for(int j = 0; j < duplicateRemoveList.size(); j++) {
-				if(yearMonthList.get(i).getImageName().equals(duplicateRemoveList.get(j).getImageName())) {
-					if(yearMonthList.get(i).getYearMonth().equals(duplicateRemoveList.get(j).getYearMonth())) {
+		List<EventboardDTO> duplicateRemoveList = new ArrayList<EventboardDTO>(
+				new LinkedHashSet<EventboardDTO>(yearMonthSaleList));
+
+		for (int i = 0; i < yearMonthList.size(); i++) {
+			for (int j = 0; j < duplicateRemoveList.size(); j++) {
+				if (yearMonthList.get(i).getImageName().equals(duplicateRemoveList.get(j).getImageName())) {
+					if (yearMonthList.get(i).getYearMonth().equals(duplicateRemoveList.get(j).getYearMonth())) {
 						duplicateRemoveList.get(j).setTotalRent(yearMonthList.get(i).getTotalRent());
-						}
 					}
 				}
 			}
-		
-		
-		
+		}
+
 		ChartDTO chartDTO = null;
-		for(int i = 0; i < duplicateRemoveList.size(); i++) {
+		for (int i = 0; i < duplicateRemoveList.size(); i++) {
 			chartDTO = new ChartDTO();
 			chartDTO.setName(duplicateRemoveList.get(i).getImageName());
 			chartDTO.setData(new int[12]);
-			for(int k = 1; k <= 12; k++) {
-				if(k < 10) {
-					if(duplicateRemoveList.get(i).getYearMonth().substring(3,5).equals("0"+k)) {
-						chartDTO.getData()[k-1] = duplicateRemoveList.get(i).getTotalRent();
+			for (int k = 1; k <= 12; k++) {
+				if (k < 10) {
+					if (duplicateRemoveList.get(i).getYearMonth().substring(3, 5).equals("0" + k)) {
+						chartDTO.getData()[k - 1] = duplicateRemoveList.get(i).getTotalRent();
 					}
 				} else {
-					if(duplicateRemoveList.get(i).getYearMonth().substring(3,5).equals(k+"")) {
-						chartDTO.getData()[k-1] = duplicateRemoveList.get(i).getTotalRent();
+					if (duplicateRemoveList.get(i).getYearMonth().substring(3, 5).equals(k + "")) {
+						chartDTO.getData()[k - 1] = duplicateRemoveList.get(i).getTotalRent();
 					}
 				}
 			}
-			
+
 			yearMonth.add(chartDTO);
 		}
-		
-		
-		
+
 		List<ChartDTO> dtoList = new ArrayList<ChartDTO>();
 		ChartDTO dto = null;
 		for (int i = 0; i < yearMonthList.size(); i++) {
@@ -1749,18 +1720,17 @@ public class CustomerServiceController {
 			dto.setData(new int[12]);
 			dtoList.add(dto);
 		}
-		
+
 		List<ChartDTO> duplicateList = new ArrayList<ChartDTO>(new LinkedHashSet<ChartDTO>(dtoList));
-		
+
 		int cnt = 0;
-		for(int i = 0; i < duplicateList.size(); i++) {
-			for(int j = 0; j < 12; j++) {
+		for (int i = 0; i < duplicateList.size(); i++) {
+			for (int j = 0; j < 12; j++) {
 				duplicateList.get(i).getData()[j] = yearMonth.get(cnt).getData()[j];
 				cnt++;
 			}
 		}
-		
-		
+
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
 		mav.addObject("salesTotalRent", salesTotalRentstr);
@@ -1771,271 +1741,259 @@ public class CustomerServiceController {
 
 	// 회원리스트로 이동
 	@RequestMapping(value = "C_memberShib", method = RequestMethod.GET)
-	public ModelAndView C_memberShib(@RequestParam(required=false , defaultValue="1") String pg) {
+	public ModelAndView C_memberShib(@RequestParam(required = false, defaultValue = "1") String pg) {
 		ModelAndView mav = new ModelAndView();
 
 		mav.addObject("display", "/customerService/C_memberShib.jsp");
-		mav.addObject("pg",pg);
+		mav.addObject("pg", pg);
 		mav.setViewName("/customerService/C_customerServiceForm");
 
 		return mav;
 	}
-	
+
 	// 회원리스트 불러오기
 	@RequestMapping(value = "getMemberList", method = RequestMethod.POST)
-	public ModelAndView getMemberList(@RequestParam(required=false , defaultValue="1") String pg) {
-		int endNum = Integer.parseInt(pg)*3;
-		int startNum = endNum-2;
-		
-		Map<String,Integer> map = new HashMap<String,Integer>();
+	public ModelAndView getMemberList(@RequestParam(required = false, defaultValue = "1") String pg) {
+		int endNum = Integer.parseInt(pg) * 3;
+		int startNum = endNum - 2;
+
+		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("endNum", endNum);
 		map.put("startNum", startNum);
-		
+
 		List<MemberDTO> list = customerServiceDAO.getMemberList(map);
-		
+
 		int totalA = customerServiceDAO.getMemberListTotal();
-		
+
 		customerServicePaging.setCurrentPage(Integer.parseInt(pg));
 		customerServicePaging.setPageBlock(3);
 		customerServicePaging.setPageSize(3);
 		customerServicePaging.setTotalA(totalA);
 		customerServicePaging.member_pagingHTML();
-		
-		
+
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("pg", pg);
 		mav.addObject("list", list);
-		mav.addObject("customerServicePaging",customerServicePaging);
-		
+		mav.addObject("customerServicePaging", customerServicePaging);
+
 		mav.setViewName("jsonView");
 
-		return mav;	
+		return mav;
 	}
-	//회원검색
-	@RequestMapping(value="memberListSearch", method = RequestMethod.POST)
-	public ModelAndView memberListSearch(@RequestParam Map<String,String> map) {
-		
-		int endNum = Integer.parseInt(map.get("pg"))*3;
-		int startNum = endNum-2;
-		map.put("endNum", endNum+"" );
-		map.put("startNum", startNum+"" );
-		
+
+	// 회원검색
+	@RequestMapping(value = "memberListSearch", method = RequestMethod.POST)
+	public ModelAndView memberListSearch(@RequestParam Map<String, String> map) {
+
+		int endNum = Integer.parseInt(map.get("pg")) * 3;
+		int startNum = endNum - 2;
+		map.put("endNum", endNum + "");
+		map.put("startNum", startNum + "");
+
 		List<MemberDTO> list = customerServiceDAO.memberListSearch(map);
-		
+
 		int totalA = customerServiceDAO.getMemberListSearchTotal(map);
-		
+
 		customerServicePaging.setCurrentPage(Integer.parseInt(map.get("pg")));
 		customerServicePaging.setPageBlock(3);
 		customerServicePaging.setPageSize(3);
 		customerServicePaging.setTotalA(totalA);
 		customerServicePaging.memberSearch_pagingHTML();
-		
+
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("list",list);
-		mav.addObject("customerServicePaging",customerServicePaging);
-		
+		mav.addObject("list", list);
+		mav.addObject("customerServicePaging", customerServicePaging);
+
 		mav.setViewName("jsonView");
 		return mav;
 	}
-	//회원 상세정보
-	@RequestMapping(value="memberView", method = RequestMethod.POST)
+
+	// 회원 상세정보
+	@RequestMapping(value = "memberView", method = RequestMethod.POST)
 	public ModelAndView memberView(@RequestParam String M_Id) {
-		
+
 		List<Book_exhibition_membersDTO> exhibitionMemberList = customerServiceDAO.getExhibitionView(M_Id);
 		List<Book_exhibition_membersDTO> performanceMemberList = customerServiceDAO.getPerformanceView(M_Id);
 		List<BusinessRoomDTO> businessRoomMemberList = customerServiceDAO.getBusinessRoomView(M_Id);
 		exhibitionMemberList.addAll(performanceMemberList);
-		
+
 		ModelAndView mav = new ModelAndView();
-		
-		
-		
-		mav.addObject("list",exhibitionMemberList);
-		mav.addObject("list2",businessRoomMemberList);
+
+		mav.addObject("list", exhibitionMemberList);
+		mav.addObject("list2", businessRoomMemberList);
 		mav.setViewName("jsonView");
 		return mav;
 	}
-	//회원 예약 삭제
-	@RequestMapping(value="memberTicketDelete", method = RequestMethod.POST)
-	public ModelAndView memberTicketDelete(@RequestParam int seq,
-											@RequestParam String imageName,
-											@RequestParam String playDate,
-											@RequestParam String ticketQty,
-											@RequestParam String memberId
-											) {
-		
-		Map<String,String> map = new HashMap<String,String>();
-		map.put("imageName",imageName);
-		map.put("playDate",playDate);
-		map.put("ticketQty",ticketQty);
-		map.put("memberId",memberId);
-		
-		//DB
-		int resultPD = memberDAO.cancelPerformance(map);	//연극 예매 취소
-		int resultPC = memberDAO.backPerformance(map);	//연극 예매티켓 수정
-		
-		//연극취소 아니라면 전시회 취소
-		if(resultPD==0 || resultPC==0) {
-			int resultED = memberDAO.cancelExhibition(map);	//전시회 예매 취소
-			int resultEC = memberDAO.backExhibition(map);	//전시회 예매티켓 수정
-			
+
+	// 회원 예약 삭제
+	@RequestMapping(value = "memberTicketDelete", method = RequestMethod.POST)
+	public ModelAndView memberTicketDelete(@RequestParam int seq, @RequestParam String imageName,
+			@RequestParam String playDate, @RequestParam String ticketQty, @RequestParam String memberId) {
+
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("imageName", imageName);
+		map.put("playDate", playDate);
+		map.put("ticketQty", ticketQty);
+		map.put("memberId", memberId);
+
+		// DB
+		int resultPD = memberDAO.cancelPerformance(map); // 연극 예매 취소
+		int resultPC = memberDAO.backPerformance(map); // 연극 예매티켓 수정
+
+		// 연극취소 아니라면 전시회 취소
+		if (resultPD == 0 || resultPC == 0) {
+			int resultED = memberDAO.cancelExhibition(map); // 전시회 예매 취소
+			int resultEC = memberDAO.backExhibition(map); // 전시회 예매티켓 수정
+
 		}
-				
+
 		customerServiceDAO.memberExTicketDelete(seq);
 		customerServiceDAO.memberPerTicketDelete(seq);
 		customerServiceDAO.memberBusinessTicketDelete(seq);
-		System.out.println(seq);
-		
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("jsonView");
 		return mav;
 	}
-	
-	//사업자 상세정보
-		@RequestMapping(value="companyView", method = RequestMethod.POST)
-		public ModelAndView companyView(@RequestParam String C_license) {
-			List<ExhibitionDTO> exhibitionCompanyList = customerServiceDAO.getCompanyExView(C_license);
-			List<ConcertHallDTO> ConcertCompanyList = customerServiceDAO.getCompanyConView(C_license);
-			
-			ModelAndView mav = new ModelAndView();
-			mav.addObject("list",exhibitionCompanyList);
-			mav.addObject("list2",ConcertCompanyList);
-			mav.setViewName("jsonView");
-			return mav;
-		}
-		
-	
+
+	// 사업자 상세정보
+	@RequestMapping(value = "companyView", method = RequestMethod.POST)
+	public ModelAndView companyView(@RequestParam String C_license) {
+		List<ExhibitionDTO> exhibitionCompanyList = customerServiceDAO.getCompanyExView(C_license);
+		List<ConcertHallDTO> ConcertCompanyList = customerServiceDAO.getCompanyConView(C_license);
+
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", exhibitionCompanyList);
+		mav.addObject("list2", ConcertCompanyList);
+		mav.setViewName("jsonView");
+		return mav;
+	}
+
 	// 사업자리스트 불러오기
-	@RequestMapping(value ="getCompanyList", method = RequestMethod.POST)
-	public ModelAndView getCompanyList(@RequestParam(required=false , defaultValue="1") String pg) {
-		int endNum = Integer.parseInt(pg)*3;
-		int startNum = endNum-2;
-		
-		Map<String,Integer> map = new HashMap<String,Integer>();
+	@RequestMapping(value = "getCompanyList", method = RequestMethod.POST)
+	public ModelAndView getCompanyList(@RequestParam(required = false, defaultValue = "1") String pg) {
+		int endNum = Integer.parseInt(pg) * 3;
+		int startNum = endNum - 2;
+
+		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("endNum", endNum);
 		map.put("startNum", startNum);
-		
+
 		List<CompanyDTO> list = customerServiceDAO.getCompanyList(map);
-		
+
 		int totalA = customerServiceDAO.getCompanyTotal();
-		
+
 		customerServicePaging.setCurrentPage(Integer.parseInt(pg));
 		customerServicePaging.setPageBlock(3);
 		customerServicePaging.setPageSize(3);
 		customerServicePaging.setTotalA(totalA);
 		customerServicePaging.company_pagingHTML();
-		
-		
+
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("pg", pg);
 		mav.addObject("list", list);
-		mav.addObject("customerServicePaging",customerServicePaging);
-		
+		mav.addObject("customerServicePaging", customerServicePaging);
+
 		mav.setViewName("jsonView");
 
 		return mav;
 	}
-	
-	//사업자검색
-	@RequestMapping(value="CompanySearch", method = RequestMethod.POST)
-	public ModelAndView CompanySearch(@RequestParam Map<String,String> map) {
-		
-		int endNum = Integer.parseInt(map.get("pg"))*3;
-		int startNum = endNum-2;
-		map.put("endNum", endNum+"" );
-		map.put("startNum", startNum+"" );
-		
+
+	// 사업자검색
+	@RequestMapping(value = "CompanySearch", method = RequestMethod.POST)
+	public ModelAndView CompanySearch(@RequestParam Map<String, String> map) {
+
+		int endNum = Integer.parseInt(map.get("pg")) * 3;
+		int startNum = endNum - 2;
+		map.put("endNum", endNum + "");
+		map.put("startNum", startNum + "");
+
 		List<CompanyDTO> list = customerServiceDAO.CompanyListSearch(map);
-		
+
 		int totalA = customerServiceDAO.getCompanyListSearchTotal(map);
-		
+
 		customerServicePaging.setCurrentPage(Integer.parseInt(map.get("pg")));
 		customerServicePaging.setPageBlock(3);
 		customerServicePaging.setPageSize(3);
 		customerServicePaging.setTotalA(totalA);
 		customerServicePaging.companySearch_pagingHTML();
-		
+
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("list",list);
-		mav.addObject("customerServicePaging",customerServicePaging);
-		
+		mav.addObject("list", list);
+		mav.addObject("customerServicePaging", customerServicePaging);
+
 		mav.setViewName("jsonView");
 		return mav;
 	}
-	
-	//사업자 예약 삭제
-	@RequestMapping(value="companyTicketDelete", method = RequestMethod.POST)
+
+	// 사업자 예약 삭제
+	@RequestMapping(value = "companyTicketDelete", method = RequestMethod.POST)
 	public ModelAndView companyTicketDelete(@RequestParam int seq) {
-		
+
 		customerServiceDAO.companyExDelete(seq);
 		customerServiceDAO.companyConDelete(seq);
-		
-		
+
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("jsonView");
 		return mav;
 	}
-	
-	//전시회,연극 등록 층 중복 체크*****
-	@RequestMapping(value="checkReservation", method=RequestMethod.POST)
-	public @ResponseBody String checkReservation(@RequestParam String postSelect, @RequestParam String imageName, @RequestParam String startDate, @RequestParam String endDate, @RequestParam String eventPlace) {
-		
-		Map<String,String> map = new HashMap<String, String>();
+
+	// 전시회,연극 등록 층 중복 체크*****
+	@RequestMapping(value = "checkReservation", method = RequestMethod.POST)
+	public @ResponseBody String checkReservation(@RequestParam String postSelect, @RequestParam String imageName,
+			@RequestParam String startDate, @RequestParam String endDate, @RequestParam String eventPlace) {
+
+		Map<String, String> map = new HashMap<String, String>();
 		map.put("postSelect", postSelect);
 		map.put("imageName", imageName);
 		map.put("startDate", startDate);
 		map.put("endDate", endDate);
 		map.put("eventPlace", eventPlace);
-		
+
 		EventboardDTO eventboardDTO = null;
 		String check = null;
-		
+
 		List<EventboardDTO> list = new ArrayList<EventboardDTO>();
-		
-		//DB
-		if(postSelect.equals("1")) {
+
+		// DB
+		if (postSelect.equals("1")) {
 			list = customerServiceDAO.checkReservation_exhibition(map);
-		}else if(postSelect.equals("2")) {
+		} else if (postSelect.equals("2")) {
 			list = customerServiceDAO.checkReservation_performance(map);
 		}
-		
-		System.out.println("ya : "+ list.toString());
-		
-		if(list.size()==0) {
+
+		if (list.size() == 0) {
 			check = "no_data";
-		}else {
+		} else {
 			check = "yes_data";
-		} 
-		
+		}
+
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("eventboardDTO", list);
 		mav.setViewName("jsonView");
-		
+
 		return check;
 	}
-	
-		
-		
-	//이메일무단수집거부
-	@RequestMapping(value="C_emailRefuse",method=RequestMethod.GET)
+
+	// 이메일무단수집거부
+	@RequestMapping(value = "C_emailRefuse", method = RequestMethod.GET)
 	public String C_emailRefuse() {
 		return "/customerService/C_emailRefuse";
 	}
-	//개인정보처리방침
-	@RequestMapping(value="C_privacy",method=RequestMethod.GET)
+
+	// 개인정보처리방침
+	@RequestMapping(value = "C_privacy", method = RequestMethod.GET)
 	public String C_privacy() {
 		return "/customerService/C_privacy";
 	}
-	//개인정보처리방침
-	@RequestMapping(value="C_map",method=RequestMethod.GET)
+
+	// 개인정보처리방침
+	@RequestMapping(value = "C_map", method = RequestMethod.GET)
 	public ModelAndView C_map() {
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("display","/main/map.jsp");
+		mav.addObject("display", "/main/map.jsp");
 		mav.setViewName("/customerService/C_map");
 		return mav;
 	}
-		
-	
 
 }

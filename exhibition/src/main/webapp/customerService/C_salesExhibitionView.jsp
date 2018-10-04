@@ -133,7 +133,6 @@
 					data: {'year':$('#year option:selected').val(), 'month': $('#month option:selected').val()},
 					dataType: "json",
 					success: function(data) {
-						alert(JSON.stringify(data.list));
 						console.log(JSON.stringify(data.yearMonth));
 						$('#salesList').show();
 						$('#salesName').text('부스명');
@@ -243,7 +242,6 @@
 					data: {'year':$('#year option:selected').val(), 'month': $('#month option:selected').val()},
 					dataType: "json",
 					success: function(data) {
-						alert(JSON.stringify(data));
 						$('#salesList').show();
 						$('#salesName').text('홀이름');
 						$('#salesList tr:gt(0)').remove();
@@ -350,7 +348,6 @@
 					data: {'year':$('#year option:selected').val(), 'month': $('#month option:selected').val()},
 					dataType: "json",
 					success: function(data) {
-						alert(JSON.stringify(data));
 						$('#salesList').show();
 						$('#salesName').text('비즈니스룸 이름');
 						$('#salesList tr:gt(0)').remove();
@@ -456,7 +453,6 @@
 					data: {'year':$('#year option:selected').val(), 'month': $('#month option:selected').val()},
 					dataType: "json",
 					success: function(data) {
-						alert(JSON.stringify(data));
 						$('#salesList').show();
 						$('#salesName').text('공연 이름');
 						$('#salesList tr:gt(0)').remove();
@@ -561,7 +557,6 @@
 					data: {'year':$('#year option:selected').val(), 'month': $('#month option:selected').val()},
 					dataType: "json",
 					success: function(data) {
-						alert(JSON.stringify(data.yearMonth));
 						console.log(JSON.stringify(data.yearMonth));
 						$('#salesList').show();
 						$('#salesName').text('박람회 이름');
