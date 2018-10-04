@@ -268,6 +268,13 @@ create table roomRate(
 roomName varchar2(30),
 rate number);
 
+--메인화면 이미지 저장 DB(추가 해주세요 181004)
+create table mainSlideDB(
+    imageName varchar(50)
+);
+
+create sequence seq_mainSlideDB NOCACHE nocycle;
+
 
 insert into roomRate values('Room1', 15000);
 insert into roomRate values('Room2', 13000);

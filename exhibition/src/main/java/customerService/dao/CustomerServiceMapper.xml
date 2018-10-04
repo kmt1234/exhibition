@@ -330,7 +330,7 @@
 	<select id="getImageboardSlide" parameterType="java.util.List" resultType="imageboard">
 		select * from customerImageboard where seq in 
 		<foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
-			${item.value}
+			#{item}
 		</foreach>
 	</select>
 	

@@ -6,16 +6,15 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashSet;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
-import javax.swing.plaf.synth.SynthSeparatorUI;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
@@ -46,10 +45,11 @@ import customerService.bean.SalesBusinessRoomDTO;
 import customerService.bean.SalesConcertHallDTO;
 import customerService.bean.SalesExhibitionDTO;
 import customerService.dao.CustomerServiceDAO;
+import main.bean.MainSlideDTO;
+import main.dao.MainDAO;
 import member.bean.MemberDTO;
 import member.dao.MemberDAO;
 import performance.bean.Book_exhibition_membersDTO;
-import performance.bean.Book_performance_membersDTO;
 import rental.bean.BusinessRoomDTO;
 import rental.bean.ConcertHallDTO;
 import rental.bean.ExhibitionDTO;
@@ -72,7 +72,8 @@ public class CustomerServiceController {
 	private ExhibitionBookDTO exhibitionBookDTO;
 	@Autowired
 	private MemberDAO memberDAO;
-
+	@Autowired
+	private MainDAO mainDAO;
 	// 고객센터 설명페이지
 	@RequestMapping(value = "C_customerServiceForm", method = RequestMethod.GET)
 	public ModelAndView C_customerServiceForm() {
@@ -895,46 +896,83 @@ public class CustomerServiceController {
 
 	// 이미지 슬라이드 가져오는 컨트롤러
 	@RequestMapping(value = "getImageboardSlide", method = RequestMethod.GET)
-	public ModelAndView getImageboardSlide(@RequestParam String slideCode) {
-		ArrayList<ImageboardDTO> list = new ArrayList<ImageboardDTO>();
+	public ModelAndView getImageboardSlide(@RequestParam String code) {
 		ModelAndView mav = new ModelAndView();
-		String[] str = { "mainPoster.jpg", "poster2.jpg", "poster4.jpg", "poster1.jpg", "poster3.jpg" };
-
-		if (slideCode.equals("5")) {
+		
+		//DB
+		List<MainSlideDTO> mainSlideDTOList = new ArrayList<MainSlideDTO>();
+		mainSlideDTOList = mainDAO.getMainSlideDB();	//이미지 슬라이드 DB에 접속 후 이미지 가져옴
+			
+		//만약 이미지 슬라이드 DB에 관리자가 등록한 이미지가 없을 경우 -> 기본 이미지 사용(5개)
+		if(mainSlideDTOList.size()==0) {
+			ArrayList<ImageboardDTO> list = new ArrayList<ImageboardDTO>();
+			
+			String[] str = { "mainPoster.jpg", "poster2.jpg", "poster4.jpg", "poster1.jpg", "poster3.jpg" };
+			
 			for (int i = 0; i < str.length; i++) {
 				ImageboardDTO imageboardDTO = new ImageboardDTO();
 				imageboardDTO.setImage1(str[i]);
-
+				list.add(imageboardDTO);
+				
+			}
+			
+			mav.addObject("list", list);
+			mav.setViewName("jsonView");
+			
+		}else{
+			ArrayList<ImageboardDTO> list = new ArrayList<ImageboardDTO>();
+			
+			String[] str = new String[mainSlideDTOList.size()];
+			
+			for(int i = 0; i < mainSlideDTOList.size(); i++) {
+				System.out.println("aaaaa : "+ mainSlideDTOList.get(i).getImageName());
+			}
+			
+			for(int i = 0; i < mainSlideDTOList.size(); i++) {
+				str[i] = mainSlideDTOList.get(i).getImageName();
+			}
+			
+			for (int i = 0; i < mainSlideDTOList.size(); i++) {
+				ImageboardDTO imageboardDTO = new ImageboardDTO();
+				imageboardDTO.setImage1(str[i]);
 				list.add(imageboardDTO);
 			}
+			
 			mav.addObject("list", list);
 			mav.setViewName("jsonView");
 		}
-		/*
-		 * }else if(slideCode.equals("null")) { List<ImageboardDTO> list1 =
-		 * customerServiceDAO.getImageboardSlide();
-		 * 
-		 * mav.addObject("list", list1); mav.setViewName("jsonView");
-		 * 
-		 * }
-		 */
-
+		
 		return mav;
 	}
 
 	@RequestMapping(value = "getImageboardSlide1", method = RequestMethod.POST)
-	public ModelAndView getImageboardSlide1(@RequestParam List<String> list) {
+	public ModelAndView getImageboardSlide1(@RequestParam List<String> list, @RequestParam List<ImageboardDTO> list1, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		for (String data : list) {
 
+//		List<ImageboardDTO> list1 = customerServiceDAO.getImageboardSlide(list);
+       
+		//DB
+		List<MainSlideDTO> mainSlideDTOList = new ArrayList<MainSlideDTO>();
+		mainSlideDTOList = mainDAO.getMainSlideDB();
+		ImageboardDTO imageboardDTO = new ImageboardDTO();
+		
+		ArrayList<ImageboardDTO> list3 = new ArrayList<ImageboardDTO>();
+		String[] str = null;
+		
+		for(int i=0; i<mainSlideDTOList.size(); i++) {
+			try {
+				str[i] = mainSlideDTOList.get(i).getImageName();
+				imageboardDTO.setImage1(str[i]);
+				list3.add(imageboardDTO);
+			} catch (Exception e) {}			
 		}
-		List<ImageboardDTO> list1 = customerServiceDAO.getImageboardSlide(list);
-
-		mav.addObject("list", list1);
+		session.setAttribute("imageboardList", list3);
+		mav.addObject("list", list3);
 		mav.setViewName("jsonView");
 
 		return mav;
 	}
+
 
 	// 박람회 업로드 리스트 폼
 	@RequestMapping(value = "C_eventboardListForm", method = RequestMethod.GET)
