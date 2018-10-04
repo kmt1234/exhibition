@@ -1,5 +1,6 @@
 package main.dao;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +21,7 @@ import customerService.bean.SalesBusinessRoomDTO;
 import customerService.bean.SalesConcertHallDTO;
 import customerService.bean.SalesExhibitionDTO;
 import main.bean.MainDTO;
+import main.bean.MainSlideDTO;
 import member.bean.MemberDTO;
 import performance.bean.Book_exhibition_membersDTO;
 import performance.bean.Book_performance_membersDTO;
@@ -41,6 +43,15 @@ public class MainDAOMybatis implements MainDAO {
 
 	public List<EventboardDTO> index_exSlider() {
 		return sqlSession.selectList("mainSQL.index_exSlider");
+	}
+
+	public void inputMainSlideDB(String string) {
+		sqlSession.insert("mainSQL.inputMainSlideDB", string); //mainSlideDB에 저장
+		
+	}
+	
+	public List<MainSlideDTO> getMainSlideDB() {//mainSlideDB에 불러오기
+		return sqlSession.selectList("mainSQL.getMainSlideDB");
 	}
 	
 }

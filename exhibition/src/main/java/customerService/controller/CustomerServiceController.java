@@ -45,6 +45,8 @@ import customerService.bean.SalesBusinessRoomDTO;
 import customerService.bean.SalesConcertHallDTO;
 import customerService.bean.SalesExhibitionDTO;
 import customerService.dao.CustomerServiceDAO;
+import main.bean.MainSlideDTO;
+import main.dao.MainDAO;
 import member.bean.MemberDTO;
 import member.dao.MemberDAO;
 import performance.bean.Book_exhibition_membersDTO;
@@ -71,6 +73,8 @@ public class CustomerServiceController {
 	private ExhibitionBookDTO exhibitionBookDTO;
 	@Autowired
 	private MemberDAO memberDAO;
+	@Autowired
+	private MainDAO mainDAO;
 
 
 
@@ -863,16 +867,37 @@ public class CustomerServiceController {
 	// 이미지 슬라이드 가져오는 컨트롤러
 	@RequestMapping(value = "getImageboardSlide", method = RequestMethod.GET)
 	public ModelAndView getImageboardSlide(@RequestParam String code) {
-		ArrayList<ImageboardDTO> list = new ArrayList<ImageboardDTO>();
 		ModelAndView mav = new ModelAndView();
-		String[] str = { "mainPoster.jpg", "poster2.jpg", "poster4.jpg", "poster1.jpg", "poster3.jpg" };
-
-		if (code.equals("1")) {
+		
+		//DB
+		List<MainSlideDTO> mainSlideDTOList = new ArrayList<MainSlideDTO>();
+		mainSlideDTOList = mainDAO.getMainSlideDB();
+		ImageboardDTO imageboardDTO = new ImageboardDTO();
+		
+		System.out.println("mainSlideDTOList리스트 사이즈!! : "+mainSlideDTOList.size());
+		
+		if(mainSlideDTOList.size()==0) {
+			ArrayList<ImageboardDTO> list = new ArrayList<ImageboardDTO>();
+			String[] str = { "mainPoster.jpg", "poster2.jpg", "poster4.jpg", "poster1.jpg", "poster3.jpg" };
 			for (int i = 0; i < str.length; i++) {
-				ImageboardDTO imageboardDTO = new ImageboardDTO();
 				imageboardDTO.setImage1(str[i]);
 				
 				list.add(imageboardDTO);
+			}
+			mav.addObject("list", list);
+			System.out.println("리스트 사이즈!! : "+list.size());
+			mav.setViewName("jsonView");
+			
+		}else if(mainSlideDTOList.size()>0){
+			ArrayList<ImageboardDTO> list = new ArrayList<ImageboardDTO>();
+			String[] str = null;
+			
+			for(int i=0; i<mainSlideDTOList.size(); i++) {
+				try {
+					str[i] = mainSlideDTOList.get(i).getImageName();
+					imageboardDTO.setImage1(str[i]);
+					list.add(imageboardDTO);
+				} catch (Exception e) {}			
 			}
 			mav.addObject("list", list);
 			mav.setViewName("jsonView");
@@ -895,8 +920,23 @@ public class CustomerServiceController {
 
 //		List<ImageboardDTO> list1 = customerServiceDAO.getImageboardSlide(list);
        
-		session.setAttribute("imageboardList", list1);
-		mav.addObject("list", list1);
+		//DB
+		List<MainSlideDTO> mainSlideDTOList = new ArrayList<MainSlideDTO>();
+		mainSlideDTOList = mainDAO.getMainSlideDB();
+		ImageboardDTO imageboardDTO = new ImageboardDTO();
+		
+		ArrayList<ImageboardDTO> list3 = new ArrayList<ImageboardDTO>();
+		String[] str = null;
+		
+		for(int i=0; i<mainSlideDTOList.size(); i++) {
+			try {
+				str[i] = mainSlideDTOList.get(i).getImageName();
+				imageboardDTO.setImage1(str[i]);
+				list3.add(imageboardDTO);
+			} catch (Exception e) {}			
+		}
+		session.setAttribute("imageboardList", list3);
+		mav.addObject("list", list3);
 		mav.setViewName("jsonView");
 
 		return mav;

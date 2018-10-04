@@ -23,6 +23,16 @@
  	<select id="index_exSlider" resultType="eventboard">
  		select * from eventboard_play where endDate >= sysdate order by startDate asc
  	</select>
+ 	
+ 	<!--mainSlideDB에 저장 -->
+ 	<insert id="inputMainSlideDB" parameterType="java.lang.String">
+ 		insert into mainSlideDB values(#{image1})
+ 	</insert>
+ 	
+ 	<!--  -->
+ 	<select id="getMainSlideDB" resultType="main.bean.MainSlideDTO">
+ 		select * from mainSlideDB
+ 	</select>
  </mapper>
  
  
