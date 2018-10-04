@@ -23,9 +23,12 @@
 	cursor: pointer;
 }
 </style>
+<script src="../js/C_contactList_Search_js.js?ver=1"></script>
 <script type="text/javascript">
 window.onload=function(){
-	
+	if('${searchOption}'=='facility' || '${searchOption}'=='name'){
+		document.getElementById("searchOption").value = '${searchOption}';
+	}
 }
 </script>
 </head>
@@ -64,8 +67,8 @@ window.onload=function(){
 	<input type="hidden" id="keyword" value="${keyword }">
 	<br><br>
 
-	<select name="searchOption" class="ui selection dropdown" id="searchOption">
-			<option value="facility">기관&시설</option>
+	<select name="searchOption" id="searchOption" class="ui selection dropdown" id="searchOption">
+			<option value="facility" id="searchOption">기관&시설</option>
 			<option value="name">담당자</option>
 	</select>
 
@@ -83,8 +86,6 @@ window.onload=function(){
 </form>
 </div>
 <input type="hidden" id="hiddenCode" value="${code}">
-<input type="hidden" id="searchOptionVal" value="${searchOption}">
-<script src="../js/C_contactList_Search_js.js?ver=1"></script>
 
 </body>
 </html>

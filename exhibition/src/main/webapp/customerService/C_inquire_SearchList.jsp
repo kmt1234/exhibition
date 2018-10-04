@@ -61,15 +61,13 @@ window.onload=function(){
 	<div id="C_inquire_SearchPagingDiv" class="ui center pagination menu"></div>
 	<input type="hidden" name="pg" id="pg1" value="${pg}">
 	<br><br>
-	<select name="searchOption" id="searchOption"  class="ui selection dropdown" style="width:100px">
+	<select name="searchOption" id="searchOption"  class="ui selection dropdown">
 		<option value="subject" style="width:100px">제목</option>
 		<option value="name">작성자</option>
 	</select>
-	&nbsp
 	<div class="ui input" style="width: 50%;">
 		<input type="text" name="keyword" id="keyword1" value="${keyword }">
 	</div>
-	&nbsp
 		<input type="button" class="middle ui button"  value="검색" id="C_inquire_SearchBtn">
 	</div>
 	<div style="margin-top: 40px;"></div>

@@ -159,7 +159,7 @@ $(document).ready(function(){
 	// 메인화면 공지사항 리스트 제목 클릭시 내용 보여줌
 	$('#C_notice_MainList').on('click','#subjectA',function(){
 		var seq = $(this).next().text();
-		location.href='/exhibition/customerService/C_notice_View.do?seq='+seq+'&pg='+$('#pg').val();
+		location.href='/exhibition/customerService/C_notice_View.do?seq='+seq+'&pg=1';
 	});
 	
 	$('#index_searchBtn').click(function(event, str){

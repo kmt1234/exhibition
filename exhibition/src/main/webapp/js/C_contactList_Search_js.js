@@ -3,11 +3,6 @@ $(document).ready(function(){
 	var C_phone =  /^((01[1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})$/;	//휴대폰 번호 양식
 	var code = $('#hiddenCode').val();
 	
-	alert($('#searchOptionVal').val());
-	if($('#searchOptionVal').val()=='facility' || $('#searchOptionVal').val()=='name'){
-		document.getElementById("searchOption").value = $('#searchOptionVal').val();
-	}
-	
 	//주요시설 연락처 - 작성하기 폼
 	$('#C_contactList_WriteBtn').click(function(){
 		location.href="/exhibition/customerService/C_contactList_Write.do";
@@ -140,6 +135,6 @@ $(document).ready(function(){
 		if(count==0) alert("항목을 선택하세요");
 		else $('#C_contactList_delete').submit();
 	}); 
+	$('.ui.selection.dropdown').dropdown();
 	
 });
-$('.ui.selection.dropdown').dropdown();
