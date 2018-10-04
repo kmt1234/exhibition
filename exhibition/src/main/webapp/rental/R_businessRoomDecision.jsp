@@ -16,6 +16,8 @@ td.empty {
     text-align: center;
     background-color: #fff !important;
 }
+
+
 </style>
 </head>
 <body>
@@ -23,44 +25,53 @@ td.empty {
 	${businessRoom} 
 </h2>
 <div>
-	<div id='calendar' style="width: 63%"></div>
+	<div id='calendar' style="width: 520px; display: inline-block; float: left; margin-left: 20px;"></div>
 </div>
-<h3>
-	<span id="timeListTitle">비즈니스룸 이용 시간 선택</span>
-</h3>
-<div>
-<form id="businessRoomForm" method="post" action="/exhibition/rental/rentalBusinessRoom.do">
-	이용 인원 : <select name="numberPeople">
-				<option value="1">1</option>
-				<option value="2">2</option>
-				<option value="3">3</option>
-				<option value="4">4</option>
-			</select>
-	<table id="time_list" width="100%">
-		<tr>
-			<th style="width: 50px">
-				<input type="checkbox" id="checkAll">
-			</th>
-			<th >이용시간</th>
-			<th style="width: 150px">금액(원)</th>
-			<th style="width: 150px">상태</th>
-		</tr>
-		<tr>
-			<td class="empty" colspan="4"> 이용 일자를 선택하세요. </td>
-		</tr>
-	</table>
-	<c:if test="${code == '1'}">
-	<input type="hidden" name="M_Id" value="${homepageMember.getM_Id()}">
-	<input type="hidden" name="M_Email" value="${homepageMember.getM_Email()}">
-	
-	</c:if>
-	<input type="hidden" id="startDate" name="startDate" value="">
-	<input type="hidden" name="roomName" value="${businessRoom}">
-	<input type="hidden" id="rate" name="rate" value="${rate}">
-	<input type="button" value="예약하기" id="rentalBusinessRoomBtn">
-</form>
-</div>	
-
+<div style="width: 370px; float: left; height:400px; display: inline-block; margin-top: 70px;">
+	<h3>
+		<span id="timeListTitle">비즈니스룸 이용 일자 선택</span>
+	</h3>
+	<form id="businessRoomForm" method="post" action="/exhibition/rental/rentalBusinessRoom.do">
+		<div style="min-height:100px; ">
+			<div style="display: inline-block; ">
+				<div style="width: 50px; height:25px; float:left; display: inline-block;">
+					<input type="checkbox" id="checkAll">
+					<div id="chechboxDiv" style="width: 50px; height:25px; "></div>
+				</div>
+				<div style="width: 150px; height:25px; float:left;  display: inline-block;">
+					이용 시간
+					<div id="hours_of_useDiv" style="width: 150px; height:25px; display: inline-block;"></div>
+				</div>
+				<div style="width: 50px; height:25px; float:left;  display: inline-block; ">
+					가격
+					<div id="rateDiv" style="width: 50px; height:25px; display: inline-block;"></div>
+				</div>
+				<div style="width: 70px; height:25px; float:left;  display: inline-block; ">
+					상태
+					<div id="stateDiv" style="width: 70px; height:25px; display: inline-block;"></div>
+				</div>
+			</div>
+		</div>
+		<div id="peopleDiv"></div>	
+		<div id="numberPeopleDiv"></div> 
+		<div style="background-color: red;">
+			<!-- <select name="numberPeople">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+				</select> -->
+			<c:if test="${code == '1'}">
+				<input type="hidden" name="M_Id" value="${homepageMember.getM_Id()}">
+				<input type="hidden" name="M_Email" value="${homepageMember.getM_Email()}">
+			</c:if>
+			<input type="hidden" id="startDate" name="startDate" value="">
+			<input type="hidden" name="roomName" value="${businessRoom}">
+			<input type="hidden" id="rate" name="rate" value="${rate}">
+			<input type="button" value="예약하기" id="rentalBusinessRoomBtn">
+		</div>	
+	</form>
+</div>
 <div class="ui mini modal rental"> <!-- 사업자 예약 못하게 하는 모달 -->
   <div class="header">
   	<i class="huge home icon"></i>
@@ -96,9 +107,6 @@ td.empty {
     <div class="ui approve button success">확인</div>
   </div>
 </div>
-
-
-
 <input type="hidden" id="code" value="${code}">
 
 <script src='../calendar2/lib/moment.min.js'></script>
@@ -154,73 +162,123 @@ var dataset = [
 					async: false,
 					dataType: 'json',
 					success : function(data) {  //룸 이름과 클릭한 날짜를 보내 해당 날짜 예약현황 보여주기
-						$('#time_list tr:gt(0)').remove();
+						$('#chechboxDiv').empty();
+						$('#hours_of_useDiv').empty();
+						$('#stateDiv').empty();
+						$('#peopleDiv').empty();
+						$('#numberPeopleDiv').empty();
+						$('rateDiv').empty();
 						
 						$('#timeListTitle').html('<pre>'+startDate + ' 이용 시간 선택'+'</pre>');
 						
-						$('<tr/>',{
-				               align : 'center'
-				            }).append($('<td/>').append($('<input/>',{
+						$('<div/>',{
+				        }).append($('<div/>').append($('<input/>',{
+				              style : "margin-top:10px;",
 				               type : 'checkbox',
 				               name: 'checkRow',
 				               id: 'firstCheck',
 				               value: 'first'
-				            }))).append($('<td/>',{
-				               text : '09 : 00 ~ 12 : 00'
-				            })).append($('<td/>',{
-				               text : rate
-				            })).append($('<td/>',{
-				               id: 'first',
-				               text : '예약가능'
-				            })).appendTo('#time_list');
+				        }))).appendTo('#chechboxDiv');
+
+						$('<div/>',{	
+						}).append($('<div/>',{
+					            text : '09 : 00 ~ 12 : 00'
+						})).appendTo('#hours_of_useDiv');
+
+						$('<div/>',{	
+						}).append($('<div/>',{
+					            text : rate
+						})).appendTo('#rateDiv');
 						
-						$('<tr/>',{
-				               align : 'center'
-				            }).append($('<td/>').append($('<input/>',{
-				               type : 'checkbox',
-				               name: 'checkRow',
-				               id: 'secondCheck',
-				               value: 'second'
-				            }))).append($('<td/>',{
-				               text : '12 : 00 ~ 15 : 00'
-				            })).append($('<td/>',{
-				               text : rate
-				            })).append($('<td/>',{
-				            	id: 'second',
-				               text : '예약가능'
-				            })).appendTo('#time_list');
+						$('<div/>',{	
+					    }).append($('<div/>',{
+					    	style : "color:green;",
+					            id: 'first',
+					            text : '예약가능'
+					    })).appendTo('#stateDiv');
 						
-						$('<tr/>',{
-				               align : 'center'
-				            }).append($('<td/>').append($('<input/>',{
-				               type : 'checkbox',
-					           name: 'checkRow',
-					           id: 'thirdCheck',
-					           value: 'third'
-				            }))).append($('<td/>',{
-				               text : '15 : 00 ~ 18 : 00'
-				            })).append($('<td/>',{
-				               text : rate
-				            })).append($('<td/>',{
-				            	id: 'third',
-				               text : '예약가능'
-				            })).appendTo('#time_list');
+						$('<div/>',{
+			            }).append($('<div/>').append($('<input/>',{
+			               style : "margin-top:10px;",
+			               type : 'checkbox',
+			               name: 'checkRow',
+			               id: 'secondCheck',
+			               value: 'first'
+			            }))).appendTo('#chechboxDiv');
 						
-						$('<tr/>',{
-				               align : 'center'
-				            }).append($('<td/>').append($('<input/>',{
-				               type : 'checkbox',
-				               name: 'checkRow',
-				               id: 'fourthCheck',
-				               value: 'fourth'
-				            }))).append($('<td/>',{
-				               text : '18 : 00 ~ 21 : 00'
-				            })).append($('<td/>',{
-				               text : rate
-				            })).append($('<td/>',{
-				            	id: 'fourth',
-				               text : '예약가능'
-				            })).appendTo('#time_list');
+						$('<div/>',{	
+						}).append($('<div/>',{
+							    style: "margin-top:10px;",
+					            text : '12 : 00 ~ 15 : 00'
+						})).appendTo('#hours_of_useDiv');
+						
+						$('<div/>',{	
+						}).append($('<div/>',{
+					            text : rate
+						})).appendTo('#rateDiv');
+						
+						$('<div/>',{	
+					    }).append($('<div/>',{
+					    	style : "color:green;",
+					            id: 'second',
+					            text : '예약가능'
+					    })).appendTo('#stateDiv');
+						
+						$('<div/>',{
+			            }).append($('<div/>').append($('<input/>',{
+			               style : "margin-top:10px;",
+			               type : 'checkbox',
+			               name: 'checkRow',
+			               id: 'thirdCheck',
+			               value: 'third'
+			            }))).appendTo('#chechboxDiv');
+						$('<div/>',{	
+						}).append($('<div/>',{
+					            text : '15 : 00 ~ 18 : 00'
+						})).appendTo('#hours_of_useDiv');
+						
+						$('<div/>',{	
+						}).append($('<div/>',{
+					            text : rate
+						})).appendTo('#rateDiv');
+						
+						$('<div/>',{	
+					    }).append($('<div/>',{
+					    	style : "color:green;",
+					            id: 'third',
+					            text : '예약가능'
+					    })).appendTo('#stateDiv');
+						
+						$('<div/>',{
+			            }).append($('<div/>').append($('<input/>',{
+			               style : "margin-top:10px;",
+			               type : 'checkbox',
+			               name: 'checkRow',
+			               id: 'fourthCheck',
+			               value: 'fourth'
+			            }))).appendTo('#chechboxDiv');
+						
+						$('<div/>',{	
+						}).append($('<div/>',{
+					            text : '18 : 00 ~ 21 : 00'
+						})).appendTo('#hours_of_useDiv');
+						
+						$('<div/>',{	
+						}).append($('<div/>',{
+					            text : rate
+						})).appendTo('#rateDiv');
+						
+						$('<div/>',{	
+					    }).append($('<div/>',{
+					    		style : "color:green;",
+					            id: 'fourth',
+					            text : '예약가능'
+					    })).appendTo('#stateDiv');
+						
+						$('<div/>',{
+							text : '인원'
+						}).appendTo('#peopleDiv')
+						
 						$.each(data.list, function(index, item){ //예약되어있는 시간대는 예약불가능이라고 써주고 체크박스 제거
 							
 							if(item.first=='Y') {
@@ -349,7 +407,7 @@ var dataset = [
 							}
 						});
 						
-					}
+					}//success
 					
 				});
 			}
