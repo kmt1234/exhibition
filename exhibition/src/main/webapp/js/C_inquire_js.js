@@ -70,8 +70,6 @@ $(document).ready(function(){
 		$('#C_inquire_writeReply').submit();
 	});
 
-	$('.ui.selection.dropdown').dropdown();	
-	
 	// 고객의 소리 문의 받은 글 불러오기
 	$.ajax({
 		type : 'POST',
@@ -117,13 +115,12 @@ $(document).ready(function(){
 						}));
 					}
 			});
-			
 			$('#C_inquire_PagingDiv').html(data.customerServicePaging.pagingHTML);
 		}
 	});
+	
 	//고객의소리 리스트 검색한 값 불러오기
 	$('#C_inquire_SearchBtn').click(function(){
-		alert("옵션"+$('#searchOption').val())
 		$('#pg').val(1);
 		if($('#keyword').val()=='')
 			alert("검색어를 입력하세요");
@@ -143,7 +140,5 @@ $(document).ready(function(){
 			location.href="/exhibition/customerService/C_inquire_SearchList.do?pg="+$('#pg').val()+'&searchOption='+$('#searchOption').val()+"&keyword="+$('#keyword').val();
 		}
 	});
-	
-
+	$('.ui.selection.dropdown').dropdown();
 });
-$('.ui.selection.dropdown').dropdown();	

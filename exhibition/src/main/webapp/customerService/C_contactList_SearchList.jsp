@@ -23,6 +23,11 @@
 	cursor: pointer;
 }
 </style>
+<script type="text/javascript">
+window.onload=function(){
+	
+}
+</script>
 </head>
 <body>
 <div class="ui compact menu" style="width: 930px; height:900px auto;  display: inline-block;" >
@@ -54,16 +59,18 @@
 	</table>
 	<br>
 	<div id="C_contactList_SearchPagingDiv" class="ui center pagination menu"></div>
-	<input type="hidden" name="pg" id="pg" value="${pg}">
+	<input type="hidden" name="pg" id="pg1" value="${pg}">
+	<input type="hidden" id="pg" value="${pg }">
+	<input type="hidden" id="keyword" value="${keyword }">
 	<br><br>
 
-	<select class="ui selection dropdown" id="searchOption">
+	<select name="searchOption" class="ui selection dropdown" id="searchOption">
 			<option value="facility">기관&시설</option>
 			<option value="name">담당자</option>
 	</select>
 
 	<div class="ui input" style="width: 40%;">
-		<input type="text" name="keyword" id="keyword" value="${keyword }">
+		<input type="text" name="keyword" id="keyword1" value="${keyword }">
 	</div>
 		<input type="button" class="middle ui button"  value="검색" id="C_contactList_SearchBtn2">
 		<c:if test="${code=='3' }"> 
@@ -76,7 +83,7 @@
 </form>
 </div>
 <input type="hidden" id="hiddenCode" value="${code}">
-<script src="../semantic/semantic.min.js"></script>
+<input type="hidden" id="searchOptionVal" value="${searchOption}">
 <script src="../js/C_contactList_Search_js.js?ver=1"></script>
 
 </body>

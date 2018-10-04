@@ -83,7 +83,6 @@
 		<input type="hidden" name="pg" id="pg" value="${pg}"> <br>
 		<div style="height: 40px;"></div>
 	</div>
-<script src="../semantic/semantic.min.js"></script>
 <script src="../js/C_notice_js.js?ver=1"></script>
 </body>
 </html>

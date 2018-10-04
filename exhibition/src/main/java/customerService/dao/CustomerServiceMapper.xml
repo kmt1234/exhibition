@@ -27,7 +27,7 @@
  	
  	<!-- 공지사항 검색 총글수 -->
  		<select id="getTotalC_notice_Search" parameterType="java.util.Map" resultType="int">
- 		select count(*) from C_notice where ${subject} like '%'||#{keyword}||'%'
+ 		select count(*) from C_notice where subject like '%'||#{keyword}||'%'
  	</select>
  	
  	<!-- 공지사항 검색 -->
@@ -35,7 +35,7 @@
  		select * from 
  		(select rownum rn, tt.* from 
  		(select * from C_notice
- 		 where ${subject} like '%'||#{keyword}||'%'
+ 		 where subject like '%'||#{keyword}||'%'
  		 order by seq desc)tt) 
  		where rn between #{startNum} and #{endNum}
  	</select>

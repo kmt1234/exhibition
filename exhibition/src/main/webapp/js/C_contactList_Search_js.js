@@ -3,6 +3,11 @@ $(document).ready(function(){
 	var C_phone =  /^((01[1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})$/;	//휴대폰 번호 양식
 	var code = $('#hiddenCode').val();
 	
+	alert($('#searchOptionVal').val());
+	if($('#searchOptionVal').val()=='facility' || $('#searchOptionVal').val()=='name'){
+		document.getElementById("searchOption").value = $('#searchOptionVal').val();
+	}
+	
 	//주요시설 연락처 - 작성하기 폼
 	$('#C_contactList_WriteBtn').click(function(){
 		location.href="/exhibition/customerService/C_contactList_Write.do";
@@ -44,7 +49,7 @@ $(document).ready(function(){
 					align : 'center',
 					text : '검색된 결과가 없습니다.'
 				})).appendTo($('#C_contactList_SearchList'));  
-				$('#C_contactList_PagingDiv').hide();
+				$('#C_contactList_SearchPagingDiv').hide();
 				
 			}else if(data.tataA!='0'){
 				$.each(data.list, function(index, item){
@@ -118,97 +123,7 @@ $(document).ready(function(){
 	
 	// 주요 시설 연락처 검색시 리스트 불러오기
 	$('#C_contactList_SearchBtn2').click(function(){
-		$('#pg').val(1);
-		if($('#keyword').val()=='')
-			alert("검색어를 입력하세요");
-		else{
-			$.ajax({
-				type : 'GET',
-				url : '/exhibition/customerService/C_contactList_Search.do?pg='+encodeURI($('#pg').val())
-				+'&searchOption='+encodeURI($('#searchOption').val())+'&keyword='+encodeURI($('#keyword').val()),
-				dataType : 'json',
-				success : function(data){
-					$('#C_contactList_SearchList tr:gt(0)').remove();
-					if(data.totalA=='0'){
-						$('<tr/>',{
-							align: 'center'
-						}).append($('<td/>',{
-							colspan: '6',
-							align : 'center',
-							text : '검색된 결과가 없습니다.'
-						})).appendTo($('#C_contactList_SearchList'));  
-						$('#C_contactList_PagingDiv').hide();
-						
-					}else if(data.tataA!='0'){
-						$('#C_contactList_PagingDiv').show();
-						$.each(data.list, function(index, item){
-							if(code!=3){
-								$('<tr/>').append($('<td/>',{
-									align : 'center',
-									style: 'width: 20%; height: 9%; text-align: center;',
-									text : item.classify,
-									id : 'classifyA'
-								})).append($('<td/>',{
-									align : 'center',
-									style: 'width: 20%; height: 9%; text-align: center;',
-									text : item.facility,
-									id : 'facilityA'
-								})).append($('<td/>',{
-									align : 'center',
-									style: 'width: 20%; height: 9%; text-align: center;',
-									text : item.title,
-									id : 'titleA'
-								})).append($('<td/>',{
-									align : 'center',
-									style: 'width: 20%; height: 9%; text-align: center;',
-									text : item.name,
-									id : 'nameA'
-								})).append($('<td/>',{
-									align : 'center',
-									style: 'width: 20%; height: 9%; text-align: center;',
-									text : item.phone,
-									id : 'phoneA'
-								})).appendTo($('#C_contactList_SearchList'));
-								
-							} else if(code==3){
-								$('<tr/>').append($('<td/>').append($('<input/>',{
-									type : 'checkbox',
-									value : item.seq,
-									name : 'box',
-									class : 'box'
-								}))).append($('<td/>',{
-									align : 'center',
-									style: 'width: 20%; height: 9%; text-align: center;',
-									text : item.classify,
-									id : 'classifyA'
-								})).append($('<td/>',{
-									align : 'center',
-									style: 'width: 20%; height: 9%; text-align: center;',
-									text : item.facility,
-									id : 'facilityA'
-								})).append($('<td/>',{
-									align : 'center',
-									style: 'width: 20%; height: 9%; text-align: center;',
-									text : item.title,
-									id : 'titleA'
-								})).append($('<td/>',{
-									align : 'center',
-									style: 'width: 20%; height: 9%; text-align: center;',
-									text : item.name,
-									id : 'nameA'
-								})).append($('<td/>',{
-									align : 'center',
-									style: 'width: 20%; height: 9%; text-align: center;',
-									text : item.phone,
-									id : 'phoneA'
-								})).appendTo($('#C_contactList_SearchList'));	
-							}
-						});
-					}
-					$('#C_contactList_SearchPagingDiv').html(data.customerServicePaging.pagingHTML);
-				}
-			});
-		}
+		location.href="/exhibition/customerService/C_contactList_SearchList.do?pg="+$('#pg1').val()+'&searchOption='+$('#searchOption').val()+"&keyword="+$('#keyword1').val();
 	});
 	
 	// 전체 선택

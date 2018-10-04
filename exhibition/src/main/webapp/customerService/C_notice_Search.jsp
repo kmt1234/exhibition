@@ -40,6 +40,7 @@
 	cursor: pointer;
 }
 </style>
+<script src="../js/C_notice_Search_js.js?ver=1"></script>
 
 </head>
 <body>
@@ -69,21 +70,20 @@
 				</tr>
 			</table>
 			<br>
+			<input type="hidden" id="pg" value="${pg }">
+			<input type="hidden" id="keyword" value="${keyword }">
 			<div id="C_notice_SearchPagingDiv" class="ui center pagination menu"></div>
 			<br><br> 
-			<input type="hidden" id="subject" value="subject">
 			<div class="ui input" style="width: 30%;">
-				<input type="text" name="keyword" id="keyword" placeholder="검색어 입력" value="${keyword}">
+				<input type="text" name="keyword" id="keyword1" placeholder="검색어 입력" value="${keyword}">
 			</div>
-			<input type="button" class="middle ui button" value="검색" id="C_notice_SearchBtn">
+			<input type="button" class="middle ui button" value="검색" id="C_notice_SearchBtn2">
 			<c:if test="${code=='3' }">
 				<input type="button" class="middle ui button" id="C_notice_WriteBtn" value="관리자 작성">
 			</c:if>
 		</div>
-		<input type="hidden" name="pg" id="pg" value="${pg}"> <br>
+		<input type="hidden" name="pg" id="pg1" value="${pg}"> <br>
 		<div style="height: 40px;"></div>
 	</div>
-<script src="../semantic/semantic.min.js"></script>
-<script src="../js/C_notice_Search_js.js?ver=1"></script>
 </body>
 </html>
