@@ -15,7 +15,7 @@ td.empty {
     background-color: #fff !important;
 }
 div{
-	/* border: 1px solid; */
+	 border: 1px solid; 
 }
 </style>
 </head>
@@ -26,12 +26,12 @@ div{
 <div>
 	<div id='calendar' style="width: 520px; display: inline-block; float: left; margin-left: 20px;"></div>
 </div>
-<div style="width: 370px; float: left;display: inline-block; margin-top: 70px;">
+<div style="width: 370px; float: left; height:400px; display: inline-block; margin-top: 70px;">
 	<h3>
 		<span id="timeListTitle">비즈니스룸 이용 일자 선택</span>
 	</h3>
 	<form id="businessRoomForm" method="post" action="/exhibition/rental/rentalBusinessRoom.do">
-		<div style="min-height: 400px auto; ">
+		<div style="min-height:100px; ">
 			<div style="display: inline-block; ">
 				<div style="width: 50px; height:25px; float:left; display: inline-block;">
 					<input type="checkbox" id="checkAll">
@@ -49,7 +49,7 @@ div{
 		</div>
 		<div id="peopleDiv"></div>	
 		<div id="numberPeopleDiv"></div> 
-			
+		<div style="background-color: red;">
 			<!-- <select name="numberPeople">
 					<option value="1">1</option>
 					<option value="2">2</option>
@@ -63,7 +63,7 @@ div{
 			<input type="hidden" id="startDate" name="startDate" value="">
 			<input type="hidden" name="roomName" value="${businessRoom}">
 			<input type="button" value="예약하기" id="rentalBusinessRoomBtn">
-	
+		</div>	
 	</form>
 </div>
 <div class="ui mini modal rental"> <!-- 사업자 예약 못하게 하는 모달 -->
