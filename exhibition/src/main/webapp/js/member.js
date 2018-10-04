@@ -20,6 +20,12 @@ $(document).ready(function() {
 		location.reload();
 	});
 	
+	//X버튼
+	$('.close.icon').click(function(){
+		$('.ui.modal1.modal').modal("hide");
+		location.reload();
+	});
+	
 	//이름 입력 시,
 	$('#Mw_Name').blur(function(){
 		if(!Mw_regName.test($('#Mw_Name').val())){

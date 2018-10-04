@@ -5,11 +5,17 @@ $(document).ready(function(){
 	
 	//개인 회원가입 클릭 시,
 	$('#M_individual').click(function(){
-		$('.ui.modal1.modal').modal('show');
+		$('.ui.modal1.modal').modal({
+			closable : false,
+            duration : 460,
+		}).modal('show');
 	});
 	//법인 회원가입 클릭 시,
 	$('#C_company').click(function(){
-		$('.ui.modal2.modal').modal('show');
+		$('.ui.modal2.modal').modal({
+			closable : false,
+            duration : 460,
+		}).modal('show');
 	});
 	
 	/*로그인 클릭시 2가지로 분류(개인&사업자)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
