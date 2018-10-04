@@ -692,7 +692,7 @@
 		</foreach>
 	</delete>
 	
-	<!-- 연극 수정하기 위해 예매를 날려버린다 -->
+	<!-- 박람회 수정하기 위해 예매를 날려버린다 -->
 	<delete id="C_exhibitionboardBookDel" parameterType="eventboard">
 		delete eventboard_exhibition_book where num=#{seq}
 	</delete>
