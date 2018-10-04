@@ -155,8 +155,8 @@ public class CustomerServiceController {
 	
 
 	// 검색내용 찾아오기
-	@RequestMapping(value = "C_notice_Search", method = RequestMethod.POST)
-	public ModelAndView C_notice_Search(@RequestParam(required = false) Map<String, String> map) {
+	@RequestMapping(value = "C_notice_SearchList", method = RequestMethod.GET)
+	public ModelAndView C_notice_SearchList(@RequestParam(required = false) Map<String, String> map) {
 		int endNum = Integer.parseInt(map.get("pg")) * 10;
 		int startNum = endNum - 9;
 
@@ -185,13 +185,14 @@ public class CustomerServiceController {
 
 	// 공지사항 페이지에서 제목을 클리하면 내용을 보여준다.
 	@RequestMapping(value = "C_notice_View", method = RequestMethod.GET)
-	public ModelAndView C_notice_View(@RequestParam String seq, @RequestParam String pg, Model model) {
+	public ModelAndView C_notice_View(@RequestParam String seq, @RequestParam(required = false, defaultValue = "1") String pg,@RequestParam(required = false, defaultValue = "") String keyword, Model model) {
 		CustomerServiceDTO customerServiceDTO = customerServiceDAO.getNoticeInfo(seq);
 
 		model.addAttribute("customerServiceDTO", customerServiceDTO);
 		
 		ModelAndView mav = new ModelAndView();
 		model.addAttribute("pg", pg);
+		model.addAttribute("keyword", keyword);
 		mav.addObject("display", "/customerService/C_notice_View.jsp");
 		mav.setViewName("/customerService/C_customerServiceForm");
 
@@ -404,13 +405,14 @@ public class CustomerServiceController {
 
 	// 고객의소리 내용보기(관리자
 	@RequestMapping(value = "C_inquire_View", method = RequestMethod.GET)
-	public ModelAndView C_inquire_View(@RequestParam int seq, @RequestParam String pg, Model model) {
+	public ModelAndView C_inquire_View(@RequestParam int seq, @RequestParam(required = false, defaultValue = "1") String pg, @RequestParam(required = false, defaultValue = "") String keyword, Model model) {
 
 		CustomerServiceDTO customerServiceDTO = customerServiceDAO.getInquireInfo(seq);
 
 		model.addAttribute("customerServiceDTO", customerServiceDTO);
 		model.addAttribute("pg", pg);
-
+		model.addAttribute("keyword", keyword);
+		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("display", "/customerService/C_inquire_View.jsp");
 		mav.setViewName("/customerService/C_customerServiceForm");
