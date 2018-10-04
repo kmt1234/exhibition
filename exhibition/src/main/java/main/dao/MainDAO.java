@@ -34,4 +34,6 @@ public interface MainDAO {
 
 	public List<MainSlideDTO> getMainSlideDB();	//mainSlideDB에 불러오기
 
+	public void deleteMainSlideDB();	//mainSlideDB 삭제
+
 }

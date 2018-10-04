@@ -635,7 +635,7 @@ public class CustomerServiceController {
 
 	// 이미지 boardWrite(ajax)
 	@RequestMapping(value = "C_imageboardWrite", method = RequestMethod.POST)
-	public String imageboardWrite(@ModelAttribute ImageboardDTO imageboardDTO, @RequestParam MultipartFile img,
+	public ModelAndView imageboardWrite(@ModelAttribute ImageboardDTO imageboardDTO, @RequestParam MultipartFile img,
 			Model model) {
 		// 경로 바꿔야함***
 		String fileName = img.getOriginalFilename();
@@ -652,7 +652,7 @@ public class CustomerServiceController {
 		// DB
 		customerServiceDAO.imageboardWrite(imageboardDTO);
 		model.addAttribute("imageboardDTO", imageboardDTO);
-		return "/customerService/C_mainImageboardListForm";
+		return new ModelAndView("redirect:/customerService/C_mainImageboardListForm.do");
 	}
 
 	// 이미지보드 리스트
@@ -668,8 +668,8 @@ public class CustomerServiceController {
 	@RequestMapping(value = "getImageboardList", method = RequestMethod.POST)
 	public ModelAndView getImageboardList(@RequestParam(required = false, defaultValue = "1") String pg) {
 
-		int endNum = Integer.parseInt(pg) * 3;
-		int startNum = endNum - 2;
+		int endNum = Integer.parseInt(pg) * 5;
+		int startNum = endNum - 4;
 
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("endNum", endNum);
@@ -679,7 +679,7 @@ public class CustomerServiceController {
 
 		imageboardPaging.setCurrentPage(Integer.parseInt(pg));
 		imageboardPaging.setPageBlock(3);
-		imageboardPaging.setPageSize(3);
+		imageboardPaging.setPageSize(5);
 		imageboardPaging.setTotalA(totalA);
 
 		imageboardPaging.makePagingHTML();
@@ -871,46 +871,47 @@ public class CustomerServiceController {
 		
 		//DB
 		List<MainSlideDTO> mainSlideDTOList = new ArrayList<MainSlideDTO>();
-		mainSlideDTOList = mainDAO.getMainSlideDB();
-		ImageboardDTO imageboardDTO = new ImageboardDTO();
-		
-		System.out.println("mainSlideDTOList리스트 사이즈!! : "+mainSlideDTOList.size());
-		
+		mainSlideDTOList = mainDAO.getMainSlideDB();	//이미지 슬라이드 DB에 접속 후 이미지 가져옴
+			
+		//만약 이미지 슬라이드 DB에 관리자가 등록한 이미지가 없을 경우 -> 기본 이미지 사용(5개)
 		if(mainSlideDTOList.size()==0) {
 			ArrayList<ImageboardDTO> list = new ArrayList<ImageboardDTO>();
+			
 			String[] str = { "mainPoster.jpg", "poster2.jpg", "poster4.jpg", "poster1.jpg", "poster3.jpg" };
+			
 			for (int i = 0; i < str.length; i++) {
+				ImageboardDTO imageboardDTO = new ImageboardDTO();
 				imageboardDTO.setImage1(str[i]);
-				
 				list.add(imageboardDTO);
+				
 			}
+			
 			mav.addObject("list", list);
-			System.out.println("리스트 사이즈!! : "+list.size());
 			mav.setViewName("jsonView");
 			
-		}else if(mainSlideDTOList.size()>0){
+		}else{
 			ArrayList<ImageboardDTO> list = new ArrayList<ImageboardDTO>();
-			String[] str = null;
 			
-			for(int i=0; i<mainSlideDTOList.size(); i++) {
-				try {
-					str[i] = mainSlideDTOList.get(i).getImageName();
-					imageboardDTO.setImage1(str[i]);
-					list.add(imageboardDTO);
-				} catch (Exception e) {}			
+			String[] str = new String[mainSlideDTOList.size()];
+			
+			for(int i = 0; i < mainSlideDTOList.size(); i++) {
+				System.out.println("aaaaa : "+ mainSlideDTOList.get(i).getImageName());
 			}
+			
+			for(int i = 0; i < mainSlideDTOList.size(); i++) {
+				str[i] = mainSlideDTOList.get(i).getImageName();
+			}
+			
+			for (int i = 0; i < mainSlideDTOList.size(); i++) {
+				ImageboardDTO imageboardDTO = new ImageboardDTO();
+				imageboardDTO.setImage1(str[i]);
+				list.add(imageboardDTO);
+			}
+			
 			mav.addObject("list", list);
 			mav.setViewName("jsonView");
 		}
-		/*
-		 * }else if(code.equals("null")) { List<ImageboardDTO> list1 =
-		 * customerServiceDAO.getImageboardSlide();
-		 * 
-		 * mav.addObject("list", list1); mav.setViewName("jsonView");
-		 * 
-		 * }
-		 */
-
+		
 		return mav;
 	}
 

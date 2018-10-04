@@ -38,67 +38,31 @@ public class IndexController {
 	/* 메인페이지 이동~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 	@RequestMapping(value = "index", method = RequestMethod.GET)
 	public ModelAndView index(@RequestParam(required = false, defaultValue = "1") String code,@RequestParam(required = false, defaultValue = "0") int slideFlag ,Model model, HttpSession session) {
+
+		model.addAttribute("code_slide", code);
+		model.addAttribute("display", "/main/I_body.jsp");
 		
-		System.out.println("슬라이드 플래그 1 : "+slideFlag);
-		
-		String[] check = (String[])session.getAttribute("check");
-		
-		try {
-			slideFlag = (Integer)session.getAttribute("slideFlag");
-			System.out.println("슬라이드 플래그 2 : "+slideFlag);
-		} catch (Exception e) {} 
-		
-		if(slideFlag==99) {
-			List<Integer> list = new ArrayList<Integer>();
-			for(String seq : check) {
-				list.add(Integer.parseInt(seq));			
-				System.out.println(list);
-			}
-			ModelAndView mav = new ModelAndView();
-			List<ImageboardDTO> list1= customerServiceDAO.getImageboardSlide(list);
-			
-			mav.addObject("list1",list1);
-			mav.addObject("code_slide", "99");
-			mav.addObject("display", "/main/I_body_1.jsp");
-			mav.setViewName("/main/index");
-			return mav;
-			
-		}else {
-			model.addAttribute("code_slide", code);
-			model.addAttribute("display", "/main/I_body.jsp");
-			List<EventboardDTO> list = mainDAO.index_exSlider();
-			
-			model.addAttribute("list",list);
-			return new ModelAndView("/main/index");
-		}
+		return new ModelAndView("/main/index");	
 	}
 	
 	@RequestMapping(value = "I_body", method = RequestMethod.POST)
 	public String I_body(@RequestParam String[] check ,Model model,String code, HttpSession session) {
-		System.out.println("체크이다 " + check.toString());
 		
-		session.setAttribute("slideFlag", 99);
-		session.setAttribute("check", check);
-		
-		int slideFlag = (Integer)session.getAttribute("slideFlag");
-		System.out.println("슬라이드 플래그 : 아이바디 : "+slideFlag);
+		//mainSlideDB 내용 삭제(비우기)
+		mainDAO.deleteMainSlideDB();
 		
 		List<Integer> list = new ArrayList<Integer>();
 		for(String seq : check) {
 			list.add(Integer.parseInt(seq));			
-			System.out.println(list);
 		}
 		
 		List<ImageboardDTO> list1= customerServiceDAO.getImageboardSlide(list);
-		System.out.println(list1.get(0).getImage1());
-		
+	
 		//mainSlideDB에 저장
 		for(int i=0; i<list1.size(); i++) {
 			mainDAO.inputMainSlideDB(list1.get(i).getImage1());
 		}
 		
-		
-		model.addAttribute("code_slide", "99");
 		model.addAttribute("list1",list1);
 		model.addAttribute("display", "/main/I_body_1.jsp");
 		return "/main/index";

@@ -53,5 +53,10 @@ public class MainDAOMybatis implements MainDAO {
 	public List<MainSlideDTO> getMainSlideDB() {//mainSlideDB에 불러오기
 		return sqlSession.selectList("mainSQL.getMainSlideDB");
 	}
+
+	public void deleteMainSlideDB() {	//mainSlideDB 삭제
+		sqlSession.delete("mainSQL.deleteMainSlideDB");
+		
+	}
 	
 }

@@ -237,4 +237,11 @@ totalRent number);
 
 create sequence seq_businessRoom start with 1000;
 
+--메인화면 이미지 저장 DB(추가 해주세요 181004)
+create table mainSlideDB(
+    imageName varchar(50)
+);
+
+create sequence seq_mainSlideDB NOCACHE nocycle;
+
 commit;

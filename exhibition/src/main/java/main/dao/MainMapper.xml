@@ -26,13 +26,18 @@
  	
  	<!--mainSlideDB에 저장 -->
  	<insert id="inputMainSlideDB" parameterType="java.lang.String">
- 		insert into mainSlideDB values(#{image1})
+		insert into mainSlideDB values(#{image1})
  	</insert>
  	
- 	<!--  -->
- 	<select id="getMainSlideDB" resultType="main.bean.MainSlideDTO">
- 		select * from mainSlideDB
+ 	<!--mainSlideDB에서 이미지 슬라이드 가져오기  -->
+ 	<select id="getMainSlideDB" resultType="main.bean.MainSlideDTO"> 		 	
+ 			select * from mainSlideDB
  	</select>
+ 	
+ 	<!--mainSlideDB 삭제  -->
+ 	<delete id="deleteMainSlideDB">
+ 		delete from mainSlideDB
+ 	</delete>
  </mapper>
  
  
