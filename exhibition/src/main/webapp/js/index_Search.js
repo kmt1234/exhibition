@@ -24,6 +24,10 @@ $(document).ready(function(event, str){
 				})).appendTo($('#index_notice_SearchList'));  
 				
 			}else if(data.totalA!='0'){
+				var notice_total = data.totalA;
+				$('<span/>',{
+					text : "("+notice_total+"건)"
+				}).appendTo($('#index_notice_total'));
 				$.each(data.list, function(index, item){
 					$('<tr/>').append($('<input/>',{
 						align : 'center',
@@ -81,7 +85,12 @@ $(document).ready(function(event, str){
 				})).appendTo($('#index_QnA_SearchList'));
 				
 			} else if(data.totalA!='0'){
+				var QnA_total = data.totalA;
+				$('<span/>',{
+					text : "("+QnA_total+"건)"
+				}).appendTo($('#index_QnA_total'));
 				$.each(data.list, function(index, item){
+					var subject = item.subject;
 					$('<tr/>').append($('<input/>',{
 						type : 'hidden',
 						text : item.classify
@@ -106,6 +115,9 @@ $(document).ready(function(event, str){
 						text : item.content
 					})).appendTo($('#index_QnA_SearchList'));
 				});
+				/*if(subject.matches(index_keyword)){
+					System.out.println("있다");
+				}*/
 			}
 		}
 	});
@@ -115,7 +127,7 @@ $(document).ready(function(event, str){
 	});
 	
 	//
-	$('#index_QnA_SearchList').on('click','#QnA_subject',function(){
+	$('#index_QnA_SearchList').on('click','#subjectA',function(){
 		var seq = $(this).prev().text();
 		location.href='/exhibition/customerService/C_QnA.do';
 	});
@@ -141,6 +153,11 @@ $(document).ready(function(event, str){
 				})).appendTo($('#index_contactList_SearchList'));  
 				
 			}else if(data.totalA!='0'){
+				var contactList_total = data.totalA;
+				$('<span/>',{
+					text : "("+contactList_total+"건)"
+				}).appendTo($('#index_contactList_total'));
+				
 				$('<tr/>').append($('<th/>',{
 					style : "width: 18%; height: 7%; padding-top: 10px; text-align: center;",
 					text : '분류'
@@ -242,6 +259,10 @@ $(document).ready(function(event, str){
 				})).appendTo($('#index_eventboard_SearchList'));  
 				
 			} else if(data.totalA!='0'){
+				var eventboard_total = data.totalA;
+				$('<span/>',{
+					text : "("+eventboard_total+"건)"
+				}).appendTo($('#index_eventboard_total'));
 				$.each(data.list, function(index, item){
 					$('<tr/>').append($('<input/>',{
 						type : 'hidden',
@@ -294,15 +315,16 @@ $(document).ready(function(event, str){
 		}
 	});
 	
+	
+	$('#index_eventboard_SearchPlusBtn').click(function(){
+		location.href="/exhibition/main/index_eventboard_Plus.do?pg="+pg+"&index_keyword="+index_keyword;
+	});
+	
 	$('#index_eventboard_SearchList').on('click','#eventboard_name',function(){
 		var seq = $(this).prev().prev().text();
 		location.href='/exhibition//performance/exhibitionBook.do?seq='+seq;
 	});
-	
-	$('#index_eventboard_SearchList').click(function(){
-		location.href="/exhibition/main/index_eventboard_Plus.do?pg="+pg+"&index_keyword="+index_keyword;
-	});
-	
+
 	$('#index_eventboard_SearchList').on('click','#eventboard_image',function(){
 		var seq = $(this).prev().text();
 		location.href='/exhibition//performance/exhibitionBook.do?seq='+seq;
@@ -329,6 +351,10 @@ $(document).ready(function(event, str){
 				})).appendTo($('#index_eventboard_play_SearchList'));  
 				
 			} else if(data.totalA!='0'){
+				var eventboard_play_total = data.totalA;
+				$('<span/>',{
+					text : "("+eventboard_play_total+"건)"
+				}).appendTo($('#index_eventboard_play_total'));
 				$.each(data.list, function(index, item){
 					$('<tr/>').append($('<input/>',{
 						type : 'hidden',
@@ -415,6 +441,10 @@ $(document).ready(function(event, str){
 				})).appendTo($('#index_hotel_list_SearchList'));  
 				
 			} else if(data.totalA!='0'){
+				var hotel_list_total = data.totalA;
+				$('<span/>',{
+					text : "("+hotel_list_total+"건)"
+				}).appendTo($('#hotel_list_total'));
 				$.each(data.list, function(index, item){
 					$('<tr/>').append($('<td/>',{
 						rowspan : '3',
