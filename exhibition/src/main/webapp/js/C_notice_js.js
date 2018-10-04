@@ -15,7 +15,7 @@ $(document).ready(function(){
 		else if($('#content').val()=='')
 			$('#contentDiv').text("내용을 입력하세요").css('font-size','9pt').css('color','red')
 		else
-			$('#C_notice_Write').submit();
+			$('#C_notice_Write').attr('action','/exhibition/customerService/C_notice_Write.do').submit();
 	});
 	
 	//공지사항 내용보기에서 글수정 버튼 눌렀을때 수정하는 폼

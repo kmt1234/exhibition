@@ -86,6 +86,8 @@ public class IndexController {
 		
 		int totalA = mainDAO.getTotal_index_notice_Search(map);
 		
+		
+		
 		mainPaging.setCurrentPage(Integer.parseInt(map.get("pg")));
 		mainPaging.setPageBlock(3);
 		mainPaging.setPageSize(3);

@@ -49,7 +49,6 @@ left: 0px;
 		<jsp:include page="../main/I_footer.jsp" ></jsp:include>
 	</div>
 	<input type="hidden" name="index_keyword" id="index_keyword" value="${index_keyword}">
-<script src="../js/index_Search.js?ver=1" charset="UTF-8"></script>
 <script src="../js/slidbar.js"></script>
 </body>
 </html>
