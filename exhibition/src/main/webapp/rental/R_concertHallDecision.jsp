@@ -8,7 +8,7 @@
 <link href='../calendar2/fullcalendar.print.css' rel='stylesheet' media='print'/>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"><!--달력 ui-->
 <style type="text/css">
-.fc-toolbar {
+.fc-toolbar {/*달력위치  */
 	height: 53px;
 }
 </style>
@@ -18,22 +18,22 @@
 	${hallName} 
 </h2>
 <form id="concertHallDecisionForm" method="post" action="/exhibition/rental/reservationConcertHall.do" style="height: 600px;">
-	
-	<div style="width: 35%; float: right;">
-		
+	<!-- 달력 -->
+	<div id='calendar' style="width: 520px; display: inline-block; float: left; margin-left: 20px;"></div>
+	<!-- 문구 -->
+	<div style="width: 350px; float: left; display: inline-block;">
 		<br><br>
-		<div style="width: 100%; float: right;">
+		<div style="width: 100%; margin-top: 30px;">
 			<h4 style="text-align: left; padding-left: 35px ">홀 총 면적 : 100㎡</h4>
 			<h4 style="text-align: left; padding-left: 35px ">홀 단위 면적 당 금액 : 1,000원</h4>
 			<h4 style="text-align: left; padding-left: 35px ">1일 기준 이용 시간 : 08:00 ~ 20:00</h4>
-			
-			<h4>
+			<h4 style="text-align: left; padding-left: 35px ">
 				예약 시작일 :
 				<span>
 					<input type="text" name="startDate" class="datepicker5" id="startDate" value="${date}">
 				</span>
 			</h4>
-			<h4>
+			<h4 style="text-align: left; padding-left: 35px ">
 				예약 종료일 :
 				<span>
 					<input type="text" name="endDate" class="datepicker6" id="endDate" value="${date}">
@@ -46,12 +46,14 @@
 			</c:if>
 			<input type="hidden" id="totalRent" name="totalRent" value="">
 			<input type="hidden" id="hallName" name="hallName" value="${hallName}">
-			<h4>
+			<h4 style="text-align: left; padding-left: 35px ">
 				공연 이름 : 
-				<input type="text" id="title" name="title">
+				<input type="text" style="width: 185px;" id="title" name="title">
 			</h4>
-			<input class="middle ui button" type="button" id="rentBtn" value="임대료 계산하기">
-			<input class="middle ui button" type="button" id="reservationBtn" value="예약하기">
+			<div style="text-align: left; padding-left: 35px ">
+				<input class="middle ui button" type="button" id="rentBtn" value="임대료 계산하기">
+				<input class="middle ui button" type="button" style="width: 110px;" id="reservationBtn" value="예약하기">
+			</div>S
 			<div id="rentDiv"></div>
 			<div id="writeDiv"></div>
 		</div>
@@ -60,7 +62,7 @@
 	
 	</div>
 	
-	<div id='calendar' style="width: 63%"></div>
+	
 </form>
 <br><br>
 

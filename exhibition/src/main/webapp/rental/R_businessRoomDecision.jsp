@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href='../calendar2/fullcalendar.css' rel='stylesheet' />
 <link href='../calendar2/fullcalendar.print.css' rel='stylesheet' media='print' />
 <style type="text/css">
@@ -15,6 +14,9 @@ td.empty {
     text-align: center;
     background-color: #fff !important;
 }
+div{
+	/* border: 1px solid; */
+}
 </style>
 </head>
 <body>
@@ -22,42 +24,68 @@ td.empty {
 	${businessRoom} 
 </h2>
 <div>
-	<div id='calendar' style="width: 63%"></div>
+	<div id='calendar' style="width: 520px; display: inline-block; float: left; margin-left: 20px;"></div>
 </div>
-<h3>
-	<span id="timeListTitle">비즈니스룸 이용 시간 선택</span>
-</h3>
-<div>
-<form id="businessRoomForm" method="post" action="/exhibition/rental/rentalBusinessRoom.do">
-	이용 인원 : <select name="numberPeople">
-				<option value="1">1</option>
-				<option value="2">2</option>
-				<option value="3">3</option>
-				<option value="4">4</option>
+<div style="width: 350px; height: 500; float: left;display: inline-block; margin-top: 70px; margin-left: 10px">
+	<h3  style="text-align: left;">
+		<span id="timeListTitleSecond"></span>
+	</h3>
+	<form id="businessRoomForm" method="post" action="/exhibition/rental/rentalBusinessRoom.do">
+		<!-- <div style="height: 110px  auto;">
+			<div style="display: inline-block; ">
+				<div style="width: 50px; height:25px; float:left; display: inline-block;">
+					<input type="checkbox" id="checkAll" style="margin-top:5px;">
+					<div id="chechboxDiv" style="width: 50px; height:25px; "></div>
+				</div>
+				<div style="width: 230px; height:25px; float:left;  display: inline-block;">
+					이용 시간
+					<div id="hours_of_useDiv" style="width: 230px; height:25px; display: inline-block;"></div>
+				</div>
+				<div style="width: 70px; height:25px; float:left;  display: inline-block; ">
+					상태
+					<div id="stateDiv" style="width: 70px; height:25px; display: inline-block;"></div>
+				</div>
+			</div>
+			
+			<div id="peopleDiv">인원 : 
+			<select name="numberPeople">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
 			</select>
-	<table id="time_list" width="100%">
-		<tr>
-			<th style="width: 50px">
-				<input type="checkbox" id="checkAll">
-			</th>
-			<th >이용시간</th>
-			<th style="width: 150px">금액(원)</th>
-			<th style="width: 150px">상태</th>
-		</tr>
-		<tr>
-			<td class="empty" colspan="4"> 이용 일자를 선택하세요. </td>
-		</tr>
-	</table>
-	<c:if test="${code == '1'}">
-	<input type="hidden" name="M_Id" value="${homepageMember.getM_Id()}">
-	<input type="hidden" name="M_Email" value="${homepageMember.getM_Email()}">
-	</c:if>
-	<input type="hidden" id="startDate" name="startDate" value="">
-	<input type="hidden" name="roomName" value="${businessRoom}">
-	<input type="button" value="예약하기" id="rentalBusinessRoomBtn">
-</form>
-</div>	
-
+			</div>	
+			<div id="numberPeopleDiv">
+			
+				
+			</div> 
+		</div> -->
+		<table class="ui striped table" id="businessRoomTable">
+		  <thead>
+		    <tr  align="center">
+			    <th>선택</th>
+			    <th>이용일자</th>
+			    <th>금액</th>
+			    <th>예약현황</th>
+		 	</tr>
+			 </thead>
+			  <tbody id="businessRoomTbody" align="center">
+			  
+			  </tbody>
+		 </table>
+		 <span id="timeListTitle">비즈니스룸 이용 일자를 선택하세요</span>
+			
+			
+			<c:if test="${code == '1'}">
+				<input type="hidden" name="M_Id" value="${homepageMember.getM_Id()}">
+				<input type="hidden" name="M_Email" value="${homepageMember.getM_Email()}">
+			</c:if>
+			<input type="hidden" id="startDate" name="startDate" value="">
+			<input type="hidden" name="roomName" value="${businessRoom}">
+			<input type="button" value="예약하기" id="rentalBusinessRoomBtn">
+	
+	</form>
+</div>
 <div class="ui mini modal rental"> <!-- 사업자 예약 못하게 하는 모달 -->
   <div class="header">
   	<i class="huge home icon"></i>
@@ -93,9 +121,6 @@ td.empty {
     <div class="ui approve button success">확인</div>
   </div>
 </div>
-
-
-
 <input type="hidden" id="code" value="${code}">
 
 <script src='../calendar2/lib/moment.min.js'></script>
@@ -103,7 +128,6 @@ td.empty {
 <script src='../calendar2/fullcalendar.min.js'></script>
 <script src="../semantic/semantic.min.js"></script>
 <script>
-
 //호출한 roomName의 예약현황을 달력에 표시가하기 위해 해당 페이지 호출하는 동시에 listView를 
 var dataset = [
 		<c:forEach var="listView" items="${listView}" varStatus="status">
@@ -117,6 +141,7 @@ var dataset = [
 	var code = $('#code').val(); //로그인 코드 받아오기
 	
 	$(document).ready(function(){
+		$('#rentalBusinessRoomBtn').hide();
 		$('#calendar').fullCalendar({
 			header: {
 	            left: 'prev,next today',
@@ -145,9 +170,10 @@ var dataset = [
 					async: false,
 					dataType: 'json',
 					success : function(data) {  //룸 이름과 클릭한 날짜를 보내 해당 날짜 예약현황 보여주기
-						$('#time_list tr:gt(0)').remove();
-						
-						$('#timeListTitle').html('<pre>'+startDate + ' 이용 시간 선택'+'</pre>');
+						$('#rentalBusinessRoomBtn').show();
+						$('#businessRoomTable tr:gt(0)').remove();
+						$('#timeListTitle').empty();
+						$('#timeListTitleSecond').html('<pre>'+startDate + ' 이용 시간 선택'+'</pre>');
 						
 						$('<tr/>',{
 				               align : 'center'
@@ -159,11 +185,11 @@ var dataset = [
 				            }))).append($('<td/>',{
 				               text : '09 : 00 ~ 12 : 00'
 				            })).append($('<td/>',{
-				               text : '12,000'
+				               text : '12000'
 				            })).append($('<td/>',{
 				               id: 'first',
-				               text : '예약가능'
-				            })).appendTo('#time_list');
+				               html : "<font color='green'>예약가능<font/>"
+				            })).appendTo('#businessRoomTbody');
 						
 						$('<tr/>',{
 				               align : 'center'
@@ -175,11 +201,11 @@ var dataset = [
 				            }))).append($('<td/>',{
 				               text : '12 : 00 ~ 15 : 00'
 				            })).append($('<td/>',{
-				               text : '12,000'
+				               text : '12000'
 				            })).append($('<td/>',{
 				            	id: 'second',
-				               text : '예약가능'
-				            })).appendTo('#time_list');
+				            	html : "<font color='green'>예약가능<font/>"
+				            })).appendTo('#businessRoomTbody');
 						
 						$('<tr/>',{
 				               align : 'center'
@@ -191,11 +217,11 @@ var dataset = [
 				            }))).append($('<td/>',{
 				               text : '15 : 00 ~ 18 : 00'
 				            })).append($('<td/>',{
-				               text : '12,000'
+				               text : '12000'
 				            })).append($('<td/>',{
 				            	id: 'third',
-				               text : '예약가능'
-				            })).appendTo('#time_list');
+				            	html : "<font color='green'>예약가능<font/>"
+				            })).appendTo('#businessRoomTbody');
 						
 						$('<tr/>',{
 				               align : 'center'
@@ -207,11 +233,13 @@ var dataset = [
 				            }))).append($('<td/>',{
 				               text : '18 : 00 ~ 21 : 00'
 				            })).append($('<td/>',{
-				               text : '12,000'
+				               text : '12000'
 				            })).append($('<td/>',{
 				            	id: 'fourth',
-				               text : '예약가능'
-				            })).appendTo('#time_list');
+				            	html : "<font color='green'>예약가능<font/>"
+				            })).appendTo('#businessRoomTbody');
+						
+						
 						$.each(data.list, function(index, item){ //예약되어있는 시간대는 예약불가능이라고 써주고 체크박스 제거
 							
 							if(item.first=='Y') {
@@ -246,6 +274,9 @@ var dataset = [
 				}
 				$('#startDate').val(startDate);
 				$.ajax({ //룸 이름과 클릭한 날짜를 보내 해당 날짜 예약현황 보여주기
+					/* $('#businessRoomTable tr:gt(0)').remove(); */
+					/* $('#timeListTitle').empty(); */
+					/* $('#timeListTitleSecond').html('<pre>'+startDate + ' 이용 시간 선택'+'</pre>'); */
 					type : 'POST',
 					url : '/exhibition/rental/searchBusinessRoom.do',
 					data : {'roomName': '${businessRoom}',
@@ -253,9 +284,7 @@ var dataset = [
 					async: false,
 					dataType: 'json',
 					success : function(data) {
-						$('#time_list tr:gt(0)').remove();
-						
-						$('#timeListTitle').html('<pre>'+startDate + ' 이용 시간 선택'+'</pre>');
+						$('#businessRoomTable tr:gt(0)').remove();
 						
 						$('<tr/>',{
 				               align : 'center'
@@ -270,8 +299,8 @@ var dataset = [
 				               text : '12,000'
 				            })).append($('<td/>',{
 				               id: 'first',
-				               text : '예약가능'
-				            })).appendTo('#time_list');
+				               html : "<font color='green'>예약가능<font/>"
+				            })).appendTo('#businessRoomTbody');
 						
 						$('<tr/>',{
 				               align : 'center'
@@ -286,8 +315,8 @@ var dataset = [
 				               text : '12,000'
 				            })).append($('<td/>',{
 				            	id: 'second',
-				               text : '예약가능'
-				            })).appendTo('#time_list');
+				            	html : "<font color='green'>예약가능<font/>"
+				            })).appendTo('#businessRoomTbody');
 						
 						$('<tr/>',{
 				               align : 'center'
@@ -302,8 +331,8 @@ var dataset = [
 				               text : '12,000'
 				            })).append($('<td/>',{
 				            	id: 'third',
-				               text : '예약가능'
-				            })).appendTo('#time_list');
+				            	html : "<font color='green'>예약가능<font/>"
+				            })).appendTo('#businessRoomTbody');
 						
 						$('<tr/>',{
 				               align : 'center'
@@ -318,8 +347,8 @@ var dataset = [
 				               text : '12,000'
 				            })).append($('<td/>',{
 				            	id: 'fourth',
-				               text : '예약가능'
-				            })).appendTo('#time_list');
+				            	html : "<font color='green'>예약가능<font/>"
+				            })).appendTo('#businessRoomTbody');
 						$.each(data.list, function(index, item){ //예약되어있는 시간대는 예약불가능이라고 써주고 체크박스 제거
 							
 							if(item.first=='Y') {

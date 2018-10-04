@@ -21,7 +21,7 @@
  	</select>
  	
  	<select id="index_exSlider" resultType="eventboard">
- 		select * from eventboard_play where endDate >= sysdate order by startDate asc
+ 		select * from eventboard_play where endDate <![CDATA[<=]]> ADD_MONTHS(SYSDATE, 3) and endDate <![CDATA[>=]]> sysdate
  	</select>
  </mapper>
  
