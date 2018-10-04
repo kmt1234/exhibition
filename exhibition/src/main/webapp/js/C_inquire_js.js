@@ -123,19 +123,17 @@ $(document).ready(function(){
 	});
 	//고객의소리 리스트 검색한 값 불러오기
 	$('#C_inquire_SearchBtn').click(function(){
+		alert("옵션"+$('#searchOption').val())
 		$('#pg').val(1);
 		if($('#keyword').val()=='')
 			alert("검색어를 입력하세요");
 		else
 			location.href="/exhibition/customerService/C_inquire_SearchList.do?pg="+$('#pg').val()+'&searchOption='+$('#searchOption').val()+"&keyword="+$('#keyword').val();
 	});
-	
-	
 	// 고객의 소리 문의 받은 글 제목 클릭시 내용 보여주기
 	$('#C_inquire_List').on('click','#subjectA',function(){
-		alert($('#keyword').val())
 		var seq = $(this).prev().prev().text();
-		location.href='/exhibition/customerService/C_inquire_View.do?seq='+seq+'&pg='+$('#pg').val()+'&keyword='+$('#keyword').val();
+		location.href="/exhibition/customerService/C_inquire_View.do?seq="+seq+"&pg="+$('#pg').val()+"&keyword="+$('#keyword').val();
 	});
 	
 	$('#C_inquire_ListBtn').on('click', function(){

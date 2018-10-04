@@ -68,17 +68,5 @@
 	<input type="hidden" name="pseq" id="pseq" value="${customerServiceDTO.seq }">
 </form>
 <script src="../js/C_inquire_js.js?ver=1"></script>
-<script>
-$(document).ready(function(){
-	$('#C_inquire_ListBtn').on('click', function(){
-		alert($('#keyword').val())
-		if($('#keyword').val()==''){
-			location.href="/exhibition/customerService/C_inquire_List.do?pg="+$('#pg').val();
-		} else {
-			location.href="/exhibition/customerService/C_inquire_SearchList.do?pg="+$('#pg').val()+'&searchOption='+$('#searchOption').val()+"&keyword="+$('#keyword').val();
-		}
-	});
-});
-</script>
 </body>
 </html>

@@ -178,14 +178,13 @@ public class CustomerServiceController {
 
 	// 공지사항 페이지에서 제목을 클리하면 내용을 보여준다.
 	@RequestMapping(value = "C_notice_View", method = RequestMethod.GET)
-	public ModelAndView C_notice_View(@RequestParam String seq, @RequestParam String pg, @RequestParam(required = false, defaultValue = "") String keyword, Model model) {
+	public ModelAndView C_notice_View(@RequestParam String seq, @RequestParam String pg, Model model) {
 		CustomerServiceDTO customerServiceDTO = customerServiceDAO.getNoticeInfo(seq);
 
 		model.addAttribute("customerServiceDTO", customerServiceDTO);
 
 		ModelAndView mav = new ModelAndView();
 		model.addAttribute("pg", pg);
-		model.addAttribute("keyword", keyword);
 		mav.addObject("display", "/customerService/C_notice_View.jsp");
 		mav.setViewName("/customerService/C_customerServiceForm");
 
@@ -358,6 +357,10 @@ public class CustomerServiceController {
 		model.addAttribute("pg", Integer.parseInt(pg));
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("searchOption", searchOption);
+	
+		
+		
+		
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("display", "/customerService/C_inquire_SearchList.jsp");
@@ -369,12 +372,14 @@ public class CustomerServiceController {
 	// 고객의 소리 문의받은글 검색 & 페이징
 	@RequestMapping(value = "C_inquire_Search", method = RequestMethod.GET)
 	public ModelAndView C_inquire_Search(@RequestParam(required = false) Map<String, String> map) {
+		
+		
+		
 		int endNum = Integer.parseInt(map.get("pg")) * 10;
 		int startNum = endNum - 9;
 
 		map.put("startNum", startNum + "");
 		map.put("endNum", endNum + "");
-
 		// DB
 		List<CustomerServiceDTO> list = customerServiceDAO.C_inquire_Search(map);
 
@@ -385,7 +390,7 @@ public class CustomerServiceController {
 		customerServicePaging.setPageBlock(10);
 		customerServicePaging.setPageSize(10);
 		customerServicePaging.setTotalA(totalA);
-		customerServicePaging.C_inquire_searchPagingHTML(map.get("keyword"),map.get("searchOption"));
+		customerServicePaging.C_inquire_searchPagingHTML(map.get("keyword"), map.get("searchOption"));
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);

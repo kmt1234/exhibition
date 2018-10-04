@@ -7,7 +7,8 @@ $(document).ready(function(){
 	$('#C_inquire_replyBtn').click(function(){
 		$('#C_inquire_writeReply').submit();
 	});
-
+	
+	
 	
 	
 	// 고객의 소리 문의 받은 글 불러오기
@@ -73,15 +74,15 @@ $(document).ready(function(){
 	});
 	
 	//고객의소리 리스트 검색한 값 불러오기
-	$('#C_inquire_SearchBtn2').click(function(){
-		$('#pg').val(1);
+	$('#C_inquire_SearchBtn').click(function(){
+		$('#pg1').val(1);
 		if($('#keyword').val()=='')
 			alert("검색어를 입력하세요");
 		else{
 			$.ajax({
 				type : 'GET',
-				url : '/exhibition/customerService/C_inquire_Search.do?pg='+encodeURI($('#pg').val())
-				+'&searchOption='+encodeURI($('#searchOption').val())+'&keyword='+encodeURI($('#keyword').val()),
+				url : '/exhibition/customerService/C_inquire_Search.do?pg='+encodeURI($('#pg1').val())
+				+'&searchOption='+encodeURI($('#searchOption').val())+'&keyword='+encodeURI($('#keyword1').val()),
 				dataType : 'json',
 				success : function(data){
 					$('#C_inquire_SearchList tr:gt(0)').remove();
@@ -145,8 +146,6 @@ $(document).ready(function(){
 	// 고객의 소리 문의 받은 글 제목 클릭시 내용 보여주기
 	$('#C_inquire_SearchList').on('click','#subjectA',function(){
 		var seq = $(this).prev().prev().text();
-		location.href='/exhibition/customerService/C_inquire_View.do?seq='+seq+'&pg='+$('#pg').val();
+		location.href='/exhibition/customerService/C_inquire_View.do?seq='+seq+'&pg='+$('#pg').val()+"&keyword="+$('#keyword').val();
 	});
-	
-	
 });

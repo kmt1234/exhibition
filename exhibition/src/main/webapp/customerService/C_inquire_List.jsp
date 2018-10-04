@@ -64,7 +64,6 @@
 	</div>
 	<div style="margin-top: 40px;"></div>
 </div>
-<script src="../semantic/semantic.min.js"></script>
 <script src="../js/C_inquire_js.js?ver=1"></script>
 
 </body>

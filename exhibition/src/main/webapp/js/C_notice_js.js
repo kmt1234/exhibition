@@ -54,11 +54,8 @@ $(document).ready(function(){
 	});
 	
 	$('#C_notice_ListBtn').on('click', function(){
-		if($('#keyword').val()==''){
-			location.href="/exhibition/customerService/C_notice_SearchList.do?pg="+$('#pg').val();
-		}else{
-			location.href='/exhibition/customerService/C_notice_SearchList.do?pg='+$('#pg').val()+'&subject='+"subject"+'&keyword='+$('#keyword').val();
-		}
+		alert($('#keyword').val())
+		location.href="/exhibition/customerService/C_notice.do?pg="+$('#pg').val();
 	});
 	
 	// 공지사항 리스트 불러오기
