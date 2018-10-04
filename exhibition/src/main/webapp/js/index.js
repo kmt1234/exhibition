@@ -156,11 +156,13 @@ $(document).ready(function(){
 		location.href='/exhibition/customerService/C_notice_View.do?seq='+seq+'&pg='+$('#pg').val();
 	});
 	
-	$('#index_searchBtn').click(function(){
+	$('#index_searchBtn').click(function(event, str){
 		var index_keyword = $('#index_keyword').val();
+		var pg = $('#pg').val();
+		if(str!='trigger') $('#pg').val(1);
 		if($('#index_keyword').val()=='')
 			alert("검색어를 입력하세요");
-		else location.href='/exhibition/main/index_SearchForm.do?index_keyword='+index_keyword;
+		else location.href="/exhibition/main/index_Search.do?index_keyword="+index_keyword;
 		
 	});
 	//일정 달력 만들어주기
@@ -176,7 +178,6 @@ $(document).ready(function(){
 	    showMonthAfterYear: true,
 	    yearSuffix: '년',
 	    onSelect: function (date) {
-	    	alert(date);
 	    	$.ajax({
 	    		type : 'POST',
 				url : '/exhibition/performance/searchAllList.do',

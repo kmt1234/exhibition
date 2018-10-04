@@ -6,8 +6,6 @@ $(document).ready(function(){
     if (("" + month).length == 1) { month = "0" + month; }
     if (("" + day).length   == 1) { day   = "0" + day;   }
     
-    
-
    var C_name = /^[가-힣]+$/;   //한글만 가능 
    var C_phone =  /^((01[1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})$/;   //휴대폰 번호 양식
    

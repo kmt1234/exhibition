@@ -22,7 +22,6 @@
 <script type="text/javascript">
 //사업자 페이지
 function CompanyList(pg){
-	/* location.href="/exhibition/customerService/C_memberShib.do?pg="+pg */
 	$('#pg').val(pg);
 	$('#companyBtn').trigger('click','trigger');
 }
@@ -101,7 +100,7 @@ function memberSearch(pg){
 	<div class="ui input" style="width: 50%;"align="center">
 		<input type="text" placeholder="Search..." id="companySearch">
 	</div>
-	<button class="ui middle button" id="companySearchBtn" style="width:76px;">검색</button>
+	<button class="ui middle button" id="companySearchBtn" style="width:85px;">검색</button>
 </div>
 
 
@@ -116,7 +115,7 @@ function memberSearch(pg){
 	<div class="ui input" style="width: 50%;"align="center">
 		<input type="text" placeholder="Search..." id="memberSearch">
 	</div>
-		<button class="ui middle button" id="memberSearchBtn" style="width:76px;">검색</button>
+		<button class="ui middle button" id="memberSearchBtn" style="width:85px;">검색</button>
 		
 </div>
 
@@ -150,9 +149,7 @@ function memberSearch(pg){
 		    <th>예매 티켓 수(인원 수)</th>
 		    <th>취소</th>
 	  </tr></thead>
-	  <tbody id="reservationMemberTable" align="center">
-	  
-	  </tbody>
+	  <tbody id="reservationMemberTable" align="center"></tbody>
  </table>
 </div>
 <div id="reConfirm">

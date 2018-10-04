@@ -34,6 +34,7 @@ span.header {
 div#uiStatistics {
     text-align: center;
 }
+
 </style>
 
 </head>
@@ -74,10 +75,10 @@ div#uiStatistics {
 	</div>
 	
 	<div class="actions">
-	  	<div class="ui red basic cancel inverted button"><i class="remove icon"></i>
+	  	<div class="ui negative button">
 	    		아니오
 	  	</div>
-  		<div class="ui green ok inverted button" id="cancel"><i class="checkmark icon"></i>
+  		<div class="ui positive right labeled icon button" id="cancel"><i class="checkmark icon"></i>
     			예
   		</div>
 	</div>
@@ -100,7 +101,7 @@ $(document).ready(function(){
 	$('.ui.small.modal')
 	  .modal({
 			closable : false,
-            duration : 460,
+            duration : 400,
 		}).modal('show');
 	
 	

@@ -238,8 +238,6 @@ $(document).ready(function(){
 			async: true,
 			dataType : 'text',
 			success : function(data){
-				//alert(JSON.stringify(data)); 잔여좌석 확인
-				
 				if(data=='choseDate'){
 					$('#remainSeats').text('날짜입력하세요');
 				}else if(data=='remainSeats'){
@@ -259,8 +257,6 @@ $(document).ready(function(){
 	$('#BookEventBtn').click(function(){
 		var conF = confirm("예매하시겠습니까?");
 		if(conF){
-			//alert($('#selectEventDate :selected').text()); //선택된 일자 호출
-			//alert($('#selectPlayTicket :selected').text()); //선택한 티켓 수 호출 
 			$('#hiddenTicketQty').val($('#selectPlayTicket :selected').val()); //티켓 수 히든에 넣기
 			$('#hiddenDate').val($('#selectEventDate :selected').text()); //공연일자 히든에 넣기 
 			//예매 가능한 날짜 있을 때만 결재 금액 나오게 하기

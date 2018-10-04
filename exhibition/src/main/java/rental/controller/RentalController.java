@@ -275,16 +275,9 @@ public class RentalController {
 	@RequestMapping(value = "rentalBusinessRoom", method = RequestMethod.POST)
 	public ModelAndView rentalBusinessRoom(@ModelAttribute BusinessRoomDTO businessRoomDTO) {
 		businessRoomDTO.setTotalRent(businessRoomDTO.getNumberPeople() * 12000);
-
-		System.out.println(businessRoomDTO.getM_Id());
-		System.out.println(businessRoomDTO.getRoomName());
-		System.out.println(businessRoomDTO.getStartDate());
-		System.out.println(businessRoomDTO.getNumberPeople());
-		System.out.println(businessRoomDTO.getTotalRent());
+		
 		for (int i = 0; i < businessRoomDTO.getCheckRow().length; i++) {
 			businessRoomDTO.setTime(businessRoomDTO.getCheckRow()[i]);
-			;
-			System.out.println(businessRoomDTO.getTime());
 		}
 
 		businessRoomDAO.rentalBusinessRoom(businessRoomDTO);
@@ -300,7 +293,6 @@ public class RentalController {
 	public String reservationHoll(@RequestParam String booth, @RequestParam String startDate,
 			@RequestParam String endDate, @RequestParam String C_email, @RequestParam String C_license,
 			@RequestParam String C_tel, @RequestParam String title, @RequestParam int totalRent) {
-		System.out.println(C_email);
 		ExhibitionDTO exhibitionDTO = new ExhibitionDTO();
 		exhibitionDTO.setBoothName(booth);
 		exhibitionDTO.setC_email(C_email);

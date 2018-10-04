@@ -63,14 +63,14 @@ pre{
 	</div>
 <br><br>
 	<div style="width: 880px; display: inline-block; text-align: left;">
-		<div style="width: 80px; display: inline-block;">
-			<p id="prevEvent">◀ 3개월 전	</p> 
+		<div style="width: 100px; display: inline-block;">
+			<p id="prevEvent">◀ 지난 리스트	</p> 
 		</div>
-			<div style="width: 80px; display: inline-block; ">
-			<p id="currEvent">행사 리스트</p> 
+			<div style="width: 100px; display: inline-block; ">
+			<p id="currEvent">이달 리스트</p> 
 		</div>
-			<div style="width: 80px; display: inline-block; ">
-			<p id="nextEvent">3개월 후▶</a> 
+			<div style="width: 100px; display: inline-block; ">
+			<p id="nextEvent">예정 리스트▶</a> 
 		</div>
 	</div><br>
 	<!--공연 리스트 -->

@@ -27,11 +27,11 @@ left: 0px;
 </style>
 </head>
 <body>
-	<header>
+<header>
 	<div style="margin-top: 20px; min-width:1170px; position: relative;   ">
 		<jsp:include page="../main/I_header.jsp"></jsp:include>
 	</div>
-	</header>
+</header>
 	<div style="margin-top: 5px; min-width:1170px; position: relative;   " class="ui container" >
 		<!-- 사이드바 메뉴 -->
 		<div style="width:230px; height:900px auto; display: inline-block;">
