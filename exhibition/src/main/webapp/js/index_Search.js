@@ -24,28 +24,31 @@ $(document).ready(function(event, str){
 				
 			}else if(data.totalA!='0'){
 				$.each(data.list, function(index, item){
-					$('<tr/>').append($('<input/>',{
+					$('<div/>').append($('<input/>',{
 						align : 'center',
-						style: 'width: 880px; text-align: left;',
+						style: 'width: 880px; text-align: left; margin-top:15px;',
 						type : 'hidden',
 						text : item.seq
-					})).append($('<td/>',{
-						style: 'width: 880px; text-align: left;',
+					})).append($('<div/>',{
+						style: 'width: 880px; text-align: left;  font-size:13pt; margin-left:5px; margin-top:35px;',
 						id : 'subjectA',
 						text : item.subject
-					})).appendTo($('#index_notice_SearchList'));
-					$('<tr/>',{
-						style: 'width: 880px; height: 35px; text-align: left;'
-					}).append($('<td/>',{
-						style: 'width: 880px;  height: 35px; text-align: left;',
+					})).append($('<div/>',{
+						style: 'width: 880px;  height: 35px; padding-left:10px; padding-top:10px; text-align: left; font-size:8pt; font-family: inherit;',
 						class : 'contentC',
 						href : 'javascript:void(0)',
 						text : item.content
 					})).appendTo($('#index_notice_SearchList'));
-				});
-			}
-		}
-	});
+					if(index%2 != 0){
+						$('<div/>',{
+							style:"width:880px;  border-bottom:1px dashed rgb(155,155,155,.6);"
+						}).appendTo($('.contentC'));
+					}
+				});//each
+				
+			}//else if
+		}//success
+	});//ajax
 	
 	$('#index_notice_SearchPlusBtn').click(function(){
 		location.href="/exhibition/main/index_notice_Plus.do?pg="+pg+"&index_keyword="+index_keyword;

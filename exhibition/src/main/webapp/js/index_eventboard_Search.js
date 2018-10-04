@@ -5,7 +5,7 @@ $(document).ready(function(event, str){
 	
 	// 메인 검색시 검색된 박람회 리스트 불러옴
 	$.ajax({
-		type : 'POST',
+		type : 'GET',
 		url : '/exhibition/main/index_eventboard_SearchPlus.do?pg='+encodeURI(pg)+'&index_keyword='+encodeURI(index_keyword),
 		dataType : 'json',
 		success : function(data){

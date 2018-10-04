@@ -15,8 +15,6 @@
 	text-decoration: none;
 }
 #subjectA:hover {
-	color: green;
-	text-decoration: underline;
 	font-weight: bold;
 	cursor: pointer;
 }
@@ -66,23 +64,21 @@
 		</h2>
 		
 		<div style="width: 100%;" align="center" id="index_notice_div">
-		<div style="width: 400px; display: inline-block; text-align: left; font-size: 25px"><span>공지 사항</span></div>
-		<div style="width: 460px; display: inline-block; text-align: right;"><span id="index_notice_SearchPlusBtn" class="plus">더보기</span></div>
-			<table style="width: 880px; height: 40px;" align="center" border="1"
-				bordercolor="#ec008c" cellpadding="2" frame="hsides" rules="rows"
-				id="index_notice_SearchList" class="ui striped table">
-			</table>
-			<br>
-			<br><br> 
+			<div style="width: 400px; display: inline-block; text-align: left; font-size: 25px"><span>공지 사항</span></div>
+			<div style="width: 460px; display: inline-block; text-align: right;"><span id="index_notice_SearchPlusBtn" class="plus">더보기</span></div>
+				<div style="width: 880px; height: auto; align:center;  "
+					id="index_notice_SearchList" >
+				</div>
 		</div>
+		<div style="width:885px; margin-left:20px;  border-top:1px ridge rgb(155,155,155,.6); margin-top: 20px; "></div>
 		
-		<div style="width: 100%;" align="center" id="index_QnA_div">
+		<div style="width: 100%; margin-top: 50px;" align="center" id="index_QnA_div">
 		<div style="width: 400px; display: inline-block; text-align: left; font-size: 25px"><span>자주 묻는 질문</span></div>
 		<div style="width: 460px; display: inline-block; text-align: right;"><span id="index_QnA_SearchPlusBtn" class="plus">더보기</span></div>
-			<table style="width: 880px; height: 40px;" align="center" border="1"
-				bordercolor="#ec008c" cellpadding="2" frame="hsides" rules="rows"
+			<div style="width: 880px; height: auto; align:center; border: 1px solid; border-color=#ec008c; "
+				
 				id="index_QnA_SearchList" class="ui striped table">
-			</table>
+			</div>
 			<br>
 			<br><br> 
 		</div>
