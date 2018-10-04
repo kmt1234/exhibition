@@ -106,7 +106,7 @@ $(document).ready(function(){
 		var count=$('.check:checked').length;
 
 		if(count==0) 
-			alert("항목을 선택해주세요");
+			$.alertable.alert("항목을 선택해주세요");
 		else
 			$('#imageboardListForm').attr('action','/exhibition/customerService/C_imageboardDelete.do').submit();
 	});
@@ -114,7 +114,7 @@ $(document).ready(function(){
 	$('#imageSelectBtn').click(function(){
 		var count=$('.check:checked').length;
 		if(count==0) 
-			alert("항목을 선택해주세요");
+			$.alertable.alert("항목을 선택해주세요");
 		else
 			$('#imageboardListForm').attr('action','/exhibition/main/I_body.do').submit();
 	});

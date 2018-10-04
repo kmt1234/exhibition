@@ -7,7 +7,7 @@
 	border : 1px solid white;
 	word-wrap : break-word;
 	width: 400px;
-	height: 400px;
+	height: 250px;
 	white-space : normal;
 	overflow-y:scroll;
 	margin-left: -37%;

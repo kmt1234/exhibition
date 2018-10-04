@@ -37,7 +37,7 @@
 </style>
 
 <!-- 사업자 회원가입 팝업 -->
-<div class="ui modal2 modal" id="companyWriteFormPopup">							<i class="close icon"></i>
+<div class="ui modal2 modal" id="companyWriteFormPopup"><i class="close icon"></i>
 	 <div class="header" align="center">법인고객 - 회원가입 </div>
 
 	<div class="image content2">

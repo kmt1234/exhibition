@@ -260,6 +260,8 @@ $(document).ready(function(){
 			dataType : 'text',
 			success : function(data){
 				if(data=='no_data'){
+					var diff_days = diff_day($('.datepicker1').val(), $('.datepicker2').val());
+					
 					checkReservation = true;
 					//시간 비교
 					var date1 = $("#startTime").val();
@@ -295,6 +297,8 @@ $(document).ready(function(){
 						$('#priceDiv').text('티켓 가격 및 관람인원에는 숫자만 입력하세요(ex. 3,000원 -> 3000 / 120석 -> 120)').css('color','red').css('font-size','9pt').css('font-weight','bold');
 					}else if(checkReservation==false){
 						 $('#warnningDiv').text('행사 기간이 겹칩니다. 날짜를 다시 확인하세요').css('color','red').css('font-size','9pt').css('font-weight','bold');
+					}else if(diff_days < 30) {
+						 $('#warnningDiv').text('행사 기간은 최소 30일 이상이어야 합니다').css('color','red').css('font-size','9pt').css('font-weight','bold');
 					}
 					else{
 						$('#eventboardModForm').attr('action','/exhibition/customerService/C_eventboardMod.do').submit();
@@ -340,6 +344,19 @@ $(document).ready(function(){
 
 		$('#eventboardModForm').attr('action','/exhibition/customerService/C_eventboardMod.do').submit();
 	});
+	
+	function diff_day(value1, value2) {
+		var arr1 = value1.split('/');
+		var arr2 = value2.split('/');
+		
+		var dt1 = new Date(arr1[0], arr1[1], arr1[2]);
+		var dt2 = new Date(arr2[0], arr2[1], arr2[2]);
+		
+		var diff = dt2 - dt1;
+		var day = 1000 * 60 * 60 * 24;//밀리세컨 초 * 초 * 분 * 시간
+		
+		return parseInt(diff/day);
+	}
 });
 </script>
 </html>

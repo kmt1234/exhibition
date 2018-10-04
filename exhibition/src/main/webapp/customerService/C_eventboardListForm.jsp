@@ -103,7 +103,7 @@ $(document).ready(function(){
 	$('#eventDeleteBtn').click(function(){
 		var count=$('.check:checked').length;
 		if(count==0) 
-			alert("항목을 선택해주세요");
+			$.alertable.alert("항목을 선택해주세요");
 		else
 			$('#eventboardListForm').attr('action','/exhibition/customerService/C_eventboardDelete.do').submit();
 	});

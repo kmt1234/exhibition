@@ -225,10 +225,7 @@ public class IndexController {
 		mainPaging.setPageBlock(3);
 		mainPaging.setPageSize(3);
 		mainPaging.setTotalA(totalA);
-		mainPaging.index_searchPagingHTML();
-		
-		System.out.println("totalA="+totalA);
-		
+		mainPaging.index_searchPagingHTML();		
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("totalA", totalA);
@@ -337,9 +334,7 @@ public class IndexController {
 		mainPaging.setPageSize(10);
 		mainPaging.setTotalA(totalA);
 		mainPaging.index_eventboard_searchPlusPagingHTML(map.get("index_keyword"));
-		
-		System.out.println("totalA="+totalA);
-		
+				
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("totalA", totalA);
 		mav.addObject("list", list);
@@ -361,9 +356,7 @@ public class IndexController {
 		int totalA = mainDAO.getTotal_index_eventboard_play_Search(map);
 		
 		List<MainDTO> list = mainDAO.index_eventboard_play_Search(map);
-		
-		System.out.println("totalA="+totalA);
-		
+				
 		mainPaging.setCurrentPage(Integer.parseInt(map.get("pg")));
 		mainPaging.setPageBlock(3);
 		mainPaging.setPageSize(3);
@@ -403,9 +396,7 @@ public class IndexController {
 		int totalA = mainDAO.getTotal_index_eventboard_play_Search(map);
 		
 		List<MainDTO> list = mainDAO.index_eventboard_play_Search(map);
-		
-		System.out.println("totalA="+totalA);
-		
+				
 		mainPaging.setCurrentPage(Integer.parseInt(map.get("pg")));
 		mainPaging.setPageBlock(10);
 		mainPaging.setPageSize(10);
@@ -433,9 +424,7 @@ public class IndexController {
 			int totalA = mainDAO.getTotal_index_hotel_list_Search(map);
 			
 			List<MainDTO> list = mainDAO.index_hotel_list_Search(map);
-			
-			System.out.println("totalA="+totalA);
-			
+						
 			mainPaging.setCurrentPage(Integer.parseInt(map.get("pg")));
 			mainPaging.setPageBlock(3);
 			mainPaging.setPageSize(3);
