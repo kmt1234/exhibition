@@ -87,7 +87,6 @@ $(document).ready(function(){
 						style : 'margin-left : 104px',
 						text : item.content
 					}).appendTo($('#C_QnA_List'));
-					
 				} 
 			});
 		}

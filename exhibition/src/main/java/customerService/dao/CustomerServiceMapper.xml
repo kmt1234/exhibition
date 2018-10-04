@@ -25,7 +25,7 @@
  	
  	<!-- 공지사항 검색 총글수 -->
  		<select id="getTotalC_notice_Search" parameterType="java.util.Map" resultType="int">
- 		select count(*) from C_notice where ${subject} like '%'||#{keyword}||'%'
+ 		select count(*) from C_notice where subject like '%'||#{keyword}||'%'
  	</select>
  	
  	<!-- 공지사항 검색 -->
@@ -33,7 +33,7 @@
  		select * from 
  		(select rownum rn, tt.* from 
  		(select * from C_notice
- 		 where ${subject} like '%'||#{keyword}||'%'
+ 		 where subject like '%'||#{keyword}||'%'
  		 order by seq desc)tt) 
  		where rn between #{startNum} and #{endNum}
  	</select>
@@ -330,7 +330,7 @@
 	<select id="getImageboardSlide" parameterType="java.util.List" resultType="imageboard">
 		select * from customerImageboard where seq in 
 		<foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
-			${item.value}
+			#{item}
 		</foreach>
 	</select>
 	
@@ -692,7 +692,7 @@
 		</foreach>
 	</delete>
 	
-	<!-- 연극 수정하기 위해 예매를 날려버린다 -->
+	<!-- 박람회 수정하기 위해 예매를 날려버린다 -->
 	<delete id="C_exhibitionboardBookDel" parameterType="eventboard">
 		delete eventboard_exhibition_book where num=#{seq}
 	</delete>
@@ -700,18 +700,33 @@
  	<!--전시회 층 예약 중복 체크  -->
  	<select id="checkReservation_exhibition" parameterType="java.util.Map" resultType="eventboard">
  		select * from(
-						select * from eventboard where startDate between #{startDate} and #{endDate} and eventPlace = #{eventPlace}
-					 union
-						select * from eventboard where endDate between #{startDate} and #{endDate} and eventPlace = #{eventPlace})
+		select * from eventboard where startDate <![CDATA[ <= ]]> #{startDate} and enddate <![CDATA[ >= ]]> #{endDate} and eventPlace = #{eventPlace}
+		union
+		select * from eventboard where endDate <![CDATA[ <= ]]> #{startDate} and enddate <![CDATA[ >= ]]> #{endDate} and eventPlace = #{eventPlace})
  	</select>
  	
  	<!--연극 공연장 예약 중복 체크  -->
  	<select id="checkReservation_performance" parameterType="java.util.Map" resultType="eventboard">
  		select * from(
-						select * from eventboard_play where startDate between #{startDate} and #{endDate} and eventPlace = #{eventPlace}
-					 union
-						select * from eventboard_play where endDate between #{startDate} and #{endDate} and eventPlace = #{eventPlace})
+		select * from eventboard_play where startDate <![CDATA[ <= ]]> #{startDate} and enddate <![CDATA[ >= ]]> #{endDate} and eventPlace = #{eventPlace}
+		union
+		select * from eventboard_play where endDate <![CDATA[ <= ]]> #{startDate} and enddate <![CDATA[ >= ]]> #{endDate} and eventPlace = #{eventPlace})
  	</select>
+ 	
+ 	<!-- 박람회 수정하기위해 일단 날짜 초기화 -->
+ 	<update id="eventboardModDelete" parameterType="String">
+ 		update eventboard set startDate='1900-01-01' , endDate ='1900-01-01' where seq=#{seq}
+ 	</update>
+ 	
+ 	<!-- 박람회 수정하기위해 예매일자 초기화 -->
+ 	<delete id="eventboardModDelete_book" parameterType="String">
+ 		delete from EVENTBOARD_EXHIBITION_BOOK where num=#{seq}
+ 	</delete>
+ 	
+ 	<!-- 공연 수정하기위해 일단 날짜 초기화 -->
+ 	<update id="eventboard_playModDelete" parameterType="String">
+ 		update eventboard_play set startDate='1900-01-01' , endDate ='1900-01-01' where seq=#{seq}
+ 	</update>
  	
  </mapper>
  

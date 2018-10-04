@@ -49,7 +49,7 @@
 	</table>
 	<br>
 	<div id="C_inquire_PagingDiv" class="ui center pagination menu"></div>
-	<input type="hidden" name="pg" id="pg" value="1">
+	<input type="hidden" name="pg" id="pg" value="${pg}">
 	<br><br>
 	<select name="searchOption" id="searchOption"  class="ui selection dropdown" style="width:100px">
 		<option value="subject" style="width:100px">제목</option>
@@ -64,7 +64,6 @@
 	</div>
 	<div style="margin-top: 40px;"></div>
 </div>
-<script src="../semantic/semantic.min.js"></script>
 <script src="../js/C_inquire_js.js?ver=1"></script>
 
 </body>

@@ -2,11 +2,12 @@ $(document).ready(function(){
 	
 	/*---------법인회원가입---------*/
 	var Cw_regPwd = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-]|.*[0-9]).{6,24}$/;	//6-24자리 영문대소문자or숫자or특수기호
-	var Cw_regReg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|\*]+$/; //한글과 영문만 가능
-	var Cw_regPhone =  /^((01[1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})$/;	//휴대폰 번호 양식
+	var Cw_regReg = /^[가-힣]{2,15}|[a-zA-Z]{2,15}\s[a-zA-Z]{2,15}$/;  //한글과 영문만 가능
+	var Cw_regPhone =  /^(0(2|3[1-3]|4[1-4]|5[1-5]|6[1-4]))(\d{3,4})(\d{4})$/; //전화번호 양식
 	var Cw_regEmail = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/; //이메일 양식
 	var reGex = /^([0-9]{10})$/; //숫자 10자리
 	var rePex = /^([0-9]{12})$/; //숫자 12자리
+	var regexp = /^[0-9]*$/; //숫자만 입력
 	
 	
 	$('#companyWrite').hide();
@@ -18,10 +19,19 @@ $(document).ready(function(){
 		location.reload();
 	});
 	
+	//X버튼
+	$('.close.icon').click(function(){
+		$('.ui.modal2.modal').modal("hide");
+		location.reload();
+	});
+	
 	//사업자명
 	$('#Cw_businessname').blur(function(){
 		if($('#Cw_businessname').val()==''){
 			$('#businessnameConfirm').text("사업자명을 입력하세요").css("font-size","11px").css("color","white");
+			$('#Cw_businessname').css({'border':'1px solid red', 'background-color':'#f4d2d2'});
+		}else if(regexp.test($('#Cw_businessname').val())){
+			$('#businessnameConfirm').text("숫자만 입력하시면 안됩니다").css("font-size","11px").css("color","white");
 			$('#Cw_businessname').css({'border':'1px solid red', 'background-color':'#f4d2d2'});
 		}else{
 			$('#businessnameConfirm').text('');
@@ -61,7 +71,7 @@ $(document).ready(function(){
 			$('#passwordConfirm').text("비밀번호를 입력하세요").css("font-size","11px").css("color","white");
 			$('#Cw_password').css({'border':'1px solid red', 'background-color':'#f4d2d2'});
 		}else if(!Cw_regPwd.test($('#Cw_password').val())){
-			$('#passwordConfirm').text("비밀번호는 6-24자리 입니다").css("font-size","11px").css("color","white");
+			$('#passwordConfirm').text("비밀번호는 숫자와 문자를 포함, 6-24자리 입니다").css("font-size","11px").css("color","white");
 			$('#Cw_password').css({'border':'1px solid red', 'background-color':'#f4d2d2'});
 		}else{
 			$('#passwordConfirm').text('');
@@ -90,7 +100,19 @@ $(document).ready(function(){
 			$('#Cw_corporate').css({'border':'1px solid red', 'background-color':'#f4d2d2'});
 		}else{
 			$('#corporateConfirm').text('');
-			$('#Cw_corporate').css({'border':'1px solid green', 'background-color':'white'});
+			$.ajax({
+				type : 'POST',
+				url : '/exhibition/company/checkNum2.do',
+				data : {'sNum2':$('#Cw_corporate').val()},
+				dataType : 'text',
+				success : function(data){
+					if(data=='exist'){
+						$('#corporateConfirm').text('이미 등록되어있는 번호입니다').css("font-size","11px").css("color","white");
+						$('#Cw_corporate').css({'border':'1px solid red', 'background-color':'#f4d2d2'});
+					}else if(data=='not_exist')
+						$('#Cw_corporate').css({'border':'1px solid green', 'background-color':'white'});
+				}//success
+			});//ajax
 		}
 	});
 	
@@ -156,13 +178,13 @@ $(document).ready(function(){
 		}
 	});
 	
-	//핸드폰
+	//전화번호
 	$('#Cw_tel').blur(function(){
 		if($('#Cw_tel').val()==''){
-			$('#telConfirm').text("휴대폰을 입력하세요").css("font-size","11px").css("color","white");
+			$('#telConfirm').text("전화번호를 입력하세요").css("font-size","11px").css("color","white");
 			$('#Cw_tel').css({'border':'1px solid red', 'background-color':'#f4d2d2'});
 		}else if(!Cw_regPhone.test($('#Cw_tel').val())){
-			$('#telConfirm').text("휴대폰 양식에 맞지 않습니다. ex) 01XXXXXXXXX").css("font-size","11px").css("color","white");
+			$('#telConfirm').text("전화번호 양식에 맞지 않습니다. ex) 01XXXXXXXXX").css("font-size","11px").css("color","white");
 			$('#Cw_tel').css({'border':'1px solid red', 'background-color':'#f4d2d2'});
 		}else {
 			$('#telConfirm').text('');

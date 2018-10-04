@@ -34,7 +34,7 @@
 <!--메인화면  -->
 <section>
 	<div class="ui container main_section">
-		<jsp:include page="${display }"/>
+		<jsp:include page="${display}"/>
 	</div>
 <!--메인화면 아래 부분(일정)  -->
 	<div class="ui container main_section1">
@@ -48,7 +48,7 @@
 			<div class="main_section3" id="mainCal" style="margin-top: 15px;" ></div>
 			<!-- today -->
 			<dl class="todays main_section3" id="todays">
-				<dt style="margin-left: 20px; font-size: 13pt">Today's</dt>
+				<dt style="margin-left: 20px; font-size: 13pt">Today's <a href="/exhibition/performance/P_allSchedule.do" style="padding-left: 100px;" class="more" title="Today's 더보기">more+</a></dt>
 				<dd id="today_list" >
 					<ul class="total_list" id="total_list" style="list-style:none;">
 					</ul>

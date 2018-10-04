@@ -161,7 +161,7 @@
 	    			<div class="content">결재 금액</div>
 	    		</div>
 	    		<div class="from1" style="width: 375px;">
-	    			<div class="content1">span id="totalPrice"></span>원</div>
+	    			<div class="content1"><span id="totalPrice"></span>원</div>
 	    		</div>
 	    		<div class="from1" style="width: 375px;">
 		  			<div class="content1" id="bookInfo">입장 시, 신분증 제출 및 예매자 아이디를 말씀해주시면 됩니다.</div>	
