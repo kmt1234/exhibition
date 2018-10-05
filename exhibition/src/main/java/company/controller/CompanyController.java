@@ -27,7 +27,6 @@ public class CompanyController {
 	@RequestMapping(value="companyWrite",method=RequestMethod.POST)
 	public ModelAndView write(@ModelAttribute CompanyDTO companyDTO, HttpSession session) {
 		companyDAO.write(companyDTO);
-		
 		//회원가입 축하 메세지
 		session.setAttribute("registerMessage", companyDTO.getC_businessname() +"님 회원가입을 축하합니다");
 		session.setMaxInactiveInterval(60);//1분 간 메세지 유효
@@ -36,7 +35,7 @@ public class CompanyController {
 	}
 	
 	//중복체크
-	//아이디 중복 검사
+	//사업자번호 중복 검사
 	@RequestMapping(value="checkNum", method=RequestMethod.POST)
 	public @ResponseBody String checkId(@RequestParam String sNum) {
 		//DB
@@ -44,6 +43,16 @@ public class CompanyController {
 		if(companyDTO==null) return "not_exist";
 		else return "exist";
 	}
+	//법인번호 중복 검사
+	@RequestMapping(value="checkNum2", method=RequestMethod.POST)
+	public @ResponseBody String checkId2(@RequestParam String sNum2) {
+		//DB
+		CompanyDTO companyDTO = companyDAO.checkId2(sNum2);
+		if(companyDTO==null) return "not_exist";
+		else return "exist";
+	}
+	
+	
 	
 	//비밀번호찾기-이메일 체크
 	@RequestMapping(value="checkEmail", method=RequestMethod.POST)

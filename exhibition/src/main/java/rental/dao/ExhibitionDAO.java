@@ -19,6 +19,11 @@ public interface ExhibitionDAO {
 	
 	public void reservationHoll(ExhibitionDTO exhibitionDTO);
 
+	public int getRateExhibition(String booth);
+
+	public void updateExhibitionRate(Map<String, String> map);
+
+
 
 
 }

@@ -1,12 +1,48 @@
 $(document).ready(function(){
 	
+	/*$('.ui.submit.button.login').keydown(function(event){ 
+	    var keyCode = (event.keyCode ? event.keyCode : event.which);   
+	    if (keyCode == 13) {
+	    	alert('dsf0');
+	        $('#Mlogin').trigger('click');
+	    }
+	});*/
+	
+	//엔터키 이벤트
+	$('#M_Id').keydown(function(key) {
+		if (key.keyCode == 13) {
+			$('#Mlogin').click();
+		}
+	});
+	$('#M_Pwd').keydown(function(key) {
+		if (key.keyCode == 13) {
+			$('#Mlogin').click();
+		}
+	});
+	$('#C_license').keydown(function(key) {
+		if (key.keyCode == 13) {
+			$('#Clogin').click();
+		}
+	});
+	$('#C_Pwd').keydown(function(key) {
+		if (key.keyCode == 13) {
+			$('#Clogin').click();
+		}
+	});
+	$('#index_keyword').keydown(function(key) {
+		if (key.keyCode == 13) {
+			$('#index_searchBtn').click();
+		}
+	});
+
 	/*----------개인회원 로그인---------*/
-	$('#Mlogin').click(function(){
+	$('#Mlogin').click(function(e){
 		var regId = /^[a-z0-9_]{5,12}$/; //5~12자 영문소문자, 숫자, 특수문자 _ 사용가능
 		var regPwd = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-]|.*[0-9]).{6,24}$/;	//6-24자리 영문대소문자or숫자or특수기호
 		var regPhone =  /^((01[1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})$/;
 		var regEmail = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-	
+		
+		
 		//유효성 칸 초기화 
 		$('#id-Confirm').empty();
 		$('#pwd-Confirm').empty();
@@ -36,6 +72,7 @@ $(document).ready(function(){
 			});//ajax
 		
 	});
+	
 	
 	/*-----개인회원 아이디 및 비밀번호 찾기-----*/
 	$('.M-find-id-pwd').click(function(){
@@ -289,7 +326,6 @@ $(document).ready(function(){
 				data : {'email': $('#verify-Email').val()},
 				dataType : 'text',
 				success : function(data){
-				//	alert("인증번호는 "+JSON.stringify(data));
 					verifyNum = data;
 					$('.verify-Number-hidden').val(verifyNum);
 				}//success
@@ -313,7 +349,6 @@ $(document).ready(function(){
 				data : {'email' : $('#verify-Email').val()},
 				dataType : 'text',
 				success : function(data){
-					//alert("임시비밀번호는 "+JSON.stringify(data));
 					temPwd = data;
 				}//success
 			});//ajax
@@ -333,7 +368,6 @@ $(document).ready(function(){
 		           data: {'temPwd': temPwd, 'M_Id' : $('#verify-M-Id').val()},
 		           dataType : 'text',
 		           success: function(data){
-		        	//   alert("변경된 건 수 : "+JSON.stringify(data));
 		        	   $('#find-M-Result').text('임시 비밀번호로 로그인 하세요').css('color','blue');
 			        	 location.href='/exhibition/main/index.do';
 		           }//success
@@ -425,7 +459,6 @@ $(document).ready(function(){
 				data : {'email': $('#verify-C-Email').val()},
 				dataType : 'text',
 				success : function(data){
-				//	alert("인증번호는 "+JSON.stringify(data));
 					verifyNum2 = data;
 					$('.verify-Number2-hidden').val(verifyNum2);
 				}//success
@@ -468,7 +501,6 @@ $(document).ready(function(){
 		           data: {'temPwd2': temPwd2, 'C_license' : $('#verify-C-Id').val()},
 		           dataType : 'text',
 		           success: function(data){
-		        	//   alert("변경된 건 수 : "+JSON.stringify(data));
 		        	   alert('임시비밀번호로 변경되었습니다.');
 		        	   location.href='/exhibition/main/index.do';
 		           }//success

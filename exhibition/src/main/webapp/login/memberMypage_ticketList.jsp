@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%--  <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -148,15 +148,15 @@ $(document).ready(function(){
 	
 	// 예매리스트 탭 
 	$('#member-ticket-list').click(function(){
-		location.href="/exhibition/login/memerMypage_ticketList.do";
+		location.href="/exhibition/login/mypage.do";
 	});
 	
 	//예매내역 탭
 	$('#member-ticket-history').click(function(){
-		location.href="/exhibition/login/ticketHistory.do";
+		//location.href="/exhibition/login/ticketHistory.do";
 	});
 	
 });
 
 </script>
-</html>
+</html> --%>

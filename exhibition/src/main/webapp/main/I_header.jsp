@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 
 <link rel="stylesheet" type="text/css" href="../semantic/semantic.min.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/claviska/jquery-alertable/master/jquery.alertable.css">
 <style type="text/css">
 @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 * {
@@ -10,7 +12,6 @@
 }
 .item {
    text-align: center;
-   
 }
 /* #main {
    height: 200px;
@@ -30,10 +31,6 @@
 #T_inform{
  font-size: 18px;
 }
-a:active{
- background-color: red;
-}
-
 #T_Atag:link {color:black; text-decoration: none;}	<!--일반 링크 검정 -->
 #T_Atag:visited {color:black; text-decoration: none;}
 #T_Atag:hover {color:black; text-decoration: underline;} <!--마우스 올렸을 때 그린색에 언더바 생성. -->
@@ -46,7 +43,7 @@ a:active{
 	<header>
 		<div id="main" style="width: 1170px; " class="ui container" >
 			<div  style="width: 25%;  display: inline-block;">
-				<a href="http://localhost:8080/exhibition/main/index.do">
+				<a style="cursor:pointer;" onclick="location.href='/exhibition/main/index.do'">
 					<img alt="" src="../img/ipecLogo.png" style="width: 90px; height: 90px;  ">
 				</a>
 			</div>
@@ -63,9 +60,9 @@ a:active{
 			</div>
 			<div style="width: 23%; text-align: right; padding-top: 30px;  display: inline-block;">
 			<!--회원가입 시, 축하메세지 출력(1분 동안)-->
-				<c:if test="${registerMessage != null}">
+				<%-- <c:if test="${registerMessage != null}">
 					<div>${registerMessage}</div>
-				</c:if>
+				</c:if> --%>
 				
 				<c:if test="${homepageMember == null}">
 					<div>&nbsp;</div>
@@ -79,7 +76,7 @@ a:active{
 					</div>
 				</c:if>
 				
-				<c:if test="${homepageMember == nul}">
+				<c:if test="${homepageMember == null}">
 					<div class="circular ui icon button" id="L_login"><i class="dropdown icon"></i>로그인
 						<div class="ui member2 dropdown">
 							<div class="menu" class="info1" style="width: 10px ; height:80px ;">
@@ -90,15 +87,22 @@ a:active{
 					</div>
 				</c:if>
 			
-			<c:if test="${homepageMember != nul}">
+			<c:if test="${homepageMember != null}">
 				<div align="center" style="text-align: right;">
 				<div>${homepageMemberName} 님 접속중입니다</div>
 					<div class="circular ui icon button" id="logout">
 						<i class="power off icon"></i>로그아웃
 					</div>
+					<c:if test="${homepageMemberName != 'master'}">
 					<div class="circular ui icon button" id="mypage">
 						<i class="user circle icon"></i>마이페이지
 					</div>
+					</c:if>
+					<c:if test="${homepageMemberName == 'master'}">
+					<div class="circular ui icon button" id="memberList">
+						<i class="user circle icon"></i>회원리스트
+					</div>
+					</c:if>
 				</div>
 			</c:if>				
 				
@@ -144,12 +148,12 @@ a:active{
 	                  <div class="item" id="C_emailConfirm">고객의 소리</div>
 	                  <div class="item" id="C_QnA">자주묻는 질문</div>
 	                  <div class="item" id="C_contactList">주요시설 연락처</div>
-	                  <c:if test="${code=='1' || code == '2' }">
+	                  <c:if test="${code eq '1' || code eq '2' }">
 	                  	<div class="item" id="C_mypage">마이페이지</div>
 	                  </c:if>
-	                  <c:if test="${code=='3' }">
+	                  <c:if test="${code eq '3' }">
 	                 	 <div class="item" id="C_boardAdd">게시판 추가</div><!--세션값에 따라 보이게 할 예정-->
-	               	  	 <div class="item" id="C_salesExhibition">메출현황</div><!--세션값에 따라 보이게 할 예정-->
+	               	  	 <div class="item" id="C_salesExhibition">매출현황</div><!--세션값에 따라 보이게 할 예정-->
 	               	  	 <div class="item" id="C_memberShib">회원리스트</div><!--세션값에 따라 보이게 할 예정-->
 	               	  </c:if>	
 	               </div>
@@ -165,7 +169,9 @@ a:active{
 				</div>
 			</div>
 		</div>
+	
 	</header>
+	
 	<%-- <input type="hidden" value="${code}" id="codeName"> --%>
 <!--개인회원 회원가입 양식 페이지 인클루드-->
 <jsp:include page="../member/writeForm.jsp"/>
@@ -179,9 +185,14 @@ a:active{
 	integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
 	crossorigin="anonymous"></script>
 <script src="../semantic/semantic.min.js?ver=1"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.ui.min.js"></script>
+<script src="https://rawgit.com/claviska/jquery-alertable/master/jquery.alertable.min.js"></script>
+<script src="../js/index_Search.js?ver=1" charset="UTF-8"></script>
 <script src="../js/index.js?ver=1" charset="UTF-8"></script> 
-<script src="../js/member.js" charset="UTF-8"></script> 
-<script src="../js/company.js" charset="UTF-8"></script>
-<script src="../js/login.js" charset="UTF-8"></script>	
-<script src="../js/post.js" charset="UTF-8"></script>	
+<script src="../js/member.js?ver=1" charset="UTF-8"></script> 
+<script src="../js/company.js?ver=1" charset="UTF-8"></script>
+<script src="../js/login.js?ver=1" charset="UTF-8"></script>	
+<script src="../js/post.js?ver=1" charset="UTF-8"></script>
+
 

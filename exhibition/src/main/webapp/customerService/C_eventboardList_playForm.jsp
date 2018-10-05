@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -72,7 +73,7 @@
 							<td width="100px" align="center">${list.seq}</td>
 							<td width="380px" align="center"><a class="play_detail"><img src="../storage/${list.image1}" width="300" height="150"></a></td>
 							<td width="100px" align="center">${list.imageName}</td>
-							<td width="150px" align="center" >${list.startDate } ~ ${list.endDate}</td>
+							<td width="150px" align="center" >${fn:substring(list.startDate, 0, 10) } ~ ${fn:substring(list.endDate, 0, 10)}</td>
 						</tr>
 					</c:if>
 				</c:forEach>
@@ -94,7 +95,6 @@ function eventboardPaging(pg){
 $(document).ready(function(){
 	//전체선택
 	$('#checkAll').click(function(){
-		//alert($('.check').length);		//클래스를 나타낼때는 앞에 .을 찍는다.
 		if($('#checkAll').prop('checked')){
 			$('.check').prop('checked',true);
 		}else{
@@ -104,9 +104,8 @@ $(document).ready(function(){
 	//선택삭제
 	$('#eventDeleteBtn_play').click(function(){
 		var count=$('.check:checked').length;
-
 		if(count==0) 
-			alert("항목을 선택해주세요");
+			$.alertable.alert("항목을 선택해주세요");
 		else
 			$('#eventboardListForm').attr('action','/exhibition/customerService/C_eventboardDelete_play.do').submit();
 	});

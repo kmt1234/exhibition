@@ -30,4 +30,10 @@ public interface  CompanyDAO {
 
 	public int mypageRentalPastTotal(Map<String, String> map);//이전 임대 리스트 총갯수
 
+	public void deleteExBooth(Map<String, String> map);//임대한 박람회 부스 삭제
+
+	public void deleteCoBooth(Map<String, String> map);//임대한 콘서트 부스 삭제
+
+	public CompanyDTO checkId2(String sNum2); //법인번호 중복체크
+
 }

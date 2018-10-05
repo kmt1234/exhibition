@@ -13,8 +13,15 @@ $(document).ready(function() {
 	$('#terms-content').hide();
 	$('#writeForm-close').hide();
 	
+	
 	//회원가입 팝업 닫기
 	$('#writeForm-close').click(function(){
+		$('.ui.modal1.modal').modal("hide");
+		location.reload();
+	});
+	
+	//X버튼
+	$('.close.icon').click(function(){
 		$('.ui.modal1.modal').modal("hide");
 		location.reload();
 	});
@@ -107,12 +114,14 @@ $(document).ready(function() {
 	
 	//회원가입 팝업 submit
 	$('#register').click(function(){
-						
 		if(Mw_regName.test($('#Mw_Name').val()) && Mw_regId.test($('#Mw_Id').val()) && Mw_regPwd.test($('#Mw_Pwd').val())
 												&& ($('#Mw_Pwd').val()== $('#Mw_Pwd2').val()) && Mw_regEmail.test($('#Mw_Email').val()) 
 												&& Mw_regPhone.test($('#Mw_Phone').val()) && $('#idConfirm').text()!='아이디 중복입니다'){
 			$('.registerConfirm').text('');
-			$('#registerForm').submit();
+			$('.ui.mini.modal.writeModal').modal('show');
+			setInterval(function() {
+				$('#registerForm').submit();
+				}, 3000);
 		}else{
 			$('.registerConfirm').text('양식이 맞지 않습니다').css("font-size","12px").css("color","white").css("margin-left","-37%");
 		}

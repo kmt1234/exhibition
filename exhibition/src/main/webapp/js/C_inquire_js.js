@@ -18,7 +18,6 @@ $(document).ready(function(){
 			data : {'email':$('#email').val()},
 			dataType: 'text',
 			success : function(data){
-				alert(JSON.stringify(data));
 				$('#reC_EmailConfirm').val(data);
 				alert($('#email').val()+"메일을 보냈습니다.");
 			}

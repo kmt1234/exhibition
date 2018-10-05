@@ -1,6 +1,5 @@
  $(document).ready(function(){
 	 var code = $('#code').val()
-	 
 	 if(code == '1'){
 	 //슬라이더 이미지 불러오기
 	 $.ajax({
@@ -57,11 +56,11 @@
 			}//else
 		}//success
 	 });//ajax
-	 }else if(code == ''){
-		$.ajax({
+	 }else if(code == '6'){
+		 $.ajax({
 		type : 'POST',
 		url : '/exhibition/customerService/getImageboardSlide1.do',
-		data : {'list':$('#list').val()},
+		data : {'list':$('#list').val(), 'list1' : $('#list1').val()},
 		dataType : 'json',
 		success : function(data){
 			if(data.list.length==0) alert('메인 이미지 없습니다. 관리자에게 문의하십시오');

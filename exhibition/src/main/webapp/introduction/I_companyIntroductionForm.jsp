@@ -63,7 +63,7 @@ background-image: url(../img/sogae.jpg);
 				회사
 				<span class="h-light">소개</span>
 				<div style="font-size:13px; float:right; height: 50px; margin-top:30px ">
-					<img src="../img/house.png" width="15px" height="16px" style="cursor: pointer; " id="houseImg"></img>
+					<img src="../img/house.png" width="15px" height="16px" style="cursor: pointer; " id="houseImg">
 					> 소개 > 회사소개
 				</div>
 				<div class="ui divider"></div> 
@@ -134,5 +134,6 @@ background-image: url(../img/sogae.jpg);
 		<jsp:include page="../main/I_footer.jsp" ></jsp:include>
 	</div>
 <script src="../js/slidbar.js"></script>	
+<script src="../js/introduction.js"></script>
 </body>
 </html>

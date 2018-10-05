@@ -27,11 +27,11 @@ left: 0px;
 </style>
 </head>
 <body>
-	<header>
+<header>
 	<div style="margin-top: 20px; min-width:1170px; position: relative;   ">
 		<jsp:include page="../main/I_header.jsp"></jsp:include>
 	</div>
-	</header>
+</header>
 	<div style="margin-top: 5px; min-width:1170px; position: relative;   " class="ui container" >
 		<!-- 사이드바 메뉴 -->
 		<div style="width:230px; height:900px auto; display: inline-block;">
@@ -49,7 +49,6 @@ left: 0px;
 		<jsp:include page="../main/I_footer.jsp" ></jsp:include>
 	</div>
 	<input type="hidden" name="index_keyword" id="index_keyword" value="${index_keyword}">
-<script src="../js/index_Search.js?ver=1" charset="UTF-8"></script>
 <script src="../js/slidbar.js"></script>
 </body>
 </html>

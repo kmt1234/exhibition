@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE>
 <html>
 <head>
 <style>
@@ -15,12 +14,18 @@
 .M_Id{
 	cursor: pointer;
 }
-
+#currentPaging{
+	color: red;
+	cursor: pointer;
+}
+#houseImg{
+	margin:-3px;
+	cursor: pointer;
+}
 </style>
 <script type="text/javascript">
 //사업자 페이지
 function CompanyList(pg){
-	/* location.href="/exhibition/customerService/C_memberShib.do?pg="+pg */
 	$('#pg').val(pg);
 	$('#companyBtn').trigger('click','trigger');
 }
@@ -49,7 +54,12 @@ function memberSearch(pg){
 <input type="hidden" id="PG" value="${pg}">
 <h2 class="box-container" style="float: center; width: 100%; text-align: left;">
 	회원 
-	<span class="h-light">사항</span>
+	<span class="h-light">리스트</span>
+	<div style="font-size:13px; float:right; margin-top: 29px;">
+	<img src="../img/house.png" width="15px" height="16px" id="houseImg">
+	> 고객센터 > 회원리스트
+	</div>
+	<div class="ui divider"></div>
 </h2>
 <div style="width: 100%; ">
 	<!-- 맨위 메뉴 텝 -->
@@ -90,30 +100,32 @@ function memberSearch(pg){
 <div name="paging" id="paging"></div>
 
 <!-- 사업자 검색 -->
-<div id="companySearchDiv" class="ui input" align="center" style="margin-top:70px">
+<div id="companySearchDiv" class="ui input" align="center" style="margin-top:20px">
 	<input type="hidden" name="pg" id="pg" value="1">
-	<select class="ui compact selection dropdown" id="companySearchOption">
+	<select class="ui selection dropdown" id="companySearchOption">
 			<option value="C_license">아이디</option>
 			<option value="C_businessname">이름</option>
 	</select>
-	<div  class="ui action input"  style="width: 300px; height: 40px;"align="center">
-		<input type="text" placeholder="Search..." style="width: 30%;" id="companySearch">
-		<input type="button" class="middle ui button"  value="검색" id="companySearchBtn">
-	</div>	
+	<div class="ui input" style="width: 50%;"align="center">
+		<input type="text" placeholder="Search..." id="companySearch">
+	</div>
+	<button class="ui middle button" id="companySearchBtn" style="width:85px;">검색</button>
 </div>
 
 
 <!-- 회원검색 -->
-<div id="memberSearchDiv" class="ui input" align="center" style="margin-top:70px">
+<div id="memberSearchDiv" class="ui input" align="center" style="margin-top:20px">
 	<input type="hidden" name="pg" id="pg" value="1">
-	<select class="ui compact selection dropdown" id="memberSearchOption">
+	<select class="ui selection dropdown" id="memberSearchOption">
 			<option value="M_Id">아이디</option>
 			<option value="M_Name">이름</option>
 	</select>
-	<div  class="ui action input"  style="width: 300px; height: 40px;"align="center">
-		<input type="text" placeholder="Search..." style="width: 30%;" id="memberSearch">
-		<input type="button" class="middle ui button"  value="검색" id="memberSearchBtn">
-	</div>	
+	
+	<div class="ui input" style="width: 50%;"align="center">
+		<input type="text" placeholder="Search..." id="memberSearch">
+	</div>
+		<button class="ui middle button" id="memberSearchBtn" style="width:85px;">검색</button>
+		
 </div>
 
 <div class="ui modal member com" id="companyModalForm">
@@ -143,12 +155,10 @@ function memberSearch(pg){
 		    <th>예약명</th>
 		    <th>예매 날짜</th>
 		    <th>예매 현황</th>
-		    <th>예매 티켓 수</th>
+		    <th>예매 티켓 수(인원 수)</th>
 		    <th>취소</th>
 	  </tr></thead>
-	  <tbody id="reservationMemberTable" align="center">
-	  
-	  </tbody>
+	  <tbody id="reservationMemberTable" align="center"></tbody>
  </table>
 </div>
 <div id="reConfirm">
@@ -203,6 +213,8 @@ function memberSearch(pg){
 </div>
 
 <div id="dialog-confirm"></div>
+
+<input type="hidden" id="masterCode" value="${code}">
 
 </body>
 <script src="../js/customerService.js?ver=1"></script>

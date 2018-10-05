@@ -1,25 +1,21 @@
 $(document).ready(function(){
-/*HEADER 설명*/	
-	/*회원가입 클릭시 2가지로 분류(개인&사업자)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/	
-	//회원가입 클릭 시,
-//	if($('#codeName').val()=='3') {
-//		$('#C_boardAdd').show();
-//	} else {
-//		$('#C_boardAdd').hide();
-//	}
-	
-	
 	$('#M_member').click(function(){
 		$('.ui.member1.dropdown').dropdown('show');
 	});
 	
 	//개인 회원가입 클릭 시,
 	$('#M_individual').click(function(){
-		$('.ui.modal1.modal').modal('show');
+		$('.ui.modal1.modal').modal({
+			closable : false,
+            duration : 460,
+		}).modal('show');
 	});
 	//법인 회원가입 클릭 시,
 	$('#C_company').click(function(){
-		$('.ui.modal2.modal').modal('show');
+		$('.ui.modal2.modal').modal({
+			closable : false,
+            duration : 460,
+		}).modal('show');
 	});
 	
 	/*로그인 클릭시 2가지로 분류(개인&사업자)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -87,7 +83,7 @@ $(document).ready(function(){
 	/*고객센터(공지사항&고객의소리&자주묻는질마누&주요시설열락처 분리 되어 있음)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 	//고객센터 정보
 	$('#C_customerServiceForm').click(function(){
-		location.href="/exhibition/customerService/C_customerServiceForm.do";
+		location.href="/exhibition/customerService/C_notice.do";
 	});
 	//공지사항
 	$('#C_notice').click(function(){
@@ -108,6 +104,10 @@ $(document).ready(function(){
 	//마이페이지(개인정보)
 	$('#C_mypage').click(function(){
 		location.href="/exhibition/login/mypage.do";
+	});
+	//마이페이지(개인정보)
+	$('#memberList').click(function(){
+		location.href="/exhibition/customerService/C_memberShib.do";
 	});
 	//게시판 추가
 	$('#C_boardAdd').click(function(){
@@ -144,7 +144,7 @@ $(document).ready(function(){
 				$('<ul/>').append($('<p/>',{
 					align : 'center',
 					id : 'subjectA',
-					style: ' width : 250px; height: 35px; margin-left : 20px; text-align: left;',
+					style: ' width : 215px; height: 25px; margin-left:35px; text-align:left; border-bottom: 1px ridge rgb(155,155,155,.6)',
 					class : 'subjectC',
 					href : 'javascript:void(0)',
 					text : item.subject
@@ -171,6 +171,131 @@ $(document).ready(function(){
 		else location.href="/exhibition/main/index_Search.do?index_keyword="+index_keyword;
 		
 	});
-
-/*BODY 설명*/	
+	
+	//달력에 내용 문자열로 보내주기
+	var today = new Date();
+	var todayDate =today.toISOString().substring(0,10);
+	
+	$.ajax({
+		type : 'POST',
+		url : '/exhibition/performance/searchAllList.do',
+		data : {'date' : todayDate},
+		async: false,
+		dataType: 'json',
+		success : function(data) {
+			$('#today_list ul li').remove();
+			$.each(data.list, function(index, item){
+				if(item.postSelect=='1') {
+					if(item.start==1) {
+						$('<li/>',{
+							class : 'ex_item',
+							html : '<br>'
+						}).append($('<span/>',{
+							class : 'calSubject',
+							html : '<img id="ex_img" width="20px" height="20px" src="../img/Ex.png">'+item.imageName+'</img>',
+							style : 'display : block'
+						})).append($('<span/>',{
+							text : item.startDate.substring(0,10) + ' ~ ' + item.endDate.substring(0,10),
+							style : 'display : block'
+						})).append($('<span/>',{
+							text : item.eventPlace,
+							style : 'display : block'
+						})).appendTo($('#total_list'));
+					} else if(item.start==10) {
+						$('<li/>',{
+							class : 'ex_item',
+							html : '<br>'
+						}).append($('<span/>',{
+							style : 'width = 220px',
+							html : '<img  id="ex_img" width="20px" height="20px" src="../img/Ex.png">'+'일정이 없습니다.'+'</img><br><br>',
+							style : 'display : block'
+						})).appendTo($('#total_list'));
+					} else {
+						$('<li/>',{
+							style: 'display: none',
+							class : 'ex_item',
+							html : '<br>'
+						}).append($('<span/>',{
+							class : 'calSubject',
+							html : '<img id="ex_img" width="20px" height="20px" src="../img/Ex.png">'+item.imageName+'</img>',
+							style : 'display : block'
+						})).append($('<span/>',{
+							text : item.startDate.substring(0,10) + ' ~ ' + item.endDate.substring(0,10),
+							style : 'display : block'
+						})).append($('<span/>',{
+							text : item.eventPlace,
+							style : 'display : block'
+						})).appendTo($('#total_list'));
+					}
+					
+					
+				} else if(item.postSelect=='2') {
+					if(item.start==2) {
+						$('<li/>',{
+							class : 'co_item',
+							html : '<br>'
+						}).append($('<span/>',{
+							class : 'calSubject',
+							html : '<img  id="co_img" width="20px" height="20px" src="../img/Ev.png">'+item.imageName+'</img>',
+							style : 'display : block'
+						})).append($('<span/>',{
+							text : item.startDate.substring(0,10) + ' ~ ' + item.endDate.substring(0,10),
+							style : 'display : block'
+						})).append($('<span/>',{
+							text : item.eventPlace,
+							style : 'display : block'
+						})).appendTo($('#total_list'));
+					} else if(item.start==10) {
+						$('<li/>',{
+							class : 'co_item',
+							html : '<br>'
+						}).append($('<span/>',{
+							style : 'width = 220px',
+							html : '<img id="co_img" width="20px" height="20px" src="../img/Ev.png">'+'일정이 없습니다.'+'</img><br><br>',
+							style : 'display : block'
+						})).appendTo($('#total_list'));
+					} else {
+						$('<li/>',{
+							style: 'display: none',
+							class : 'co_item',
+							html : '<br>'
+						}).append($('<span/>',{
+							html : '<img style="padding-top:2px;" id="co_img" width="20px" height="20px" src="../img/Ev.png">'+item.imageName+'</img>',
+							style : 'display : block'
+						})).append($('<span/>',{
+							text : item.startDate.substring(0,10) + ' ~ ' + item.endDate.substring(0,10),
+							style : 'display : block'
+						})).append($('<span/>',{
+							text : item.eventPlace,
+							style : 'display : block'
+						})).appendTo($('#total_list'));
+					}
+				}
+				
+			});
+		}
+	});
+	setInterval(function () {
+		if($('li.ex_item').length > 1){moveExItems()}
+		if($('li.co_item').length > 1){moveCoItems()}
+	}, 3000)
+	
+	function moveExItems() {
+		var current_item = $('li.ex_item:visible');
+		var next_item = current_item.next();
+		if(next_item.attr('class') != 'ex_item') {
+			next_item = $('li.ex_item').first();
+		}
+		next_item.fadeIn("slow");
+		current_item.hide();
+	}
+	function moveCoItems() {
+		var current_item = $('li.co_item:visible');
+		var next_item = current_item.next();
+		if(next_item.attr('class') != 'co_item') {
+			next_item = $('li.co_item').first();
+		}
+		next_item.fadeIn("slow");
+		current_item.hide();
+	}	
 });

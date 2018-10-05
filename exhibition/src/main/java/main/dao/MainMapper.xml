@@ -125,6 +125,25 @@
  		 imageName like '%'||#{index_keyword}||'%' or image1 like '%'||#{index_keyword}||'%' or
  		 eventLink like '%'||#{index_keyword}||'%' or eventPlace like '%'||#{index_keyword}||'%'
  	</select>
+ 	
+ 	<select id="index_exSlider" resultType="eventboard">
+ 		select * from eventboard_play where startDate <![CDATA[<=]]> ADD_MONTHS(SYSDATE, 3) and endDate <![CDATA[>=]]> sysdate
+ 	</select>
+ 	
+ 	<!--mainSlideDB에 저장 -->
+ 	<insert id="inputMainSlideDB" parameterType="java.lang.String">
+		insert into mainSlideDB values(#{image1})
+ 	</insert>
+ 	
+ 	<!--mainSlideDB에서 이미지 슬라이드 가져오기  -->
+ 	<select id="getMainSlideDB" resultType="main.bean.MainSlideDTO"> 		 	
+ 			select * from mainSlideDB
+ 	</select>
+ 	
+ 	<!--mainSlideDB 삭제  -->
+ 	<delete id="deleteMainSlideDB">
+ 		delete from mainSlideDB
+ 	</delete>
  </mapper>
  
  

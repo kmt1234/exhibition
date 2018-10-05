@@ -104,3 +104,18 @@
  
 </div><!--id="modalWrapper"-->
 
+<div id="writeDiv">
+	<div class="ui mini modal writeModal">
+	  <div class="header">회원 가입</div>
+	  <div class="content" style="width:100%">
+	    <div>회원가입이 완료 되었습니다.</div>
+	  </div>
+	  <div class="actions">
+	      <div class="ui positive right labeled icon button" id ="writeOkay">
+	        Yes
+	        <i class="checkmark icon"></i>
+	      </div>
+	  </div>
+	</div>
+</div>
+

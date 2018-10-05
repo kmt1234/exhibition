@@ -9,6 +9,59 @@
 	width: 40%;
 	float: left;
 }
+
+#currentPaging{
+	color: red;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+#paging{
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+}
+.imageName{
+	cursor: pointer;
+	color: green;
+}
+
+#cancelMsg{
+	color: green;
+	text-align: center;
+}
+
+.ui.table td {
+    text-align: center;
+}
+#uiCard{
+	display: inline-block;
+}
+
+#uiStatistics{
+	display: inherit;
+}
+
+#contentId {
+    display: contents;
+}
+
+span.header {
+    text-align: center;
+}	
+
+.meta {
+    text-align: center;
+}
+
+.description {
+    text-align: center;
+}
+
+div#uiStatistics {
+    text-align: center;
+}
+
 </style>
 <div class="ui compact menu" style="width: 930px; height:900px auto;  display: inline-block;" >
 	<h2 class="box-container" style="float: center; width: 100%; height:126px; text-align: left;">
@@ -139,8 +192,132 @@
 				</div><!--class="ui card"-->
 			</div><!--align="center"  -->
 		</div><!--id="modify-Div"  -->
-	<div style="display: inline-block; border: 1px solid; margin-top:80px; width: 465px; height: 385px;"></div>
-</div><!-- 전체 -->
+	<div id="memberTicketInformation" style="display: inline-block; border: 1px solid; margin-top:80px; width: 465px; height: 385px; overflow: scroll;">
+		
+		
+		<!--내용--><input type="hidden" id="pg" value="${pg}"><!--현재 페이지-->	
+		<div class="ui segment" id="Ticket-List-Div" style="display: inline-block;">
+			
+			<!-- <table class="ui selectable inverted table" >
+				<thead>
+					<tr>
+						<th>회원 아이디</th>
+						<th>공연 및 전시회</th>
+						<th>예매 일자</th>
+						<th>예매 티켓 수량</th>
+						<th>환불 여부</th>
+					</tr>
+				</thead>
+			</table> -->
+			
+			 <table class="ui striped table" class="ticketListTable">
+			 	 <thead>
+				  	<tr align="center">
+					  	<th>공연 및 전시회</th>
+					  	<th>행사 날짜</th>
+						<th>예매 티켓 수량</th>
+						<th>환불 여부</th>
+				  	</tr></thead>
+			  	<tbody id="ticketList" align="center"></tbody>	 
+			  </table>
+			
+			<!--클릭 시, hidden에 해당 데이터 저장  -->
+			<form name="eventDetailInfo" id="eventDetailInfo" method="post" action="/exhibition/login/eventDetail.do">
+				<input type="hidden" name="memberId" id="memberId">
+				<input type="hidden" name="imageName" id="imageName">
+				<input type="hidden" name="playDate" id="playDate">
+				<input type="hidden" name="ticketQty" id="ticketQty">
+			</form>
+			
+			
+			<div id="paging"></div>
+			
+		</div><!--id="Ticket-List-Div"-->
+	
+	
+	</div><!--id="memberTicketInformation"-->
 </div>
+</div><!-- 전체 -->
+
+<!--예매 취소하기 위해 필요한 값들-->	
+<input type="hidden" id="hiddenImageName" value="${imageName }">
+<input type="hidden" id="hiddenPlayDate" value="${playDate }">
+<input type="hidden" id="hiddenTicketQty" value="${ticketQty }">
+
+
 
 <script src="../js/memberMypage.js?ver=1"></script>
+<script>
+/*페이징 */
+function MemberTicketListPaging(pg){
+	$('.tr').remove();	//예매리스트 내용 초기화
+	console.log(pg);
+	//$('#pg').val() = pg;
+	//회원의 예매 리스트를 가져오는 ajax 
+	$.ajax({
+		type : 'GET',
+		url : '/exhibition/login/getMemberTicketList.do?pg='+pg+'',
+		dataType : 'json',
+		success : function(data){
+			$.each(data.list, function(index, item){
+				$('<tr/>',{
+					class : 'tr'
+				}).append($('<td/>',{
+					text : item.imageName,
+					class : 'imageName',
+					value : item.imageName
+				})).append($('<td/>',{
+					text : item.playDate,
+					value : item.playDate
+				})).append($('<td/>',{
+					id : 'ticketQtyTd',
+					text : item.ticketQty,
+					value : item.ticketQty
+				})).append($('<td/>',{
+					id : 'cancelMsg',
+					text : '환불 가능'
+				})).appendTo($('#ticketList'));
+			});//each
+			
+			$('#paging').html(data.memberTicketListPaging.pagingHTML);
+		}//success
+	});//ajax
+}
+/*페이징 */
+function TicketHistoryListPaging(pg){
+	$('.tr').remove();	//예매리스트 내용 초기화
+	
+	//과거 예매 내역 불러오는 ajax
+	$.ajax({
+		type : 'GET',
+		url : '/exhibition/login/getTicketHistory.do?pg='+pg+'',
+		dataType : 'json',
+		success : function(data){
+			$.each(data.list, function(index, item){
+				$('<tr/>',{
+					class : 'tr'
+				}).append($('<td/>',{
+					text : item.imageName,
+					class : 'imageName1',
+					value : item.imageName
+				})).append($('<td/>',{
+					text : item.playDate,
+					value : item.playDate
+				})).append($('<td/>',{
+					id : 'ticketQtyTd',
+					text : item.ticketQty,
+					value : item.ticketQty
+				})).append($('<td/>',{
+					id : 'cancelMsg',
+					class : 'cancelMsg',
+					text : '환불 불가'
+				})).appendTo($('#ticketList'));
+				$('.imageName1').css({'cursor': 'pointer', 'color' : 'red'});
+				$('.cancelMsg').css({color : 'red'});
+			});//each
+			$('#paging').html(data.TicketHistoryListPaging.pagingHTML);
+		}//success
+	});//ajax
+	//location.href="/exhibition/login/mypage.do?pg="+pg;
+}
+</script>

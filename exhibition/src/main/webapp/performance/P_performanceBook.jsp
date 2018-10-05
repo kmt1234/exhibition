@@ -6,148 +6,104 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>연극</title>
-
+<link rel="stylesheet" href="../css/P_allScheduleList.css" ><!-- 리스트보기 -->
 <style>
-
-img{
-	width: 367px;
-	height: 425px;
-	border-radius: 10px;
-}
-
-td{
-	text-align: left;
-   	padding-left: 6%;
-    padding-top: 2px;
-}
-
-.bookWrapper{
-	float: left;
-}
-
-.ui.divider{
-	margin: 5rem 0 0 0;
-}
-
 .playContentHeader{
 	float: left;
 }
-
-.playContent{
-	display: grid;
-}
-
-.bookPlayTitle{
-   	margin-right: 40%;
-    margin-top: 2%;
-    margin-bottom: 2%;
-    font-size: 3rem;
-    width: 710px;
-}
-
-.bookPlayTitleDiv {
-    margin-top: 25px;
-}
-
 .book_play_confirm {
     display: flex;
 }
-
 .playTableWrapper{
 	margin-left: 33px;
 }
-
 #modalImage1{
 	margin-left: 20px;
 }
-
 #bookInfo{
-	margin-left: 30px;
+	margin-left: 10px;
+	font-size: 12pt;
 }
-
 </style>
 
 </head>
 <body>
-	<!-- 메인 화면 -->
-	<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
-		공연
-		<span class="h-light">예약하기</span>
-	</h2>
-	
-	
-	<!--메뉴-->
-<div class="bookWrapper">
-	<div class="ui steps">
-	  
-	  <div class="active step">
-	    <div class="content">
-	      <div class="title">예매하기</div>
-	    </div>
-	  </div>
-	  	  	  
-	</div><!--class="ui ordered steps"-->
-	
-</div><!--class="bookWrapper"-->
-	
-<div class="ui divider"></div>	
-	
-<!--내용 : 예매하기-->
-<div id="Book_play_div">
-
-	<div class="playContentHeader">
-		<div><img src="../storage/${eventboardDTO.image1}"></div>
-		
+<!-- 메인 화면 -->
+<h2 class="box-container"  style="float: left; width:100%; text-align: left;">
+	<span>공연 </span>
+	<span class="h-light">예약하기</span>
+	<div style="font-size:13px; float:right; height: 50px; margin-top:30px ">
+		<img src="../img/house.png" width="15px" height="16px" style="cursor: pointer;" id="houseImg"></img>
+		> 일정 > 목록 > 예약하기 
 	</div>
-	
+	<div class="ui divider"></div> 
+</h2>
+<!--내용 : 예매하기-->
+<div class="ui compact menu" style="width: 880px; display: inline-block; text-align: left;">
+	<div class="playContentHeader" style="border: 1px solid; ">
+		<div><img style="width: 350px; height: 400px; border-radius: 10px;" src="../storage/${eventboardDTO.image1}"></div>
+	</div>
 	<!--날짜 비교(기본 : 오늘날짜)-->
 	<jsp:useBean id="now" class="java.util.Date"/> 
-	
-	<div class="bookPlayTitleDiv"><span class="bookPlayTitle">${eventboardDTO.imageName}</span></div><input type="hidden" id="imageName" value="${eventboardDTO.imageName}"><!--연극 제목  -->
-	
-	<div class="playContent">
-		<table style="height: 170%;" class="playContentTable">
-			<tr>
-				<td>장소</td><td> : </td> <td>${eventboardDTO.eventPlace}</td>
-			</tr>
-			<tr>
-				<td>기간</td><td> : </td> <td>${eventboardDTO.startDate} ~ ${eventboardDTO.endDate}</td>
-			</tr>
-			<tr>
-				<td>가격</td><td> : </td> <td><fmt:formatNumber type="number" value="${eventboardDTO.eventPrice}" pattern="#,###" />원</td>
-			</tr>
-			<tr>
-				<td>좌석배정 방식</td><td> : </td> <td>선착순</td>
-			</tr>
-			<tr>
-				<td>공연날짜</td><td> : </td> 
-				<td>
-					<select id="selectEventDate">
-						<option value="2000-01-01">날짜선택</option>
-						
-						<!--오늘날짜와 비교 후, 기간 지났으면 날짜 선택 비활성화  -->
-						<c:forEach items="${listDate}" var="eventPeriod">
-							<c:if test="${eventPeriod < now}">
-								<option disabled="disabled" value="${eventPeriod}"><fmt:formatDate value="${eventPeriod}" pattern="yyyy년-MM월-dd일"/></option>
-							</c:if>
-						</c:forEach>
-					
-						<c:forEach items="${listDate}" var="eventPeriod">
-							<c:if test="${eventPeriod > now}">
-								<option value="${eventPeriod}"><fmt:formatDate value="${eventPeriod}" pattern="yyyy년-MM월-dd일"/></option>
-							</c:if>
-						</c:forEach>
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td>공연 시간</td><td> : </td> <td>${eventboardDTO.startTime} ~ ${eventboardDTO.endTime}</td>
-			</tr>
-			<tr>
-				<td>매수</td><td> : </td>
-				<td>
+	<div style="width:500px; margin-top:20px; height:auto; display: inline-block;">
+		<div class="bookPlayTitleDiv" style="margin-left:20px; height:50px; font-size: 20pt; ">${eventboardDTO.imageName}</div>
+		<!--연극 제목  -->
+		
+			<div class="from">
+				<div class="content">장소</div>
+			</div>
+			<div class="from1" style="width: 375px;">
+				<div class="content1" >${eventboardDTO.eventPlace}</div>
+			</div>
+			<div class="from">
+				<div class="content">기간</div>
+			</div>
+			<div class="from1" style="width: 375px;">
+				<div class="content1">${eventboardDTO.startDate} ~ ${eventboardDTO.endDate}</div>
+			</div>
+			<div class="from">
+				<div class="content">가격</div> 
+			</div>
+			<div class="from1" style="width: 375px;">
+				<div class="content1"><fmt:formatNumber type="number" value="${eventboardDTO.eventPrice}" pattern="#,###" />원</div>
+			</div>
+			<div class="from">
+				<div class="content">좌석배정 방식</div>
+			</div>
+			<div class="from1" style="width: 375px;">
+				<div class="content1">선착순</div>
+			</div>
+			<div class="from">
+				<div class="content">공연날짜</div> 
+			</div>
+			<div class="from1" style="width: 375px;">
+				<select id="selectEventDate">
+					<option value="2000-01-01">날짜선택</option>
+					<!--오늘날짜와 비교 후, 기간 지났으면 날짜 선택 비활성화  -->
+					<c:forEach items="${listDate}" var="eventPeriod">
+						<c:if test="${eventPeriod < now}">
+							<option disabled="disabled" value="${eventPeriod}"><fmt:formatDate value="${eventPeriod}" pattern="yyyy년-MM월-dd일"/></option>
+						</c:if>
+					</c:forEach>
+				
+					<c:forEach items="${listDate}" var="eventPeriod">
+						<c:if test="${eventPeriod > now}">
+							<option value="${eventPeriod}"><fmt:formatDate value="${eventPeriod}" pattern="yyyy년-MM월-dd일"/></option>
+						</c:if>
+					</c:forEach>
+				</select>
+			</div>
+			<div class="from">
+				<div class="content">공연 시간</div>
+			</div>
+			<div class="from1" style="width: 375px;">
+				<div class="content1">${eventboardDTO.startTime} ~ ${eventboardDTO.endTime}</div>
+			</div>
+			<div class="from">
+				<div class="content">매수</div>
+			</div>
+			<div class="from1" style="width: 375px;">
+				<div class="content1">
 					<select id="selectPlayTicket">
 						<option value="1">1매</option>
 						<option value="2">2매</option>
@@ -155,108 +111,95 @@ td{
 						<option value="4">4매</option>
 						<option value="5">5매</option>
 					</select>
-				</td>
-			</tr>
+				</div>
+			</div>
 			<fmt:parseNumber var="remain" value="${eventboardDTO.eventSeats}" integerOnly="true" />
-			<tr>
-				<td>잔여 매수</td><td> : </td> <td><span id="remainSeats">${eventboardDTO.eventSeats}</span></td><!--잔여매수-->
-			</tr>
-			<tr>
-				<td colspan="3" align="center"><button class="ui pink button" id="book_next_Btn">다음단계로 진행</button></td>
-			</tr>
-		</table>			
-		
+			<div class="from">
+				<div class="content">잔여 매수</div>
+			</div>
+			<div class="from1" style="width: 375px;">
+				<div class="content1"><span id="remainSeats">${eventboardDTO.eventSeats}</span></div><!--잔여매수-->
+			</div>
+			<div style="margin-left: 20px;">
+				<button class="ui pink button" id="book_next_Btn">다음단계로 진행</button>
+			</div>
+		</div>	
+		<div style="display: inline-block; float:left; width: 880px; height:20px; "></div>		
 	</div><!--class="playContent"  -->
-	
+	<input type="hidden" id="imageName" value="${eventboardDTO.imageName}">
 	<input type="hidden" id="hiddenTicketPrice" value="${eventboardDTO.eventPrice}"><!--티켓가격-->
-	<input id="hiddenDate" type="hidden"><!--공연일자(하루)-->	
-	<input id="hiddenTicketQty" type="hidden"><!--티켓 수량 -->
-	<input type="hidden" value="${eventboardDTO.eventSeats}" id="hiddenTotalSeats"><!--전체 좌석 수 -->
-	<input id="hiddenId" type="hidden" value="${id}"><!--로그인 된 아이디-->
-			
-</div><!-- id="Book_play_div"-->
-		
-		
+	<input type="hidden" id="hiddenDate"><!--공연일자(하루)-->	
+	<input type="hidden" id="hiddenTicketQty" type="hidden"><!--티켓 수량 -->
+	<input type="hidden" id="hiddenTotalSeats" value="${eventboardDTO.eventSeats}" ><!--전체 좌석 수 -->
+	<input  type="hidden" id="hiddenId" value="${id}"><!--로그인 된 아이디-->
 	<!--예약확인 및 결제하기 (모달)-->
-	<div class="ui modal bookNextStep"><i class="close icon"></i>
-	  <div class="header" id="bookConfirmHeader">예매확인 및 결제하기</div>
-	  
-	  <div class="book_play_confirm">
-	  	
+	<div class="ui modal bookNextStep" style="min-width: 900px;"" ><i class="close icon"></i>
+	  <div class="header" id="bookConfirmHeader" >예매확인 및 결제하기</div>
+	  <div class="book_play_confirm" >
 	  	<div>
-	      <img src="../storage/${eventboardDTO.image1}" id="modalImage1">
+	      <img style="width: 350px;height: 400px; border-radius: 10px;" src="../storage/${eventboardDTO.image1}" id="modalImage1">
 	    </div>
-	    
-	    <div class="playTableWrapper">
-	    
-	    	<table>
-	    		<tr>
-	    			<td>연극명</td><td> : </td> <td>${eventboardDTO.imageName}</td>
-	    		</tr>
-	    		<tr>
-	    			<td>예매 티켓</td><td> : </td> <td><span id="BookConfirmedTicketQty"></span>매</td>
-	    		</tr>
-	    		<tr>
-	    			<td>좌석</td><td> : </td> <td>선착순</td>
-	    		</tr>
-	    		<tr>
-	    			<td>예매자ID</td><td> : </td> <td>${id}</td>
-	    		</tr>
-	    		<tr>
-	    			<td>장소</td><td> : </td> <td>${eventboardDTO.eventPlace}</td>
-	    		</tr>
-	    		<tr>
-	    			<td>시간</td><td> : </td> <td>${eventboardDTO.startTime} ~ ${eventboardDTO.endTime}</td>
-	    		</tr>
-	    		<tr>
-	    			<td>결재 금액</td><td> : </td> <td><span id="totalPrice"></span>원</td>
-	    		</tr>
-	    	</table><br><br>
-		  	
-		  	<div id="bookInfo">티켓 발권 시, 신분증 제출 및 예매자 아이디를 말씀해주시면 됩니다.</div>	
-	    </div>
-	    
+	    <div >
+	    	<div class="bookPlayTitleDiv" style="margin-left:20px; height:50px; font-size: 20pt; margin-top: 20px;">${eventboardDTO.imageName}</div>
+	    		<div class="from">
+	    			<div class="content">예매 티켓</div> 
+	    		</div>
+	    		<div class="from1" style="width: 375px;">
+	    			<div class="content1"><span id="BookConfirmedTicketQty"></span>매</div>
+	    		</div>
+	    		<div class="from">
+	    			<div class="content">좌석</div>
+	    		</div>
+	    		<div class="from1" style="width: 375px;">
+	    			<div class="content1">선착순</div>
+	    		</div>
+	    		<div class="from">
+	    			<div class="content">예매자ID</div> 
+	    		</div>
+	    		<div class="from1" style="width: 375px;">
+	    			<div class="content1">${id}</div>
+	    		</div>
+	    		<div class="from">
+	    			<div class="content">장소</div> 
+	    		</div>
+	    		<div class="from1" style="width: 375px;">
+	    			<div class="content1">${eventboardDTO.eventPlace}</div>
+	    		</div>
+	    		<div class="from">
+	    			<div class="content">시간</div> 
+	    		</div>
+	    		<div class="from1" style="width: 375px;">
+	    			<div class="content1">${eventboardDTO.startTime} ~ ${eventboardDTO.endTime}</div>
+	    		</div>
+	    		<div class="from">
+	    			<div class="content">결재 금액</div>
+	    		</div>
+	    		<div class="from1" style="width: 375px;">
+	    			<div class="content1"><span id="totalPrice"></span>원</div>
+	    		</div>
+		  		<div class="from1" style="width: 375px;">
+		  			<div class="content1" id="bookInfo">티켓 발권 시, 신분증 제출 및 예매자 아이디를 말씀해주시면 됩니다.</div>	
+	    		</div>
+	    	</div>
 	  </div><!--class="book_play_confirm"-->
-	  
 	  <div class="actions">
 	    <div class="ui black deny button" id="BookEventCancelBtn">취소</div>
-	    
 	    <div class="ui positive right labeled icon button" id="BookEventBtn">예매확인/결제<i class="checkmark icon"></i></div>
 	  </div><!--class="actions"  -->
-	  
 	</div><!--class="ui modal bookNextStep"-->
-	
-	
-				
-		
-		
-		
-		
-		
-		
-		
-		 
-		
 </body>
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"
-	integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-	crossorigin="anonymous"></script>
-<script src="../semantic/semantic.min.js"></script>
 <script>
 $(document).ready(function(){
 	//페이지 호출 시(기본),
 	$('#BookEventBtn').show();	//매진 시, 버튼 숨기고 아닐 시, 보이기
-	
 	//로그인 아닐 시, 예매버튼 없애버림
 	if($('#hiddenId').val()==''){
 		$('#BookEventBtn').hide(); //예매버튼 숨김
 		$('#bookConfirmHeader').text('로그인 후 예매가능합니다');
 	}
-	
 	if($('#selectEventDate :selected').val()=='2000-01-01'){
 		$('#BookEventBtn').hide();
 	}
-	
 	//잔여좌석 보다 구매티켓이 높을 경우 구매 못하게 막음
 	$('#selectPlayTicket').change(function(){
 		$.ajax({
@@ -274,7 +217,6 @@ $(document).ready(function(){
 			}//success
 		});//ajax
 	});
-	
 	//날짜 변경 시, 히든 태그에 날짜 값 넣기
 	$("#selectEventDate").change(function() {
 		$('#BookEventBtn').show();
@@ -283,13 +225,11 @@ $(document).ready(function(){
 		if($('#selectEventDate :selected').val()=='2000-01-01'){
 			$('#BookEventBtn').hide();
 		}
-		
 		//로그인 아닐 시, 예매버튼 없애버림
 		if($('#hiddenId').val()==''){
 			$('#BookEventBtn').hide(); //예매버튼 숨김
 			$('#bookConfirmHeader').text('로그인 후 예매가능합니다');
 		}
-		
 		//티켓 잔여 확인
 		$.ajax({
 			type : 'POST',
@@ -298,8 +238,6 @@ $(document).ready(function(){
 			async: true,
 			dataType : 'text',
 			success : function(data){
-				//alert(JSON.stringify(data)); 잔여좌석 확인
-				
 				if(data=='choseDate'){
 					$('#remainSeats').text('날짜입력하세요');
 				}else if(data=='remainSeats'){
@@ -315,28 +253,20 @@ $(document).ready(function(){
 		});//ajax
 		
 	});//날짜 변경 값 확인	
-	
-	
 	//예매하기 버튼 클릭 시,
 	$('#BookEventBtn').click(function(){
 		var conF = confirm("예매하시겠습니까?");
 		if(conF){
-			//alert($('#selectEventDate :selected').text()); //선택된 일자 호출
-			//alert($('#selectPlayTicket :selected').text()); //선택한 티켓 수 호출 
-			
 			$('#hiddenTicketQty').val($('#selectPlayTicket :selected').val()); //티켓 수 히든에 넣기
 			$('#hiddenDate').val($('#selectEventDate :selected').text()); //공연일자 히든에 넣기 
-			
 			//예매 가능한 날짜 있을 때만 결재 금액 나오게 하기
 			if($('#hiddenId').val()==''){
 				alert('회원가입 후 예매 가능합니다');
-			
 			}else if($('#selectEventDate :selected').val()!='0'){
 				$('#totalPrice').text($('#hiddenTicketPrice').val() * $('#selectPlayTicket :selected').val());
 				//	$('#Book_play_div').hide();
 				//	$('#Confirm_play_div').show();
 			}
-			
 			//예매 가능한 날짜 없을 시, 예매 컨트롤러 못감
 			if($('#selectEventDate :selected').val()=='0'){
 				alert("예매 가능한 날짜 없음");	
@@ -355,15 +285,11 @@ $(document).ready(function(){
 							location.href="/exhibition/performance/P_performanceList.do";
 						} 
 					}//success
-					
 				});//ajax
-				
 			}//else
-			
 		}else{
 			location.href="javascript:history.back()";	//뒤로가기 
 		}
-		
 	});//예매하기 버튼 클릭 
 	
 	//다음단계 버튼 클릭 시,
@@ -372,14 +298,13 @@ $(document).ready(function(){
 			closable : false,
             duration : 460,
 		}).modal('show');
-		
 		//예매티켓 확인
 		$('#BookConfirmedTicketQty').text($('#selectPlayTicket :selected').val());
-		
 		//결제금액 확인(3자리수)
 		var totPrice = $('#hiddenTicketPrice').val() * $('#selectPlayTicket :selected').val();	
 		$('#totalPrice').text(totPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 	});
+	$(window).resize(function (){});
 		
 });
 

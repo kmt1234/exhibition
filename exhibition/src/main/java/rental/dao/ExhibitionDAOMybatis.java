@@ -57,6 +57,17 @@ public class ExhibitionDAOMybatis implements ExhibitionDAO {
 		
 	}
 
+	public int getRateExhibition(String booth) {
+		return sqlSession.selectOne("exhibitionSQL.getRateExhibition", booth);
+	}
+
+	public void updateExhibitionRate(Map<String, String> map) {
+		sqlSession.update("exhibitionSQL.updateExhibitionRate", map);
+		
+	}
+
+
+
 
 	
 	

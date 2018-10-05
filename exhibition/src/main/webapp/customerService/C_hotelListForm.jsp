@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+	<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -107,7 +107,7 @@ $(document).ready(function(){
 		var count=$('.check:checked').length;
 
 		if(count==0) 
-			alert("항목을 선택해주세요");
+			$.alertable.alert("항목을 선택해주세요");
 		else
 			$('#hotelListForm').attr('action','/exhibition/customerService/C_hotelDelete.do').submit();
 	});
