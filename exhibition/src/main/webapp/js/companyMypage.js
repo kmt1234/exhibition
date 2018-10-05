@@ -135,16 +135,7 @@ $(document).ready(function(){
 	});
 	
 	//회원탈퇴버튼
-	$('.ui.modal3').hide();
 	$('#company-out').click(function(){
-		$('#C-modify-modify').hide();
-		$('.ui.modal3').show();
-	});
-	$('#out-no').click(function(){//아니오 클릭시
-		$('.ui.modal3').hide();
-		$('#C-modify-modify').show();
-	});
-	$('#out-yes').click(function(){//네 클릭시
 		$('.ui.basic.modal').modal({
 			closable : false,
             duration : 460,

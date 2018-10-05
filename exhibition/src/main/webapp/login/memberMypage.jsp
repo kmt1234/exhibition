@@ -167,23 +167,6 @@ div#uiStatistics {
 							    </div>
 							    <br><span class="M-modify-result-Span"></span>
 								<div style="margin-top: 40px;"></div>	
-								
-									<!-- 숨어있다 -->
-									<div class="ui modal3">
-										  <div class="content">
-										    <p>탈퇴하시겠습니까?</p>
-										  </div>
-										  <div class="actions">
-										    <div class="ui negative button" id="out-no">
-										      <i class="remove icon"></i>
-										      	아니오
-										    </div>
-										    <div class="ui positive right labeled icon button" id="out-yes">
-										      <i class="checkmark icon"></i>
-										      	네
-										    </div>
-										  </div>
-									</div><!-- 숨어있다 -->
 									<jsp:include page="memberOut.jsp"/>
 				    		</div><!--수정영역 텍스트필드-->
 				  		</div><!--class="description"  -->
