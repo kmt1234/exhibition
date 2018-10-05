@@ -1,6 +1,8 @@
  $(document).ready(function(){
 	 var code = $('#code').val()
 	 if(code == '1'){
+		 
+	 var link; 
 	 //슬라이더 이미지 불러오기
 	 $.ajax({
 		type : 'GET',
@@ -21,7 +23,16 @@
 								}))).appendTo('.slide',{
 									style : 'width : 6000px; list-style: none; font-size: 0'
 								});
+					link = item.eventLink;
+					console.log(link);
 				});//each
+				
+				 $('.pic').on('click',function(){
+					 if(link==null){
+						 alert('해당 이벤트에 대한 링크 없음');
+					 }
+					 
+				 });
 				
 				 var current = 0;
 				 var max = 0;
@@ -114,5 +125,5 @@
 		}//success
 	 });//ajax
 	 }
-	 
+	 	 
  });
