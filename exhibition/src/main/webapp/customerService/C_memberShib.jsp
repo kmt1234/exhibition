@@ -18,6 +18,10 @@
 	color: red;
 	cursor: pointer;
 }
+#houseImg{
+	margin:-3px;
+	cursor: pointer;
+}
 </style>
 <script type="text/javascript">
 //사업자 페이지
@@ -50,7 +54,12 @@ function memberSearch(pg){
 <input type="hidden" id="PG" value="${pg}">
 <h2 class="box-container" style="float: center; width: 100%; text-align: left;">
 	회원 
-	<span class="h-light">사항</span>
+	<span class="h-light">리스트</span>
+	<div style="font-size:13px; float:right; margin-top: 29px;">
+	<img src="../img/house.png" width="15px" height="16px" id="houseImg">
+	> 고객센터 > 회원리스트
+	</div>
+	<div class="ui divider"></div>
 </h2>
 <div style="width: 100%; ">
 	<!-- 맨위 메뉴 텝 -->
