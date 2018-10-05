@@ -52,7 +52,7 @@
 			<table id="eventboardListTab" border="1" frame="hsides" rules="rows" cellpadding="3" cellspacing="0">
 				<tr>
 					<th><input type="checkbox" id="checkAll" class="check"></th>
-					<th width="50">번호</th>
+					<th width="80">번호</th>
 					<th width="200">이미지</th>
 					<th width="150">호텔명</th>
 					<th width="350">호텔정보</th>
