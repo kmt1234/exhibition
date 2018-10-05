@@ -36,6 +36,7 @@ left: 0px;
 }
 #houseImg{
 	margin:-3px;
+	cursor: pointer;
 }
 
 </style>
@@ -80,6 +81,7 @@ left: 0px;
 		<jsp:include page="../main/I_footer.jsp" ></jsp:include>
 	</div>
 	
-<script src="../js/slidbar.js"></script>		
+<script src="../js/slidbar.js"></script>
+<script src="../js/introduction.js"></script>		
 </body>
 </html>

@@ -1,4 +1,16 @@
 $(document).ready(function(){
+	$('#memberSearch').keydown(function(key) {
+		if (key.keyCode == 13) {
+			$('#memberSearchBtn').click();
+		}
+	});
+	$('#companySearch').keydown(function(key) {
+		if (key.keyCode == 13) {
+			$('#companySearchBtn').click();
+		}
+	});
+	
+	
 	var date = new Date();
     var year  = date.getFullYear();
     var month = date.getMonth() + 1; // 0부터 시작하므로 1더함 더함
@@ -55,7 +67,6 @@ $(document).ready(function(){
          data : {'email':$('#email').val()},
          dataType: 'text',
          success : function(data){
-            alert(data);
             $('#reC_EmailConfirm').val(data);
             alert('메일을 보냈습니다.')
          }
@@ -124,7 +135,6 @@ $(document).ready(function(){
    //자주 묻는 질문 작성하기 등록버튼
    $('#C_QnA_checkWriteBtn').click(function(){
       var classify = $('#classify option:selected').val();
-      alert(classify);
       $('#subjectDiv').empty();
       $('#contentDiv').empty();
       if($('#subject').val()=='')
@@ -200,7 +210,6 @@ $(document).ready(function(){
 						},
 					dataType : 'json',
 					success : function(data){
-						/*  alert(JSON.stringify(data)); */
 						 $.each(data.list,function(index, item){
 							 $('<tr/>').append($('<td/>',{
 							 		name : 'C_businessname',
@@ -259,47 +268,7 @@ $(document).ready(function(){
 	
 		});
 	});
-	
-		//제발 냅둬주세요
-		/*$('#memberSearchBtn').click(function(event,str){
-			$('#memberListTable').hide();
-			if(str!='trigger') $('#pg').val(1);
-			if($('#memberSearch').val()==''){
-				alert("검색어를 입력하세요");
-			}else{
-				$.ajax({
-					type: 'POST',
-					url : '/exhibition/customerService/memberListSearch.do',
-					data : {'pg' : $('#pg').val()
-						,'memberSearchOption' : $('#memberSearchOption').val() 
-						,'memberSearch' : $('#memberSearch').val()
-						},
-					dataType : 'json',
-					success : function(data){
-						$('#C_memberListFrom tr:gt(0)').remove();
-						alert(JSON.stringify(data.length));
-						 $.each(data.list,function(index, item){
-							 $('<tr/>').append($('<td/>',{
-							 		name : 'M_Name',
-							 		text : item.m_Name
-							 	})).append($('<td/>',{
-							 		name : 'M_Id',
-							 		class : 'M_Id',
-							 		text : item.m_Id
-							 	})).append($('<td/>',{
-							 		name : 'M_Email',
-							 		text : item.m_Email
-							 	})).append($('<td/>',{
-							 		name : 'M_Phone',
-							 		text : item.m_Phone
-							 	})).appendTo($('#memberListTable'));
-							});
-						$('#paging').html(data.customerServicePaging.pagingHTML);
-					}
-				});
-			}
-		});*/
-	
+
 		
 	$('#memberListTable').on('click','.C_license',function(){
 		if($('#masterCode').val()!='3') {
@@ -316,7 +285,6 @@ $(document).ready(function(){
 			dataType : 'json',
 			success : function(data){
 				$('#companyModalForm tr:gt(0)').remove();
-				alert(JSON.stringify(data));
 				$.each(data.list,function(index, item){
 					var startDate = item.startDate.toString().slice(0,10);
 					var endDate = item.endDate.toString().slice(0,10);
@@ -409,7 +377,6 @@ $(document).ready(function(){
 			data : {'M_Id' : $(this).text()},
 			dataType : 'json',
 			success : function(data){
-				/*alert(JSON.stringify(data));*/
 				$('#memberModalForm tr:gt(0)').remove();
 				$.each(data.list,function(index, item){
 					playDate = item.playDate.toString().slice(0,10);
@@ -496,9 +463,6 @@ $(document).ready(function(){
 		});
 			
 	});
-	/*$('#memberDeleteBtn').click(function(){
-		alert("gggfgf");
-	});*/
 	var memberSeq;
 	var imageName;
 	var playDate;
@@ -518,7 +482,6 @@ $(document).ready(function(){
 		
 		
 	});
-	/*alert(memberSeq+","+imageName+","+playDate+","+ticketQty);*/
 	$('#memberYesBtn').click(function(){
 		$.ajax({
 			type : 'POST',

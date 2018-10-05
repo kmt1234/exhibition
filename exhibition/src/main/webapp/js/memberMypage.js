@@ -226,7 +226,10 @@ $(document).ready(function(){
 		$('#M-modify-modify').show();
 	});
 	$('#out-yes').click(function(){//네 클릭시
-		$('.ui.basic.modal').modal('show');
+		$('.ui.basic.modal').modal({
+			closable : false,
+            duration : 460,
+		}).modal('show');
 	});
 	
 	$('#del_OK').click(function(){

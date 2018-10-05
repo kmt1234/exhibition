@@ -89,7 +89,7 @@
 			
 			<c:if test="${homepageMember != null}">
 				<div align="center" style="text-align: right;">
-				<div>${homepageMemberName} 님 접속중입니다</div>
+				<%-- <div>${homepageMemberName} 님 접속중입니다</div> --%>
 					<div class="circular ui icon button" id="logout">
 						<i class="power off icon"></i>로그아웃
 					</div>

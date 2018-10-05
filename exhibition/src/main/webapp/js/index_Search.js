@@ -7,7 +7,7 @@ $(document).ready(function(event, str){
 	$.ajax({
 		type : 'POST',
 		url : '/exhibition/main/index_notice_Search.do',
-		data : {'pg': $('#pg').val(),
+		data : {'pg': 1,
 				'index_keyword' : index_keyword},
 		dataType : 'json',
 		success : function(data){
@@ -42,15 +42,15 @@ $(document).ready(function(event, str){
 						id : 'subjectA',
 						text : item.subject
 					})).append($('<div/>',{
-						style: 'width: 880px;  height: 35px; padding-left:10px; padding-top:10px; text-align: left; font-size:8pt; font-family: inherit;',
-						class : 'contentC',
+						style: 'width: 880px; overflow: hidden; white-space: nowrap; text-overflow  : ellipsis; height: 35px; padding-left:10px; padding-top:10px; text-align: left; font-size:8pt; font-family: inherit;',
+						class : 'contentC'+index+'',
 						href : 'javascript:void(0)',
 						text : item.content
 					})).appendTo($('#index_notice_SearchList'));
-					if(index%2 != 0){
+					if(index == 0 || index==1){
 						$('<div/>',{
 							style:"width:880px;  border-bottom:1px dashed rgb(155,155,155,.6);"
-						}).appendTo($('.contentC'));
+						}).appendTo($('.contentC'+index));
 					}
 				});//each
 				
@@ -72,7 +72,7 @@ $(document).ready(function(event, str){
 	$.ajax({
 		type : 'POST',
 		url : '/exhibition/main/index_QnA_Search.do',
-		data : {'pg': $('#pg').val(),
+		data : {'pg': 1,
 				'index_keyword' : index_keyword},
 		dataType : 'json',
 		success : function(data){
@@ -96,29 +96,29 @@ $(document).ready(function(event, str){
 					var subject = item.subject;
 					$('<div/>').append($('<input/>',{
 						type : 'hidden',
-						text : item.classify
+						text : item.classify+index
 					})).append($('<input/>',{
 						align : 'center',
 						style: 'width: 880px; text-align: left;',
 						type : 'hidden',
-						text : item.seq
+						text : item.seq+index
 					})).append($('<div/>',{
-						style: 'width: 60px; height:30px; padding-left:7px; padding-top:5px; text-align: left;  font-size:13pt; margin-left:5px; border: 1px ridge rgb(255,0,0,.6); margin-top:35px; display: inline-block; float:left;',
+						style: 'width: auto; height:30px; padding-left:2px; padding-top:5px; text-align: left;  font-size:13pt; margin-left:5px; border: 1px ridge rgb(255,0,0,.6); margin-top:35px; display: inline-block; float:left;',
 						text : "["+item.classify+"]",
 					})).append($('<div/>',{
 						style: 'width: 800px; height:30px; padding-top:7px; text-align:left;  font-size:13pt; margin-left:5px; margin-top:35px; display: inline-block;',
 						id : 'subjectA',
 						text : item.subject
 					})).append($('<div/>',{
-						style: 'width: 880px;  height: 35px; padding-left:10px; padding-top:10px; text-align: left; font-size:8pt; font-family: inherit;',
-						class : 'contentC',
+						style: 'width: 880px; overflow: hidden; white-space: nowrap; text-overflow  : ellipsis;  height: 35px; padding-left:10px; padding-top:10px; text-align: left; font-size:8pt; font-family: inherit;',
+						class : 'contentC'+index+'',
 						href : 'javascript:void(0)',
 						text : item.content
 					})).appendTo($('#index_QnA_SearchList'));
-					if(index%2 != 0){
+					if(index=='0' || index=='1'){
 						$('<div/>',{
-							style:"width:880px;  border-bottom:1px dashed rgb(155,155,155,.6);"
-						}).appendTo($('.contentC'));
+							style:"width:880px;  border-bottom:1px dashed rgb(155,155,155,.6); "
+						}).appendTo($('.contentC'+index));
 					}
 				});
 			}
@@ -139,7 +139,7 @@ $(document).ready(function(event, str){
 	$.ajax({
 		type : 'POST',
 		url : '/exhibition/main/index_contactList_Search.do',
-		data : {'pg': $('#pg').val(),
+		data : {'pg': 1,
 				'index_keyword': index_keyword },
 		dataType : 'json',
 		success : function(data){
@@ -245,7 +245,7 @@ $(document).ready(function(event, str){
 	$.ajax({
 		type : 'POST',
 		url : '/exhibition/main/index_eventboard_Search.do',
-		data : {'pg': $('#pg').val(),
+		data : {'pg': 1,
 				'index_keyword': index_keyword },
 		dataType : 'json',
 		success : function(data){
@@ -265,54 +265,77 @@ $(document).ready(function(event, str){
 				$('<span/>',{
 					text : "("+eventboard_total+"건)"
 				}).appendTo($('#index_eventboard_total'));
+				
 				$.each(data.list, function(index, item){
 					$('<div/>').append($('<input/>',{
 						type : 'hidden',
 						text : item.seq
 					})).append($('<div/>',{
-						rowspan : '9',
-						style : 'width : 100px; '
-					}).append($('<img>',{
+						style : 'height:345px;',
+						class : 'dashed_from'+index+''	
+					}).append($('<img/>',{
 						src : '../storage/'+item.image1+'',
-						style : 'width : 100px; height : 80px;',
+						style : 'width : 250px; height: 285px; margin-top:60px; float:left; border: 1px ridge rgb(155,155,155,.6); display:inline-block; ',
 						id : 'eventboard_image'
-					}))).append($('<div/>',{
-						text : item.imagename,
-						id : 'eventboard_name'
-					})).appendTo($('#index_eventboard_SearchList'));
-					
-					$('<tr/>').append($('<td/>',{
+					})).append($('<div/>',{
+						style:'float:left; text-align:left; margin-left:20px; width:610px; height:90px; padding-top:60px; font-size: 15pt; margin-top:10px; ',
+						text: item.imagename
+					})).append($('<div/>',{
+						style:'display:inline-block; width:50px; border: 1px ridge rgb(255,0,0,.6); margin-left:20px; float:left;  height:25px; padding:0; padding-top:3px; font-size: 10pt; font-family: inherit;',
+						text : '일시'
+					})).append($('<div/>',{
+						style : 'display:inline-block; float:left; margin-left:10px; width:540px; text-align:left; padding-top:3px; height:25px;',
 						text : item.startdate+"~"+item.enddate
-					})).appendTo($('#index_eventboard_SearchList'));
-					
-					$('<tr/>').append($('<td/>',{
+					})).append($('<div/>',{
+						style:'display:inline-block; width:50px; margin-top:5px; border: 1px ridge rgb(255,0,0,.6); margin-left:20px; float:left;  height:25px; padding:0; padding-top:3px; font-size: 10pt; font-family: inherit;',
+						text : '시간'
+					})).append($('<div/>',{
+						style : 'display:inline-block; float:left;  margin-top:5px; margin-left:10px; width:540px; text-align:left; padding-top:3px; height:25px;',
 						text : item.starttime+"~"+item.endtime
-					})).appendTo($('#index_eventboard_SearchList'));
-					
-					$('<tr/>').append($('<td/>',{
-						text : item.eventplace
-					})).appendTo($('#index_eventboard_SearchList'));
-					
-					$('<tr/>').append($('<td/>',{
+					})).append($('<div/>',{
+						style:'display:inline-block; width:50px; margin-top:5px; border: 1px ridge rgb(255,0,0,.6); margin-left:20px; float:left;  height:25px; padding:0; padding-top:3px; font-size: 10pt; font-family: inherit;',
+						text : '장소'
+					})).append($('<div/>',{
+						style : 'display:inline-block; float:left;  margin-top:5px; margin-left:10px; width:540px; text-align:left; padding-top:3px; height:25px;',
+						text :  item.eventplace
+					})).append($('<div/>',{
+						style:'display:inline-block; width:50px; margin-top:5px; border: 1px ridge rgb(255,0,0,.6); margin-left:20px; float:left;  height:25px; padding:0; padding-top:3px; font-size: 10pt; font-family: inherit;',
+						text : '싸이트'
+					})).append($('<div/>',{
+						style : 'display:inline-block; float:left;  margin-top:5px; margin-left:10px; width:540px; text-align:left; padding-top:3px; height:25px;',
 						text : item.eventlink
-					})).appendTo($('#index_eventboard_SearchList'));
-					
-					$('<tr/>').append($('<td/>',{
+					})).append($('<div/>',{
+						style:'display:inline-block; width:50px; margin-top:5px; border: 1px ridge rgb(255,0,0,.6); margin-left:20px; float:left;  height:25px; padding:0; padding-top:3px; font-size: 10pt; font-family: inherit;',
+						text : '가격'
+					})).append($('<div/>',{
+						style : 'display:inline-block; float:left;  margin-top:5px; margin-left:10px; width:540px; text-align:left; padding-top:3px; height:25px;',
 						text : item.eventprice
-					})).appendTo($('#index_eventboard_SearchList'));
-					
-					$('<tr/>').append($('<td/>',{
+					})).append($('<div/>',{
+						style:'display:inline-block; width:50px; margin-top:5px; border: 1px ridge rgb(255,0,0,.6); margin-left:20px; float:left;  height:25px; padding:0; padding-top:3px; font-size: 10pt; font-family: inherit;',
+						text : '좌석수'
+					})).append($('<div/>',{
+						style : 'display:inline-block; float:left;  margin-top:5px; margin-left:10px; width:540px; text-align:left; padding-top:3px; height:25px;',
 						text : item.eventseats
-					})).appendTo($('#index_eventboard_SearchList'));
-					
-					$('<tr/>').append($('<td/>',{
+					})).append($('<div/>',{
+						style:'display:inline-block; width:50px; margin-top:5px; border: 1px ridge rgb(255,0,0,.6); margin-left:20px; float:left;  height:25px; padding:0; padding-top:3px; font-size: 10pt; font-family: inherit;',
+						text : '등급'
+					})).append($('<div/>',{
+						style : 'display:inline-block; float:left;  margin-top:5px; margin-left:10px; width:540px; text-align:left; padding-top:3px; height:25px;',
 						text : item.eventrate
-					})).appendTo($('#index_eventboard_SearchList'));
-					
-					$('<tr/>').append($('<td/>',{
-						text : item.eventcontent
-					})).appendTo($('#index_eventboard_SearchList'));
+					})).append($('<div/>',{
+						style:'display:inline-block; width:50px; margin-top:5px; border: 1px ridge rgb(255,0,0,.6); margin-left:20px; float:left;  height:25px; padding:0; padding-top:3px; font-size: 10pt; font-family: inherit;',
+						text : '내용'
+					})).append($('<div/>',{
+						style : 'overflow: hidden; white-space: nowrap; text-overflow  : ellipsis; display:inline-block; float:left;  margin-top:5px; margin-left:10px; width:540px; text-align:left; padding-top:3px; height:5px;',
+						text :  item.eventcontent
+					}))).appendTo($('#index_eventboard_SearchList'));
+					if(index=='1' || index=='2'){
+						$('<div/>',{
+							style:"width:880px;  border-bottom:1px dashed rgb(155,155,155,.6);"
+						}).appendTo($('.dashed_from'+index));
+					}
 				});
+				
 			}
 		}
 	});
@@ -337,7 +360,7 @@ $(document).ready(function(event, str){
 	$.ajax({
 		type : 'POST',
 		url : '/exhibition/main/index_eventboard_play_Search.do',
-		data : {'pg': $('#pg').val(),
+		data : {'pg': 1,
 				'index_keyword': index_keyword },
 		dataType : 'json',
 		success : function(data){
@@ -358,52 +381,74 @@ $(document).ready(function(event, str){
 					text : "("+eventboard_play_total+"건)"
 				}).appendTo($('#index_eventboard_play_total'));
 				$.each(data.list, function(index, item){
-					$('<tr/>').append($('<input/>',{
+					$('<div/>').append($('<input/>',{
 						type : 'hidden',
 						text : item.seq
-					})).append($('<td/>',{
-						rowspan : '9',
-						style : 'width : 100px; '
-					}).append($('<img>',{
+					})).append($('<div/>',{
+						style : 'height:345px;',
+						class : 'dashed_from'+index+''	
+					}).append($('<img/>',{
 						src : '../storage/'+item.image1+'',
-						style : 'width : 100px; height : 80px;',
-						id : 'eventboard_play_image'
-					}))).append($('<td/>',{
-						text : item.imagename,
-						id : 'eventboard_play_name'
-					})).appendTo($('#index_eventboard_play_SearchList'));
-					
-					$('<tr/>').append($('<td/>',{
+						style : 'width : 250px; height: 285px; margin-top:60px; float:left; border: 1px ridge rgb(155,155,155,.6); display:inline-block; ',
+						id : 'eventboard_image'
+					})).append($('<div/>',{
+						style:'float:left; text-align:left; margin-left:20px; width:610px; height:90px; padding-top:60px; font-size: 15pt; margin-top:10px; ',
+						text: item.imagename
+					})).append($('<div/>',{
+						style:'display:inline-block; width:50px; border: 1px ridge rgb(255,0,0,.6); margin-left:20px; float:left;  height:25px; padding:0; padding-top:3px; font-size: 10pt; font-family: inherit;',
+						text : '일시'
+					})).append($('<div/>',{
+						style : 'display:inline-block; float:left; margin-left:10px; width:540px; text-align:left; padding-top:3px; height:25px;',
 						text : item.startdate+"~"+item.enddate
-					})).appendTo($('#index_eventboard_play_SearchList'));
-					
-					$('<tr/>').append($('<td/>',{
+					})).append($('<div/>',{
+						style:'display:inline-block; width:50px; margin-top:5px; border: 1px ridge rgb(255,0,0,.6); margin-left:20px; float:left;  height:25px; padding:0; padding-top:3px; font-size: 10pt; font-family: inherit;',
+						text : '시간'
+					})).append($('<div/>',{
+						style : 'display:inline-block; float:left;  margin-top:5px; margin-left:10px; width:540px; text-align:left; padding-top:3px; height:25px;',
 						text : item.starttime+"~"+item.endtime
-					})).appendTo($('#index_eventboard_play_SearchList'));
-					
-					$('<tr/>').append($('<td/>',{
-						text : item.eventplace
-					})).appendTo($('#index_eventboard_play_SearchList'));
-					
-					$('<tr/>').append($('<td/>',{
+					})).append($('<div/>',{
+						style:'display:inline-block; width:50px; margin-top:5px; border: 1px ridge rgb(255,0,0,.6); margin-left:20px; float:left;  height:25px; padding:0; padding-top:3px; font-size: 10pt; font-family: inherit;',
+						text : '장소'
+					})).append($('<div/>',{
+						style : 'display:inline-block; float:left;  margin-top:5px; margin-left:10px; width:540px; text-align:left; padding-top:3px; height:25px;',
+						text :  item.eventplace
+					})).append($('<div/>',{
+						style:'display:inline-block; width:50px; margin-top:5px; border: 1px ridge rgb(255,0,0,.6); margin-left:20px; float:left;  height:25px; padding:0; padding-top:3px; font-size: 10pt; font-family: inherit;',
+						text : '싸이트'
+					})).append($('<div/>',{
+						style : 'display:inline-block; float:left;  margin-top:5px; margin-left:10px; width:540px; text-align:left; padding-top:3px; height:25px;',
 						text : item.eventlink
-					})).appendTo($('#index_eventboard_play_SearchList'));
-					
-					$('<tr/>').append($('<td/>',{
+					})).append($('<div/>',{
+						style:'display:inline-block; width:50px; margin-top:5px; border: 1px ridge rgb(255,0,0,.6); margin-left:20px; float:left;  height:25px; padding:0; padding-top:3px; font-size: 10pt; font-family: inherit;',
+						text : '가격'
+					})).append($('<div/>',{
+						style : 'display:inline-block; float:left;  margin-top:5px; margin-left:10px; width:540px; text-align:left; padding-top:3px; height:25px;',
 						text : item.eventprice
-					})).appendTo($('#index_eventboard_play_SearchList'));
-					
-					$('<tr/>').append($('<td/>',{
+					})).append($('<div/>',{
+						style:'display:inline-block; width:50px; margin-top:5px; border: 1px ridge rgb(255,0,0,.6); margin-left:20px; float:left;  height:25px; padding:0; padding-top:3px; font-size: 10pt; font-family: inherit;',
+						text : '좌석수'
+					})).append($('<div/>',{
+						style : 'display:inline-block; float:left;  margin-top:5px; margin-left:10px; width:540px; text-align:left; padding-top:3px; height:25px;',
 						text : item.eventseats
-					})).appendTo($('#index_eventboard_play_SearchList'));
-					
-					$('<tr/>').append($('<td/>',{
+					})).append($('<div/>',{
+						style:'display:inline-block; width:50px; margin-top:5px; border: 1px ridge rgb(255,0,0,.6); margin-left:20px; float:left;  height:25px; padding:0; padding-top:3px; font-size: 10pt; font-family: inherit;',
+						text : '등급'
+					})).append($('<div/>',{
+						style : 'display:inline-block; float:left;  margin-top:5px; margin-left:10px; width:540px; text-align:left; padding-top:3px; height:25px;',
 						text : item.eventrate
-					})).appendTo($('#index_eventboard_play_SearchList'));
-					
-					$('<tr/>').append($('<td/>',{
-						text : item.eventcontent
-					})).appendTo($('#index_eventboard_play_SearchList'));
+					})).append($('<div/>',{
+						style:'display:inline-block; width:50px; margin-top:5px; border: 1px ridge rgb(255,0,0,.6); margin-left:20px; float:left;  height:25px; padding:0; padding-top:3px; font-size: 10pt; font-family: inherit;',
+						text : '내용'
+					})).append($('<div/>',{
+						style : 'overflow: hidden; white-space: nowrap; text-overflow  : ellipsis; display:inline-block; float:left;  margin-top:5px; margin-left:10px; width:540px; text-align:left; padding-top:3px; height:5px;',
+						text :  item.eventcontent
+					}))).appendTo($('#index_eventboard_play_SearchList'));
+					if(index=='1' || index=='2'){
+						$('<div/>',{
+							style:"width:880px;  border-bottom:1px dashed rgb(155,155,155,.6);"
+						}).appendTo($('.dashed_from'+index));
+					}
+				
 				});
 			}
 		}
@@ -427,7 +472,7 @@ $(document).ready(function(event, str){
 	$.ajax({
 		type : 'POST',
 		url : '/exhibition/main/index_hotel_list_Search.do',
-		data : {'pg': $('#pg').val(),
+		data : {'pg': 1,
 				'index_keyword': index_keyword },
 		dataType : 'json',
 		success : function(data){
@@ -436,8 +481,10 @@ $(document).ready(function(event, str){
 			}
 			if(data.totalA=='0'){
 				$('<div/>',{
+					
 					align: 'left'
 				}).append($('<div/>',{
+					style:'margin-top:35px;',
 					align : 'left',
 					text : '검색된 결과가 없습니다.'
 				})).appendTo($('#index_hotel_list_SearchList'));  
@@ -448,28 +495,37 @@ $(document).ready(function(event, str){
 					text : "("+hotel_list_total+"건)"
 				}).appendTo($('#hotel_list_total'));
 				$.each(data.list, function(index, item){
-					$('<tr/>').append($('<td/>',{
-						rowspan : '3',
-						style : 'width : 100px; '
-					}).append($('<img>',{
+					$('<div/>').append($('<input/>',{
+						type : 'hidden',
+						text : item.seq
+					})).append($('<div/>',{
+						style : 'height:345px;',
+						class : 'dashed_from'+index+''	
+					}).append($('<img/>',{
 						src : '../storage/'+item.image1+'',
-						class : 'hotel_image',
-						style : 'width : 100px; height : 80px;'
-					}))).append($('<td/>',{
-						text : item.imagename
-					})).appendTo($('#index_hotel_list_SearchList'));
-					
-					$('<tr/>').append($('<td/>',{
+						style : 'width : 250px; height: 285px; margin-top:60px; float:left; border: 1px ridge rgb(155,155,155,.6); display:inline-block; ',
+						id : 'eventboard_image'
+					})).append($('<div/>',{
+						style:'float:left; text-align:left; margin-left:20px; width:610px; height:90px; padding-top:60px; font-size: 15pt; margin-top:10px; ',
+						text: item.imagename
+					})).append($('<div/>',{
+						style:'display:inline-block; width:50px; border: 1px ridge rgb(255,0,0,.6); margin-left:20px; float:left;  height:25px; padding:0; padding-top:3px; font-size: 10pt; font-family: inherit;',
+						text : '장소'
+					})).append($('<div/>',{
+						style : 'display:inline-block; float:left;  margin-top:5px; margin-left:10px; width:540px; text-align:left; padding-top:3px; height:25px;',
 						text : item.eventplace
-					})).appendTo($('#index_hotel_list_SearchList'));
-					
-					$('<tr/>').append($('<td/>',{
+					})).append($('<div/>',{
+						style:'display:inline-block; width:50px; border: 1px ridge rgb(255,0,0,.6); margin-left:20px; float:left;  height:25px; padding:0; padding-top:3px; font-size: 10pt; font-family: inherit;',
+						text : '싸이트'
+					})).append($('<td/>',{
+						style : 'display:inline-block; float:left;  margin-top:5px; margin-left:10px; width:540px; text-align:left; padding-top:3px; height:25px;',
 						text : item.eventlink
-					})).appendTo($('#index_hotel_list_SearchList'));
-					
-					
-					eventlink = item.eventlink;
-					
+					}))).appendTo($('#index_hotel_list_SearchList'));
+					if(index=='1' || index=='2'){
+						$('<div/>',{
+							style:"width:880px;  border-bottom:1px dashed rgb(155,155,155,.6);"
+						}).appendTo($('.dashed_from'+index));
+					}
 				});
 			}
 		}

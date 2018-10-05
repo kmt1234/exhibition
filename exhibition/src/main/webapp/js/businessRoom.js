@@ -53,7 +53,7 @@ $(document).ready(function(){
 		if($('#roomRate').val()=='') {
 			alert('평당 가격을 입력하세요');
 			return;
-		} else if($('#roomRate').val()!='') {
+		} else {
 			$('#modifyRateBusinessRoomForm').submit();
 			alert('수정되었습니다.');
 		}
