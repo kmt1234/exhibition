@@ -43,7 +43,7 @@
 			<img src="../img/house.png" width="15px" height="16px" style="cursor: pointer;" id="houseImg"></img>
 			> 고객센터 > 게시판추가 > 목록
 		</div>
-		<div class="ui divider"></div> 
+		<div class="ui divider"></div>
 	</h2>
 	<!--리스트  -->
 	<div style="width: auto; float: left; margin-left: 100px;">
