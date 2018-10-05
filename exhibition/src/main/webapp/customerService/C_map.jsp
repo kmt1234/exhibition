@@ -19,6 +19,7 @@
 }
 #houseImg{
 	margin:-3px;
+	cursor: pointer;
 }
 .smallFont{
  font-size: 14px;
@@ -75,6 +76,7 @@ left: 0px;
 	<div class="ui container" style="margin-top: 20px; min-width:1170px; position: relative; ">
 		<jsp:include page="../main/I_footer.jsp" ></jsp:include>
 	</div>
-<script src="../js/slidbar.js"></script>		
+<script src="../js/slidbar.js"></script>
+<script src="../js/introduction.js"></script>		
 </body>
 </html>

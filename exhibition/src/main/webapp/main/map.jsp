@@ -37,7 +37,7 @@ var markerOptions = {
 var marker = new naver.maps.Marker(markerOptions); */
 
 
-var coex = new naver.maps.LatLng(37.511964, 127.057988),
+var coex = new naver.maps.LatLng(37.5052, 127.0040),
     map = new naver.maps.Map('map', {
         center: coex,
         zoom: 10
@@ -50,10 +50,9 @@ var coex = new naver.maps.LatLng(37.511964, 127.057988),
 
 var contentString = [
 	    '<div class="iw_inner">',
-	    '   <h3>코엑스</h3>',
-	    '   <p>서울 특별시 강남구 영동대로 513 (삼성동,코엑스) 06164 <br />',
-	    '       <img src="../img/logo.jpg" width="55" height="55" alt="코엑스" class="thumb" /><br />',
-	    '       02-120 | 공공,사회기관 &gt; 특별,광역시청<br />',
+	    '   <h3>IPEX</h3>',
+	    '   <p>서울 특별시 서초구 신반포로 176 (반포동)<br />',
+	    '       <img src="../img/ipecLogo.jpg" width="55" height="55" alt="" class="thumb" /><br />',
 	    '       <a href="/exhibition/main/index.do" target="_blank">메인화면</a>',
 	    '   </p>',
 	    '</div>'
@@ -65,7 +64,7 @@ var infowindow = new naver.maps.InfoWindow({
 	backgroundColor: "#eee",
 	borderColor: "#2db400",
 	borderWidth: 5,
-	anchorSize: new naver.maps.Size(30, 30),
+	anchorSize: new naver.maps.Size(20, 40),
 	anchorSkew: true,
 	anchorColor: "#eee",
 	pixelOffset: new naver.maps.Point(20, -20)
