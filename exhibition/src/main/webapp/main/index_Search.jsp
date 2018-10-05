@@ -68,6 +68,13 @@
 #eventboard_play_image:hover{
 	cursor: pointer;
 }
+#hotel_image:hover{
+	cursor: pointer;
+}
+#link:hover{
+	color: green;
+	cursor: pointer;
+}
 /* 작업중  */
 /* 큰제목 */
 .index_Search_title{
@@ -90,6 +97,10 @@
 	display: inline-block;
 	text-align: left; 
 	font-size: 105x
+}
+.aaa{
+	color : #4169E1;
+	font-weight: 800;
 }
 </style>
 </head>
