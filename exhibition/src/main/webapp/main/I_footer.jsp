@@ -1,5 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<style>
+#MOVE_TOP_BTN {
+    position: fixed;
+    right: 2%;
+    bottom: 50px;
+    display: none;
+    z-index: 999;
+    cursor: pointer;
+}
+.arrow.alternate.circle.up.icon {
+    font-size: 3em;
+   
+}
+#topFont{
+	font-size: 13px;
+    margin-left: 13px;
+    margin-top: -12px;
+}
+</style>
 
 <div id="footer_main" >
 	<div style=" display: inline-block; float: left;">
@@ -21,4 +40,34 @@
 		<a href="/exhibition/customerService/C_map.do">사이트맵</a>&nbsp;
 	</div>
 </div>
+<script>
+$(function() {
+    $(window).scroll(function() {
+        if ($(this).scrollTop() > 300) {
+            $('#MOVE_TOP_BTN').fadeIn();
+        } else {
+            $('#MOVE_TOP_BTN').fadeOut();
+        }
+    });
+    
+    $("#MOVE_TOP_BTN").click(function() {
+        $('html, body').animate({
+            scrollTop : 0
+        }, 400);
+        return false;
+    });
+});
+
+</script>
+
+<div id="MOVE_TOP_BTN">
+<i class="arrow alternate circle up icon" ></i>
+<div id="topFont">TOP</div>
+</div>
+<!-- <button class="circular ui icon button" id="MOVE_TOP_BTN">
+  TOP
+</button> -->
+
+
+
 

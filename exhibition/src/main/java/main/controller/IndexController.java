@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import customerService.bean.EventboardDTO;
 import customerService.bean.ImageboardDTO;
 import customerService.dao.CustomerServiceDAO;
 import main.bean.MainDTO;
@@ -38,7 +39,10 @@ public class IndexController {
 	@RequestMapping(value = "index", method = RequestMethod.GET)
 	public ModelAndView index(@RequestParam(required = false, defaultValue = "1") String code,@RequestParam(required = false, defaultValue = "0") int slideFlag ,Model model, HttpSession session) {
 
+		List<EventboardDTO> list = mainDAO.index_exSlider();
+		
 		model.addAttribute("code_slide", code);
+		model.addAttribute("list", list);
 		model.addAttribute("display", "/main/I_body.jsp");
 		
 		return new ModelAndView("/main/index");	

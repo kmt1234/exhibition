@@ -103,7 +103,7 @@ $(document).ready(function(event, str){
 						type : 'hidden',
 						text : item.seq+index
 					})).append($('<div/>',{
-						style: 'width: 60px; height:30px; padding-left:7px; padding-top:5px; text-align: left;  font-size:13pt; margin-left:5px; border: 1px ridge rgb(255,0,0,.6); margin-top:35px; display: inline-block; float:left;',
+						style: 'width: auto; height:30px; padding-left:2px; padding-top:5px; text-align: left;  font-size:13pt; margin-left:5px; border: 1px ridge rgb(255,0,0,.6); margin-top:35px; display: inline-block; float:left;',
 						text : "["+item.classify+"]",
 					})).append($('<div/>',{
 						style: 'width: 800px; height:30px; padding-top:7px; text-align:left;  font-size:13pt; margin-left:5px; margin-top:35px; display: inline-block;',
@@ -258,7 +258,7 @@ $(document).ready(function(event, str){
 				}).append($('<div/>',{
 					align : 'left',
 					text : '검색된 결과가 없습니다.'
-				})).appendTo($('#index_eventboard_SearchList_Img'));  
+				})).appendTo($('#index_eventboard_SearchList'));  
 				
 			} else if(data.totalA!='0'){
 				var eventboard_total = data.totalA;
@@ -481,8 +481,10 @@ $(document).ready(function(event, str){
 			}
 			if(data.totalA=='0'){
 				$('<div/>',{
+					
 					align: 'left'
 				}).append($('<div/>',{
+					style:'margin-top:35px;',
 					align : 'left',
 					text : '검색된 결과가 없습니다.'
 				})).appendTo($('#index_hotel_list_SearchList'));  
