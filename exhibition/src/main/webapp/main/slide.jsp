@@ -15,12 +15,12 @@ $(document).ready(function(){
 		autoHover: true,
 		 auto: true,
 	     speed: 500,
-	     pause: 4000,
+	     pause: 5000,
 	     mode:'fade',
 	     autoControls: false,
-	     pager: true,
+	     pager: false,
 	     responsive: false,
-	     controls: false,
+	     controls: true,	
 	     
 	});
 });
