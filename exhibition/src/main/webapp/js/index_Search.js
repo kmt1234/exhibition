@@ -7,7 +7,7 @@ $(document).ready(function(event, str){
 	$.ajax({
 		type : 'POST',
 		url : '/exhibition/main/index_notice_Search.do',
-		data : {'pg': $('#pg').val(),
+		data : {'pg': 1,
 				'index_keyword' : index_keyword},
 		dataType : 'json',
 		success : function(data){
@@ -15,43 +15,52 @@ $(document).ready(function(event, str){
 				$('#index_notice_SearchPlusBtn').hide();
 			}
 			if(data.totalA=='0'){
-				$('<tr/>',{
-					align: 'center'
-				}).append($('<td/>',{
+				$('<div/>',{
+					align: 'left'
+				}).append($('<div/>',{
 					align : 'center',
 					text : '검색된 결과가 없습니다.'
 				})).appendTo($('#index_notice_SearchList'));  
 				
 			}else if(data.totalA!='0'){
+				var notice_total = data.totalA;
+				$('<span/>',{
+					text : "("+notice_total+"건)"
+				}).appendTo($('#index_notice_total'));
 				$.each(data.list, function(index, item){
-					$('<tr/>').append($('<input/>',{
+					$('<div/>').append($('<input/>',{
 						align : 'center',
-						style: 'width: 880px; text-align: left;',
+						style: 'width: 880px; text-align: left; margin-top:15px;',
 						type : 'hidden',
 						text : item.seq
-					})).append($('<td/>',{
-						style: 'width: 880px; text-align: left;',
+					}).append($('<input/>',{
+					}))).append($('<div/>',{
+						style: 'width: 50px; height:30px; padding-left:7px; padding-top:5px; text-align: left;  font-size:13pt; margin-left:5px; border: 1px ridge rgb(255,0,0,.6); margin-top:35px; display: inline-block; float:left;',
+						text : '제목',
+					})).append($('<div/>',{
+						style: 'width: 810px; height:30px; padding-top:7px; text-align:left;  font-size:13pt; margin-left:5px; margin-top:35px; display: inline-block;',
 						id : 'subjectA',
 						text : item.subject
-					})).appendTo($('#index_notice_SearchList'));
-					$('<tr/>',{
-						style: 'width: 880px; height: 35px; text-align: left;'
-					}).append($('<td/>',{
-						style: 'width: 880px;  height: 35px; text-align: left;',
+					})).append($('<div/>',{
+						style: 'width: 880px;  height: 35px; padding-left:10px; padding-top:10px; text-align: left; font-size:8pt; font-family: inherit;',
 						class : 'contentC',
 						href : 'javascript:void(0)',
 						text : item.content
 					})).appendTo($('#index_notice_SearchList'));
-				});
-			}
-		}
-	});
+					if(index%2 != 0){
+						$('<div/>',{
+							style:"width:880px;  border-bottom:1px dashed rgb(155,155,155,.6);"
+						}).appendTo($('.contentC'));
+					}
+				});//each
+				
+			}//else if
+		}//success
+	});//ajax
 	
 	$('#index_notice_SearchPlusBtn').click(function(){
 		location.href="/exhibition/main/index_notice_Plus.do?pg="+pg+"&index_keyword="+index_keyword;
 	});
-	
-	
 	// 공지사항 제목 클릭시 내용보여줌
 	$('#index_notice_SearchList').on('click','#subjectA',function(){
 		var seq = $(this).prev().text();
@@ -63,7 +72,7 @@ $(document).ready(function(event, str){
 	$.ajax({
 		type : 'POST',
 		url : '/exhibition/main/index_QnA_Search.do',
-		data : {'pg': $('#pg').val(),
+		data : {'pg': 1,
 				'index_keyword' : index_keyword},
 		dataType : 'json',
 		success : function(data){
@@ -71,38 +80,46 @@ $(document).ready(function(event, str){
 				$('#index_QnA_SearchPlusBtn').hide();
 			}
 			if(data.totalA=='0'){
-				$('<tr/>',{
-					align: 'center'
-				}).append($('<td/>',{
+				$('<div/>',{
+					align: 'left'
+				}).append($('<div/>',{
 					align : 'center',
 					text : '검색된 결과가 없습니다.'
 				})).appendTo($('#index_QnA_SearchList'));
 				
 			} else if(data.totalA!='0'){
+				var QnA_total = data.totalA;
+				$('<span/>',{
+					text : "("+QnA_total+"건)"
+				}).appendTo($('#index_QnA_total'));
 				$.each(data.list, function(index, item){
-					$('<tr/>').append($('<input/>',{
+					var subject = item.subject;
+					$('<div/>').append($('<input/>',{
 						type : 'hidden',
 						text : item.classify
 					})).append($('<input/>',{
-						
 						align : 'center',
 						style: 'width: 880px; text-align: left;',
 						type : 'hidden',
 						text : item.seq
-					})).append($('<td/>',{
-						style: 'width: 880px; text-align: left;',
+					})).append($('<div/>',{
+						style: 'width: 60px; height:30px; padding-left:7px; padding-top:5px; text-align: left;  font-size:13pt; margin-left:5px; border: 1px ridge rgb(255,0,0,.6); margin-top:35px; display: inline-block; float:left;',
+						text : "["+item.classify+"]",
+					})).append($('<div/>',{
+						style: 'width: 800px; height:30px; padding-top:7px; text-align:left;  font-size:13pt; margin-left:5px; margin-top:35px; display: inline-block;',
 						id : 'subjectA',
-						text : "["+item.classify+"]   "+item.subject
-					})).appendTo($('#index_QnA_SearchList'));
-				
-					$('<tr/>',{
-						style: 'width: 880px; height: 35px; text-align: left;'
-					}).append($('<td/>',{
-						style: 'width: 880px;  height: 35px; text-align: left;',
+						text : item.subject
+					})).append($('<div/>',{
+						style: 'width: 880px;  height: 35px; padding-left:10px; padding-top:10px; text-align: left; font-size:8pt; font-family: inherit;',
 						class : 'contentC',
 						href : 'javascript:void(0)',
 						text : item.content
 					})).appendTo($('#index_QnA_SearchList'));
+					if(index%2 != 0){
+						$('<div/>',{
+							style:"width:880px;  border-bottom:1px dashed rgb(155,155,155,.6);"
+						}).appendTo($('.contentC'));
+					}
 				});
 			}
 		}
@@ -113,7 +130,7 @@ $(document).ready(function(event, str){
 	});
 	
 	//
-	$('#index_QnA_SearchList').on('click','#QnA_subject',function(){
+	$('#index_QnA_SearchList').on('click','#subjectA',function(){
 		var seq = $(this).prev().text();
 		location.href='/exhibition/customerService/C_QnA.do';
 	});
@@ -122,7 +139,7 @@ $(document).ready(function(event, str){
 	$.ajax({
 		type : 'POST',
 		url : '/exhibition/main/index_contactList_Search.do',
-		data : {'pg': $('#pg').val(),
+		data : {'pg': 1,
 				'index_keyword': index_keyword },
 		dataType : 'json',
 		success : function(data){
@@ -130,81 +147,85 @@ $(document).ready(function(event, str){
 				$('#index_contactList_SearchPlusBtn').hide();
 			}
 			if(data.totalA=='0'){
-				$('<tr/>',{
-					align: 'center'
-				}).append($('<td/>',{
+				$('<div/>',{
+					align: 'left'
+				}).append($('<div/>',{
 					colspan: '6',
-					align : 'center',
+					align : 'left',
 					text : '검색된 결과가 없습니다.'
 				})).appendTo($('#index_contactList_SearchList'));  
 				
 			}else if(data.totalA!='0'){
-				$('<tr/>').append($('<th/>',{
-					style : "width: 18%; height: 7%; padding-top: 10px; text-align: center;",
+				var contactList_total = data.totalA;
+				$('<span/>',{
+					text : "("+contactList_total+"건)"
+				}).appendTo($('#index_contactList_total'));
+				
+				$('<div/>').append($('<div/>',{
+					style : "width: 175px; height: 7%; font-size:13pt; margin-top:35px; text-align: left; display :inline-block;",
 					text : '분류'
-				})).append($('<th/>',{
-					style : "width: 18%; height: 7%; padding-top: 10px; text-align: center;",
+				})).append($('<div/>',{
+					style : "width: 175px; height: 7%; font-size:13pt; margin-top:35px; text-align: left; display :inline-block;",
 					text : '기관 & 시설'
-				})).append($('<th/>',{
-					style : "width: 18%; height: 7%; padding-top: 10px; text-align: center;",
+				})).append($('<div/>',{
+					style : "width: 175px; height: 7%;  font-size:13pt; margin-top:35px; text-align: left; display :inline-block;",
 					text : '명칭'
-				})).append($('<th/>',{
-					style : "width: 18%; height: 7%; padding-top: 10px; text-align: center;",
+				})).append($('<div/>',{
+					style : "width: 175px; height: 7%;  font-size:13pt; margin-top:35px; text-align: left; display :inline-block;",
 					text : '담당자'
-				})).append($('<th/>',{
-					style : "width: 18%; height: 7%; padding-top: 10px; text-align: center;",
+				})).append($('<div/>',{
+					style : "width: 175px; height: 7%; font-size:13pt; margin-top:35px; text-align: left; display :inline-block;",
 					text : '연락처'
+				})).append($('<div/>',{
+					style:"width:880px; margin-top:5px; border-bottom:1px dashed rgb(155,155,155,.6);"
 				})).appendTo($('#index_contactList_SearchList'));
 				
 				$.each(data.list, function(index, item){
 					if(code!=3){
-						$('<tr/>').append($('<td/>',{
-							align : 'center',
-							style: 'width: 20%; height: 9%; text-align: center;',
+						$('<div/>').append($('<div/>',{
+							style: 'width: 175px; height: 9%; font-size:10pt; margin-top:10px; text-align: left; display :inline-block;',
 							text : item.classify,
-						})).append($('<td/>',{
-							align : 'center',
-							style: 'width: 20%; height: 9%; text-align: center;',
+						})).append($('<div/>',{
+							style: 'width: 175px; height: 9%; font-size:10pt; margin-top:10px; text-align: left; display :inline-block;',
 							text : item.facility,
-						})).append($('<td/>',{
-							align : 'center',
-							style: 'width: 20%; height: 9%; text-align: center;',
+						})).append($('<div/>',{
+							style: 'width: 175px; height: 9%; font-size:10pt; margin-top:10px; text-align: left; display :inline-block;',
 							text : item.title,
-						})).append($('<td/>',{
-							align : 'center',
-							style: 'width: 20%; height: 9%; text-align: center;',
+						})).append($('<div/>',{
+							style: 'width: 175px; height: 9%; font-size:10pt; margin-top:10px; text-align: left; display :inline-block;',
 							text : item.name,
-						})).append($('<td/>',{
-							align : 'center',
-							style: 'width: 20%; height: 9%; text-align: center;',
+						})).append($('<div/>',{
+							style: 'width: 175px; height: 9%; font-size:10pt; margin-top:10px; text-align: left; display :inline-block;',
 							text : item.phone,
 						})).appendTo($('#index_contactList_SearchList'));
-						
+						$('<div/>',{
+							style:"width:880px; margin-top:5px; border-bottom:1px dashed rgb(155,155,155,.6);"
+						}).appendTo($('#index_contactList_SearchList'));
 					} else if(code==3){
-						$('<tr/>').append($('<td/>').append($('<input/>',{
+						$('<div/>').append($('<div/>').append($('<input/>',{
 							type : 'checkbox',
 							value : item.seq,
 							name : 'box',
 							class : 'box'
-						}))).append($('<td/>',{
+						}))).append($('<div/>',{
 							align : 'center',
-							style: 'width: 20%; height: 9%; text-align: center;',
+							style: 'width: 175px; height: 9%; font-size:10pt; margin-top:10px; text-align: left; display :inline-block;',
 							text : item.classify,
-						})).append($('<td/>',{
+						})).append($('<div/>',{
 							align : 'center',
-							style: 'width: 20%; height: 9%; text-align: center;',
+							style: 'width: 175px; height: 9%; font-size:10pt; margin-top:10px; text-align: left; display :inline-block;',
 							text : item.facility,
-						})).append($('<td/>',{
+						})).append($('<div/>',{
 							align : 'center',
-							style: 'width: 20%; height: 9%; text-align: center;',
+							style: 'width: 175px; height: 9%; font-size:10pt; margin-top:10px; text-align: left; display :inline-block;',
 							text : item.title,
-						})).append($('<td/>',{
+						})).append($('<div/>',{
 							align : 'center',
-							style: 'width: 20%; height: 9%; text-align: center;',
+							style: 'width: 175px; height: 9%; font-size:10pt; margin-top:10px; text-align: left; display :inline-block;',
 							text : item.name,
-						})).append($('<td/>',{
+						})).append($('<div/>',{
 							align : 'center',
-							style: 'width: 20%; height: 9%; text-align: center;',
+							style: 'width: 175px; height: 9%; font-size:10pt; margin-top:10px; text-align: left; display :inline-block;',
 							text : item.phone,
 						})).appendTo($('#index_contactList_SearchList'));	
 					}
@@ -224,7 +245,7 @@ $(document).ready(function(event, str){
 	$.ajax({
 		type : 'POST',
 		url : '/exhibition/main/index_eventboard_Search.do',
-		data : {'pg': $('#pg').val(),
+		data : {'pg': 1,
 				'index_keyword': index_keyword },
 		dataType : 'json',
 		success : function(data){
@@ -232,26 +253,30 @@ $(document).ready(function(event, str){
 				$('#index_eventboard_SearchPlusBtn').hide();
 			}
 			if(data.totalA=='0'){
-				$('<tr/>',{
-					align: 'center'
-				}).append($('<td/>',{
-					align : 'center',
+				$('<div/>',{
+					align: 'left'
+				}).append($('<div/>',{
+					align : 'left',
 					text : '검색된 결과가 없습니다.'
 				})).appendTo($('#index_eventboard_SearchList'));  
 				
 			} else if(data.totalA!='0'){
+				var eventboard_total = data.totalA;
+				$('<span/>',{
+					text : "("+eventboard_total+"건)"
+				}).appendTo($('#index_eventboard_total'));
 				$.each(data.list, function(index, item){
-					$('<tr/>').append($('<input/>',{
+					$('<div/>').append($('<input/>',{
 						type : 'hidden',
 						text : item.seq
-					})).append($('<td/>',{
+					})).append($('<div/>',{
 						rowspan : '9',
 						style : 'width : 100px; '
 					}).append($('<img>',{
 						src : '../storage/'+item.image1+'',
 						style : 'width : 100px; height : 80px;',
 						id : 'eventboard_image'
-					}))).append($('<td/>',{
+					}))).append($('<div/>',{
 						text : item.imagename,
 						id : 'eventboard_name'
 					})).appendTo($('#index_eventboard_SearchList'));
@@ -292,15 +317,16 @@ $(document).ready(function(event, str){
 		}
 	});
 	
+	
+	$('#index_eventboard_SearchPlusBtn').click(function(){
+		location.href="/exhibition/main/index_eventboard_Plus.do?pg="+pg+"&index_keyword="+index_keyword;
+	});
+	
 	$('#index_eventboard_SearchList').on('click','#eventboard_name',function(){
 		var seq = $(this).prev().prev().text();
 		location.href='/exhibition//performance/exhibitionBook.do?seq='+seq;
 	});
-	
-	$('#index_eventboard_SearchList').click(function(){
-		location.href="/exhibition/main/index_eventboard_Plus.do?pg="+pg+"&index_keyword="+index_keyword;
-	});
-	
+
 	$('#index_eventboard_SearchList').on('click','#eventboard_image',function(){
 		var seq = $(this).prev().text();
 		location.href='/exhibition//performance/exhibitionBook.do?seq='+seq;
@@ -311,7 +337,7 @@ $(document).ready(function(event, str){
 	$.ajax({
 		type : 'POST',
 		url : '/exhibition/main/index_eventboard_play_Search.do',
-		data : {'pg': $('#pg').val(),
+		data : {'pg': 1,
 				'index_keyword': index_keyword },
 		dataType : 'json',
 		success : function(data){
@@ -319,14 +345,18 @@ $(document).ready(function(event, str){
 				$('#index_eventboard_play_SearchPlusBtn').hide();
 			}
 			if(data.totalA=='0'){
-				$('<tr/>',{
-					align: 'center'
-				}).append($('<td/>',{
-					align : 'center',
+				$('<div/>',{
+					align: 'left'
+				}).append($('<div/>',{
+					align : 'left',
 					text : '검색된 결과가 없습니다.'
 				})).appendTo($('#index_eventboard_play_SearchList'));  
 				
 			} else if(data.totalA!='0'){
+				var eventboard_play_total = data.totalA;
+				$('<span/>',{
+					text : "("+eventboard_play_total+"건)"
+				}).appendTo($('#index_eventboard_play_total'));
 				$.each(data.list, function(index, item){
 					$('<tr/>').append($('<input/>',{
 						type : 'hidden',
@@ -397,7 +427,7 @@ $(document).ready(function(event, str){
 	$.ajax({
 		type : 'POST',
 		url : '/exhibition/main/index_hotel_list_Search.do',
-		data : {'pg': $('#pg').val(),
+		data : {'pg': 1,
 				'index_keyword': index_keyword },
 		dataType : 'json',
 		success : function(data){
@@ -405,14 +435,18 @@ $(document).ready(function(event, str){
 				$('#index_hotel_list_SearchPlusBtn').hide();
 			}
 			if(data.totalA=='0'){
-				$('<tr/>',{
-					align: 'center'
-				}).append($('<td/>',{
-					align : 'center',
+				$('<div/>',{
+					align: 'left'
+				}).append($('<div/>',{
+					align : 'left',
 					text : '검색된 결과가 없습니다.'
 				})).appendTo($('#index_hotel_list_SearchList'));  
 				
 			} else if(data.totalA!='0'){
+				var hotel_list_total = data.totalA;
+				$('<span/>',{
+					text : "("+hotel_list_total+"건)"
+				}).appendTo($('#hotel_list_total'));
 				$.each(data.list, function(index, item){
 					$('<tr/>').append($('<td/>',{
 						rowspan : '3',

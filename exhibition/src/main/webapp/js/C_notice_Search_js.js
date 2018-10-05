@@ -18,10 +18,11 @@ $(document).ready(function(){
 			$('#C_notice_Write').submit();
 	});
 	
+	
 	$.ajax({
 		type : 'GET',
 		url : '/exhibition/customerService/C_notice_SearchList.do?pg='+encodeURI($('#pg').val())
-		+'&subject='+"subject"+'&keyword='+encodeURI($('#keyword').val()),
+		+'&keyword='+encodeURI($('#keyword').val()),
 		dataType : 'json',
 		success : function(data){
 			if(data.totalA=='0'){
@@ -62,51 +63,8 @@ $(document).ready(function(){
 	});
 	
 	// 공지사항 검색한 값 불러오기
-	$('#C_notice_SearchBtn').click(function(){
-		$('#pg').val(1);
-		if($('#keyword').val()=='')
-			alert("검색어를 입력하세요");
-		else{
-			$.ajax({
-				type : 'GET',
-				url : '/exhibition/customerService/C_notice_SearchList.do?pg='+encodeURI($('#pg').val())+'&subject='+"subject"+'&keyword='+encodeURI($('#keyword').val()),
-				dataType : 'json',
-				success : function(data){
-					$('#C_notice_SearchList tr:gt(0)').remove();
-					if(data.totalA=='0'){
-						$('<tr/>',{
-							align: 'center'
-						}).append($('<td/>',{
-							colspan: '3',
-							align : 'center',
-							text : '검색된 결과가 없습니다.'
-						})).appendTo($('#C_notice_SearchList'));  
-						$('#C_notice_SearchPagingDiv').hide();
-						
-					}else if(data.tataA!='0'){
-						$('#C_notice_SearchPagingDiv').show();
-						$.each(data.list, function(index, item){
-							$('<tr/>').append($('<td/>',{
-								align : 'center',
-								style: 'width: 20%; height: 9%; text-align: center;',
-								text : item.seq
-							})).append($('<td/>',{
-								id : 'subjectA',
-								style: 'width: 45%; height: 7%;text-align: center;',
-								href : 'javascript:void(0)',
-								text : item.subject
-							})).append($('<td/>',{
-								align : 'center',
-								style: 'width: 20%; height: 7%;text-align: center;',
-								text : item.logtime
-							})).appendTo($('#C_notice_SearchList'));     
-						
-						});
-					}
-					$('#C_notice_SearchPagingDiv').html(data.customerServicePaging.pagingHTML);
-				}
-			});
-		}
+	$('#C_notice_SearchBtn2').click(function(){
+		location.href="/exhibition/customerService/C_notice_Search.do?pg=1&keyword="+$('#keyword1').val();
 	});
 	
 	// 공지사항 리스트 제목 클릭시 내용 보여줌
@@ -115,11 +73,5 @@ $(document).ready(function(){
 		var seq = $(this).prev().text();
 		location.href='/exhibition/customerService/C_notice_View.do?seq='+seq+'&pg='+$('#pg').val()+'&keyword='+$('#keyword').val();
 	});
-	
-	//공지사항 작성중 돌아가기(뒤로)
-	$('#C_notice_WriteBack').click(function(){
-		location.href="/exhibition/customerService/C_notice.do?pg=${pg}";
-	});
-	
 
 });

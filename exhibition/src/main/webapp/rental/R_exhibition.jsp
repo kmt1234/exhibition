@@ -73,14 +73,14 @@ ul{
 <h2 class="box-container" style="float: center; width: 100%; text-align: left; padding-bottom: 0px;">
 	박람회 
 	<span class="h-light">홀</span>
-	<div style="font-size:13px; float:right; height: 50px; margin-top:30px ">
+	<div style="font-size:13px; float:right; height: 50px; margin-top:30px;">
 		<img src="../img/house.png" width="15px" height="16px" style="cursor: pointer; " id="houseImg">
 		> 소개 > 박람회 홀
 	</div>
 	<div class="ui divider"></div>
 </h2>
-
-<table style="margin-left:20px; width: 50%; display: inline-block;">
+<div id="Layer1" style="position:absolute; left:237px; top:140px; width:164px; height:104px; z-index:1">
+<table style="width: 50%; display: inline-block;">
 	<tr>
 		<td>
 			<button class="middle ui button" style="width: 180px;" id="1F">
@@ -94,8 +94,10 @@ ul{
 		</td>
 	</tr>
 </table>
-<c:if test="${homepageMemberName == 'hong123'}">
-<div style="display: inline-block; width: auto;">
+</div>
+
+<c:if test="${code == '3'}">
+<div style="position:absolute; width: 500px; margin-left: 360px; margin-top: 5px;">
 	<form id="modifyRateExhibitionForm" action="/exhibition/rental/modifyRateExhibition.do" method="post">
 		<select id="boothNameSel" name="boothNameSel">
 			<option value="Booth1">Booth1</option>
@@ -114,10 +116,11 @@ ul{
 			<option value="Booth14">Booth14</option>
 		</select>
 		<input type="text" name="boothRate" id="boothRate">
+		<button id="modifyRateBtn">평당 가격 수정</button>
 	</form>
-	<button id="modifyRateBtn">평당 가격 수정</button>
 </div>
 </c:if>
+
 <br><br>
 <h2 align="left" style="margin-left: 46px; color: #610170;">
 <i class="camera icon"></i>
