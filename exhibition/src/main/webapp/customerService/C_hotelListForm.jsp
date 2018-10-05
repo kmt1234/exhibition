@@ -43,19 +43,19 @@
 			<img src="../img/house.png" width="15px" height="16px" style="cursor: pointer;" id="houseImg"></img>
 			> 고객센터 > 게시판추가 > 목록
 		</div>
-		<div class="ui divider"></div> 
+		<div class="ui divider"></div>
 	</h2>
 	<!--리스트  -->
-	<div style="width: 730px; float: left; margin-left: 100px;">
+	<div style="width: auto; float: left; margin-left: 100px;">
 		<div align="left"><input type="button" class="hotelUploadBtn" value="업로드"></div>
 		<form name="hotelListForm" id="hotelListForm" method="post">
 			<table id="eventboardListTab" border="1" frame="hsides" rules="rows" cellpadding="3" cellspacing="0">
 				<tr>
 					<th><input type="checkbox" id="checkAll" class="check"></th>
-					<th width="100">번호</th>
-					<th width="380">이미지</th>
-					<th width="100">호텔명</th>
-					<th width="150">호텔정보</th>
+					<th width="80">번호</th>
+					<th width="200">이미지</th>
+					<th width="150">호텔명</th>
+					<th width="350">호텔정보</th>
 				</tr>
 				<!--등록된 박람회 정보가 없을 때  -->								
 				<c:if test="${listSize eq '0'}">	
@@ -69,8 +69,8 @@
 						<tr>
 							<td rowspan="2"><input type="checkbox" name="check" class="check" value="${list.seq}"></td>
 							<td rowspan="2" align="center">${list.seq}<br>
-							<td rowspan="2" align="center" ><a class="hotel_detail"><img src="../storage/${list.image1}" width="200" height="150"></a></td>
-							<td rowspan="2" align="center">${list.imageName}</td>	
+							<td rowspan="2" align="center" width="100"><a class="hotel_detail"><img src="../storage/${list.image1}" width="200" height="150"></a></td>
+							<td rowspan="2" align="center" width="150">${list.imageName}</td>	
 							<td>${list.eventLink}</td>
 						</tr>
 						<tr>

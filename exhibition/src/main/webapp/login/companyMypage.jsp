@@ -239,8 +239,10 @@
 								    <p>탈퇴하시겠습니까?</p>
 								  </div>
 								  <div class="actions">
+
 								    <div class="ui negative button" id="out-no">
-								      <i class="remove icon"></i>
+
+								     <i class="remove icon"></i>
 								      아니오
 								    </div>
 								    <div class="ui positive right labeled icon button" id="out-yes">
