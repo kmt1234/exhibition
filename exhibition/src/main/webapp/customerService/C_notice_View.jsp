@@ -53,7 +53,7 @@
 			<button class="middle ui button" id="C_notice_ListBtn" >목록</button>
 			<input type="hidden" id="putSeq" value="${customerServiceDTO.seq}">
 			<input type="hidden" id="pg" value="${pg}">
-			<input type="hidden" id="keyword" value="${keyword}">
+			<input type="hidden" id="keyword" value="${index_keyword}">
 		</div>
 	</div>
 	<div style="height: 80px;"></div>

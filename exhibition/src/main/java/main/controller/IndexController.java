@@ -118,6 +118,7 @@ public class IndexController {
 		return mav; 
 	}
 	
+	
 	@RequestMapping(value="index_notice_Plus", method=RequestMethod.GET)
 	public ModelAndView index_notice_Plus(@RequestParam(required = false, defaultValue = "1") int pg, @RequestParam String index_keyword, Model model) {
 		model.addAttribute("pg", pg);
@@ -131,13 +132,13 @@ public class IndexController {
 	
 	// 메인 검색후  공지사항 더보기 버튼 클릭시 리스트 불러옴
 	@RequestMapping(value="index_notice_SearchPlus", method=RequestMethod.GET)
-	public ModelAndView index_notice_SearchPlus(@RequestParam(required = false) Map<String, String> map) {
+	public ModelAndView index_notice_SearchPlus(@RequestParam(required = false, defaultValue = "1") Map<String, String> map) {
 		int endNum = Integer.parseInt(map.get("pg")) * 10;
 		int startNum = endNum - 9;
 		
 		map.put("startNum", startNum + "");
 		map.put("endNum", endNum + "");
-
+		
 		
 		List<MainDTO> list = mainDAO.index_notice_Search(map);
 		
@@ -198,7 +199,7 @@ public class IndexController {
 	}
 	
 	// 메인 검색후  자주묻는 질문 더보기 버튼 클릭시 리스트 불러옴
-	@RequestMapping(value="index_QnA_SearchPlus", method=RequestMethod.POST)
+	@RequestMapping(value="index_QnA_SearchPlus", method=RequestMethod.GET)
 	public ModelAndView index_QnA_SearchPlus(@RequestParam(required = false) Map<String, String> map) {
 		int endNum = Integer.parseInt(map.get("pg")) * 10;
 		int startNum = endNum - 9;
@@ -304,7 +305,6 @@ public class IndexController {
 		List<MainDTO> list = mainDAO.index_eventboard_Search(map);
 		
 		int totalA = mainDAO.getTotal_index_eventboard_Search(map);
-		
 		
 		mainPaging.setCurrentPage(Integer.parseInt(map.get("pg")));
 		mainPaging.setPageBlock(3);

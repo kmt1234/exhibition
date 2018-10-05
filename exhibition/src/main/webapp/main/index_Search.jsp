@@ -49,29 +49,16 @@
 	cursor: pointer;
 	
 }
-#eventboard_name:hover{
+.name:hover{
 	color: green;
 	text-decoration: underline;
 	font-weight: bold;
 	cursor: pointer;
 }
-#eventboard_image:hover{
+.image:hover{
 	cursor: pointer;
 }
-#eventboard_play_name:hover{
-	color: green;
-	text-decoration: underline;
-	font-weight: bold;
-	cursor: pointer;
-}
-
-#eventboard_play_image:hover{
-	cursor: pointer;
-}
-#hotel_image:hover{
-	cursor: pointer;
-}
-#link:hover{
+.link:hover{
 	color: green;
 	cursor: pointer;
 }
