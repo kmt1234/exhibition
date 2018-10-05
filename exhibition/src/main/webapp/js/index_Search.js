@@ -7,7 +7,7 @@ $(document).ready(function(event, str){
 	$.ajax({
 		type : 'POST',
 		url : '/exhibition/main/index_notice_Search.do',
-		data : {'pg': $('#pg').val(),
+		data : {'pg': 1,
 				'index_keyword' : index_keyword},
 		dataType : 'json',
 		success : function(data){
@@ -72,7 +72,7 @@ $(document).ready(function(event, str){
 	$.ajax({
 		type : 'POST',
 		url : '/exhibition/main/index_QnA_Search.do',
-		data : {'pg': $('#pg').val(),
+		data : {'pg': 1,
 				'index_keyword' : index_keyword},
 		dataType : 'json',
 		success : function(data){
@@ -139,7 +139,7 @@ $(document).ready(function(event, str){
 	$.ajax({
 		type : 'POST',
 		url : '/exhibition/main/index_contactList_Search.do',
-		data : {'pg': $('#pg').val(),
+		data : {'pg': 1,
 				'index_keyword': index_keyword },
 		dataType : 'json',
 		success : function(data){
@@ -245,7 +245,7 @@ $(document).ready(function(event, str){
 	$.ajax({
 		type : 'POST',
 		url : '/exhibition/main/index_eventboard_Search.do',
-		data : {'pg': $('#pg').val(),
+		data : {'pg': 1,
 				'index_keyword': index_keyword },
 		dataType : 'json',
 		success : function(data){
@@ -258,58 +258,64 @@ $(document).ready(function(event, str){
 				}).append($('<div/>',{
 					align : 'left',
 					text : '검색된 결과가 없습니다.'
-				})).appendTo($('#index_eventboard_SearchList'));  
+				})).appendTo($('#index_eventboard_SearchList_Img'));  
 				
 			} else if(data.totalA!='0'){
 				var eventboard_total = data.totalA;
 				$('<span/>',{
 					text : "("+eventboard_total+"건)"
 				}).appendTo($('#index_eventboard_total'));
+				
 				$.each(data.list, function(index, item){
 					$('<div/>').append($('<input/>',{
 						type : 'hidden',
 						text : item.seq
-					})).append($('<div/>',{
-						rowspan : '9',
-						style : 'width : 100px; '
-					}).append($('<img>',{
+					})).append($('<img/>',{
 						src : '../storage/'+item.image1+'',
-						style : 'width : 100px; height : 80px;',
+						style : 'width : 200px; height: 200px; float:left; border: 1px ridge rgb(155,155,155,.6); ',
 						id : 'eventboard_image'
-					}))).append($('<div/>',{
-						text : item.imagename,
-						id : 'eventboard_name'
-					})).appendTo($('#index_eventboard_SearchList'));
-					
-					$('<tr/>').append($('<td/>',{
+					})).append($('<div/>',{
+						style:'float:left; text-align:left; margin-left:20px; width:660px; height:30px; font-size: 15pt; margin-top:10px; ',
+						text: item.imagename
+					})).append($('<div/>',{
+						style:'display:inline-block; width:50px; border: 1px ridge rgb(255,0,0,.6); margin-left:20px; float:left;  height:25px; padding:0; padding-top:3px; font-size: 10pt; font-family: inherit;',
+						text : '일시'
+					})).append($('<div/>',{
+						style : 'display:inline-block; float:left; margin-left:10px; width:580px; text-align:left; padding-top:3px; height:25px;',
 						text : item.startdate+"~"+item.enddate
-					})).appendTo($('#index_eventboard_SearchList'));
-					
-					$('<tr/>').append($('<td/>',{
+					})).append($('<div/>',{
+						style:'display:inline-block; width:50px; margin-top:5px; border: 1px ridge rgb(255,0,0,.6); margin-left:20px; float:left;  height:25px; padding:0; padding-top:3px; font-size: 10pt; font-family: inherit;',
+						text : '시간'
+					})).append($('<div/>',{
+						style : 'display:inline-block; float:left;  margin-top:5px; margin-left:10px; width:580px; text-align:left; padding-top:3px; height:25px;',
 						text : item.starttime+"~"+item.endtime
-					})).appendTo($('#index_eventboard_SearchList'));
-					
-					$('<tr/>').append($('<td/>',{
-						text : item.eventplace
-					})).appendTo($('#index_eventboard_SearchList'));
-					
-					$('<tr/>').append($('<td/>',{
+					})).append($('<div/>',{
+						style:'display:inline-block; width:50px; margin-top:5px; border: 1px ridge rgb(255,0,0,.6); margin-left:20px; float:left;  height:25px; padding:0; padding-top:3px; font-size: 10pt; font-family: inherit;',
+						text : '장소'
+					})).append($('<div/>',{
+						style : 'display:inline-block; float:left;  margin-top:5px; margin-left:10px; width:580px; text-align:left; padding-top:3px; height:25px;',
+						text :  item.eventplace
+					})).append($('<div/>',{
+						style:'display:inline-block; width:50px; margin-top:5px; border: 1px ridge rgb(255,0,0,.6); margin-left:20px; float:left;  height:25px; padding:0; padding-top:3px; font-size: 10pt; font-family: inherit;',
+						text : '싸이트'
+					})).append($('<div/>',{
+						style : 'display:inline-block; float:left;  margin-top:5px; margin-left:10px; width:580px; text-align:left; padding-top:3px; height:25px;',
 						text : item.eventlink
 					})).appendTo($('#index_eventboard_SearchList'));
 					
-					$('<tr/>').append($('<td/>',{
+					$('<div/>').append($('<div/>',{
 						text : item.eventprice
 					})).appendTo($('#index_eventboard_SearchList'));
 					
-					$('<tr/>').append($('<td/>',{
+					$('<div/>').append($('<div/>',{
 						text : item.eventseats
 					})).appendTo($('#index_eventboard_SearchList'));
 					
-					$('<tr/>').append($('<td/>',{
+					$('<div/>').append($('<div/>',{
 						text : item.eventrate
 					})).appendTo($('#index_eventboard_SearchList'));
 					
-					$('<tr/>').append($('<td/>',{
+					$('<div/>').append($('<div/>',{
 						text : item.eventcontent
 					})).appendTo($('#index_eventboard_SearchList'));
 				});
@@ -337,7 +343,7 @@ $(document).ready(function(event, str){
 	$.ajax({
 		type : 'POST',
 		url : '/exhibition/main/index_eventboard_play_Search.do',
-		data : {'pg': $('#pg').val(),
+		data : {'pg': 1,
 				'index_keyword': index_keyword },
 		dataType : 'json',
 		success : function(data){
@@ -427,7 +433,7 @@ $(document).ready(function(event, str){
 	$.ajax({
 		type : 'POST',
 		url : '/exhibition/main/index_hotel_list_Search.do',
-		data : {'pg': $('#pg').val(),
+		data : {'pg': 1,
 				'index_keyword': index_keyword },
 		dataType : 'json',
 		success : function(data){

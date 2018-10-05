@@ -25,14 +25,14 @@
 								});
 					link = item.eventLink;
 					console.log(link);
+					
+					
 				});//each
 				
-				 $('.pic').on('click',function(){
-					 if(link==null){
-						 alert('해당 이벤트에 대한 링크 없음');
-					 }
-					 
-				 });
+				$('.pic').on('click',function(){
+					alert('해당 링크 없음');
+				});
+				
 				
 				 var current = 0;
 				 var max = 0;

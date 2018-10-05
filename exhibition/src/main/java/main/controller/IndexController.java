@@ -90,7 +90,7 @@ public class IndexController {
 	
 	// 메인 검색시 검색된 공지사항 리스트 불러옴
 	@RequestMapping(value="index_notice_Search", method=RequestMethod.POST)
-	public ModelAndView index_notice_Search(@RequestParam(required = false, defaultValue = "1") Map<String, String> map) {
+	public ModelAndView index_notice_Search(@RequestParam Map<String, String> map) {
 		int endNum = Integer.parseInt(map.get("pg")) * 3;
 		int startNum = endNum - 2;
 		
@@ -160,7 +160,7 @@ public class IndexController {
 	
 	// 메인 검색시 검색된 자주묻는 질문 리스트 불러옴
 	@RequestMapping(value="index_QnA_Search", method=RequestMethod.POST)
-	public ModelAndView index_QnA_Search(@RequestParam(required = false) Map<String, String> map) {
+	public ModelAndView index_QnA_Search(@RequestParam Map<String, String> map) {
 		int endNum = Integer.parseInt(map.get("pg")) * 3;
 		int startNum = endNum - 2;
 		
@@ -227,7 +227,7 @@ public class IndexController {
 	
 	// 메인 검색시 검색된 주요시설 연락처 리스트 불러옴
 	@RequestMapping(value="index_contactList_Search", method=RequestMethod.POST)
-	public ModelAndView index_contactList_Search(@RequestParam(required = false) Map<String, String> map) {
+	public ModelAndView index_contactList_Search(@RequestParam Map<String, String> map) {
 		int endNum = Integer.parseInt(map.get("pg")) * 3;
 		int startNum = endNum - 2;
 		
@@ -294,7 +294,7 @@ public class IndexController {
 	
 	// 메인 검색시 검색된 박람회 리스트 불러옴
 	@RequestMapping(value="index_eventboard_Search", method=RequestMethod.POST)
-	public ModelAndView index_eventboard_Search(@RequestParam(required = false) Map<String, String> map) {
+	public ModelAndView index_eventboard_Search(@RequestParam Map<String, String> map) {
 		int endNum = Integer.parseInt(map.get("pg")) * 3;
 		int startNum = endNum - 2;
 		
@@ -364,7 +364,7 @@ public class IndexController {
 	
 	// 메인 검색시 검색된 연극 리스트 불러옴
 	@RequestMapping(value="index_eventboard_play_Search", method=RequestMethod.POST)
-	public ModelAndView index_eventboard_play_Search(@RequestParam(required = false) Map<String, String> map) {
+	public ModelAndView index_eventboard_play_Search(@RequestParam Map<String, String> map) {
 		int endNum = Integer.parseInt(map.get("pg")) * 3;
 		int startNum = endNum - 2;
 		
@@ -432,7 +432,7 @@ public class IndexController {
 	
 	// 메인 검색시 검색된 숙박 리스트 불러옴
 		@RequestMapping(value="index_hotel_list_Search", method=RequestMethod.POST)
-		public ModelAndView index_hotel_list_Search(@RequestParam(required = false) Map<String, String> map) {
+		public ModelAndView index_hotel_list_Search(@RequestParam Map<String, String> map) {
 			int endNum = Integer.parseInt(map.get("pg")) * 3;
 			int startNum = endNum - 2;
 			

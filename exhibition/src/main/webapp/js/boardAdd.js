@@ -103,6 +103,15 @@ $(document).ready(function(){
 		$('#warnningDiv').empty();
 		$('#hotelDiv').empty();
 		$('#telDiv').empty();
+		//메인 등록 시,
+		if($('#postSelect').val()=='0'){
+			if($('#imageName').val()=='')
+				$('#imageNameDiv').text('제목을 입력하세요').css('color','red').css('font-size','9pt').css('font-weight','bold');
+			else if($('#img').val()=='') 
+				$('#imgDiv').text('파일을 선택해 주세요').css('color','magenta').css('font-size','9pt').css('font-weight','bold');
+			else//메인 이미지 슬라이더
+				$('#imageboardWriteForm').attr({action:'/exhibition/customerService/C_imageboardWrite.do', method:'post'}).submit();
+		}
 		
 		if($('#postSelect').val()=='1' || $('#postSelect').val()=='2'){
 			var checkReservation = false;
@@ -129,18 +138,9 @@ $(document).ready(function(){
 				success : function(data){
 					if(data=='no_data'){
 						checkReservation = true;
-						//메인 등록 시,
-						if($('#postSelect').val()=='0'){
-							if($('#imageName').val()=='')
-								$('#imageNameDiv').text('제목을 입력하세요').css('color','red').css('font-size','9pt').css('font-weight','bold');
-							else if($('#img').val()=='') 
-								$('#imgDiv').text('파일을 선택해 주세요').css('color','magenta').css('font-size','9pt').css('font-weight','bold');
-							else//메인 이미지 슬라이더
-								$('#imageboardWriteForm').attr({action:'/exhibition/customerService/C_imageboardWrite.do', method:'post'}).submit();
-						}
 						
 						//전시회, 연극 등록 시,
-						else if($('#postSelect').val()=='1' || $('#postSelect').val()=='2'){
+						if($('#postSelect').val()=='1' || $('#postSelect').val()=='2'){
 							//시간 비교
 							var date1 = $("#startTime").val();
 						    var date2 = $("#endTime").val();
@@ -183,26 +183,8 @@ $(document).ready(function(){
 							}else if($('#postSelect').val()=='2'){	//연극
 								$('#imageboardWriteForm').attr({action:'/exhibition/customerService/C_eventInfoWrite_play.do', method:'post'}).submit();
 							}
-						}else if($('#postSelect').val()=='3'){
-							var reg = /^https?\:\/\/.+/;
-							var tel = /^((01[1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})|(02|0[3-9]+[0-9])(\d{3,4})(\d{4})$/;
-							if($('#imageName').val()=='')
-								$('#imageNameDiv').text('제목을 입력하세요').css('color','red').css('font-size','9pt').css('font-weight','bold');
-							else if($('#img').val()=='') 
-								$('#imgDiv').text('파일을 선택해 주세요').css('color','magenta').css('font-size','9pt').css('font-weight','bold');
-							else if($('#eventLink').val()=='')
-								$('#hotelDiv').text('호텔 링크를 입력하세요').css('color','red').css('font-size','9pt').css('font-weight','bold');
-							else if(!reg.test($('#eventLink').val())){
-								$('#hotelDiv').text('호텔 링크 앞에는 http://가 입력되어야 합니다').css('color','red').css('font-size','9pt').css('font-weight','bold');
-							} else if($('#telPlace').val()=='')
-								$('#telDiv').text('전화번호를 입력하세요').css('color','red').css('font-size','9pt').css('font-weight','bold');
-							else if(!tel.test($('#telPlace').val())){
-								$('#telDiv').text('전화번호 양식에 맞지 않습니다').css('color','red').css('font-size','9pt').css('font-weight','bold');
-							}else
-								$('#imageboardWriteForm').attr({action:'/exhibition/customerService/C_hotelInfoWrite.do', method:'post'}).submit();
 						}
-					} 
-					else if(data=='yes_data'){
+					} else if(data=='yes_data'){
 						$.alertable.alert('일정이 중복됩니다', {
 					      show: function() {
 					        $(this.overlay).velocity('transition.fadeIn', 300);        
@@ -216,6 +198,25 @@ $(document).ready(function(){
 					} 
 				}
 			});//ajax
+		}
+		
+		if($('#postSelect').val()=='3'){
+			var reg = /^https?\:\/\/.+/;
+			var tel = /^((01[1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})|(02|0[3-9]+[0-9])(\d{3,4})(\d{4})$/;
+			if($('#imageName').val()=='')
+				$('#imageNameDiv').text('제목을 입력하세요').css('color','red').css('font-size','9pt').css('font-weight','bold');
+			else if($('#img').val()=='') 
+				$('#imgDiv').text('파일을 선택해 주세요').css('color','magenta').css('font-size','9pt').css('font-weight','bold');
+			else if($('#eventLink').val()=='')
+				$('#hotelDiv').text('호텔 링크를 입력하세요').css('color','red').css('font-size','9pt').css('font-weight','bold');
+			else if(!reg.test($('#eventLink').val())){
+				$('#hotelDiv').text('호텔 링크 앞에는 http://가 입력되어야 합니다').css('color','red').css('font-size','9pt').css('font-weight','bold');
+			} else if($('#telPlace').val()=='')
+				$('#telDiv').text('전화번호를 입력하세요').css('color','red').css('font-size','9pt').css('font-weight','bold');
+			else if(!tel.test($('#telPlace').val())){
+				$('#telDiv').text('전화번호 양식에 맞지 않습니다').css('color','red').css('font-size','9pt').css('font-weight','bold');
+			}else
+				$('#imageboardWriteForm').attr({action:'/exhibition/customerService/C_hotelInfoWrite.do', method:'post'}).submit();
 		}
 		
 	});

@@ -53,7 +53,7 @@
 			<div style="text-align: left; padding-left: 35px ">
 				<input class="middle ui button" type="button" id="rentBtn" value="임대료 계산하기">
 				<input class="middle ui button" type="button" style="width: 110px;" id="reservationBtn" value="예약하기">
-			</div>S
+			</div>
 			<div id="rentDiv"></div>
 			<div id="writeDiv"></div>
 		</div>

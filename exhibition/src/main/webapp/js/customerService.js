@@ -1,4 +1,16 @@
 $(document).ready(function(){
+	$('#memberSearch').keydown(function(key) {
+		if (key.keyCode == 13) {
+			$('#memberSearchBtn').click();
+		}
+	});
+	$('#companySearch').keydown(function(key) {
+		if (key.keyCode == 13) {
+			$('#companySearchBtn').click();
+		}
+	});
+	
+	
 	var date = new Date();
     var year  = date.getFullYear();
     var month = date.getMonth() + 1; // 0부터 시작하므로 1더함 더함
