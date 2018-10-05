@@ -20,6 +20,7 @@
 		</div>
 		<div class="ui divider"></div> 
 	</h2>
+	<form id=C_notice_Write" method="post" action="/exhibition/customerService/C_notice_checkModify.do">
 	<table style="width:880px; margin-left: 20px;" class="ui celled table">
 		<tr>
 			<td style="width:8%; height:40px; background-color: #f7f6e6; font-size: 15px;text-align: center;" >제 목</td>
@@ -49,6 +50,7 @@
 		<button class="middle ui button" id="C_notice_WriteBack" >목록</button>
 		<input type="hidden" name="pg" id="pg" value="${pg}">
 	</div>
+	</form>
 <div style="height: 80px;"></div>
 </div>
 

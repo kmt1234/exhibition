@@ -73,6 +73,11 @@
 #eventboard_play_image:hover{
 	cursor: pointer;
 }
+
+.aaa{
+	text-decoration: underline;
+	font-weight: bold;
+}
 </style>
 
 </head>

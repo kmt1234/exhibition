@@ -3,14 +3,17 @@ $(document).ready(function(event, str){
 	var pg = $('#pg').val();
 	var code = $('#hiddenCode').val();
 	
+	
+	
 	// 메인 검색시 검색된 공지사항 리스트 불러옴
 	$.ajax({
 		type : 'POST',
 		url : '/exhibition/main/index_notice_Search.do',
-		data : {'pg': $('#pg').val(),
+		data : {'pg': 1,
 				'index_keyword' : index_keyword},
 		dataType : 'json',
 		success : function(data){
+			alert(JSON.stringify(data));
 			if(data.totalA<'4'){
 				$('#index_notice_SearchPlusBtn').hide();
 			}
@@ -24,11 +27,18 @@ $(document).ready(function(event, str){
 				})).appendTo($('#index_notice_SearchList'));  
 				
 			}else if(data.totalA!='0'){
-				var notice_total = data.totalA;
 				$('<span/>',{
-					text : "("+notice_total+"건)"
+					text : "("+data.totalA+"건)"
 				}).appendTo($('#index_notice_total'));
 				$.each(data.list, function(index, item){
+					
+					var PointKeyword = "<span class='aaa'>"+index_keyword+"</span>";
+					var upperSubject = item.subject.toUpperCase();
+					var searchSubject = upperSubject.replace(index_keyword,PointKeyword);
+					var matchSubject = '/'+index_keyword+'/gi';
+					
+					alert(item.subject.match(matchSubject));
+					
 					$('<tr/>').append($('<input/>',{
 						align : 'center',
 						style: 'width: 880px; text-align: left;',
@@ -37,9 +47,9 @@ $(document).ready(function(event, str){
 					})).append($('<td/>',{
 						style: 'width: 880px; text-align: left;',
 						id : 'subjectA',
-						text : item.subject
+						html : searchSubject
 					})).appendTo($('#index_notice_SearchList'));
-					
+
 					$('<tr/>',{
 						style: 'width: 880px; height: 35px; text-align: left;'
 					}).append($('<td/>',{
@@ -85,9 +95,8 @@ $(document).ready(function(event, str){
 				})).appendTo($('#index_QnA_SearchList'));
 				
 			} else if(data.totalA!='0'){
-				var QnA_total = data.totalA;
 				$('<span/>',{
-					text : "("+QnA_total+"건)"
+					text : "("+data.totalA+"건)"
 				}).appendTo($('#index_QnA_total'));
 				$.each(data.list, function(index, item){
 					var subject = item.subject;
@@ -153,9 +162,8 @@ $(document).ready(function(event, str){
 				})).appendTo($('#index_contactList_SearchList'));  
 				
 			}else if(data.totalA!='0'){
-				var contactList_total = data.totalA;
 				$('<span/>',{
-					text : "("+contactList_total+"건)"
+					text : "("+data.totalA+"건)"
 				}).appendTo($('#index_contactList_total'));
 				
 				$('<tr/>').append($('<th/>',{
@@ -259,9 +267,8 @@ $(document).ready(function(event, str){
 				})).appendTo($('#index_eventboard_SearchList'));  
 				
 			} else if(data.totalA!='0'){
-				var eventboard_total = data.totalA;
 				$('<span/>',{
-					text : "("+eventboard_total+"건)"
+					text : "("+data.totalA+"건)"
 				}).appendTo($('#index_eventboard_total'));
 				$.each(data.list, function(index, item){
 					$('<tr/>').append($('<input/>',{
@@ -351,9 +358,8 @@ $(document).ready(function(event, str){
 				})).appendTo($('#index_eventboard_play_SearchList'));  
 				
 			} else if(data.totalA!='0'){
-				var eventboard_play_total = data.totalA;
 				$('<span/>',{
-					text : "("+eventboard_play_total+"건)"
+					text : "("+data.totalA+"건)"
 				}).appendTo($('#index_eventboard_play_total'));
 				$.each(data.list, function(index, item){
 					$('<tr/>').append($('<input/>',{
@@ -441,9 +447,8 @@ $(document).ready(function(event, str){
 				})).appendTo($('#index_hotel_list_SearchList'));  
 				
 			} else if(data.totalA!='0'){
-				var hotel_list_total = data.totalA;
 				$('<span/>',{
-					text : "("+hotel_list_total+"건)"
+					text : "("+data.totalA+"건)"
 				}).appendTo($('#hotel_list_total'));
 				$.each(data.list, function(index, item){
 					$('<tr/>').append($('<td/>',{

@@ -72,7 +72,7 @@ public class IndexController {
 	
 	// 메인 검색시 검색된 공지사항 리스트 불러옴
 	@RequestMapping(value="index_notice_Search", method=RequestMethod.POST)
-	public ModelAndView index_notice_Search(@RequestParam(required = false, defaultValue = "1") Map<String, String> map) {
+	public ModelAndView index_notice_Search(@RequestParam Map<String, String> map) {
 		int endNum = Integer.parseInt(map.get("pg")) * 3;
 		int startNum = endNum - 2;
 		
