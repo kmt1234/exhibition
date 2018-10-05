@@ -148,7 +148,7 @@ create sequence seq_C_contactList nocycle nocache;
 create table hotel_list(
 seq number primary key,
 postSelect number default(3),      --구분(분류) 박람회 : 1 연극 : 2
-imageName VARCHAR2(40) NOT NULL,   --제목
+imageName VARCHAR2(500) NOT NULL,   --제목
 image1 varchar2(500) NOT NULL,     --이미지파일
 eventLink varchar2(200) NOT NULL,  --링크
 eventPlace varchar2(100) NOT NULL  --TEL

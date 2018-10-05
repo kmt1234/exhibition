@@ -240,7 +240,7 @@
 								    <p>탈퇴하시겠습니까?</p>
 								  </div>
 								  <div class="actions">
-								    <div class="ui red basic cancel inverted button" id="out-no">
+								    <div class="ui red submit inverted button" id="out-no">
 								      <i class="remove icon"></i>
 								      아니오
 								    </div>

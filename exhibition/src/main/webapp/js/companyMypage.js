@@ -6,7 +6,7 @@ $(document).ready(function(){
 
 	var Mm_regPwd = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-]|.*[0-9]).{6,24}$/;	//6-24자리 영문대소문자or숫자or특수기호
 	var Mm_regEmail = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/; //이메일 양식
-	var Mm_regPhone =  /^((01[1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})$/;
+	var Mm_regPhone = /^(0(2|3[1-3]|4[1-4]|5[1-5]|6[1-4]))(\d{3,4})(\d{4})$/;
 	
 	
 	var pwd = '';
@@ -67,7 +67,7 @@ $(document).ready(function(){
 	//핸드폰 입력 시,
 	$('#C-modify-phone').blur(function(){
 		if(!Mm_regPhone.test($('#C-modify-phone').val())){
-			$('.C-modify-phone-Span').text('핸드폰 번호 양식이 맞지 않습니다').css('color','red').css('font-size','10px');
+			$('.C-modify-phone-Span').text('전화 번호 양식이 맞지 않습니다').css('color','red').css('font-size','10px');
 			$('#C-modify-phone').css({'border':'1px solid red', 'background-color':'#f4d2d2'});
 			phone = 'fail';
 		}else{
@@ -145,7 +145,10 @@ $(document).ready(function(){
 		$('#C-modify-modify').show();
 	});
 	$('#out-yes').click(function(){//네 클릭시
-		$('.ui.basic.modal').modal('show');
+		$('.ui.basic.modal').modal({
+			closable : false,
+            duration : 460,
+		}).modal('show');
 	});
 	
 	$('#del_OK').click(function(){

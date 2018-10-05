@@ -113,7 +113,7 @@ $(document).ready(function(){
 	//수정완료 클릭시
 	$('#hotelboardModBtn').click(function(){
 		var reg = /^https?\:\/\/.+/;
-		var tel = /^((01[1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})|(02|0[3-9]+[0-9])(\d{3,4})(\d{4})$/;
+		var tel = /^(0(2|3[1-3]|4[1-4]|5[1-5]|6[1-4]))(\d{3,4})(\d{4})$/;
 		if($('#telPlace').val()=='')
 			$('#telDiv').text('전화번호를 입력하세요').css('color','red').css('font-size','9pt').css('font-weight','bold');
 		else if(!tel.test($('#telPlace').val())){
@@ -122,8 +122,10 @@ $(document).ready(function(){
 			$('#hotelDiv').text('호텔 링크를 입력하세요').css('color','red').css('font-size','9pt').css('font-weight','bold');
 		else if(!reg.test($('#eventLink').val())){
 			$('#hotelDiv').text('호텔 링크 앞에는 http://가 입력되어야 합니다').css('color','red').css('font-size','9pt').css('font-weight','bold');
-		}else 
+		}else {
+			alert('수정이 완료되었습니다.');
 			$('#hotelboardModForm').attr('action','/exhibition/customerService/C_hotelboardMod.do').submit();
+		}
 	});
 });
 </script>
