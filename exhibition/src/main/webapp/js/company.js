@@ -19,6 +19,12 @@ $(document).ready(function(){
 		location.reload();
 	});
 	
+	//X버튼
+	$('.close.icon').click(function(){
+		$('.ui.modal2.modal').modal("hide");
+		location.reload();
+	});
+	
 	//사업자명
 	$('#Cw_businessname').blur(function(){
 		if($('#Cw_businessname').val()==''){

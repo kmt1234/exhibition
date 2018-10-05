@@ -214,7 +214,7 @@ div#uiStatistics {
 			 	 <thead>
 				  	<tr align="center">
 					  	<th>공연 및 전시회</th>
-					  	<th>예매 일자</th>
+					  	<th>행사 날짜</th>
 						<th>예매 티켓 수량</th>
 						<th>환불 여부</th>
 				  	</tr></thead>

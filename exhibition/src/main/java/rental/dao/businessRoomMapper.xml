@@ -14,4 +14,11 @@
  	<select id="rentalBusinessRoom" parameterType="rental.bean.BusinessRoomDTO">
  		insert into BUSINESSROOM(seq, roomName, M_Id, M_Email, numberPeople, startDate, ${time}, totalRent) values(seq_businessroom.nextval,#{roomName}, #{M_Id}, #{M_Email}, #{numberPeople}, #{startDate}, 'Y', #{totalRent}) 
  	</select>
+ 	
+ 	<select id="getRateBusinessRoom" parameterType="String" resultType="int">
+ 		select rate from roomRate where roomName=#{businessRoom}
+ 	</select>
+ 	<update id="updateBusinessRoomRate" parameterType="java.util.Map">
+ 		update roomRate set rate=${rate} where roomName=#{roomName} 
+ 	</update>
 </mapper>

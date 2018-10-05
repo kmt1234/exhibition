@@ -5,11 +5,17 @@ $(document).ready(function(){
 	
 	//개인 회원가입 클릭 시,
 	$('#M_individual').click(function(){
-		$('.ui.modal1.modal').modal('show');
+		$('.ui.modal1.modal').modal({
+			closable : false,
+            duration : 460,
+		}).modal('show');
 	});
 	//법인 회원가입 클릭 시,
 	$('#C_company').click(function(){
-		$('.ui.modal2.modal').modal('show');
+		$('.ui.modal2.modal').modal({
+			closable : false,
+            duration : 460,
+		}).modal('show');
 	});
 	
 	/*로그인 클릭시 2가지로 분류(개인&사업자)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -153,7 +159,7 @@ $(document).ready(function(){
 	// 메인화면 공지사항 리스트 제목 클릭시 내용 보여줌
 	$('#C_notice_MainList').on('click','#subjectA',function(){
 		var seq = $(this).next().text();
-		location.href='/exhibition/customerService/C_notice_View.do?seq='+seq+'&pg='+$('#pg').val();
+		location.href='/exhibition/customerService/C_notice_View.do?seq='+seq+'&pg=1';
 	});
 	
 	$('#index_searchBtn').click(function(event, str){
@@ -198,7 +204,7 @@ $(document).ready(function(){
 									html : '<img id="ex_img" width="20px" height="20px" src="../img/Ex.png">'+item.imageName+'</img>',
 									style : 'display : block'
 								})).append($('<span/>',{
-									text : item.startDate.substring(0,10) + '-' + item.endDate.substring(0,10),
+									text : item.startDate.substring(0,10) + ' ~ ' + item.endDate.substring(0,10),
 									style : 'display : block'
 								})).append($('<span/>',{
 									text : item.eventPlace,
@@ -224,7 +230,7 @@ $(document).ready(function(){
 									html : '<img id="ex_img" width="20px" height="20px" src="../img/Ex.png">'+item.imageName+'</img>',
 									style : 'display : block'
 								})).append($('<span/>',{
-									text : item.startDate.substring(0,10) + '-' + item.endDate.substring(0,10),
+									text : item.startDate.substring(0,10) + ' ~ ' + item.endDate.substring(0,10),
 									style : 'display : block'
 								})).append($('<span/>',{
 									text : item.eventPlace,
@@ -242,7 +248,7 @@ $(document).ready(function(){
 									style : 'display : block'
 								})).append($('<span/>',{
 									class : 't-tit ellipsis',
-									text : item.startDate.substring(0,10) + '-' + item.endDate.substring(0,10),
+									text : item.startDate.substring(0,10) + ' ~ ' + item.endDate.substring(0,10),
 									style : 'display : block'
 								})).append($('<span/>',{
 									class : 't-tit ellipsis',
@@ -269,7 +275,7 @@ $(document).ready(function(){
 									style : 'display : block'
 								})).append($('<span/>',{
 									class : 't-tit ellipsis',
-									text : item.startDate.substring(0,10) + '-' + item.endDate.substring(0,10),
+									text : item.startDate.substring(0,10) + ' ~ ' + item.endDate.substring(0,10),
 									style : 'display : block'
 								})).append($('<span/>',{
 									class : 't-tit ellipsis',
@@ -310,7 +316,7 @@ $(document).ready(function(){
 							html : '<img id="ex_img" width="20px" height="20px" src="../img/Ex.png">'+item.imageName+'</img>',
 							style : 'display : block'
 						})).append($('<span/>',{
-							text : item.startDate.substring(0,10) + '-' + item.endDate.substring(0,10),
+							text : item.startDate.substring(0,10) + ' ~ ' + item.endDate.substring(0,10),
 							style : 'display : block'
 						})).append($('<span/>',{
 							text : item.eventPlace,
@@ -335,7 +341,7 @@ $(document).ready(function(){
 							html : '<img id="ex_img" width="20px" height="20px" src="../img/Ex.png">'+item.imageName+'</img>',
 							style : 'display : block'
 						})).append($('<span/>',{
-							text : item.startDate.substring(0,10) + '-' + item.endDate.substring(0,10),
+							text : item.startDate.substring(0,10) + ' ~ ' + item.endDate.substring(0,10),
 							style : 'display : block'
 						})).append($('<span/>',{
 							text : item.eventPlace,
@@ -354,7 +360,7 @@ $(document).ready(function(){
 							html : '<img  id="co_img" width="20px" height="20px" src="../img/Ev.png">'+item.imageName+'</img>',
 							style : 'display : block'
 						})).append($('<span/>',{
-							text : item.startDate.substring(0,10) + '-' + item.endDate.substring(0,10),
+							text : item.startDate.substring(0,10) + ' ~ ' + item.endDate.substring(0,10),
 							style : 'display : block'
 						})).append($('<span/>',{
 							text : item.eventPlace,
@@ -378,7 +384,7 @@ $(document).ready(function(){
 							html : '<img style="padding-top:2px;" id="co_img" width="20px" height="20px" src="../img/Ev.png">'+item.imageName+'</img>',
 							style : 'display : block'
 						})).append($('<span/>',{
-							text : item.startDate.substring(0,10) + '-' + item.endDate.substring(0,10),
+							text : item.startDate.substring(0,10) + ' ~ ' + item.endDate.substring(0,10),
 							style : 'display : block'
 						})).append($('<span/>',{
 							text : item.eventPlace,

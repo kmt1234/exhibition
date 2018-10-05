@@ -107,7 +107,7 @@ $(document).ready(function(){
 		var count=$('.check:checked').length;
 
 		if(count==0) 
-			alert("항목을 선택해주세요");
+			$.alertable.alert("항목을 선택해주세요");
 		else
 			$('#hotelListForm').attr('action','/exhibition/customerService/C_hotelDelete.do').submit();
 	});

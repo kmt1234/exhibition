@@ -39,9 +39,9 @@
 	<div class="ui divider"></div> 
 </h2>
 <!--내용 : 예매하기-->
-<div style="width: 880px; display: inline-block; text-align: left;">
+<div class="ui compact menu" style="width: 880px; display: inline-block; text-align: left;">
 	<div class="playContentHeader" style="border: 1px solid; ">
-		<div><img style="width: 350px;height: 400px; border-radius: 10px;" src="../storage/${eventboardDTO.image1}"></div>
+		<div><img style="width: 350px; height: 400px; border-radius: 10px;" src="../storage/${eventboardDTO.image1}"></div>
 	</div>
 	<!--날짜 비교(기본 : 오늘날짜)-->
 	<jsp:useBean id="now" class="java.util.Date"/> 
@@ -133,9 +133,9 @@
 	<input type="hidden" id="hiddenTotalSeats" value="${eventboardDTO.eventSeats}" ><!--전체 좌석 수 -->
 	<input  type="hidden" id="hiddenId" value="${id}"><!--로그인 된 아이디-->
 	<!--예약확인 및 결제하기 (모달)-->
-	<div class="ui modal bookNextStep"><i class="close icon"></i>
-	  <div class="header" id="bookConfirmHeader">예매확인 및 결제하기</div>
-	  <div class="book_play_confirm">
+	<div class="ui modal bookNextStep" style="min-width: 900px;"" ><i class="close icon"></i>
+	  <div class="header" id="bookConfirmHeader" >예매확인 및 결제하기</div>
+	  <div class="book_play_confirm" >
 	  	<div>
 	      <img style="width: 350px;height: 400px; border-radius: 10px;" src="../storage/${eventboardDTO.image1}" id="modalImage1">
 	    </div>
@@ -304,6 +304,7 @@ $(document).ready(function(){
 		var totPrice = $('#hiddenTicketPrice').val() * $('#selectPlayTicket :selected').val();	
 		$('#totalPrice').text(totPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 	});
+	$(window).resize(function (){});
 		
 });
 
