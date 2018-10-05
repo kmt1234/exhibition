@@ -7,7 +7,7 @@ $(document).ready(function(event, str){
 	$.ajax({
 		type : 'POST',
 		url : '/exhibition/main/index_notice_Search.do',
-		data : {'pg': $('#pg').val(),
+		data : {'pg': 1,
 				'index_keyword' : index_keyword},
 		dataType : 'json',
 		success : function(data){
@@ -72,7 +72,7 @@ $(document).ready(function(event, str){
 	$.ajax({
 		type : 'POST',
 		url : '/exhibition/main/index_QnA_Search.do',
-		data : {'pg': $('#pg').val(),
+		data : {'pg': 1,
 				'index_keyword' : index_keyword},
 		dataType : 'json',
 		success : function(data){
@@ -139,7 +139,7 @@ $(document).ready(function(event, str){
 	$.ajax({
 		type : 'POST',
 		url : '/exhibition/main/index_contactList_Search.do',
-		data : {'pg': $('#pg').val(),
+		data : {'pg': 1,
 				'index_keyword': index_keyword },
 		dataType : 'json',
 		success : function(data){
@@ -245,7 +245,7 @@ $(document).ready(function(event, str){
 	$.ajax({
 		type : 'POST',
 		url : '/exhibition/main/index_eventboard_Search.do',
-		data : {'pg': $('#pg').val(),
+		data : {'pg': 1,
 				'index_keyword': index_keyword },
 		dataType : 'json',
 		success : function(data){
@@ -343,7 +343,7 @@ $(document).ready(function(event, str){
 	$.ajax({
 		type : 'POST',
 		url : '/exhibition/main/index_eventboard_play_Search.do',
-		data : {'pg': $('#pg').val(),
+		data : {'pg': 1,
 				'index_keyword': index_keyword },
 		dataType : 'json',
 		success : function(data){
@@ -433,7 +433,7 @@ $(document).ready(function(event, str){
 	$.ajax({
 		type : 'POST',
 		url : '/exhibition/main/index_hotel_list_Search.do',
-		data : {'pg': $('#pg').val(),
+		data : {'pg': 1,
 				'index_keyword': index_keyword },
 		dataType : 'json',
 		success : function(data){

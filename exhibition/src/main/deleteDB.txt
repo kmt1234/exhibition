@@ -23,6 +23,7 @@ drop table businessRoom;
 drop sequence seq_exhibitionRental;
 drop sequence seq_customerImageboard;
 drop sequence seq_eventboard;
+drop sequence seq_eventboard_play;
 drop sequence seq_C_notice;
 drop sequence seq_C_QnA;
 drop sequence seq_C_inquire;
