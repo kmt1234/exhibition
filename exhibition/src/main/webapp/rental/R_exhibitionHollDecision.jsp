@@ -18,25 +18,27 @@
 	${booth} 
 </h2>
 <form id="exhibitionHollDecisionForm" method="post" action="/exhibition/rental/reservationHoll.do" style="height: 600px;">
-	<div style="width: 35%; float: right;">
+	<!-- 달력 -->
+	<div id='calendar' style="width: 520px; display: inline-block; float: left; margin-left: 20px;"></div>
+	<!-- 문구 -->
+	<div style="width: 350px; float: left; display: inline-block;">
 		<br><br>
-		<div style="width: 100%; float: right;">
+		<div style="width: 100%; margin-top: 30px;">
 			<h4 style="text-align: left; padding-left: 35px ">부스 총 면적 : 100㎡</h4>
 			<h4 style="text-align: left; padding-left: 35px ">부스 단위 면적 당 금액 : <fmt:formatNumber value="${rate}" pattern="#,###"/>원</h4>
 			<h4 style="text-align: left; padding-left: 35px ">1일 기준 이용 시간 : 08:00 ~ 20:00</h4>
-			
-			<h4>
+			<h4 style="text-align: left; padding-left: 35px ">
 				예약 시작일 :
 				<span>
 					<input type="text" name="startDate" class="datepicker3" id="startDate" value="${date}">
 				</span>
 			</h4>
-			<h4>
+			<h4  style="text-align: left; padding-left: 35px ">
 				예약 종료일 :
 				<span>
 					<input type="text" name="endDate" class="datepicker4" id="endDate" value="${date}">
 				</span>
-			</h4>
+			</h4 >
 		    <c:if test="${code== '2'}">
 			<input type="hidden" name="C_email" value='${C_email}'>
 			<input type="hidden" name="C_license" value="${C_license}">
@@ -44,24 +46,20 @@
 			</c:if>
 			<input type="hidden" id="totalRent" name="totalRent" value="">
 			<input type="hidden" id="booth" name="booth" value="${booth}">
-			<h4>
+			<h4 style="text-align: left; padding-left: 35px ">
 				행사 이름 : 
-				<input type="text" id="title" name="title">
+				<input type="text" style="width: 185px;" id="title" name="title">
 			</h4>
-			<input class="middle ui button" type="button" id="rentBtn" value="임대료 계산하기">
-			<input class="middle ui button" type="button" id="reservationBtn" value="예약하기">
+			<div style="text-align: left; padding-left: 35px ">
+				<input class="middle ui button" type="button" id="rentBtn" value="임대료 계산하기">
+				<input class="middle ui button" style="width: 110px;" type="button" id="reservationBtn" value="예약하기">
+			</div>
 			<div id="rentDiv"></div>
 			<div id="writeDiv"></div>
 		</div>
-	
-	
-	
 	</div>
-	
-	<div id='calendar' style="width: 63%"></div>
 </form>
 <br><br>
-
 <div class="ui mini modal rental">
   <div class="header">
   	<i class="huge home icon"></i>
@@ -73,25 +71,11 @@
     <div class="ui approve button">확인</div>
   </div>
 </div>
-
-<div class="ui mini modal successBooth"> <!-- 예약성공 모달 -->
-  <div class="header">
-  	<i class="huge home icon"></i>
-  </div>
-  <div class="content" style="width: 100%">
-    <span>예약성공</span>
-  </div>
-  <div class="actions">
-    <div class="ui approve button successBooth">확인</div>
-  </div>
-</div>
-
 <input type="hidden" id="code" value="${code}">
 
 <script src='../calendar2/lib/moment.min.js'></script>
 <script src='../calendar2/lib/jquery.min.js'></script>
 <script src='../calendar2/fullcalendar.min.js'></script>
-<script src="../semantic/semantic.min.js"></script>
 <script>
 	var dataset = [
 		<c:forEach var="listView" items="${listView}" varStatus="status">
@@ -117,12 +101,6 @@
 			
 			if($('#startDate').val() > $('#endDate').val()) {
 				$('#writeDiv').text('예약 종료일이 시작일보다 빠릅니다.');
-				return;
-			}
-			
-			var diff_days = diff_day($('#startDate').val(), $('#endDate').val());
-			if(diff_days < 30) {
-				$('#writeDiv').text('한달 이상 예약하셔야 합니다.');
 				return;
 			}
 			
@@ -175,15 +153,7 @@
 					success : function(data){
 						
 						if(data==='not_exist') {
-							$('.ui.mini.modal.successBooth').modal({
-								closable : false,
-					            duration : 460,
-							}).modal('show');
-							
-							$('.ui.approve.button.successBooth').on('click', function(){
-								$('#exhibitionHollDecisionForm').submit();
-							});
-							
+							$('#exhibitionHollDecisionForm').submit();
 						} else if(data==='exist') {
 							$('#writeDiv').text('예약불가능');
 							$('#rentDiv').text('');
@@ -229,20 +199,7 @@
 		    minDate : 1,
 		    yearSuffix: '년'
 		});
-		
-		
-		function diff_day(value1, value2) {
-			var arr1 = value1.split('/');
-			var arr2 = value2.split('/');
-			
-			var dt1 = new Date(arr1[0], arr1[1], arr1[2]);
-			var dt2 = new Date(arr2[0], arr2[1], arr2[2]);
-			
-			var diff = dt2 - dt1;
-			var day = 1000 * 60 * 60 * 24;//밀리세컨 초 * 초 * 분 * 시간
-			
-			return parseInt(diff/day);
-		}
+				
 		
 	});
 	

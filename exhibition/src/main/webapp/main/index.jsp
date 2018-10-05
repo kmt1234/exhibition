@@ -34,7 +34,7 @@
 <!--메인화면  -->
 <section>
 	<div class="ui container main_section">
-		<jsp:include page="${display }"/>
+		<jsp:include page="${display}"/>
 	</div>
 <!--메인화면 아래 부분(일정)  -->
 	<div class="ui container main_section1">

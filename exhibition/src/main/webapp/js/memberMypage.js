@@ -12,9 +12,6 @@ $(document).ready(function(){
 				$('<tr/>',{
 					class : 'tr'
 				}).append($('<td/>',{
-					text : item.memberId,
-					value : item.memberId
-				})).append($('<td/>',{
 					text : item.imageName,
 					class : 'imageName',
 					value : item.imageName
@@ -72,9 +69,6 @@ $(document).ready(function(){
 					$('<tr/>',{
 						class : 'tr'
 					}).append($('<td/>',{
-						text : item.memberId,
-						value : item.memberId
-					})).append($('<td/>',{
 						text : item.imageName,
 						class : 'imageName1',
 						value : item.imageName

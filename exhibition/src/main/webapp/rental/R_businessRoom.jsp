@@ -124,6 +124,10 @@ ul{
 		<div class="absol" id="Room6" style="font-size: 25px; cursor:pointer;">Room6</div>
 	</div>
 </div>
+
+
+
+
 <script src="../js/businessRoom.js?ver=1"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="../js/introduction.js"></script>

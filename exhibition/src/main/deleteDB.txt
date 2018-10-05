@@ -1,4 +1,4 @@
-테이블
+--테이블
 drop table memberTable;
 drop table company;
 drop table exhibitionRental;
@@ -19,7 +19,7 @@ drop table concertHall;
 drop table customerService;
 drop table businessRoom;
 
-시퀀스
+--시퀀스
 drop sequence seq_exhibitionRental;
 drop sequence seq_customerImageboard;
 drop sequence seq_eventboard;
