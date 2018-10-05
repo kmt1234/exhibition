@@ -8,9 +8,9 @@
 	
 	<div style="margin-top:25px; width: 380px; display: inline-block; float: left;"  >
 		<address>
-			서울 특별시 강남구 영동대로 513 (IPEX) 06164<br>
+			서울 특별시 서초구 신반포로 176 (반포동)<br>
 			문의전화 : 02-6000-0114 팩스 : 02-1234-1111
-			<p> bruno mars - When I wa your man</p>
+			<p> COPYRIGHT 2015-2017 IPEX.ALL RIGHTS RESERVED</p>
 		</address>
 	</div>
 	

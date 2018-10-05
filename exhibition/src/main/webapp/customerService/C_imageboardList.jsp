@@ -95,7 +95,6 @@ $(document).ready(function(){
 	})//ajax
 	//전체선택
 	$('#checkAll').click(function(){
-		//alert($('.check').length);		//클래스를 나타낼때는 앞에 .을 찍는다.
 		if($('#checkAll').prop('checked')){
 			$('.check').prop('checked',true);
 		}else{
@@ -107,7 +106,7 @@ $(document).ready(function(){
 		var count=$('.check:checked').length;
 
 		if(count==0) 
-			alert("항목을 선택해주세요");
+			$.alertable.alert("항목을 선택해주세요");
 		else
 			$('#imageboardListForm').attr('action','/exhibition/customerService/C_imageboardDelete.do').submit();
 	});
@@ -116,7 +115,7 @@ $(document).ready(function(){
 		var count=$('.check:checked').length;
 		
 		if(count==0) 
-			alert("항목을 선택해주세요");
+			$.alertable.alert("항목을 선택해주세요");
 		else
 			
 			$('#imageboardListForm').attr('action','/exhibition/main/I_body.do').submit();

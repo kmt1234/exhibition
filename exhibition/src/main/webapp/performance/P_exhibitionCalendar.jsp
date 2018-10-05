@@ -24,9 +24,6 @@ if(month.length == 1){
 if(day.length == 1){ 
   day = "0" + day; 
 }
-
-//alert(JASON.stringify('${listView}'));
-
 var dataSet = [
 	<c:forEach var="listView" items="${listView}" varStatus="status">
 		<c:if test="${listView.postSelect == '1'}">
@@ -94,6 +91,11 @@ var dataSet = [
 	<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
 		박람회
 		<span class="h-light">일정</span>
+		<div style="font-size:13px; float:right; height: 50px; margin-top:30px ">
+		<img src="../img/house.png" width="15px" height="16px" style="cursor: pointer;" id="houseImg"></img>
+		> 일정 > 박람회일정
+	</div>
+	<div class="ui divider"></div> 
 	</h2>
 	
 	<!-- 버튼 -->
@@ -113,7 +115,7 @@ var dataSet = [
 			</tr>
 		</table>
 		 <span style="float: right; margin-right:30px; ">
-		 <img src="../img/Ex.png" style="width:25px; height: 25px; " align='absmiddle'> 전시회
+		 <img src="../img/Ex.png" style="width:25px; height: 25px; " align='absmiddle'> 박람회
 		 </span>
 		 
 		 <span style="float: right; margin-right:30px; ">

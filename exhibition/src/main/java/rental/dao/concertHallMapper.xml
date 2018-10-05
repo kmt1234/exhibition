@@ -16,4 +16,12 @@
  		insert into concertHall(seq ,hallName, C_license, C_tel, C_email, totalRent, title, startDate, endDate) values(seq_concertHall.nextval,#{hallName}, #{C_license}, #{C_tel}, #{C_email}, #{totalRent}, #{title}, #{startDate}, #{endDate})
  	</insert>
  	
+ 	<select id="getRateConcertHall" parameterType="String" resultType="int">
+ 		select rate from hallRate where hallName=#{hallName}
+ 	</select>
+ 	
+ 	<update id="updateConcertHallRate" parameterType="java.util.Map">
+ 		update hallRate set rate=${rate} where hallName=#{hallName} 
+ 	</update>
+ 	
 </mapper>

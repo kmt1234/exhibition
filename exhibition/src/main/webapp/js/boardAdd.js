@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	
 	//시간
 	$('.timepicker1').timepicker({
 		timeFormat : 'H:mm',
@@ -90,24 +91,100 @@ $(document).ready(function(){
 		if ($.isNumeric(test)) checkS = true;
 	});
 	
-	//행사위치 유효성
-	var checkReservation = false;
-	$('#eventPlace').blur(function(){
-		if($('#eventPlace').val()==''){
-			checkReservation = false;
-		}else if($('#eventPlace').val()!=''){
+	//이미지 등록
+	$('#checkImageboardWrite').click(function(){
+		
+		$('#imageNameDiv').empty();
+		$('#imgDiv').empty();
+		$('#dateDiv').empty();
+		$('#placeDiv').empty();
+		$('#priceDiv').empty();
+		$('#timeDiv').empty();
+		$('#warnningDiv').empty();
+		$('#hotelDiv').empty();
+		$('#telDiv').empty();
+		//메인 등록 시,
+		if($('#postSelect').val()=='0'){
+			if($('#imageName').val()=='')
+				$('#imageNameDiv').text('제목을 입력하세요').css('color','red').css('font-size','9pt').css('font-weight','bold');
+			else if($('#img').val()=='') 
+				$('#imgDiv').text('파일을 선택해 주세요').css('color','magenta').css('font-size','9pt').css('font-weight','bold');
+			else//메인 이미지 슬라이더
+				$('#imageboardWriteForm').attr({action:'/exhibition/customerService/C_imageboardWrite.do', method:'post'}).submit();
+		}
+		
+		if($('#postSelect').val()=='1' || $('#postSelect').val()=='2'){
+			var checkReservation = false;
+			var diff_days = null;
+			var arr1 = $('.datepicker1').val();
+			var arr2 = $('.datepicker2').val();
+			
+			var cutarr1 = arr1.split('/');
+			var cutarr2 = arr2.split('/');
+			
+			var dt1 = new Date(cutarr1[0], cutarr1[1], cutarr1[2]);
+			var dt2 = new Date(cutarr2[0], cutarr2[1], cutarr2[2]);
+			
+			var diff = dt2 - dt1;
+			var day = 1000 * 60 * 60 * 24;//밀리세컨 초 * 초 * 분 * 시간
+			diff_days = parseInt(diff/day);
+
 			//예약 중복 확인
 			$.ajax({
 				type : 'POST',
-				url : '/exhibition/customerService/checkReservation.do',
+				url : '/exhibition/customerService/checkReservation2.do',
 				data : {'postSelect':$('#postSelect').val(), 'imageName' : $('#imageName').val(), 'startDate' : $('.datepicker1').val(), 'endDate' : $('.datepicker2').val(),'eventPlace' : $('#eventPlace').val()},
 				dataType : 'text',
 				success : function(data){
 					if(data=='no_data'){
-						//alert('등록가능합니다');
 						checkReservation = true;
-					} 
-					else if(data=='yes_data'){
+						
+						//전시회, 연극 등록 시,
+						if($('#postSelect').val()=='1' || $('#postSelect').val()=='2'){
+							//시간 비교
+							var date1 = $("#startTime").val();
+						    var date2 = $("#endTime").val();
+						     
+						    var cutDate1 = date1.split(':');
+						    var cutDate2 = date2.split(':');
+						     
+						    console.log(cutDate1[0]);
+						    console.log(cutDate2[0]);
+							
+							if($('#imageName').val()=='')
+								$('#imageNameDiv').text('제목은 필수입니다').css('color','red').css('font-size','9pt').css('font-weight','bold');
+							else if($('#img').val()=='') 
+								$('#imgDiv').text('파일을 선택해 주세요').css('color','magenta').css('font-size','9pt').css('font-weight','bold');
+							else if($('.datepicker1').datepicker().val()==''){
+								$('#dateDiv').text('날짜는 필수입니다').css('color','red').css('font-size','9pt').css('font-weight','bold');
+							}
+							else if($('.datepicker2').datepicker().val()==''){
+								$('#dateDiv').text('날짜는 필수입니다').css('color','red').css('font-size','9pt').css('font-weight','bold');
+							}
+							else if($('.datepicker2').datepicker().val() < $('.datepicker1').datepicker().val()){
+								$('#dateDiv').text('시작 및 종료일자를 확인하세요').css('color','red').css('font-size','9pt').css('font-weight','bold');
+							}else if(diff_days < 30) {
+								$('#dateDiv').text('한달 이상 예약하셔야 합니다.').css('color','red').css('font-size','9pt').css('font-weight','bold');
+							}
+							else if (parseInt(cutDate2[0]) - parseInt(cutDate1[0]) <= 0){
+							    $('#timeDiv').text('시작 및 종료시간을 확인하세요').css('color','red').css('font-size','9pt').css('font-weight','bold');
+						    }
+							else if($('#eventPlace').val()=='' || $('#eventPlace').val()!='1층' && $('#eventPlace').val()!='2층'&& $('#eventPlace').val()!='P_Room1' && $('#eventPlace').val()!='P_Room2' && $('#eventPlace').val()!='P_Room3' && $('#eventPlace').val()!='P_Room4'){
+								$('#placeDiv').text('전시회는 1층 또는 2층 / 공연은 공연 위치(대문자 : P_Room1 ~ P_Room4)를 입력하세요 (ex.1층 또는 P_Room1)').css('color','red').css('font-size','7pt').css('font-weight','bold');
+							}
+							else if(checkP == false || checkS == false){
+								$('#priceDiv').text('티켓 가격 및 관람인원에는 숫자만 입력하세요(ex. 3,000원 -> 3000 / 120석 -> 120)').css('color','red').css('font-size','9pt').css('font-weight','bold');
+							}
+							else if(checkReservation==false){
+								 $('#warnningDiv').text('행사 기간이 겹칩니다. 날짜를 다시 확인하세요').css('color','red').css('font-size','9pt').css('font-weight','bold');
+							}
+							else if($('#postSelect').val()=='1'){	//박람회
+								$('#imageboardWriteForm').attr({action:'/exhibition/customerService/C_eventInfoWrite.do', method:'post'}).submit();
+							}else if($('#postSelect').val()=='2'){	//연극
+								$('#imageboardWriteForm').attr({action:'/exhibition/customerService/C_eventInfoWrite_play.do', method:'post'}).submit();
+							}
+						}
+					} else if(data=='yes_data'){
 						$.alertable.alert('일정이 중복됩니다', {
 					      show: function() {
 					        $(this.overlay).velocity('transition.fadeIn', 300);        
@@ -122,73 +199,8 @@ $(document).ready(function(){
 				}
 			});//ajax
 		}
-	});
-	
-	//이미지 등록
-	$('#checkImageboardWrite').click(function(){
-		$('#imageNameDiv').empty();
-		$('#imgDiv').empty();
-		$('#dateDiv').empty();
-		$('#placeDiv').empty();
-		$('#priceDiv').empty();
-		$('#timeDiv').empty();
-		$('#warnningDiv').empty();
-		$('#hotelDiv').empty();
-		$('#telDiv').empty();
 		
-		//메인 등록 시,
-		if($('#postSelect').val()=='0'){
-			if($('#imageName').val()=='')
-				$('#imageNameDiv').text('제목을 입력하세요').css('color','red').css('font-size','9pt').css('font-weight','bold');
-			else if($('#img').val()=='') 
-				$('#imgDiv').text('파일을 선택해 주세요').css('color','magenta').css('font-size','9pt').css('font-weight','bold');
-			else//메인 이미지 슬라이더
-				$('#imageboardWriteForm').attr({action:'/exhibition/customerService/C_imageboardWrite.do', method:'post'}).submit();
-		}
-		
-		//전시회, 연극 등록 시,
-		else if($('#postSelect').val()=='1' || $('#postSelect').val()=='2'){
-			//시간 비교
-			var date1 = $("#startTime").val();
-		    var date2 = $("#endTime").val();
-		     
-		    var cutDate1 = date1.split(':');
-		    var cutDate2 = date2.split(':');
-		     
-		    console.log(cutDate1[0]);
-		    console.log(cutDate2[0]);
-			
-			if($('#imageName').val()=='')
-				$('#imageNameDiv').text('제목은 필수입니다').css('color','red').css('font-size','9pt').css('font-weight','bold');
-			else if($('#img').val()=='') 
-				$('#imgDiv').text('파일을 선택해 주세요').css('color','magenta').css('font-size','9pt').css('font-weight','bold');
-			else if($('.datepicker1').datepicker().val()==''){
-				$('#dateDiv').text('날짜는 필수입니다').css('color','red').css('font-size','9pt').css('font-weight','bold');
-			}
-			else if($('.datepicker2').datepicker().val()==''){
-				$('#dateDiv').text('날짜는 필수입니다').css('color','red').css('font-size','9pt').css('font-weight','bold');
-			}
-			else if($('.datepicker2').datepicker().val() < $('.datepicker1').datepicker().val()){
-				$('#dateDiv').text('시작 및 종료일자를 확인하세요').css('color','red').css('font-size','9pt').css('font-weight','bold');
-			}
-			else if (parseInt(cutDate2[0]) - parseInt(cutDate1[0]) <= 0){
-			    $('#timeDiv').text('시작 및 종료시간을 확인하세요').css('color','red').css('font-size','9pt').css('font-weight','bold');
-		    }
-			else if($('#eventPlace').val()=='' || $('#eventPlace').val()!='1층' && $('#eventPlace').val()!='2층'&& $('#eventPlace').val()!='P_Room1' && $('#eventPlace').val()!='P_Room2' && $('#eventPlace').val()!='P_Room3' && $('#eventPlace').val()!='P_Room4'){
-				$('#placeDiv').text('전시회는 1층 또는 2층 / 공연은 공연 위치(대문자 : P_Room1 ~ P_Room4)를 입력하세요 (ex.1층 또는 P_Room1)').css('color','red').css('font-size','7pt').css('font-weight','bold');
-			}
-			else if(checkP == false || checkS == false){
-				$('#priceDiv').text('티켓 가격 및 관람인원에는 숫자만 입력하세요(ex. 3,000원 -> 3000 / 120석 -> 120)').css('color','red').css('font-size','9pt').css('font-weight','bold');
-			}
-			else if(checkReservation==false){
-				 $('#warnningDiv').text('행사 기간이 겹칩니다. 날짜를 다시 확인하세요').css('color','red').css('font-size','9pt').css('font-weight','bold');
-			}
-			else if($('#postSelect').val()=='1'){	//박람회
-				$('#imageboardWriteForm').attr({action:'/exhibition/customerService/C_eventInfoWrite.do', method:'post'}).submit();
-			}else if($('#postSelect').val()=='2'){	//연극
-				$('#imageboardWriteForm').attr({action:'/exhibition/customerService/C_eventInfoWrite_play.do', method:'post'}).submit();
-			}
-		}else if($('#postSelect').val()=='3'){
+		if($('#postSelect').val()=='3'){
 			var reg = /^https?\:\/\/.+/;
 			var tel = /^((01[1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})|(02|0[3-9]+[0-9])(\d{3,4})(\d{4})$/;
 			if($('#imageName').val()=='')

@@ -1,4 +1,16 @@
 $(document).ready(function(){
+	$('#memberSearch').keydown(function(key) {
+		if (key.keyCode == 13) {
+			$('#memberSearchBtn').click();
+		}
+	});
+	$('#companySearch').keydown(function(key) {
+		if (key.keyCode == 13) {
+			$('#companySearchBtn').click();
+		}
+	});
+	
+	
 	var date = new Date();
     var year  = date.getFullYear();
     var month = date.getMonth() + 1; // 0부터 시작하므로 1더함 더함
@@ -6,8 +18,6 @@ $(document).ready(function(){
     if (("" + month).length == 1) { month = "0" + month; }
     if (("" + day).length   == 1) { day   = "0" + day;   }
     
-    
-
    var C_name = /^[가-힣]+$/;   //한글만 가능 
    var C_phone =  /^((01[1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})$/;   //휴대폰 번호 양식
    
@@ -163,7 +173,7 @@ $(document).ready(function(){
 			data : {'pg' : $('#pg').val()},
 			dataType : 'json',
 			success : function(data){
-				/* $('#C_memberListFrom div:gt(0)').remove(); */
+				$('#memberListTable tr:gt(0)').remove();
 				$.each(data.list,function(index, item){
 					$('<tr/>').append($('<td/>',{
 				 		name : 'C_businessname',
@@ -187,11 +197,12 @@ $(document).ready(function(){
 		
 		//사업자 검색
 		$('#companySearchBtn').click(function(event,str){
-			$('#memberListTable').empty();
+			
 			if(str!='trigger') $('#pg').val(1);
 			if($('#companySearch').val()==''){
 				alert("검색어를 입력하세요");
 			}else{
+				$('#memberListTable').empty();
 				$.ajax({
 					type: 'POST',
 					url : '/exhibition/customerService/CompanySearch.do',
@@ -201,7 +212,6 @@ $(document).ready(function(){
 						},
 					dataType : 'json',
 					success : function(data){
-						$('#C_memberListFrom div:gt(0)').remove();
 						/*  alert(JSON.stringify(data)); */
 						 $.each(data.list,function(index, item){
 							 $('<tr/>').append($('<td/>',{
@@ -228,12 +238,10 @@ $(document).ready(function(){
 	
 	
 	//개인회원정보 불러오기
-	 $('#memberSearchDiv').hide();
 	$('#memberBtn').click(function(event,str){
 		if(str!='trigger') $('#pg').val(1);
 		$('#companySearchDiv').hide();
 		$('#memberSearchDiv').show();
-		$('#memberListTable').empty();
 		
 		$.ajax({
 			type : 'POST',
@@ -241,7 +249,7 @@ $(document).ready(function(){
 			data : {'pg' : $('#pg').val()},
 			dataType : 'json',
 			success : function(data){
-				$('#memberListTable td:gt(0)').remove();
+				$('#memberListTable').empty();
 				$.each(data.list,function(index, item){
 					$('<tr/>').append($('<td/>',{
 				 		name : 'M_Name',
@@ -306,7 +314,10 @@ $(document).ready(function(){
 	
 		
 	$('#memberListTable').on('click','.C_license',function(){
-		
+		if($('#masterCode').val()!='3') {
+			alert('권한이 없습니다.');
+			return;
+		}
 		var toDay = year+"-"+month+"-"+day;
 		var ing;
 		var companyDeleteBtn;
@@ -397,6 +408,10 @@ $(document).ready(function(){
 	var playDate;
 	var memberId;
 	$('#memberListTable').on('click','.M_Id',function(){
+		if($('#masterCode').val()!='3') {
+			alert('권한이 없습니다.');
+			return;
+		}
 		toDay = year+"-"+month+"-"+day;
 		var ing;
 		var deleteBtn
@@ -501,6 +516,7 @@ $(document).ready(function(){
 	var playDate;
 	var ticketQty;
 	$('#reservationMemberTable').on('click','#memberDeleteBtn',function(){
+		
 		if(toDay == playDate){
 			$('.ui.mini.modal.not.member').modal('show');
 		}else{	
@@ -530,7 +546,7 @@ $(document).ready(function(){
 		});
 	});
 	var companySeq;
-	$('#reservationCompanyTable').on('click','#companyDeleteBtn',function(){	
+	$('#reservationCompanyTable').on('click','#companyDeleteBtn',function(){
 			$('.ui.mini.modal.company').modal('show');
 			companySeq = $(this).parent().prev().prev().prev().prev().prev().text();
 	});

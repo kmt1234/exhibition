@@ -112,5 +112,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="backExhibition" parameterType="java.util.Map">
 		update eventboard_exhibition_book set remainticket = remainticket+#{ticketQty}, bookticket = bookticket-#{ticketQty} where imagename=#{imageName} and playdate = #{playDate}
 	</update>
-	
+
+	<!--개인회원 인증번호 발송 시, 회원의 아이디 및 이메일 일치 여부 확인  -->
+	<select id="verifyNumEmailCheck" parameterType="java.util.Map" resultType="member">
+		select * from memberTable where M_Id = #{M_Id} and M_Email = #{M_Email}
+	</select>
 </mapper>

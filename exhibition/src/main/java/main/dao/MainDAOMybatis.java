@@ -33,12 +33,12 @@ public class MainDAOMybatis implements MainDAO {
 	@Autowired
 	private SqlSession sqlSession;
 
-	public List<MainDTO> index_NoticeSearch(Map<String, String> map) {
-		return sqlSession.selectList("mainSQL.index_NoticeSearch", map);
+	public List<MainDTO> index_notice_Search(Map<String, String> map) {
+		return sqlSession.selectList("mainSQL.index_notice_Search", map);
 	}
 
-	public int getTotal_index_NoticeSearch(Map<String, String> map) {
-		return sqlSession.selectOne("mainSQL.getTotal_index_NoticeSearch", map);
+	public int getTotal_index_notice_Search(Map<String, String> map) {
+		return sqlSession.selectOne("mainSQL.getTotal_index_notice_Search", map);
 	}
 
 	public List<EventboardDTO> index_exSlider() {
@@ -59,4 +59,43 @@ public class MainDAOMybatis implements MainDAO {
 		
 	}
 	
+	public List<MainDTO> index_QnA_Search(Map<String, String> map) {
+		return sqlSession.selectList("mainSQL.index_QnA_Search", map);
+	}
+
+	public int getTotal_index_QnA_Search(Map<String, String> map) {
+		return sqlSession.selectOne("mainSQL.getTotal_index_QnA_Search", map);
+	}
+
+	public List<MainDTO> index_contactList_Search(Map<String, String> map) {
+		return sqlSession.selectList("mainSQL.index_contactList_Search", map);
+	}
+
+	public int getTotal_index_contactList_Search(Map<String, String> map) {
+		return sqlSession.selectOne("mainSQL.getTotal_index_contactList_Search", map);
+	}
+
+	public List<MainDTO> index_eventboard_Search(Map<String, String> map) {
+		return sqlSession.selectList("mainSQL.index_eventboard_Search", map);
+	}
+
+	public int getTotal_index_eventboard_Search(Map<String, String> map) {
+		return sqlSession.selectOne("mainSQL.getTotal_index_eventboard_Search", map);
+	}
+	
+	public List<MainDTO> index_eventboard_play_Search(Map<String, String> map) {
+		return sqlSession.selectList("mainSQL.index_eventboard_play_Search", map);
+	}
+
+	public int getTotal_index_eventboard_play_Search(Map<String, String> map) {
+		return sqlSession.selectOne("mainSQL.getTotal_index_eventboard_play_Search", map);
+	}
+	
+	public List<MainDTO> index_hotel_list_Search(Map<String, String> map) {
+		return sqlSession.selectList("mainSQL.index_hotel_list_Search", map);
+	}
+
+	public int getTotal_index_hotel_list_Search(Map<String, String> map) {
+		return sqlSession.selectOne("mainSQL.getTotal_index_hotel_list_Search", map);
+	}
 }

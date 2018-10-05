@@ -5,11 +5,17 @@ $(document).ready(function(){
 	
 	//개인 회원가입 클릭 시,
 	$('#M_individual').click(function(){
-		$('.ui.modal1.modal').modal('show');
+		$('.ui.modal1.modal').modal({
+			closable : false,
+            duration : 460,
+		}).modal('show');
 	});
 	//법인 회원가입 클릭 시,
 	$('#C_company').click(function(){
-		$('.ui.modal2.modal').modal('show');
+		$('.ui.modal2.modal').modal({
+			closable : false,
+            duration : 460,
+		}).modal('show');
 	});
 	
 	/*로그인 클릭시 2가지로 분류(개인&사업자)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -138,7 +144,7 @@ $(document).ready(function(){
 				$('<ul/>').append($('<p/>',{
 					align : 'center',
 					id : 'subjectA',
-					style: ' width : 250px; height: 35px; margin-left : 20px; text-align: left;',
+					style: ' width : 215px; height: 25px; margin-left:35px; text-align:left; border-bottom: 1px ridge rgb(155,155,155,.6)',
 					class : 'subjectC',
 					href : 'javascript:void(0)',
 					text : item.subject
@@ -153,137 +159,17 @@ $(document).ready(function(){
 	// 메인화면 공지사항 리스트 제목 클릭시 내용 보여줌
 	$('#C_notice_MainList').on('click','#subjectA',function(){
 		var seq = $(this).next().text();
-		location.href='/exhibition/customerService/C_notice_View.do?seq='+seq+'&pg='+$('#pg').val();
+		location.href='/exhibition/customerService/C_notice_View.do?seq='+seq+'&pg=1';
 	});
 	
-	$('#index_searchBtn').click(function(){
+	$('#index_searchBtn').click(function(event, str){
 		var index_keyword = $('#index_keyword').val();
+		var pg = $('#pg').val();
+		if(str!='trigger') $('#pg').val(1);
 		if($('#index_keyword').val()=='')
 			alert("검색어를 입력하세요");
-		else location.href='/exhibition/main/index_SearchForm.do?index_keyword='+index_keyword;
+		else location.href="/exhibition/main/index_Search.do?index_keyword="+index_keyword;
 		
-	});
-	//일정 달력 만들어주기
-	$('#mainCal').datepicker({
-		dateFormat : "yy/mm/dd",
-	    prevText: '이전 달',
-	    nextText: '다음 달',
-	    monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-	    monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-	    dayNames: ['일', '월', '화', '수', '목', '금', '토'],
-	    dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
-	    dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-	    showMonthAfterYear: true,
-	    yearSuffix: '년',
-	    onSelect: function (date) {
-	    	alert(date);
-	    	$.ajax({
-	    		type : 'POST',
-				url : '/exhibition/performance/searchAllList.do',
-				data : {'date' : date},
-				async: false,
-				dataType: 'json',
-				success : function(data) {
-					alert(JSON.stringify(data));
-					$('#today_list ul li').remove();
-					$.each(data.list, function(index, item){
-						if(item.postSelect=='1') {
-							if(item.start==1) {
-								$('<li/>',{
-									class : 'ex_item',
-									html : '<br>'
-								}).append($('<span/>',{
-									style : 'width = 220px',
-									html : '<img id="ex_img" width="20px" height="20px" src="../img/Ex.png">'+item.imageName+'</img>',
-									style : 'display : block'
-								})).append($('<span/>',{
-									text : item.startDate.substring(0,10) + '-' + item.endDate.substring(0,10),
-									style : 'display : block'
-								})).append($('<span/>',{
-									text : item.eventPlace,
-									style : 'display : block'
-								})).appendTo($('#total_list'));
-							} else if(item.start==10) {
-								$('<li/>',{
-									class : 'ex_item',
-									html : '<br>'
-								}).append($('<span/>',{
-									style : 'width = 220px',
-									html : '<img id="ex_img" width="20px" height="20px" src="../img/Ex.png">'+'일정이 없습니다.'+'</img>',
-									style : 'display : block'
-								})).appendTo($('#total_list'));
-							} else {
-								$('<li/>',{
-									style: 'display: none',
-									class : 'ex_item',
-									html : '<br>'
-								}).append($('<span/>',{
-									style : 'width = 220px',
-									html : '<img id="ex_img" width="20px" height="20px" src="../img/Ex.png">'+item.imageName+'</img>',
-									style : 'display : block'
-								})).append($('<span/>',{
-									text : item.startDate.substring(0,10) + '-' + item.endDate.substring(0,10),
-									style : 'display : block'
-								})).append($('<span/>',{
-									text : item.eventPlace,
-									style : 'display : block'
-								})).appendTo($('#total_list'));
-							}
-							
-							
-							
-						} else if(item.postSelect=='2') {
-							if(item.start==2) {
-								$('<li/>',{
-									class : 'co_item',
-									html : '<br>'
-								}).append($('<span/>',{
-									html : '<img  id="co_img" width="20px" height="20px" src="../img/Ev.png">'+item.imageName+'</img>',
-									style : 'display : block'
-								})).append($('<span/>',{
-									class : 't-tit ellipsis',
-									text : item.startDate.substring(0,10) + '-' + item.endDate.substring(0,10),
-									style : 'display : block'
-								})).append($('<span/>',{
-									class : 't-tit ellipsis',
-									text : item.eventPlace,
-									style : 'display : block'
-								})).appendTo($('#total_list'));
-							} else if(item.start==10) {
-								$('<li/>',{
-									class : 'co_item',
-									html : '<br>'
-								}).append($('<span/>',{
-									style : 'width = 220px',
-									html : '<img id="co_img" width="20px" height="20px" src="../img/Ev.png">'+'일정이 없습니다.'+'</img>',
-									style : 'display : block'
-								})).appendTo($('#total_list'));
-							} else {
-								$('<li/>',{
-									style: 'display: none',
-									class : 'co_item',
-									html : '<br>'
-								}).append($('<span/>',{
-									html : '<img  id="co_img" width="20px" height="20px" src="../img/Ev.png">'+item.imageName+'</img>',
-									style : 'display : block'
-								})).append($('<span/>',{
-									class : 't-tit ellipsis',
-									text : item.startDate.substring(0,10) + '-' + item.endDate.substring(0,10),
-									style : 'display : block'
-								})).append($('<span/>',{
-									class : 't-tit ellipsis',
-									text : item.eventPlace,
-									style : 'display : block'
-								})).appendTo($('#total_list'));
-							}
-							
-						}
-
-					});
-				}
-	    		
-	    	});
-	    }
 	});
 	
 	//달력에 내용 문자열로 보내주기
@@ -297,7 +183,6 @@ $(document).ready(function(){
 		async: false,
 		dataType: 'json',
 		success : function(data) {
-			console.log(JSON.stringify(data));
 			$('#today_list ul li').remove();
 			$.each(data.list, function(index, item){
 				if(item.postSelect=='1') {
@@ -306,10 +191,11 @@ $(document).ready(function(){
 							class : 'ex_item',
 							html : '<br>'
 						}).append($('<span/>',{
+							class : 'calSubject',
 							html : '<img id="ex_img" width="20px" height="20px" src="../img/Ex.png">'+item.imageName+'</img>',
 							style : 'display : block'
 						})).append($('<span/>',{
-							text : item.startDate.substring(0,10) + '-' + item.endDate.substring(0,10),
+							text : item.startDate.substring(0,10) + ' ~ ' + item.endDate.substring(0,10),
 							style : 'display : block'
 						})).append($('<span/>',{
 							text : item.eventPlace,
@@ -321,7 +207,7 @@ $(document).ready(function(){
 							html : '<br>'
 						}).append($('<span/>',{
 							style : 'width = 220px',
-							html : '<img id="ex_img" width="20px" height="20px" src="../img/Ex.png">'+'일정이 없습니다.'+'</img><br><br>',
+							html : '<img  id="ex_img" width="20px" height="20px" src="../img/Ex.png">'+'일정이 없습니다.'+'</img><br><br>',
 							style : 'display : block'
 						})).appendTo($('#total_list'));
 					} else {
@@ -330,10 +216,11 @@ $(document).ready(function(){
 							class : 'ex_item',
 							html : '<br>'
 						}).append($('<span/>',{
+							class : 'calSubject',
 							html : '<img id="ex_img" width="20px" height="20px" src="../img/Ex.png">'+item.imageName+'</img>',
 							style : 'display : block'
 						})).append($('<span/>',{
-							text : item.startDate.substring(0,10) + '-' + item.endDate.substring(0,10),
+							text : item.startDate.substring(0,10) + ' ~ ' + item.endDate.substring(0,10),
 							style : 'display : block'
 						})).append($('<span/>',{
 							text : item.eventPlace,
@@ -348,10 +235,11 @@ $(document).ready(function(){
 							class : 'co_item',
 							html : '<br>'
 						}).append($('<span/>',{
-							html : '<img style="margin-top:5px;" id="co_img" width="20px" height="20px" src="../img/Ev.png">'+item.imageName+'</img>',
+							class : 'calSubject',
+							html : '<img  id="co_img" width="20px" height="20px" src="../img/Ev.png">'+item.imageName+'</img>',
 							style : 'display : block'
 						})).append($('<span/>',{
-							text : item.startDate.substring(0,10) + '-' + item.endDate.substring(0,10),
+							text : item.startDate.substring(0,10) + ' ~ ' + item.endDate.substring(0,10),
 							style : 'display : block'
 						})).append($('<span/>',{
 							text : item.eventPlace,
@@ -363,7 +251,7 @@ $(document).ready(function(){
 							html : '<br>'
 						}).append($('<span/>',{
 							style : 'width = 220px',
-							html : '<img style="margin-top:5px;" id="co_img" width="20px" height="20px" src="../img/Ev.png">'+'일정이 없습니다.'+'</img><br><br>',
+							html : '<img id="co_img" width="20px" height="20px" src="../img/Ev.png">'+'일정이 없습니다.'+'</img><br><br>',
 							style : 'display : block'
 						})).appendTo($('#total_list'));
 					} else {
@@ -372,10 +260,10 @@ $(document).ready(function(){
 							class : 'co_item',
 							html : '<br>'
 						}).append($('<span/>',{
-							html : '<img style="margin-top:5px;" id="co_img" width="20px" height="20px" src="../img/Ev.png">'+item.imageName+'</img>',
+							html : '<img style="padding-top:2px;" id="co_img" width="20px" height="20px" src="../img/Ev.png">'+item.imageName+'</img>',
 							style : 'display : block'
 						})).append($('<span/>',{
-							text : item.startDate.substring(0,10) + '-' + item.endDate.substring(0,10),
+							text : item.startDate.substring(0,10) + ' ~ ' + item.endDate.substring(0,10),
 							style : 'display : block'
 						})).append($('<span/>',{
 							text : item.eventPlace,
@@ -410,13 +298,4 @@ $(document).ready(function(){
 		next_item.fadeIn("slow");
 		current_item.hide();
 	}	
-	//공연포스터 슬라이더
-	$('.bxslider').bxSlider({
-   	 	auto: true,
-        speed: 500,
-        pause: 4000,
-        mode:'fade',
-        autoControls: true,
-        pager:true,
-   });
 });

@@ -34,4 +34,6 @@ public interface  CompanyDAO {
 
 	public void deleteCoBooth(Map<String, String> map);//임대한 콘서트 부스 삭제
 
+	public CompanyDTO checkId2(String sNum2); //법인번호 중복체크
+
 }

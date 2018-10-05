@@ -1,13 +1,24 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+R<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+#houseImg{
+	margin:-3px;
+	cursor: pointer;
+}
+</style>
 </head>
 <body>
 <div>
 	<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
-		매출<span class="h-light">정보</span>
+		매출<span class="h-light">현황</span>
+		<div style="font-size:13px; float:right; margin-top: 29px;">
+		<img src="../img/house.png" width="15px" height="16px" id="houseImg">
+		> 고객센터 > 매출 현황
+		</div>
+		<div class="ui divider"></div>
 	</h2>
 	<table style=" width: 100%;">
 		<tr>
@@ -133,7 +144,6 @@
 					data: {'year':$('#year option:selected').val(), 'month': $('#month option:selected').val()},
 					dataType: "json",
 					success: function(data) {
-						alert(JSON.stringify(data.list));
 						console.log(JSON.stringify(data.yearMonth));
 						$('#salesList').show();
 						$('#salesName').text('부스명');
@@ -243,7 +253,6 @@
 					data: {'year':$('#year option:selected').val(), 'month': $('#month option:selected').val()},
 					dataType: "json",
 					success: function(data) {
-						alert(JSON.stringify(data));
 						$('#salesList').show();
 						$('#salesName').text('홀이름');
 						$('#salesList tr:gt(0)').remove();
@@ -350,7 +359,6 @@
 					data: {'year':$('#year option:selected').val(), 'month': $('#month option:selected').val()},
 					dataType: "json",
 					success: function(data) {
-						alert(JSON.stringify(data));
 						$('#salesList').show();
 						$('#salesName').text('비즈니스룸 이름');
 						$('#salesList tr:gt(0)').remove();
@@ -456,7 +464,6 @@
 					data: {'year':$('#year option:selected').val(), 'month': $('#month option:selected').val()},
 					dataType: "json",
 					success: function(data) {
-						alert(JSON.stringify(data));
 						$('#salesList').show();
 						$('#salesName').text('공연 이름');
 						$('#salesList tr:gt(0)').remove();
@@ -561,7 +568,6 @@
 					data: {'year':$('#year option:selected').val(), 'month': $('#month option:selected').val()},
 					dataType: "json",
 					success: function(data) {
-						alert(JSON.stringify(data.yearMonth));
 						console.log(JSON.stringify(data.yearMonth));
 						$('#salesList').show();
 						$('#salesName').text('박람회 이름');

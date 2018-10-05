@@ -23,9 +23,6 @@ if(month.length == 1){
 if(day.length == 1){ 
   day = "0" + day; 
 }
-
-//alert(JASON.stringify('${listView}'));
-
 var dataSet = [
 	<c:forEach var="listView" items="${listView}" varStatus="status">
 		<c:if test="${listView.postSelect == '2'}">
@@ -116,7 +113,7 @@ var dataSet = [
 			</tr>
 		</table>
 		 <span style="float: right; margin-right:30px; ">
-		 <img src="../img/Ex.png" style="width:25px; height: 25px; " align='absmiddle'> 전시회
+		 <img src="../img/Ex.png" style="width:25px; height: 25px; " align='absmiddle'> 박람회
 		 </span>
 		 
 		 <span style="float: right;  ">

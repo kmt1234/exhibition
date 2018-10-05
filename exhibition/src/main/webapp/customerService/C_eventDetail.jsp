@@ -19,7 +19,7 @@
 	</h2>
 	<form id="eventboardModForm" method="POST" enctype="multipart/form-data">
 		<input type="hidden" name="postSelect" id="postSelect" value="1">
-		<input type="hidden" name="seq" value="${eventboardDTO.seq}">
+		<input type="hidden" name="seq" id="seq" value="${eventboardDTO.seq}">
 		<input type="hidden" name="image1" value="${eventboardDTO.image1}">
 	<!-- 내용 입력 -->
 	<div style="width: 520px; margin-left: 20px;" >
@@ -56,10 +56,10 @@
 			<div class="ui inverted input" style="width: 100%;">
 				<div class="ui left icon input focus" style="width: 100%; height: 50px;">
 					<input type="text" name="startDate" class="datepicker1">
-					<input type="hidden" id="startDate" value="${eventboardDTO.startDate}" style="width:195px;">
+					<input type="hidden" id="startDate" value="${startDate}" style="width:195px;">
 					<div style="width: 10px;"></div>
 					<input type="text" name="endDate" class="datepicker2">
-					<input type="hidden" id="endDate" value="${eventboardDTO.endDate}" style="width:195px;">
+					<input type="hidden" id="endDate" value="${endDate}" style="width:195px;">
 				</div>
 		  	</div>
 	  	</div>
@@ -113,6 +113,7 @@
 			<div class="ui inverted input" style="width: 100%;">
 				<div class="ui left icon input focus" style="width: 420px; height: 50px;">
 					<input type="text" name="eventPrice" id="eventPrice" value="${eventboardDTO.eventPrice}">
+					<input type="hidden" id="Pricehidden" value="${eventboardDTO.eventPrice}">
 	  				<i class="user icon"></i>
 	  			</div>
 	  		</div>
@@ -138,7 +139,7 @@
 			</div>
 			<div class="ui inverted input" style="width: 100%;">	
 				<div class="ui left icon input focus" style="width: 420px; height: 50px;">
-					<input type="text" name="eventRate" value="${eventboardDTO.eventRate}">
+					<input type="text" name="eventRate" id="eventRate" value="${eventboardDTO.eventRate}">
 	  				<i class="user icon"></i>
 	  			</div>
 	  		</div>
@@ -150,6 +151,7 @@
 	 		 <div class="ui inverted input" style="width: 100%;">
 				<div class="ui left icon input focus" style="width: 420px;" >
 					<textarea rows="5" cols="78" name="eventContent" id="eventContent" style="resize: none;"><c:out value="${eventboardDTO.eventContent}"/></textarea>
+					<textarea rows="5" cols="78" id="HiddeneventContent" style="display: none;"><c:out value="${eventboardDTO.eventContent}"/></textarea>
 				</div>
 			</div>
 	  	</div>
@@ -159,8 +161,7 @@
 	    	<div style="width: 5%;">&nbsp;</div>
 	    	<button class="middle ui button" type="reset" id="writeReset" style="width: 15%;">다시작성</button>
 	    	<div style="width: 5%;">&nbsp;</div>
-	    	<div class="middle ui button" id="imageboardList" style="width: 15%;"
-	    	onclick="location.href='/exhibition/customerService/C_eventboardListForm.do'">목록</div>
+	    	<div class="middle ui button" id="imageboardList" style="width: 15%;">목록</div>
 		</div>
 	</div><!--수정영역 텍스트필드-->
 	<div id="warnningDiv"></div>
@@ -174,6 +175,18 @@ $(document).ready(function(){
 	var endDate = $('#endDate').val().substring(0,4)+"/"+$('#endDate').val().substring(5,7)+"/"+$('#endDate').val().substring(8,10);
 	var startTime = $('#timepicker1').val().substring(0,2);
 	var endTime = $('#timepicker2').val().substring(0,2);
+	var checkReservation = false;
+	
+	var hiddenimageName = $('#imageName').val();
+	var hiddeneventLink = $('#eventLink').val();
+	var hiddenStarttime = startTime;
+	var hiddenendTime = endTime;
+	var hiddeneventPlace = $('#eventPlace').val();
+	var hiddeneventPrice = $('#eventPrice').val();
+	var hiddeneventSeats = $('#eventSeats').val();
+	var hiddeneventRate = $('#eventRate').val();
+	
+	
 	//시간
 	$('.timepicker1').timepicker({
 		timeFormat : 'H:mm',
@@ -181,7 +194,7 @@ $(document).ready(function(){
 	    minTime: '09',
 	    maxTime: '10:00pm',
 	    defaultTime: '09',
-	    startTime: '09:00am',
+	    startTime: startTime,
 	    dynamic: false,
 	    dropdown: true,
 	    scrollbar: false	
@@ -192,14 +205,14 @@ $(document).ready(function(){
 	    interval: 60,
 	    minTime: $('.timepicker1').val(),
 	    maxTime: '10:00pm',
-	    defaultTime: $('.timepicker1').val(),
+	    defaultTime: endTime,
 	    dynamic: false,
 	    dropdown: true,
 	    scrollbar: false	
 	});
 	//날짜
-	$(".datepicker1, .datepicker2").datepicker({
-		dateFormat : "yy/mm/dd",
+	$('.datepicker1, .datepicker2').datepicker({
+		dateFormat : 'yy/mm/dd',
 	    prevText: '이전 달',
 	    nextText: '다음 달',
 	    monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
@@ -211,47 +224,9 @@ $(document).ready(function(){
 	    minDate: 0,
 	    yearSuffix: '년'
 	});
-	
 	//시작일과 마지막날짜 설정
 	$('.datepicker1').datepicker('setDate', startDate);
 	$('.datepicker2').datepicker('setDate', endDate);
-	
-	
-	
-	//행사위치 유효성
-	var checkReservation = false;
-	$('#eventPlace').blur(function(){
-		
-		if($('#eventPlace').val()==''){
-			checkReservation = false;
-		}else if($('#eventPlace').val()!=''){
-			//예약 중복 확인
-			$.ajax({
-				type : 'POST',
-				url : '/exhibition/customerService/checkReservation.do',
-				data : {'postSelect':$('#postSelect').val(), 'imageName' : $('#imageName').val(), 'startDate' : $('.datepicker1').val(), 'endDate' : $('.datepicker2').val(),'eventPlace' : $('#eventPlace').val()},
-				dataType : 'text',
-				success : function(data){
-					if(data=='no_data'){
-						//alert('등록가능합니다');
-						checkReservation = true;
-					} 
-					else if(data=='yes_data'){
-						$.alertable.alert('일정이 중복됩니다', {
-					      show: function() {
-					        $(this.overlay).velocity('transition.fadeIn', 300);        
-					        $(this.modal).velocity('transition.shrinkIn', 300);
-					      },
-					      hide: function() {
-					        $(this.overlay).velocity('transition.fadeOut', 300);
-					        $(this.modal).velocity('transition.shrinkOut', 300);
-					      } 
-					    });
-					} 
-				}
-			});//ajax
-		}
-	});
 	
 	//전시회 티켓 금액 유효성
 	var checkP = true;
@@ -275,49 +250,113 @@ $(document).ready(function(){
 	
 	//수정 버튼 클릭
 	$('#ModeButton').click(function(){
-		//시간 비교
-		var date1 = $("#startTime").val();
-	    var date2 = $("#endTime").val();
-	     
-	    var cutDate1 = date1.split(':');
-	    var cutDate2 = date2.split(':');
-	     
-	    console.log(cutDate1[0]);
-	    console.log(cutDate2[0]);
-	    
-		$('#imageNameDiv').empty();
-		$('#imgDiv').empty();
-		$('#dateDiv').empty();
-		$('#placeDiv').empty();
-		$('#priceDiv').empty();
-		$('#timeDiv').empty();
-		$('#warnningDiv').empty();
-		
-		if($('#imageName').val()==''){
-			$('#imageNameDiv').text('제목은 필수입니다').css('color','red').css('font-size','9pt').css('font-weight','bold');
-		}else if($('#img').val()==''){
-			$('#imgDiv').text('파일을 선택해 주세요').css('color','magenta').css('font-size','9pt').css('font-weight','bold');	
-		}else if($('.datepicker1').datepicker().val()==''){
-			$('#dateDiv').text('날짜는 필수입니다').css('color','red').css('font-size','9pt').css('font-weight','bold');
-		}else if($('.datepicker2').datepicker().val()==''){
-			$('#dateDiv').text('날짜는 필수입니다').css('color','red').css('font-size','9pt').css('font-weight','bold');
-		}else if($('.datepicker2').datepicker().val() < $('.datepicker1').datepicker().val()){
-			$('#dateDiv').text('시작 및 종료일자를 확인하세요').css('color','red').css('font-size','9pt').css('font-weight','bold');
-		}else if (parseInt(cutDate2[0]) - parseInt(cutDate1[0]) <= 0){
-		    $('#timeDiv').text('시작 및 종료시간을 확인하세요').css('color','red').css('font-size','9pt').css('font-weight','bold');
-	    }else if($('#eventPlace').val()=='' || $('#eventPlace').val()!='1층' && $('#eventPlace').val()!='2층'&& $('#eventPlace').val()!='P_Room1' && $('#eventPlace').val()!='P_Room2' && $('#eventPlace').val()!='P_Room3' && $('#eventPlace').val()!='P_Room4'){
-			$('#placeDiv').text('전시회는 1층 또는 2층 / 공연은 공연 위치(대문자 : P_Room1 ~ P_Room4)를 입력하세요 (ex.1층 또는 P_Room1)').css('color','red').css('font-size','7pt').css('font-weight','bold');
-		}else if(checkP == false || checkS == false){
-			$('#priceDiv').text('티켓 가격 및 관람인원에는 숫자만 입력하세요(ex. 3,000원 -> 3000 / 120석 -> 120)').css('color','red').css('font-size','9pt').css('font-weight','bold');
-		}else if(checkReservation==false){
-			 $('#warnningDiv').text('행사 기간이 겹칩니다. 날짜를 다시 확인하세요').css('color','red').css('font-size','9pt').css('font-weight','bold');
-		}
-		
-		else{
-			$('#eventboardModForm').attr('action','/exhibition/customerService/C_eventboardMod.do').submit();
-		}
-		
+		//예약 중복 확인
+		$.ajax({
+			type : 'POST',
+			url : '/exhibition/customerService/checkReservation.do',
+			data : {'seq':$('#seq').val() ,'postSelect':$('#postSelect').val(), 'imageName':$('#imageName').val(), 
+				    'startDate':$('.datepicker1').val(), 'endDate':$('.datepicker2').val(),
+				    'eventPlace':$('#eventPlace').val()},
+			dataType : 'text',
+			success : function(data){
+				if(data=='no_data'){
+					var diff_days = diff_day($('.datepicker1').val(), $('.datepicker2').val());
+					
+					checkReservation = true;
+					//시간 비교
+					var date1 = $("#startTime").val();
+				    var date2 = $("#endTime").val();
+				     
+				    var cutDate1 = date1.split(':');
+				    var cutDate2 = date2.split(':');
+				     
+				    console.log(cutDate1[0]);
+				    console.log(cutDate2[0]);
+				    
+					$('#imageNameDiv').empty();
+					$('#imgDiv').empty();
+					$('#dateDiv').empty();
+					$('#placeDiv').empty();
+					$('#priceDiv').empty();
+					$('#timeDiv').empty();
+					$('#warnningDiv').empty();
+					
+					if($('#imageName').val()==''){
+						$('#imageNameDiv').text('제목은 필수입니다').css('color','red').css('font-size','9pt').css('font-weight','bold');
+					}else if($('.datepicker1').datepicker().val()==''){
+						$('#dateDiv').text('날짜는 필수입니다').css('color','red').css('font-size','9pt').css('font-weight','bold');
+					}else if($('.datepicker2').datepicker().val()==''){
+						$('#dateDiv').text('날짜는 필수입니다').css('color','red').css('font-size','9pt').css('font-weight','bold');
+					}else if($('.datepicker2').datepicker().val() < $('.datepicker1').datepicker().val()){
+						$('#dateDiv').text('시작 및 종료일자를 확인하세요').css('color','red').css('font-size','9pt').css('font-weight','bold');
+					}else if (parseInt(cutDate2[0]) - parseInt(cutDate1[0]) <= 0){
+					    $('#timeDiv').text('시작 및 종료시간을 확인하세요').css('color','red').css('font-size','9pt').css('font-weight','bold');
+				    }else if($('#eventPlace').val()=='' || $('#eventPlace').val()!='1층' && $('#eventPlace').val()!='2층'&& $('#eventPlace').val()!='P_Room1' && $('#eventPlace').val()!='P_Room2' && $('#eventPlace').val()!='P_Room3' && $('#eventPlace').val()!='P_Room4'){
+						$('#placeDiv').text('전시회는 1층 또는 2층 / 공연은 공연 위치(대문자 : P_Room1 ~ P_Room4)를 입력하세요 (ex.1층 또는 P_Room1)').css('color','red').css('font-size','7pt').css('font-weight','bold');
+					}else if(checkP == false || checkS == false){
+						$('#priceDiv').text('티켓 가격 및 관람인원에는 숫자만 입력하세요(ex. 3,000원 -> 3000 / 120석 -> 120)').css('color','red').css('font-size','9pt').css('font-weight','bold');
+					}else if(checkReservation==false){
+						 $('#warnningDiv').text('행사 기간이 겹칩니다. 날짜를 다시 확인하세요').css('color','red').css('font-size','9pt').css('font-weight','bold');
+					}else if(diff_days < 30) {
+						 $('#warnningDiv').text('행사 기간은 최소 30일 이상이어야 합니다').css('color','red').css('font-size','9pt').css('font-weight','bold');
+					}
+					else{
+						$('#eventboardModForm').attr('action','/exhibition/customerService/C_eventboardMod.do').submit();
+					}
+				} 
+				else if(data=='yes_data'){
+					startDate = $('#startDate').val().substring(0,4)+"/"+$('#startDate').val().substring(5,7)+"/"+$('#startDate').val().substring(8,10);
+					endDate = $('#endDate').val().substring(0,4)+"/"+$('#endDate').val().substring(5,7)+"/"+$('#endDate').val().substring(8,10);
+					$('.datepicker1').datepicker('setDate', startDate);
+					$('.datepicker2').datepicker('setDate', endDate);
+					$.alertable.alert('일정이 중복됩니다', {
+				      show: function() {
+				        $(this.overlay).velocity('transition.fadeIn', 300);        
+				        $(this.modal).velocity('transition.shrinkIn', 300);
+				      },
+				      hide: function() {
+				        $(this.overlay).velocity('transition.fadeOut', 300);
+				        $(this.modal).velocity('transition.shrinkOut', 300);
+				      } 
+				    });
+				} 
+			}
+		});//ajax
+
 	});
+	
+	//목록 버튼클릭
+	$('#imageboardList').click(function(){
+		startDate = $('#startDate').val().substring(0,4)+"/"+$('#startDate').val().substring(5,7)+"/"+$('#startDate').val().substring(8,10);
+		endDate = $('#endDate').val().substring(0,4)+"/"+$('#endDate').val().substring(5,7)+"/"+$('#endDate').val().substring(8,10);
+		$('#imageName').val(hiddenimageName);
+		$('#eventLink').val(hiddeneventLink);
+		$('#eventPlace').val(hiddeneventPlace);
+		$('#eventSeats').val(hiddeneventSeats);
+		$('#eventRate').val(hiddeneventRate);
+		$('#img').val('');
+		$('.datepicker1').datepicker('setDate', startDate);
+		$('.datepicker2').datepicker('setDate', endDate);
+		$('.timepicker1').timepicker('setTime', hiddenStarttime);
+		$('.timepicker2').timepicker('setTime', hiddenendTime);
+		$('#eventPrice').val($('#Pricehidden').val());
+		$('#eventContent').val($('#HiddeneventContent').val());
+
+		$('#eventboardModForm').attr('action','/exhibition/customerService/C_eventboardMod.do').submit();
+	});
+	
+	function diff_day(value1, value2) {
+		var arr1 = value1.split('/');
+		var arr2 = value2.split('/');
+		
+		var dt1 = new Date(arr1[0], arr1[1], arr1[2]);
+		var dt2 = new Date(arr2[0], arr2[1], arr2[2]);
+		
+		var diff = dt2 - dt1;
+		var day = 1000 * 60 * 60 * 24;//밀리세컨 초 * 초 * 분 * 시간
+		
+		return parseInt(diff/day);
+	}
 });
 </script>
 </html>

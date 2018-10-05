@@ -240,7 +240,7 @@
 								    <p>탈퇴하시겠습니까?</p>
 								  </div>
 								  <div class="actions">
-								    <div class="ui red basic cancel inverted button" id="out-no">
+								    <div class="ui red submit inverted button" id="out-no">
 								      <i class="remove icon"></i>
 								      아니오
 								    </div>
@@ -255,9 +255,9 @@
 				</div>
 			</div>
 	</div>		
-	<div style="display: inline-block; border: 1px solid; margin-top:80px; width: 470px; height: auto;">
+	<div style="display: inline-block; border: 1px solid; margin-top:80px; width: 470px; height: auto; padding-bottom:448px">
 		<div id="renrenlist">
-		<div class="header" id="exhibitionHeader" style="text-align:left;font-size:20px;font-weight: bold;">박람회</div>
+		<div class="header" id="exhibitionHeader" style="text-align:left;font-size:20px;font-weight: bold; margin-left:10px;margin-top:10px;">박람회</div>
 		<table class="ui striped table" id="exhibitionList">
 		  <thead>
 		  	<tr align="center">
@@ -273,7 +273,7 @@
 	  		</tbody>	 
 	  	</table>
 	  	<br>
-	  	<div class="header" id="exhibitionHeader" style="text-align:left;font-size:20px;font-weight: bold;">공연</div>
+	  	<div class="header" id="exhibitionHeader" style="text-align:left;font-size:20px;font-weight: bold; margin-left: 10px;">공연</div>
 	  <table class="ui striped table" id="concertList">
 	 	 <thead>
 		  	<tr align="center">

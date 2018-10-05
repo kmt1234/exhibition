@@ -35,7 +35,7 @@ public class CustomerServicePaging {
 	}
 	
 	//공지사항 검색후 페이징
-	public void C_notice_searchPagingHTML() {
+	public void C_notice_searchPagingHTML(String keyword) {
 		pagingHTML = new StringBuffer();
 		
 		int totalP = (totalA+pageSize-1)/pageSize;
@@ -44,15 +44,15 @@ public class CustomerServicePaging {
 		if(endPage > totalP) endPage = totalP;
 		
 		if(startPage!=1) 
-			pagingHTML.append("<span class='item' id=paging onclick=C_notice_Search("+(startPage-1)+")>이전</span>");
+			pagingHTML.append("<a class='item' href='C_notice_Search.do?pg="+(startPage-1)+"&keyword="+keyword+"'>이전</a>");
 		for(int i=startPage; i<=endPage; i++) {
 			if(i==currentPage)
-				pagingHTML.append("<span class='item' id=currentPaging onclick=C_notice_Search("+i+")>"+i+"</span>");
+				pagingHTML.append("<a class='item' id=currentPaging href='C_notice_Search.do?pg="+i+"&keyword="+keyword+"'>"+i+"</a>");
 			else
-				pagingHTML.append("<span class='item' id=paging onclick=C_notice_Search("+i+")>"+i+"</span>");
+				pagingHTML.append("<a class='item' id=paging href='C_notice_Search.do?pg="+i+"&keyword="+keyword+"'>"+i+"</a>");
 		}
 		if(endPage!=totalP) 
-			pagingHTML.append("<span class='item' id=paging onclick=C_notice_Search("+(endPage+1)+")>다음</span>");
+			pagingHTML.append("<a class='item' href='C_notice_Search.do?pg="+(endPage+1)+"&keyword="+keyword+"'>다음</a>");
 	}
 	
 	//고객의 소리 페이징
@@ -77,7 +77,7 @@ public class CustomerServicePaging {
 	}
 	
 	//고객의 소리 검색후 페이징
-	public void C_inquire_searchPagingHTML() {
+	public void C_inquire_searchPagingHTML(String keyword, String searchOption) {
 		pagingHTML = new StringBuffer();
 		
 		int totalP = (totalA+pageSize-1)/pageSize;
@@ -86,15 +86,15 @@ public class CustomerServicePaging {
 		if(endPage > totalP) endPage = totalP;
 		
 		if(startPage!=1) 
-			pagingHTML.append("<span class='item' id=paging onclick=C_inquire_Search("+(startPage-1)+")>이전</span>");
+			pagingHTML.append("<a class='item' href='C_inquire_SearchList.do?pg="+(startPage-1)+"&searchOption="+searchOption+"&keyword="+keyword+"'>이전</a>");
 		for(int i=startPage; i<=endPage; i++) {
 			if(i==currentPage)
-				pagingHTML.append("<span class='item' id=currentPaging onclick=C_inquire_Search("+i+")>"+i+"</span>");
+				pagingHTML.append("<a class='item' id=currentPaging href='C_inquire_SearchList.do?pg="+i+"&searchOption="+searchOption+"&keyword="+keyword+"'>"+i+"</a>");
 			else
-				pagingHTML.append("<span class='item' id=paging onclick=C_inquire_Search("+i+")>"+i+"</span>");
+				pagingHTML.append("<a class='item' id=paging href='C_inquire_SearchList.do?pg="+i+"&searchOption="+searchOption+"&keyword="+keyword+"'>"+i+"</a>");
 		}
 		if(endPage!=totalP) 
-			pagingHTML.append("<span class='item' id=paging onclick=C_inquire_Search("+(endPage+1)+")>다음</span>");
+			pagingHTML.append("<a class='item' href='C_inquire_SearchList.do?pg="+(endPage+1)+"&searchOption="+searchOption+"&keyword="+keyword+"'>다음</a>");
 	}
 	
 	//주요시설 연락처 페이징
@@ -119,7 +119,7 @@ public class CustomerServicePaging {
 	}
 	
 	//주요시설 연락처 검색후 페이징
-	public void C_contactList_searchPagingHTML() {
+	public void C_contactList_searchPagingHTML(String keyword, String searchOption) {
 		pagingHTML = new StringBuffer();
 		
 		int totalP = (totalA+pageSize-1)/pageSize;
@@ -128,15 +128,15 @@ public class CustomerServicePaging {
 		if(endPage > totalP) endPage = totalP;
 		
 		if(startPage!=1) 
-			pagingHTML.append("<span class='item' id=paging onclick=C_contactList_Search("+(startPage-1)+")>이전</span>");
+			pagingHTML.append("<a class='item' href='C_contactList_SearchList.do?pg="+(startPage-1)+"&searchOption="+searchOption+"&keyword="+keyword+"'>이전</a>");
 		for(int i=startPage; i<=endPage; i++) {
 			if(i==currentPage)
-				pagingHTML.append("<span class='item' id=currentPaging onclick=C_contactList_Search("+i+")>"+i+"</span>");
+				pagingHTML.append("<a class='item' id=currentPaging href='C_contactList_SearchList.do?pg="+i+"&searchOption="+searchOption+"&keyword="+keyword+"'>"+i+"</a>");
 			else
-				pagingHTML.append("<span class='item' id=paging onclick=C_contactList_Search("+i+")>"+i+"</span>");
+				pagingHTML.append("<a class='item' id=paging href='C_contactList_SearchList.do?pg="+i+"&searchOption="+searchOption+"&keyword="+keyword+"'>"+i+"</a>");
 		}
 		if(endPage!=totalP) 
-			pagingHTML.append("<span class='item' id=paging onclick=C_contactList_Search("+(endPage+1)+")>다음</span>");
+			pagingHTML.append("<a class='item' href='C_contactList_SearchList.do?pg="+(endPage+1)+"&searchOption="+searchOption+"&keyword="+keyword+"'>다음</a>");
 	}
 	//사업자 페이징
 	public void company_pagingHTML() {

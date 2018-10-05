@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +13,6 @@
 	width: 90%;
 	margin-left:46px;
 	position: relative;
-   
 }
 
 #exhibition2F{
@@ -73,27 +73,54 @@ ul{
 <h2 class="box-container" style="float: center; width: 100%; text-align: left; padding-bottom: 0px;">
 	박람회 
 	<span class="h-light">홀</span>
-	<div style="font-size:13px; float:right; height: 50px; margin-top:30px ">
+	<div style="font-size:13px; float:right; height: 50px; margin-top:30px;">
 		<img src="../img/house.png" width="15px" height="16px" style="cursor: pointer; " id="houseImg">
 		> 소개 > 박람회 홀
 	</div>
 	<div class="ui divider"></div>
 </h2>
-
-<table style="margin-left:20px; width: 40%;">
+<div id="Layer1" style="position:absolute; left:237px; top:140px; width:164px; height:104px; z-index:1">
+<table style="width: 50%; display: inline-block;">
 	<tr>
 		<td>
-			<button class="middle ui button" style="width: 100%;" id="1F">
+			<button class="middle ui button" style="width: 180px;" id="1F">
 				1층
 			</button> 
 		</td>
 		<td>
-			<button class="middle ui button" style="width: 100%;" id="2F">
+			<button class="middle ui button" style="width: 180px;" id="2F">
 				2층
 			</button> 
 		</td>
 	</tr>
 </table>
+</div>
+
+<c:if test="${code == '3'}">
+<div style="position:absolute; width: 500px; margin-left: 360px; margin-top: 5px;">
+	<form id="modifyRateExhibitionForm" action="/exhibition/rental/modifyRateExhibition.do" method="post">
+		<select id="boothNameSel" name="boothNameSel">
+			<option value="Booth1">Booth1</option>
+			<option value="Booth2">Booth2</option>
+			<option value="Booth3">Booth3</option>
+			<option value="Booth4">Booth4</option>
+			<option value="Booth5">Booth5</option>
+			<option value="Booth6">Booth6</option>
+			<option value="Booth7">Booth7</option>
+			<option value="Booth8">Booth8</option>
+			<option value="Booth9">Booth9</option>
+			<option value="Booth10">Booth10</option>
+			<option value="Booth11">Booth11</option>
+			<option value="Booth12">Booth12</option>
+			<option value="Booth13">Booth13</option>
+			<option value="Booth14">Booth14</option>
+		</select>
+		<input type="text" name="boothRate" id="boothRate">
+		<button id="modifyRateBtn">평당 가격 수정</button>
+	</form>
+</div>
+</c:if>
+
 <br><br>
 <h2 align="left" style="margin-left: 46px; color: #610170;">
 <i class="camera icon"></i>

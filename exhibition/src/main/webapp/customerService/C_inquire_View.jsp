@@ -64,15 +64,9 @@
 	</c:if>
 	<input type="button" class="middle ui button" id="C_inquire_ListBtn" value="목록">
 	<input type="hidden" name="pg" id="pg" value="${pg}">
+	<input type="hidden" id="keyword" value="${keyword}">
 	<input type="hidden" name="pseq" id="pseq" value="${customerServiceDTO.seq }">
 </form>
 <script src="../js/C_inquire_js.js?ver=1"></script>
-<script>
-$(document).ready(function(){
-	$('#C_inquire_ListBtn').on('click', function(){
-		location.href="/exhibition/customerService/C_inquire_List.do?pg="+$('#pg').val();
-	});
-});
-</script>
 </body>
 </html>

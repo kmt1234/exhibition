@@ -198,4 +198,15 @@ $(document).ready(function(){
 		location.href="/exhibition/rental/R_exhibitionHollDecision.do?room="+$('#C_room4').text();
 	});
 	
+	
+	$('#modifyRateBtn').click(function(){
+		if($('#boothRate').val()=='') {
+			alert('평당 가격을 입력하세요');
+			return;
+		} else {
+			$('#modifyRateExhibitionForm').submit();
+		}
+		
+	});
+	
 });

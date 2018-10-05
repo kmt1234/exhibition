@@ -13,8 +13,15 @@ $(document).ready(function() {
 	$('#terms-content').hide();
 	$('#writeForm-close').hide();
 	
+	
 	//회원가입 팝업 닫기
 	$('#writeForm-close').click(function(){
+		$('.ui.modal1.modal').modal("hide");
+		location.reload();
+	});
+	
+	//X버튼
+	$('.close.icon').click(function(){
 		$('.ui.modal1.modal').modal("hide");
 		location.reload();
 	});
@@ -90,6 +97,21 @@ $(document).ready(function() {
 		}else{
 			$('#emailConfirm1').text('');
 			$('#Mw_Email').css({'border':'1px solid green', 'background-color':'white'});
+			$.ajax({
+				type : 'POST',
+				url : '/exhibition/member/checkEmail.do',
+				data : {'M_Email' : $('#Mw_Email').val()},
+				dataType : 'text',
+				success : function(data){
+					if(data=='exist'){
+						$('#emailConfirm1').text("이메일이 중복됩니다").css("font-size","11px").css("color","white");
+						$('#Mw_Email').css({'border':'1px solid red', 'background-color':'#f4d2d2'});
+					}else if(data=='not_exist'){
+						$('#emailConfirm1').text('');
+						$('#Mw_Email').css({'border':'1px solid green', 'background-color':'white'});
+					}
+				}//success
+			});//ajax
 		}
 	});
 	
@@ -107,12 +129,14 @@ $(document).ready(function() {
 	
 	//회원가입 팝업 submit
 	$('#register').click(function(){
-						
 		if(Mw_regName.test($('#Mw_Name').val()) && Mw_regId.test($('#Mw_Id').val()) && Mw_regPwd.test($('#Mw_Pwd').val())
 												&& ($('#Mw_Pwd').val()== $('#Mw_Pwd2').val()) && Mw_regEmail.test($('#Mw_Email').val()) 
-												&& Mw_regPhone.test($('#Mw_Phone').val()) && $('#idConfirm').text()!='아이디 중복입니다'){
+												&& Mw_regPhone.test($('#Mw_Phone').val()) && $('#idConfirm').text()!='아이디 중복입니다' && $('#emailConfirm1').text()!='이메일이 중복됩니다'){
 			$('.registerConfirm').text('');
-			$('#registerForm').submit();
+			$('.ui.mini.modal.writeModal').modal('show');
+			setInterval(function() {
+				$('#registerForm').submit();
+				}, 3000);
 		}else{
 			$('.registerConfirm').text('양식이 맞지 않습니다').css("font-size","12px").css("color","white").css("margin-left","-37%");
 		}
