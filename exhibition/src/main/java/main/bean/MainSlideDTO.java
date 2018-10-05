@@ -8,4 +8,5 @@ import lombok.Data;
 @Data
 public class MainSlideDTO {
 	private String imageName;	
+	private String eventLink;	
 }

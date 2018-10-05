@@ -1,6 +1,7 @@
 package main.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,10 +15,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import customerService.bean.EventboardDTO;
 import customerService.bean.ImageboardDTO;
 import customerService.dao.CustomerServiceDAO;
 import main.bean.MainDTO;
 import main.bean.MainPaging;
+import main.bean.MainSlideDTO;
 import main.dao.MainDAO;;
 
 
@@ -38,7 +41,10 @@ public class IndexController {
 	@RequestMapping(value = "index", method = RequestMethod.GET)
 	public ModelAndView index(@RequestParam(required = false, defaultValue = "1") String code,@RequestParam(required = false, defaultValue = "0") int slideFlag ,Model model, HttpSession session) {
 
+		List<EventboardDTO> list = mainDAO.index_exSlider();
+		
 		model.addAttribute("code_slide", code);
+		model.addAttribute("list", list);
 		model.addAttribute("display", "/main/I_body.jsp");
 		
 		return new ModelAndView("/main/index");	
@@ -56,10 +62,21 @@ public class IndexController {
 		}
 		
 		List<ImageboardDTO> list1= customerServiceDAO.getImageboardSlide(list);
-	
+		
+		//
+		Map<String,String> map = new HashMap<String,String>();
+		MainSlideDTO mainSlideDTO = new MainSlideDTO(); 
 		//mainSlideDB에 저장
 		for(int i=0; i<list1.size(); i++) {
-			mainDAO.inputMainSlideDB(list1.get(i).getImage1());
+			
+			if(list1.get(i).getEventLink()==null || list1.get(i).getEventLink()=="") {
+				list1.get(i).setEventLink("http://localhost:8080/exhibition/main/index.do");
+			}
+			
+			mainSlideDTO.setImageName(list1.get(i).getImage1());
+			mainSlideDTO.setEventLink(list1.get(i).getEventLink());
+			
+			mainDAO.inputMainSlideDB(mainSlideDTO);
 		}
 		
 		model.addAttribute("list1",list1);

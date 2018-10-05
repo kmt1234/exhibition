@@ -15,12 +15,16 @@
 					$('#mainSlideUl').append($('<li/>',{
 												style : 'display: inline-block'
 												})
-							   					.append($('<img>',{
+							   					.append($('<a/>',{
+							   						href : item.eventLink+'',
+							   						target : '_blank'
+							   					}).append($('<img>',{
 																	src : '../storage/'+item.image1+'',
 																	style : 'cursor:pointer; display:block; border:0;',
 																	class : 'pic',
+																	value : item.image1,
 																	id : 'image1'
-								}))).appendTo('.slide',{
+								})))).appendTo('.slide',{
 									style : 'width : 6000px; list-style: none; font-size: 0'
 								});
 					link = item.eventLink;
@@ -29,9 +33,7 @@
 					
 				});//each
 				
-				$('.pic').on('click',function(){
-					alert('해당 링크 없음');
-				});
+				
 				
 				
 				 var current = 0;

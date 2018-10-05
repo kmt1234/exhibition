@@ -908,6 +908,7 @@ public class CustomerServiceController {
 			ArrayList<ImageboardDTO> list = new ArrayList<ImageboardDTO>();
 			
 			String[] str = { "mainPoster.jpg", "poster2.jpg", "poster4.jpg", "poster1.jpg", "poster3.jpg" };
+			String[] link = {};
 			
 			for (int i = 0; i < str.length; i++) {
 				ImageboardDTO imageboardDTO = new ImageboardDTO();
@@ -948,9 +949,7 @@ public class CustomerServiceController {
 	@RequestMapping(value = "getImageboardSlide1", method = RequestMethod.POST)
 	public ModelAndView getImageboardSlide1(@RequestParam List<String> list, @RequestParam List<ImageboardDTO> list1, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-
-//		List<ImageboardDTO> list1 = customerServiceDAO.getImageboardSlide(list);
-       
+      
 		//DB
 		List<MainSlideDTO> mainSlideDTOList = new ArrayList<MainSlideDTO>();
 		mainSlideDTOList = mainDAO.getMainSlideDB();

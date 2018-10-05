@@ -46,7 +46,6 @@
 	<div style="width: 100%;">
 		<!-- 맨위 메뉴 텝 -->
 		<div style=" width:880px; float: left; text-align: left;">
-			<a class="middle ui button" class="active item" id="company-info-modify" style="margin-left:20px; width:150px; float: left;">수정</a>
 			<a class="middle ui button" class="item"id="rental-list"  style=" width:150px; float: left;">임대리스트</a>
 			<a class="middle ui button" class="item"id="rental-history"  style=" width:150px; float: left;">지난 임대 내역</a>
 		</div>
@@ -240,11 +239,13 @@
 								    <p>탈퇴하시겠습니까?</p>
 								  </div>
 								  <div class="actions">
-								    <div class="ui red submit inverted button" id="out-no">
-								      <i class="remove icon"></i>
+
+								    <div class="ui negative button" id="out-no">
+
+								     <i class="remove icon"></i>
 								      아니오
 								    </div>
-								    <div class="ui green submit inverted button" id="out-yes">
+								    <div class="ui positive right labeled icon button" id="out-yes">
 								      <i class="checkmark icon"></i>
 								      네
 								    </div>

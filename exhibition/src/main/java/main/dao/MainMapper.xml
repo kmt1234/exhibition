@@ -131,8 +131,9 @@
  	</select>
  	
  	<!--mainSlideDB에 저장 -->
- 	<insert id="inputMainSlideDB" parameterType="java.lang.String">
-		insert into mainSlideDB values(#{image1})
+ 	<insert id="inputMainSlideDB" parameterType="main.bean.MainSlideDTO">
+		insert into mainSlideDB(imageName,eventLink) values(#{imageName},#{eventLink})
+		
  	</insert>
  	
  	<!--mainSlideDB에서 이미지 슬라이드 가져오기  -->
