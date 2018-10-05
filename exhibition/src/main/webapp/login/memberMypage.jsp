@@ -198,14 +198,28 @@ div#uiStatistics {
 		<!--내용--><input type="hidden" id="pg" value="${pg}"><!--현재 페이지-->	
 		<div class="ui segment" id="Ticket-List-Div" style="display: inline-block;">
 			
-			<table class="ui selectable inverted table" class="ticketListTable" id="ticketList">
+			<!-- <table class="ui selectable inverted table" >
 				<thead>
 					<tr>
-						<th>회원 아이디</th><th>공연 및 전시회</th><th>예매 일자</th><th>예매 티켓 수량</th><th>환불 여부</th>
-					
+						<th>회원 아이디</th>
+						<th>공연 및 전시회</th>
+						<th>예매 일자</th>
+						<th>예매 티켓 수량</th>
+						<th>환불 여부</th>
 					</tr>
 				</thead>
-			</table>
+			</table> -->
+			
+			 <table class="ui striped table" class="ticketListTable">
+			 	 <thead>
+				  	<tr align="center">
+					  	<th>공연 및 전시회</th>
+					  	<th>행사 날짜</th>
+						<th>예매 티켓 수량</th>
+						<th>환불 여부</th>
+				  	</tr></thead>
+			  	<tbody id="ticketList" align="center"></tbody>	 
+			  </table>
 			
 			<!--클릭 시, hidden에 해당 데이터 저장  -->
 			<form name="eventDetailInfo" id="eventDetailInfo" method="post" action="/exhibition/login/eventDetail.do">
@@ -249,9 +263,6 @@ function MemberTicketListPaging(pg){
 				$('<tr/>',{
 					class : 'tr'
 				}).append($('<td/>',{
-					text : item.memberId,
-					value : item.memberId
-				})).append($('<td/>',{
 					text : item.imageName,
 					class : 'imageName',
 					value : item.imageName
@@ -286,9 +297,6 @@ function TicketHistoryListPaging(pg){
 				$('<tr/>',{
 					class : 'tr'
 				}).append($('<td/>',{
-					text : item.memberId,
-					value : item.memberId
-				})).append($('<td/>',{
 					text : item.imageName,
 					class : 'imageName1',
 					value : item.imageName

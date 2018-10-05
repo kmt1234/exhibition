@@ -54,7 +54,7 @@
 			    </div>
 			    
 			    <div align="center">
-				    <div class="ui submit button" id="Mlogin">로그인</div><br>
+				    <button type="text" class="ui button" id="Mlogin">로그인</button><br>
 				    <span id="login-Confirm"></span>
 			    </div>
 			    

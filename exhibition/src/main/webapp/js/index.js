@@ -5,11 +5,17 @@ $(document).ready(function(){
 	
 	//개인 회원가입 클릭 시,
 	$('#M_individual').click(function(){
-		$('.ui.modal1.modal').modal('show');
+		$('.ui.modal1.modal').modal({
+			closable : false,
+            duration : 460,
+		}).modal('show');
 	});
 	//법인 회원가입 클릭 시,
 	$('#C_company').click(function(){
-		$('.ui.modal2.modal').modal('show');
+		$('.ui.modal2.modal').modal({
+			closable : false,
+            duration : 460,
+		}).modal('show');
 	});
 	
 	/*로그인 클릭시 2가지로 분류(개인&사업자)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -153,14 +159,16 @@ $(document).ready(function(){
 	// 메인화면 공지사항 리스트 제목 클릭시 내용 보여줌
 	$('#C_notice_MainList').on('click','#subjectA',function(){
 		var seq = $(this).next().text();
-		location.href='/exhibition/customerService/C_notice_View.do?seq='+seq+'&pg='+$('#pg').val();
+		location.href='/exhibition/customerService/C_notice_View.do?seq='+seq+'&pg=1';
 	});
 	
-	$('#index_searchBtn').click(function(){
+	$('#index_searchBtn').click(function(event, str){
 		var index_keyword = $('#index_keyword').val();
+		var pg = $('#pg').val();
+		if(str!='trigger') $('#pg').val(1);
 		if($('#index_keyword').val()=='')
 			alert("검색어를 입력하세요");
-		else location.href='/exhibition/main/index_SearchForm.do?index_keyword='+index_keyword;
+		else location.href="/exhibition/main/index_Search.do?index_keyword="+index_keyword;
 		
 	});
 	//일정 달력 만들어주기

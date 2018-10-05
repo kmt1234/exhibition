@@ -1,6 +1,5 @@
 package customerService.dao;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -21,7 +20,6 @@ import customerService.bean.SalesConcertHallDTO;
 import customerService.bean.SalesExhibitionDTO;
 import member.bean.MemberDTO;
 import performance.bean.Book_exhibition_membersDTO;
-import performance.bean.Book_performance_membersDTO;
 import rental.bean.BusinessRoomDTO;
 import rental.bean.ConcertHallDTO;
 import rental.bean.ExhibitionDTO;
@@ -177,7 +175,7 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	}
 	
 	//메인(슬라이드 이미지 불러오기)
-	public List<ImageboardDTO> getImageboardSlide(List<String> list) {
+	public List<ImageboardDTO> getImageboardSlide(List<Integer> list) {
 		return sqlSession.selectList("customerServiceSQL.getImageboardSlide",list);
 	}
 	
@@ -432,7 +430,6 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	//박람회 일자별 DB 등록 메소드 
 	public void eventInfoWrite_exhibition_bookDB(ExhibitionBookDTO exhibitionBookDTO) {
 		sqlSession.insert("customerServiceSQL.eventInfoWrite_exhibition_bookDB", exhibitionBookDTO);
-		
 	}
 		
 	//연극 수정할때 예매일자별 날려버리기
@@ -493,6 +490,17 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	public List<EventboardDTO> checkReservation_performance(Map<String, String> map) {
 		return sqlSession.selectList("customerServiceSQL.checkReservation_performance", map);
 	}
+	
+	//박람회 수정하기위해 일단 날짜 초기화
+	public void eventboardModDelete(String seq) {
+		sqlSession.update("customerServiceSQL.eventboardModDelete",seq);
+	}
+	
+	//공연 수정하기위해 일단 날짜 초기화
+	public void eventboard_playModDelete(String seq) {
+		sqlSession.update("customerServiceSQL.eventboard_playModDelete",seq);
+	}
+	
 	
 	
 }

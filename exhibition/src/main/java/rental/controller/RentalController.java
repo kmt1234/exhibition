@@ -280,7 +280,7 @@ public class RentalController {
 	// 비지니스룸 예약
 	@RequestMapping(value = "rentalBusinessRoom", method = RequestMethod.POST)
 	public ModelAndView rentalBusinessRoom(@ModelAttribute BusinessRoomDTO businessRoomDTO, @RequestParam int rate) {
-		businessRoomDTO.setTotalRent(businessRoomDTO.getNumberPeople() * rate);
+		businessRoomDTO.setTotalRent(rate);
 		
 		for (int i = 0; i < businessRoomDTO.getCheckRow().length; i++) {
 			businessRoomDTO.setTime(businessRoomDTO.getCheckRow()[i]);
