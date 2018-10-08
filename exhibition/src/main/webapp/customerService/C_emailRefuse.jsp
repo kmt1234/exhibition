@@ -53,7 +53,7 @@ left: 0px;
 			<div class="ui compact menu" id="slidbar" style="display: inline-block;">
 				<a class="item"  style="border: none; width: 227px;" href="/exhibition/customerService/C_privacy.do">개인정보 처리방침</a> 
 				<a class="item" href="/exhibition/customerService/C_emailRefuse.do">이메일무단수집거부</a>
-				<a class="item" href="/exhibition/customerService/C_map.do">사이트맵</a>
+				<a class="item" href="/exhibition/customerService/C_map.do">위치정보</a>
 			</div>
 		</div>
 		<!-- 메인 화면 -->

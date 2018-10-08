@@ -37,8 +37,8 @@
 		<tr>
 			<td width="70" align="center" height="200" style=" background-color: #f7f6e6;text-align: center;">내용</td>
 			<td colspan="3">
-				<div align="center" id="content" >
-					${customerServiceDTO.content }
+				<div id="content" >
+					<pre>${customerServiceDTO.content }</pre>
 					<div id="contentDiv"></div>
 				</div>
 			</td>
