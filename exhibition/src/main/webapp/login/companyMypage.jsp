@@ -273,7 +273,7 @@
 	 </div>
 	 <div id="renrenhistory">
 	 	<div class="ui rental All" id="Ticket-History-Div">
-	 	<div class="header" id="exhibitionHeader" style="text-align:left;font-size:20px;font-weight: bold;">지난 내역</div>
+	 	<div class="header" id="exhibitionHeader" style="text-align:left;font-size:20px;font-weight: bold;margin-top:10px;">지난 내역</div>
 			<table class="ui striped table">
 		  <thead>
 		  	<tr align="center">
@@ -281,7 +281,7 @@
 			  	<th>행사명</th>
 			  	<th>행사시작일</th>
 			  	<th>행사종료일</th>
-			  	<th>진행사항</th>
+			  	<th>진행상황</th>
 		  	</tr></thead>
 		  	<tbody id="rental_All" align="center">
 	  		<c:if test="${listSize eq '0'}">

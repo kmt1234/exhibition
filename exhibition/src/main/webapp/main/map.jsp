@@ -18,7 +18,7 @@
 </head>
 <body>
 <div id="map"></div>
-<script src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=cpw9RMOfkmb0qIa7Vz23"></script>
+<script src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=PBn8XIJ0bDbYqi268PvE"></script>
 <script>
 
 /* var position = new naver.maps.LatLng(37.511964, 127.057988);

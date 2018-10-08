@@ -89,7 +89,6 @@ $(document).ready(function(){
 	// 공지사항 검색한 값 불러오기
 	$('#C_notice_SearchBtn').click(function(){
 		$('#pg').val(1);
-		alert($('#keyword').val());
 		if($('#keyword').val()=='')
 			alert("검색어를 입력하세요");
 		else

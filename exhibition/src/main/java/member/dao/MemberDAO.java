@@ -43,6 +43,8 @@ public interface MemberDAO {
 	public int cancelExhibition(Map<String, String> map);	//전시회 예매 취소
 	public int backExhibition(Map<String, String> map);		//전시회 예매티켓 수정
 
+	public MemberDTO verifyNumEmailCheck(Map<String, String> map);	//개인회원 인증번호 발송 시, 회원의 아이디 및 이메일 일치 여부 확인
+
 	
 	
 

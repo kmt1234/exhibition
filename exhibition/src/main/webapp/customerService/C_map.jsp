@@ -52,18 +52,18 @@ left: 0px;
 			<div class="ui compact menu" id="slidbar" style="display: inline-block;">
 				<a class="item" style="border: none; width: 227px;" href="/exhibition/customerService/C_privacy.do">개인정보 처리방침</a> 
 				<a class="item" href="/exhibition/customerService/C_emailRefuse.do">이메일무단수집거부</a>
-				<a class="item" href="/exhibition/customerService/C_map.do">사이트맵</a>
+				<a class="item" href="/exhibition/customerService/C_map.do">위치정보</a>
 			</div>
 		</div>
 		<!-- 메인 화면 -->
 		<div class="ui compact menu" style="width: 930px; height:900px auto;  display: inline-block;" >
 			<!-- 타이틀 -->
 			<h2 class="box-container" style="float: center; width: 100%; height:126px; text-align: left;">
-				<span>사이트</span> 
-				<span class="h-light">맵</span>
+				<span>위치</span> 
+				<span class="h-light">정보</span>
 				<div style="font-size:13px; float:right; height: 50px; margin-top:30px ">
 					<img src="../img/house.png" width="15px" height="16px" id="houseImg">
-					> 이용안내 > 사이트맵
+					> 이용안내 > 위치정보
 				</div>
 				<div class="ui divider"></div>
 			</h2>

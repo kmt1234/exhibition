@@ -37,7 +37,7 @@
 		<a href="/exhibition/customerService/C_contactList.do">주요연락처</a>&nbsp;
 		<a href="/exhibition/customerService/C_privacy.do">개인정보처리방침</a>&nbsp;
 		<a href="/exhibition/customerService/C_emailRefuse.do">이메일무단수집거부</a>&nbsp;
-		<a href="/exhibition/customerService/C_map.do">사이트맵</a>&nbsp;
+		<a href="/exhibition/customerService/C_map.do">위치정보</a>&nbsp;
 	</div>
 </div>
 <script>

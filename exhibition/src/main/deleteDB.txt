@@ -36,6 +36,7 @@ drop sequence seq_Book_Play_Members;
 drop sequence seq_hotel_list;
 drop sequence seq_concertHall;
 drop sequence seq_businessRoom;
+drop sequence seq_mainSlideDB;
 
 
 

@@ -39,7 +39,7 @@ left: 0px;
 			<div class="ui compact menu" id="slidbar" style="display: inline-block;">
 				<a class="item" style="border: none; width: 227px;" href="/exhibition/customerService/C_notice.do">공지사항</a> 
 				<a class="item" href="/exhibition/customerService/C_emailConfirm.do">고객의 소리</a> 
-				<a class="item" href="/exhibition/customerService/C_QnA.do">자주묻는 질문</a>
+				<a class="item" href="/exhibition/customerService/C_QnA.do?classify=위치/교통">자주묻는 질문</a>
 				<a class="item" href="/exhibition/customerService/C_contactList.do">주요시설 연락처</a>
 			<c:if test="${code == '1' || code == '2' }">
             	<a class="item" href="/exhibition/login/mypage.do">마이페이지</a>

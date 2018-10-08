@@ -49,23 +49,15 @@
 	cursor: pointer;
 	
 }
-#eventboard_name:hover{
-	color: green;
-	text-decoration: underline;
+.name:hover{
 	font-weight: bold;
 	cursor: pointer;
 }
-#eventboard_image:hover{
+.image:hover{
 	cursor: pointer;
 }
-#eventboard_play_name:hover{
+.link:hover{
 	color: green;
-	text-decoration: underline;
-	font-weight: bold;
-	cursor: pointer;
-}
-
-#eventboard_play_image:hover{
 	cursor: pointer;
 }
 /* 작업중  */
@@ -90,6 +82,10 @@
 	display: inline-block;
 	text-align: left; 
 	font-size: 105x
+}
+.aaa{
+	color : #ec008c;
+	font-weight: 800;
 }
 </style>
 </head>

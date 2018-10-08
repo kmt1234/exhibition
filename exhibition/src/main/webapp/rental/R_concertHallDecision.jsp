@@ -55,7 +55,7 @@
 				<input class="middle ui button" type="button" style="width: 110px;" id="reservationBtn" value="예약하기">
 			</div>
 			<div id="rentDiv"></div>
-			<div id="writeDiv"></div>
+			<div id="writeConDiv"></div>
 		</div>
 	
 	
@@ -110,23 +110,24 @@
 		</c:forEach>
 	]; 
 	
+	
 	var code = $('#code').val();
 	
 	$(document).ready(function(){
 		$('#rentBtn').click(function(){
 			if($('#startDate').val() < '${date}') {
-				$('#writeDiv').text('현재일로부터 한달 이후 부터 예약가능합니다.');
+				$('#writeConDiv').text('현재일로부터 한달 이후 부터 예약가능합니다.');
 				return;
 			}
 			
 			if($('#startDate').val() > $('#endDate').val()) {
-				$('#writeDiv').text('예약 종료일이 시작일보다 빠릅니다.');
+				$('#writeConDiv').text('예약 종료일이 시작일보다 빠릅니다.');
 				return;
 			}
 			
 			var diff_days = diff_day($('#startDate').val(), $('#endDate').val());
 			if(diff_days < 30) {
-				$('#writeDiv').text('한달 이상 예약하셔야 합니다.');
+				$('#writeConDiv').text('한달 이상 예약하셔야 합니다.');
 				return;
 			}
 			
@@ -138,29 +139,29 @@
 		    $('#rentDiv').text(hallName + '의 총 임대료 : ' + totalRent.toLocaleString() + '원');
 		    $('#totalRent').val(totalRent);
 			$('#hallName').val(hallName);
-			$('#writeDiv').text('');
+			$('#writeConDiv').text('');
 		});
 		
 		$('#reservationBtn').click(function(){
 			if($('#startDate').val() < '${date}') {
-				$('#writeDiv').text('예약 시작일을 다시 설정해주세요.');
+				$('#writeConDiv').text('예약 시작일을 다시 설정해주세요.');
 				return;
 			}
 			
 			if($('#startDate').val() > $('#endDate').val()) {
-				$('#writeDiv').text('예약 종료일이 시작일보다 빠릅니다.');
+				$('#writeConDiv').text('예약 종료일이 시작일보다 빠릅니다.');
 				return;
 			}
 			
 			if(code=='2') {
 				
 				if($('#rentDiv').text()=='') {
-					$('#writeDiv').text('임대료 계산부터 해주세요.');
+					$('#writeConDiv').text('임대료 계산부터 해주세요.');
 					return;
 				}
 				
 				if($('#title').val()=='') {
-					$('#writeDiv').text('공연 이름을 입력해주세요.');
+					$('#writeConDiv').text('공연 이름을 입력해주세요.');
 					return;
 				}
 				
@@ -184,7 +185,7 @@
 								$('#concertHallDecisionForm').submit();
 							});
 						} else if(data==='exist') {
-							$('#writeDiv').text('예약불가능');
+							$('#writeConDiv').text('예약불가능');
 							$('#rentDiv').text('');
 						}  
 						

@@ -110,6 +110,12 @@ public class MemberDAOMybatis implements MemberDAO {
 	public int backExhibition(Map<String, String> map) {
 		return sqlSession.update("memberSQL.backExhibition", map);
 	}
+	
+	//개인회원 인증번호 발송 시, 회원의 아이디 및 이메일 일치 여부 확인
+	public MemberDTO verifyNumEmailCheck(Map<String, String> map) {
+		return sqlSession.selectOne("memberSQL.verifyNumEmailCheck", map);
+		
+	}
 
 	
 	

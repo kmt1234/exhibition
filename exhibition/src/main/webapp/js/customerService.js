@@ -421,8 +421,8 @@ $(document).ready(function(){
 						ing = "<font color='gray'>기간만료</font>";
 						deleteBtn = "";
 					}else if(playDate >= toDay){
-						ing = "<font color='green'>예매완료</font>";
-						deleteBtn = "<input type='button' value='예매취소' id='memberDeleteBtn' class='middle ui button delete'>";
+						ing = "<font color='green'>예약완료</font>";
+						deleteBtn = "<input type='button' value='예약취소' id='memberDeleteBtn' class='middle ui button delete'>";
 					}
 					
 					if(item.first=="Y"){
@@ -450,9 +450,7 @@ $(document).ready(function(){
 				 		id : "status",
 				 		html : ing
 				 	})).append($('<td/>',{
-				 		name : 'tickeyQty',
-				 		id : 'tickeyQty',
-				 		text : item.numberPeople
+				 		text : '-'
 				 	})).append($('<td/>',{
 				 		html : deleteBtn
 				 	})).appendTo($('#reservationMemberTable'));

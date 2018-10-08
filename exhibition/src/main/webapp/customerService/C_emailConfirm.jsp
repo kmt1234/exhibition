@@ -47,7 +47,7 @@
 	</table>
 	<c:if test="${code=='3' }">
 		<div align="left" style="margin-left: 20px;">
-			<input class="ui button" type="button" id="C_email_ListBtn" value="관리자 버튼">
+			<input class="ui button" type="button" id="C_email_ListBtn" value="목록보기">
 		</div>
  	</c:if>
 	<div style="margin-top: 105px;"></div>
