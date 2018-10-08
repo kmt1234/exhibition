@@ -686,7 +686,9 @@ public class CustomerServiceController {
 		imageboardDTO.setImage1(fileName);
 		// DB
 		customerServiceDAO.imageboardWrite(imageboardDTO);
+		
 		model.addAttribute("imageboardDTO", imageboardDTO);
+		model.addAttribute("display", "/customerService/C_imageboardList.jsp");
 		return "/customerService/C_mainImageboardListForm";
 	}
 
@@ -703,8 +705,8 @@ public class CustomerServiceController {
 	@RequestMapping(value = "getImageboardList", method = RequestMethod.POST)
 	public ModelAndView getImageboardList(@RequestParam(required = false, defaultValue = "1") String pg) {
 
-		int endNum = Integer.parseInt(pg) * 3;
-		int startNum = endNum - 2;
+		int endNum = Integer.parseInt(pg) * 5;
+		int startNum = endNum - 4;
 
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("endNum", endNum);
@@ -714,7 +716,7 @@ public class CustomerServiceController {
 
 		imageboardPaging.setCurrentPage(Integer.parseInt(pg));
 		imageboardPaging.setPageBlock(3);
-		imageboardPaging.setPageSize(3);
+		imageboardPaging.setPageSize(5);
 		imageboardPaging.setTotalA(totalA);
 
 		imageboardPaging.makePagingHTML();
@@ -741,6 +743,7 @@ public class CustomerServiceController {
 		}
 
 		customerServiceDAO.imageboardDelete(list);
+		model.addAttribute("display", "/customerService/C_imageboardList.jsp");
 		return "/customerService/C_mainImageboardListForm";
 	}
 
@@ -908,11 +911,12 @@ public class CustomerServiceController {
 			ArrayList<ImageboardDTO> list = new ArrayList<ImageboardDTO>();
 			
 			String[] str = { "mainPoster.jpg", "poster2.jpg", "poster4.jpg", "poster1.jpg", "poster3.jpg" };
-			String[] link = {};
-			
+					
 			for (int i = 0; i < str.length; i++) {
 				ImageboardDTO imageboardDTO = new ImageboardDTO();
 				imageboardDTO.setImage1(str[i]);
+				imageboardDTO.setEventLink("no_Link");
+				
 				list.add(imageboardDTO);
 				
 			}
@@ -924,6 +928,7 @@ public class CustomerServiceController {
 			ArrayList<ImageboardDTO> list = new ArrayList<ImageboardDTO>();
 			
 			String[] str = new String[mainSlideDTOList.size()];
+			String[] link = new String[mainSlideDTOList.size()];
 			
 			for(int i = 0; i < mainSlideDTOList.size(); i++) {
 				System.out.println("aaaaa : "+ mainSlideDTOList.get(i).getImageName());
@@ -931,11 +936,13 @@ public class CustomerServiceController {
 			
 			for(int i = 0; i < mainSlideDTOList.size(); i++) {
 				str[i] = mainSlideDTOList.get(i).getImageName();
+				link[i] = mainSlideDTOList.get(i).getEventLink();
 			}
 			
 			for (int i = 0; i < mainSlideDTOList.size(); i++) {
 				ImageboardDTO imageboardDTO = new ImageboardDTO();
 				imageboardDTO.setImage1(str[i]);
+				imageboardDTO.setEventLink(link[i]);
 				list.add(imageboardDTO);
 			}
 			
