@@ -50,7 +50,6 @@
 	
 }
 .name:hover{
-	color: green;
 	text-decoration: underline;
 	font-weight: bold;
 	cursor: pointer;
@@ -86,7 +85,7 @@
 	font-size: 105x
 }
 .aaa{
-	color : #4169E1;
+	color : #ec008c;
 	font-weight: 800;
 }
 </style>
