@@ -2,6 +2,7 @@ $(document).ready(function(event, str){
 	var index_keyword = $('#indexkeyword').val();
 	var pg = $('#pg').val();
 	var code = $('#hiddenCode').val();
+	var PointKeyword = "<span class='aaa'>"+index_keyword+"</span>";
 	
 	// 메인 검색시 검색된 공지사항 리스트 불러옴
 	$.ajax({
@@ -18,16 +19,17 @@ $(document).ready(function(event, str){
 				$('<div/>',{
 					align: 'left'
 				}).append($('<div/>',{
-					align : 'center',
+					align : 'left',
+					style : 'margin-top:35px; margin-left:10px;',
 					text : '검색된 결과가 없습니다.'
 				})).appendTo($('#index_notice_SearchList'));  
 				
 			}else if(data.totalA!='0'){
-				var notice_total = data.totalA;
 				$('<span/>',{
-					text : "("+notice_total+"건)"
+					text : "("+data.totalA+"건)"
 				}).appendTo($('#index_notice_total'));
 				$.each(data.list, function(index, item){
+					
 					$('<div/>').append($('<input/>',{
 						align : 'center',
 						style: 'width: 880px; text-align: left; margin-top:15px;',
@@ -40,12 +42,14 @@ $(document).ready(function(event, str){
 					})).append($('<div/>',{
 						style: 'width: 810px; height:30px; padding-top:7px; text-align:left;  font-size:13pt; margin-left:5px; margin-top:35px; display: inline-block;',
 						id : 'subjectA',
-						text : item.subject
+						html : item.subject.replaceAll(index_keyword, PointKeyword)
+						
 					})).append($('<div/>',{
 						style: 'width: 880px; overflow: hidden; white-space: nowrap; text-overflow  : ellipsis; height: 35px; padding-left:10px; padding-top:10px; text-align: left; font-size:8pt; font-family: inherit;',
 						class : 'contentC'+index+'',
 						href : 'javascript:void(0)',
-						text : item.content
+						html : item.content.replaceAll(index_keyword, PointKeyword)
+						
 					})).appendTo($('#index_notice_SearchList'));
 					if(index == 0 || index==1){
 						$('<div/>',{
@@ -63,8 +67,8 @@ $(document).ready(function(event, str){
 	});
 	// 공지사항 제목 클릭시 내용보여줌
 	$('#index_notice_SearchList').on('click','#subjectA',function(){
-		var seq = $(this).prev().text();
-		location.href='/exhibition/customerService/C_notice_View.do?seq='+seq+'&pg='+$('#pg').val();
+		var seq = $(this).prev().prev().text();
+		location.href='/exhibition/customerService/C_notice_View.do?seq='+seq+'&pg='+$('#pg').val()+'&keyword='+$('#keyword').val();
 	});
 	
 
@@ -83,14 +87,14 @@ $(document).ready(function(event, str){
 				$('<div/>',{
 					align: 'left'
 				}).append($('<div/>',{
-					align : 'center',
+					align : 'left',
+					style : 'margin-top:35px; margin-left:10px;',
 					text : '검색된 결과가 없습니다.'
 				})).appendTo($('#index_QnA_SearchList'));
 				
 			} else if(data.totalA!='0'){
-				var QnA_total = data.totalA;
 				$('<span/>',{
-					text : "("+QnA_total+"건)"
+					text : "("+data.totalA+"건)"
 				}).appendTo($('#index_QnA_total'));
 				$.each(data.list, function(index, item){
 					var subject = item.subject;
@@ -103,17 +107,17 @@ $(document).ready(function(event, str){
 						type : 'hidden',
 						text : item.seq+index
 					})).append($('<div/>',{
-						style: 'width: auto; height:30px; padding-left:2px; padding-top:5px; text-align: left;  font-size:13pt; margin-left:5px; border: 1px ridge rgb(255,0,0,.6); margin-top:35px; display: inline-block; float:left;',
+						style: 'width: auto; height:30px; padding-top:5px; text-align: left;  font-size:13pt; margin-left:5px; border: 1px ridge rgb(255,0,0,.6); margin-top:35px; display: inline-block; float:left;',
 						text : "["+item.classify+"]",
 					})).append($('<div/>',{
-						style: 'width: 800px; height:30px; padding-top:7px; text-align:left;  font-size:13pt; margin-left:5px; margin-top:35px; display: inline-block;',
+						style: 'width: auto; height:30px; padding-top:7px; text-align:left; float : left; font-size:13pt; margin-left:5px; margin-top:35px; display: inline-block;',
 						id : 'subjectA',
-						text : item.subject
+						html : item.subject.replaceAll(index_keyword, PointKeyword)
 					})).append($('<div/>',{
 						style: 'width: 880px; overflow: hidden; white-space: nowrap; text-overflow  : ellipsis;  height: 35px; padding-left:10px; padding-top:10px; text-align: left; font-size:8pt; font-family: inherit;',
 						class : 'contentC'+index+'',
 						href : 'javascript:void(0)',
-						text : item.content
+						html : item.content.replaceAll(index_keyword, PointKeyword)
 					})).appendTo($('#index_QnA_SearchList'));
 					if(index=='0' || index=='1'){
 						$('<div/>',{
@@ -152,13 +156,13 @@ $(document).ready(function(event, str){
 				}).append($('<div/>',{
 					colspan: '6',
 					align : 'left',
+					style : 'margin-top:35px; margin-left:10px;',
 					text : '검색된 결과가 없습니다.'
 				})).appendTo($('#index_contactList_SearchList'));  
 				
 			}else if(data.totalA!='0'){
-				var contactList_total = data.totalA;
 				$('<span/>',{
-					text : "("+contactList_total+"건)"
+					text : "("+data.totalA+"건)"
 				}).appendTo($('#index_contactList_total'));
 				
 				$('<div/>').append($('<div/>',{
@@ -184,19 +188,19 @@ $(document).ready(function(event, str){
 					if(code!=3){
 						$('<div/>').append($('<div/>',{
 							style: 'width: 175px; height: 9%; font-size:10pt; margin-top:10px; text-align: left; display :inline-block;',
-							text : item.classify,
+							html : item.classify.replaceAll(index_keyword, PointKeyword)
 						})).append($('<div/>',{
 							style: 'width: 175px; height: 9%; font-size:10pt; margin-top:10px; text-align: left; display :inline-block;',
-							text : item.facility,
+							html : item.facility.replaceAll(index_keyword, PointKeyword)
 						})).append($('<div/>',{
 							style: 'width: 175px; height: 9%; font-size:10pt; margin-top:10px; text-align: left; display :inline-block;',
-							text : item.title,
+							html : item.title.replaceAll(index_keyword, PointKeyword)
 						})).append($('<div/>',{
 							style: 'width: 175px; height: 9%; font-size:10pt; margin-top:10px; text-align: left; display :inline-block;',
-							text : item.name,
+							html : item.name.replaceAll(index_keyword, PointKeyword)
 						})).append($('<div/>',{
 							style: 'width: 175px; height: 9%; font-size:10pt; margin-top:10px; text-align: left; display :inline-block;',
-							text : item.phone,
+							html : item.phone.replaceAll(index_keyword, PointKeyword)
 						})).appendTo($('#index_contactList_SearchList'));
 						$('<div/>',{
 							style:"width:880px; margin-top:5px; border-bottom:1px dashed rgb(155,155,155,.6);"
@@ -210,23 +214,23 @@ $(document).ready(function(event, str){
 						}))).append($('<div/>',{
 							align : 'center',
 							style: 'width: 175px; height: 9%; font-size:10pt; margin-top:10px; text-align: left; display :inline-block;',
-							text : item.classify,
+							html : item.classify.replaceAll(index_keyword, PointKeyword)
 						})).append($('<div/>',{
 							align : 'center',
 							style: 'width: 175px; height: 9%; font-size:10pt; margin-top:10px; text-align: left; display :inline-block;',
-							text : item.facility,
+							html : item.facility.replaceAll(index_keyword, PointKeyword)
 						})).append($('<div/>',{
 							align : 'center',
 							style: 'width: 175px; height: 9%; font-size:10pt; margin-top:10px; text-align: left; display :inline-block;',
-							text : item.title,
+							html : item.title.replaceAll(index_keyword, PointKeyword)
 						})).append($('<div/>',{
 							align : 'center',
 							style: 'width: 175px; height: 9%; font-size:10pt; margin-top:10px; text-align: left; display :inline-block;',
-							text : item.name,
+							html : item.name.replaceAll(index_keyword, PointKeyword)
 						})).append($('<div/>',{
 							align : 'center',
 							style: 'width: 175px; height: 9%; font-size:10pt; margin-top:10px; text-align: left; display :inline-block;',
-							text : item.phone,
+							html : item.phone.replaceAll(index_keyword, PointKeyword)
 						})).appendTo($('#index_contactList_SearchList'));	
 					}
 				});
@@ -256,17 +260,19 @@ $(document).ready(function(event, str){
 				$('<div/>',{
 					align: 'left'
 				}).append($('<div/>',{
+					style : 'margin-top:35px; margin-left:10px;',
 					align : 'left',
 					text : '검색된 결과가 없습니다.'
 				})).appendTo($('#index_eventboard_SearchList'));  
 				
 			} else if(data.totalA!='0'){
-				var eventboard_total = data.totalA;
 				$('<span/>',{
-					text : "("+eventboard_total+"건)"
+					text : "("+data.totalA+"건)"
 				}).appendTo($('#index_eventboard_total'));
 				
 				$.each(data.list, function(index, item){
+					var time = item.starttime+"~"+item.endtime;
+					var date = item.startdate+"~"+item.enddate;
 					$('<div/>').append($('<input/>',{
 						type : 'hidden',
 						text : item.seq
@@ -276,58 +282,60 @@ $(document).ready(function(event, str){
 					}).append($('<img/>',{
 						src : '../storage/'+item.image1+'',
 						style : 'width : 250px; height: 285px; margin-top:60px; float:left; border: 1px ridge rgb(155,155,155,.6); display:inline-block; ',
-						id : 'eventboard_image'
+						class : 'image'
 					})).append($('<div/>',{
 						style:'float:left; text-align:left; margin-left:20px; width:610px; height:90px; padding-top:60px; font-size: 15pt; margin-top:10px; ',
-						text: item.imagename
+						class : 'name',
+						html : item.imagename.replaceAll(index_keyword, PointKeyword)
 					})).append($('<div/>',{
 						style:'display:inline-block; width:50px; border: 1px ridge rgb(255,0,0,.6); margin-left:20px; float:left;  height:25px; padding:0; padding-top:3px; font-size: 10pt; font-family: inherit;',
 						text : '일시'
 					})).append($('<div/>',{
 						style : 'display:inline-block; float:left; margin-left:10px; width:540px; text-align:left; padding-top:3px; height:25px;',
-						text : item.startdate+"~"+item.enddate
+						html : date.replaceAll(index_keyword, PointKeyword)
 					})).append($('<div/>',{
 						style:'display:inline-block; width:50px; margin-top:5px; border: 1px ridge rgb(255,0,0,.6); margin-left:20px; float:left;  height:25px; padding:0; padding-top:3px; font-size: 10pt; font-family: inherit;',
 						text : '시간'
 					})).append($('<div/>',{
 						style : 'display:inline-block; float:left;  margin-top:5px; margin-left:10px; width:540px; text-align:left; padding-top:3px; height:25px;',
-						text : item.starttime+"~"+item.endtime
+						html : time.replaceAll(index_keyword, PointKeyword)
 					})).append($('<div/>',{
 						style:'display:inline-block; width:50px; margin-top:5px; border: 1px ridge rgb(255,0,0,.6); margin-left:20px; float:left;  height:25px; padding:0; padding-top:3px; font-size: 10pt; font-family: inherit;',
 						text : '장소'
 					})).append($('<div/>',{
 						style : 'display:inline-block; float:left;  margin-top:5px; margin-left:10px; width:540px; text-align:left; padding-top:3px; height:25px;',
-						text :  item.eventplace
+						html : item.eventplace.replaceAll(index_keyword, PointKeyword)
 					})).append($('<div/>',{
 						style:'display:inline-block; width:50px; margin-top:5px; border: 1px ridge rgb(255,0,0,.6); margin-left:20px; float:left;  height:25px; padding:0; padding-top:3px; font-size: 10pt; font-family: inherit;',
 						text : '싸이트'
 					})).append($('<div/>',{
 						style : 'display:inline-block; float:left;  margin-top:5px; margin-left:10px; width:540px; text-align:left; padding-top:3px; height:25px;',
-						text : item.eventlink
+						class : 'link',
+						html : '<a href='+item.eventlink.replaceAll(index_keyword, PointKeyword)+'>'+item.eventlink.replaceAll(index_keyword, PointKeyword)+'</a>'
 					})).append($('<div/>',{
 						style:'display:inline-block; width:50px; margin-top:5px; border: 1px ridge rgb(255,0,0,.6); margin-left:20px; float:left;  height:25px; padding:0; padding-top:3px; font-size: 10pt; font-family: inherit;',
 						text : '가격'
 					})).append($('<div/>',{
 						style : 'display:inline-block; float:left;  margin-top:5px; margin-left:10px; width:540px; text-align:left; padding-top:3px; height:25px;',
-						text : item.eventprice
+						html : item.eventprice.replaceAll(index_keyword, PointKeyword)
 					})).append($('<div/>',{
 						style:'display:inline-block; width:50px; margin-top:5px; border: 1px ridge rgb(255,0,0,.6); margin-left:20px; float:left;  height:25px; padding:0; padding-top:3px; font-size: 10pt; font-family: inherit;',
 						text : '좌석수'
 					})).append($('<div/>',{
 						style : 'display:inline-block; float:left;  margin-top:5px; margin-left:10px; width:540px; text-align:left; padding-top:3px; height:25px;',
-						text : item.eventseats
+						html : item.eventseats.replaceAll(index_keyword, PointKeyword)
 					})).append($('<div/>',{
 						style:'display:inline-block; width:50px; margin-top:5px; border: 1px ridge rgb(255,0,0,.6); margin-left:20px; float:left;  height:25px; padding:0; padding-top:3px; font-size: 10pt; font-family: inherit;',
 						text : '등급'
 					})).append($('<div/>',{
 						style : 'display:inline-block; float:left;  margin-top:5px; margin-left:10px; width:540px; text-align:left; padding-top:3px; height:25px;',
-						text : item.eventrate
+						html : item.eventrate.replaceAll(index_keyword, PointKeyword)
 					})).append($('<div/>',{
 						style:'display:inline-block; width:50px; margin-top:5px; border: 1px ridge rgb(255,0,0,.6); margin-left:20px; float:left;  height:25px; padding:0; padding-top:3px; font-size: 10pt; font-family: inherit;',
 						text : '내용'
 					})).append($('<div/>',{
 						style : 'overflow: hidden; white-space: nowrap; text-overflow  : ellipsis; display:inline-block; float:left;  margin-top:5px; margin-left:10px; width:540px; text-align:left; padding-top:3px; height:5px;',
-						text :  item.eventcontent
+						html : item.eventcontent.replaceAll(index_keyword, PointKeyword)
 					}))).appendTo($('#index_eventboard_SearchList'));
 					if(index=='1' || index=='2'){
 						$('<div/>',{
@@ -345,13 +353,13 @@ $(document).ready(function(event, str){
 		location.href="/exhibition/main/index_eventboard_Plus.do?pg="+pg+"&index_keyword="+index_keyword;
 	});
 	
-	$('#index_eventboard_SearchList').on('click','#eventboard_name',function(){
-		var seq = $(this).prev().prev().text();
+	$('#index_eventboard_SearchList').on('click','.name',function(){
+		var seq = $(this).parent().prev().text();
 		location.href='/exhibition//performance/exhibitionBook.do?seq='+seq;
 	});
 
-	$('#index_eventboard_SearchList').on('click','#eventboard_image',function(){
-		var seq = $(this).prev().text();
+	$('#index_eventboard_SearchList').on('click','.image',function(){
+		var seq = $(this).parent().prev().text();
 		location.href='/exhibition//performance/exhibitionBook.do?seq='+seq;
 	});
 	
@@ -372,15 +380,17 @@ $(document).ready(function(event, str){
 					align: 'left'
 				}).append($('<div/>',{
 					align : 'left',
+					style : 'margin-top:35px; margin-left:10px;',
 					text : '검색된 결과가 없습니다.'
 				})).appendTo($('#index_eventboard_play_SearchList'));  
 				
 			} else if(data.totalA!='0'){
-				var eventboard_play_total = data.totalA;
 				$('<span/>',{
-					text : "("+eventboard_play_total+"건)"
+					text : "("+data.totalA+"건)"
 				}).appendTo($('#index_eventboard_play_total'));
 				$.each(data.list, function(index, item){
+					var time = item.starttime+"~"+item.endtime;
+					var date = item.startdate+"~"+item.enddate;
 					$('<div/>').append($('<input/>',{
 						type : 'hidden',
 						text : item.seq
@@ -390,65 +400,66 @@ $(document).ready(function(event, str){
 					}).append($('<img/>',{
 						src : '../storage/'+item.image1+'',
 						style : 'width : 250px; height: 285px; margin-top:60px; float:left; border: 1px ridge rgb(155,155,155,.6); display:inline-block; ',
-						id : 'eventboard_image'
+						class : 'image'
 					})).append($('<div/>',{
 						style:'float:left; text-align:left; margin-left:20px; width:610px; height:90px; padding-top:60px; font-size: 15pt; margin-top:10px; ',
-						text: item.imagename
+						class : 'name',
+						html : item.imagename.replaceAll(index_keyword, PointKeyword)
 					})).append($('<div/>',{
 						style:'display:inline-block; width:50px; border: 1px ridge rgb(255,0,0,.6); margin-left:20px; float:left;  height:25px; padding:0; padding-top:3px; font-size: 10pt; font-family: inherit;',
 						text : '일시'
 					})).append($('<div/>',{
 						style : 'display:inline-block; float:left; margin-left:10px; width:540px; text-align:left; padding-top:3px; height:25px;',
-						text : item.startdate+"~"+item.enddate
+						html : date.replaceAll(index_keyword, PointKeyword)
 					})).append($('<div/>',{
 						style:'display:inline-block; width:50px; margin-top:5px; border: 1px ridge rgb(255,0,0,.6); margin-left:20px; float:left;  height:25px; padding:0; padding-top:3px; font-size: 10pt; font-family: inherit;',
 						text : '시간'
 					})).append($('<div/>',{
 						style : 'display:inline-block; float:left;  margin-top:5px; margin-left:10px; width:540px; text-align:left; padding-top:3px; height:25px;',
-						text : item.starttime+"~"+item.endtime
+						html : time.replaceAll(index_keyword, PointKeyword)
 					})).append($('<div/>',{
 						style:'display:inline-block; width:50px; margin-top:5px; border: 1px ridge rgb(255,0,0,.6); margin-left:20px; float:left;  height:25px; padding:0; padding-top:3px; font-size: 10pt; font-family: inherit;',
 						text : '장소'
 					})).append($('<div/>',{
 						style : 'display:inline-block; float:left;  margin-top:5px; margin-left:10px; width:540px; text-align:left; padding-top:3px; height:25px;',
-						text :  item.eventplace
+						html : item.eventplace.replaceAll(index_keyword, PointKeyword)
 					})).append($('<div/>',{
 						style:'display:inline-block; width:50px; margin-top:5px; border: 1px ridge rgb(255,0,0,.6); margin-left:20px; float:left;  height:25px; padding:0; padding-top:3px; font-size: 10pt; font-family: inherit;',
 						text : '싸이트'
 					})).append($('<div/>',{
 						style : 'display:inline-block; float:left;  margin-top:5px; margin-left:10px; width:540px; text-align:left; padding-top:3px; height:25px;',
-						text : item.eventlink
+						class : 'link',
+						html : '<a href='+item.eventlink.replaceAll(index_keyword, PointKeyword)+'>'+item.eventlink.replaceAll(index_keyword, PointKeyword)+'</a>'
 					})).append($('<div/>',{
 						style:'display:inline-block; width:50px; margin-top:5px; border: 1px ridge rgb(255,0,0,.6); margin-left:20px; float:left;  height:25px; padding:0; padding-top:3px; font-size: 10pt; font-family: inherit;',
 						text : '가격'
 					})).append($('<div/>',{
 						style : 'display:inline-block; float:left;  margin-top:5px; margin-left:10px; width:540px; text-align:left; padding-top:3px; height:25px;',
-						text : item.eventprice
+						html : item.eventprice.replaceAll(index_keyword, PointKeyword)
 					})).append($('<div/>',{
 						style:'display:inline-block; width:50px; margin-top:5px; border: 1px ridge rgb(255,0,0,.6); margin-left:20px; float:left;  height:25px; padding:0; padding-top:3px; font-size: 10pt; font-family: inherit;',
 						text : '좌석수'
 					})).append($('<div/>',{
 						style : 'display:inline-block; float:left;  margin-top:5px; margin-left:10px; width:540px; text-align:left; padding-top:3px; height:25px;',
-						text : item.eventseats
+						html : item.eventseats.replaceAll(index_keyword, PointKeyword)
 					})).append($('<div/>',{
 						style:'display:inline-block; width:50px; margin-top:5px; border: 1px ridge rgb(255,0,0,.6); margin-left:20px; float:left;  height:25px; padding:0; padding-top:3px; font-size: 10pt; font-family: inherit;',
 						text : '등급'
 					})).append($('<div/>',{
 						style : 'display:inline-block; float:left;  margin-top:5px; margin-left:10px; width:540px; text-align:left; padding-top:3px; height:25px;',
-						text : item.eventrate
+						html : item.eventrate.replaceAll(index_keyword, PointKeyword)
 					})).append($('<div/>',{
 						style:'display:inline-block; width:50px; margin-top:5px; border: 1px ridge rgb(255,0,0,.6); margin-left:20px; float:left;  height:25px; padding:0; padding-top:3px; font-size: 10pt; font-family: inherit;',
 						text : '내용'
 					})).append($('<div/>',{
 						style : 'overflow: hidden; white-space: nowrap; text-overflow  : ellipsis; display:inline-block; float:left;  margin-top:5px; margin-left:10px; width:540px; text-align:left; padding-top:3px; height:5px;',
-						text :  item.eventcontent
+						html : item.eventcontent.replaceAll(index_keyword, PointKeyword)
 					}))).appendTo($('#index_eventboard_play_SearchList'));
 					if(index=='1' || index=='2'){
 						$('<div/>',{
 							style:"width:880px;  border-bottom:1px dashed rgb(155,155,155,.6);"
 						}).appendTo($('.dashed_from'+index));
 					}
-				
 				});
 			}
 		}
@@ -458,14 +469,16 @@ $(document).ready(function(event, str){
 		location.href="/exhibition/main/index_eventboard_play_Plus.do?pg="+pg+"&index_keyword="+index_keyword;
 	});
 	
-	$('#index_eventboard_play_SearchList').on('click','#eventboard_play_name',function(){
-		var seq = $(this).prev().prev().text();
+	$('#index_eventboard_play_SearchList').on('click','.name',function(){
+		var seq = $(this).parent().prev().text();
 		location.href='/exhibition//performance/performanceBook.do?seq='+seq;
 	});
-	$('#index_eventboard_play_SearchList').on('click','#eventboard_play_image',function(){
-		var seq = $(this).prev().text();
+	$('#index_eventboard_play_SearchList').on('click','.image',function(){
+		var seq = $(this).parent().prev().text();
 		location.href='/exhibition//performance/performanceBook.do?seq='+seq;
 	});
+	
+	
 	
 	var eventlink;
 	// 메인 검색시 검색된 숙박 리스트 불러옴
@@ -481,19 +494,17 @@ $(document).ready(function(event, str){
 			}
 			if(data.totalA=='0'){
 				$('<div/>',{
-					
 					align: 'left'
 				}).append($('<div/>',{
-					style:'margin-top:35px;',
 					align : 'left',
+					style : 'margin-top:35px; margin-left:10px;',
 					text : '검색된 결과가 없습니다.'
 				})).appendTo($('#index_hotel_list_SearchList'));  
 				
 			} else if(data.totalA!='0'){
-				var hotel_list_total = data.totalA;
 				$('<span/>',{
-					text : "("+hotel_list_total+"건)"
-				}).appendTo($('#hotel_list_total'));
+					text : "("+data.totalA+"건)"
+				}).appendTo($('#index_hotel_list_total'));
 				$.each(data.list, function(index, item){
 					$('<div/>').append($('<input/>',{
 						type : 'hidden',
@@ -504,22 +515,22 @@ $(document).ready(function(event, str){
 					}).append($('<img/>',{
 						src : '../storage/'+item.image1+'',
 						style : 'width : 250px; height: 285px; margin-top:60px; float:left; border: 1px ridge rgb(155,155,155,.6); display:inline-block; ',
-						id : 'eventboard_image'
 					})).append($('<div/>',{
 						style:'float:left; text-align:left; margin-left:20px; width:610px; height:90px; padding-top:60px; font-size: 15pt; margin-top:10px; ',
-						text: item.imagename
+						html : item.imagename.replaceAll(index_keyword, PointKeyword)
 					})).append($('<div/>',{
 						style:'display:inline-block; width:50px; border: 1px ridge rgb(255,0,0,.6); margin-left:20px; float:left;  height:25px; padding:0; padding-top:3px; font-size: 10pt; font-family: inherit;',
 						text : '장소'
 					})).append($('<div/>',{
 						style : 'display:inline-block; float:left;  margin-top:5px; margin-left:10px; width:540px; text-align:left; padding-top:3px; height:25px;',
-						text : item.eventplace
+						html : item.eventplace.replaceAll(index_keyword, PointKeyword)
 					})).append($('<div/>',{
 						style:'display:inline-block; width:50px; border: 1px ridge rgb(255,0,0,.6); margin-left:20px; float:left;  height:25px; padding:0; padding-top:3px; font-size: 10pt; font-family: inherit;',
 						text : '싸이트'
 					})).append($('<td/>',{
 						style : 'display:inline-block; float:left;  margin-top:5px; margin-left:10px; width:540px; text-align:left; padding-top:3px; height:25px;',
-						text : item.eventlink
+						class : 'link',
+						html : '<a href='+item.eventlink.replaceAll(index_keyword, PointKeyword)+'>'+item.eventlink.replaceAll(index_keyword, PointKeyword)+'</a>'
 					}))).appendTo($('#index_hotel_list_SearchList'));
 					if(index=='1' || index=='2'){
 						$('<div/>',{
@@ -535,7 +546,10 @@ $(document).ready(function(event, str){
 		location.href="/exhibition/main/index_hotel_list_Plus.do?pg="+pg+"&index_keyword="+index_keyword;
 	});
 	
-	$('#index_hotel_list_SearchList').on('click','.hotel_image',function(){
-		location.href=''+eventlink+'';
-	});
+
+	
+	
+	String.prototype.replaceAll = function(org, dest) {
+	    return this.split(org).join(dest);
+	}
 });
