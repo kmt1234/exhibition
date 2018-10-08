@@ -9,6 +9,7 @@ $(document).ready(function(){
 			closable : false,
             duration : 460,
 		}).modal('show');
+		$('.bx-wrapper .bx-controls-direction a').hide();
 	});
 	//법인 회원가입 클릭 시,
 	$('#C_company').click(function(){
@@ -16,6 +17,7 @@ $(document).ready(function(){
 			closable : false,
             duration : 460,
 		}).modal('show');
+		$('.bx-wrapper .bx-controls-direction a').hide();
 	});
 	
 	/*로그인 클릭시 2가지로 분류(개인&사업자)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -25,11 +27,19 @@ $(document).ready(function(){
 	});
 	//개인회원 로그인 클릭 시,
 	$('#M_individual_L').click(function(){
-		$('.ui.modal-Login-Member.modal').modal('show');
+		$('.ui.modal-Login-Member.modal').modal({
+			closable : false,
+            duration : 460,
+		}).modal('show');
+		$('.bx-wrapper .bx-controls-direction a').hide();
 	});
 	//법인회원 로그인 클릭 시,
 	$('#C_company_L').click(function(){
-		$('.ui.modal-Login-Company.modal').modal('show');
+		$('.ui.modal-Login-Company.modal').modal({
+			closable : false,
+            duration : 460,
+		}).modal('show');
+		$('.bx-wrapper .bx-controls-direction a').hide();
 	});
 	
 	/*일정정보(일정설명&전체일정&박람회일정&공연일정)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
