@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
 <style>
 .ui.inverted.divider {
     margin: 5px 0;
@@ -62,10 +61,6 @@ div#uiStatistics {
     text-align: center;
 }
 
-.result{
-   color: green;
-   cursor: pointer;
-}
 </style>
 <div class="ui compact menu" style="width: 930px; height:900px auto;  display: inline-block;" >
    <h2 class="box-container" style="float: center; width: 100%; height:126px; text-align: left;">
@@ -200,21 +195,20 @@ div#uiStatistics {
       
       
       <!--내용--><input type="hidden" id="pg" value="${pg}"><!--현재 페이지-->   
-      <div class="ui segment" id="Ticket-List-Div" style="display: inline-block;">
-                  
-          <table class="ui striped table" class="businessListTable">
+      <div class="ui segment" id="Ticket-List-Div" style="display: inline-block;">         
+          <table class="ui striped table" class="ticketListTable">
               <thead>
                  <tr align="center">
-                    <th>비지니스룸 번호</th>
-                    <th>예매 날짜</th>
-                  <th>예매 시간</th>
+                    <th>공연 및 전시회</th>
+                    <th>행사 날짜</th>
+                  <th>예매 티켓 수량</th>
                   <th>환불 여부</th>
                  </tr></thead>
-              <tbody id="businessList" align="center"></tbody>    
+              <tbody id="ticketList" align="center"></tbody>    
            </table>
          
          <!--클릭 시, hidden에 해당 데이터 저장  -->
-         <form name="eventDetailInfo" id="eventDetailInfo" method="post" action="/exhibition/login/memberBusinessRoomCancel.do">
+         <form name="eventDetailInfo" id="eventDetailInfo" method="post" action="/exhibition/login/eventDetail.do">
             <input type="hidden" name="memberId" id="memberId">
             <input type="hidden" name="imageName" id="imageName">
             <input type="hidden" name="playDate" id="playDate">
@@ -230,193 +224,156 @@ div#uiStatistics {
    </div><!--id="memberTicketInformation"-->
 </div>
 </div><!-- 전체 -->
-
-
-<!-- <script src="../js/memberMypage.js?ver=1"></script> -->
 <script>
 $(document).ready(function(){
-   $('.tr').remove();   //리스트 내용 초기화
-   
+   //과거 예매 내역 불러오는 ajax
    $.ajax({
       type : 'GET',
-      url : '/exhibition/login/memberBusinessRoom.do?pg='+$('#pg').val()+'',
+      url : '/exhibition/login/getTicketHistory.do?pg='+$('#pg').val()+'',
       dataType : 'json',
       success : function(data){
-         //alert(JSON.stringify(data));
-         
-         var date = new Date();
-          var year = date.getFullYear();
-          var month = date.getMonth()+1;
-          var day = date.getDate();
-         
-          if ((day+"").length < 2) {
-             day = "0" + day;
-          }
-          //예매일자(오늘일 경우 환불불가)
-          var fullDate = year+''+month+''+day;
-          var compareDate = '';
-         console.log(fullDate); //오늘날짜
-         
-         //예매시간 
-         var time = '';
-         
          $.each(data.list, function(index, item){
-            
-            if(item.first=='Y'){
-               time = '09:00~12:00';
-            }else if(item.second=='Y'){
-               time = '12:00~15:00';
-            }else if(item.third=='Y'){
-               time = '15:00~18:00';
-            }else if(item.fourth=='Y'){
-               time = '18:00~21:00';
-            }
-            
-            //예매한 날짜
-            compareDate = item.startDate.replace(/-/gi,'');
-            
-            if(compareDate > fullDate){
-               compareDate = 'O';
-            }else if(compareDate <= fullDate){
-               compareDate = 'X';
-            }
-            
             $('<tr/>',{
                class : 'tr'
             }).append($('<td/>',{
-               text : item.roomName,
-               class : 'roomName',
-               value : item.roomName
+               text : item.imageName,
+               class : 'imageName1',
+               value : item.imageName
             })).append($('<td/>',{
-               text : item.startDate,
-               class : 'startDate',
-               value : item.startDate
+               text : item.playDate,
+               value : item.playDate
             })).append($('<td/>',{
-               text : time,
-               class : 'time',
-               value : time
+               id : 'ticketQtyTd',
+               text : item.ticketQty,
+               value : item.ticketQty
             })).append($('<td/>',{
-               text : compareDate,
-               class : 'result',
-               value : item.seq
-            })).appendTo($('#businessList'));
+               id : 'cancelMsg',
+               class : 'cancelMsg',
+               text : '환불 불가'
+            })).appendTo($('#ticketList'));
+            $('.imageName1').css({'cursor': 'pointer', 'color' : 'red'});
+            $('.cancelMsg').css({color : 'red'});
+            
          });//each
+         $('#paging').html(data.TicketHistoryListPaging.pagingHTML);
          
-         $('#paging').html(data.memberBuisnessListPaging.pagingHTML);
+         $('#ticketList').on('click','.imageName1',function(){
+             $.alertable.alert('당일 취소 불가능합니다(지난 이벤트 포함)', {
+                  show: function() {
+                    $(this.overlay).velocity('transition.fadeIn', 300);        
+                    $(this.modal).velocity('transition.shrinkIn', 300);
+                  },
+                  hide: function() {
+                    $(this.overlay).velocity('transition.fadeOut', 300);
+                    $(this.modal).velocity('transition.shrinkOut', 300);
+                  } 
+                });
+         });
+
       }//success
    });//ajax
    
-   //예약 취소
-   var seq='';
-   $('#businessList').on('click','.result',function(){
-      var result = confirm('취소 하시겠습니까?');
-      seq = $(this).attr('value');
-      //시퀀스 확인()
-      console.log('시퀀스 : '+seq);
-      
-      if(result){
-         $.ajax({
-            type : 'GET',
-            url : '/exhibition/login/memberBusinessRoomCancel.do?seq='+seq,
-            dataType : 'text',
-            success : function(data){
-               if(data=='deleteOk'){
-                  alert('취소되었습니다');
-                  location.href='/exhibition/login/memberBusinessRoomList.do';
-               }else{
-                  alert('에러 발생. 관리자에게 문의바람');
-                  location.href='/exhibition/login/memberBusinessRoomList.do';
-               }
-            }//success
-         });//ajax
-      }//if
-   });
    
-   //예매리스트ㄹㄹ
+   // 예매리스트 탭 
    $('#member-ticket-list').click(function(){
       location.href="/exhibition/login/mypage.do";
    });
    
-   //예매내역
-   $('#member-ticket-history').click(function(){
-      location.href='/exhibition/login/ticketHistory.do'
+   //비지니스 룸 내역
+   $('#member-business-List').click(function(){
+      location.href="http://localhost:8080/exhibition/login/memberBusinessRoomList.do";
    });
    
+   //예매내역 탭
+   $('#member-ticket-history').click(function(){
+      $('tr:gt(0)').remove();   //예매리스트 내용 초기화
+      $('#ticketList').removeClass('imageName');
+      
+      //과거 예매 내역 불러오는 ajax
+      $.ajax({
+         type : 'GET',
+         url : '/exhibition/login/getTicketHistory.do?pg='+$('#pg').val()+'',
+         dataType : 'json',
+         success : function(data){
+            $.each(data.list, function(index, item){
+               $('<tr/>',{
+                  class : 'tr'
+               }).append($('<td/>',{
+                  text : item.imageName,
+                  class : 'imageName1',
+                  value : item.imageName
+               })).append($('<td/>',{
+                  text : item.playDate,
+                  value : item.playDate
+               })).append($('<td/>',{
+                  id : 'ticketQtyTd',
+                  text : item.ticketQty,
+                  value : item.ticketQty
+               })).append($('<td/>',{
+                  id : 'cancelMsg',
+                  class : 'cancelMsg',
+                  text : '환불 불가'
+               })).appendTo($('#ticketList'));
+               $('.imageName1').css({'cursor': 'pointer', 'color' : 'red'});
+               $('.cancelMsg').css({color : 'red'});
+               
+            });//each
+            $('#paging').html(data.TicketHistoryListPaging.pagingHTML);
+            
+            $('#ticketList').on('click','.imageName1',function(){
+                $.alertable.alert('당일 취소 불가능합니다(지난 이벤트 포함)', {
+                     show: function() {
+                       $(this.overlay).velocity('transition.fadeIn', 300);        
+                       $(this.modal).velocity('transition.shrinkIn', 300);
+                     },
+                     hide: function() {
+                       $(this.overlay).velocity('transition.fadeOut', 300);
+                       $(this.modal).velocity('transition.shrinkOut', 300);
+                     } 
+                   });
+            });
+
+         }//success
+      });//ajax
+   });
 });
 </script>
 <script>
 /*페이징 */
-function memberBuisnessListPaging(pg){
-$('.tr').remove();   //리스트 내용 초기화
-   console.log(pg);
+function TicketHistoryListPaging(pg){
+   $('.tr').remove();   //예매리스트 내용 초기화
+   
+   //과거 예매 내역 불러오는 ajax
    $.ajax({
       type : 'GET',
-      url : '/exhibition/login/memberBusinessRoom.do?pg='+pg+'',
+      url : '/exhibition/login/getTicketHistory.do?pg='+pg+'',
       dataType : 'json',
       success : function(data){
-         //alert(JSON.stringify(data));
-         
-         var date = new Date();
-          var year = date.getFullYear();
-          var month = date.getMonth()+1;
-          var day = date.getDate();
-         
-          if ((day+"").length < 2) {
-             day = "0" + day;
-          }
-          //예매일자(오늘일 경우 환불불가)
-          var fullDate = year+''+month+''+day;
-          var compareDate = '';
-         console.log(fullDate); //오늘날짜
-         
-         //예매시간 
-         var time = '';
-         
          $.each(data.list, function(index, item){
-            
-            if(item.first=='Y'){
-               time = '09:00~12:00';
-            }else if(item.second=='Y'){
-               time = '12:00~15:00';
-            }else if(item.third=='Y'){
-               time = '15:00~18:00';
-            }else if(item.fourth=='Y'){
-               time = '18:00~21:00';
-            }
-            
-            //예매한 날짜
-            compareDate = item.startDate.replace(/-/gi,'');
-            
-            if(compareDate > fullDate){
-               compareDate = 'O';
-            }else if(compareDate <= fullDate){
-               compareDate = 'X';
-            }
-            
             $('<tr/>',{
                class : 'tr'
             }).append($('<td/>',{
-               text : item.roomName,
-               class : 'roomName',
-               value : item.roomName
+               text : item.imageName,
+               class : 'imageName1',
+               value : item.imageName
             })).append($('<td/>',{
-               text : item.startDate,
-               class : 'startDate',
-               value : item.startDate
+               text : item.playDate,
+               value : item.playDate
             })).append($('<td/>',{
-               text : time,
-               class : 'time',
-               value : time
+               id : 'ticketQtyTd',
+               text : item.ticketQty,
+               value : item.ticketQty
             })).append($('<td/>',{
-               text : compareDate,
-               class : 'result',
-               value : item.seq
-            })).appendTo($('#businessList'));
+               id : 'cancelMsg',
+               class : 'cancelMsg',
+               text : '환불 불가'
+            })).appendTo($('#ticketList'));
+            $('.imageName1').css({'cursor': 'pointer', 'color' : 'red'});
+            $('.cancelMsg').css({color : 'red'});
          });//each
-         
-         $('#paging').html(data.memberBuisnessListPaging.pagingHTML);
+         $('#paging').html(data.TicketHistoryListPaging.pagingHTML);
       }//success
    });//ajax
-   
+   //location.href="/exhibition/login/mypage.do?pg="+pg;
 }
 </script>

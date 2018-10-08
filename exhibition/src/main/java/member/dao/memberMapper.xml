@@ -130,4 +130,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 select * from businessroom where M_id = #{M_Id} and FIRST = 'Y' or second = 'Y' or third = 'Y' or fourth = 'Y' order by startDate asc)tt
              )where rn <![CDATA[>=]]> ${startNum} and rn <![CDATA[<=]]> ${endNum}
 	</select>
+	
+	<!--마이페이지-비지니스룸 삭제 메소드(ajax) -->
+
+
+	<delete parameterType="java.util.Map" id="deleteBusinessRoom">
+		delete from businessroom where M_Id = #{M_Id} and seq = #{seq}
+	</delete>
 </mapper>

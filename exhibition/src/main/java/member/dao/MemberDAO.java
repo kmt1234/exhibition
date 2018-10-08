@@ -49,6 +49,8 @@ public interface MemberDAO {
 	public int getBusinessHistoryListTotalA(Map<String, String> map);	//비지니스룸 내역 총 글수 가져오는 메소드
 
 	public List<SalesBusinessRoomDTO> getBusinessHistoryList(Map<String, String> map); //마이페이지-비지니스룸 내역 불러오는 메소드(ajax)
+	
+	public int deleteBusinessRoom(Map<String, String> map);	//마이페이지-비지니스룸 삭제 메소드(ajax)
 
 	
 	

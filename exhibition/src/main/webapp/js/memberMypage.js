@@ -61,7 +61,7 @@ $(document).ready(function(){
 	
 	//예매내역 탭
 	$('#member-ticket-history').click(function(){
-		$('.tr').remove();	//예매리스트 내용 초기화
+		$('tr:gt(0)').remove();	//예매리스트 내용 초기화
 		$('#ticketList').removeClass('imageName');
 		
 		//과거 예매 내역 불러오는 ajax
@@ -91,6 +91,7 @@ $(document).ready(function(){
 					})).appendTo($('#ticketList'));
 					$('.imageName1').css({'cursor': 'pointer', 'color' : 'red'});
 					$('.cancelMsg').css({color : 'red'});
+					
 				});//each
 				$('#paging').html(data.TicketHistoryListPaging.pagingHTML);
 				

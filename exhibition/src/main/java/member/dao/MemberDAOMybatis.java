@@ -127,6 +127,11 @@ public class MemberDAOMybatis implements MemberDAO {
 	public List<SalesBusinessRoomDTO> getBusinessHistoryList(Map<String, String> map) {
 		return sqlSession.selectList("getBusinessHistoryList",map);
 	}
+	
+	//마이페이지-비지니스룸 삭제 메소드(ajax)
+	public int deleteBusinessRoom(Map<String, String> map) {
+		return sqlSession.delete("deleteBusinessRoom", map);
+	}
 
 	
 	
