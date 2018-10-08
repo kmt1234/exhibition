@@ -98,6 +98,7 @@
 			<div class="totalCount" id="index_notice_total" style="width: 279px;"></div>
 			<div style="width: 465px; display: inline-block; text-align: right;"></div>
 			<div id="index_notice_PlusList" style="width: 885px; height: auto; align:center;"></div>
+			<br>
 			<div id="index_notice_PlusPagingDiv" class="ui center pagination menu"></div>
 		</div>
 		<div class="space_border"></div>

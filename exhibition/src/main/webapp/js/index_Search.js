@@ -1,8 +1,12 @@
 $(document).ready(function(event, str){
-	var index_keyword = $('#indexkeyword').val();
+	var index_keyword = $('#index_keyword').val();
 	var pg = $('#pg').val();
 	var code = $('#hiddenCode').val();
 	var PointKeyword = "<span class='aaa'>"+index_keyword+"</span>";
+	var classify;
+	String.prototype.replaceAll = function(org, dest) {
+	    return this.split(org).join(dest);
+	}
 	
 	// 메인 검색시 검색된 공지사항 리스트 불러옴
 	$.ajax({
@@ -97,6 +101,7 @@ $(document).ready(function(event, str){
 					text : "("+data.totalA+"건)"
 				}).appendTo($('#index_QnA_total'));
 				$.each(data.list, function(index, item){
+					
 					var subject = item.subject;
 					$('<div/>').append($('<input/>',{
 						type : 'hidden',
@@ -107,8 +112,8 @@ $(document).ready(function(event, str){
 						type : 'hidden',
 						text : item.seq+index
 					})).append($('<div/>',{
-						style: 'width: auto; height:30px; padding-top:5px; text-align: left;  font-size:13pt; margin-left:5px; border: 1px ridge rgb(255,0,0,.6); margin-top:35px; display: inline-block; float:left;',
-						text : "["+item.classify+"]",
+						style: 'width: 50px; height:30px; padding-left:7px; padding-top:5px; text-align: left;  font-size:13pt; margin-left:5px; border: 1px ridge rgb(255,0,0,.6); margin-top:35px; display: inline-block; float:left;',
+						text : item.classify
 					})).append($('<div/>',{
 						style: 'width: auto; height:30px; padding-top:7px; text-align:left; float : left; font-size:13pt; margin-left:5px; margin-top:35px; display: inline-block;',
 						id : 'subjectA',
@@ -135,8 +140,8 @@ $(document).ready(function(event, str){
 	
 	//
 	$('#index_QnA_SearchList').on('click','#subjectA',function(){
-		var seq = $(this).prev().text();
-		location.href='/exhibition/customerService/C_QnA.do';
+		classify = $(this).prev().text();
+		location.href='/exhibition/customerService/C_QnA.do?classify='+classify;
 	});
 	
 	// 메인 검색시 검색된 주요시설 연락처 리스트 불러옴
@@ -266,6 +271,7 @@ $(document).ready(function(event, str){
 				})).appendTo($('#index_eventboard_SearchList'));  
 				
 			} else if(data.totalA!='0'){
+				
 				$('<span/>',{
 					text : "("+data.totalA+"건)"
 				}).appendTo($('#index_eventboard_total'));
@@ -334,7 +340,7 @@ $(document).ready(function(event, str){
 						style:'display:inline-block; width:50px; margin-top:5px; border: 1px ridge rgb(255,0,0,.6); margin-left:20px; float:left;  height:25px; padding:0; padding-top:3px; font-size: 10pt; font-family: inherit;',
 						text : '내용'
 					})).append($('<div/>',{
-						style : 'overflow: hidden; white-space: nowrap; text-overflow  : ellipsis; display:inline-block; float:left;  margin-top:5px; margin-left:10px; width:540px; text-align:left; padding-top:3px; height:5px;',
+						style : 'display:inline-block; float:left;  margin-top:5px; margin-left:10px; width:540px; text-align:left; padding-top:3px; height:25px;',
 						html : item.eventcontent.replaceAll(index_keyword, PointKeyword)
 					}))).appendTo($('#index_eventboard_SearchList'));
 					if(index=='1' || index=='2'){
@@ -452,7 +458,7 @@ $(document).ready(function(event, str){
 						style:'display:inline-block; width:50px; margin-top:5px; border: 1px ridge rgb(255,0,0,.6); margin-left:20px; float:left;  height:25px; padding:0; padding-top:3px; font-size: 10pt; font-family: inherit;',
 						text : '내용'
 					})).append($('<div/>',{
-						style : 'overflow: hidden; white-space: nowrap; text-overflow  : ellipsis; display:inline-block; float:left;  margin-top:5px; margin-left:10px; width:540px; text-align:left; padding-top:3px; height:5px;',
+						style : 'display:inline-block; float:left;  margin-top:5px; margin-left:10px; width:540px; text-align:left; padding-top:3px; height:25px;',
 						html : item.eventcontent.replaceAll(index_keyword, PointKeyword)
 					}))).appendTo($('#index_eventboard_play_SearchList'));
 					if(index=='1' || index=='2'){
@@ -549,7 +555,5 @@ $(document).ready(function(event, str){
 
 	
 	
-	String.prototype.replaceAll = function(org, dest) {
-	    return this.split(org).join(dest);
-	}
+	
 });

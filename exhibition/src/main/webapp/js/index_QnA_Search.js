@@ -1,13 +1,14 @@
 $(document).ready(function(event, str){
-	var index_keyword = $('#indexkeyword').val();
+	var index_keyword = $('#index_keyword').val();
 	var pg = $('#pg').val();
 	var code = $('#hiddenCode').val();
 	var PointKeyword = "<span class='aaa'>"+index_keyword+"</span>";
+	var classify
 	
 	// 메인 검색시 검색된 주요시설 연락처 리스트 불러옴
 	$.ajax({
 		type : 'GET',
-		url : '/exhibition/main/index_QnA_SearchPlus.dopg='+pg+'&index_keyword='+encodeURI(index_keyword),
+		url : '/exhibition/main/index_QnA_SearchPlus.do?pg='+pg+'&index_keyword='+encodeURI(index_keyword),
 		dataType : 'json',
 		success : function(data){
 			$.each(data.list, function(index, item){
@@ -21,8 +22,8 @@ $(document).ready(function(event, str){
 					type : 'hidden',
 					text : item.seq+index
 				})).append($('<div/>',{
-					style: 'width: auto; height:30px; padding-top:5px; text-align: left;  font-size:13pt; margin-left:5px; border: 1px ridge rgb(255,0,0,.6); margin-top:35px; display: inline-block; float:left;',
-					text : "["+item.classify+"]",
+					style: 'width: auto; height:30px; padding-left:7px; padding-right:7px;padding-top:5px; text-align: left;  font-size:13pt; margin-left:5px; border: 1px ridge rgb(255,0,0,.6); margin-top:35px; display: inline-block; float:left;',
+					text : item.classify
 				})).append($('<div/>',{
 					style: 'width: auto; height:30px; padding-top:7px; text-align:left; float : left; font-size:13pt; margin-left:5px; margin-top:35px; display: inline-block;',
 					id : 'subjectA',
@@ -44,8 +45,8 @@ $(document).ready(function(event, str){
 	});
 	
 	$('#index_QnA_PlusList').on('click','#subjectA',function(){
-		var seq = $(this).prev().text();
-		location.href='/exhibition/customerService/C_QnA.do';
+		classify = $(this).prev().text();
+		location.href='/exhibition/customerService/C_QnA.do?classify='+classify;
 	});
 	String.prototype.replaceAll = function(org, dest) {
 	    return this.split(org).join(dest);

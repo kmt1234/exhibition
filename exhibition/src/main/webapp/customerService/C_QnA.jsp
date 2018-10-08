@@ -68,10 +68,8 @@ selector    : {
 	<div style="margin-top: 40px;"></div>
 </form>
 </div>
-
+<input type="hidden" id="classify" value="${classify}">
 <input type="hidden" id="hiddenCode" value="${code}">
-<script src="../semantic/semantic.min.js"></script>
 <script src="../js/C_QnA_js.js?ver=1"></script>
-
 </body>
 </html>

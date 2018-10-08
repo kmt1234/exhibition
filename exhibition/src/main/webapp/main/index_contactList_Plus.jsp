@@ -98,6 +98,7 @@
 			<div class="totalCount" id="index_contactList_total" style="width: 202px;" ></div>
 			<div style="width: 460px; display: inline-block; text-align: right;"></div>
 			<div style="width: 885px; height: auto; align:center;" id="index_contactList_PlusList"></div>
+			<br>
 			<div id="index_contactList_PlusPagingDiv" class="ui center pagination menu"></div>
 		</div>
 		<div class="space_border"></div>
