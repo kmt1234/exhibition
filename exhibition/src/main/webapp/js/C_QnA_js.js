@@ -94,7 +94,6 @@ $(document).ready(function(){
 	
 	// 자주 묻는 질문 버튼에 따라 리스트 불러오기
 	$('.QnA').click(function(){
-		var child = $('#C_QnA_List').empty();
 		var classify = $(this).val();
 		$.ajax({
 			type : 'POST',

@@ -50,8 +50,8 @@
 			<div  style="width: 49%;  display: inline-block;">
 				<div class="ui input" style="width: 100%; ">
 					<div class="ui action input"  style="width: 100%; ">
-						<input type="text" id="index_keyword" placeholder="Search..." style="width: 30%;" >
-						<input type="hidden" id="indexkeyword" value="${index_keyword}">
+						<input type="text" id="index_keyword" placeholder="Search..." style="width: 30%;" value="${index_keyword}">
+						<input type="hidden" id="index_keyword" value="${index_keyword}">
 						<button class="ui icon button" id="index_searchBtn">
 							<i class="search icon"></i>
 						</button>

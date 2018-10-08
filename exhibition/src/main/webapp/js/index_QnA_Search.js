@@ -1,5 +1,5 @@
 $(document).ready(function(event, str){
-	var index_keyword = $('#indexkeyword').val();
+	var index_keyword = $('#index_keyword').val();
 	var pg = $('#pg').val();
 	var code = $('#hiddenCode').val();
 	var PointKeyword = "<span class='aaa'>"+index_keyword+"</span>";
@@ -7,7 +7,7 @@ $(document).ready(function(event, str){
 	// 메인 검색시 검색된 주요시설 연락처 리스트 불러옴
 	$.ajax({
 		type : 'GET',
-		url : '/exhibition/main/index_QnA_SearchPlus.dopg='+pg+'&index_keyword='+encodeURI(index_keyword),
+		url : '/exhibition/main/index_QnA_SearchPlus.do?pg='+pg+'&index_keyword='+encodeURI(index_keyword),
 		dataType : 'json',
 		success : function(data){
 			$.each(data.list, function(index, item){

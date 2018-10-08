@@ -1,5 +1,5 @@
 $(document).ready(function(event, str){
-	var index_keyword = $('#indexkeyword').val();
+	var index_keyword = $('#index_keyword').val();
 	var pg = $('#pg').val();
 	var code = $('#hiddenCode').val();
 	var PointKeyword = "<span class='aaa'>"+index_keyword+"</span>";
