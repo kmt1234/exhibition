@@ -41,7 +41,7 @@
 <!--내용 : 예매하기-->
 <div class="ui compact menu" style="width: 880px; display: inline-block; text-align: left;">
 	<div class="playContentHeader" style="border: 1px solid; ">
-		<div><img style="width: 350px;height: 400px; border-radius: 10px;" src="../storage/${eventboardDTO.image1}"></div>
+		<div><img style="width: 350px; height: 400px; border-radius: 10px;" src="../storage/${eventboardDTO.image1}"></div>
 	</div>
 	<!--날짜 비교(기본 : 오늘날짜)-->
 	<jsp:useBean id="now" class="java.util.Date"/> 

@@ -1,5 +1,6 @@
 package rental.controller;
 
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -296,7 +297,7 @@ public class RentalController {
 
 	// 부스 예약
 	@RequestMapping(value = "reservationHoll", method = RequestMethod.POST)
-	public String reservationHoll(@RequestParam String booth, @RequestParam String startDate,
+	public ModelAndView reservationHoll(@RequestParam String booth, @RequestParam String startDate,
 			@RequestParam String endDate, @RequestParam String C_email, @RequestParam String C_license,
 			@RequestParam String C_tel, @RequestParam String title, @RequestParam int totalRent) {
 		ExhibitionDTO exhibitionDTO = new ExhibitionDTO();
@@ -312,7 +313,10 @@ public class RentalController {
 
 		exhibitionDAO.reservationHoll(exhibitionDTO);
 
-		return "/rental/R_exhibitionOk";
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("display", "/rental/R_exhibition.jsp");
+		mav.setViewName("/rental/R_rentalForm");
+		return mav;
 	}
 	
 	// 공연장 예약

@@ -175,6 +175,7 @@
 					&ensp;&ensp;
 					<a id="B1" class="B">B2</a>
 					&ensp;&ensp;|
+					&ensp;&ensp;
 					<a id="B2" class="B">B3</a>
 					&ensp;&ensp;
 				</div>
