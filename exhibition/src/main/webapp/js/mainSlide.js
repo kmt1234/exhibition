@@ -1,6 +1,8 @@
  $(document).ready(function(){
 	 var code = $('#code').val()
 	 if(code == '1'){
+		 
+	 var link; 
 	 //슬라이더 이미지 불러오기
 	 $.ajax({
 		type : 'GET',
@@ -13,15 +15,32 @@
 					$('#mainSlideUl').append($('<li/>',{
 												style : 'display: inline-block'
 												})
-							   					.append($('<img>',{
+							   					.append($('<a/>',{
+							   						class : 'a_Link',
+							   						href : item.eventLink+'',
+							   						target : '_blank'
+							   					}).append($('<img>',{
 																	src : '../storage/'+item.image1+'',
-																	style : 'cursor:pointer; display:block; border:0;',
+																	style : 'display:block; border:0;',
 																	class : 'pic',
+																	value : item.image1,
 																	id : 'image1'
-								}))).appendTo('.slide',{
+								})))).appendTo('.slide',{
 									style : 'width : 6000px; list-style: none; font-size: 0'
 								});
+					link = item.eventLink;
+					console.log(link);
+					
+					//메인 이미지의 링크가 없으면 클릭 사라짐
+					if(link == 'http://localhost:8080/exhibition/main/index.do'){
+						$('.a_Link').removeAttr("href");						
+					}
+					
+					
 				});//each
+				
+				
+				
 				
 				 var current = 0;
 				 var max = 0;
@@ -114,5 +133,5 @@
 		}//success
 	 });//ajax
 	 }
-	 
+	 	 
  });
