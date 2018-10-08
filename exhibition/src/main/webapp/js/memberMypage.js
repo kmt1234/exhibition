@@ -1,7 +1,5 @@
 $(document).ready(function(){
-	
 	$('.tr').remove();	//예매리스트 내용 초기화
-
 	//회원의 예매 리스트를 가져오는 ajax 
 	$.ajax({
 		type : 'GET',
@@ -104,9 +102,6 @@ $(document).ready(function(){
 
 			}//success
 		});//ajax
-		
-		
-		
 		//location.href="/exhibition/login/ticketHistory.do";
 	});
 	
