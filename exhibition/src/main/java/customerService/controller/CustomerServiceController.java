@@ -471,8 +471,9 @@ public class CustomerServiceController {
 
 	// 자주묻는 질문
 	@RequestMapping(value = "C_QnA", method = RequestMethod.GET)
-	public ModelAndView C_QnAForm() {
+	public ModelAndView C_QnAForm(@RequestParam String classify) {
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("classify", classify);
 		mav.addObject("display", "/customerService/C_QnA.jsp");
 		mav.setViewName("/customerService/C_customerServiceForm");
 		return mav;

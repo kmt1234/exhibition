@@ -95,7 +95,7 @@ $(document).ready(function(){
 	});
 	//자주묻는 질문
 	$('#C_QnA').click(function(){
-		location.href="/exhibition/customerService/C_QnA.do";
+		location.href="/exhibition/customerService/C_QnA.do?classify=위치/교통";
 	});
 	//주요시설 연락처
 	$('#C_contactList').click(function(){
