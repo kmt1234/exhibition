@@ -20,11 +20,11 @@
 </h2>
 <table style="width:100%;" class="ui celled table">
 <tr>
-		<td style="width:8%; height:40px; background-color: #f7f6e6; font-size: 15px;text-align: center;" >제 목</td>
+		<td style="width:8%; height:40px; background-color: #f7f6e6; font-size: 15px;text-align: center;"$>제 목</td>
 		
 		<td style="width:20%;">
 			<div>
-				<input type="text" name="subject" id="subject" style="float: left; width:100%; height:40px;">
+				<input type="text" name="subject" id="subject" style="float: left; width:100%; height:40px;" value="[${name }]님에 대한 답변입니다." readonly>
 				<div id="subjectDiv"></div>
 			</div>
 		</td>
