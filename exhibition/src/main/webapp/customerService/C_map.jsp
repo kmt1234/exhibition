@@ -59,11 +59,11 @@ left: 0px;
 		<div class="ui compact menu" style="width: 930px; height:900px auto;  display: inline-block;" >
 			<!-- 타이틀 -->
 			<h2 class="box-container" style="float: center; width: 100%; height:126px; text-align: left;">
-				<span>사이트</span> 
-				<span class="h-light">맵</span>
+				<span>위치</span> 
+				<span class="h-light">정보</span>
 				<div style="font-size:13px; float:right; height: 50px; margin-top:30px ">
 					<img src="../img/house.png" width="15px" height="16px" id="houseImg">
-					> 이용안내 > 사이트맵
+					> 이용안내 > 위치정보
 				</div>
 				<div class="ui divider"></div>
 			</h2>
