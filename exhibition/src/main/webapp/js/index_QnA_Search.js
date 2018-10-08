@@ -22,7 +22,7 @@ $(document).ready(function(event, str){
 					type : 'hidden',
 					text : item.seq+index
 				})).append($('<div/>',{
-					style: 'width: auto; height:30px; padding-top:5px; text-align: left;  font-size:13pt; margin-left:5px; border: 1px ridge rgb(255,0,0,.6); margin-top:35px; display: inline-block; float:left;',
+					style: 'width: auto; height:30px; padding-left:7px; padding-right:7px;padding-top:5px; text-align: left;  font-size:13pt; margin-left:5px; border: 1px ridge rgb(255,0,0,.6); margin-top:35px; display: inline-block; float:left;',
 					text : item.classify
 				})).append($('<div/>',{
 					style: 'width: auto; height:30px; padding-top:7px; text-align:left; float : left; font-size:13pt; margin-left:5px; margin-top:35px; display: inline-block;',

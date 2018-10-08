@@ -80,8 +80,7 @@
 	font-weight: 800;
 }
 .name:hover{
-	color: green;
-	text-decoration: underline;
+	color: black;
 	font-weight: bold;
 	cursor: pointer;
 }

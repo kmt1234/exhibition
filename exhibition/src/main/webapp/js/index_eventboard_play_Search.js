@@ -10,7 +10,6 @@ $(document).ready(function(event, str){
 		url : '/exhibition/main/index_eventboard_play_SearchPlus.do?pg='+pg+'&index_keyword='+encodeURI(index_keyword),
 		dataType : 'json',
 		success : function(data){
-			alert(JSON.stringify(data))
 			$.each(data.list, function(index, item){
 				var time = item.starttime+"~"+item.endtime;
 				var date = item.startdate+"~"+item.enddate;

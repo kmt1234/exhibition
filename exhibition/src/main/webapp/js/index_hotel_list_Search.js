@@ -11,7 +11,6 @@ $(document).ready(function(event, str){
 		url : '/exhibition/main/index_hotel_list_SearchPlus.do?pg='+pg+'&index_keyword='+encodeURI(index_keyword),
 		dataType : 'json',
 		success : function(data){
-			alert(JSON.stringify(data))
 				$.each(data.list, function(index, item){
 					$('<div/>').append($('<input/>',{
 						type : 'hidden',
