@@ -27,6 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 import company.bean.CompanyDTO;
 import company.dao.CompanyDAO;
 import customerService.bean.EventboardDTO;
+import customerService.bean.SalesBusinessRoomDTO;
 import member.bean.MemberDTO;
 import member.dao.MemberDAO;
 import member.dao.MemberTicketListPaging;
@@ -49,6 +50,8 @@ public class LoginController {
 	private Book_performance_membersDTO book_performance_membersDTO;
 	@Autowired
 	private MemberTicketListPaging memberTicketListPaging;
+	@Autowired
+	private SalesBusinessRoomDTO salesBusinessRoomDTO;
 
 	// 개인회원-로그인
 	@RequestMapping(value = "login", method = RequestMethod.POST)
@@ -501,6 +504,97 @@ public class LoginController {
 		mav.addObject("pg", pg);
 		mav.addObject("display","/login/memberMypage.jsp");
 		mav.setViewName("/customerService/C_customerServiceForm");
+		return mav;
+	}
+	
+	//마이페이지-비지니스룸 내역 리스트 페이지
+	@RequestMapping(value="memberBusinessRoomList", method=RequestMethod.GET)
+	public ModelAndView memberBusinessRoomList(@RequestParam(required = false, defaultValue = "1") String pg) {
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("pg", pg);
+		mav.addObject("display","/login/memberMypage_business.jsp");
+		mav.setViewName("/customerService/C_customerServiceForm");
+		return mav;
+	}
+	
+	//마이페이지-비지니스룸 내역 불러오는 메소드(ajax)
+	@RequestMapping(value="memberBusinessRoom", method=RequestMethod.GET)
+	public ModelAndView memberBusinessRoom(@RequestParam(required = false, defaultValue = "1") String pg, HttpSession session) {
+		
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("homepageMember");
+		String id = memberDTO.getM_Id();
+		
+		//페이징 처리(5개씩 출력)	
+		int endNum = Integer.parseInt(pg) * 3;
+		int startNum = endNum - 2;
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("startNum", startNum+"");
+		map.put("endNum", endNum+"");
+		map.put("M_Id", id);
+		
+		int totalA = memberDAO.getBusinessHistoryListTotalA(map);
+		
+		memberTicketListPaging.setCurrentPage(Integer.parseInt(pg));
+		memberTicketListPaging.setPageBlock(2);
+		memberTicketListPaging.setPageSize(3);
+		memberTicketListPaging.setTotalA(totalA);
+		memberTicketListPaging.makePagingHTML_business();
+		
+		//DB
+		List<SalesBusinessRoomDTO> list = new ArrayList<SalesBusinessRoomDTO>();
+		list = memberDAO.getBusinessHistoryList(map);
+		
+		for(int i=0; i<list.size(); i++) {
+			list.get(i).setStartDate(list.get(i).getStartDate().substring(0, 10));
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("pg", pg);
+		mav.addObject("memberBuisnessListPaging", memberTicketListPaging);
+		mav.addObject("list", list);
+		mav.setViewName("jsonView");
+		return mav;
+	}
+	
+	//마이페이지-비지니스룸 예약 취소(진행중_)
+	@RequestMapping(value="memberBusinessRoomCancel", method=RequestMethod.POST)
+	public ModelAndView memberBusinessRoomCancel(@RequestParam(required = false, defaultValue = "1") String pg, HttpSession session) {
+		
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("homepageMember");
+		String id = memberDTO.getM_Id();
+		
+		//페이징 처리(5개씩 출력)	
+		int endNum = Integer.parseInt(pg) * 3;
+		int startNum = endNum - 2;
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("startNum", startNum+"");
+		map.put("endNum", endNum+"");
+		map.put("M_Id", id);
+		
+		int totalA = memberDAO.getBusinessHistoryListTotalA(map);
+		
+		memberTicketListPaging.setCurrentPage(Integer.parseInt(pg));
+		memberTicketListPaging.setPageBlock(2);
+		memberTicketListPaging.setPageSize(3);
+		memberTicketListPaging.setTotalA(totalA);
+		memberTicketListPaging.makePagingHTML_business();
+		
+		//DB
+		List<SalesBusinessRoomDTO> list = new ArrayList<SalesBusinessRoomDTO>();
+		list = memberDAO.getBusinessHistoryList(map);
+		
+		for(int i=0; i<list.size(); i++) {
+			list.get(i).setStartDate(list.get(i).getStartDate().substring(0, 10));
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("pg", pg);
+		mav.addObject("memberBuisnessListPaging", memberTicketListPaging);
+		mav.addObject("list", list);
+		mav.setViewName("jsonView");
 		return mav;
 	}
 	

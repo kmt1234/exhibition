@@ -1,7 +1,12 @@
 $(document).ready(function(){
 	
 	$('.tr').remove();	//예매리스트 내용 초기화
-
+	
+	//비지니스 룸 내역
+	$('#member-business-List').click(function(){
+		location.href="http://localhost:8080/exhibition/login/memberBusinessRoomList.do";
+	});
+	
 	//회원의 예매 리스트를 가져오는 ajax 
 	$.ajax({
 		type : 'GET',
