@@ -30,7 +30,7 @@
 		<span class="h-light">소리</span>
 		<div style="font-size:13px; float:right; height: 50px; margin-top:30px ">
 			<img src="../img/house.png" width="15px" height="16px" style="cursor: pointer;" id="houseImg"></img>
-			> 고객센터 > 고객의 소리 > 내용
+			> 고객센터 > 고객의 소리 > 목록
 		</div>
 		<div class="ui divider"></div> 
 	</h2>

@@ -426,10 +426,10 @@ public class CustomerServiceController {
 			@RequestParam String email, @RequestParam int pseq, @RequestParam int pg, Model model) {
 
 		model.addAttribute("customerServiceDTO", customerServiceDTO);
-
 		ModelAndView mav = new ModelAndView();
 		model.addAttribute("pseq", pseq);
 		model.addAttribute("pg", pg);
+		model.addAttribute("name",customerServiceDTO.getName());
 		mav.addObject("display", "/customerService/C_inquire_Reply.jsp");
 		mav.setViewName("/customerService/C_customerServiceForm");
 		return mav;
