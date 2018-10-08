@@ -1,5 +1,12 @@
 $(document).ready(function(){
+	
 	$('.tr').remove();	//예매리스트 내용 초기화
+	
+	//비지니스 룸 내역
+	$('#member-business-List').click(function(){
+		location.href="http://localhost:8080/exhibition/login/memberBusinessRoomList.do";
+	});
+	
 	//회원의 예매 리스트를 가져오는 ajax 
 	$.ajax({
 		type : 'GET',
@@ -102,6 +109,9 @@ $(document).ready(function(){
 
 			}//success
 		});//ajax
+		
+		
+		
 		//location.href="/exhibition/login/ticketHistory.do";
 	});
 	
@@ -211,13 +221,22 @@ $(document).ready(function(){
 	
 	
 	//회원탈퇴버튼
+	$('.ui.modal3').hide();
 	$('#member-out').click(function(){
+		$('#M-modify-modify').hide();
+		$('.ui.modal3').show();
+	});
+	$('#out-no').click(function(){//아니오 클릭시
+		$('.ui.modal3').hide();
+		$('#M-modify-modify').show();
+	});
+	$('#out-yes').click(function(){//네 클릭시
 		$('.ui.basic.modal').modal({
 			closable : false,
             duration : 460,
 		}).modal('show');
 	});
-
+	
 	$('#del_OK').click(function(){
 		$.ajax({
 				type : 'POST',
