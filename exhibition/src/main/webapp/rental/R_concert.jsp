@@ -82,7 +82,7 @@ ul{
 			<option value="P_Room4">P_Room4</option>
 		</select>
 		<input type="text" name="hallRate" id="hallRate">
-		<button id="modifyHallRateBtn">평당 가격 수정</button>
+		<button type="button" id="modifyHallRateBtn">평당 가격 수정</button>
 	</form>
 </div>
 </c:if>

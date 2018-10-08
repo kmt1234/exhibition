@@ -265,8 +265,9 @@ $(document).ready(function(event, str){
 				$('<span/>',{
 					text : "("+eventboard_total+"건)"
 				}).appendTo($('#index_eventboard_total'));
-				
+			
 				$.each(data.list, function(index, item){
+					alert(item.eventcontent)
 					$('<div/>').append($('<input/>',{
 						type : 'hidden',
 						text : item.seq

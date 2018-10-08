@@ -49,11 +49,13 @@ $(document).ready(function(){
 	});
 	
 	$('#modifyRoomRateBtn').click(function(){
+		
 		if($('#roomRate').val()=='') {
 			alert('평당 가격을 입력하세요');
 			return;
 		} else {
 			$('#modifyRateBusinessRoomForm').submit();
+			alert('수정되었습니다.');
 		}
 	});
 	
