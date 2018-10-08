@@ -558,7 +558,7 @@ public class LoginController {
 		return mav;
 	}
 	
-	//마이페이지-비지니스룸 예약 취소(진행중_)
+	//마이페이지-비지니스룸 예약 취소(진행중_**)
 	@RequestMapping(value="memberBusinessRoomCancel", method=RequestMethod.POST)
 	public ModelAndView memberBusinessRoomCancel(@RequestParam(required = false, defaultValue = "1") String pg, HttpSession session) {
 		

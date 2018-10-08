@@ -298,7 +298,7 @@ $(document).ready(function(){
 				})).append($('<td/>',{
 					text : compareDate,
 					class : 'result',
-					value : compareDate
+					value : item.seq
 				})).appendTo($('#businessList'));
 			});//each
 			
@@ -307,15 +307,15 @@ $(document).ready(function(){
 	});//ajax
 	
 	//예약 취소
+	var seq='';
 	$('#businessList').on('click','.result',function(){
 		var result = confirm('취소 하시겠습니까?');
+		seq = $(this).attr('value');
+
+		console.log('시퀀스 : '+seq);
 		
 		if(result){
-			$('#memberId').val($(this).prev().text());
-			$('#imageName').val($(this).text());
-			$('#playDate').val($(this).next().text());
-			$('#ticketQty').val($(this).next().next().text());
-			$('#eventDetailInfo').submit();
+			
 		}
 	});
 	
@@ -387,12 +387,13 @@ $('.tr').remove();	//리스트 내용 초기화
 				})).append($('<td/>',{
 					text : compareDate,
 					class : 'result',
-					value : compareDate
+					value : item.seq
 				})).appendTo($('#businessList'));
 			});//each
 			
 			$('#paging').html(data.memberBuisnessListPaging.pagingHTML);
 		}//success
 	});//ajax
+	
 }
 </script>
