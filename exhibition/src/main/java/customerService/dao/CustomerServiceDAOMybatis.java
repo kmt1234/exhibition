@@ -346,7 +346,7 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 			return sqlSession.selectOne("customerServiceSQL.getSalesTotalRentExhibitionTicket", salesMon);
 		}
 	}
-	//콘서트 티켓 년 월 총 매출 가져오기
+	//박람회 티켓 년 월 총 매출 가져오기
 	public List<EventboardDTO> getYearMonthExhibitionTicket(Map<String, String> map) {
 		return sqlSession.selectList("customerServiceSQL.getYearMonthExhibitionTicket", map);
 	}
