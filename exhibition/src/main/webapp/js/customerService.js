@@ -383,7 +383,6 @@ $(document).ready(function(){
 			data : {'M_Id' : $(this).text()},
 			dataType : 'json',
 			success : function(data){
-				alert(JSON.stringify(data));
 				$('#memberModalForm tr:gt(0)').remove();
 				if(data.list=='' || data.list2==''){
 					$('#memberHeader').text(id+"님 예약 정보");
