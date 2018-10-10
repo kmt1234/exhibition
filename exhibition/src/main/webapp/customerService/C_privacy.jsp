@@ -19,6 +19,7 @@
 }
 #houseImg{
 	margin:-3px;
+	cursor: pointer;
 }
 .smallFont{
  font-size: 14px;
@@ -51,7 +52,7 @@ left: 0px;
 			<div class="ui compact menu" id="slidbar" style="display: inline-block;">
 				<a class="item" style="border: none; width: 227px;" href="/exhibition/customerService/C_privacy.do">개인정보 처리방침</a> 
 				<a class="item" href="/exhibition/customerService/C_emailRefuse.do">이메일무단수집거부</a>
-				<a class="item" href="/exhibition/customerService/C_map.do">사이트맵</a>
+				<a class="item" href="/exhibition/customerService/C_map.do">위치정보</a>
 			</div>
 		</div>
 		<!-- 메인 화면 -->
@@ -158,6 +159,7 @@ left: 0px;
 	<div class="ui container" style="margin-top: 20px; min-width:1170px; position: relative; ">
 		<jsp:include page="../main/I_footer.jsp" ></jsp:include>
 	</div>
-<script src="../js/slidbar.js"></script>		
+<script src="../js/slidbar.js"></script>
+<script src="../js/introduction.js"></script>	
 </body>
 </html>

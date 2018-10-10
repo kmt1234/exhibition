@@ -5,12 +5,31 @@
 .ui.inverted.divider2 {
 	margin: 5px 0;
 }
+#currentPaging{
+	color: red;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+#paging{
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+}
 #textf {
 	width: 40%;
 	float: left;
 }
 .ui.left.icon.input {
 	width: 300px;
+}
+.title{
+	color: green;
+	font-weight: bold;
+	cursor:pointer;
+}
+.ending{
+	color: red;
 }
 </style>
 <div class="ui compact menu" style="width: 930px; height:900px auto;  display: inline-block;" >
@@ -23,11 +42,10 @@
 		</div>
 	<div class="ui divider"></div> 
 	</h2>
-	<!-- 메인메뉴 -->
+	<!-- 메인메뉴 --><input type="hidden" id="license_here" value="${c_license}">
 	<div style="width: 100%;">
 		<!-- 맨위 메뉴 텝 -->
 		<div style=" width:880px; float: left; text-align: left;">
-			<a class="middle ui button" class="active item" id="company-info-modify" style="margin-left:20px; width:150px; float: left;">수정</a>
 			<a class="middle ui button" class="item"id="rental-list"  style=" width:150px; float: left;">임대리스트</a>
 			<a class="middle ui button" class="item"id="rental-history"  style=" width:150px; float: left;">지난 임대 내역</a>
 		</div>
@@ -215,27 +233,303 @@
 							        <div class="middle ui button" id="C-modify-cancel" style="width: 30%;">취소</div>
 							    </div>
 						  		<div style="margin-top: 40px;"></div>
-								<!-- 숨어있다 -->
-								<div class="ui modal3">
-								  <div class="content">
-								    <p>탈퇴하시겠습니까?</p>
-								  </div>
-								  <div class="actions">
-								    <div class="ui red basic cancel inverted button" id="out-no">
-								      <i class="remove icon"></i>
-								      아니오
-								    </div>
-								    <div class="ui green submit inverted button" id="out-yes">
-								      <i class="checkmark icon"></i>
-								      네
-								    </div>
-								  </div>
-								</div><!-- 숨어있다 -->
 							</div><!--회사정보들-->
 						</div>
 				</div>
 			</div>
 	</div>		
-	<div style="display: inline-block; border: 1px solid; margin-top:80px; width: 465px; height: 385px;"></div>
+	<div style="display: inline-block; border: 1px solid; margin-top:80px; width: 470px; height: auto; padding-bottom:448px">
+		<div id="renrenlist">
+		<div class="header" id="exhibitionHeader" style="text-align:left;font-size:20px;font-weight: bold; margin-left:10px;margin-top:10px;">박람회</div>
+		<table class="ui striped table" id="exhibitionList">
+		  <thead>
+		  	<tr align="center">
+			  	<th>부스명</th>
+			  	<th>행사명</th>
+			  	<th>행사시작일</th>
+			  	<th>행사종료일</th>
+			  	<th>진행상황</th>
+		  	</tr>
+		  </thead>
+		  	<tbody id="rental_exhibition" align="center">
+	  	
+	  		</tbody>	 
+	  	</table>
+	  	<br>
+	  	<div class="header" id="exhibitionHeader" style="text-align:left;font-size:20px;font-weight: bold; margin-left: 10px;">공연</div>
+	  <table class="ui striped table" id="concertList">
+	 	 <thead>
+		  	<tr align="center">
+			  	<th>부스명</th>
+			  	<th>공연명</th>
+			  	<th>공연시작일</th>
+			  	<th>공연종료일</th>
+			  	<th>진행상황</th>
+		  	</tr></thead>
+	  	<tbody id="rental_concert" align="center">
+  	
+  		</tbody>	 
+	  </table>
+	 </div>
+	 <div id="renrenhistory">
+	 	<div class="ui rental All" id="Ticket-History-Div">
+	 	<div class="header" id="exhibitionHeader" style="text-align:left;font-size:20px;font-weight: bold;margin-top:10px;">지난 내역</div>
+			<table class="ui striped table">
+		  <thead>
+		  	<tr align="center">
+			  	<th>부스명</th>
+			  	<th>행사명</th>
+			  	<th>행사시작일</th>
+			  	<th>행사종료일</th>
+			  	<th>진행상황</th>
+		  	</tr></thead>
+		  	<tbody id="rental_All" align="center">
+	  		<c:if test="${listSize eq '0'}">
+	  		<tr><td colspan="5">지난 임대 내역이 없습니다.</td></tr>
+	  		</c:if>
+	  		</tbody>
+		  </table>
+		  <div name="paging" id="paging"></div>
+		</div> 
+	 </div><!-- renrenhistory -->
+	 
+	</div><!-- inline-block -->
 </div>
+
+<div class="ui mini modal exhibition1" >
+	  <div class="header">임대 취소</div>
+	  <div class="content" style="width:100%">
+	    <div>정말 임대를 취소 하시겠습니까?</div>
+	  </div>
+	  <div class="actions">
+	    <div class="ui negative button">
+	        No
+	      </div>
+	      <div class="ui positive right labeled icon button" id ="exhibitionYesBtn">
+	        Yes
+	        <i class="checkmark icon"></i>
+	      </div>
+	  </div>
+	</div>
+
+	<div class="ui mini modal exhibition2">
+	  <div class="header">임대 취소</div>
+	  <div class="content" style="width:100%">
+	    <div>진행중인 임대는 취소 불가능 합니다.</div>
+	  </div>
+	  <div class="actions">
+	      <div class="ui positive right labeled icon button" id ="exhibitionnotBtn">
+	        Yes
+	        <i class="checkmark icon"></i>
+	      </div>
+	  </div>
+	</div>
+<input type="hidden" name="pg" id="pg" value="${pg}">
+<script>
+$(document).ready(function(){
+	$('#renrenhistory').hide();
+	var date = new Date();
+    var year  = date.getFullYear();
+    var month = date.getMonth() + 1; // 0부터 시작하므로 1더함 더함
+    var day   = date.getDate();
+    if (("" + month).length == 1) { month = "0" + month; }
+    if (("" + day).length   == 1) { day   = "0" + day;   }
+	var toDay = year+"-"+month+"-"+day;
+	var ing;
+	//임대리스트
+	$.ajax({
+		type : 'POST',
+		url : '/exhibition/login/getmypageRental.do',
+		data : {'C_license':$('#license_here').val()},
+		dataType : 'json',
+		success : function(data){
+			$.each(data.list,function(index, item){
+				var startDate = item.startDate.toString().slice(0,10);
+				var endDate = item.endDate.toString().slice(0,10);
+				
+				if(startDate <= toDay && endDate >= toDay ){
+				 ing = "<font color='green'>진행중</font>";
+				 companyDeleteBtn ="";
+				}else if(endDate >toDay){
+					ing = "<font color='blue'>진행 예정</font>";
+				}
+				$('<tr/>').append($('<td/>',{
+			 		name : 'boothName',
+			 		text : item.boothName
+			 	})).append($('<td/>',{
+			 		name : 'title',
+			 		class : 'title',
+			 		text : item.title
+			 	})).append($('<td/>',{
+			 		name : 'startDate',
+			 		text : item.startDate
+			 	})).append($('<td/>',{
+			 		name : 'endDate',
+			 		text : item.endDate
+			 	})).append($('<td/>',{
+			 		name : 'ing',
+			 		html : ing
+			 	})).appendTo($('#rental_exhibition'));
+			});
+			$.each(data.list2,function(index, item){
+				var startDate = item.startDate.toString().slice(0,10);
+				var endDate = item.endDate.toString().slice(0,10);
+				
+				if(startDate <= toDay && endDate >= toDay ){
+				 ing = "<font color='green'>진행중</font>";
+				 companyDeleteBtn ="";
+				}else if(endDate >toDay){
+					ing = "<font color='blue'>진행 예정</font>";
+				}
+				
+				$('<tr/>').append($('<td/>',{
+			 		name : 'hallName',
+			 		text : item.hallName
+			 	})).append($('<td/>',{
+			 		name : 'title',
+			 		class : 'title',
+			 		text : item.title
+			 	})).append($('<td/>',{
+			 		name : 'startDate',
+			 		text : item.startDate
+			 	})).append($('<td/>',{
+			 		name : 'endDate',
+			 		text : item.endDate
+			 	})).append($('<td/>',{
+			 		name : 'ing',
+			 		html : ing
+			 	})).appendTo($('#rental_concert'));
+			});
+		}
+	});
+	var HiddenboothName;
+	var Hiddentitle;
+	var HiddenstartDate;
+	var HiddenendDate;
+	
+	$('#exhibitionList').on('click','.title',function(){
+		HiddenboothName = $(this).prev().text();
+		Hiddentitle = $(this).text();
+		HiddenstartDate = $(this).next().text();
+		HiddenendDate = $(this).next().next().text();
+		$.ajax({
+			type : 'POST',
+			url : '/exhibition/login/DateCompare.do',
+			data : {'startDate':$(this).next().text(),'endDate':$(this).next().next().text()},
+			dataType : 'text',
+			success : function(data){
+				if(data=='exist'){
+					$('.ui.mini.modal.exhibition2').modal('show');
+				}else if(data=='not_exist'){
+					$('.ui.mini.modal.exhibition1').modal('show');
+				}
+			}
+		});
+	});
+	
+	$('#concertList').on('click','.title',function(){
+		HiddenboothName = $(this).prev().text();
+		Hiddentitle = $(this).text();
+		HiddenstartDate = $(this).next().text();
+		HiddenendDate = $(this).next().next().text();
+		$.ajax({
+			type : 'POST',
+			url : '/exhibition/login/DateCompare.do',
+			data : {'startDate':$(this).next().text(),'endDate':$(this).next().next().text()},
+			dataType : 'text',
+			success : function(data){
+				if(data=='exist'){
+					$('.ui.mini.modal.exhibition2').modal('show');
+				}else if(data=='not_exist'){
+					$('.ui.mini.modal.exhibition1').modal('show');
+				}
+			}
+		});
+	});
+	
+///////////////////////////////////////////////////////////////////////////////////////
+	$('#rental-list').click(function(){
+		$('#renrenlist').show();
+		$('#renrenhistory').hide();
+	});
+	$('#rental-history').click(function(){
+		$('#rental_All').empty();
+		$('#renrenlist').hide();
+		$('#renrenhistory').show();
+		$.ajax({
+			type : 'POST',
+			url : '/exhibition/login/getAllRental.do',
+			data : {'C_license':$('#license_here').val(),'pg':$('#pg').val()},
+			dataType : 'json',
+			success : function(data){
+				$.each(data.list,function(index, item){
+					$('<tr/>').append($('<td/>',{
+				 		name : 'boothName',
+				 		text : item.boothName
+				 	})).append($('<td/>',{
+				 		name : 'title',
+				 		text : item.title
+				 	})).append($('<td/>',{
+				 		name : 'startDate',
+				 		text : item.startDate
+				 	})).append($('<td/>',{
+				 		name : 'endDate',
+				 		text : item.endDate
+				 	})).append($('<td/>',{
+				 		name : 'ending',
+				 		class : 'ending',
+				 		text : '진행종료'
+				 	})).appendTo($('#rental_All'));
+				});
+				$('#paging').html(data.memberTicketListPaging.pagingHTML);
+			}
+		});
+		
+	});
+
+		 $('#exhibitionYesBtn').click(function(){
+			$.ajax({
+				type : 'POST',
+				url : '/exhibition/login/deleteGOGO.do',
+				data : {'boothName':HiddenboothName,'title':Hiddentitle,'startDate':HiddenstartDate,'endDate':HiddenendDate},
+				dataType : 'json',
+				success : function(data){
+					location.href="/exhibition/login/mypage.do";
+				}
+			});
+		}); 
+
+});
+function MemberTicketListPaging(pg){
+	$('#rental_All').empty();
+	$.ajax({
+		type : 'POST',
+		url : '/exhibition/login/getAllRental.do',
+		data : {'C_license':$('#license_here').val(),'pg':$('#pg').val()},
+		dataType : 'json',
+		success : function(data){
+			$.each(data.list,function(index, item){
+				$('<tr/>').append($('<td/>',{
+			 		name : 'boothName',
+			 		text : item.boothName
+			 	})).append($('<td/>',{
+			 		name : 'title',
+			 		text : item.title
+			 	})).append($('<td/>',{
+			 		name : 'startDate',
+			 		text : item.startDate
+			 	})).append($('<td/>',{
+			 		name : 'endDate',
+			 		text : item.endDate
+			 	})).append($('<td/>',{
+			 		name : 'ending',
+			 		class : 'ending',
+			 		text : '진행종료'
+			 	})).appendTo($('#rental_All'));
+			});
+			$('#paging').html(data.memberTicketListPaging.pagingHTML);
+		}
+	});
+}
+</script>
 <jsp:include page="companyOut.jsp"/>

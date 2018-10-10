@@ -1,4 +1,3 @@
-
 --회원가입
 create table memberTable(	
 M_Name varchar2(30) not null,	    --이름
@@ -48,7 +47,7 @@ startDate date not null,
 endDate date not null
 );
 
-create sequence seq_exhibitionRental  nocache nocycle;
+create sequence seq_exhibitionRental  START WITH 1 INCREMENT BY 2;
 
 CREATE TABLE customerImageboard(
      seq NUMBER PRIMARY KEY,         --시퀀스      
@@ -98,7 +97,7 @@ CREATE TABLE customerImageboard(
      eventContent varchar2(4000)	--소개 글(간단)
  );
  
- create sequence seq_eventboard_play  nocache nocycle;
+create sequence seq_eventboard_play  nocache nocycle;
  
 create table C_notice(
 seq number primary key,                 --시퀀스
@@ -106,7 +105,6 @@ subject varchar2(500) not null,          --제목
 content varchar2(4000) not null,         --내용
 logtime date default sysdate);          --날짜
 
-drop table C_notice;
 create sequence seq_C_notice nocycle nocache;
 
 create table C_QnA (
@@ -115,7 +113,7 @@ classify varchar2(200),                 --분류
 subject varchar2(500) not null,         --제목
 content varchar2(4000) not null);        --내용
 
-drop table C_qna;
+
 create sequence seq_C_QnA nocycle nocache;
 
 create table C_inquire(
@@ -133,7 +131,6 @@ pseq NUMBER DEFAULT 0 NOT NULL,         --원글번호
 reply NUMBER DEFAULT 0 NOT NULL,        --답변수
 logtime DATE DEFAULT sysdate);          --날짜
 
-drop table C_inquire;
 create sequence seq_C_inquire nocycle nocache;
 
 create table C_contactList(
@@ -145,13 +142,13 @@ name varchar2(200) not null,         --담당자
 phone varchar2(200) not null);         --연락처
 
 
-drop table C_contactlist;
+
 create sequence seq_C_contactList nocycle nocache;
 
 create table hotel_list(
 seq number primary key,
 postSelect number default(3),      --구분(분류) 박람회 : 1 연극 : 2
-imageName VARCHAR2(40) NOT NULL,   --제목
+imageName VARCHAR2(500) NOT NULL,   --제목
 image1 varchar2(500) NOT NULL,     --이미지파일
 eventLink varchar2(200) NOT NULL,  --링크
 eventPlace varchar2(100) NOT NULL  --TEL
@@ -167,8 +164,9 @@ num NUMBER,                        --연극시퀀스
  playTicket VARCHAR2(100),           --일별 총 티켓 수
  remainTicket VARCHAR2(100),         --일별 잔여 티켓 수
  ticketPrice VARCHAR2(100),          --티켓 가격
- bookTicket VARCHAR2(100),           --예매된 티켓 수
+ bookTicket VARCHAR2(100)           --예매된 티켓 수
 );
+
 create sequence seq_eventboard_exhibition_book  nocache nocycle; 
 
 
@@ -185,8 +183,8 @@ num NUMBER,                        --연극시퀀스
  bookStatus char(1) CONSTRAINT bookStatus_CK    --예매 상태(0 : 예매X , 1 : 예매완료)
     check(bookStatus IN ('0','1'))
 );
-create sequence seq_eventboard_play_book  nocache nocycle; 
 
+create sequence seq_eventboard_play_book  nocache nocycle; 
 
 create table Book_Play_Members(
 seq number primary key,
@@ -195,7 +193,7 @@ PLAYDATE	DATE,
 MEMBERID	VARCHAR2(100),
 TICKETQTY	VARCHAR2(30));
 
-create sequence seq_Book_Play_Members;
+create sequence seq_Book_Play_Members START WITH 1 INCREMENT BY 2;
 
 --전시회 예매자 DB
 create table Book_Exhibition_Members(
@@ -205,8 +203,6 @@ PLAYDATE	DATE,
 MEMBERID	VARCHAR2(100),
 TICKETQTY	VARCHAR2(30)
 );
-
-create sequence seq_Book_Exhibition_Members;
 
 create table concertHall(
 seq NUMBER PRIMARY KEY,
@@ -220,9 +216,10 @@ startDate date not null,
 endDate date not null
 );
 
-create sequence seq_concertHall start with 1000;
+create sequence seq_concertHall START WITH 2 INCREMENT BY 2;
 
 create table businessRoom(
+seq NUMBER PRIMARY KEY,
 roomName varchar2(30), 
 M_Id varchar2(30), 
 M_Email varchar2(50),
@@ -234,4 +231,55 @@ third varchar2(10) default 'N',
 fourth varchar2(10) default 'N',
 totalRent number);
 
-commit;
+create sequence seq_businessRoom START WITH 2 INCREMENT BY 2;
+
+create table boothRate(
+boothName varchar2(30),
+rate number);
+
+insert into BOOTHRATE values('Booth1', 1000);
+insert into BOOTHRATE values('Booth2', 1000);
+insert into BOOTHRATE values('Booth3', 1000);
+insert into BOOTHRATE values('Booth4', 1000);
+insert into BOOTHRATE values('Booth5', 1000);
+insert into BOOTHRATE values('Booth6', 1000);
+insert into BOOTHRATE values('Booth7', 1000);
+insert into BOOTHRATE values('Booth8', 1000);
+insert into BOOTHRATE values('Booth9', 1000);
+insert into BOOTHRATE values('Booth10', 1000);
+insert into BOOTHRATE values('Booth11', 1000);
+insert into BOOTHRATE values('Booth12', 1500);
+insert into BOOTHRATE values('Booth13', 1500);
+insert into BOOTHRATE values('Booth14', 1500);
+
+
+create table hallRate(
+hallName varchar2(30),
+rate number);
+
+
+insert into hallRate values('P_Room1', 1000);
+insert into hallRate values('P_Room2', 1000);
+insert into hallRate values('P_Room3', 1200);
+insert into hallRate values('P_Room4', 1200);
+
+
+create table roomRate(
+roomName varchar2(30),
+rate number);
+
+--메인화면 이미지 저장 DB(추가 해주세요 181004)
+create table mainSlideDB(
+    imageName varchar2(500),
+    eventLink varchar2(500)
+);
+
+create sequence seq_mainSlideDB NOCACHE nocycle;
+
+
+insert into roomRate values('Room1', 15000);
+insert into roomRate values('Room2', 13000);
+insert into roomRate values('Room3', 12000);
+insert into roomRate values('Room4', 14000);
+insert into roomRate values('Room5', 13000);
+insert into roomRate values('Room6', 13000);

@@ -17,6 +17,7 @@ import customerService.bean.SalesExhibitionDTO;
 import member.bean.MemberDTO;
 import performance.bean.Book_exhibition_membersDTO;
 import performance.bean.Book_performance_membersDTO;
+import rental.bean.BusinessRoomDTO;
 import rental.bean.ConcertHallDTO;
 import rental.bean.ExhibitionDTO;
 
@@ -94,7 +95,7 @@ public interface CustomerServiceDAO {
 	
 	public void eventInfoWrite(EventboardDTO eventboardDTO);	//박람회 정보 등록
 	
-	public List<ImageboardDTO> getImageboardSlide(List<String> list);	//메인(슬라이드 이미지 불러오기)
+	public List<ImageboardDTO> getImageboardSlide(List<Integer> check);	//메인(슬라이드 이미지 불러오기)
 	
 	public List<EventboardDTO> eventboardList(Map<String, Integer> map);	//박람회 업로드 리스트 가져오기
 	
@@ -188,6 +189,7 @@ public interface CustomerServiceDAO {
 	//회원 예매 삭제
 	public void memberExTicketDelete(int seq);
 	public void memberPerTicketDelete(int seq);
+	public void memberBusinessTicketDelete(int seq);
 	
 	//사업자 정보
 	public List<CompanyDTO> getCompanyList(Map<String, Integer> map);
@@ -229,10 +231,13 @@ public interface CustomerServiceDAO {
 	
 	public List<Book_exhibition_membersDTO> getExhibitionView(String M_Id);	//박람회 상세정보
 	public List<Book_exhibition_membersDTO> getPerformanceView(String M_Id); //연극 상세정보
+	public List<BusinessRoomDTO> getBusinessRoomView(String M_Id);			//비즈니스룸 상세정보
 	
-	public EventboardDTO checkReservation_exhibition(Map<String, String> map);	//전시회 예약 중복 체크
-	public EventboardDTO checkReservation_performance(Map<String, String> map);	//연극 예약 중복 체크
-	
+	public List<EventboardDTO> checkReservation_exhibition(Map<String, String> map);	//전시회 예약 중복 체크
+	public List<EventboardDTO> checkReservation_performance(Map<String, String> map);	//연극 예약 중복 체크
+	public void eventboardModDelete(String seq);//박람회 수정하기위해 일단 날짜 초기화	
+	public void eventboard_playModDelete(String seq);//공연 수정하기위해 일단 날짜 초기화	
+
 	
 	
 	

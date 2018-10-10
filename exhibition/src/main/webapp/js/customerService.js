@@ -1,4 +1,16 @@
 $(document).ready(function(){
+	$('#memberSearch').keydown(function(key) {
+		if (key.keyCode == 13) {
+			$('#memberSearchBtn').click();
+		}
+	});
+	$('#companySearch').keydown(function(key) {
+		if (key.keyCode == 13) {
+			$('#companySearchBtn').click();
+		}
+	});
+	
+	
 	var date = new Date();
     var year  = date.getFullYear();
     var month = date.getMonth() + 1; // 0부터 시작하므로 1더함 더함
@@ -6,8 +18,6 @@ $(document).ready(function(){
     if (("" + month).length == 1) { month = "0" + month; }
     if (("" + day).length   == 1) { day   = "0" + day;   }
     
-    
-
    var C_name = /^[가-힣]+$/;   //한글만 가능 
    var C_phone =  /^((01[1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})$/;   //휴대폰 번호 양식
    
@@ -57,7 +67,6 @@ $(document).ready(function(){
          data : {'email':$('#email').val()},
          dataType: 'text',
          success : function(data){
-            alert(data);
             $('#reC_EmailConfirm').val(data);
             alert('메일을 보냈습니다.')
          }
@@ -126,7 +135,6 @@ $(document).ready(function(){
    //자주 묻는 질문 작성하기 등록버튼
    $('#C_QnA_checkWriteBtn').click(function(){
       var classify = $('#classify option:selected').val();
-      alert(classify);
       $('#subjectDiv').empty();
       $('#contentDiv').empty();
       if($('#subject').val()=='')
@@ -163,7 +171,7 @@ $(document).ready(function(){
 			data : {'pg' : $('#pg').val()},
 			dataType : 'json',
 			success : function(data){
-				/* $('#C_memberListFrom div:gt(0)').remove(); */
+				$('#memberListTable tr:gt(0)').remove();
 				$.each(data.list,function(index, item){
 					$('<tr/>').append($('<td/>',{
 				 		name : 'C_businessname',
@@ -187,11 +195,12 @@ $(document).ready(function(){
 		
 		//사업자 검색
 		$('#companySearchBtn').click(function(event,str){
-			$('#memberListTable').empty();
+			
 			if(str!='trigger') $('#pg').val(1);
 			if($('#companySearch').val()==''){
 				alert("검색어를 입력하세요");
 			}else{
+				$('#memberListTable').empty();
 				$.ajax({
 					type: 'POST',
 					url : '/exhibition/customerService/CompanySearch.do',
@@ -201,8 +210,6 @@ $(document).ready(function(){
 						},
 					dataType : 'json',
 					success : function(data){
-						$('#C_memberListFrom div:gt(0)').remove();
-						/*  alert(JSON.stringify(data)); */
 						 $.each(data.list,function(index, item){
 							 $('<tr/>').append($('<td/>',{
 							 		name : 'C_businessname',
@@ -228,12 +235,10 @@ $(document).ready(function(){
 	
 	
 	//개인회원정보 불러오기
-	 $('#memberSearchDiv').hide();
 	$('#memberBtn').click(function(event,str){
 		if(str!='trigger') $('#pg').val(1);
 		$('#companySearchDiv').hide();
 		$('#memberSearchDiv').show();
-		$('#memberListTable').empty();
 		
 		$.ajax({
 			type : 'POST',
@@ -241,7 +246,7 @@ $(document).ready(function(){
 			data : {'pg' : $('#pg').val()},
 			dataType : 'json',
 			success : function(data){
-				$('#memberListTable td:gt(0)').remove();
+				$('#memberListTable').empty();
 				$.each(data.list,function(index, item){
 					$('<tr/>').append($('<td/>',{
 				 		name : 'M_Name',
@@ -263,50 +268,13 @@ $(document).ready(function(){
 	
 		});
 	});
-	
-		//제발 냅둬주세요
-		/*$('#memberSearchBtn').click(function(event,str){
-			$('#memberListTable').hide();
-			if(str!='trigger') $('#pg').val(1);
-			if($('#memberSearch').val()==''){
-				alert("검색어를 입력하세요");
-			}else{
-				$.ajax({
-					type: 'POST',
-					url : '/exhibition/customerService/memberListSearch.do',
-					data : {'pg' : $('#pg').val()
-						,'memberSearchOption' : $('#memberSearchOption').val() 
-						,'memberSearch' : $('#memberSearch').val()
-						},
-					dataType : 'json',
-					success : function(data){
-						$('#C_memberListFrom tr:gt(0)').remove();
-						alert(JSON.stringify(data.length));
-						 $.each(data.list,function(index, item){
-							 $('<tr/>').append($('<td/>',{
-							 		name : 'M_Name',
-							 		text : item.m_Name
-							 	})).append($('<td/>',{
-							 		name : 'M_Id',
-							 		class : 'M_Id',
-							 		text : item.m_Id
-							 	})).append($('<td/>',{
-							 		name : 'M_Email',
-							 		text : item.m_Email
-							 	})).append($('<td/>',{
-							 		name : 'M_Phone',
-							 		text : item.m_Phone
-							 	})).appendTo($('#memberListTable'));
-							});
-						$('#paging').html(data.customerServicePaging.pagingHTML);
-					}
-				});
-			}
-		});*/
-	
+
 		
 	$('#memberListTable').on('click','.C_license',function(){
-		
+		if($('#masterCode').val()!='3') {
+			alert('권한이 없습니다.');
+			return;
+		}
 		var toDay = year+"-"+month+"-"+day;
 		var ing;
 		var companyDeleteBtn;
@@ -317,7 +285,6 @@ $(document).ready(function(){
 			dataType : 'json',
 			success : function(data){
 				$('#companyModalForm tr:gt(0)').remove();
-				alert(JSON.stringify(data));
 				$.each(data.list,function(index, item){
 					var startDate = item.startDate.toString().slice(0,10);
 					var endDate = item.endDate.toString().slice(0,10);
@@ -395,7 +362,12 @@ $(document).ready(function(){
 	});
 	var toDay;
 	var playDate;
+	var memberId;
 	$('#memberListTable').on('click','.M_Id',function(){
+		if($('#masterCode').val()!='3') {
+			alert('권한이 없습니다.');
+			return;
+		}
 		toDay = year+"-"+month+"-"+day;
 		var ing;
 		var deleteBtn
@@ -405,11 +377,10 @@ $(document).ready(function(){
 			data : {'M_Id' : $(this).text()},
 			dataType : 'json',
 			success : function(data){
-				/*alert(JSON.stringify(data));*/
 				$('#memberModalForm tr:gt(0)').remove();
 				$.each(data.list,function(index, item){
 					playDate = item.playDate.toString().slice(0,10);
-					
+					memberId = item.memberId;
 					
 					if(playDate < toDay){
 						ing = "<font color='gray'>기간만료</font>";
@@ -442,37 +413,89 @@ $(document).ready(function(){
 				 	})).appendTo($('#reservationMemberTable'));
 					
 					});
+				var time;
+				$.each(data.list2,function(index, item){
+					playDate = item.startDate.toString().slice(0,10);
+					
+					if(playDate < toDay){
+						ing = "<font color='gray'>기간만료</font>";
+						deleteBtn = "";
+					}else if(playDate >= toDay){
+						ing = "<font color='green'>예약완료</font>";
+						deleteBtn = "<input type='button' value='예약취소' id='memberDeleteBtn' class='middle ui button delete'>";
+					}
+					
+					if(item.first=="Y"){
+						time = "09:00~12:00";	
+					}else if(item.second=="Y"){
+						time = "12:00~15:00";
+					}else if(item.third=="Y"){
+						time = "15:00~18:00";
+					}else if(item.fourth=="Y"){
+						time = "18:00~21:00";
+					}
+					
+					$('<tr/>').append($('<td/>',{
+				 		text : item.seq
+				 	})).append($('<td/>',{
+				 		name : 'imageName',
+				 		id : 'imageName',
+				 		text : item.roomName
+				 	})).append($('<td/>',{
+				 		name : 'playDate',
+				 		id : 'playDate',
+				 		text : playDate+"("+time+")"
+				 	})).append($('<td/>',{
+				 		name : "status",
+				 		id : "status",
+				 		html : ing
+				 	})).append($('<td/>',{
+				 		text : '-'
+				 	})).append($('<td/>',{
+				 		html : deleteBtn
+				 	})).appendTo($('#reservationMemberTable'));
+					
+					});
 				$('.ui.modal.member.mem').modal('show');
 			}
 		});
 			
 	});
-	/*$('#memberDeleteBtn').click(function(){
-		alert("gggfgf");
-	});*/
 	var memberSeq;
+	var imageName;
+	var playDate;
+	var ticketQty;
 	$('#reservationMemberTable').on('click','#memberDeleteBtn',function(){
+		
 		if(toDay == playDate){
 			$('.ui.mini.modal.not.member').modal('show');
 		}else{	
 			$('.ui.mini.modal.mem').modal('show');
 			memberSeq = $(this).parent().prev().prev().prev().prev().prev().text();
+			imageName =	$(this).parent().prev().prev().prev().prev().text();
+			playDate = 	$(this).parent().prev().prev().prev().text();
+			ticketQty = $(this).parent().prev().text();
+			
 		}
 		
+		
 	});
-	
 	$('#memberYesBtn').click(function(){
 		$.ajax({
 			type : 'POST',
 			url : '/exhibition/customerService/memberTicketDelete.do',
-			data : {'seq' : memberSeq},
+			data : {'seq' : memberSeq,
+					'imageName' : imageName,
+					'playDate' : playDate,
+					'ticketQty' : ticketQty,
+					'memberId' : memberId},
 			dataType : 'json',
 			success : function(data){
 			}
 		});
 	});
 	var companySeq;
-	$('#reservationCompanyTable').on('click','#companyDeleteBtn',function(){	
+	$('#reservationCompanyTable').on('click','#companyDeleteBtn',function(){
 			$('.ui.mini.modal.company').modal('show');
 			companySeq = $(this).parent().prev().prev().prev().prev().prev().text();
 	});
@@ -486,6 +509,10 @@ $(document).ready(function(){
 			success : function(data){
 			}
 		});
+	});
+	
+	$('#houseImg').click(function(){
+		location.href='/exhibition/main/index.do';
 	});
 
 });

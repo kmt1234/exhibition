@@ -24,12 +24,9 @@ left: 0px;
 </style>
 </head>
 <body>
-
-<header>
-	<div style="margin-top: 20px; min-width:1170px; position: relative;">
-		<jsp:include page="../main/I_header.jsp"></jsp:include>
-	</div>
-</header>
+<div style="margin-top: 7px; min-width:1170px; position: relative;" class="ui container" >
+	<jsp:include page="../main/I_header.jsp"></jsp:include>
+</div>
 	<div style="margin-top: 5px; min-width:1170px; position: relative;   " class="ui container" >
 		<!-- 사이드바 메뉴 -->
 		<div style="width:230px; height:900px auto; display: inline-block;">
@@ -41,13 +38,12 @@ left: 0px;
 		</div>
 		<!-- 메인 화면 -->
 		<div class="ui compact menu" style="width: 930px; min-height:900px auto;  display: inline-block;" >
-		
 			<jsp:include page="${display}" ></jsp:include>
 		</div>
 	</div>
-	<div class="ui container" style="margin-top: 20px; min-width:1170px; position: relative; ">
-		<jsp:include page="../main/I_footer.jsp" ></jsp:include>
-	</div>
+<div class="ui container" style="margin-top: 20px; min-width:1170px; position: relative; ">
+	<jsp:include page="../main/I_footer.jsp" ></jsp:include>
+</div>
 <script src="../js/slidbar.js"></script>
 <script src="../js/p_exhibitionCalendar.js"></script>
 <script src="../js/p_peformanceCalendar.js"></script>

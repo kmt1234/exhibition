@@ -71,6 +71,21 @@ public class CompanyDAOMybatis implements CompanyDAO {
 	public int mypageRentalPastTotal(Map<String, String> map) {
 		return sqlSession.selectOne("companySQL.mypageRentalPastTotal", map);
 	}
+	
+	//임대한 박람회 부스 삭제
+	public void deleteExBooth(Map<String, String> map) {
+		sqlSession.delete("companySQL.deleteExBooth",map);
+	}
+	
+	//임대한 콘서트 부스 삭제
+	public void deleteCoBooth(Map<String, String> map) {
+		sqlSession.delete("companySQL.deleteCoBooth",map);
+	}
+	
+	//법인번호 중복체크
+	public CompanyDTO checkId2(String sNum2) {
+		return sqlSession.selectOne("companySQL.checkId2", sNum2);
+	}
 
 
 }

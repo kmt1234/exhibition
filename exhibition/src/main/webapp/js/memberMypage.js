@@ -1,5 +1,53 @@
 $(document).ready(function(){
 	
+	$('.tr').remove();	//예매리스트 내용 초기화
+	
+	//비지니스 룸 내역
+	$('#member-business-List').click(function(){
+		location.href="http://localhost:8080/exhibition/login/memberBusinessRoomList.do";
+	});
+	
+	//회원의 예매 리스트를 가져오는 ajax 
+	$.ajax({
+		type : 'GET',
+		url : '/exhibition/login/getMemberTicketList.do?pg='+$('#pg').val()+'',
+		dataType : 'json',
+		success : function(data){
+			$.each(data.list, function(index, item){
+				$('<tr/>',{
+					class : 'tr'
+				}).append($('<td/>',{
+					text : item.imageName,
+					class : 'imageName',
+					value : item.imageName
+				})).append($('<td/>',{
+					text : item.playDate,
+					value : item.playDate
+				})).append($('<td/>',{
+					id : 'ticketQtyTd',
+					text : item.ticketQty,
+					value : item.ticketQty
+				})).append($('<td/>',{
+					id : 'cancelMsg',
+					text : '환불 가능'
+				})).appendTo($('#ticketList'));
+			});//each
+			
+			$('#paging').html(data.memberTicketListPaging.pagingHTML);
+			
+			//예매 취소 하기
+			$('#ticketList').on('click','.imageName',function(){
+								
+				$('#memberId').val($(this).prev().text());
+				$('#imageName').val($(this).text());
+				$('#playDate').val($(this).next().text());
+				$('#ticketQty').val($(this).next().next().text());
+				$('#eventDetailInfo').submit();
+				
+			});
+		}//success
+	});//ajax
+	
 	//회원정보 수정 메뉴
 	$('#member-info-modify').click(function(){
 		location.href="/exhibition/login/mypage.do";
@@ -8,12 +56,64 @@ $(document).ready(function(){
 	
 	// 예매리스트 탭 
 	$('#member-ticket-list').click(function(){
-		location.href="/exhibition/login/memerMypage_ticketList.do";
+		location.href="/exhibition/login/mypage.do";
 	});
 	
 	//예매내역 탭
 	$('#member-ticket-history').click(function(){
-		location.href="/exhibition/login/ticketHistory.do";
+		$('tr:gt(0)').remove();	//예매리스트 내용 초기화
+		$('#ticketList').removeClass('imageName');
+		
+		//과거 예매 내역 불러오는 ajax
+		$.ajax({
+			type : 'GET',
+			url : '/exhibition/login/getTicketHistory.do?pg='+$('#pg').val()+'',
+			dataType : 'json',
+			success : function(data){
+				$.each(data.list, function(index, item){
+					$('<tr/>',{
+						class : 'tr'
+					}).append($('<td/>',{
+						text : item.imageName,
+						class : 'imageName1',
+						value : item.imageName
+					})).append($('<td/>',{
+						text : item.playDate,
+						value : item.playDate
+					})).append($('<td/>',{
+						id : 'ticketQtyTd',
+						text : item.ticketQty,
+						value : item.ticketQty
+					})).append($('<td/>',{
+						id : 'cancelMsg',
+						class : 'cancelMsg',
+						text : '환불 불가'
+					})).appendTo($('#ticketList'));
+					$('.imageName1').css({'cursor': 'pointer', 'color' : 'red'});
+					$('.cancelMsg').css({color : 'red'});
+					
+				});//each
+				$('#paging').html(data.TicketHistoryListPaging.pagingHTML);
+				
+				$('#ticketList').on('click','.imageName1',function(){
+					 $.alertable.alert('당일 취소 불가능합니다(지난 이벤트 포함)', {
+					      show: function() {
+					        $(this.overlay).velocity('transition.fadeIn', 300);        
+					        $(this.modal).velocity('transition.shrinkIn', 300);
+					      },
+					      hide: function() {
+					        $(this.overlay).velocity('transition.fadeOut', 300);
+					        $(this.modal).velocity('transition.shrinkOut', 300);
+					      } 
+					    });
+				});
+
+			}//success
+		});//ajax
+		
+		
+		
+		//location.href="/exhibition/login/ticketHistory.do";
 	});
 	
 	
@@ -132,7 +232,10 @@ $(document).ready(function(){
 		$('#M-modify-modify').show();
 	});
 	$('#out-yes').click(function(){//네 클릭시
-		$('.ui.basic.modal').modal('show');
+		$('.ui.basic.modal').modal({
+			closable : false,
+            duration : 460,
+		}).modal('show');
 	});
 	
 	$('#del_OK').click(function(){
@@ -152,23 +255,5 @@ $(document).ready(function(){
 		});
 	});
 	
-	
-	
-	
-	//예매리스트
-	$('#member-ticket-list').click(function(){
-		location.href="/exhibition/login/memerMypage_ticketList.do";
-	});
-	
-	//예매내역
-	$('#member-ticket-history').click(function(){
-		$('#member-info-modify').removeClass('active');
-		$('#member-ticket-list').removeClass('active');
-		$('#member-ticket-history').addClass('active');
-		
-		$('#modify-Div').hide();
-		$('#Ticket-List-Div').hide();
-		$('#Ticket-History-Div').show();
-	});
 	
 });

@@ -45,11 +45,11 @@
 			</td>
 		</tr>
 	</table>
-	<%-- <c:if test="${code=='3' }"> --%>
+	<c:if test="${code=='3' }">
 		<div align="left" style="margin-left: 20px;">
-			<input class="ui button" type="button" id="C_email_ListBtn" value="관리자 버튼">
+			<input class="ui button" type="button" id="C_email_ListBtn" value="목록보기">
 		</div>
-<%-- 	</c:if> --%>
+ 	</c:if>
 	<div style="margin-top: 105px;"></div>
 </div>
 <script src="../js/C_inquire_js.js?ver=1"></script>

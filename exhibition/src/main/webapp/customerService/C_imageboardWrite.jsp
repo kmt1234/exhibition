@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 window.onload=function(){
-	alert("이미지 업로드 완료");
+	$.alertable.alert("이미지 업로드 완료");
 	location.href="/exhibition/customerService/C_mainImageboardListForm.do";
 }
 </script>

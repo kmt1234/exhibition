@@ -62,15 +62,14 @@ selector    : {
 			</th>
 		<input class="middle ui button" type="button" style="margin-left: 50px;" value="작성" id="C_QnA_writeBtn">
 		<input type="button" class="middle ui button" id="C_QnA_DeleteBtn" value="삭제" >
+		<input type="hidden" name="pg" id="pg" value="1">
 		</c:if>
 	</div>
 	<div style="margin-top: 40px;"></div>
 </form>
 </div>
-
+<input type="hidden" id="classify" value="${classify}">
 <input type="hidden" id="hiddenCode" value="${code}">
-<script src="../semantic/semantic.min.js"></script>
 <script src="../js/C_QnA_js.js?ver=1"></script>
-
 </body>
 </html>

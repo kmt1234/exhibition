@@ -57,7 +57,7 @@ left: 0px;
             	<a class="item" href="/exhibition/login/mypage.do">마이페이지</a>
             </c:if>
             <c:if test="${code == '3' }">
-              	<a class="item" href="C_mainImageboardForm.do">게시판 추가</a>
+              	<a class="item" href="C_mainImageboardForm.do?postSelect=0">게시판 추가</a>
            		<a class="item" href="C_salesExhibitionView.do">매출 현황</a>
            		<a class="item" href="C_memberShib.do">회원리스트</a>
            	</c:if>	
@@ -67,11 +67,11 @@ left: 0px;
 	<div class="ui compact menu" style="width: 930px; min-height:900px auto;  display: inline-block;" >
 			<div style="width: 100%; text-align: left;">
 				<h2 class="box-container" style="float: center; width: 100%; height:126px; text-align: left;">
-					<span>이벤트</span>
-					<span class="h-light">업로드</span>
+					<span>게시판</span>
+					<span class="h-light">추가</span>
 					<div style="font-size:13px; float:right; height: 50px; margin-top:30px ">
 						<img src="../img/house.png" width="15px" height="16px" style="cursor: pointer;" id="houseImg"></img>
-						> 고객센터 > 게시판추가 > 작성
+						> 고객센터 > 게시판추가
 					</div>
 					<div class="ui divider"></div> 
 				</h2>

@@ -51,6 +51,7 @@
 		  	</div>
   		</div>
   	</div>
+  	<div id="dateDiv"></div>
   	<br>
   	<!-- 클릭시를 위한것 아직은 시행안했음 -->
   	<div style="width: 100%; text-align: left; margin-top: 20px;display: inline-block; ">
@@ -60,7 +61,7 @@
 			</div>
 		  	<div class="ui inverted input" style="width: 100%;">
 				<div class="ui left icon input  focus" style="width: 400px;  height: 50px;">
-					<input type="text" name="eventLink" id="eventLink" placeholder="박람회 링크">
+					<input type="text" name="eventLink" id="eventLink" value="http://">
 					<i class="user icon"></i>
 				</div>
 		  	</div>
@@ -82,6 +83,7 @@
 		  	</div>
   		</div>
   	</div>
+  	<div id="timeDiv"></div>
   	<br>
   	<!-- 부스번호 -->
   	<div style="width: 100%; text-align: left; margin-top: 20px;display: inline-block; ">
@@ -91,12 +93,13 @@
 			</div>
 		  	<div class="ui inverted input" style="width: 100%;">
 				<div class="ui left icon input focus" style="width: 400px;  height: 50px;">
-					<input type="text" name="eventPlace" id="eventPlace" placeholder="행사위치">
+					<input type="text" name="eventPlace" id="eventPlace" placeholder="ex. 1층">
 					<i class="user icon"></i>
 				</div>
 		  	</div>
   		</div>
   	</div>
+  	<div id="placeDiv"></div>
   	<br>
   	<!-- 티켓 금액-->
   	<div style="width: 100%; text-align: left; margin-top: 20px;display: inline-block; ">
@@ -106,12 +109,13 @@
 			</div>
 		  	<div class="ui inverted input" style="width: 100%;">
 				<div class="ui left icon input focus" style="width: 400px; height: 50px;">
-					<input type="text" name="eventPrice" id="eventPrice" placeholder="티켓 금액">
+					<input type="text" name="eventPrice" id="eventPrice" placeholder="ex. 5000">
 					<i class="user icon"></i>
 				</div>
 		  	</div>
   		</div>
   	</div>
+  	<div id="priceDiv"></div>
   	<br>
   	<!-- 관람인원 -->
   	<div style="width: 100%; text-align: left; margin-top: 20px;display: inline-block; ">
@@ -121,12 +125,13 @@
 			</div>	
 		  	<div class="ui inverted input" style="width: 100%;">
 				<div class="ui left icon input focus" style="width: 400px; height: 50px;">
-					<input type="text" name="eventSeats" id="eventSeats" placeholder="관람인원">
+					<input type="text" name="eventSeats" id="eventSeats" placeholder="ex. 10000">
 					<i class="user icon"></i>
 				</div>
 		  	</div>
   		</div>
   	</div>
+  	<div id="seatsDiv"></div>
   	<br>
   	<!-- 관람등급 -->
   	<div style="width: 100%; text-align: left; margin-top: 20px;display: inline-block; ">
@@ -136,7 +141,7 @@
 			</div>	
 		  	<div class="ui inverted input" style="width: 100%;">
 				<div class="ui left icon input focus" style="width: 400px; height: 50px;">
-					<input type="text" name="eventRate" placeholder="관람등급">
+					<input type="text" name="eventRate" placeholder="ex. 15세">
 					<i class="user icon"></i>
 				</div>
 		  	</div>
@@ -156,5 +161,6 @@
 		  	</div>
   		</div>
   	</div>
+  	<div id="warnningDiv"></div>
   	<br><br>
 </div><!--수정영역 텍스트필드-->

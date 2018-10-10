@@ -1,6 +1,5 @@
 package customerService.dao;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -21,9 +20,9 @@ import customerService.bean.SalesConcertHallDTO;
 import customerService.bean.SalesExhibitionDTO;
 import member.bean.MemberDTO;
 import performance.bean.Book_exhibition_membersDTO;
-import performance.bean.Book_performance_membersDTO;
-import rental.bean.ExhibitionDTO;
+import rental.bean.BusinessRoomDTO;
 import rental.bean.ConcertHallDTO;
+import rental.bean.ExhibitionDTO;
 
 @Transactional
 @Component
@@ -111,7 +110,6 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	public void C_QnA_checkWrite(Map<String, String> map) {
 		sqlSession.insert("customerServiceSQL.C_QnA_checkWrite", map);		
 	}
-	
 	// 자주 묻는 질문 관리자가 삭제하기
 	public void C_QnA_Delete(List<Integer> list) {
 		sqlSession.delete("customerServiceSQL.C_QnA_Delete", list);
@@ -145,7 +143,7 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	
 	
 	
-	/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~```*/
+	/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 	
 	
 	
@@ -177,7 +175,7 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	}
 	
 	//메인(슬라이드 이미지 불러오기)
-	public List<ImageboardDTO> getImageboardSlide(List<String> list) {
+	public List<ImageboardDTO> getImageboardSlide(List<Integer> list) {
 		return sqlSession.selectList("customerServiceSQL.getImageboardSlide",list);
 	}
 	
@@ -258,98 +256,98 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 		sqlSession.update("customerServiceSQL.C_hotelboardMod", hotelboardDTO);	
 	}
 
-	//박람회 부스 매출가져오기
-	public List<SalesExhibitionDTO> getSalesExhibition(String salesMon) {
-		return sqlSession.selectList("customerServiceSQL.getSalesExhibition", salesMon);
-	}
-	
-	//박람회 부스 총매출액가져오기
-	public int getSalesTotalRentExhibition(String salesMon) {
-		if(sqlSession.selectOne("customerServiceSQL.getSalesTotalRentExhibition", salesMon)==null) {
-			return 0;
-		} else {
-			return sqlSession.selectOne("customerServiceSQL.getSalesTotalRentExhibition", salesMon);
-		}
-	}
-	
-	//박람회 년 월 부스별 총 매출 가져오기
-	public List<SalesExhibitionDTO> getYearMonthSalesExhibition(Map<String, String> map) {
-		return sqlSession.selectList("customerServiceSQL.getYearMonthSalesExhibition", map);
-		
-	}
-	
-	//콘서트 홀 매출 가져오기
-	public List<SalesConcertHallDTO> getSalesConcertHall(String salesMon) {
-		return sqlSession.selectList("customerServiceSQL.getSalesConcertHall", salesMon);
-	}
-	
-	//콘서트 홀 총 매출액 가져오기
-	public int getSalesTotalRentConcertHall(String salesMon) {
-		if(sqlSession.selectOne("customerServiceSQL.getSalesTotalRentConcertHall", salesMon)==null) {
-			return 0;
-		} else {
-			return sqlSession.selectOne("customerServiceSQL.getSalesTotalRentConcertHall", salesMon);
-		}
-	}
-	
-	//콘서트 홀 년 월 부스별 총 매출 가져오기
-	public List<SalesConcertHallDTO> getYearMonthSalesConcertHall(Map<String, String> map) {
-		return sqlSession.selectList("customerServiceSQL.getYearMonthSalesConcertHall", map);
-	}
-	
-	//비즈니스룸 매출가져오기
-	public List<SalesBusinessRoomDTO> getSalesBusinessRoom(String salesMon) {
-		return sqlSession.selectList("customerServiceSQL.getSalesBusinessRoom", salesMon);
-	}
-	
-	//비즈니스룸 총 매출액 가져오기
-	public int getSalesTotalRentBusinessRoom(String salesMon) {
-		if(sqlSession.selectOne("customerServiceSQL.getSalesTotalRentBusinessRoom", salesMon)==null) {
-			return 0;
-		} else {
-			return sqlSession.selectOne("customerServiceSQL.getSalesTotalRentBusinessRoom", salesMon);
-		}
-	}
-	//비즈니스룸 년 월 룸별 총 매출 가져오기
-	public List<SalesBusinessRoomDTO> getYearMonthBusinessRoom(Map<String, String> map) {
-		return sqlSession.selectList("customerServiceSQL.getYearMonthBusinessRoom", map);
-	}
-	
-	
-	//콘서트 티켓 매출 가져오기
-	public List<EventboardDTO> getSalesConcertTicket(String salesMon) {
-		return sqlSession.selectList("customerServiceSQL.getSalesConcertTicket", salesMon);
-	}
-	//콘서트 티켓 총 매출액
-	public int getSalesTotalRentConcertTicket(String salesMon) {
-		if(sqlSession.selectOne("customerServiceSQL.getSalesTotalRentConcertTicket", salesMon)==null) {
-			return 0;
-		} else {
-			return sqlSession.selectOne("customerServiceSQL.getSalesTotalRentConcertTicket", salesMon);
-		}
-	}
-	//콘서트 티켓 년 월 총 매출 가져오기
-	public List<EventboardDTO> getYearMonthConcertTicket(Map<String, String> map) {
-		return sqlSession.selectList("customerServiceSQL.getYearMonthConcertTicket", map);
-	}
-	
-	//박람회 티켓 매출 가져오기
-	public List<EventboardDTO> getSalesExhibitionTicket(String salesMon) {
-		return sqlSession.selectList("customerServiceSQL.getSalesExhibitionTicket", salesMon);
-	}
-	
-	//박람회 티켓 총 매출액
-	public int getSalesTotalRentExhibitionTicket(String salesMon) {
-		if(sqlSession.selectOne("customerServiceSQL.getSalesTotalRentExhibitionTicket", salesMon)==null) {
-			return 0;
-		} else {
-			return sqlSession.selectOne("customerServiceSQL.getSalesTotalRentExhibitionTicket", salesMon);
-		}
-	}
-	//박람회 티켓 년 월 총 매출 가져오기
-	public List<EventboardDTO> getYearMonthExhibitionTicket(Map<String, String> map) {
-		return sqlSession.selectList("customerServiceSQL.getYearMonthExhibitionTicket", map);
-	}
+	   //박람회 부스 매출가져오기
+	   public List<SalesExhibitionDTO> getSalesExhibition(String salesMon) {
+	      return sqlSession.selectList("customerServiceSQL.getSalesExhibition", salesMon);
+	   }
+	   
+	   //박람회 부스 총매출액가져오기
+	   public int getSalesTotalRentExhibition(String salesMon) {
+	      if(sqlSession.selectOne("customerServiceSQL.getSalesTotalRentExhibition", salesMon)==null) {
+	         return 0;
+	      } else {
+	         return sqlSession.selectOne("customerServiceSQL.getSalesTotalRentExhibition", salesMon);
+	      }
+	   }
+	   
+	   //박람회 년 월 부스별 총 매출 가져오기
+	   public List<SalesExhibitionDTO> getYearMonthSalesExhibition(Map<String, String> map) {
+	      return sqlSession.selectList("customerServiceSQL.getYearMonthSalesExhibition", map);
+	      
+	   }
+	   
+	   //콘서트 홀 매출 가져오기
+	   public List<SalesConcertHallDTO> getSalesConcertHall(String salesMon) {
+	      return sqlSession.selectList("customerServiceSQL.getSalesConcertHall", salesMon);
+	   }
+	   
+	   //콘서트 홀 총 매출액 가져오기
+	   public int getSalesTotalRentConcertHall(String salesMon) {
+	      if(sqlSession.selectOne("customerServiceSQL.getSalesTotalRentConcertHall", salesMon)==null) {
+	         return 0;
+	      } else {
+	         return sqlSession.selectOne("customerServiceSQL.getSalesTotalRentConcertHall", salesMon);
+	      }
+	   }
+	   
+	   //콘서트 홀 년 월 부스별 총 매출 가져오기
+	   public List<SalesConcertHallDTO> getYearMonthSalesConcertHall(Map<String, String> map) {
+	      return sqlSession.selectList("customerServiceSQL.getYearMonthSalesConcertHall", map);
+	   }
+	   
+	   //비즈니스룸 매출가져오기
+	   public List<SalesBusinessRoomDTO> getSalesBusinessRoom(String salesMon) {
+	      return sqlSession.selectList("customerServiceSQL.getSalesBusinessRoom", salesMon);
+	   }
+	   
+	   //비즈니스룸 총 매출액 가져오기
+	   public int getSalesTotalRentBusinessRoom(String salesMon) {
+	      if(sqlSession.selectOne("customerServiceSQL.getSalesTotalRentBusinessRoom", salesMon)==null) {
+	         return 0;
+	      } else {
+	         return sqlSession.selectOne("customerServiceSQL.getSalesTotalRentBusinessRoom", salesMon);
+	      }
+	   }
+	   //비즈니스룸 년 월 룸별 총 매출 가져오기
+	   public List<SalesBusinessRoomDTO> getYearMonthBusinessRoom(Map<String, String> map) {
+	      return sqlSession.selectList("customerServiceSQL.getYearMonthBusinessRoom", map);
+	   }
+	   
+	   
+	   //콘서트 티켓 매출 가져오기
+	   public List<EventboardDTO> getSalesConcertTicket(String salesMon) {
+	      return sqlSession.selectList("customerServiceSQL.getSalesConcertTicket", salesMon);
+	   }
+	   //콘서트 티켓 총 매출액
+	   public int getSalesTotalRentConcertTicket(String salesMon) {
+	      if(sqlSession.selectOne("customerServiceSQL.getSalesTotalRentConcertTicket", salesMon)==null) {
+	         return 0;
+	      } else {
+	         return sqlSession.selectOne("customerServiceSQL.getSalesTotalRentConcertTicket", salesMon);
+	      }
+	   }
+	   //콘서트 티켓 년 월 총 매출 가져오기
+	   public List<EventboardDTO> getYearMonthConcertTicket(Map<String, String> map) {
+	      return sqlSession.selectList("customerServiceSQL.getYearMonthConcertTicket", map);
+	   }
+	   
+	   //박람회 티켓 매출 가져오기
+	   public List<EventboardDTO> getSalesExhibitionTicket(String salesMon) {
+	      return sqlSession.selectList("customerServiceSQL.getSalesExhibitionTicket", salesMon);
+	   }
+	   
+	   //박람회 티켓 총 매출액
+	   public int getSalesTotalRentExhibitionTicket(String salesMon) {
+	      if(sqlSession.selectOne("customerServiceSQL.getSalesTotalRentExhibitionTicket", salesMon)==null) {
+	         return 0;
+	      } else {
+	         return sqlSession.selectOne("customerServiceSQL.getSalesTotalRentExhibitionTicket", salesMon);
+	      }
+	   }
+	   //박람회 티켓 년 월 총 매출 가져오기
+	   public List<EventboardDTO> getYearMonthExhibitionTicket(Map<String, String> map) {
+	      return sqlSession.selectList("customerServiceSQL.getYearMonthExhibitionTicket", map);
+	   }
 	
 	//회원정보 불러오기
 	public List<MemberDTO> getMemberList(Map<String, Integer> map) {
@@ -374,6 +372,10 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	//연극뷰
 	public List<Book_exhibition_membersDTO> getPerformanceView(String M_Id) {
 		return sqlSession.selectList("customerServiceSQL.getPerformanceView",M_Id);
+	}
+	//비즈니스뷰
+	public List<BusinessRoomDTO> getBusinessRoomView(String M_Id) {
+		return sqlSession.selectList("customerServiceSQL.getBusinessRoomView",M_Id);
 	}
 	
 	//사업자 정보 불러오기
@@ -428,7 +430,6 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	//박람회 일자별 DB 등록 메소드 
 	public void eventInfoWrite_exhibition_bookDB(ExhibitionBookDTO exhibitionBookDTO) {
 		sqlSession.insert("customerServiceSQL.eventInfoWrite_exhibition_bookDB", exhibitionBookDTO);
-		
 	}
 		
 	//연극 수정할때 예매일자별 날려버리기
@@ -454,17 +455,20 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	public void C_exhibitionboardBookDel(EventboardDTO eventboardDTO) {
 		sqlSession.delete("customerServiceSQL.C_exhibitionboardBookDel", eventboardDTO);	
 	}
-
 	public List<Book_exhibition_membersDTO> getMemberView(String M_Id) {
 		return sqlSession.selectList("customerServiceSQL.getMemberView",M_Id);
 	}
 	
-		//회원 예약 취소
+	//회원 예약 취소
 	public void memberExTicketDelete(int seq) {
 		sqlSession.delete("customerServiceSQL.memberExTicketDelete",seq);
 	}
 	public void memberPerTicketDelete(int seq) {
 		sqlSession.delete("customerServiceSQL.memberPerTicketDelete",seq);
+	}
+	public void memberBusinessTicketDelete(int seq) {
+		System.out.println(seq);
+		sqlSession.delete("customerServiceSQL.memberBusinessTicketDelete",seq);
 		
 	}
 	
@@ -478,18 +482,25 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	}
 	
 	//전시회 층 예약 중복 체크
-	public EventboardDTO checkReservation_exhibition(Map<String, String> map) {
-		return sqlSession.selectOne("customerServiceSQL.checkReservation_exhibition", map);
+	public List<EventboardDTO> checkReservation_exhibition(Map<String, String> map) {
+		return sqlSession.selectList("customerServiceSQL.checkReservation_exhibition", map);
 	}
 	
 	//연극 공연장 예약 중복 체크
-	public EventboardDTO checkReservation_performance(Map<String, String> map) {
-		return sqlSession.selectOne("customerServiceSQL.checkReservation_performance", map);
+	public List<EventboardDTO> checkReservation_performance(Map<String, String> map) {
+		return sqlSession.selectList("customerServiceSQL.checkReservation_performance", map);
+	}
+	
+	//박람회 수정하기위해 일단 날짜 초기화
+	public void eventboardModDelete(String seq) {
+		sqlSession.update("customerServiceSQL.eventboardModDelete",seq);
+	}
+	
+	//공연 수정하기위해 일단 날짜 초기화
+	public void eventboard_playModDelete(String seq) {
+		sqlSession.update("customerServiceSQL.eventboard_playModDelete",seq);
 	}
 	
 	
-	
-	
-
 	
 }

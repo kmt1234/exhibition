@@ -74,7 +74,6 @@ public class MemberController {
 		
 		if(memberDTO == null) return "not_exist";
 		else {
-			System.out.println(memberDTO.getM_Id());
 			return memberDTO.getM_Id();
 		}  
 	}
@@ -141,6 +140,19 @@ public class MemberController {
 		return mav;
 	}
 	
+	//개인회원 인증번호 발송 시, 회원의 아이디 및 이메일 일치 여부 확인
+	@RequestMapping(value="verifyNumEmailCheck", method=RequestMethod.POST)
+	public @ResponseBody String verifyNumEmailCheck(@RequestParam String M_Id, @RequestParam String M_Email) {
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("M_Id", M_Id);
+		map.put("M_Email", M_Email);
+		
+		//DB
+		MemberDTO memberDTO = memberDAO.verifyNumEmailCheck(map);
+		
+		if(memberDTO==null) return "not_exist";
+		else return "exist";
+	}
 	
 	
 	@RequestMapping(value="costomerServiceForm",method=RequestMethod.GET)
