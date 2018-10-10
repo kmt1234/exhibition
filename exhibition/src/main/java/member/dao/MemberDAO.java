@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import customerService.bean.EventboardDTO;
+import customerService.bean.SalesBusinessRoomDTO;
 import member.bean.MemberDTO;
 import performance.bean.Book_performance_membersDTO;
 
@@ -44,6 +45,12 @@ public interface MemberDAO {
 	public int backExhibition(Map<String, String> map);		//전시회 예매티켓 수정
 
 	public MemberDTO verifyNumEmailCheck(Map<String, String> map);	//개인회원 인증번호 발송 시, 회원의 아이디 및 이메일 일치 여부 확인
+
+	public int getBusinessHistoryListTotalA(Map<String, String> map);	//비지니스룸 내역 총 글수 가져오는 메소드
+
+	public List<SalesBusinessRoomDTO> getBusinessHistoryList(Map<String, String> map); //마이페이지-비지니스룸 내역 불러오는 메소드(ajax)
+	
+	public int deleteBusinessRoom(Map<String, String> map);	//마이페이지-비지니스룸 삭제 메소드(ajax)
 
 	
 	

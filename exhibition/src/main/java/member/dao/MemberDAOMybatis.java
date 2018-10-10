@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import customerService.bean.EventboardDTO;
+import customerService.bean.SalesBusinessRoomDTO;
 import member.bean.MemberDTO;
 import performance.bean.Book_performance_membersDTO;
 
@@ -115,6 +116,21 @@ public class MemberDAOMybatis implements MemberDAO {
 	public MemberDTO verifyNumEmailCheck(Map<String, String> map) {
 		return sqlSession.selectOne("memberSQL.verifyNumEmailCheck", map);
 		
+	}
+	
+	//비지니스룸 내역 총 글수 가져오는 메소드
+	public int getBusinessHistoryListTotalA(Map<String, String> map) {
+		return sqlSession.selectOne("getBusinessHistoryListTotalA", map);
+	}
+
+	//마이페이지-비지니스룸 내역 불러오는 메소드(ajax)
+	public List<SalesBusinessRoomDTO> getBusinessHistoryList(Map<String, String> map) {
+		return sqlSession.selectList("getBusinessHistoryList",map);
+	}
+	
+	//마이페이지-비지니스룸 삭제 메소드(ajax)
+	public int deleteBusinessRoom(Map<String, String> map) {
+		return sqlSession.delete("deleteBusinessRoom", map);
 	}
 
 	

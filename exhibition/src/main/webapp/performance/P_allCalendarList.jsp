@@ -99,6 +99,6 @@ function performancePaging(pg){
 	location.href="/exhibition/performance/P_allScheduleList.do?pg="+pg;
 }
 </script>
-</body>
 
+</body>
 </html>
