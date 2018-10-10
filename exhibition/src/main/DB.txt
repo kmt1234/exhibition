@@ -277,7 +277,8 @@ create table mainSlideDB(
 create sequence seq_mainSlideDB NOCACHE nocycle;
 
 
-insert into roomRate values('Room1', 15000);
+
+
 insert into roomRate values('Room2', 13000);
 insert into roomRate values('Room3', 12000);
 insert into roomRate values('Room4', 14000);

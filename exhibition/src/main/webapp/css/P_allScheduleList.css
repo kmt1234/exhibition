@@ -55,3 +55,7 @@ p:hover{
     height: 25px;
     width: 465px;
 }
+#houseImg{
+	margin:-3px;
+	cursor: pointer;
+}

@@ -87,6 +87,10 @@ body {
 	max-width: 880px;
 	margin: 0 auto;
 }
+#houseImg{
+	margin:-3px;
+	cursor: pointer;
+}
 </style>
 </head>
 
@@ -128,4 +132,5 @@ body {
 		<br><br><br><br>
 		<div  id='calendar'></div>
 </body>
+<script src="../js/traffic.js"></script>
 </html>
