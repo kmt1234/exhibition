@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <style>
 .ui.inverted.divider {
     margin: 5px 0;
@@ -75,11 +75,13 @@ div#uiStatistics {
 	</h2>
 	<div style="width: 100%;">
 		<!-- 맨위 메뉴 텝 -->
-		<div style="margin-left: 20px; width:880px; float: left; text-align: left;">
-		  	<a class="middle ui button" class="item" id="member-ticket-list">예매리스트</a>
-		  	<a class="middle ui button" class="item" id="member-ticket-history">예매 내역</a>
-		  	<a class="middle ui button" class="item" id="member-business-List">비지니스 룸 내역</a>
-		</div>
+		<c:if test="${code != 3 }">
+			<div style="margin-left: 20px; width:880px; float: left; text-align: left;">
+			  	<a class="middle ui button" class="item" id="member-ticket-list">예매리스트</a>
+			  	<a class="middle ui button" class="item" id="member-ticket-history">예매 내역</a>
+			  	<a class="middle ui button" class="item" id="member-business-List">비지니스 룸 내역</a>
+			</div>
+		</c:if>
 		<!-- 메인메뉴 -->
 		<div class="" id="modify-Div" style="margin-left: 20px; float: left;" >
 			<div>
