@@ -63,7 +63,7 @@ div#uiStatistics {
 }
 
 .result{
-   color: green;
+/*    color: green; */
    cursor: pointer;
 }
 </style>
@@ -235,33 +235,38 @@ div#uiStatistics {
 <!-- <script src="../js/memberMypage.js?ver=1"></script> -->
 <script>
 $(document).ready(function(){
-   $('.tr').remove();   //리스트 내용 초기화
+	 
+	var date = new Date();
+     var year = date.getFullYear();
+     var month = date.getMonth()+1;
+     var day = date.getDate();
+    
+     if ((day+"").length < 2) {
+        day = "0" + day;
+     }
+     
+	//예매일자(오늘일 경우 환불불가)
+    var fullDate = parseInt(year+''+month+''+day);
+    var compareDate = '';
+    var ing = '';
+    
+    console.log(fullDate); //오늘날짜
+	
+	$('.tr').remove();   //리스트 내용 초기화
    
    $.ajax({
       type : 'GET',
       url : '/exhibition/login/memberBusinessRoom.do?pg='+$('#pg').val()+'',
       dataType : 'json',
+      async : false,
       success : function(data){
          //alert(JSON.stringify(data));
-         
-         var date = new Date();
-          var year = date.getFullYear();
-          var month = date.getMonth()+1;
-          var day = date.getDate();
-         
-          if ((day+"").length < 2) {
-             day = "0" + day;
-          }
-          //예매일자(오늘일 경우 환불불가)
-          var fullDate = year+''+month+''+day;
-          var compareDate = '';
-         console.log(fullDate); //오늘날짜
-         
+
          //예매시간 
          var time = '';
          
          $.each(data.list, function(index, item){
-            
+        	 
             if(item.first=='Y'){
                time = '09:00~12:00';
             }else if(item.second=='Y'){
@@ -273,12 +278,14 @@ $(document).ready(function(){
             }
             
             //예매한 날짜
-            compareDate = item.startDate.replace(/-/gi,'');
+            compareDate = parseInt(item.startDate.replace(/-/gi,''));
             
             if(compareDate > fullDate){
-               compareDate = 'O';
+               ing = '<font color="green">O</font>';
+               
             }else if(compareDate <= fullDate){
-               compareDate = 'X';
+               ing = '<font color="red">X</font>';
+                       
             }
             
             $('<tr/>',{
@@ -296,40 +303,49 @@ $(document).ready(function(){
                class : 'time',
                value : time
             })).append($('<td/>',{
-               text : compareDate,
+               html : ing,
                class : 'result',
                value : item.seq
             })).appendTo($('#businessList'));
+
          });//each
-         
+
          $('#paging').html(data.memberBuisnessListPaging.pagingHTML);
+
       }//success
    });//ajax
    
    //예약 취소
    var seq='';
-   $('#businessList').on('click','.result',function(){
-      var result = confirm('취소 하시겠습니까?');
-      seq = $(this).attr('value');
-      //시퀀스 확인()
-      console.log('시퀀스 : '+seq);
-      
-      if(result){
-         $.ajax({
-            type : 'GET',
-            url : '/exhibition/login/memberBusinessRoomCancel.do?seq='+seq,
-            dataType : 'text',
-            success : function(data){
-               if(data=='deleteOk'){
-                  alert('취소되었습니다');
-                  location.href='/exhibition/login/memberBusinessRoomList.do';
-               }else{
-                  alert('에러 발생. 관리자에게 문의바람');
-                  location.href='/exhibition/login/memberBusinessRoomList.do';
-               }
-            }//success
-         });//ajax
-      }//if
+   $('#businessList').on('click','.result',function(){ 
+	 	   
+	 if($(this).prev().prev().text().replace(/-/gi,'') <= fullDate){
+		 alert('취소할 수 없습니다');
+	 }else{
+		 var result = confirm('취소 하시겠습니까?');
+	      seq = $(this).attr('value');
+	      
+	      //시퀀스 확인()
+	      console.log('시퀀스 : '+seq);
+	      
+	      if(result){
+	    	  $.ajax({
+	            type : 'GET',
+	            url : '/exhibition/login/memberBusinessRoomCancel.do?seq='+seq,
+	            dataType : 'text',
+	            success : function(data){
+	               if(data=='deleteOk'){
+	                  alert('취소되었습니다');
+	                  location.href='/exhibition/login/memberBusinessRoomList.do';
+	               }else{
+	                  alert('에러 발생. 관리자에게 문의바람');
+	                  location.href='/exhibition/login/memberBusinessRoomList.do';
+	               }
+	            }//success
+	         });//ajax
+	      }//if 
+	 }
+	 
    });
    
    //예매리스트ㄹㄹ
@@ -388,10 +404,10 @@ $('.tr').remove();   //리스트 내용 초기화
             compareDate = item.startDate.replace(/-/gi,'');
             
             if(compareDate > fullDate){
-               compareDate = 'O';
-            }else if(compareDate <= fullDate){
-               compareDate = 'X';
-            }
+                compareDate = '<font color="green">O</font>';
+             }else if(compareDate <= fullDate){
+                compareDate = '<font color="red">X</font>';
+             }
             
             $('<tr/>',{
                class : 'tr'
@@ -408,15 +424,157 @@ $('.tr').remove();   //리스트 내용 초기화
                class : 'time',
                value : time
             })).append($('<td/>',{
-               text : compareDate,
+               html : compareDate,
                class : 'result',
                value : item.seq
             })).appendTo($('#businessList'));
          });//each
          
          $('#paging').html(data.memberBuisnessListPaging.pagingHTML);
+         
       }//success
    });//ajax
-   
+ 
 }
+</script>
+<script>
+$(document).ready(function(){
+	var Mm_regPwd = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-]|.*[0-9]).{6,24}$/;	//6-24자리 영문대소문자or숫자or특수기호
+	var Mm_regEmail = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/; //이메일 양식
+	var Mm_regPhone =  /^((01[1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})$/;
+	
+	
+	var pwd1 = '';
+	//1차 비밀번호 입력 시, 
+	$('#M-modify-pwd').blur(function(){
+		if(!Mm_regPwd.test($('#M-modify-pwd').val())){
+			$('.M-modify-pwd-Span').text('비밀번호는 6-24자 영문 대소문자 입니다').css('color','red').css('font-size','10px');
+			$('#M-modify-pwd').css({'border':'1px solid red', 'background-color':'#f4d2d2'});
+			pwd1 = 'fail';
+		}else{
+			$('.M-modify-pwd-Span').text('');
+			$('#M-modify-pwd').css({'border':'1px solid green', 'background-color':'#e3fce6'});
+			pwd1 = 'success';
+		}
+	});
+	
+	var pwd2 = '';
+	//2차 비밀번호 입력 시,
+	$('#M-modify-pwd2').blur(function(){
+		if(!Mm_regPwd.test($('#M-modify-pwd2').val())){
+			$('.M-modify-pwd2-Span').text('비밀번호는 6-24자 영문 대소문자 입니다').css('color','red').css('font-size','10px');
+			$('#M-modify-pwd2').css({'border':'1px solid red', 'background-color':'#f4d2d2'});
+			pwd2 = 'fail';
+		}else if($('#M-modify-pwd2').val()!=$('#M-modify-pwd').val()){
+			$('.M-modify-pwd2-Span').text('비밀번호가 일치하지 않습니다').css('color','white').css('font-size','10px');
+			$('#M-modify-pwd2').css({'border':'1px solid red', 'background-color':'#f4d2d2'});
+			pwd2 = 'fail';
+		}else{
+			$('.M-modify-pwd2-Span').text('');
+			$('#M-modify-pwd2').css({'border':'1px solid green', 'background-color':'#e3fce6'});
+			pwd2 = 'success';
+		}
+	});
+	
+	var phone='success';
+	//핸드폰 입력 시,
+	$('#M-modify-phone').blur(function(){
+		if(!Mm_regPhone.test($('#M-modify-phone').val())){
+			$('.M-modify-phone-Span').text('핸드폰 번호 양식이 맞지 않습니다').css('color','red').css('font-size','10px');
+			$('#M-modify-phone').css({'border':'1px solid red', 'background-color':'#f4d2d2'});
+			phone = 'fail';
+		}else{
+			$('.M-modify-phone-Span').text('');
+			$('#M-modify-phone').css({'border':'1px solid green', 'background-color':'#e3fce6'});
+			phone = 'success';
+		}
+	});
+	
+	var email='success';
+	//이메일 입력 시,
+	$('#M-modify-email').blur(function(){
+		if(!Mm_regEmail.test($('#M-modify-email').val())){
+			$('.M-modify-email-Span').text('이메일 양식이 맞지 않습니다').css('color','red').css('font-size','10px');
+			$('#M-modify-email').css({'border':'1px solid red', 'background-color':'#f4d2d2'});
+			email = 'fail';
+		}else{
+			$('.M-modify-email-Span').text('');
+			$('#M-modify-email').css({'border':'1px solid green', 'background-color':'#e3fce6'});
+			email = 'success';
+		}
+	});
+	
+	
+	//수정
+	$('#M-modify-modify').click(function(){
+		if($('#M-modify-pwd').val()=='' || $('#M-modify-pwd2').val()==''){
+			$('.M-modify-result-Span').text('비밀번호를 입력하세요').css('color','red').css('font-size','10px');
+		}else if($('#M-modify-pwd').val() != $('#M-modify-pwd2').val()){
+			$('.M-modify-result-Span').text('비밀번호가 일치하지 않습니다').css('color','red').css('font-size','10px');
+		}else if($('#M-modify-phone').val()==''){
+			$('.M-modify-result-Span').text('핸드폰 번호 입력하세요').css('color','red').css('font-size','10px');
+		}else if($('#M-modify-email').val()==''){
+			$('.M-modify-result-Span').text('이메일 입력하세요').css('color','red').css('font-size','10px');
+		}else if(pwd1=='success' && pwd2=='success' && phone=='success' && email=='success'){			
+			$.ajax({
+				type : 'POST',
+				url : '/exhibition/member/memberModify.do',
+				data : {'M_Id':$('#M-modify-id-hidden').val(), 'M_Pwd':$('#M-modify-pwd').val(), 'M_Phone':$('#M-modify-phone').val(),'M_Email':$('#M-modify-email').val()},
+				dataType : 'text',
+				success : function(data){
+					
+					if(data=='modify'){
+						alert('수정되었습니다 다시 로그인 해주세요');
+						location.href='/exhibition/main/index.do';
+					}else{
+						alert('수정실패');
+						location.href='/exhibition/main/index.do';
+					}
+				}//success
+			});//ajax
+		}//if
+		
+	});
+	
+	
+	//취소 -> 메인으로
+	$('#M-modify-cancel').click(function(){
+		location.href="/exhibition/main/index.do";
+	});
+	
+	
+	//회원탈퇴버튼
+	$('.ui.modal3').hide();
+	$('#member-out').click(function(){
+		$('#M-modify-modify').hide();
+		$('.ui.modal3').show();
+	});
+	$('#out-no').click(function(){//아니오 클릭시
+		$('.ui.modal3').hide();
+		$('#M-modify-modify').show();
+	});
+	$('#out-yes').click(function(){//네 클릭시
+		$('.ui.basic.modal').modal({
+			closable : false,
+            duration : 460,
+		}).modal('show');
+	});
+	
+	$('#del_OK').click(function(){
+		$.ajax({
+				type : 'POST',
+				url : '/exhibition/member/deleteMember.do',
+				data : {'M_Id':$('#M-modify-id-hidden').val(),'M_Pwd':$('#del_pass').val()},
+				dataType : 'text',
+				success : function(data){
+					if(data=='exist'){
+						location.href='/exhibition/member/outComplete.do';
+					}else if(data=='not_exist'){
+						$('#del_check').text("비밀번호가 틀렸습니다.").css("font-size","12px").css("color","red").css("margin-left","24%").css("margin-top","2%");
+						$('.ui.basic.modal').modal('show');
+					}
+				}//success
+		});
+	});
+});
 </script>

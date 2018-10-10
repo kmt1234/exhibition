@@ -916,7 +916,7 @@ public class CustomerServiceController {
 			for (int i = 0; i < str.length; i++) {
 				ImageboardDTO imageboardDTO = new ImageboardDTO();
 				imageboardDTO.setImage1(str[i]);
-				imageboardDTO.setEventLink("no_Link");
+				imageboardDTO.setEventLink("http://localhost:8080/exhibition/main/index.do");
 				
 				list.add(imageboardDTO);
 				
