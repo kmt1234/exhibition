@@ -164,7 +164,9 @@ div#uiStatistics {
 								<div class="ui two buttons">
 							    	<div class="middle ui button" id="M-modify-modify" style="width: 30%;">수정</div>
 							    	<div style="width: 5%;">&nbsp;</div>
-							    	<button class="middle ui button" id="member-out" style="width: 30%;">회원탈퇴</button>
+							    	<c:if test="${code != 3 }">
+							    		<button class="middle ui button" id="member-out" style="width: 30%;">회원탈퇴</button>
+							    	</c:if>
 							    	<div style="width: 5%;">&nbsp;</div>
 							        <div class="middle ui button" id="M-modify-cancel" style="width: 30%;">취소</div>
 							    </div>
@@ -177,6 +179,7 @@ div#uiStatistics {
 				</div><!--class="ui card"-->
 			</div><!--align="center"  -->
 		</div><!--id="modify-Div"  -->
+	<c:if test="${code != 3 }">	
 	<div id="memberTicketInformation" style="display: inline-block; border: 1px solid; margin-top:80px; width: 465px; height: 385px; overflow: scroll;">
 		
 		
@@ -221,6 +224,7 @@ div#uiStatistics {
 	
 	
 	</div><!--id="memberTicketInformation"-->
+	</c:if>
 </div>
 </div><!-- 전체 -->
 
