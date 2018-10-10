@@ -53,7 +53,37 @@
 	font-weight: bold;
 	cursor: pointer;
 }
+/* 큰제목 */
+.index_Search_title{
+	width: auto; 
+	margin-left:-20px; 
+	display: inline-block;
+	text-align: left; 
+	font-size: 25px
+}
+/* 제목사이 공간띄우기 */
+.space_border{
+	width:885px; 
+	margin-left:20px; 
+	margin-top: 40px; 
+	margin-bottom:40px; 
+	border-top:1px ridge rgb(155,155,155,.6);
+}
+/* 몇건인지 확인 */
+.totalCount{
+	display: inline-block;
+	text-align: left; 
+	font-size: 105x
+}
+.aaa{
+	color : #4169E1;
+	font-weight: 800;
+}
 
+.link:hover{
+	color: green;
+	cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -68,17 +98,14 @@
 			</div>
 			<div class="ui divider"></div> 
 		</h2>
-		<div style="width: 100%;" align="center" id="index_notice_div">
-		<div style="width: 400px; display: inline-block; text-align: left; font-size: 25px"><span>숙박</span></div>
-		<div style="width: 460px; display: inline-block; text-align: right;"></div>
-			<table style="width: 880px; height: 40px;" align="center" border="1"
-				bordercolor="#ec008c" cellpadding="2" frame="hsides" rules="rows"
-				id="index_hotel_list_PlusList" class="ui striped table">
-			</table>
-			<br>
+		<div style="width: 100%;" align="center" id="index_hotel_list_div">
+			<div class="index_Search_title" ><span>숙박</span></div>
+			<div class="totalCount" id="index_hotel_list_total" style="width: 333px;"></div>
+			<div style="width: 460px; display: inline-block; text-align: right;"></div>
+			<div style="width: 885px; height: auto; align:center;" id="index_hotel_list_PlusList" ></div>
 			<div id="index_hotel_list_PlusPagingDiv" class="ui center pagination menu"></div>
-			<br><br> 
 		</div>
+		<div class="space_border"></div>
 		</div>
 		<input type="hidden" name="index_keyword" id="index_keyword" value="${index_keyword}">
 		<input type="hidden" name="pg" id="pg" value="${pg}"> <br>

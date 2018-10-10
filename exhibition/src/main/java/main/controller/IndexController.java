@@ -1,6 +1,7 @@
 package main.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +20,7 @@ import customerService.bean.ImageboardDTO;
 import customerService.dao.CustomerServiceDAO;
 import main.bean.MainDTO;
 import main.bean.MainPaging;
+import main.bean.MainSlideDTO;
 import main.dao.MainDAO;;
 
 
@@ -60,10 +62,22 @@ public class IndexController {
 		}
 		
 		List<ImageboardDTO> list1= customerServiceDAO.getImageboardSlide(list);
-	
+		
+		//
+		Map<String,String> map = new HashMap<String,String>();
+		MainSlideDTO mainSlideDTO = new MainSlideDTO(); 
 		//mainSlideDB에 저장
 		for(int i=0; i<list1.size(); i++) {
-			mainDAO.inputMainSlideDB(list1.get(i).getImage1());
+			
+			//메인 이미지 슬라이드의 링크가 없을 시, 홈 주소를 설정 -> 제이쿼리에서 클릭 막을 예정
+			if(list1.get(i).getEventLink()==null || list1.get(i).getEventLink()=="") {
+				list1.get(i).setEventLink("http://localhost:8080/exhibition/main/index.do");
+			}
+			
+			mainSlideDTO.setImageName(list1.get(i).getImage1());
+			mainSlideDTO.setEventLink(list1.get(i).getEventLink());
+			
+			mainDAO.inputMainSlideDB(mainSlideDTO);
 		}
 		
 		model.addAttribute("list1",list1);
@@ -122,6 +136,7 @@ public class IndexController {
 		return mav; 
 	}
 	
+	
 	@RequestMapping(value="index_notice_Plus", method=RequestMethod.GET)
 	public ModelAndView index_notice_Plus(@RequestParam(required = false, defaultValue = "1") int pg, @RequestParam String index_keyword, Model model) {
 		model.addAttribute("pg", pg);
@@ -135,13 +150,13 @@ public class IndexController {
 	
 	// 메인 검색후  공지사항 더보기 버튼 클릭시 리스트 불러옴
 	@RequestMapping(value="index_notice_SearchPlus", method=RequestMethod.GET)
-	public ModelAndView index_notice_SearchPlus(@RequestParam(required = false) Map<String, String> map) {
+	public ModelAndView index_notice_SearchPlus(@RequestParam(required = false, defaultValue = "1") Map<String, String> map) {
 		int endNum = Integer.parseInt(map.get("pg")) * 10;
 		int startNum = endNum - 9;
 		
 		map.put("startNum", startNum + "");
 		map.put("endNum", endNum + "");
-
+		
 		
 		List<MainDTO> list = mainDAO.index_notice_Search(map);
 		
@@ -202,7 +217,7 @@ public class IndexController {
 	}
 	
 	// 메인 검색후  자주묻는 질문 더보기 버튼 클릭시 리스트 불러옴
-	@RequestMapping(value="index_QnA_SearchPlus", method=RequestMethod.POST)
+	@RequestMapping(value="index_QnA_SearchPlus", method=RequestMethod.GET)
 	public ModelAndView index_QnA_SearchPlus(@RequestParam(required = false) Map<String, String> map) {
 		int endNum = Integer.parseInt(map.get("pg")) * 10;
 		int startNum = endNum - 9;
@@ -308,7 +323,6 @@ public class IndexController {
 		List<MainDTO> list = mainDAO.index_eventboard_Search(map);
 		
 		int totalA = mainDAO.getTotal_index_eventboard_Search(map);
-		
 		
 		mainPaging.setCurrentPage(Integer.parseInt(map.get("pg")));
 		mainPaging.setPageBlock(3);

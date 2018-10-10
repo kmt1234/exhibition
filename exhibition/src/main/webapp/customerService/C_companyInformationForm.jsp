@@ -37,11 +37,11 @@
 	<div class="ui five column grid container">
 		<!-- 사이드바 메뉴 -->
 		<div class="ui compact menu" id="new1" style="width: 20%; height: 1030px;">
-			<a class="item" class="menu1" href="C_noticeForm.jsp">공지사항</a> 
-			<a class="item" class="menu1" href="C_emailConfirmForm.jsp">고객의소리</a> 
-			<a class="item" class="menu1" href="C_QnAForm.jsp">자주묻는 질문</a> 
-			<a class="item" class="menu1" href="C_contactListForm.jsp">주요시설 연락처</a> 
-			<a class="item" class="menu1" href="C_companyInformationForm.jsp">마이페이지</a>
+			<a class="item" class="menu1" href="/exhibition/customerService/C_noticeForm.do">공지사항</a> 
+			<a class="item" class="menu1" href="/exhibition/customerService/C_emailConfirmForm.do">고객의소리</a> 
+			<a class="item" class="menu1" href="/exhibition/customerService/C_QnAForm.do">자주묻는 질문</a> 
+			<a class="item" class="menu1" href="/exhibition/customerService/C_contactListForm.do">주요시설 연락처</a> 
+			<a class="item" class="menu1" href="/exhibition/customerService/C_companyInformationForm.do">마이페이지</a>
 			<a class="item" class="menu1" href="">게시판추가</a> 
 		</div>
 		<!-- 메인 화면 -->

@@ -73,16 +73,7 @@ function memberSearch(pg){
 	 	</a>
 	 </div>
 </div><br><br>
-<!-- <div id="labelList" class="ui labeled" style="width: 700px; margin-left: 20px; margin-top: 60px;">
-	<div  style="float: left; width: 870px;" >
-		<div  style="float: left; width: 180px; display: inline-block;">이름(사업자명)</div>
-		<div  style="float: left; width: 180px; display: inline-block;">아이디(사업자번호)</div>
-		<div  style="float: left; width: 180px; display: inline-block;">이메일</div>
-		<div  style="float: left; width: 180px; display: inline-block;">핸드폰(대표번호)</div>
-		<div  style="float: left; width: 100px; display: inline-block;">비고</div>
-		<div id="C_memberListFrom" style="margin-top: 35px;"></div>
-	</div>
-</div> -->
+
 <table class="ui striped table">
   <thead>
     <tr  align="center">

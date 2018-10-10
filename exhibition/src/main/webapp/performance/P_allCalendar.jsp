@@ -9,6 +9,7 @@
 <link href='../calendar2/fullcalendar.print.css' rel='stylesheet' media='print' />
 <script src='../calendar2/lib/moment.min.js'></script>
 <script src='../calendar2/fullcalendar.min.js'></script>
+<script src='../js/introduction.js'></script>
 <script type="text/javascript">
 var date = new Date(); 
 var year = date.getFullYear(); 

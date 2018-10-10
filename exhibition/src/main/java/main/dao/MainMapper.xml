@@ -9,15 +9,15 @@
  		select * from 
  		(select rownum rn, tt.* from 
  		(select * from C_notice where 
- 		 subject like '%'||#{index_keyword}||'%'or content like '%'||#{index_keyword}||'%'
+ 		 upper(subject) like '%'||upper(#{index_keyword})||'%'or upper(content) like '%'||upper(#{index_keyword})||'%'
  		 order by seq desc)tt) 
  		where rn between #{startNum} and #{endNum}
  	</select>
  	
  	<!-- 메인 공지사항 검색 총글수 -->
  	<select id="getTotal_index_notice_Search" parameterType="java.util.Map" resultType="int">
- 		select count(*) from C_notice where subject like '%'||#{index_keyword}||'%' or 
- 		content like '%'||#{index_keyword}||'%'
+ 		select count(*) from C_notice where upper(subject) like '%'||upper(#{index_keyword})||'%' or 
+ 		upper(content) like '%'||upper(#{index_keyword})||'%'
  	</select>
  	
  	<!-- 메인 자주묻는 질문 검색 -->
@@ -131,8 +131,9 @@
  	</select>
  	
  	<!--mainSlideDB에 저장 -->
- 	<insert id="inputMainSlideDB" parameterType="java.lang.String">
-		insert into mainSlideDB values(#{image1})
+ 	<insert id="inputMainSlideDB" parameterType="main.bean.MainSlideDTO">
+		insert into mainSlideDB(imageName,eventLink) values(#{imageName},#{eventLink})
+		
  	</insert>
  	
  	<!--mainSlideDB에서 이미지 슬라이드 가져오기  -->

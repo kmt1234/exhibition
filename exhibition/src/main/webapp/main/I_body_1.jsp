@@ -13,7 +13,7 @@
 	<div id="mainSlideDiv" class="slide" >
 		<ul id="mainSlideUl" >
 			<c:forEach items="${list1}" var="list1">
-				 <li style="display: inline-block;"><img class="pic" style="cursor:pointer; display:block; border:0;" src="../storage/${list1.image1}" ></li>
+				 <li style="display: inline-block;"><a class="slideAtag" target="_blank" href="${list1.eventLink }"><img class="pic" style="cursor:pointer; display:block; border:0;" src="../storage/${list1.image1}" ></a></li>
 			</c:forEach>
 		</ul>
 	</div>
@@ -23,7 +23,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js"></script>
 <script>
 $(document).ready(function(){
-
+	
 	 var current = 0;
 	 var max = 0;
 	 var container;

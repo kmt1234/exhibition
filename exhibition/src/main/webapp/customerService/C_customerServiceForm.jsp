@@ -45,9 +45,9 @@ left: 0px;
             	<a class="item" href="/exhibition/login/mypage.do">마이페이지</a>
             </c:if>
             <c:if test="${code == '3' }">
-              	<a class="item" href="C_mainImageboardForm.do?postSelect=0">게시판 추가</a>
-           		<a class="item" href="C_salesExhibitionView.do">매출 현황</a>
-           		<a class="item" href="C_memberShib.do">회원리스트</a>
+              	<a class="item" href="/exhibition/customerService/C_mainImageboardForm.do?postSelect=0">게시판 추가</a>
+           		<a class="item" href="/exhibition/customerService/C_salesExhibitionView.do">매출 현황</a>
+           		<a class="item" href="/exhibition/customerService/C_memberShib.do">회원리스트</a>
            	</c:if>	
 		</div>
 		</div>

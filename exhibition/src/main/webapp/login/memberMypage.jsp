@@ -78,6 +78,7 @@ div#uiStatistics {
 		<div style="margin-left: 20px; width:880px; float: left; text-align: left;">
 		  	<a class="middle ui button" class="item" id="member-ticket-list">예매리스트</a>
 		  	<a class="middle ui button" class="item" id="member-ticket-history">예매 내역</a>
+		  	<a class="middle ui button" class="item" id="member-business-List">비지니스 룸 내역</a>
 		</div>
 		<!-- 메인메뉴 -->
 		<div class="" id="modify-Div" style="margin-left: 20px; float: left;" >
@@ -226,8 +227,6 @@ div#uiStatistics {
 <input type="hidden" id="hiddenPlayDate" value="${playDate }">
 <input type="hidden" id="hiddenTicketQty" value="${ticketQty }">
 
-
-
 <script src="../js/memberMypage.js?ver=1"></script>
 <script>
 /*페이징 */
@@ -268,7 +267,6 @@ function MemberTicketListPaging(pg){
 /*페이징 */
 function TicketHistoryListPaging(pg){
 	$('.tr').remove();	//예매리스트 내용 초기화
-	
 	//과거 예매 내역 불러오는 ajax
 	$.ajax({
 		type : 'GET',
