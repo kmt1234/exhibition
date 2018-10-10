@@ -354,7 +354,9 @@ public class LoginController {
 	
 	//회원의 예매 리스트를 가져오는 ajax
 	@RequestMapping(value="getMemberTicketList", method=RequestMethod.GET)
-	public ModelAndView getMemberTicketList(@RequestParam(required = false, defaultValue = "1") String pg, HttpSession session) {
+	public ModelAndView getMemberTicketList(@RequestParam(required = false, defaultValue = "1") String pg, 
+											@RequestParam int code,
+											HttpSession session) {
 		MemberDTO memberDTO = (MemberDTO)session.getAttribute("homepageMember");
 		String id = memberDTO.getM_Id();
 		
@@ -383,16 +385,16 @@ public class LoginController {
 		mav.addObject("pg", pg);
 		mav.addObject("list", list);
 		mav.addObject("memberTicketListPaging", memberTicketListPaging);
-		mav.setViewName("jsonView");
-		
+		if(code != 3) {
+			mav.setViewName("jsonView");
+		}
 		if(list==null) {
 			mav.addObject("no_data", "no_data");
 			return mav;
 		} 
-		else {
 			return mav;
 		} 
-	}
+	
 	
 	//회원의 예매정보 상세보기
 	@RequestMapping(value="eventDetail", method=RequestMethod.POST)

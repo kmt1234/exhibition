@@ -249,6 +249,7 @@ div#uiStatistics {
 <input type="hidden" id="hiddenImageName" value="${imageName }">
 <input type="hidden" id="hiddenPlayDate" value="${playDate }">
 <input type="hidden" id="hiddenTicketQty" value="${ticketQty }">
+<input type="hidden" id="code" value="${code }">
 
 <script>
 /*페이징 */
