@@ -93,16 +93,10 @@
 					<div class="circular ui icon button" id="logout">
 						<i class="power off icon"></i>로그아웃
 					</div>
-					<c:if test="${homepageMemberName != 'master'}">
 					<div class="circular ui icon button" id="mypage">
 						<i class="user circle icon"></i>마이페이지
 					</div>
-					</c:if>
-					<c:if test="${homepageMemberName == 'master'}">
-					<div class="circular ui icon button" id="memberList">
-						<i class="user circle icon"></i>회원리스트
-					</div>
-					</c:if>
+					
 				</div>
 			</c:if>				
 				

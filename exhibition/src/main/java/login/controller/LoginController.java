@@ -193,7 +193,7 @@ public class LoginController {
 		int totalA = companyDAO.mypageRentalPastTotal(map);
 		ModelAndView mav = new ModelAndView();
 		
-		if (code == 1) {
+		if (code == 1 || code == 3) {
 			mav.addObject("display","/login/memberMypage.jsp");
 			mav.setViewName("/customerService/C_customerServiceForm"); // 개인마이페이지
 		} else if (code == 2) {
@@ -222,6 +222,7 @@ public class LoginController {
 		map.put("dateM", dateM);
 
 		List<ExhibitionDTO> list = companyDAO.getExhibitionList(map);
+		
 		for(int i = 0; i < list.size(); i++) {
 			list.get(i).setStartDate(list.get(i).getStartDate().substring(0, 10));
 			list.get(i).setEndDate(list.get(i).getEndDate().substring(0, 10));

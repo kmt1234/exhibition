@@ -521,26 +521,26 @@
  	<select id="getMemberList" resultType="member" parameterType="java.util.Map">
 		select * from(
 		select rownum rn, tt.* from(
-		select * from membertable where code=1 order by M_name)tt
+		select * from membertable order by code desc , M_name)tt
 		)where rn <![CDATA[ >= ]]> #{startNum} and rn <![CDATA[<=]]> #{endNum}
  	</select>
  	
 	<!-- 회원 정보 페이징처리 -->
 	<select id="getMemberListTotal" parameterType="java.util.Map" resultType="int">
-		select count(*) from membertable where code=1
+		select count(*) from membertable
 	</select>
 	
  	<!-- 회원 검색 -->
  	<select id="memberListSearch" parameterType="java.util.Map" resultType="member">
 		select * from (
 		select rownum rn, tt.* from(
-		select * from membertable where ${memberSearchOption} like '%'||#{memberSearch}||'%' and code=1 order by M_name)tt
+		select * from membertable where ${memberSearchOption} like '%'||#{memberSearch}||'%' order by code desc , M_name)tt
 		)where rn <![CDATA[ >= ]]> #{startNum} and rn<![CDATA[<=]]> #{endNum} 
 	</select>
 	
  	<!-- 회원 검색 페이징-->
  	<select id="getMemberListSearchTotal" parameterType="java.util.Map" resultType="int">
-		select count(*) from membertable where ${memberSearchOption} like '%'||#{memberSearch}||'%' and code=1
+		select count(*) from membertable where ${memberSearchOption} like '%'||#{memberSearch}||'%'
 	</select>
 	
 	<!-- 회원 상세정보 -->
