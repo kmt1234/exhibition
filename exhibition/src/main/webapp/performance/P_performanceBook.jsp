@@ -192,14 +192,18 @@
 $(document).ready(function(){
 	//페이지 호출 시(기본),
 	$('#BookEventBtn').show();	//매진 시, 버튼 숨기고 아닐 시, 보이기
+	$('#hiddenDate').val($('#selectEventDate :selected').text());
+	
+	if($('#selectEventDate :selected').val()=='2000-01-01' || $('#hiddenId').val()=='manager'){
+		$('#BookEventBtn').hide();
+	}
+	
 	//로그인 아닐 시, 예매버튼 없애버림
 	if($('#hiddenId').val()==''){
 		$('#BookEventBtn').hide(); //예매버튼 숨김
 		$('#bookConfirmHeader').text('로그인 후 예매가능합니다');
 	}
-	if($('#selectEventDate :selected').val()=='2000-01-01'){
-		$('#BookEventBtn').hide();
-	}
+	
 	//잔여좌석 보다 구매티켓이 높을 경우 구매 못하게 막음
 	$('#selectPlayTicket').change(function(){
 		$.ajax({
@@ -222,7 +226,7 @@ $(document).ready(function(){
 		$('#BookEventBtn').show();
 		$('#hiddenDate').val($('#selectEventDate :selected').text());
 		
-		if($('#selectEventDate :selected').val()=='2000-01-01'){
+		if($('#selectEventDate :selected').val()=='2000-01-01' || $('#hiddenId').val()=='manager'){
 			$('#BookEventBtn').hide();
 		}
 		//로그인 아닐 시, 예매버튼 없애버림

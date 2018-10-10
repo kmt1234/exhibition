@@ -185,7 +185,7 @@ $(document).ready(function(){
 		$('#bookConfirmHeader').text('로그인 후 예매가능합니다');
 	}
 	
-	if($('#selectEventDate :selected').val()=='2000-01-01'){
+	if($('#selectEventDate :selected').val()=='2000-01-01'  || $('#hiddenId').val()=='manager'){
 		$('#BookEventBtn').hide();
 	}
 	
@@ -213,7 +213,7 @@ $(document).ready(function(){
 		$('#BookEventBtn').show();
 		$('#hiddenDate').val($('#selectEventDate :selected').text());
 		
-		if($('#selectEventDate :selected').val()=='2000-01-01'){
+		if($('#selectEventDate :selected').val()=='2000-01-01' || $('#hiddenId').val()=='manager'){
 			$('#BookEventBtn').hide();
 		}
 		
