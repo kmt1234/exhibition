@@ -20,29 +20,21 @@ td{
 		</div>
 		<div class="ui divider"></div> 
 	</h2>
-	<table class="ui celled table" style="margin-left: 20px; width: 880px;">
-		<tr>
-			<td  align="center" style=" width:100px; background-color: #f7f6e6;text-align: center;">글번호</td>
+	<table class="ui celled table" style="margin-left: 20px; max-width: 880px;">
+		<tr height="50px">
+			<td align="center" style="width:80px; background-color: #f7f6e6; text-align: center;"><span style="width: 50px;">글번호</span></td>
 			
-			<td style="width:50px; text-align: center;" >
-				<div id="seq">
-					${customerServiceDTO.seq }
-				</div>
+			<td style="width:100px; text-align: center;" >
+				<pre style=" white-space:pre-wrap;  max-height: 50px; overflow: auto;">${customerServiceDTO.subject }</pre>
 			</td>
-			<td  align="center" style="background-color: #f7f6e6; text-align: center;">글제목</td>
-			<td id="subjectDiv" width="100px;">
-				<div style="width: 730px; max-height: 200px;">
-					<pre style=" white-space:pre-wrap;  max-height: 200px; overflow: auto;">${customerServiceDTO.subject }</pre>
-				</div>
-			</td>
+			<td align="center" style="width:80px; background-color: #f7f6e6; text-align: center;"><p>글제목</p></td>
+			<td width="100px" style="text-align:center"><span>${customerServiceDTO.seq }</span></span></td>
 		</tr>
 		
 		<tr>
-			<td width="70" align="center" height="200" style=" background-color: #f7f6e6;text-align: center;">내용</td>
-			<td colspan="3" width="810px;" >
-				<div style="width: 810px; max-height: 200px;"   >
-					<pre style=" white-space:pre-wrap;  max-height: 200px; overflow: auto;">${customerServiceDTO.content }</pre>
-				</div>
+			<td align="center" style="width:80px; background-color: #f7f6e6;text-align: center;">내용</td>
+			<td colspan="3" width="1000px;" >
+				<pre style=" white-space:pre-wrap;  max-height: 300px; overflow: auto;">${customerServiceDTO.content }</pre>
 			</td>
 		</tr>
 	</table>

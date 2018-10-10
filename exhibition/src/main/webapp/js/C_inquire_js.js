@@ -82,24 +82,29 @@ $(document).ready(function(){
 					text : item.seq,
 					style : 'text-align : center',
 					id : 'seqA',
+					style: 'width: 50px; height: 50px; text-align: center;',
 				})).append($('<td/>',{
-					class : item.seq+""
+					class : item.seq+"",
+					style: 'width: 50px; height: 50px; text-align: center;',
 				})).append($('<td/>',{
 					id : 'subjectA',
 					style : 'text-align : center',
-					href : 'javascript:void(0)',
+					style: 'width: 250px; height: 50px; text-align: center;',
 					text : item.subject
 				})).append($('<td/>',{
 					style : 'text-align : center',
+					style: 'width: 100px; height: 50px; text-align: center;',
 					text : item.name,
 					id : 'nameA'
 				})).append($('<td/>',{
 					style : 'text-align : center',
 					text : item.email,
+					style: 'width: 150px; height: 50px; text-align: center;',
 					id : 'emailA'
 				})).append($('<td/>',{
 					style : 'text-align : center',
 					text : item.logtime,
+					style: 'width: 100px; height: 50px; text-align: center;',
 					id : 'logtime'
 				})).appendTo($('#C_inquire_List'));
 				

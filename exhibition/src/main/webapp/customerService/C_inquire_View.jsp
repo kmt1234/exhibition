@@ -13,7 +13,7 @@
 	고객의
 	<span class="h-light">소리</span>
 </h2>
-<table class="ui celled table">
+<table class="ui celled table" style="margin-left: 20px; width: 880px;">
 		<tr>
 			<td  align="center" height="30" style="width:10%; background-color: #f7f6e6;text-align: center;">글번호</td>
 			
@@ -69,6 +69,7 @@
 	<input type="hidden" id="keyword" value="${keyword}">
 	<input type="hidden" name="name" value="${customerServiceDTO.name}">
 	<input type="hidden" name="pseq" id="pseq" value="${customerServiceDTO.seq }">
+	<div style="height: 80px;"></div>
 </form>
 <script src="../js/C_inquire_js.js?ver=1"></script>
 </body>

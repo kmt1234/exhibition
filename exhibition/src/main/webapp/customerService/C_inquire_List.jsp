@@ -21,6 +21,13 @@
 	text-decoration: none;
 	cursor: pointer;
 }
+#subjectA{
+	display : inline-block;
+	width : 351px; 
+	overflow: hidden;  
+	white-space: nowrap;  
+	text-overflow  : ellipsis;
+}
 </style>
 </head>
 <body>
