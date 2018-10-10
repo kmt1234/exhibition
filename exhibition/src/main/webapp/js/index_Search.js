@@ -440,7 +440,6 @@ $(document).ready(function(event, str){
 						target : '_blank',
 						href : item.eventlink.replaceAll(index_keyword, PointKeyword),
 						text : item.eventlink.replaceAll(index_keyword, PointKeyword)
-						
 					}))).append($('<div/>',{
 						style:'display:inline-block; width:50px; margin-top:5px; border: 1px ridge rgb(255,0,0,.6); margin-left:20px; float:left;  height:25px; padding:0; padding-top:3px; font-size: 10pt; font-family: inherit;',
 						text : '가격'
@@ -554,13 +553,7 @@ $(document).ready(function(event, str){
 			}
 		}
 	});
-	
 	$('#index_hotel_list_SearchPlusBtn').click(function(){
 		location.href="/exhibition/main/index_hotel_list_Plus.do?pg="+pg+"&index_keyword="+index_keyword;
 	});
-	
-
-	
-	
-	
 });
