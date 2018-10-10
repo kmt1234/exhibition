@@ -232,6 +232,7 @@ div#uiStatistics {
 <input type="hidden" id="hiddenImageName" value="${imageName }">
 <input type="hidden" id="hiddenPlayDate" value="${playDate }">
 <input type="hidden" id="hiddenTicketQty" value="${ticketQty }">
+<input type="hidden" id="code" value="${code }">
 
 <script src="../js/memberMypage.js?ver=1"></script>
 <script>

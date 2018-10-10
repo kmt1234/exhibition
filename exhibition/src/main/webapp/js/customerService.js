@@ -269,8 +269,10 @@ $(document).ready(function(){
 		});
 	});
 
-		
+	//사업자 상세정보
+	var id;
 	$('#memberListTable').on('click','.C_license',function(){
+		id = $(this).text();
 		if($('#masterCode').val()!='3') {
 			alert('권한이 없습니다.');
 			return;
@@ -284,6 +286,9 @@ $(document).ready(function(){
 			data : {'C_license' : $(this).text()},
 			dataType : 'json',
 			success : function(data){
+				if(data.list==''){
+					$('#companyHeader').text(id+"님 예약 정보");
+				}
 				$('#companyModalForm tr:gt(0)').remove();
 				$.each(data.list,function(index, item){
 					var startDate = item.startDate.toString().slice(0,10);
@@ -301,7 +306,7 @@ $(document).ready(function(){
 						companyDeleteBtn = "";
 					}	
 				
-				
+					
 					$('#companyHeader').text(item.c_license+"님 예약 정보");
 					$('<tr/>').append($('<td/>',{
 				 		name : 'companySeq',
@@ -371,13 +376,18 @@ $(document).ready(function(){
 		toDay = year+"-"+month+"-"+day;
 		var ing;
 		var deleteBtn
+		id = $(this).text();
 		$.ajax({
 			type : 'POST',
 			url : '/exhibition/customerService/memberView.do',
 			data : {'M_Id' : $(this).text()},
 			dataType : 'json',
 			success : function(data){
+				alert(JSON.stringify(data));
 				$('#memberModalForm tr:gt(0)').remove();
+				if(data.list=='' || data.list2==''){
+					$('#memberHeader').text(id+"님 예약 정보");
+				}
 				$.each(data.list,function(index, item){
 					playDate = item.playDate.toString().slice(0,10);
 					memberId = item.memberId;
@@ -389,7 +399,7 @@ $(document).ready(function(){
 						ing = "<font color='green'>예매완료</font>";
 						deleteBtn = "<input type='button' value='예매취소' id='memberDeleteBtn' class='middle ui button delete'>";
 					}
-					$('#memberHeader').text(item.memberId+"님 예약 정보");
+					$('#memberHeader').text(memberId+"님 예약 정보");
 					$('<tr/>').append($('<td/>',{
 				 		text : item.seq
 				 	})).append($('<td/>',{
@@ -413,6 +423,7 @@ $(document).ready(function(){
 				 	})).appendTo($('#reservationMemberTable'));
 					
 					});
+				
 				var time;
 				$.each(data.list2,function(index, item){
 					playDate = item.startDate.toString().slice(0,10);
