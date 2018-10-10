@@ -52,6 +52,7 @@
 <script src="../js/C_inquire_js.js?ver=1"></script>
 <script>
 $(document).ready(function(){
+	var replyCnt = 0;
 	$('#C_inquire_ListBtn').on('click', function(){
 		location.href="/exhibition/customerService/C_inquire_List.do?pg="+$('#pg').val();
 	});
@@ -63,8 +64,10 @@ $(document).ready(function(){
 			$('#subjectDiv').text("제목을 입력하세요").css('font-size','9pt').css('color','red')
 		else if($('#content').val()=='')
 			$('#contentDiv').text("내용을 입력하세요").css('font-size','9pt').css('color','red')
-		else
+		else if(replyCnt==0){
+			replyCnt++;
 			$('#C_inquire_Reply').submit();
+		}
 	});
 });
 </script>

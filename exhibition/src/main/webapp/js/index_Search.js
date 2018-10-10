@@ -112,7 +112,7 @@ $(document).ready(function(event, str){
 						type : 'hidden',
 						text : item.seq+index
 					})).append($('<div/>',{
-						style: 'width: auto; height:30px; padding-left:7px; padding-top:5px; text-align: left;  font-size:13pt; margin-left:5px; border: 1px ridge rgb(255,0,0,.6); margin-top:35px; display: inline-block; float:left;',
+						style: 'width: auto; height:30px; padding-left:7px; padding-right:7px;padding-top:5px; text-align: left;  font-size:13pt; margin-left:5px; border: 1px ridge rgb(255,0,0,.6); margin-top:35px; display: inline-block; float:left;',
 						text : item.classify
 					})).append($('<div/>',{
 						style: 'width: auto; height:30px; padding-top:7px; text-align:left; float : left; font-size:13pt; margin-left:5px; margin-top:35px; display: inline-block;',
@@ -313,12 +313,14 @@ $(document).ready(function(event, str){
 						html : item.eventplace.replaceAll(index_keyword, PointKeyword)
 					})).append($('<div/>',{
 						style:'display:inline-block; width:50px; margin-top:5px; border: 1px ridge rgb(255,0,0,.6); margin-left:20px; float:left;  height:25px; padding:0; padding-top:3px; font-size: 10pt; font-family: inherit;',
-						text : '싸이트'
+						text : '사이트'
 					})).append($('<div/>',{
 						style : 'display:inline-block; float:left;  margin-top:5px; margin-left:10px; width:540px; text-align:left; padding-top:3px; height:25px;',
-						class : 'link',
-						html : '<a href='+item.eventlink.replaceAll(index_keyword, PointKeyword)+'>'+item.eventlink.replaceAll(index_keyword, PointKeyword)+'</a>'
-					})).append($('<div/>',{
+					}).append($('<a/>',{
+						target : '_blank',
+						href : item.eventlink.replaceAll(index_keyword, PointKeyword),
+						text : item.eventlink.replaceAll(index_keyword, PointKeyword)
+					}))).append($('<div/>',{
 						style:'display:inline-block; width:50px; margin-top:5px; border: 1px ridge rgb(255,0,0,.6); margin-left:20px; float:left;  height:25px; padding:0; padding-top:3px; font-size: 10pt; font-family: inherit;',
 						text : '가격'
 					})).append($('<div/>',{
@@ -361,12 +363,12 @@ $(document).ready(function(event, str){
 	
 	$('#index_eventboard_SearchList').on('click','.name',function(){
 		var seq = $(this).parent().prev().text();
-		location.href='/exhibition//performance/exhibitionBook.do?seq='+seq;
+		location.href='/exhibition/performance/exhibitionBook.do?seq='+seq;
 	});
 
 	$('#index_eventboard_SearchList').on('click','.image',function(){
 		var seq = $(this).parent().prev().text();
-		location.href='/exhibition//performance/exhibitionBook.do?seq='+seq;
+		location.href='/exhibition/performance/exhibitionBook.do?seq='+seq;
 	});
 	
 	
@@ -431,12 +433,15 @@ $(document).ready(function(event, str){
 						html : item.eventplace.replaceAll(index_keyword, PointKeyword)
 					})).append($('<div/>',{
 						style:'display:inline-block; width:50px; margin-top:5px; border: 1px ridge rgb(255,0,0,.6); margin-left:20px; float:left;  height:25px; padding:0; padding-top:3px; font-size: 10pt; font-family: inherit;',
-						text : '싸이트'
+						text : '사이트'
 					})).append($('<div/>',{
 						style : 'display:inline-block; float:left;  margin-top:5px; margin-left:10px; width:540px; text-align:left; padding-top:3px; height:25px;',
-						class : 'link',
-						html : '<a href='+item.eventlink.replaceAll(index_keyword, PointKeyword)+'>'+item.eventlink.replaceAll(index_keyword, PointKeyword)+'</a>'
-					})).append($('<div/>',{
+					}).append($('<a/>',{
+						target : '_blank',
+						href : item.eventlink.replaceAll(index_keyword, PointKeyword),
+						text : item.eventlink.replaceAll(index_keyword, PointKeyword)
+						
+					}))).append($('<div/>',{
 						style:'display:inline-block; width:50px; margin-top:5px; border: 1px ridge rgb(255,0,0,.6); margin-left:20px; float:left;  height:25px; padding:0; padding-top:3px; font-size: 10pt; font-family: inherit;',
 						text : '가격'
 					})).append($('<div/>',{
@@ -477,11 +482,11 @@ $(document).ready(function(event, str){
 	
 	$('#index_eventboard_play_SearchList').on('click','.name',function(){
 		var seq = $(this).parent().prev().text();
-		location.href='/exhibition//performance/performanceBook.do?seq='+seq;
+		location.href='/exhibition/performance/performanceBook.do?seq='+seq;
 	});
 	$('#index_eventboard_play_SearchList').on('click','.image',function(){
 		var seq = $(this).parent().prev().text();
-		location.href='/exhibition//performance/performanceBook.do?seq='+seq;
+		location.href='/exhibition/performance/performanceBook.do?seq='+seq;
 	});
 	
 	
@@ -525,19 +530,21 @@ $(document).ready(function(event, str){
 						style:'float:left; text-align:left; margin-left:20px; width:610px; height:90px; padding-top:60px; font-size: 15pt; margin-top:10px; ',
 						html : item.imagename.replaceAll(index_keyword, PointKeyword)
 					})).append($('<div/>',{
-						style:'display:inline-block; width:50px; border: 1px ridge rgb(255,0,0,.6); margin-left:20px; float:left;  height:25px; padding:0; padding-top:3px; font-size: 10pt; font-family: inherit;',
-						text : '장소'
+						style:'display:inline-block; width:auto; border: 1px ridge rgb(255,0,0,.6); margin-left:20px; float:left;  height:25px; padding:0; padding-top:3px; padding-left:3px; padding-right:3px; font-size: 10pt; font-family: inherit;',
+						text : '대표번호'
 					})).append($('<div/>',{
 						style : 'display:inline-block; float:left;  margin-top:5px; margin-left:10px; width:540px; text-align:left; padding-top:3px; height:25px;',
 						html : item.eventplace.replaceAll(index_keyword, PointKeyword)
 					})).append($('<div/>',{
 						style:'display:inline-block; width:50px; border: 1px ridge rgb(255,0,0,.6); margin-left:20px; float:left;  height:25px; padding:0; padding-top:3px; font-size: 10pt; font-family: inherit;',
 						text : '싸이트'
-					})).append($('<td/>',{
+					})).append($('<div/>',{
 						style : 'display:inline-block; float:left;  margin-top:5px; margin-left:10px; width:540px; text-align:left; padding-top:3px; height:25px;',
-						class : 'link',
-						html : '<a href='+item.eventlink.replaceAll(index_keyword, PointKeyword)+'>'+item.eventlink.replaceAll(index_keyword, PointKeyword)+'</a>'
-					}))).appendTo($('#index_hotel_list_SearchList'));
+					}).append($('<a/>',{
+						target : '_blank',
+						href : item.eventlink.replaceAll(index_keyword, PointKeyword),
+						text : item.eventlink.replaceAll(index_keyword, PointKeyword)
+					})))).appendTo($('#index_hotel_list_SearchList'));
 					if(index=='1' || index=='2'){
 						$('<div/>',{
 							style:"width:880px;  border-bottom:1px dashed rgb(155,155,155,.6);"
