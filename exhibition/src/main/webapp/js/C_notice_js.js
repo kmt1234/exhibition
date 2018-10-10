@@ -65,19 +65,17 @@ $(document).ready(function(){
 			$.each(data.list, function(index, item){
 				$('<tr/>').append($('<td/>',{
 						align : 'center',
-						style: 'width: 20%; height: 9%; text-align: center;',
+						style: 'width: 100px; height: 50px; text-align: center;',
 						text : item.seq,
 						id : 'seqA'
 					})).append($('<td/>',{
 						align : 'center',
 						id : 'subjectA',
-						style: 'width: 45%; height: 7%;text-align: center;',
-						class : item.seq+"",
-						href : 'javascript:void(0)',
+						style: 'width: 600px; height: 50px;text-align: center;',
 						text : item.subject
 					})).append($('<td/>',{
 						align : 'center',
-						style: 'width: 20%; height: 7%;text-align: center;',
+						style: 'width: 200px; height: 50px;text-align: center;',
 						text : item.logtime,
 						id : 'logtime'
 					})).appendTo($('#C_notice_List'));

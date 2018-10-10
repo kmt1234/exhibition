@@ -39,6 +39,13 @@
 	text-decoration: none;
 	cursor: pointer;
 }
+#subjectA{
+	display : block;
+	width : 200px; 
+	overflow: hidden;  
+	white-space: nowrap;  
+	text-overflow  : ellipsis;
+}
 
 </style>
 
@@ -62,11 +69,11 @@
 				id="C_notice_List" class="ui striped table">
 				<tr>
 					<th
-						style="width: 100px; height: 7%; padding-top: 10px; text-align: center;">번호</th>
+						style="width: 100px; height: 50px; padding-top: 10px; text-align: center;">번호</th>
 					<th
-						style="width: 500px; height: 7%; padding-top: 10px; text-align: center;">제목</th>
+						style="width: 500px; height: 50px; padding-top: 10px; text-align: center;">제목</th>
 					<th
-						style="width: 100px; height: 7%; padding-top: 10px; text-align: center;">등록일</th>
+						style="width: 200px; height: 50px; padding-top: 10px; text-align: center;">등록일</th>
 				</tr>
 			</table>
 			<br>

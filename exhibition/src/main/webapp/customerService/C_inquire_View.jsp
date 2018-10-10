@@ -31,11 +31,11 @@
 			</td>
 		</tr>
 		<tr>
-			<td  align="center" height="30" style="width:10%; background-color: #f7f6e6;text-align: center;">글제목</td>
+			<td align="center" height="30" style="width:10%; background-color: #f7f6e6;text-align: center;">글제목</td>
 			
 			<td style="width:20%;text-align: center;" >
 				<div id="subject">
-					${customerServiceDTO.subject }
+					<pre style="white-space: pre-wrap;">${customerServiceDTO.subject }</pre>
 				</div>
 			</td>
 			<td  align="center" style="width:10%; background-color: #f7f6e6;text-align: center;">이메일</td>
@@ -48,10 +48,10 @@
 		</tr>		
 		
 		<tr>
-			<td width="70" align="center" height="200" style=" background-color: #f7f6e6;text-align: center;">내용</td>
-			<td colspan="3">
+			<td align="center" height="200" style=" background-color: #f7f6e6;text-align: center;">내용</td>
+			<td style="width:20%;text-align: center;" colspan="3">
 				<div id="content" >
-					<pre>${customerServiceDTO.content }</pre>
+					<pre style="white-space: pre-wrap;">${customerServiceDTO.content }</pre>
 					<div id="contentDiv"></div>
 				</div>
 			</td>
