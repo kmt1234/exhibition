@@ -60,6 +60,13 @@
 	color: green;
 	cursor: pointer;
 }
+.contentE{
+	display : block;
+	width : 200px; 
+	overflow: hidden;  
+	white-space: nowrap;  
+	text-overflow  : ellipsis;
+}
 /* 작업중  */
 /* 큰제목 */
 .index_Search_title{

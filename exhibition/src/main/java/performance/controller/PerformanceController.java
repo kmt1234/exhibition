@@ -315,16 +315,16 @@ public class PerformanceController {
 		
 		//현재 날짜
 		Date currentDate = new Date();
-			
+		SimpleDateFormat formatter1 = new SimpleDateFormat("YYMM");
+		String dateS = formatter1.format(currentDate);
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
 		String startDateC = formatter.format(currentDate);
 		String selMonth = startDateC.substring(0, 8) + "01";
 		
-		Map<String,String> map = new HashMap<String,String>();
-		map.put("endNum", endNum+"");
-		map.put("startNum", startNum+"");
-		map.put("selMonth", selMonth);
-		
+		Map<String,Integer> map = new HashMap<String,Integer>();
+		map.put("endNum", endNum);
+		map.put("startNum", startNum);
+		map.put("dateS", Integer.parseInt(dateS));
 		int totalA = performanceDAO.getPlayListTotalA();
 		
 		//Paging
@@ -591,17 +591,16 @@ public class PerformanceController {
 		
 		//현재 날짜
 		Date currentDate = new Date();
-			
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
-		
+		SimpleDateFormat formatter1 = new SimpleDateFormat("YYMM");
+		String dateS = formatter1.format(currentDate);
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");	
 		String startDateC = formatter.format(currentDate);
-		
 		String selMonth = startDateC.substring(0, 8) + "01";
 		
-		Map<String,String> map = new HashMap<String,String>();
-		map.put("endNum", endNum+"");
-		map.put("startNum", startNum+"");
-		map.put("selMonth", selMonth);
+		Map<String,Integer> map = new HashMap<String,Integer>();
+		map.put("endNum", endNum);
+		map.put("startNum", startNum);
+		map.put("dateS", Integer.parseInt(dateS));
 		
 		int totalA = performanceDAO.getExhibitionListTotalA();
 		
