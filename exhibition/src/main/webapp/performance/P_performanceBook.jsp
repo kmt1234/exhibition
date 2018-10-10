@@ -81,12 +81,6 @@
 					<option value="2000-01-01">날짜선택</option>
 					<!--오늘날짜와 비교 후, 기간 지났으면 날짜 선택 비활성화  -->
 					<c:forEach items="${listDate}" var="eventPeriod">
-						<c:if test="${eventPeriod < now}">
-							<option disabled="disabled" value="${eventPeriod}"><fmt:formatDate value="${eventPeriod}" pattern="yyyy년-MM월-dd일"/></option>
-						</c:if>
-					</c:forEach>
-				
-					<c:forEach items="${listDate}" var="eventPeriod">
 						<c:if test="${eventPeriod > now}">
 							<option value="${eventPeriod}"><fmt:formatDate value="${eventPeriod}" pattern="yyyy년-MM월-dd일"/></option>
 						</c:if>
@@ -213,7 +207,11 @@ $(document).ready(function(){
 			dataType : 'text',
 			success : function(data){
 				if(data=='ok'){
-					$('#BookEventBtn').show();
+					if($('#hiddenId').val()=='manager'){
+						$('#BookEventBtn').hide();
+					}else{
+						$('#BookEventBtn').show();
+					}
 				}else if(data=='no'){
 					alert('예매 가능한 티켓이 충분하지 않습니다. 죄솧합니다.');
 					$('#BookEventBtn').hide();
