@@ -244,11 +244,9 @@ $(document).ready(function(event, str){
 		}
 	});
 	
-	
 	$('#index_contactList_SearchPlusBtn').click(function(){
 		location.href="/exhibition/main/index_contactList_Plus.do?pg="+pg+"&index_keyword="+index_keyword;
 	});
-	
 	
 	// 메인 검색시 검색된 박람회 리스트 불러옴
 	$.ajax({

@@ -83,7 +83,11 @@ $(document).ready(function(){
 			$('#C_notice_PagingDiv').html(data.customerServicePaging.pagingHTML);
 		}
 	});
-	
+	$('#keyword').keydown(function(key) {
+		if (key.keyCode == 13) {
+			$('#C_notice_SearchBtn').click();
+		}
+	});
 	// 공지사항 검색한 값 불러오기
 	$('#C_notice_SearchBtn').click(function(){
 		$('#pg').val(1);

@@ -73,7 +73,8 @@ $(document).ready(function(){
 						type : 'checkbox',
 						value : item.seq,
 						name : 'box',
-						class : 'box'
+						class : 'box',
+						href : 'javascript:void(0)'
 					}))).append($('<td/>',{
 						align : 'center',
 						style: 'width: 172px; height: 62px; text-align: center;',
@@ -106,31 +107,43 @@ $(document).ready(function(){
 			$('#C_contactList_PagingDiv').html(data.customerServicePaging.pagingHTML);
 		}
 	});
+	$('#keyword').keydown(function(key) {
+		if (key.keyCode == 13) {
+			$('#C_contactList_SearchBtn').click();
+		}
+	});
 	
 	// 주요 시설 연락처 검색시 리스트 불러오기
 	$('#C_contactList_SearchBtn').click(function(){
 		$('#pg').val(1);
-		if($('#keyword').val()=='')
+		if($('#keyword').val()==''){
 			alert("검색어를 입력하세요");
-		else
+		}else{
 			location.href="/exhibition/customerService/C_contactList_SearchList.do?pg="+$('#pg').val()+'&searchOption='+$('#searchOption').val()+"&keyword="+$('#keyword').val();
+		}
 	});
 	
 	// 전체 선택
 	$('#checkAll').click(function(){
 		if($('#checkAll').prop('checked')){
-			//$('.box')[i].checked = true;
 			$('.box').prop('checked',true);
 		}else {
-			//$('.box').prop('checked',false);
 			$('.box').prop('checked',false);
 		}
 	});
+	
 	//선택 삭제
 	$('#C_contactList_DeleteBtn').click(function(){
 		var count = $('.box:checked').length;
 		if(count==0) alert("항목을 선택하세요");
-		else $('#C_contactList_delete').submit();
+		else {
+			$.ajax({
+				type : 'POST',
+				url : '/exhibition/customerService/C_contactList_Delete.do',
+				data : {'box':$('.box').val()}
+				
+			});
+		}
 	}); 
 });
 

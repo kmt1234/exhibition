@@ -114,7 +114,11 @@ $(document).ready(function(){
 			$('#C_inquire_PagingDiv').html(data.customerServicePaging.pagingHTML);
 		}
 	});
-	
+	$('#keyword').keydown(function(key) {
+		if (key.keyCode == 13) {
+			$('#C_inquire_SearchBtn').click();
+		}
+	});
 	//고객의소리 리스트 검색한 값 불러오기
 	$('#C_inquire_SearchBtn').click(function(){
 		$('#pg').val(1);
