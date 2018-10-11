@@ -185,24 +185,28 @@ $(document).ready(function(){
 	
 	//잔여좌석 보다 구매티켓이 높을 경우 구매 못하게 막음
 	$('#selectPlayTicket').change(function(){
-		$.ajax({
-			type : 'POST',
-			url : '/exhibition/performance/book_exhibition_checkBuy.do',
-			data : {'wantTicket':$('#selectPlayTicket :selected').val(),'imageName' : $('#imageName').val(), 'playDate' : $('#selectEventDate :selected').text()},
-			dataType : 'text',
-			success : function(data){
-				if(data=='ok'){
-					if($('#hiddenId').val()=='manager'){
+		if($('#selectEventDate :selected').val()=='2000-01-01'){
+			alert('날짜를 먼저 선택해주세요');
+		}else{
+			$.ajax({
+				type : 'POST',
+				url : '/exhibition/performance/book_exhibition_checkBuy.do',
+				data : {'wantTicket':$('#selectPlayTicket :selected').val(),'imageName' : $('#imageName').val(), 'playDate' : $('#selectEventDate :selected').text()},
+				dataType : 'text',
+				success : function(data){
+					if(data=='ok'){
+						if($('#hiddenId').val()=='manager'){
+							$('#BookEventBtn').hide();
+						}else{
+							$('#BookEventBtn').show();
+						}
+					}else if(data=='no'){
+						alert('예매 가능한 티켓이 부족합니다. 다른 날짜를 선택해주세요');
 						$('#BookEventBtn').hide();
-					}else{
-						$('#BookEventBtn').show();
 					}
-				}else if(data=='no'){
-					alert('예매 가능한 티켓이 부족합니다. 다른 날짜를 선택해주세요');
-					$('#BookEventBtn').hide();
-				}
-			}//success
-		});//ajax
+				}//success
+			});//ajax	
+		}
 	});
 	
 	//날짜 변경 시, 히든 태그에 날짜 값 넣기
