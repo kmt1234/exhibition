@@ -21,6 +21,18 @@
 	text-decoration: none;
 	cursor: pointer;
 }
+
+#subjectA{
+	display : block;
+	width : 200px; 
+	overflow: hidden;  
+	white-space: nowrap;  
+	text-overflow  : ellipsis;
+}
+.aaa{
+	color : #ec008c;
+	font-weight: 800;
+}
 </style>
 <script src="../js/C_inquire_Search_js.js?ver=1"></script>
 <script type="text/javascript">
@@ -49,10 +61,10 @@ window.onload=function(){
 		<tr>
 			<td style="width: 50px;  padding-top: 10px; text-align: center;">번호 </td>
 			<td style="width: 50px;  padding-top: 10px; text-align: center;"></td>
-			<td style="width: 250px;  padding-top: 10px; text-align: center;">제목</td>
+			<td style="width: 360px;  padding-top: 10px; text-align: center;">제목</td>
 			<td style="width: 100px;  padding-top: 10px; text-align: center;">작성자</td>
-			<td style="width: 150px;  padding-top: 10px; text-align: center;">이메일</td>
-			<td style="width: 100px;  padding-top: 10px; text-align: center;">등록일</td>
+			<td style="width: 200px;  padding-top: 10px; text-align: center;">이메일</td>
+			<td style="width: 120px;  padding-top: 10px; text-align: center;">등록일</td>
 		</tr>
 	</table>
 	<input type="hidden" id="pg" value="${pg }">

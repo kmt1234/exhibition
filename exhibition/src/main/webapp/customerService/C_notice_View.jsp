@@ -3,6 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE>
 <head>
+<style type="text/css">
+td{
+	width: 20px;
+}
+</style>
 </head>
 <body>
 <div class="ui compact menu" style="width: 930px; height:900px auto;  display: inline-block;" >
@@ -15,32 +20,21 @@
 		</div>
 		<div class="ui divider"></div> 
 	</h2>
-	<table class="ui celled table" style="margin-left: 20px; width: 880px">
-		<tr>
-			<td  align="center" height="30" style="width:10%; background-color: #f7f6e6;text-align: center;">글번호</td>
-			
-			<td style="width:20%;text-align: center;" >
-				<div id="seq">
-					${customerServiceDTO.seq }
-				</div>
+	<table class="ui celled table" style="margin-left: 20px; max-width: 880px;">
+		<tr height="50px">
+			<td align="center" style="max-width:50px; background-color: #f7f6e6; text-align: center;">제목</td>
+			<td style="width:100px; text-align: center;" >
+				<pre style=" white-space:pre-wrap;  max-height: 50px; overflow: auto;">${customerServiceDTO.subject }</pre>
 			</td>
-			<td  align="center" style="width:10%; background-color: #f7f6e6;text-align: center;">글제목</td>
 			
-			<td style="width:20%;text-align: center;">
-				<div id="subject">
-					${customerServiceDTO.subject }
-					<div id="subjectDiv"></div>
-				</div>
-			</td>
-		</tr>	
+			<td align="center" style="max-width:50px; background-color: #f7f6e6; text-align: center;">글번호</td>
+			<td width="100px" style="text-align:center"><span>${customerServiceDTO.seq }</span></td>
+		</tr>
 		
 		<tr>
-			<td width="70" align="center" height="200" style=" background-color: #f7f6e6;text-align: center;">내용</td>
-			<td colspan="3" width="810px;" >
-				<div id="content" style="width: 810px;"   >
-					<pre style="white-space: pre-wrap;">${customerServiceDTO.content }</pre>
-					<div id="contentDiv"></div>
-				</div>
+			<td align="center" style="max-width:50px; background-color: #f7f6e6;text-align: center;">내용</td>
+			<td colspan="3" width="800px;" >
+				<pre style=" white-space:pre-wrap;  max-height: 300px; overflow: auto;">${customerServiceDTO.content }</pre>
 			</td>
 		</tr>
 	</table>

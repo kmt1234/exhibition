@@ -43,27 +43,27 @@ $(document).ready(function(){
 				if(code!=3){
 					$('<tr/>').append($('<td/>',{
 						align : 'center',
-						style: 'width: 20%; height: 9%; text-align: center;',
+						style: 'width: 172px; height: 62px; text-align: center;',
 						text : item.classify,
 						id : 'classifyA'
 					})).append($('<td/>',{
 						align : 'center',
-						style: 'width: 20%; height: 9%; text-align: center;',
+						style: 'width: 172px; height: 62px; text-align: center;',
 						text : item.facility,
 						id : 'facilityA'
 					})).append($('<td/>',{
 						align : 'center',
-						style: 'width: 20%; height: 9%; text-align: center;',
+						style: 'width: 172px; height: 62px; text-align: center;',
 						text : item.title,
 						id : 'titleA'
 					})).append($('<td/>',{
 						align : 'center',
-						style: 'width: 20%; height: 9%; text-align: center;',
+						style: 'width: 172px; height: 62px; text-align: center;',
 						text : item.name,
 						id : 'nameA'
 					})).append($('<td/>',{
 						align : 'center',
-						style: 'width: 20%; height: 9%; text-align: center;',
+						style: 'width: 172px; height: 62px; text-align: center;',
 						text : item.phone,
 						id : 'phoneA'
 					})).appendTo($('#C_contactList_List'));
@@ -76,27 +76,27 @@ $(document).ready(function(){
 						class : 'box'
 					}))).append($('<td/>',{
 						align : 'center',
-						style: 'width: 20%; height: 9%; text-align: center;',
+						style: 'width: 172px; height: 62px; text-align: center;',
 						text : item.classify,
 						id : 'classifyA'
 					})).append($('<td/>',{
 						align : 'center',
-						style: 'width: 20%; height: 9%; text-align: center;',
+						style: 'width: 172px; height: 62px; text-align: center;',
 						text : item.facility,
 						id : 'facilityA'
 					})).append($('<td/>',{
 						align : 'center',
-						style: 'width: 20%; height: 9%; text-align: center;',
+						style: 'width: 172px; height: 62px; text-align: center;',
 						text : item.title,
 						id : 'titleA'
 					})).append($('<td/>',{
 						align : 'center',
-						style: 'width: 20%; height: 9%; text-align: center;',
+						style: 'width: 172px; height: 62px; text-align: center;',
 						text : item.name,
 						id : 'nameA'
 					})).append($('<td/>',{
 						align : 'center',
-						style: 'width: 20%; height: 9%; text-align: center;',
+						style: 'width: 156px; height: 62px; text-align: center;',
 						text : item.phone,
 						id : 'phoneA'
 					})).appendTo($('#C_contactList_List'));	

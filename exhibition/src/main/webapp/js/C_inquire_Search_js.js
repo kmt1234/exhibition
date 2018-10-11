@@ -2,6 +2,8 @@ $(document).ready(function(){
 	var C_name = /^[가-힣]+$/;	//한글만 가능 
 	var C_phone =  /^((01[1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})$/;	//휴대폰 번호 양식
 	var Cw_regEmail = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/; //이메일 양식
+	var keyword = $('#keyword').val();
+	var PointKeyword = "<span class='aaa'>"+keyword+"</span>";
 	
 	//고객의 소리  - 답변하기 폼
 	$('#C_inquire_replyBtn').click(function(){
@@ -29,30 +31,36 @@ $(document).ready(function(){
 				$('#C_inquire_SearchPagingDiv').hide();
 				
 			}else if(data.tataA!='0'){
+				if($('#searchOption').val()=='subject'){
 				$('#C_inquire_SearchPagingDiv').show();
 				$.each(data.list, function(index, item){
 				$('<tr/>').append($('<td/>',{
 					text : item.seq,
-					style : 'text-align : center',
+					style: 'width: 50px; height: 50px; text-align: center;',
 					id : 'seqA',
 				})).append($('<td/>',{
-					class : item.seq+""
+					class : item.seq+"",
+					style: 'width: 50px; height: 50px; text-align: center;'
 				})).append($('<td/>',{
 					id : 'subjectA',
 					style : 'text-align : center',
 					href : 'javascript:void(0)',
-					text : item.subject
+					style: 'width: 250px; height: 50px; text-align: center;',
+					html : item.subject.replace(keyword, PointKeyword)
 				})).append($('<td/>',{
 					style : 'text-align : center',
 					text : item.name,
+					style: 'width: 100px; height: 50px; text-align: center;',
 					id : 'nameA'
 				})).append($('<td/>',{
 					style : 'text-align : center',
 					text : item.email,
+					style: 'width: 150px; height: 50px; text-align: center;',
 					id : 'emailA'
 				})).append($('<td/>',{
 					style : 'text-align : center',
 					text : item.logtime,
+					style: 'width: 100px; height: 50px; text-align: center;',
 					id : 'logtime'
 				})).appendTo($('#C_inquire_SearchList'));
 				
@@ -67,6 +75,51 @@ $(document).ready(function(){
 						}));
 					}
 				});
+				}else if($('#searchOption').val()=='name'){
+					$('#C_inquire_SearchPagingDiv').show();
+					$.each(data.list, function(index, item){
+					$('<tr/>').append($('<td/>',{
+						text : item.seq,
+						style: 'width: 50px; height: 50px; text-align: center;',
+						id : 'seqA',
+					})).append($('<td/>',{
+						class : item.seq+"",
+						style: 'width: 50px; height: 50px; text-align: center;'
+					})).append($('<td/>',{
+						id : 'subjectA',
+						style : 'text-align : center',
+						href : 'javascript:void(0)',
+						style: 'width: 250px; height: 50px; text-align: center;',
+						text : item.subject
+					})).append($('<td/>',{
+						style : 'text-align : center',
+						html : item.name.replace(keyword, PointKeyword),
+						style: 'width: 100px; height: 50px; text-align: center;',
+						id : 'nameA'
+					})).append($('<td/>',{
+						style : 'text-align : center',
+						text : item.email,
+						style: 'width: 150px; height: 50px; text-align: center;',
+						id : 'emailA'
+					})).append($('<td/>',{
+						style : 'text-align : center',
+						text : item.logtime,
+						style: 'width: 100px; height: 50px; text-align: center;',
+						id : 'logtime'
+					})).appendTo($('#C_inquire_SearchList'));
+					
+					
+						if(item.pseq!=0){//답글
+							$('.'+item.seq).append($('<i/>',{
+								class : 'check icon'
+							}));
+						} else {
+							$('.'+item.seq).append($('<i/>',{
+								class : 'question icon'
+							}));
+						}
+					});
+				}
 			}
 		
 			$('#C_inquire_SearchPagingDiv').html(data.customerServicePaging.pagingHTML);

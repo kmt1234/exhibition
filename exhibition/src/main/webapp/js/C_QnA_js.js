@@ -9,6 +9,7 @@ $(document).ready(function(){
 	}else{
 		var classify = $('#classify').val()
 	}
+	
 	//자주 묻는 질문 - 작성하기 폼
 	$('#C_QnA_writeBtn').click(function(){
 		location.href="/exhibition/customerService/C_QnA_Write.do";
@@ -18,6 +19,9 @@ $(document).ready(function(){
 	//자주 묻는 질문 작성하기 등록버튼
 	$('#C_QnA_checkWriteBtn').click(function(){
 		var classify = $('#classify option:selected').val();
+		var subject = $('#subject').val();
+		var content = $('#content').val();
+		
 		$('#subjectDiv').empty();
 		$('#contentDiv').empty();
 		if($('#subject').val()=='')

@@ -8,6 +8,15 @@
   resize: none; /* 사용자 임의 변경 불가 */
 }
 </style>
+<script type="text/javascript">
+window.onload=function(){
+	if('${classify}'=='위치/교통' || '${classify}'=='주차' || 
+			'${classify}'=='전시/공연' || '${classify}'=='임대' || 
+			'${classify}'=='시설' || '${classify}'=='기타'){
+		document.getElementById("classify").value = '${classify}';
+	}
+}
+</script>
 </head>
 <body>
 <div class="ui compact menu" style="width: 930px; height:900px auto;  display: inline-block;" >
@@ -32,9 +41,9 @@
 					<option  value="전시/공연">전시&공연</option>
 					<option  value="임대">임대</option>
 					<option  value="시설">시설</option>
-					<option  value=기타>기타</option>
+					<option  value="기타">기타</option>
 				</select>
-				<input type="hidden" name="C_qty" id="C_qty">
+				<input type="text" name="C_qty" id="C_qty" value="${C_qty }">
 			</td>
 		</tr>
 		<tr>

@@ -45,11 +45,11 @@
 					<input type="checkbox" id="checkAll">
 				</th>
 			</c:if>
-				<th style="width: 18%; height: 7%; padding-top: 10px; text-align: center;">분류</th>
-				<th style="width: 18%; height: 7%; padding-top: 10px; text-align: center;">기관 & 시설</th>
-				<th style="width: 18%; height: 7%; padding-top: 10px; text-align: center;">명칭</th>
-				<th style="width: 18%; height: 7%; padding-top: 10px; text-align: center;">담당자</th>
-				<th style="width: 18%; height: 7%; padding-top: 10px; text-align: center;">연락처</th>
+				<th style="width: 172px; height: auto; padding-top: 10px; text-align: center;">분류</th>
+				<th style="width: 172px; height: auto; padding-top: 10px; text-align: center;">기관 & 시설</th>
+				<th style="width: 172px; height: auto; padding-top: 10px; text-align: center;">명칭</th>
+				<th style="width: 172px; height: auto; padding-top: 10px; text-align: center;">담당자</th>
+				<th style="width: 156px; height: auto; padding-top: 10px; text-align: center;">연락처</th>
 			</tr>
 	</table>
 	<br>

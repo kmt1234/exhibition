@@ -364,11 +364,6 @@ public class CustomerServiceController {
 		model.addAttribute("pg", Integer.parseInt(pg));
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("searchOption", searchOption);
-	
-		
-		
-		
-		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("display", "/customerService/C_inquire_SearchList.jsp");
 		mav.setViewName("/customerService/C_customerServiceForm");
@@ -376,7 +371,7 @@ public class CustomerServiceController {
 	}
 	
 	// 고객의 소리 문의받은글 검색 & 페이징
-	@RequestMapping(value = "C_inquire_Search", method = RequestMethod.POST)
+	@RequestMapping(value = "C_inquire_Search", method = RequestMethod.GET)
 	public ModelAndView C_inquire_Search(@RequestParam(required = false) Map<String, String> map) {
 		int endNum = Integer.parseInt(map.get("pg")) * 10;
 		int startNum = endNum - 9;
@@ -471,7 +466,7 @@ public class CustomerServiceController {
 
 	// 자주묻는 질문
 	@RequestMapping(value = "C_QnA", method = RequestMethod.GET)
-	public ModelAndView C_QnAForm(@RequestParam String classify) {
+	public ModelAndView C_QnAForm(@RequestParam(required=false, defaultValue="위치/교통") String classify, @RequestParam(required=false, defaultValue="1") String C_qty, @RequestParam(required=false, defaultValue="1") String subject,@RequestParam(required=false, defaultValue="1") String content) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("classify", classify);
 		mav.addObject("display", "/customerService/C_QnA.jsp");
@@ -507,11 +502,12 @@ public class CustomerServiceController {
 		map.put("classify", C_qty);
 		map.put("subject", subject);
 		map.put("content", content);
+		System.out.println(C_qty);
 		// DB
 		customerServiceDAO.C_QnA_checkWrite(map);
-
+		
 		return new ModelAndView("redirect:/customerService/C_QnA.do");
-	}
+		}
 
 	// 자주 묻는 질문 연락처 삭제
 	@RequestMapping(value = "C_QnA_Delete", method = RequestMethod.POST)
