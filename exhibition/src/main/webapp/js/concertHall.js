@@ -42,6 +42,7 @@ $(document).ready(function(){
 		location.href="/exhibition/rental/R_concertHallDecision.do?hallName="+$('#C_room4').text().replace(/ /gi, '');
 	});
 	
+	$('#hallRate').keyup(function(){$(this).val($(this).val().replace(/[^0-9]/g,"") );});
 	
 	$('#modifyHallRateBtn').click(function(){
 		if($('#hallRate').val()=='') {

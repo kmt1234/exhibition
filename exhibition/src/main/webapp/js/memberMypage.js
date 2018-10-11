@@ -222,21 +222,13 @@ $(document).ready(function(){
 	
 	
 	//회원탈퇴버튼
-	$('.ui.modal3').hide();
 	$('#member-out').click(function(){
-		$('#M-modify-modify').hide();
-		$('.ui.modal3').show();
-	});
-	$('#out-no').click(function(){//아니오 클릭시
-		$('.ui.modal3').hide();
-		$('#M-modify-modify').show();
-	});
-	$('#out-yes').click(function(){//네 클릭시
 		$('.ui.basic.modal').modal({
 			closable : false,
             duration : 460,
 		}).modal('show');
 	});
+
 	
 	$('#del_OK').click(function(){
 		$.ajax({

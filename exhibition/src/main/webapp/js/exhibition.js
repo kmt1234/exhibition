@@ -198,6 +198,7 @@ $(document).ready(function(){
 		location.href="/exhibition/rental/R_exhibitionHollDecision.do?room="+$('#C_room4').text();
 	});
 	
+	$('#boothRate').keyup(function(){$(this).val($(this).val().replace(/[^0-9]/g,"") );});
 	
 	$('#modifyRateBtn').click(function(){
 		if($('#boothRate').val()=='') {

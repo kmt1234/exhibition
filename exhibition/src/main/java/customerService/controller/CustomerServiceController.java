@@ -63,7 +63,7 @@ public class CustomerServiceController {
 	private JavaMailSenderImpl emailSender;
 	@Autowired
 	private ImageboardPaging imageboardPaging;
-	private String filePath = "C:\\Users\\user\\git\\exhibition\\exhibition\\src\\main\\webapp\\storage\\";
+	private String filePath = "C:\\Users\\kmtab\\git\\exhibition\\exhibition\\src\\main\\webapp\\storage\\";
 	@Autowired
 	private CustomerServicePaging customerServicePaging;
 	@Autowired
@@ -916,7 +916,7 @@ public class CustomerServiceController {
 			for (int i = 0; i < str.length; i++) {
 				ImageboardDTO imageboardDTO = new ImageboardDTO();
 				imageboardDTO.setImage1(str[i]);
-				imageboardDTO.setEventLink("no_Link");
+				imageboardDTO.setEventLink("http://localhost:8080/exhibition/main/index.do");
 				
 				list.add(imageboardDTO);
 				

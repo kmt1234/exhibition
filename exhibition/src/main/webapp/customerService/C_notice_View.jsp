@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE">
+<!DOCTYPE>
 <head>
 </head>
 <body>
@@ -36,9 +36,9 @@
 		
 		<tr>
 			<td width="70" align="center" height="200" style=" background-color: #f7f6e6;text-align: center;">내용</td>
-			<td colspan="3">
-				<div id="content" >
-					<pre>${customerServiceDTO.content }</pre>
+			<td colspan="3" width="810px;" >
+				<div id="content" style="width: 810px;"   >
+					<pre style="white-space: pre-wrap;">${customerServiceDTO.content }</pre>
 					<div id="contentDiv"></div>
 				</div>
 			</td>
