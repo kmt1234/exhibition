@@ -15,13 +15,13 @@
 </h2>
 <table class="ui celled table" style="margin-left: 20px; max-width: 880px;">
 		<tr height= "80px">
-			<td style="width:100px; height:100px; text-align:center; background-color: #f7f6e6; text-align: center;" >제목</td>
-			<td style="width:540px; center;" >
+			<td width="100px" style=" height:100px; text-align:center; background-color: #f7f6e6; text-align: center;" >제목</td>
+			<td width="500px" style=" center;" >
 				<pre style="white-space:pre-wrap; max-width:520px; max-height: 50px; overflow: auto;">${customerServiceDTO.subject }</pre> 
 			</td>
 			
-			<td style="width:100px; text-align:center; background-color: #f7f6e6">글번호</td>
-			<td style="width:140px; text-align:center"><span>${customerServiceDTO.seq }</span></td>
+			<td width="100px" style=" text-align:center; background-color: #f7f6e6">글번호</td>
+			<td width="180px" style=" text-align:center"><span>${customerServiceDTO.seq }</span></td>
 		</tr>
 		<tr height= "80px">
 			<td style=" height:100px;  text-align:center; background-color: #f7f6e6">작성자</td>
@@ -31,10 +31,10 @@
 			<td style="text-align:center; background-color: #f7f6e6">이메일</td>
 			<td style="text-align:center"><span>${customerServiceDTO.email }</span></td>
 		</tr>
-		<tr style="height:200px;" >
+		<tr style="height:400px;" >
 			<td style=" text-align:center; background-color: #f7f6e6">내용</td>
 			<td colspan="3" >
-				<pre style=" white-space:pre-wrap; max-width:800px; height:200px; overflow: auto;">${customerServiceDTO.content }</pre>
+				<pre style=" white-space:pre-wrap; max-width:800px; height:400px; overflow: auto;">${customerServiceDTO.content }</pre>
 			</td>
 		</tr>
 	</table>
