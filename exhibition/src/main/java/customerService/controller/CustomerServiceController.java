@@ -466,7 +466,7 @@ public class CustomerServiceController {
 
 	// 자주묻는 질문
 	@RequestMapping(value = "C_QnA", method = RequestMethod.GET)
-	public ModelAndView C_QnAForm(@RequestParam String classify) {
+	public ModelAndView C_QnAForm(@RequestParam(required=false, defaultValue="위치/교통") String classify, @RequestParam(required=false, defaultValue="1") String C_qty, @RequestParam(required=false, defaultValue="1") String subject,@RequestParam(required=false, defaultValue="1") String content) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("classify", classify);
 		mav.addObject("display", "/customerService/C_QnA.jsp");
@@ -502,11 +502,12 @@ public class CustomerServiceController {
 		map.put("classify", C_qty);
 		map.put("subject", subject);
 		map.put("content", content);
+		System.out.println(C_qty);
 		// DB
 		customerServiceDAO.C_QnA_checkWrite(map);
-
+		
 		return new ModelAndView("redirect:/customerService/C_QnA.do");
-	}
+		}
 
 	// 자주 묻는 질문 연락처 삭제
 	@RequestMapping(value = "C_QnA_Delete", method = RequestMethod.POST)
