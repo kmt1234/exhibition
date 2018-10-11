@@ -15,12 +15,12 @@
 </h2>
 <table class="ui celled table" style="margin-left: 20px; max-width: 880px;">
 		<tr height= "80px">
-			<td width="100px" style=" height:100px; text-align:center; background-color: #f7f6e6; text-align: center;" >제목</td>
-			<td width="500px" style=" center;" >
+			<td width="150px" style=" height:100px; text-align:center; background-color: #f7f6e6; text-align: center;" >제목</td>
+			<td width="400px" style=" center;" >
 				<pre style="white-space:pre-wrap; max-width:520px; max-height: 50px; overflow: auto;">${customerServiceDTO.subject }</pre> 
 			</td>
 			
-			<td width="100px" style=" text-align:center; background-color: #f7f6e6">글번호</td>
+			<td width="150px" style=" text-align:center; background-color: #f7f6e6">글번호</td>
 			<td width="180px" style=" text-align:center"><span>${customerServiceDTO.seq }</span></td>
 		</tr>
 		<tr height= "80px">
