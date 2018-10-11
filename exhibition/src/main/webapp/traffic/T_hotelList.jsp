@@ -57,7 +57,7 @@
 					  <li><a href="T_allForm.do">오시는 길</a></li>
 					  <li><a href="T_parkingAllForm.do">주차 안내</a></li>
 					</ul>
-				<a class="item" href="P_performanceScheduleForm.do">숙박안내</a> 
+				<a class="item" href="T_hotelList.do">숙박안내</a> 
 			</div>
 		
 		</div>
@@ -85,7 +85,7 @@
 				
 			</c:forEach>	
 		</div>
-			<div id="hotelPaging3" style="margin-top: 30px; display: inline-block; ">${imageboardPaging.pagingHTML }</div>
+			<div id="hotelPaging3" style="margin-top: 30px;">${imageboardPaging.pagingHTML }</div>
 		</div>
 	</div>
 		
