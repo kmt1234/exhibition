@@ -1,4 +1,6 @@
 $(document).ready(function(){
+	var keyword = $('#keyword').val();
+	var PointKeyword = "<span class='aaa'>"+keyword+"</span>";
 	
 	$('#C_notice_WriteBtn').click(function(){ 
 		location.href="/exhibition/customerService/C_notice_WriteBtn.do";
@@ -43,20 +45,18 @@ $(document).ready(function(){
 					var k = search.match($('#keyword').val())
  				$('<tr/>').append($('<td/>',{
 						align : 'center',
-						style: 'width: 20%; height: 9%; text-align: center;',
+						style: 'width: 100px; height: 50px; text-align: center;',
 						text : item.seq,
 						id : 'seqA',
-						
 					})).append($('<td/>',{
 						align : 'center',
 						id : 'subjectA',
-						style: 'width: 45%; height: 7%;text-align: center;',
-						class : item.seq+"",
+						style: 'width: 600px; height: 50px;text-align: center;',
+						html : item.subject.replaceAll(keyword, PointKeyword),
 						href : 'javascript:void(0)',
-						text : item.subject
 					})).append($('<td/>',{
 						align : 'center',
-						style: 'width: 20%; height: 7%;text-align: center;',
+						style: 'width: 200px; height: 50px;text-align: center;',
 						text : item.logtime,
 						id : 'logtime'
 					})).appendTo($('#C_notice_SearchList'));
@@ -73,7 +73,6 @@ $(document).ready(function(){
 	
 	// 공지사항 리스트 제목 클릭시 내용 보여줌
 	$('#C_notice_SearchList').on('click','#subjectA',function(){
-		alert($('#keyword').val())
 		var seq = $(this).prev().text();
 		location.href='/exhibition/customerService/C_notice_View.do?seq='+seq+'&pg='+$('#pg').val()+'&keyword='+$('#keyword').val();
 	});

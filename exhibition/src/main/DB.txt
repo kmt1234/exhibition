@@ -101,8 +101,8 @@ create sequence seq_eventboard_play  nocache nocycle;
  
 create table C_notice(
 seq number primary key,                 --시퀀스
-subject varchar2(500) not null,          --제목
-content varchar2(4000) not null,         --내용
+subject clob not null,          --제목
+content clob not null,         --내용
 logtime date default sysdate);          --날짜
 
 create sequence seq_C_notice nocycle nocache;
@@ -122,8 +122,8 @@ email varchar2(200),                     --이메일
 classify varchar2(200),                  --분류
 name varchar2(200),                      --작성자
 phone varchar2(200),                     --전화번호
-subject varchar2(200) not null,          --제목
-content varchar2(4000) not null,         --내용
+subject clob not null,          --제목
+content clob not null,         --내용
 ref NUMBER NOT NULL,                    --그룹번호
 lev NUMBER DEFAULT 0 NOT NULL,          --단계
 step NUMBER DEFAULT 0 NOT NULL,         --글순서

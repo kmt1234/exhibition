@@ -46,12 +46,12 @@
 	<table style="height: 40px; " align="center" border="1" bordercolor="#ec008c" cellpadding="4"  rules="rows"
 	id="C_inquire_List" class="ui striped table" >
 		<tr>
-			<td style="width: 50px;  padding-top: 10px; text-align: center;">번호</td>
-			<td style="width: 50px;  padding-top: 10px; text-align: center;"></td>
-			<td style="width: 250px;  padding-top: 10px; text-align: center;">제목</td>
-			<td style="width: 100px;  padding-top: 10px; text-align: center;">작성자</td>
-			<td style="width: 150px;  padding-top: 10px; text-align: center;">이메일</td>
-			<td style="width: 100px;  padding-top: 10px; text-align: center;">등록일</td>
+			<td style="width: 50px; height: 44px; padding-top: 10px; text-align: center;">번호</td>
+			<td style="width: 50px; height: 44px; padding-top: 10px; text-align: center;"></td>
+			<td style="width: 360px; height: 44px; padding-top: 10px; text-align: center;">제목</td>
+			<td style="width: 100px; height: 44px; padding-top: 10px; text-align: center;">작성자</td>
+			<td style="width: 200px; height: 44px; padding-top: 10px; text-align: center;">이메일</td>
+			<td style="width: 120px; height: 44px; padding-top: 10px; text-align: center;">등록일</td>
 		</tr>
 	</table>
 	<br>

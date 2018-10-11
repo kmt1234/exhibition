@@ -22,18 +22,18 @@ td{
 	</h2>
 	<table class="ui celled table" style="margin-left: 20px; max-width: 880px;">
 		<tr height="50px">
-			<td align="center" style="width:80px; background-color: #f7f6e6; text-align: center;"><span style="width: 50px;">글번호</span></td>
-			
+			<td align="center" style="max-width:50px; background-color: #f7f6e6; text-align: center;">제목</td>
 			<td style="width:100px; text-align: center;" >
 				<pre style=" white-space:pre-wrap;  max-height: 50px; overflow: auto;">${customerServiceDTO.subject }</pre>
 			</td>
-			<td align="center" style="width:80px; background-color: #f7f6e6; text-align: center;"><p>글제목</p></td>
-			<td width="100px" style="text-align:center"><span>${customerServiceDTO.seq }</span></span></td>
+			
+			<td align="center" style="max-width:50px; background-color: #f7f6e6; text-align: center;">글번호</td>
+			<td width="100px" style="text-align:center"><span>${customerServiceDTO.seq }</span></td>
 		</tr>
 		
 		<tr>
-			<td align="center" style="width:80px; background-color: #f7f6e6;text-align: center;">내용</td>
-			<td colspan="3" width="1000px;" >
+			<td align="center" style="max-width:50px; background-color: #f7f6e6;text-align: center;">내용</td>
+			<td colspan="3" width="800px;" >
 				<pre style=" white-space:pre-wrap;  max-height: 300px; overflow: auto;">${customerServiceDTO.content }</pre>
 			</td>
 		</tr>
