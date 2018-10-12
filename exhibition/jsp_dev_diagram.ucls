@@ -1,0 +1,731 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.2" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="company.bean.CompanyDTO" project="exhibition" 
+    file="/exhibition/src/main/java/company/bean/CompanyDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="527" width="183" x="2566" y="1650"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="company.controller.CompanyController" project="exhibition" 
+    file="/exhibition/src/main/java/company/controller/CompanyController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3025" y="1372"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="3" language="java" name="company.dao.CompanyDAO" project="exhibition" 
+    file="/exhibition/src/main/java/company/dao/CompanyDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2998" y="1804"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="4" language="java" name="company.dao.CompanyDAOMybatis" project="exhibition" 
+    file="/exhibition/src/main/java/company/dao/CompanyDAOMybatis.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3392" y="1818"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="customerService.controller.CustomerServiceController" project="exhibition" 
+    file="/exhibition/src/main/java/customerService/controller/CustomerServiceController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="709" width="460" x="4407" y="2335"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="6" language="java" name="customerService.dao.CustomerServiceDAO" project="exhibition" 
+    file="/exhibition/src/main/java/customerService/dao/CustomerServiceDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="682" width="416" x="6145" y="3261"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="7" language="java" name="customerService.dao.CustomerServiceDAOMybatis" project="exhibition" 
+    file="/exhibition/src/main/java/customerService/dao/CustomerServiceDAOMybatis.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="780" width="416" x="6608" y="3263"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="customerService.bean.SalesBusinessRoomDTO" project="exhibition" 
+    file="/exhibition/src/main/java/customerService/bean/SalesBusinessRoomDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3632" y="3660"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="customerService.bean.SalesExhibitionDTO" project="exhibition" 
+    file="/exhibition/src/main/java/customerService/bean/SalesExhibitionDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3832" y="3687"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="customerService.bean.EventboardDTO" project="exhibition" 
+    file="/exhibition/src/main/java/customerService/bean/EventboardDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="652" width="164" x="3950" y="3260"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="customerService.bean.ChartDTO" project="exhibition" 
+    file="/exhibition/src/main/java/customerService/bean/ChartDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="4229" y="3390"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="customerService.bean.HotelboardDTO" project="exhibition" 
+    file="/exhibition/src/main/java/customerService/bean/HotelboardDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="4421" y="3498"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="customerService.bean.CustomerServiceDTO" project="exhibition" 
+    file="/exhibition/src/main/java/customerService/bean/CustomerServiceDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="779" width="163" x="4539" y="3260"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="customerService.bean.ImageboardPaging" project="exhibition" 
+    file="/exhibition/src/main/java/customerService/bean/ImageboardPaging.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="4837" y="3498"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="customerService.bean.ImageboardDTO" project="exhibition" 
+    file="/exhibition/src/main/java/customerService/bean/ImageboardDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="5054" y="3552"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="customerService.bean.ExhibitionBookDTO" project="exhibition" 
+    file="/exhibition/src/main/java/customerService/bean/ExhibitionBookDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="5253" y="3525"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="customerService.bean.PlayBookDTO" project="exhibition" 
+    file="/exhibition/src/main/java/customerService/bean/PlayBookDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="5456" y="3579"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="customerService.bean.SalesConcertHallDTO" project="exhibition" 
+    file="/exhibition/src/main/java/customerService/bean/SalesConcertHallDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="681" width="152" x="5581" y="3260"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="customerService.bean.CustomerServicePaging" project="exhibition" 
+    file="/exhibition/src/main/java/customerService/bean/CustomerServicePaging.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="5913" y="3561"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="introduction.controller.IntroductionController" project="exhibition" 
+    file="/exhibition/src/main/java/introduction/controller/IntroductionController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="319" width="253" x="2566" y="2297"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="login.controller.LoginController" project="exhibition" 
+    file="/exhibition/src/main/java/login/controller/LoginController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3737" y="2631"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="22" language="java" name="main.controller.IndexController" project="exhibition" 
+    file="/exhibition/src/main/java/main/controller/IndexController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="6931" y="2464"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="23" language="java" name="main.dao.MainDAO" project="exhibition" 
+    file="/exhibition/src/main/java/main/dao/MainDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="6778" y="3000"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="24" language="java" name="main.dao.MainDAOMybatis" project="exhibition" 
+    file="/exhibition/src/main/java/main/dao/MainDAOMybatis.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="7212" y="3011"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="25" language="java" name="main.bean.MainSlideDTO" project="exhibition" 
+    file="/exhibition/src/main/java/main/bean/MainSlideDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="7377" y="3404"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="26" language="java" name="main.bean.MainPaging" project="exhibition" 
+    file="/exhibition/src/main/java/main/bean/MainPaging.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="7640" y="3095"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="27" language="java" name="main.bean.MainDTO" project="exhibition" 
+    file="/exhibition/src/main/java/main/bean/MainDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="667" width="175" x="7086" y="3268"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="28" language="java" name="member.controller.MemberController" project="exhibition" 
+    file="/exhibition/src/main/java/member/controller/MemberController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="473" width="317" x="2519" y="2711"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="29" language="java" name="member.dao.MemberDAOMybatis" project="exhibition" 
+    file="/exhibition/src/main/java/member/dao/MemberDAOMybatis.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2738" y="3504"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="30" language="java" name="member.dao.MemberTicketListPaging" project="exhibition" 
+    file="/exhibition/src/main/java/member/dao/MemberTicketListPaging.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3109" y="2949"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="31" language="java" name="member.dao.MemberDAO" project="exhibition" 
+    file="/exhibition/src/main/java/member/dao/MemberDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3231" y="3494"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="32" language="java" name="performance.controller.PerformanceController" project="exhibition" 
+    file="/exhibition/src/main/java/performance/controller/PerformanceController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="4954" y="1262"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="33" language="java" name="performance.bean.PerformanceDTO" project="exhibition" 
+    file="/exhibition/src/main/java/performance/bean/PerformanceDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="397" width="150" x="3735" y="1659"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="34" language="java" name="performance.bean.PerformancePaging" project="exhibition" 
+    file="/exhibition/src/main/java/performance/bean/PerformancePaging.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="397" width="214" x="3952" y="1659"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="35" language="java" name="performance.bean.Book_performance_membersDTO" project="exhibition" 
+    file="/exhibition/src/main/java/performance/bean/Book_performance_membersDTO.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="289" width="220" x="4303" y="1660"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="36" language="java" name="performance.bean.Book_exhibition_membersDTO" project="exhibition" 
+    file="/exhibition/src/main/java/performance/bean/Book_exhibition_membersDTO.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="289" width="201" x="4597" y="1658"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="37" language="java" name="performance.dao.PerformanceDAO" project="exhibition" 
+    file="/exhibition/src/main/java/performance/dao/PerformanceDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="5112" y="1970"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="38" language="java" name="performance.dao.PerformanceDAOmybatis" project="exhibition" 
+    file="/exhibition/src/main/java/performance/dao/PerformanceDAOmybatis.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="5638" y="1986"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="39" language="java" name="rental.controller.RentalController" project="exhibition" 
+    file="/exhibition/src/main/java/rental/controller/RentalController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="6119" y="1219"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="40" language="java" name="rental.bean.BusinessRoomDTO" project="exhibition" 
+    file="/exhibition/src/main/java/rental/bean/BusinessRoomDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="5973" y="2106"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="41" language="java" name="rental.bean.ConcertHallDTO" project="exhibition" 
+    file="/exhibition/src/main/java/rental/bean/ConcertHallDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="6168" y="2052"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="42" language="java" name="rental.bean.RentalPerformanceDTO" project="exhibition" 
+    file="/exhibition/src/main/java/rental/bean/RentalPerformanceDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="6362" y="1890"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="43" language="java" name="rental.bean.ExhibitionDTO" project="exhibition" 
+    file="/exhibition/src/main/java/rental/bean/ExhibitionDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="6559" y="2079"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="44" language="java" name="rental.dao.ExhibitionDAO" project="exhibition" 
+    file="/exhibition/src/main/java/rental/dao/ExhibitionDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="6851" y="1739"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="45" language="java" name="rental.dao.BusinessRoomDAOMybatis" project="exhibition" 
+    file="/exhibition/src/main/java/rental/dao/BusinessRoomDAOMybatis.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="7638" y="1999"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="46" language="java" name="rental.dao.ConcertHallDAOMybatis" project="exhibition" 
+    file="/exhibition/src/main/java/rental/dao/ConcertHallDAOMybatis.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="7217" y="1985"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="47" language="java" name="rental.dao.BusinessRoomDAO" project="exhibition" 
+    file="/exhibition/src/main/java/rental/dao/BusinessRoomDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="7619" y="1730"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="48" language="java" name="rental.dao.ConcertHallDAO" project="exhibition" 
+    file="/exhibition/src/main/java/rental/dao/ConcertHallDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="7203" y="1730"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="49" language="java" name="rental.dao.ExhibitionDAOMybatis" project="exhibition" 
+    file="/exhibition/src/main/java/rental/dao/ExhibitionDAOMybatis.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="6857" y="2005"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="50" language="java" name="traffic.controller.TrafficController" project="exhibition" 
+    file="/exhibition/src/main/java/traffic/controller/TrafficController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="5618" y="2991"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="51">    
+    <end type="SOURCE" refId="39" navigable="false">      
+      <attribute id="52" name="concertHallDAO"/>      
+      <multiplicity id="53" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="48" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="54">    
+    <end type="SOURCE" refId="32" navigable="false">      
+      <attribute id="55" name="book_performance_membersDTO"/>      
+      <multiplicity id="56" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="35" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="57">    
+    <end type="SOURCE" refId="32" navigable="false">      
+      <attribute id="58" name="exhibitionDAO"/>      
+      <multiplicity id="59" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="44" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="60">    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="61" name="memberTicketListPaging"/>      
+      <multiplicity id="62" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="63">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="64" name="mainDAO"/>      
+      <multiplicity id="65" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="66">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="67" name="customerServiceDAO"/>      
+      <multiplicity id="68" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="69">    
+    <end type="SOURCE" refId="38"/>    
+    <end type="TARGET" refId="37"/>  
+  </realization>  
+  <association id="70">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="71" name="exhibitionBookDTO"/>      
+      <multiplicity id="72" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="73">    
+    <end type="SOURCE" refId="50" navigable="false">      
+      <attribute id="74" name="imageboardPaging"/>      
+      <multiplicity id="75" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="76">    
+    <end type="SOURCE" refId="46"/>    
+    <end type="TARGET" refId="48"/>  
+  </realization>  
+  <association id="77">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="78" name="customerServiceDAO"/>      
+      <multiplicity id="79" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="80">    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="81" name="companyDAO"/>      
+      <multiplicity id="82" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="83">    
+    <end type="SOURCE" refId="32" navigable="false">      
+      <attribute id="84" name="exhibitionBookDTO"/>      
+      <multiplicity id="85" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="86">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="87" name="imageboardPaging"/>      
+      <multiplicity id="88" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="89">    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="90" name="salesBusinessRoomDTO"/>      
+      <multiplicity id="91" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="92">    
+    <end type="SOURCE" refId="24"/>    
+    <end type="TARGET" refId="23"/>  
+  </realization>  
+  <association id="93">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="94" name="imageboardList"/>      
+      <multiplicity id="95" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="96">    
+    <end type="SOURCE" refId="32" navigable="false">      
+      <attribute id="97" name="performanceDAO"/>      
+      <multiplicity id="98" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="37" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="99">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="100" name="memberDAO"/>      
+      <multiplicity id="101" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="31" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="102">    
+    <end type="SOURCE" refId="39" navigable="false">      
+      <attribute id="103" name="exhibitionDAO"/>      
+      <multiplicity id="104" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="44" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="105">    
+    <end type="SOURCE" refId="32" navigable="false">      
+      <attribute id="106" name="performancePaging"/>      
+      <multiplicity id="107" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="34" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="108">    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="109" name="memberDAO"/>      
+      <multiplicity id="110" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="31" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="111">    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="31"/>  
+  </realization>  
+  <association id="112">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="113" name="companyDAO"/>      
+      <multiplicity id="114" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="115">    
+    <end type="SOURCE" refId="32" navigable="false">      
+      <attribute id="116" name="book_exhibition_membersDTO"/>      
+      <multiplicity id="117" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="36" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="118">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="119" name="mainPaging"/>      
+      <multiplicity id="120" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="121">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="122" name="playBookDTO"/>      
+      <multiplicity id="123" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="124">    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="125" name="book_performance_membersDTO"/>      
+      <multiplicity id="126" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="35" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="127">    
+    <end type="SOURCE" refId="50" navigable="false">      
+      <attribute id="128" name="customerServiceDAO"/>      
+      <multiplicity id="129" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="130">    
+    <end type="SOURCE" refId="45"/>    
+    <end type="TARGET" refId="47"/>  
+  </realization>  
+  <realization id="131">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="3"/>  
+  </realization>  
+  <association id="132">    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="133" name="memberDAO"/>      
+      <multiplicity id="134" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="31" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="135">    
+    <end type="SOURCE" refId="49"/>    
+    <end type="TARGET" refId="44"/>  
+  </realization>  
+  <association id="136">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="137" name="customerServicePaging"/>      
+      <multiplicity id="138" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="139">    
+    <end type="SOURCE" refId="39" navigable="false">      
+      <attribute id="140" name="businessRoomDAO"/>      
+      <multiplicity id="141" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="47" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="142">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="6"/>  
+  </realization>  
+  <association id="143">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="144" name="mainDAO"/>      
+      <multiplicity id="145" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
