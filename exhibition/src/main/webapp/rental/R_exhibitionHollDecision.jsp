@@ -169,7 +169,7 @@
 					url : '/exhibition/rental/searchRentDay.do',
 					data : {'booth': '${booth}',
 							'startDate' : $('#startDate').val(),
-							'endDate' : $('#startDate').val()},
+							'endDate' : $('#endDate').val()},
 					async: false,
 					dataType: 'text',
 					success : function(data){
@@ -184,7 +184,7 @@
 								$('#exhibitionHollDecisionForm').submit();
 							});
 						} else if(data==='exist') {
-							$('#writeConDiv').text('예약불가능');
+							$('#writeExDiv').text('예약불가능');
 							$('#rentDiv').text('');
 						}  
 						

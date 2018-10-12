@@ -91,17 +91,20 @@ public class RentalController {
 			width = 120;
 		}
 		
-		Calendar cal = Calendar.getInstance();
-		cal.add(cal.MONTH, 1);
 		
-		Date date = new Date(cal.getTimeInMillis());
-		
+		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+		
+		Calendar cal = Calendar.getInstance();
 
+        cal.setTime(date);
+
+        cal.add(Calendar.DATE, 1);
+		
 		model.addAttribute("rate", rate);
 		model.addAttribute("width", width);
 		model.addAttribute("hallName", hallName);
-		model.addAttribute("date", sdf.format(date));
+		model.addAttribute("date", sdf.format(cal.getTime()));
 
 		List<ConcertHallDTO> list = concertHallDAO.getCalendar(hallName);
 		for (ConcertHallDTO data : list) {
@@ -242,12 +245,19 @@ public class RentalController {
 	public @ResponseBody String searchRentDay(@RequestParam String booth, @RequestParam String startDate,
 			@RequestParam String endDate) {
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("boothName", booth);
-		map.put("startDate", startDate);
-		map.put("endDate", endDate);
-		String result = exhibitionDAO.searchRentDay(map);
-
-		return result;
+		String[] diffDays = getDiffDays(startDate.replaceAll("/", ""), endDate.replaceAll("/", ""));
+		String result = null;
+		String finalResult = "not_exist";
+		for(int i = 0; i < diffDays.length; i++) {
+			map.put("booth", booth);
+			map.put("diffDay", diffDays[i]);
+			result = exhibitionDAO.searchRentDay(map);
+			if(result.equals("exist")) {
+				finalResult = "exist";
+			} 
+		}
+		
+		return finalResult;
 	}
 	
 	// 예약가능한 concertHall 날짜 확인하기
@@ -255,12 +265,26 @@ public class RentalController {
 	public @ResponseBody String searchConcertHallRentDay(@RequestParam String hallName, @RequestParam String startDate,
 			@RequestParam String endDate) {
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("hallName", hallName);
-		map.put("startDate", startDate);
-		map.put("endDate", endDate);
-		String result = concertHallDAO.searchConcertHallRentDay(map);
-
-		return result;
+		System.out.println(startDate);
+		System.out.println(endDate);
+		
+		String[] diffDays = getDiffDays(startDate.replaceAll("/", ""), endDate.replaceAll("/", ""));
+		
+		for(int i = 0; i < diffDays.length;i++) {
+			System.out.println(diffDays[i]);
+		}
+		String result = null;
+		String finalResult = "not_exist";
+		for(int i = 0; i < diffDays.length; i++) {
+			map.put("hallName", hallName);
+			map.put("diffDay", diffDays[i]);
+			result = concertHallDAO.searchConcertHallRentDay(map);
+			if(result.equals("exist")) {
+				finalResult = "exist";
+			} 
+		}
+		
+		return finalResult;
 	}
 
 	// 특정 날짜 비지니스룸 예약현황 확인

@@ -170,7 +170,7 @@
 					url : '/exhibition/rental/searchConcertHallRentDay.do',
 					data : {'hallName': '${hallName}',
 							'startDate' : $('#startDate').val(),
-							'endDate' : $('#startDate').val()},
+							'endDate' : $('#endDate').val()},
 					async: false,
 					dataType: 'text',
 					success : function(data){
@@ -200,7 +200,6 @@
 		});
 		
 		var calDate = new Date();
-		calDate.setMonth(calDate.getMonth()+1);
 		
 		
 		$('#calendar').fullCalendar({

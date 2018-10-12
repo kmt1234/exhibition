@@ -238,10 +238,13 @@ div{
                         $('#fourthCheck').remove();
                      }
                   });
-
+				 
+                  if($('#first').text()=='예약불가능' && $('#second').text()=='예약불가능' && $('#third').text()=='예약불가능' && $('#fourth').text()=='예약불가능'){
+                  	$('#rentalBusinessRoomBtn').hide();
+                 	 }
                }
 
-            });
+           });
 
          },//밑에는 예약되어있는 날짜 클릭이벤트
          eventClick: function(event){
