@@ -65,19 +65,17 @@ $(document).ready(function(){
 			$.each(data.list, function(index, item){
 				$('<tr/>').append($('<td/>',{
 						align : 'center',
-						style: 'width: 20%; height: 9%; text-align: center;',
+						style: 'width: 80px; height: 50px; text-align: center;',
 						text : item.seq,
 						id : 'seqA'
 					})).append($('<td/>',{
 						align : 'center',
 						id : 'subjectA',
-						style: 'width: 45%; height: 7%;text-align: center;',
-						class : item.seq+"",
-						href : 'javascript:void(0)',
+						style: 'width: 600px; height: 50px;text-align: center;',
 						text : item.subject
 					})).append($('<td/>',{
 						align : 'center',
-						style: 'width: 20%; height: 7%;text-align: center;',
+						style: 'width: 200px; height: 50px;text-align: center;',
 						text : item.logtime,
 						id : 'logtime'
 					})).appendTo($('#C_notice_List'));
@@ -86,6 +84,11 @@ $(document).ready(function(){
 		}
 	});
 	
+	$('#keyword').keydown(function(key) {
+		if (key.keyCode == 13) {
+			$('#C_notice_SearchBtn').click();
+		}
+	});
 	// 공지사항 검색한 값 불러오기
 	$('#C_notice_SearchBtn').click(function(){
 		$('#pg').val(1);
@@ -94,6 +97,9 @@ $(document).ready(function(){
 		else
 			location.href="/exhibition/customerService/C_notice_Search.do?pg="+$('#pg').val()+"&keyword="+$('#keyword').val();
 	});
+	
+	
+	
 	
 	
 	// 공지사항 리스트 제목 클릭시 내용 보여줌

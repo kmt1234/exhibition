@@ -136,10 +136,20 @@ $(document).ready(function(){
 	
 	//회원탈퇴버튼
 	$('#company-out').click(function(){
-		$('.ui.basic.modal').modal({
-			closable : false,
-            duration : 460,
-		}).modal('show');
+		var extable = document.getElementById("exhibitionList");
+		var exCount = extable.rows.length-1;
+		var cotable = document.getElementById("concertList");
+		var coCount = cotable.rows.length-1;
+		if(exCount != 0){
+			swal( "불가" ,  "진행중인 임대가 있으면 탈퇴가 불가능합니다.",  "error" );
+		}else if(coCount != 0){
+			swal( "불가" ,  "진행중인 임대가 있으면 탈퇴가 불가능합니다.",  "error" );
+		}else{
+			$('.ui.basic.modal').modal({
+				closable : false,
+	            duration : 460,
+			}).modal('show');
+		}
 	});
 	
 	$('#del_OK').click(function(){

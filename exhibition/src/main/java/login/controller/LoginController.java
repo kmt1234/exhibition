@@ -355,7 +355,7 @@ public class LoginController {
 	//회원의 예매 리스트를 가져오는 ajax
 	@RequestMapping(value="getMemberTicketList", method=RequestMethod.GET)
 	public ModelAndView getMemberTicketList(@RequestParam(required = false, defaultValue = "1") String pg, 
-											@RequestParam int code,
+											@RequestParam(required = false, defaultValue = "1") int code,
 											HttpSession session) {
 		MemberDTO memberDTO = (MemberDTO)session.getAttribute("homepageMember");
 		String id = memberDTO.getM_Id();

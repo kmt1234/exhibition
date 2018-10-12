@@ -47,7 +47,7 @@
 			<input type="hidden" id="totalRent" name="totalRent" value="">
 			<input type="hidden" id="booth" name="booth" value="${booth}">
 			<h4 style="text-align: left; padding-left: 35px ">
-				행사 이름 : 
+				업 체 명 : 
 				<input type="text" style="width: 185px;" id="title" name="title">
 			</h4>
 			<div style="text-align: left; padding-left: 35px ">

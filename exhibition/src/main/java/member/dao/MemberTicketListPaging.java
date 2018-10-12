@@ -26,7 +26,7 @@ public class MemberTicketListPaging {
 		if(endPage > totalP) endPage = totalP;
 		
 		if(startPage>pageBlock)	
-			pagingHTML.append("[<span id=paging onclick=MemberTicketListPaging("+(startPage-1)+")>다음</span>]");
+			pagingHTML.append("[<span id=paging onclick=MemberTicketListPaging("+(startPage-1)+")>이전</span>]");
 	
 		for(int i = startPage; i<=endPage; i++) {
 			if(i==currentPage) {
@@ -36,7 +36,7 @@ public class MemberTicketListPaging {
 			}
 		}
 		if(endPage < totalP)
-			pagingHTML.append("[<span id=paging onclick=MemberTicketListPaging("+(endPage+1)+")>이전</span>]");
+			pagingHTML.append("[<span id=paging onclick=MemberTicketListPaging("+(endPage+1)+")>다음</span>]");
 	}
 	
 	//예매내역(과거) 페이징
@@ -52,7 +52,7 @@ public class MemberTicketListPaging {
 		if(endPage > totalP) endPage = totalP;
 		
 		if(startPage>pageBlock)	
-			pagingHTML.append("[<span id=paging onclick=TicketHistoryListPaging("+(startPage-1)+")>다음</span>]");
+			pagingHTML.append("[<span id=paging onclick=TicketHistoryListPaging("+(startPage-1)+")>이전</span>]");
 	
 		for(int i = startPage; i<=endPage; i++) {
 			if(i==currentPage) {
@@ -62,7 +62,7 @@ public class MemberTicketListPaging {
 			}
 		}
 		if(endPage < totalP)
-			pagingHTML.append("[<span id=paging onclick=TicketHistoryListPaging("+(endPage+1)+")>이전</span>]");
+			pagingHTML.append("[<span id=paging onclick=TicketHistoryListPaging("+(endPage+1)+")>다음</span>]");
 	}
 	
 	//비지니스룸 페이징
@@ -78,7 +78,7 @@ public class MemberTicketListPaging {
 		if(endPage > totalP) endPage = totalP;
 		
 		if(startPage>pageBlock)	
-			pagingHTML.append("[<span id=paging onclick=memberBuisnessListPaging("+(startPage-1)+")>다음</span>]");
+			pagingHTML.append("[<span id=paging onclick=memberBuisnessListPaging("+(startPage-1)+")>이전</span>]");
 	
 		for(int i = startPage; i<=endPage; i++) {
 			if(i==currentPage) {
@@ -88,7 +88,7 @@ public class MemberTicketListPaging {
 			}
 		}
 		if(endPage < totalP)
-			pagingHTML.append("[<span id=paging onclick=memberBuisnessListPaging("+(endPage+1)+")>이전</span>]");
+			pagingHTML.append("[<span id=paging onclick=memberBuisnessListPaging("+(endPage+1)+")>다음</span>]");
 	}
 }
 

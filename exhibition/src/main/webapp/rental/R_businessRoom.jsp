@@ -51,18 +51,20 @@ ul{
 	</div>
 	<div class="ui divider"></div>
 </h2>
-<table style="margin-left:20px; width: 40%;">
+<div id="Layer1" style="position:absolute; left:237px; top:140px; width:164px; height:104px; z-index:1">
+<table style="width: 50%; display: inline-block;">
 	<tr>
 		<td>
-			<button class="middle ui button" style="width: 50%;" id="3F">
+			<button class="middle ui button" style="width: 180px;" id="3F">
 				3층
 			</button> 
 		</td>
 	</tr>
 </table>
+</div>
 
 <c:if test="${code == '3'}">
-<div style="position:absolute; width: 500px; margin-left: 360px; margin-top: 5px;">
+<div style="position:absolute; width: 500px; margin-left: 180px; margin-top: 5px;">
 	<form id="modifyRateBusinessRoomForm" action="/exhibition/rental/modifyRateBusinessRoom.do" method="post">
 		<select id="roomNameSel" name="roomNameSel">
 			<option value="Room1">Room1</option>

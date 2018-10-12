@@ -22,6 +22,10 @@
 	text-decoration: none;
 	cursor: pointer;
 }
+.aaa{
+	color : #ec008c;
+	font-weight: 800;
+}
 </style>
 <script src="../js/C_contactList_Search_js.js?ver=1"></script>
 <script type="text/javascript">
@@ -30,6 +34,7 @@ window.onload=function(){
 		document.getElementById("searchOption").value = '${searchOption}';
 	}
 }
+
 </script>
 </head>
 <body>
@@ -53,11 +58,11 @@ window.onload=function(){
 					<input type="checkbox" id="checkAll">
 				</th>
 			</c:if>
-				<th style="width: 18%; height: 7%; padding-top: 10px; text-align: center;">분류</th>
-				<th style="width: 18%; height: 7%; padding-top: 10px; text-align: center;">기관 & 시설</th>
-				<th style="width: 18%; height: 7%; padding-top: 10px; text-align: center;">명칭</th>
-				<th style="width: 18%; height: 7%; padding-top: 10px; text-align: center;">담당자</th>
-				<th style="width: 18%; height: 7%; padding-top: 10px; text-align: center;">연락처</th>
+				<th style="width: 172px; height: auto; padding-top: 10px; text-align: center;">분류</th>
+				<th style="width: 172px; height: auto; padding-top: 10px; text-align: center;">기관 & 시설</th>
+				<th style="width: 172px; height: auto; padding-top: 10px; text-align: center;">명칭</th>
+				<th style="width: 172px; height: auto; padding-top: 10px; text-align: center;">담당자</th>
+				<th style="width: 100px; height: auto; padding-top: 10px; text-align: center;">연락처</th>
 			</tr>
 	</table>
 	<br>
@@ -68,7 +73,7 @@ window.onload=function(){
 	<br><br>
 
 	<select name="searchOption" id="searchOption" class="ui selection dropdown" id="searchOption">
-			<option value="facility" id="searchOption">기관&시설</option>
+			<option value="facility">기관&시설</option>
 			<option value="name">담당자</option>
 	</select>
 

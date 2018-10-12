@@ -120,21 +120,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!--비지니스룸 내역 총 글수 가져오는 메소드  -->
 	<select id="getBusinessHistoryListTotalA" parameterType="java.util.Map" resultType="int">
-		select count(*) from businessroom where M_id = #{M_Id} and FIRST = 'Y' or second like 'Y' or third = 'Y' or fourth = 'Y' order by startDate asc
+		select count(*) from businessroom where M_id = #{M_Id} order by startDate asc
 	</select>
 	
 	<!--마이페이지-비지니스룸 내역 불러오는 메소드(ajax)  -->
 	<select id="getBusinessHistoryList" parameterType="java.util.Map" resultType="customerService.bean.SalesBusinessRoomDTO">
 		select * from(
                 select rownum rn, tt.* from(
-                select * from businessroom where M_id = #{M_Id} and FIRST = 'Y' or second = 'Y' or third = 'Y' or fourth = 'Y' order by startDate asc)tt
+                select * from businessroom where M_id = #{M_Id} order by startDate asc)tt
              )where rn <![CDATA[>=]]> ${startNum} and rn <![CDATA[<=]]> ${endNum}
 	</select>
 	
 	<!--마이페이지-비지니스룸 삭제 메소드(ajax) -->
-
-
 	<delete parameterType="java.util.Map" id="deleteBusinessRoom">
 		delete from businessroom where M_Id = #{M_Id} and seq = #{seq}
 	</delete>
+	
+	<!--전시회 예매 내역있는지 확인(개인회원 탈퇴 시,)  -->
+	<select id="checkBookExhibition" parameterType="java.util.Map" resultType="int">
+		select count(*) from Book_Exhibition_Members where memberId = #{M_Id} and playDate <![CDATA[>=]]>sysdate
+	</select>
+	
+	<!--연극 예매 내역있는지 확인(개인회원 탈퇴 시,)  -->
+	<select id="checkBookPlay" parameterType="java.util.Map" resultType="int">
+		select count(*) from Book_Play_Members where memberId = #{M_Id} and playDate <![CDATA[>=]]>sysdate
+	</select>
+	
+	<!--비지니스룸 예매 내역있는지 확인(개인회원 탈퇴 시,)  -->
+	<select id="checkBookBusiness" resultType="int">
+		select count(*) from BUSINESSROOM where M_Id = #{M_Id} and startDate <![CDATA[>=]]>sysdate
+	</select>
 </mapper>

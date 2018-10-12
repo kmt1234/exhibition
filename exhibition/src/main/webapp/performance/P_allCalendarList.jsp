@@ -101,5 +101,4 @@ function performancePaging(pg){
 </script>
 <script src='../js/introduction.js'></script>
 </body>
-
 </html>

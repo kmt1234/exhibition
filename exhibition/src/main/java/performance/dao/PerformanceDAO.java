@@ -13,7 +13,7 @@ public interface PerformanceDAO {
 
 	public List<EventboardDTO> getPerformance();
 
-	public List<EventboardDTO> getPlayList(Map<String,String> map);	//공연일정 리스트 가져오는 메소드
+	public List<EventboardDTO> getPlayList(Map<String, String> map);	//공연일정 리스트 가져오는 메소드
 
 	public int getPlayListTotalA();	//공연일정 리스트 총 글수 가져오는 메소드
 
@@ -58,15 +58,17 @@ public interface PerformanceDAO {
 
 	public List<EventboardDTO> getAllExhibitionList(Map<String, Integer> map);//박람회-리스트 전체 일정 가져오기
 
-	public int getAllListTotalA(Map<String, Integer> map); //전체 리스트 총글구하기
+	public int getAllListTotalA(); //전체 리스트 총글구하기
 
-	public int getAllListTotalA_Prev(Map<String, Integer> map);//전체리스트 3개월이전 총글구하기
+	public int getAllListTotalA_Prev(Map<String, String> map);//전체리스트 3개월이전 총글구하기
 
-	public List<EventboardDTO> getAllExhibitionList_Prev(Map<String, Integer> map);//전체리스트 3개월 이전 글 뿌리기
+	public List<EventboardDTO> getAllExhibitionList_Prev(Map<String, String> map);//전체리스트 3개월 이전 글 뿌리기
 
-	public int getAllListTotalA_After(Map<String, Integer> map); //전체리스트 3개월 이후 총글구하기
+	public int getAllListTotalA_After(); //전체리스트 3개월 이후 총글구하기
 
-	public List<EventboardDTO> getAllExhibitionList_After(Map<String, Integer> map);//전체리스트 3개월 이후 글 뿌리기
+	public List<EventboardDTO> getAllExhibitionList_After(Map<String, String> map);//전체리스트 3개월 이후 글 뿌리기
+
+	public EventboardDTO getExhibitionCal(String seq);
 	
 
 	

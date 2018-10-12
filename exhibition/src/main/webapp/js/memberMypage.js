@@ -4,7 +4,7 @@ $(document).ready(function(){
 	
 	//비지니스 룸 내역
 	$('#member-business-List').click(function(){
-		location.href="http://localhost:8080/exhibition/login/memberBusinessRoomList.do";
+		location.href="/exhibition/login/memberBusinessRoomList.do";
 	});
 	
 	//회원의 예매 리스트를 가져오는 ajax 
@@ -222,21 +222,13 @@ $(document).ready(function(){
 	
 	
 	//회원탈퇴버튼
-	$('.ui.modal3').hide();
 	$('#member-out').click(function(){
-		$('#M-modify-modify').hide();
-		$('.ui.modal3').show();
-	});
-	$('#out-no').click(function(){//아니오 클릭시
-		$('.ui.modal3').hide();
-		$('#M-modify-modify').show();
-	});
-	$('#out-yes').click(function(){//네 클릭시
 		$('.ui.basic.modal').modal({
 			closable : false,
             duration : 460,
 		}).modal('show');
 	});
+
 	
 	$('#del_OK').click(function(){
 		$.ajax({
@@ -247,6 +239,8 @@ $(document).ready(function(){
 				success : function(data){
 					if(data=='exist'){
 						location.href='/exhibition/member/outComplete.do';
+					}else if(data=='exist_book'){
+						swal( "불가" ,  "예매내역을 모두 취소 후, 회원탈퇴 가능합니다.",  "error" );
 					}else if(data=='not_exist'){
 						$('#del_check').text("비밀번호가 틀렸습니다.").css("font-size","12px").css("color","red").css("margin-left","24%").css("margin-top","2%");
 						$('.ui.basic.modal').modal('show');

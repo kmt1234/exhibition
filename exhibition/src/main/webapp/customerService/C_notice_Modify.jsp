@@ -18,7 +18,7 @@
 		<tr>
 			<td height="30" style="width:10%; background-color: #f7f6e6; text-align: center;">글제목</td>
 			
-			<td style="width:5px; text-align: left;">
+			<td style="width:100px; text-align: left;">
 				<div class="ui input">
 					<input type="text" name="subject" id="subject" value="${customerServiceDTO.subject }">
 					<div id="subjectDiv"></div>

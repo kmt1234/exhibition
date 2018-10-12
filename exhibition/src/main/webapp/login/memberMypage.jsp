@@ -170,8 +170,7 @@ div#uiStatistics {
 							    	<div style="width: 5%;">&nbsp;</div>
 							        <div class="middle ui button" id="M-modify-cancel" style="width: 30%;">취소</div>
 							    </div>
-							    <br><span class="M-modify-result-Span"></span>
-								<div style="margin-top: 40px;"></div>	
+								<div style="margin-top: 40px;"></div>
 									<jsp:include page="memberOut.jsp"/>
 				    		</div><!--수정영역 텍스트필드-->
 				  		</div><!--class="description"  -->
@@ -227,14 +226,12 @@ div#uiStatistics {
 	</c:if>
 </div>
 </div><!-- 전체 -->
-
 <!--예매 취소하기 위해 필요한 값들-->	
 <input type="hidden" id="hiddenImageName" value="${imageName }">
 <input type="hidden" id="hiddenPlayDate" value="${playDate }">
 <input type="hidden" id="hiddenTicketQty" value="${ticketQty }">
 <input type="hidden" id="code" value="${code }">
 
-<script src="../js/memberMypage.js?ver=1"></script>
 <script>
 /*페이징 */
 function MemberTicketListPaging(pg){
@@ -308,3 +305,4 @@ function TicketHistoryListPaging(pg){
 	//location.href="/exhibition/login/mypage.do?pg="+pg;
 }
 </script>
+<script src="../js/memberMypage.js?ver=1"></script>

@@ -60,7 +60,7 @@
 						    	<input type="hidden" id="C-modify-password-hidden" value="${DTO.getC_password()}">
 			  				</div>
 			  				<!-- 회사정보들 -->
-			  				<div style="width: 100%;">
+			  				<div style="width: 405px;">
 			  					<br>
 			  					<!-- 사업자명 -->
 			  					<div style="width: 100%; text-align: left; margin-top: 20px;display: inline-block; ">
@@ -138,8 +138,9 @@
 										</div>
 							  		</div><!--class="ui inverted input"-->
 									</div>
+								<br><div style="width: 300px;"><span class="C-modify-pwd-Span"></span></div>
 								</div>
-								<br><span class="C-modify-pwd-Span"></span>
+								
 								<!-- 비밀번호 확인 -->
 								<div style="width: 100%; text-align: left; margin-top: 20px;display: inline-block; ">
 									<div class="ui labeled input " >
@@ -368,6 +369,7 @@ $(document).ready(function(){
 			 		text : item.endDate
 			 	})).append($('<td/>',{
 			 		name : 'ing',
+			 		class : 'Exing',
 			 		html : ing
 			 	})).appendTo($('#rental_exhibition'));
 			});
@@ -397,6 +399,7 @@ $(document).ready(function(){
 			 		text : item.endDate
 			 	})).append($('<td/>',{
 			 		name : 'ing',
+			 		class : 'Coing',
 			 		html : ing
 			 	})).appendTo($('#rental_concert'));
 			});

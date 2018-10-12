@@ -47,5 +47,6 @@ left: 0px;
 <script src="../js/slidbar.js"></script>
 <script src="../js/p_exhibitionCalendar.js"></script>
 <script src="../js/p_peformanceCalendar.js"></script>
+<script src="../js/traffic.js"></script>
 </body>
 </html>

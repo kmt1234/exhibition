@@ -167,12 +167,6 @@
 		</foreach>
 	</delete>
  	
- 	
- 	
- 	
- 	
- 	
- 	
  	<!-- 주요시설 연락처 총글수 -->
  	<select id="getTotalC_contactList" resultType="int">
  		select count(*) from C_contactList

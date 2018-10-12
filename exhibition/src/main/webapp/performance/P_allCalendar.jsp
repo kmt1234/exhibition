@@ -35,7 +35,7 @@ var dataSet = [
 		    	"start" : '<c:out value="${listView.days[dayStatus.index]}"/>',
 		    	"imageurl" : "../img/Ex.png",
 		    	"color" : "#ffffff",
-		    	"url" : "/exhibition/performance/P_allScheduleList.do",
+		    	"url" : "/exhibition/performance/P_allScheduleList.do?seq="+${listView.seq},
 		    	"textColor" : "#000000",
 		    	"class" : "aaaa"
 		    	} 
@@ -91,6 +91,10 @@ body {
 	max-width: 880px;
 	margin: 0 auto;
 }
+#houseImg{
+	margin:-3px;
+	cursor: pointer;
+}
 </style>
 </head>
 
@@ -132,4 +136,5 @@ body {
 		<br><br><br><br>
 		<div  id='calendar' class="calendar"></div>
 </body>
+<script src="../js/traffic.js"></script>
 </html>

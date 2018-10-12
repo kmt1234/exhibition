@@ -182,6 +182,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.ui.min.js"></script>
 <script src="https://rawgit.com/claviska/jquery-alertable/master/jquery.alertable.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="../js/index_Search.js?ver=1" charset="UTF-8"></script>
 <script src="../js/index.js?ver=1" charset="UTF-8"></script> 
 <script src="../js/member.js?ver=1" charset="UTF-8"></script> 

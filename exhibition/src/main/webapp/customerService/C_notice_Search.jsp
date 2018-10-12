@@ -39,6 +39,17 @@
 	text-decoration: none;
 	cursor: pointer;
 }
+#subjectA{
+	display : block;
+	width : 200px; 
+	overflow: hidden;  
+	white-space: nowrap;  
+	text-overflow  : ellipsis;
+}
+.aaa{
+	color : #ec008c;
+	font-weight: 800;
+}
 </style>
 <script src="../js/C_notice_Search_js.js?ver=1"></script>
 
