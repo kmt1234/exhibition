@@ -126,6 +126,7 @@
 	<input type="hidden" id="hiddenTicketQty" type="hidden"><!--티켓 수량 -->
 	<input type="hidden" id="hiddenTotalSeats" value="${eventboardDTO.eventSeats}" ><!--전체 좌석 수 -->
 	<input  type="hidden" id="hiddenId" value="${id}"><!--로그인 된 아이디-->
+	<input  type="hidden" id="hiddenCode" value="${code}">
 	<!--예약확인 및 결제하기 (모달)-->
 	<div class="ui modal bookNextStep" style="min-width: 900px;"" ><i class="close icon"></i>
 	  <div class="header" id="bookConfirmHeader" >예매확인 및 결제하기</div>
@@ -198,6 +199,11 @@ $(document).ready(function(){
 		$('#bookConfirmHeader').text('로그인 후 예매가능합니다');
 	}
 	
+	if($('#hiddenCode').val()=='2'){
+		$('#BookEventBtn').hide(); //예매버튼 숨김
+		$('#bookConfirmHeader').text('개인회원으로 예매 가능합니다');
+	}
+	
 	//잔여좌석 보다 구매티켓이 높을 경우 구매 못하게 막음
 	$('#selectPlayTicket').change(function(){
 		if($('#selectEventDate :selected').val()=='2000-01-01'){
@@ -212,6 +218,9 @@ $(document).ready(function(){
 					if(data=='ok'){
 						if($('#hiddenId').val()=='manager'){
 							$('#BookEventBtn').hide();
+						}else if($('#hiddenCode').val()==2){
+							$('#BookEventBtn').hide(); //예매버튼 숨김
+							$('#bookConfirmHeader').text('개인회원으로 예매 가능합니다');
 						}else{
 							$('#BookEventBtn').show();
 						}
@@ -235,28 +244,33 @@ $(document).ready(function(){
 		if($('#hiddenId').val()==''){
 			$('#BookEventBtn').hide(); //예매버튼 숨김
 			$('#bookConfirmHeader').text('로그인 후 예매가능합니다');
+		}else if($('#hiddenCode').val()==2){
+			$('#BookEventBtn').hide(); //예매버튼 숨김
+			$('#bookConfirmHeader').text('개인회원으로 예매 가능합니다');
+		}else{
+			//티켓 잔여 확인
+			$.ajax({
+				type : 'POST',
+				url : '/exhibition/performance/book_performance_remainSeats.do',
+				data : {'totalSeats' : $('#hiddenTotalSeats').val(), 'imageName' : $('#imageName').val(), 'playDate' : $('#selectEventDate :selected').text()},
+				async: true,
+				dataType : 'text',
+				success : function(data){
+					if(data=='choseDate'){
+						$('#remainSeats').text('날짜입력하세요');
+					}else if(data=='remainSeats'){
+						$('#remainSeats').text(data);
+					}else if(data=='noSeats'){
+						$('#BookEventBtn').hide();
+						$('#remainSeats').text('매진');
+					}else{
+						$('#remainSeats').text(data);	
+					}
+					
+				}//success
+			});//ajax
 		}
-		//티켓 잔여 확인
-		$.ajax({
-			type : 'POST',
-			url : '/exhibition/performance/book_performance_remainSeats.do',
-			data : {'totalSeats' : $('#hiddenTotalSeats').val(), 'imageName' : $('#imageName').val(), 'playDate' : $('#selectEventDate :selected').text()},
-			async: true,
-			dataType : 'text',
-			success : function(data){
-				if(data=='choseDate'){
-					$('#remainSeats').text('날짜입력하세요');
-				}else if(data=='remainSeats'){
-					$('#remainSeats').text(data);
-				}else if(data=='noSeats'){
-					$('#BookEventBtn').hide();
-					$('#remainSeats').text('매진');
-				}else{
-					$('#remainSeats').text(data);	
-				}
-				
-			}//success
-		});//ajax
+		
 		
 	});//날짜 변경 값 확인	
 	//예매하기 버튼 클릭 시,

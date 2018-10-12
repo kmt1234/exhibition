@@ -132,9 +132,21 @@ public class MemberDAOMybatis implements MemberDAO {
 	public int deleteBusinessRoom(Map<String, String> map) {
 		return sqlSession.delete("deleteBusinessRoom", map);
 	}
-
 	
+	//전시회 예매 내역있는지 확인(개인회원 탈퇴 시,)
+	public int checkBookExhibition(Map<String, String> map) {
+		return sqlSession.selectOne("checkBookExhibition", map);
+	}
 	
+	//연극 예매 내역있는지 확인(개인회원 탈퇴 시,)
+	public int checkBookPlay(Map<String, String> map) {
+		return sqlSession.selectOne("checkBookPlay", map);
+	}
+	
+	//비지니스룸 예매 내역있는지 확인(개인회원 탈퇴 시,)
+	public int checkBookBusiness(Map<String, String> map) {
+		return sqlSession.selectOne("checkBookBusiness", map);
+	}
 	
 	
 }
