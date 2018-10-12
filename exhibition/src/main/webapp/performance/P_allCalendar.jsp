@@ -75,7 +75,9 @@ var dataSet = [
                     eventElement.find("span.fc-title").prepend("<img src='" + event.imageurl +	"'width='25px' height='25px'  align='absmiddle'> &ensp;");
                 }
             },
-
+			dayClick : function(date){
+				alert(date);
+			},
 			events: dataSet
    
 		});

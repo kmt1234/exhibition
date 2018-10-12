@@ -109,7 +109,6 @@ public class PerformanceController {
 		System.out.println(dto.getStartDate().replaceAll("-", "").substring(0, 9));
 		System.out.println(dto.getEndDate().replaceAll("-", "").substring(0, 9));
 		
-		/*System.out.println(getDiffDayCount(dto.getStartDate().replaceAll("/", "")), sdf.format(today)));*/
 		System.out.println(getDiffDayCount(String.valueOf(dto.getStartDate().replaceAll("-", "").substring(0, 9)), sdf.format(today)));
 		System.out.println(getDiffDayCount(String.valueOf(dto.getEndDate().replaceAll("-", "").substring(0, 9)), sdf.format(today)));
 		

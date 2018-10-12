@@ -200,7 +200,6 @@
 		});
 		
 		var calDate = new Date();
-		calDate.setMonth(calDate.getMonth()+1);
 		
 		
 		$('#calendar').fullCalendar({

@@ -91,17 +91,20 @@ public class RentalController {
 			width = 120;
 		}
 		
-		Calendar cal = Calendar.getInstance();
-		cal.add(cal.MONTH, 1);
 		
-		Date date = new Date(cal.getTimeInMillis());
-		
+		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+		
+		Calendar cal = Calendar.getInstance();
 
+        cal.setTime(date);
+
+        cal.add(Calendar.DATE, 1);
+		
 		model.addAttribute("rate", rate);
 		model.addAttribute("width", width);
 		model.addAttribute("hallName", hallName);
-		model.addAttribute("date", sdf.format(date));
+		model.addAttribute("date", sdf.format(cal.getTime()));
 
 		List<ConcertHallDTO> list = concertHallDAO.getCalendar(hallName);
 		for (ConcertHallDTO data : list) {

@@ -184,7 +184,7 @@
 								$('#exhibitionHollDecisionForm').submit();
 							});
 						} else if(data==='exist') {
-							$('#writeConDiv').text('예약불가능');
+							$('#writeExDiv').text('예약불가능');
 							$('#rentDiv').text('');
 						}  
 						
