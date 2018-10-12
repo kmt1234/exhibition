@@ -124,11 +124,22 @@ public class MemberController {
 		map.put("M_Pwd", M_Pwd);
 		
 		//DB
-		int su = memberDAO.deleteMember(map);
-		if(su==0) return "not_exist";
-		else {
+		int su=0;
+		int checkBookExhibition = memberDAO.checkBookExhibition(map);
+		int checkBookPlay = memberDAO.checkBookPlay(map);
+		int checkBookBusiness = memberDAO.checkBookBusiness(map);
+		
+		if(checkBookExhibition>0 || checkBookPlay>0 || checkBookBusiness>0) {
+			return "exist_book";
+		} 
+		else if(checkBookExhibition==0 && checkBookPlay==0 && checkBookBusiness==0){
+			su = memberDAO.deleteMember(map);
 			session.invalidate();
 			return "exist";
+		}else if(su==0) {
+			return "not_exist";
+		}else {
+			return "tell_manager";
 		}
 	}
 	

@@ -239,6 +239,8 @@ $(document).ready(function(){
 				success : function(data){
 					if(data=='exist'){
 						location.href='/exhibition/member/outComplete.do';
+					}else if(data=='exist_book'){
+						alert('예매내역을 모두 취소 후, 회원탈퇴 가능합니다.');
 					}else if(data=='not_exist'){
 						$('#del_check').text("비밀번호가 틀렸습니다.").css("font-size","12px").css("color","red").css("margin-left","24%").css("margin-top","2%");
 						$('.ui.basic.modal').modal('show');

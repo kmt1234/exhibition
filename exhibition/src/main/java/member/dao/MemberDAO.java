@@ -52,6 +52,15 @@ public interface MemberDAO {
 	
 	public int deleteBusinessRoom(Map<String, String> map);	//마이페이지-비지니스룸 삭제 메소드(ajax)
 
+	public int checkBookExhibition(Map<String, String> map);	//전시회 예매 내역있는지 확인(개인회원 탈퇴 시,)
+
+	public int checkBookPlay(Map<String, String> map);	//연극 예매 내역있는지 확인(개인회원 탈퇴 시,)
+
+	public int checkBookBusiness(Map<String, String> map);	//비지니스룸 예매 내역있는지 확인(개인회원 탈퇴 시,)
+
+
+
+
 	
 	
 
