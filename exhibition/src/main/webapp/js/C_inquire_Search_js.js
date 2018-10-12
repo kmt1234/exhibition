@@ -125,7 +125,11 @@ $(document).ready(function(){
 			$('#C_inquire_SearchPagingDiv').html(data.customerServicePaging.pagingHTML);
 		}
 	});
-	
+	$('#keyword1').keydown(function(key) {
+		if (key.keyCode == 13) {
+			$('#C_inquire_SearchBtn').click();
+		}
+	});
 	//고객의소리 리스트 검색한 값 불러오기
 	$('#C_inquire_SearchBtn').click(function(){
 		location.href="/exhibition/customerService/C_inquire_SearchList.do?pg="+$('#pg1').val()+'&searchOption='+$('#searchOption').val()+"&keyword="+$('#keyword1').val();

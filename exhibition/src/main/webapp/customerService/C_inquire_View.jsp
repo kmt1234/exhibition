@@ -16,7 +16,7 @@
 <table class="ui celled table" style="margin-left: 20px; max-width: 880px;">
 		<tr height= "80px">
 			<td width="150px" style=" height:100px; text-align:center; background-color: #f7f6e6; text-align: center;" >제목</td>
-			<td width="400px" style=" center;" >
+			<td width="400px" style=" center; text-align:center;" >
 				<pre style="white-space:pre-wrap; max-width:520px; max-height: 50px; overflow: auto;">${customerServiceDTO.subject }</pre> 
 			</td>
 			
@@ -33,8 +33,8 @@
 		</tr>
 		<tr style="height:400px;" >
 			<td style=" text-align:center; background-color: #f7f6e6">내용</td>
-			<td colspan="3" >
-				<pre style=" white-space:pre-wrap; max-width:800px; height:400px; overflow: auto;">${customerServiceDTO.content }</pre>
+			<td colspan="3" align="center">
+				<pre style="align:center white-space:pre-wrap; max-width:800px; height:400px; overflow: auto;">${customerServiceDTO.content }</pre>
 			</td>
 		</tr>
 	</table>

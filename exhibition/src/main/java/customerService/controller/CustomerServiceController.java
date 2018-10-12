@@ -502,7 +502,6 @@ public class CustomerServiceController {
 		map.put("classify", C_qty);
 		map.put("subject", subject);
 		map.put("content", content);
-		System.out.println(C_qty);
 		// DB
 		customerServiceDAO.C_QnA_checkWrite(map);
 		

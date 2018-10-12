@@ -43,7 +43,7 @@ window.onload=function(){
 					<option  value="시설">시설</option>
 					<option  value="기타">기타</option>
 				</select>
-				<input type="text" name="C_qty" id="C_qty" value="${C_qty }">
+				<input type="hidden" name="C_qty" id="C_qty" value="${C_qty }">
 			</td>
 		</tr>
 		<tr>

@@ -65,7 +65,7 @@ $(document).ready(function(){
 			$.each(data.list, function(index, item){
 				$('<tr/>').append($('<td/>',{
 						align : 'center',
-						style: 'width: 100px; height: 50px; text-align: center;',
+						style: 'width: 80px; height: 50px; text-align: center;',
 						text : item.seq,
 						id : 'seqA'
 					})).append($('<td/>',{
@@ -84,6 +84,11 @@ $(document).ready(function(){
 		}
 	});
 	
+	$('#keyword').keydown(function(key) {
+		if (key.keyCode == 13) {
+			$('#C_notice_SearchBtn').click();
+		}
+	});
 	// 공지사항 검색한 값 불러오기
 	$('#C_notice_SearchBtn').click(function(){
 		$('#pg').val(1);
@@ -92,6 +97,9 @@ $(document).ready(function(){
 		else
 			location.href="/exhibition/customerService/C_notice_Search.do?pg="+$('#pg').val()+"&keyword="+$('#keyword').val();
 	});
+	
+	
+	
 	
 	
 	// 공지사항 리스트 제목 클릭시 내용 보여줌
