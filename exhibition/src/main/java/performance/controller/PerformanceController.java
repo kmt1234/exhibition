@@ -95,18 +95,15 @@ public class PerformanceController {
 	
 	//이번달 전체일정 리스트
 	@RequestMapping(value="P_allScheduleList", method=RequestMethod.GET)
-	public ModelAndView P_allScheduleList(@RequestParam(required=false , defaultValue="1") String pg) {	
-		//Paging
+	public ModelAndView P_allScheduleList(@RequestParam(required=false , defaultValue="1") String pg) {		
 		int endNum = Integer.parseInt(pg)*9;
 		int startNum = endNum-8;
-		
 		Map<String,Integer> map = new HashMap<String,Integer>();
 		map.put("endNum", endNum);
 		map.put("startNum", startNum);
 		
 		int totalA = performanceDAO.getAllListTotalA();
 		
-		//Paging
 		performancePaging.setCurrentPage(Integer.parseInt(pg));
 		performancePaging.setPageBlock(5);
 		performancePaging.setPageSize(9);
@@ -114,12 +111,12 @@ public class PerformanceController {
 
 		performancePaging.makePagingHTML();
 		
-		//DB
 		List<EventboardDTO> list = performanceDAO.getAllExhibitionList(map);
 		for(int i = 0; i < list.size(); i++) {
 			list.get(i).setStartDate(list.get(i).getStartDate().substring(0, 10));
 			list.get(i).setEndDate(list.get(i).getEndDate().substring(0, 10));
 		}
+		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
 		mav.addObject("listSize", list.size()+"");
@@ -127,9 +124,45 @@ public class PerformanceController {
 		mav.addObject("performancePaging", performancePaging);
 		mav.addObject("display","/performance/P_allCalendarList.jsp");
 		mav.setViewName("/performance/P_performanceForm");
-		return mav ;
+		
+		return mav;
 	}
 	
+	//선택한 날짜 전체일정 리스트
+	@RequestMapping(value="P_allScheduleListSelect", method=RequestMethod.GET)
+	public ModelAndView P_allScheduleListSelect(@RequestParam(required=false , defaultValue="1") String pg,@RequestParam String date) {
+		int endNum = Integer.parseInt(pg)*9;
+		int startNum = endNum-8;
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("endNum", endNum+"");
+		map.put("startNum", startNum+"");
+		map.put("date", date);
+		System.out.println("123");
+		int totalA = performanceDAO.getAllListSelectTotalA(date);
+		
+		performancePaging.setCurrentPage(Integer.parseInt(pg));
+		performancePaging.setPageBlock(5);
+		performancePaging.setPageSize(9);
+		performancePaging.setTotalA(totalA);
+
+		performancePaging.makePagingHTML();
+		
+		List<EventboardDTO> list = performanceDAO.getAllExhibitionListSelect(map);
+		for(int i = 0; i < list.size(); i++) {
+			list.get(i).setStartDate(list.get(i).getStartDate().substring(0, 10));
+			list.get(i).setEndDate(list.get(i).getEndDate().substring(0, 10));
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("list", list);
+		mav.addObject("listSize", list.size()+"");
+		mav.addObject("pg", pg);
+		mav.addObject("performancePaging", performancePaging);
+		mav.addObject("display","/performance/P_allCalendarList.jsp");
+		mav.setViewName("/performance/P_performanceForm");
+		return mav;
+	}
 	//3개월 이전 전체행사 리스트
 	@RequestMapping(value="P_allScheduleList_Prev", method=RequestMethod.GET)
 	public ModelAndView P_allScheduleList_Prev(@RequestParam(required=false , defaultValue="1") String pg) {	

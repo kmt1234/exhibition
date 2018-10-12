@@ -67,6 +67,10 @@ public interface PerformanceDAO {
 	public int getAllListTotalA_After(); //전체리스트 3개월 이후 총글구하기
 
 	public List<EventboardDTO> getAllExhibitionList_After(Map<String, String> map);//전체리스트 3개월 이후 글 뿌리기
+
+	public int getAllListSelectTotalA(String date);//선택한 날짜 전체일정 개수
+
+	public List<EventboardDTO> getAllExhibitionListSelect(Map<String, String> map);//선택한 날짜 전체리스트
 	
 
 	

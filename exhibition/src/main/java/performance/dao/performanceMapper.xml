@@ -217,4 +217,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)where startDate <![CDATA[>]]> (select sysdate from dual) and startDate <![CDATA[<=]]> (select add_months(sysdate,3) from dual) order by startDate)tt
 		)where rn <![CDATA[>=]]> #{startNum} and rn <![CDATA[<=]]> #{endNum}
 	</select>
+	
+	<!--선택한 날짜의 전체일정 리스트갯수 -->
+	<select id="getAllListSelectTotalA" parameterType="String" resultType="Integer">
+		select count(*) from
+		(select * from
+		(select * from eventboard where enddate <![CDATA[>=]]> #{date}) where startdate <![CDATA[<=]]> #{date} 
+		union
+		select * from
+		(select * from eventboard_play where enddate <![CDATA[>=]]> #{date}) where startdate <![CDATA[<=]]> #{date})
+	</select>
+	
+	<!--선택한 날짜의 전체일정 리스트-->
+	<select id="getAllExhibitionListSelect" parameterType="java.util.Map" resultType="eventboard">
+		select * from(
+		select rownum rn, tt.* from(
+		select * from
+		(select * from eventboard where enddate <![CDATA[>=]]> #{date})
+		where startdate <![CDATA[<=]]> #{date} 
+		union
+		select * from
+		(select * from eventboard_play where enddate <![CDATA[>=]]> #{date})
+		where startdate <![CDATA[<=]]> #{date})tt order by startdate)
+		where rn <![CDATA[>=]]> #{startNum} and rn <![CDATA[<=]]> #{endNum}
+	</select>
 </mapper>

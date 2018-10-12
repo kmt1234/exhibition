@@ -22,6 +22,9 @@ if(month.length == 1){
 if(day.length == 1){ 
   day = "0" + day; 
 }
+var today = year+"-"+month+"-"+day;
+
+
 var dataSet = [
 	<c:forEach var="listView" items="${listView}" varStatus="status">
 		<c:if test="${listView.postSelect == '1'}">
@@ -31,10 +34,9 @@ var dataSet = [
 		    	{"title" : '박람회',
 		    	"start" : '<c:out value="${listView.days[dayStatus.index]}"/>',
 		    	"imageurl" : "../img/Ex.png",
-		    	"url" : "/exhibition/performance/P_exhibitionList.do",
 		    	"color" : "#ffffff",
-		    	"textColor" : "#000000"
-		    	
+		    	"textColor" : "#000000",
+		    	"class" : "aaaa"
 		    	} 
 		    	//</c:if>
 		    	<c:if test="${!dayStatus.last}">,</c:if>
@@ -50,7 +52,6 @@ var dataSet = [
 			    	{"title" : '공연',
 			    	"start" : '<c:out value="${listView.days[dayStatus.index]}"/>',
 			    	"imageurl" : "../img/Ev.png",
-			    	"url" : "/exhibition/performance/P_performanceList.do",
 			    	"color" : "#ffffff",
 			    	"textColor" : "#000000"
 			    	} <c:if test="${!dayStatus.last}">,</c:if>
@@ -60,8 +61,8 @@ var dataSet = [
 			</c:if> 
 		</c:forEach>
 	];
-
 	$(document).ready(function() {
+		var thisDate = "";
 		$('#calendar').fullCalendar({
 			defaultDate: date,
 			editable: false,
@@ -71,11 +72,14 @@ var dataSet = [
                 if(event.imageurl) {
                     eventElement.find("span.fc-title").prepend("<img src='" + event.imageurl +	"'width='25px' height='25px'  align='absmiddle'> &ensp;");
                 }
-            },        
-			events: dataSet
+            },
+
+			events: dataSet,
+			dayClick : function(date){
+				location.href="/exhibition/performance/P_allScheduleListSelect.do?date="+date.toISOString();
+			}
    
 		});
-		
 	 });
 </script>
 <style>
@@ -131,7 +135,7 @@ body {
 		 </span>
 	</div>
 		<br><br><br><br>
-		<div  id='calendar'></div>
+		<div  id='calendar' class="calendar"></div>
 </body>
 <script src="../js/traffic.js"></script>
 </html>

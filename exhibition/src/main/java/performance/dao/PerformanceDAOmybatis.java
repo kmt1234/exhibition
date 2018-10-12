@@ -180,5 +180,15 @@ public class PerformanceDAOmybatis implements PerformanceDAO {
 		return sqlSession.selectList("performanceSQL.getAllExhibitionList_After",map);
 	}
 	
+	//선택한 날짜의 전체일정 리스트갯수
+	public int getAllListSelectTotalA(String date) {
+		return sqlSession.selectOne("performanceSQL.getAllListSelectTotalA",date);
+	}
+	
+	//선택한 날짜의 전체일정 리스트
+	public List<EventboardDTO> getAllExhibitionListSelect(Map<String, String> map) {
+		return sqlSession.selectList("performanceSQL.getAllExhibitionListSelect",map);
+	}
+	
 
 }

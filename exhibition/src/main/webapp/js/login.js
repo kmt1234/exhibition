@@ -1,13 +1,4 @@
 $(document).ready(function(){
-	
-	/*$('.ui.submit.button.login').keydown(function(event){ 
-	    var keyCode = (event.keyCode ? event.keyCode : event.which);   
-	    if (keyCode == 13) {
-	    	alert('dsf0');
-	        $('#Mlogin').trigger('click');
-	    }
-	});*/
-	
 	//엔터키 이벤트
 	$('#M_Id').keydown(function(key) {
 		if (key.keyCode == 13) {
