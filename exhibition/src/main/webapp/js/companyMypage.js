@@ -141,9 +141,9 @@ $(document).ready(function(){
 		var cotable = document.getElementById("concertList");
 		var coCount = cotable.rows.length-1;
 		if(exCount != 0){
-			swal( "불가" ,  "진행중인 임대가 있으면 탈퇴가 불가능합니다.",  "error" );
+			swal("Warnning!!", "진행중인 임대가 있으면 탈퇴가 불가능합니다.", "error" );
 		}else if(coCount != 0){
-			swal( "불가" ,  "진행중인 임대가 있으면 탈퇴가 불가능합니다.",  "error" );
+			swal("Warnning!!", "진행중인 임대가 있으면 탈퇴가 불가능합니다.", "error" );
 		}else{
 			$('.ui.basic.modal').modal({
 				closable : false,

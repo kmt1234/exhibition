@@ -97,8 +97,8 @@ public class PerformanceController {
 	@RequestMapping(value="P_allScheduleList", method=RequestMethod.GET)
 	public ModelAndView P_allScheduleList(@RequestParam(required=false , defaultValue="1") String pg) {	
 		//Paging
-		int endNum = Integer.parseInt(pg)*5;
-		int startNum = endNum-4;
+		int endNum = Integer.parseInt(pg)*9;
+		int startNum = endNum-8;
 		
 		Map<String,Integer> map = new HashMap<String,Integer>();
 		map.put("endNum", endNum);
@@ -108,8 +108,8 @@ public class PerformanceController {
 		
 		//Paging
 		performancePaging.setCurrentPage(Integer.parseInt(pg));
-		performancePaging.setPageBlock(3);
-		performancePaging.setPageSize(5);
+		performancePaging.setPageBlock(5);
+		performancePaging.setPageSize(9);
 		performancePaging.setTotalA(totalA);
 
 		performancePaging.makePagingHTML();
@@ -134,8 +134,8 @@ public class PerformanceController {
 	@RequestMapping(value="P_allScheduleList_Prev", method=RequestMethod.GET)
 	public ModelAndView P_allScheduleList_Prev(@RequestParam(required=false , defaultValue="1") String pg) {	
 		//Paging
-		int endNum = Integer.parseInt(pg)*5;
-		int startNum = endNum-4;	
+		int endNum = Integer.parseInt(pg)*9;
+		int startNum = endNum-8;	
 		
 		Date date = new Date();						//현재 날짜의 월
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
@@ -151,8 +151,8 @@ public class PerformanceController {
 		
 		//Paging
 		performancePaging.setCurrentPage(Integer.parseInt(pg));
-		performancePaging.setPageBlock(3);
-		performancePaging.setPageSize(5);
+		performancePaging.setPageBlock(5);
+		performancePaging.setPageSize(9);
 		performancePaging.setTotalA(totalA);
 
 		performancePaging.makePagingHTML();
@@ -177,8 +177,8 @@ public class PerformanceController {
 	@RequestMapping(value="P_allScheduleList_After", method=RequestMethod.GET)
 	public ModelAndView P_allScheduleList_After(@RequestParam(required=false , defaultValue="1") String pg) {	
 		//Paging
-		int endNum = Integer.parseInt(pg)*5;
-		int startNum = endNum-4;	
+		int endNum = Integer.parseInt(pg)*9;
+		int startNum = endNum-8;	
 		
 		Date date = new Date();						//현재 날짜의 월
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
@@ -194,8 +194,8 @@ public class PerformanceController {
 		
 		//Paging
 		performancePaging.setCurrentPage(Integer.parseInt(pg));
-		performancePaging.setPageBlock(3);
-		performancePaging.setPageSize(5);
+		performancePaging.setPageBlock(5);
+		performancePaging.setPageSize(9);
 		performancePaging.setTotalA(totalA);
 
 		performancePaging.makePagingHTML();
