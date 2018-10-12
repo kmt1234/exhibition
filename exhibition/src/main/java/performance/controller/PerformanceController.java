@@ -1125,8 +1125,11 @@ public class PerformanceController {
 		book_performance_membersDTO.setTicketQty(ticketQty);
 		
 		//DB (예매자 등록 DB)
-		int result = performanceDAO.bookPlayMembers(book_performance_membersDTO);
-		performanceDAO.bookPlayMembers_calculate(book_performance_membersDTO);	//예매한 티켓 만큼 잔여티켓 계산해주기
+		int result=0;
+		if(object.toString().equals("1")) {
+			result = performanceDAO.bookPlayMembers(book_performance_membersDTO);
+			performanceDAO.bookPlayMembers_calculate(book_performance_membersDTO);	//예매한 티켓 만큼 잔여티켓 계산해주기
+		}
 		
 		if(result==0) return "fail";
 		else return "ok";
