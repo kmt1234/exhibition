@@ -8,6 +8,10 @@ $(document).ready(function(){
 		location.href="/exhibition/customerService/C_contactList_Write.do";
 	});
 	
+	$('#C_contactList_Btn').click(function(){
+		location.href="/exhibition/customerService/C_contactList.do";
+	});
+	
 	$('#C_contactList_checkWriteBtn').on('click',function(){
 		$('#classifyDiv').empty();
 		$('#facilityDiv').empty();

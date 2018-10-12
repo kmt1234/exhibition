@@ -40,7 +40,7 @@
 			<p id="P_allLsintBtn_Prev">◀ 지난 리스트</p> 
 		</div>
 			<div style="width: 100px; display: inline-block; ">
-			<p id="P_allLsintBtn_Now">이달 리스트</p> 
+			<p id="P_allLsintBtn_Now">진행중인 리스트</p> 
 		</div>
 			<div style="width: 100px; display: inline-block; ">
 			<p id="P_allLsintBtn_After">예정 리스트▶</a> 

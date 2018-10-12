@@ -158,8 +158,9 @@ public class PerformanceController {
 		mav.addObject("list", list);
 		mav.addObject("listSize", list.size()+"");
 		mav.addObject("pg", pg);
+		mav.addObject("date",date);
 		mav.addObject("performancePaging", performancePaging);
-		mav.addObject("display","/performance/P_allCalendarList.jsp");
+		mav.addObject("display","/performance/P_selectCalendarList.jsp");
 		mav.setViewName("/performance/P_performanceForm");
 		return mav;
 	}

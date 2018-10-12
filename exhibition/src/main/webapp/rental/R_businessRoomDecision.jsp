@@ -358,6 +358,13 @@ div{
                        $('#fourthCheck').remove();
                     }
                  });
+                 
+                 if($('#first').text()=='예약불가능' && $('#second').text()=='예약불가능' && $('#third').text()=='예약불가능' && $('#fourth').text()=='예약불가능'){
+                   	$('#rentalBusinessRoomBtn').hide();
+                  	}
+                   if($('#code').val()!='1') {
+                 	$('#rentalBusinessRoomBtn').hide();
+                   	}
 
                }
 

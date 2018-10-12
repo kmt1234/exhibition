@@ -20,7 +20,7 @@
 			
 			<td style="width:100px; text-align: left;">
 				<div class="ui input">
-					<input type="text" name="subject" id="subject" value="${customerServiceDTO.subject }">
+					<input type="text" style="width:70px;" name="subject" id="subject" value="${customerServiceDTO.subject }">
 					<div id="subjectDiv"></div>
 				</div>	
 			</td>

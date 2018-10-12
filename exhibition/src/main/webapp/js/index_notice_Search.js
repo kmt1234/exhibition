@@ -43,8 +43,8 @@ $(document).ready(function(event, str){
 	
 	});
 	$('#index_notice_PlusList').on('click','#subjectA',function(){
-		var seq = $(this).prev().text();
-		location.href='/exhibition/customerService/C_notice_View.do?seq='+seq+'&pg='+$('#pg').val();
+		var seq = $(this).prev().prev().text();
+		location.href='/exhibition/customerService/C_notice_View.do?seq='+seq+'&pg='+$('#pg').val()+'&keyword='+$('#keyword').val();
 	});
 	String.prototype.replaceAll = function(org, dest) {
 	    return this.split(org).join(dest);
