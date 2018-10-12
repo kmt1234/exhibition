@@ -15,36 +15,27 @@
 		<div class="ui divider"></div> 
 	</h2>
 	<table style="width:880px; margin-left: 20px;" class="ui celled table">
-		<tr>
-			<td height="30" style="width:10%; background-color: #f7f6e6; text-align: center;">글제목</td>
+		<tr height="50px">
+			<td height="50px" style="width:100px; background-color: #f7f6e6; text-align: center;">글제목</td>
 			
-			<td style="width:100px; text-align: left;">
-				<div class="ui input">
-					<input type="text" name="subject" id="subject" value="${customerServiceDTO.subject }">
-					<div id="subjectDiv"></div>
-				</div>	
+			<td style="width:580px; text-align: left;">
+				<input type="text" name="subject" id="subject" style="width:580px;" value="${customerServiceDTO.subject }">
+				<div id="subjectDiv"></div>
 			</td>
 			
-			<td  align="center" style="width:10%; background-color: #f7f6e6;text-align: center;">글번호</td>
+			<td  align="center" style="width:100px; background-color: #f7f6e6;text-align: center;">글번호</td>
 			
-			<td style="width:20%;text-align: center;">
-				<div>
-					${customerServiceDTO.seq }
-					<input type="hidden" name="seq" id="seq" value="${customerServiceDTO.seq }">
-					
-				</div>
+			<td style="width:100px; text-align: center;">
+				${customerServiceDTO.seq }
+				<input type="hidden" name="seq" id="seq" value="${customerServiceDTO.seq }">
 			</td>
 		</tr>	
 		
 		<tr>
-			<td width="70" align="center" height="200" style=" background-color: #f7f6e6;">내용</td>
+			<td width="100px" align="center" height="200px" style= " text-align: center; background-color: #f7f6e6;">내용</td>
 			<td colspan="3">
-				<div class="ui form" >
-					<div align="center" class="field">
-						<textArea name="content" id="content" style="width: 100%" >${customerServiceDTO.content }</textArea>
-						<div id="contentDiv"></div>
-					</div>
-				</div>
+				<textArea name="content" id="content" style="resize: none; width:772px; height:400px;" >${customerServiceDTO.content }</textArea>
+				<div id="contentDiv"></div>
 			</td>
 		</tr>
 	</table>

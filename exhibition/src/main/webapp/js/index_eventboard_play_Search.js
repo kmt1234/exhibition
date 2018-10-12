@@ -74,7 +74,7 @@ $(document).ready(function(event, str){
 					style:'display:inline-block; width:50px; margin-top:5px; border: 1px ridge rgb(255,0,0,.6); margin-left:20px; float:left;  height:25px; padding:0; padding-top:3px; font-size: 10pt; font-family: inherit;',
 					text : '내용'
 				})).append($('<div/>',{
-					style : 'overflow: hidden; white-space: nowrap; text-overflow  : ellipsis; display:inline-block; float:left;  margin-top:5px; margin-left:10px; width:540px; text-align:left; padding-top:3px; height:5px;',
+					style : 'display:inline-block; float:left;  margin-top:5px; margin-left:10px; width:540px; text-align:left; padding-top:3px; height:25px;',
 					html : item.eventcontent.replaceAll(index_keyword, PointKeyword)
 				}))).appendTo($('#index_eventboard_play_PlusSearchList'));
 				if(index=='1' || index=='2'){

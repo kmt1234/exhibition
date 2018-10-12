@@ -27,7 +27,6 @@
 	font-weight: 800;
 }
 </style>
-<script src="../js/C_contactList_Search_js.js?ver=1"></script>
 <script type="text/javascript">
 window.onload=function(){
 	if('${searchOption}'=='facility' || '${searchOption}'=='name'){
@@ -67,17 +66,17 @@ window.onload=function(){
 	</table>
 	<br>
 	<div id="C_contactList_SearchPagingDiv" class="ui center pagination menu"></div>
-	<input type="hidden" name="pg" id="pg1" value="${pg}">
-	<input type="hidden" id="pg" value="${pg }">
-	<input type="hidden" id="keyword" value="${keyword }">
 	<br><br>
 
-	<select name="searchOption" id="searchOption" class="ui selection dropdown" id="searchOption">
+	<select id="searchOption" class="ui selection dropdown">
 			<option value="facility">기관&시설</option>
 			<option value="name">담당자</option>
 	</select>
 
 	<div class="ui input" style="width: 40%;">
+		<input type="hidden" name="pg" id="pg1" value="${pg}">
+		<input type="hidden" id="pg" value="${pg }">
+		<input type="hidden" id="keyword" value="${keyword }">
 		<input type="text" name="keyword" id="keyword1" value="${keyword }">
 	</div>
 		<input type="button" class="middle ui button"  value="검색" id="C_contactList_SearchBtn2">
@@ -91,6 +90,7 @@ window.onload=function(){
 <div style="margin-top: 40px;"></div> 
 </div>
 <input type="hidden" id="hiddenCode" value="${code}">
+<script src="../js/C_contactList_Search_js.js?ver=1"></script>
 
 </body>
 </html>
