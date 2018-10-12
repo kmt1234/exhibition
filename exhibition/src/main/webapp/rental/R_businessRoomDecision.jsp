@@ -33,7 +33,7 @@ div{
       <table class="ui striped table" id="businessRoomTable">
         <thead>
           <tr align="center">
-             <th>선택</th>
+             <th><input type="checkbox" id="checkAll">선택</th>
              <th>이용일자</th>
              <th>금액</th>
              <th>예약현황</th>
