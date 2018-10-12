@@ -112,6 +112,10 @@ $(document).ready(function(){
 		}
 	});
 	
+	$('#C_notice_cancel').click(function(){
+		location.href="/exhibition/customerService/C_notice.do?pg="+$('#pg').val();
+	})
+	
 });
 	
 	

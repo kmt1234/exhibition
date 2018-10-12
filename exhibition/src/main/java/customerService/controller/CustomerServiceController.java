@@ -502,7 +502,6 @@ public class CustomerServiceController {
 		map.put("classify", C_qty);
 		map.put("subject", subject);
 		map.put("content", content);
-		System.out.println(C_qty);
 		// DB
 		customerServiceDAO.C_QnA_checkWrite(map);
 		
@@ -546,7 +545,6 @@ public class CustomerServiceController {
 
 		for (String seq : box) {
 			list.add(Integer.parseInt(seq));
-			System.out.println(seq);
 		}
 
 		customerServiceDAO.C_contactList_Delete(list);

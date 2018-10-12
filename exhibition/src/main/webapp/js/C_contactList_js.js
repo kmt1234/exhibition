@@ -8,7 +8,7 @@ $(document).ready(function(){
 		location.href="/exhibition/customerService/C_contactList_Write.do";
 	});
 	
-	$('#C_contactList_checkWriteBtn').click(function(){
+	$('#C_contactList_checkWriteBtn').on('click',function(){
 		$('#classifyDiv').empty();
 		$('#facilityDiv').empty();
 		$('#titleDiv').empty();
@@ -136,14 +136,7 @@ $(document).ready(function(){
 	$('#C_contactList_DeleteBtn').click(function(){
 		var count = $('.box:checked').length;
 		if(count==0) alert("항목을 선택하세요");
-		else {
-			$.ajax({
-				type : 'POST',
-				url : '/exhibition/customerService/C_contactList_Delete.do',
-				data : {'box':$('.box').val()}
-				
-			});
-		}
+		else $('#C_contactList_delete').submit();
 	}); 
 });
 

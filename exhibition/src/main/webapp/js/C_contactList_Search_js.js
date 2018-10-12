@@ -208,7 +208,8 @@ $(document).ready(function(){
 	$('#C_contactList_DeleteBtn').click(function(){
 		var count = $('.box:checked').length;
 		if(count==0) alert("항목을 선택하세요");
+		else $('#C_contactList_delete').submit();
 	}); 
-	$('.ui.selection.dropdown').dropdown();
 	
 });
+$('.ui.selection.dropdown').dropdown();

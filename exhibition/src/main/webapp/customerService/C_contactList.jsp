@@ -26,6 +26,7 @@
 </head>
 <body>
 <div class="ui compact menu" style="width: 930px; height:900px auto;  display: inline-block;" >
+<form id="C_contactList_delete" method="post" action="C_contactList_Delete.do">
 	<h2 class="box-container"style="float: center; width: 100%; height:126px;  text-align: left;">
 		<span>주요시설</span>
 		<span class="h-light">연락처</span>
@@ -71,6 +72,7 @@
 		</c:if>
 
 </div>
+</form>
 <div style="margin-top: 40px;"></div> 
 </div>
 <input type="hidden" id="hiddenCode" value="${code}">

@@ -34,34 +34,26 @@ $(document).ready(function(){
 				if($('#searchOption').val()=='subject'){
 				$('#C_inquire_SearchPagingDiv').show();
 				$.each(data.list, function(index, item){
-				$('<tr/>').append($('<td/>',{
-					text : item.seq,
-					style: 'width: 50px; height: 50px; text-align: center;',
-					id : 'seqA',
-				})).append($('<td/>',{
-					class : item.seq+"",
-					style: 'width: 50px; height: 50px; text-align: center;'
-				})).append($('<td/>',{
-					id : 'subjectA',
-					style : 'text-align : center',
-					href : 'javascript:void(0)',
-					style: 'width: 250px; height: 50px; text-align: center;',
-					html : item.subject.replace(keyword, PointKeyword)
-				})).append($('<td/>',{
-					style : 'text-align : center',
-					text : item.name,
-					style: 'width: 100px; height: 50px; text-align: center;',
-					id : 'nameA'
-				})).append($('<td/>',{
-					style : 'text-align : center',
-					text : item.email,
-					style: 'width: 150px; height: 50px; text-align: center;',
-					id : 'emailA'
-				})).append($('<td/>',{
-					style : 'text-align : center',
-					text : item.logtime,
-					style: 'width: 100px; height: 50px; text-align: center;',
-					id : 'logtime'
+					$('<tr/>').append($('<td/>',{
+						text : item.seq,
+						style: 'width: 50px; height: 44px; text-align: center;'
+					})).append($('<td/>',{
+						class : item.seq+"",
+						style: 'width: 50px; height: 44px; text-align: center;'
+					})).append($('<td/>',{
+						id : 'subjectA',
+						style: 'width: 360px; height: 44px; text-align: center;',
+						text : item.subject
+					})).append($('<td/>',{
+						style: 'width: 100px; height: 44px; text-align: center;',
+						text : item.name,
+						id : 'nameA'
+					})).append($('<td/>',{
+						text : item.email,
+						style: 'width: 200px; height: 44px; text-align: center;',
+					})).append($('<td/>',{
+						text : item.logtime,
+						style: 'width: 120px; height: 44px; text-align: center;',
 				})).appendTo($('#C_inquire_SearchList'));
 				
 				
@@ -78,34 +70,26 @@ $(document).ready(function(){
 				}else if($('#searchOption').val()=='name'){
 					$('#C_inquire_SearchPagingDiv').show();
 					$.each(data.list, function(index, item){
-					$('<tr/>').append($('<td/>',{
-						text : item.seq,
-						style: 'width: 50px; height: 50px; text-align: center;',
-						id : 'seqA',
-					})).append($('<td/>',{
-						class : item.seq+"",
-						style: 'width: 50px; height: 50px; text-align: center;'
-					})).append($('<td/>',{
-						id : 'subjectA',
-						style : 'text-align : center',
-						href : 'javascript:void(0)',
-						style: 'width: 250px; height: 50px; text-align: center;',
-						text : item.subject
-					})).append($('<td/>',{
-						style : 'text-align : center',
-						html : item.name.replace(keyword, PointKeyword),
-						style: 'width: 100px; height: 50px; text-align: center;',
-						id : 'nameA'
-					})).append($('<td/>',{
-						style : 'text-align : center',
-						text : item.email,
-						style: 'width: 150px; height: 50px; text-align: center;',
-						id : 'emailA'
-					})).append($('<td/>',{
-						style : 'text-align : center',
-						text : item.logtime,
-						style: 'width: 100px; height: 50px; text-align: center;',
-						id : 'logtime'
+						$('<tr/>').append($('<td/>',{
+							text : item.seq,
+							style: 'width: 50px; height: 44px; text-align: center;'
+						})).append($('<td/>',{
+							class : item.seq+"",
+							style: 'width: 50px; height: 44px; text-align: center;'
+						})).append($('<td/>',{
+							id : 'subjectA',
+							style: 'width: 360px; height: 44px; text-align: center;',
+							text : item.subject
+						})).append($('<td/>',{
+							style: 'width: 100px; height: 44px; text-align: center;',
+							text : item.name,
+							id : 'nameA'
+						})).append($('<td/>',{
+							text : item.email,
+							style: 'width: 200px; height: 44px; text-align: center;',
+						})).append($('<td/>',{
+							text : item.logtime,
+							style: 'width: 120px; height: 44px; text-align: center;',
 					})).appendTo($('#C_inquire_SearchList'));
 					
 					
