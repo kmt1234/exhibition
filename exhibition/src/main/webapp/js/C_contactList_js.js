@@ -1,4 +1,9 @@
 $(document).ready(function(){
+	$('#keyword').keydown(function(key) {
+		if (key.keyCode == 13) {
+			$('#C_contactList_SearchBtn').click();
+		}
+	});
 	var C_name = /^[가-힣]+$/;	//한글만 가능 
 	var C_phone =  /^((01[1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})$/;	//휴대폰 번호 양식
 	var code = $('#hiddenCode').val();
@@ -106,7 +111,7 @@ $(document).ready(function(){
 			$('#C_contactList_PagingDiv').html(data.customerServicePaging.pagingHTML);
 		}
 	});
-	
+
 	// 주요 시설 연락처 검색시 리스트 불러오기
 	$('#C_contactList_SearchBtn').click(function(){
 		$('#pg').val(1);

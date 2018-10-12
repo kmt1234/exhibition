@@ -86,7 +86,6 @@ public class PerformanceController {
 			}
 		modelMap.addAttribute("listView",list);
 		
-		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("display","/performance/P_allCalendar.jsp");
 		mav.setViewName("/performance/P_performanceForm");
