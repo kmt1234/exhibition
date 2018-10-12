@@ -51,7 +51,7 @@ div{
          <input type="hidden" id="startDate" name="startDate" value="">
          <input type="hidden" name="roomName" value="${businessRoom}">
          <input type="hidden" id="rate" name="rate" value="${rate}">
-         <input type="button" value="예약하기" id="rentalBusinessRoomBtn">
+         <input type="button" value="예약하기" id="rentalBusinessRoomBtn" class="ui middle button bussinessRoom">
 
    </form>
 </div>
@@ -241,7 +241,10 @@ div{
 				 
                   if($('#first').text()=='예약불가능' && $('#second').text()=='예약불가능' && $('#third').text()=='예약불가능' && $('#fourth').text()=='예약불가능'){
                   	$('#rentalBusinessRoomBtn').hide();
-                 	 }
+                 	}
+                  if($('#code').val()!='1') {
+                	$('#rentalBusinessRoomBtn').hide();
+                  	}
                }
 
            });
@@ -373,25 +376,30 @@ div{
       });
          //예약하기 버튼
          $('#rentalBusinessRoomBtn').on('click', function(){
-            //개인으로 로그인 할때만 submit
-            if($('#code').val()=='1') {
+        	var count = $('[name="checkRow"]:checked').length;
+			alert(count);
+     		if(count==0) {
+     			alert("항목을 선택해주세요");
+     		} else {
+     			 //개인으로 로그인 할때만 submit
+                if($('#code').val()=='1') {
 
-               $('.ui.mini.modal.success').modal({
-                  closable : false,
-                     duration : 460,
-               }).modal('show');
+                   $('.ui.mini.modal.success').modal({
+                      closable : false,
+                         duration : 460,
+                   }).modal('show');
 
-               $('.ui.approve.button.success').on('click', function(){
-                  $('#businessRoomForm').submit();
-               });
-            } else {
-               $('.ui.mini.modal.rental').modal('show');
-            }
+                   $('.ui.approve.button.success').on('click', function(){
+                      $('#businessRoomForm').submit();
+                   });
+                } else {
+                   $('.ui.mini.modal.rental').modal('show');
+                }
+     		}
+           
 
          });
 	
-       
-   
    });
 </script>
 </body>
