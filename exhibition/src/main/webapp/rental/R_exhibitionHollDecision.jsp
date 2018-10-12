@@ -169,7 +169,7 @@
 					url : '/exhibition/rental/searchRentDay.do',
 					data : {'booth': '${booth}',
 							'startDate' : $('#startDate').val(),
-							'endDate' : $('#startDate').val()},
+							'endDate' : $('#endDate').val()},
 					async: false,
 					dataType: 'text',
 					success : function(data){

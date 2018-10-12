@@ -9,7 +9,7 @@
  	</select>
  	
 	<select id="searchConcertHallRentDay" parameterType="java.util.Map" resultType="rental.bean.ConcertHallDTO">
- 		select * from concertHall where hallName=#{hallName} and (#{startDate} between startDate and endDate or #{endDate} between startDate and endDate)
+ 		select * from concertHall where hallName=#{hallName} and (#{diffDay} between startDate and endDate)
  	</select>
  	
  	<insert id="reservationConcertHall" parameterType="rental.bean.ConcertHallDTO">

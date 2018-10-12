@@ -4,7 +4,7 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="exhibitionSQL">
  	<select id="searchRentDay" parameterType="java.util.Map" resultType="exhibition">
- 		select * from exhibitionRental where boothName=#{boothName} and (#{startDate} between startDate and endDate or #{endDate} between startDate and endDate)
+ 		select * from exhibitionRental where boothName=#{booth} and (#{diffDay} between startDate and endDate)
  	</select>
  	
  	<insert id="reservationHoll" parameterType="exhibition">
