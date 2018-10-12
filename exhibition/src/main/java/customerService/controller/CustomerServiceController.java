@@ -2128,5 +2128,16 @@ public class CustomerServiceController {
 		mav.setViewName("/customerService/C_map");
 		return mav;
 	}
+	
+	//메인이미지 초기화
+	@RequestMapping(value="reset", method=RequestMethod.GET)
+	public @ResponseBody String reset() {
+		//DB
+		customerServiceDAO.resetMainImage();
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");
+		return "delete"; 
+	}
 
 }

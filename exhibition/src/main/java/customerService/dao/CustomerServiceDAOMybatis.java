@@ -500,6 +500,11 @@ public class CustomerServiceDAOMybatis implements CustomerServiceDAO {
 	public void eventboard_playModDelete(String seq) {
 		sqlSession.update("customerServiceSQL.eventboard_playModDelete",seq);
 	}
+	//메인이미지 초기화
+	public void resetMainImage() {
+		sqlSession.delete("resetMainImage");
+		
+	}
 	
 	
 	

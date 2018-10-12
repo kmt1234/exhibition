@@ -722,6 +722,10 @@
  		update eventboard_play set startDate='1900-01-01' , endDate ='1900-01-01' where seq=#{seq}
  	</update>
  	
+ 	<!-- 메인이미지 슬라이드 초기화 -->
+ 	<delete id="resetMainImage">
+ 		delete from mainSlideDB
+ 	</delete>
  </mapper>
  
  

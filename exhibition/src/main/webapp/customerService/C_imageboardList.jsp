@@ -52,6 +52,7 @@
 			<div style="float:left;">
 				<a class="middle ui button"  id="imageSelectBtn">메인등록</a>
 				<a class="middle ui button" id="imageDeleteBtn">선택삭제</a>
+				<a class="middle ui button" id="imageResetBtn">메인 이미지 초기화</a>
 			</div>
 			<input type="hidden" name="code" value="6">
 		</form>
@@ -127,6 +128,24 @@ $(document).ready(function(){
 	$('#imageboardListTab').on('click','.play_detail',function(){
 			var seq = $(this).parent().prev().text();
 			location.href="/exhibition/customerService/C_imageDetail.do?seq="+seq+"";
+	});
+	
+	//메인 이미지 초기화
+	$('#imageResetBtn').click(function(){
+		$.ajax({
+			type : 'GET',
+			url : '/exhibition/customerService/reset.do',
+			dataType : 'text',
+			success : function(data){
+				if(data=='delete'){
+					alert('초기화 성공했습니다');
+					location.href='/exhibition/customerService/C_mainImageboardListForm.do';
+				}else{
+					alert('관리자에게 문의하세요');
+					location.href='/exhibition/main/index.do';
+				}
+			}
+		});
 	});
 });
 </script>

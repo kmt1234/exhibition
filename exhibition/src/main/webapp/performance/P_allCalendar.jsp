@@ -91,6 +91,7 @@ body {
 #calendar {
 	max-width: 880px;
 	margin: 0 auto;
+	cursor:pointer;
 }
 #houseImg{
 	margin:-3px;
