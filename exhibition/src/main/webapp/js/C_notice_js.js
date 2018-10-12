@@ -65,7 +65,7 @@ $(document).ready(function(){
 			$.each(data.list, function(index, item){
 				$('<tr/>').append($('<td/>',{
 						align : 'center',
-						style: 'width: 80px; height: 50px; text-align: center;',
+						style: 'width: 100px; height: 50px; text-align: center;',
 						text : item.seq,
 						id : 'seqA'
 					})).append($('<td/>',{
@@ -83,7 +83,6 @@ $(document).ready(function(){
 			$('#C_notice_PagingDiv').html(data.customerServicePaging.pagingHTML);
 		}
 	});
-	
 	$('#keyword').keydown(function(key) {
 		if (key.keyCode == 13) {
 			$('#C_notice_SearchBtn').click();
@@ -99,9 +98,6 @@ $(document).ready(function(){
 	});
 	
 	
-	
-	
-	
 	// 공지사항 리스트 제목 클릭시 내용 보여줌
 	$('#C_notice_List').on('click','#subjectA',function(){
 		var seq = $(this).prev().text();
@@ -115,6 +111,10 @@ $(document).ready(function(){
 			location.href="/exhibition/customerService/C_notice_Search.do?pg="+$('#pg').val()+"&keyword="+$('#keyword').val();
 		}
 	});
+	
+	$('#C_notice_cancel').click(function(){
+		location.href="/exhibition/customerService/C_notice.do?pg="+$('#pg').val();
+	})
 	
 });
 	

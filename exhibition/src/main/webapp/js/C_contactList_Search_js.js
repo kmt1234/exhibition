@@ -180,15 +180,20 @@ $(document).ready(function(){
 			$('#C_contactList_SearchPagingDiv').html(data.customerServicePaging.pagingHTML);
 		}
 	});
+	
 	$('#keyword1').keydown(function(key) {
 		if (key.keyCode == 13) {
 			$('#C_contactList_SearchBtn2').click();
-			event.preventDefault();
 		}
 	});
 	// 주요 시설 연락처 검색시 리스트 불러오기
 	$('#C_contactList_SearchBtn2').click(function(){
-		location.href="/exhibition/customerService/C_contactList_SearchList.do?pg="+$('#pg1').val()+'&searchOption='+$('#searchOption').val()+"&keyword="+$('#keyword1').val();
+		$('#pg').val(1);
+		if($('#keyword').val()==''){
+			alert("검색어를 입력하세요");
+		}else{
+			location.href="/exhibition/customerService/C_contactList_SearchList.do?pg="+$('#pg1').val()+'&searchOption='+$('#searchOption').val()+"&keyword="+$('#keyword1').val();
+		}
 	});
 	
 	// 전체 선택
@@ -205,6 +210,6 @@ $(document).ready(function(){
 		if(count==0) alert("항목을 선택하세요");
 		else $('#C_contactList_delete').submit();
 	}); 
-	$('.ui.selection.dropdown').dropdown();
 	
 });
+$('.ui.selection.dropdown').dropdown();

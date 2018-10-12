@@ -528,7 +528,7 @@ public class CustomerServiceController {
 
 	// 주요시설 연락처
 	@RequestMapping(value = "C_contactList", method = RequestMethod.GET)
-	public ModelAndView C_contactList(@RequestParam(required = false, defaultValue = "1") String pg, Model model) {
+	public ModelAndView C_contactList(@RequestParam(required = false, defaultValue = "1") String pg,@RequestParam(required = false, defaultValue = "1") String[] box, Model model) {
 		model.addAttribute("pg", Integer.parseInt(pg));
 		ModelAndView mav = new ModelAndView();
 

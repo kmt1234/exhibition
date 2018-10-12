@@ -15,26 +15,24 @@
 </h2>
 <table class="ui celled table" style="margin-left: 20px; max-width: 880px;">
 		<tr height= "80px">
-			<td width="150px" style=" height:100px; text-align:center; background-color: #f7f6e6; text-align: center;" >제목</td>
-			<td width="400px" style=" center; text-align:center;" >
-				<pre style="white-space:pre-wrap; max-width:520px; max-height: 50px; overflow: auto;">${customerServiceDTO.subject }</pre> 
+			<td width="100px" style="text-align:center; background-color: #f7f6e6;" >제목</td>
+			<td>
+				<pre style="white-space:pre-wrap; max-width:780px; max-height: 80px; overflow: auto;">${customerServiceDTO.subject }</pre> 
 			</td>
 			
-			<td width="150px" style=" text-align:center; background-color: #f7f6e6">글번호</td>
-			<td width="180px" style=" text-align:center"><span>${customerServiceDTO.seq }</span></td>
 		</tr>
 		<tr height= "80px">
-			<td style=" height:100px;  text-align:center; background-color: #f7f6e6">작성자</td>
-			<td style=" text-align:center;">
-				${customerServiceDTO.name }
-			</td>
-			<td style="text-align:center; background-color: #f7f6e6">이메일</td>
-			<td style="text-align:center"><span>${customerServiceDTO.email }</span></td>
+			<td width="100px" style="text-align:center; background-color: #f7f6e6">작성자</td>
+			<td width="190px" style="text-align:center;"><span>${customerServiceDTO.name }</span></td>
+			<td width="100px" style="text-align:center; background-color: #f7f6e6">분류</td>
+			<td width="190px" style="text-align:center;"><span>${customerServiceDTO.classify }</span></td>
+			<td width="100px" style="text-align:center; background-color: #f7f6e6">이메일</td>
+			<td width="200px" style="text-align:center;"><span>${customerServiceDTO.email }</span></td>
 		</tr>
-		<tr style="height:400px;" >
+		<tr height="400px" >
 			<td style=" text-align:center; background-color: #f7f6e6">내용</td>
-			<td colspan="3" align="center">
-				<pre style="align:center white-space:pre-wrap; max-width:800px; height:400px; overflow: auto;">${customerServiceDTO.content }</pre>
+			<td colspan="3" >
+				<pre style=" white-space:pre-wrap; max-width:800px; height:400px; overflow: auto;">${customerServiceDTO.content }</pre>
 			</td>
 		</tr>
 	</table>

@@ -72,8 +72,8 @@
       </c:if>
 
 </div>
-<div style="margin-top: 40px;"></div> 
 </form>
+<div style="margin-top: 40px;"></div> 
 </div>
 <input type="hidden" id="hiddenCode" value="${code}">
 <script src="../js/C_contactList_js.js?ver=1"></script>

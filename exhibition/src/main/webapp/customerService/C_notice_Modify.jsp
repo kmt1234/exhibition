@@ -49,8 +49,9 @@
 		</tr>
 	</table>
 	<div style="float: left; margin-left: 20px;">
+		<input type="hidden" id="pg" value="${pg }">
 		<input class="middle ui button" type="button" id="C_notice_checkModifyBtn" value="수정">
-		<input class="middle ui button" type="reset" value="취소">
+		<input class="middle ui button" type="reset" id="C_notice_cancel" value="취소">
 	</div>
 	<div style="height: 80px;"></div>
 </div>

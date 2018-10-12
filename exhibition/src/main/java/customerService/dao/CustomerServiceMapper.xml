@@ -25,7 +25,7 @@
  	
  	<!-- 공지사항 검색 총글수 -->
  		<select id="getTotalC_notice_Search" parameterType="java.util.Map" resultType="int">
- 		select count(*) from C_notice where subject like '%'||#{keyword}||'%'
+ 		select count(*) from C_notice where upper(subject) like '%'||upper(#{keyword})||'%'
  	</select>
  	
  	<!-- 공지사항 검색 -->
@@ -33,7 +33,7 @@
  		select * from 
  		(select rownum rn, tt.* from 
  		(select * from C_notice
- 		 where subject like '%'||#{keyword}||'%'
+ 		 where upper(subject) like '%'||upper(#{keyword})||'%'
  		 order by seq desc)tt) 
  		where rn between #{startNum} and #{endNum}
  	</select>
@@ -92,7 +92,7 @@
  	
  	<!-- 고객의 소리 문의글 검색된 총글수 -->
  	<select id="getTotalC_inquire_Search" parameterType="java.util.Map" resultType="int">
- 		select count(*) from C_inquire where ${searchOption} like '%'||#{keyword}||'%'
+ 		select count(*) from C_inquire where ${searchOption} like '%'||upper(#{keyword})||'%'
  	</select>
 
  	<!-- 고객의소리 검색된글 불러오기 -->
@@ -100,7 +100,7 @@
  		select * from 
  		(select rownum rn, tt.* from 
  		(select * from C_inquire
- 		 where ${searchOption} like '%'||#{keyword}||'%'
+ 		 where ${searchOption} like '%'||upper(#{keyword})||'%'
  		 order by ref desc, step asc)tt) 
  		where rn between #{startNum} and #{endNum}
  	</select>
@@ -182,7 +182,7 @@
  	
  	<!-- 주요시설 연락처 검색 총글수 -->
  	<select id="getTotalC_contactList_Search" parameterType="java.util.Map" resultType="int">
- 		select count(*) from C_contactList where ${searchOption} like '%'||#{keyword}||'%'
+ 		select count(*) from C_contactList where ${searchOption} like '%'||upper(#{keyword})||'%'
  	</select>
  	
  	<!-- 주요시설 연락처 검색 -->
@@ -190,7 +190,7 @@
  		select * from 
  		(select rownum rn, tt.* from 
  		(select * from C_contactList
- 		 where ${searchOption} like '%'||#{keyword}||'%'
+ 		 where ${searchOption} like '%'||upper(#{keyword})||'%'
  		 order by seq desc)tt) 
  		where rn between #{startNum} and #{endNum}
  	</select>

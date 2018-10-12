@@ -65,11 +65,13 @@ $(document).ready(function(){
 			$('#C_notice_SearchPagingDiv').html(data.customerServicePaging.pagingHTML);
 		}
 	});
+	
 	$('#keyword1').keydown(function(key) {
 		if (key.keyCode == 13) {
 			$('#C_notice_SearchBtn2').click();
 		}
 	});
+	
 	// 공지사항 검색한 값 불러오기
 	$('#C_notice_SearchBtn2').click(function(){
 		location.href="/exhibition/customerService/C_notice_Search.do?pg=1&keyword="+$('#keyword1').val();
