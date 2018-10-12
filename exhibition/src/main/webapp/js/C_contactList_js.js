@@ -107,6 +107,12 @@ $(document).ready(function(){
       }
    });
    
+   $('#keyword').keydown(function(key) {
+		if (key.keyCode == 13) {
+			$('#C_contactList_SearchBtn').click();
+			event.preventDefault();
+		}
+	});
    // 주요 시설 연락처 검색시 리스트 불러오기
    $('#C_contactList_SearchBtn').click(function(){
       $('#pg').val(1);

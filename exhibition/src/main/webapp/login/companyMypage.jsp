@@ -60,7 +60,7 @@
 						    	<input type="hidden" id="C-modify-password-hidden" value="${DTO.getC_password()}">
 			  				</div>
 			  				<!-- 회사정보들 -->
-			  				<div style="width: 100%;">
+			  				<div style="width: 405px;">
 			  					<br>
 			  					<!-- 사업자명 -->
 			  					<div style="width: 100%; text-align: left; margin-top: 20px;display: inline-block; ">
