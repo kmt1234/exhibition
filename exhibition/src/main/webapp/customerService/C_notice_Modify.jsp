@@ -16,19 +16,14 @@
 	</h2>
 	<table style="width:880px; margin-left: 20px;" class="ui celled table">
 		<tr height="50px">
-			<td height="50px" style="width:100px; background-color: #f7f6e6; text-align: center;">글제목</td>
-			
+			<td height="50px" style="max-width:50px; background-color: #f7f6e6; text-align: center;">글제목</td>
 			<td style="width:580px; text-align: left;">
-				<input type="text" name="subject" id="subject" style="width:580px;" value="${customerServiceDTO.subject }">
+				<input type="text" name="subject" id="subject" style="width:580px; height:40px" value="${customerServiceDTO.subject }">
 				<div id="subjectDiv"></div>
 			</td>
 			
-			<td  align="center" style="width:100px; background-color: #f7f6e6;text-align: center;">글번호</td>
-			
-			<td style="width:100px; text-align: center;">
-				${customerServiceDTO.seq }
-				<input type="hidden" name="seq" id="seq" value="${customerServiceDTO.seq }">
-			</td>
+			<td align="center" style="max-width:50px; background-color: #f7f6e6;text-align: center;">글번호</td>
+			<td width="100px" style="text-align: center;"><span>${customerServiceDTO.seq }</span></td>
 		</tr>	
 		
 		<tr>
@@ -43,6 +38,7 @@
 		<input type="hidden" id="pg" value="${pg }">
 		<input class="middle ui button" type="button" id="C_notice_checkModifyBtn" value="수정">
 		<input class="middle ui button" type="reset" id="C_notice_cancel" value="취소">
+				<input type="hidden" name="seq" id="seq" value="${customerServiceDTO.seq }">
 	</div>
 	<div style="height: 80px;"></div>
 </div>
