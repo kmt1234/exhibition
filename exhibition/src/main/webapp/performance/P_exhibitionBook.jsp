@@ -118,6 +118,7 @@
 	<input id="hiddenTicketQty" type="hidden"><!--티켓 수량 -->
 	<input type="hidden" value="${eventboardDTO.eventSeats}" id="hiddenTotalSeats"><!--전체 좌석 수 -->
 	<input id="hiddenId" type="hidden" value="${id}"><!--로그인 된 아이디-->
+	<input  type="hidden" id="hiddenCode" value="${code}">
 	<!--예약확인 및 결제하기 (모달-개인)-->
 	<div class="ui modal bookNextStep"><i class="close icon"></i>
 	  <div class="header" id="bookConfirmHeader">예매확인 및 결제하기</div>
@@ -179,6 +180,12 @@ $(document).ready(function(){
 		$('#bookConfirmHeader').text('로그인 후 예매가능합니다');
 	}
 	
+	//사업자로그인시, 예매버튼 없애버림
+	if($('#hiddenCode').val()=='2'){
+		$('#BookEventBtn').hide(); //예매버튼 숨김
+		$('#bookConfirmHeader').text('개인회원으로 예매 가능합니다');
+	}
+	
 	if($('#selectEventDate :selected').val()=='2000-01-01'  || $('#hiddenId').val()=='manager'){
 		$('#BookEventBtn').hide();
 	}
@@ -197,6 +204,9 @@ $(document).ready(function(){
 					if(data=='ok'){
 						if($('#hiddenId').val()=='manager'){
 							$('#BookEventBtn').hide();
+						}else if($('#hiddenCode').val()==2){
+							$('#BookEventBtn').hide(); //예매버튼 숨김
+							$('#bookConfirmHeader').text('개인회원으로 예매 가능합니다');
 						}else{
 							$('#BookEventBtn').show();
 						}
@@ -222,6 +232,12 @@ $(document).ready(function(){
 		if($('#hiddenId').val()==''){
 			$('#BookEventBtn').hide(); //예매버튼 숨김
 			$('#bookConfirmHeader').text('로그인 후 예매가능합니다');
+		}
+		
+		//사업자로그인시, 예매버튼 없애버림
+		if($('#hiddenCode').val()=='2'){
+			$('#BookEventBtn').hide(); //예매버튼 숨김
+			$('#bookConfirmHeader').text('개인회원으로 예매 가능합니다');
 		}
 		
 		//티켓 잔여 확인

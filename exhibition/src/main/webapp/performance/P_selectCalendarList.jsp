@@ -41,6 +41,7 @@
 		</h2>
 	</div><br>
 	<!-- 전체일정 리스트 -->
+	<input type="hidden" id="hiddenDate" value="${date}">
 	<div style="margin-left:20px; margin-top:10px; width: 880px; ">
 		<c:if test="${listSize eq '0'}">	
 			<div>
@@ -90,7 +91,7 @@
 <div style="margin:20px; width:880px; " align="center">${performancePaging.pagingHTML}</div>
 <script>
 function performancePaging(pg){
-	location.href="/exhibition/performance/P_selectScheduleList.do?pg="+pg;
+	location.href="/exhibition/performance/P_allScheduleListSelect.do?date="+$('#hiddenDate').val()+"&pg="+pg;
 }
 </script>
 <script src='../js/introduction.js'></script>

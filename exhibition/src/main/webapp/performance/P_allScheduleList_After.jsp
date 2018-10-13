@@ -50,7 +50,7 @@
 	<div style="margin-left:20px; margin-top:10px; width: 880px; ">
 		<c:if test="${listSize eq '0'}">	
 			<div style="float : left;">
-				<p>현재 계획된 일정이 없습니다</p>
+				<p>지난 일정이 없습니다</p>
 			</div>
 		</c:if>			
 		<c:forEach items="${list}" var="list">		

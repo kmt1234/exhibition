@@ -130,14 +130,13 @@ public class PerformanceController {
 	
 	//선택한 날짜 전체일정 리스트
 	@RequestMapping(value="P_allScheduleListSelect", method=RequestMethod.GET)
-	public ModelAndView P_allScheduleListSelect(@RequestParam(required=false , defaultValue="1") String pg,@RequestParam String date) {
+	public ModelAndView P_allScheduleListSelect(@RequestParam String date, @RequestParam(required=false , defaultValue="1") String pg) {
 		int endNum = Integer.parseInt(pg)*9;
 		int startNum = endNum-8;
 		Map<String,String> map = new HashMap<String,String>();
 		map.put("endNum", endNum+"");
 		map.put("startNum", startNum+"");
 		map.put("date", date);
-		System.out.println("123");
 		int totalA = performanceDAO.getAllListSelectTotalA(date);
 		
 		performancePaging.setCurrentPage(Integer.parseInt(pg));

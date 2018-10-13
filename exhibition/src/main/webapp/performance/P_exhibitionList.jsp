@@ -56,7 +56,7 @@
 			<p id="prevEvent">◀지난 리스트	</p> 
 		</div>
 			<div style="width: 100px; display: inline-block; ">
-			<p id="currEvent">이달 리스트</p> 
+			<p id="currEvent">진행중인 리스트</p> 
 		</div>
 			<div style="width: 100px; display: inline-block; ">
 			<p id="nextEvent">예정 리스트▶</a> 
