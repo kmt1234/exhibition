@@ -36,21 +36,16 @@
 	</div>
 <br><br>
 	<div style="width: 880px; display: inline-block; text-align: left;">
-		<div style="width: 100px; display: inline-block;">
-			<p id="P_allLsintBtn_Prev">◀ 지난 리스트	</p> 
-		</div>
-			<div style="width: 100px; display: inline-block; ">
-			<p id="P_allLsintBtn_Now">진행중인 리스트</p> 
-		</div>
-			<div style="width: 100px; display: inline-block; ">
-			<p id="P_allLsintBtn_After">예정 리스트▶</a> 
-		</div>
+		<h2>
+			${date}
+		</h2>
 	</div><br>
 	<!-- 전체일정 리스트 -->
+	<input type="hidden" id="hiddenDate" value="${date}">
 	<div style="margin-left:20px; margin-top:10px; width: 880px; ">
 		<c:if test="${listSize eq '0'}">	
-			<div style="float : left;">
-				<p>지난 일정이 없습니다</p>
+			<div>
+				<p>현재 계획된 일정이 없습니다</p>
 			</div>
 		</c:if>			
 		<c:forEach items="${list}" var="list">		
@@ -94,11 +89,11 @@
 		</c:forEach>
 	</div>	
 <div style="margin:20px; width:880px; " align="center">${performancePaging.pagingHTML}</div>
-
 <script>
 function performancePaging(pg){
-	location.href="/exhibition/performance/P_allScheduleList_After.do?pg="+pg;
+	location.href="/exhibition/performance/P_allScheduleListSelect.do?date="+$('#hiddenDate').val()+"&pg="+pg;
 }
 </script>
+<script src='../js/introduction.js'></script>
 </body>
 </html>

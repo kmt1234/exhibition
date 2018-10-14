@@ -50,9 +50,11 @@ $(document).ready(function(event, str){
 					text : '싸이트'
 				})).append($('<div/>',{
 					style : 'display:inline-block; float:left;  margin-top:5px; margin-left:10px; width:540px; text-align:left; padding-top:3px; height:25px;',
-					class : 'link',
-					html : '<a href='+item.eventlink.replaceAll(index_keyword, PointKeyword)+'>'+item.eventlink.replaceAll(index_keyword, PointKeyword)+'</a>'
-				})).append($('<div/>',{
+				}).append($('<a/>',{
+					target : '_blank',
+					href : item.eventlink,
+					text : item.eventlink
+				}))).append($('<div/>',{
 					style:'display:inline-block; width:50px; margin-top:5px; border: 1px ridge rgb(255,0,0,.6); margin-left:20px; float:left;  height:25px; padding:0; padding-top:3px; font-size: 10pt; font-family: inherit;',
 					text : '가격'
 				})).append($('<div/>',{
@@ -74,8 +76,9 @@ $(document).ready(function(event, str){
 					style:'display:inline-block; width:50px; margin-top:5px; border: 1px ridge rgb(255,0,0,.6); margin-left:20px; float:left;  height:25px; padding:0; padding-top:3px; font-size: 10pt; font-family: inherit;',
 					text : '내용'
 				})).append($('<div/>',{
-					style : 'overflow: hidden; white-space: nowrap; text-overflow  : ellipsis; display:inline-block; float:left;  margin-top:5px; margin-left:10px; width:540px; text-align:left; padding-top:3px; height:5px;',
-					html : item.eventcontent.replaceAll(index_keyword, PointKeyword)
+					style : ' display:inline-block; float:left;  margin-top:5px; margin-left:10px; width:540px; text-align:left; padding-top:3px; height:25px;',
+					html : item.eventcontent.replaceAll(index_keyword, PointKeyword),
+					class : 'contentE'
 				}))).appendTo($('#index_eventboard_PlusList'));
 				if(index=='1' || index=='2'){
 					$('<div/>',{

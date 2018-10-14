@@ -91,6 +91,13 @@
 	color: green;
 	cursor: pointer;
 }
+.contentE{
+	display : block;
+	width : 200px; 
+	overflow: hidden;  
+	white-space: nowrap;  
+	text-overflow  : ellipsis;
+}
 
 </style>
 </head>

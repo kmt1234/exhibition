@@ -212,8 +212,10 @@ $(document).ready(function(){
 				$('#repasswordConfirm').text()=='' && $('#corporateConfirm').text()=='' && $('#conditionConfirm').text()=='' &&
 				$('#address1Confirm').text()=='' && $('#address2Confirm').text()=='' && $('#representativeConfirm').text()=='' &&
 				$('#telConfirm').text()=='' && $('#emailConfirm').text()==''){
-			alert('회원가입이 완료되었습니다.');
-			$('#companyWriteForm').submit();
+			$('.ui.mini.modal.writeModal2').modal('show');
+			setInterval(function() {
+				$('#companyWriteForm').submit();
+				}, 3000);
 		}else{
 			alert('양식을 다시 확인하세요');
 		}

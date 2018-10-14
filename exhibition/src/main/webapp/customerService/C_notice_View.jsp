@@ -31,9 +31,9 @@ td{
 			<td width="100px" style="text-align:center"><span>${customerServiceDTO.seq }</span></td>
 		</tr>
 		
-		<tr height="400px">
-			<td align="center" style="max-width:50px; height:400px; background-color: #f7f6e6;text-align: center;">내용</td>
-			<td colspan="3" width="800px;" >
+		<tr>
+			<td align="center" style="max-width:50px; background-color: #f7f6e6;text-align: center;">내용</td>
+			<td colspan="3" width="800px" height="300px">
 				<pre style=" white-space:pre-wrap;  max-height: 300px; overflow: auto;">${customerServiceDTO.content }</pre>
 			</td>
 		</tr>

@@ -134,7 +134,20 @@ action="/exhibition/company/companyWrite.do">
 	    <div class="ui black deny button" id="companyWriteForm-close">취소</div>
 	    <div class="ui positive right labeled icon button" id="companyWrite">가입<i class="checkmark icon"></i></div>
 	</div>
-	
+<div id="writeDiv">
+	<div class="ui mini modal writeModal2">
+	  <div class="header">회원 가입</div>
+	  <div class="content" style="width:100%">
+	    <div>회원가입이 완료 되었습니다.</div>
+	  </div>
+	  <div class="actions">
+	      <div class="ui positive right labeled icon button" id ="writeOkay">
+	        Yes
+	        <i class="checkmark icon"></i>
+	      </div>
+	  </div>
+	</div>
+</div>
 </div><!-- class="image content2" -->
 </div><!-- class="ui modal2 modal" -->
  

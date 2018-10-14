@@ -43,7 +43,7 @@ $(document).ready(function(){
 					})).append($('<td/>',{
 						id : 'subjectA',
 						style: 'width: 360px; height: 44px; text-align: center;',
-						text : item.subject
+						html : item.subject.replaceAll(keyword, PointKeyword)
 					})).append($('<td/>',{
 						style: 'width: 100px; height: 44px; text-align: center;',
 						text : item.name,
@@ -82,7 +82,7 @@ $(document).ready(function(){
 							text : item.subject
 						})).append($('<td/>',{
 							style: 'width: 100px; height: 44px; text-align: center;',
-							text : item.name,
+							html : item.name.replaceAll(keyword, PointKeyword),
 							id : 'nameA'
 						})).append($('<td/>',{
 							text : item.email,

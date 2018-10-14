@@ -168,6 +168,7 @@ public class PerformancePaging {
 		if(endPage < totalP)
 			pagingHTML.append("[<span id=paging onclick=exhibitionPrevPaging("+(endPage+1)+")>이전</span>]");
 	}
+	
 }
 
 

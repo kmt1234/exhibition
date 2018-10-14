@@ -71,6 +71,7 @@
 	</table>
 	<div style="float: left; margin-left: 20px; margin-top: 10px;">
 		<input type="button" id="C_contactList_checkWriteBtn" class="middle ui button" value="등록">
+		<input type="button" id="C_contactList_Btn" class="middle ui button" value="취소">
 	</div>
 	<div style="margin-top: 80px;"></div>
 </form>
