@@ -29,7 +29,6 @@
 									style : 'width : 6000px; list-style: none; font-size: 0'
 								});
 					link = item.eventLink;
-					console.log(link);
 					
 					//메인 이미지의 링크가 없으면 클릭 사라짐
 					if(link=="http://localhost:8080/exhibition/main/index.do"){
