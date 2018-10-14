@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <style>
 .ui.inverted.divider {
     margin: 5px 0;
@@ -75,11 +75,13 @@ div#uiStatistics {
 	</h2>
 	<div style="width: 100%;">
 		<!-- 맨위 메뉴 텝 -->
-		<div style="margin-left: 20px; width:880px; float: left; text-align: left;">
-			<a class="middle ui  button" class="active item" id="member-info-modify">수정		  	</a>
-		  	<a class="middle ui button" class="item" id="member-ticket-list">예매리스트</a>
-		  	<a class="middle ui button" class="item" id="member-ticket-history">예매 내역</a>
-		</div>
+		<c:if test="${code != 3 }">
+			<div style="margin-left: 20px; width:880px; float: left; text-align: left;">
+			  	<a class="middle ui button" class="item" id="member-ticket-list">예매리스트</a>
+			  	<a class="middle ui button" class="item" id="member-ticket-history">예매 내역</a>
+			  	<a class="middle ui button" class="item" id="member-business-List">비지니스 룸 내역</a>
+			</div>
+		</c:if>
 		<!-- 메인메뉴 -->
 		<div class="" id="modify-Div" style="margin-left: 20px; float: left;" >
 			<div>
@@ -162,29 +164,13 @@ div#uiStatistics {
 								<div class="ui two buttons">
 							    	<div class="middle ui button" id="M-modify-modify" style="width: 30%;">수정</div>
 							    	<div style="width: 5%;">&nbsp;</div>
-							    	<button class="middle ui button" id="member-out" style="width: 30%;">회원탈퇴</button>
+							    	<c:if test="${code != 3 }">
+							    		<button class="middle ui button" id="member-out" style="width: 30%;">회원탈퇴</button>
+							    	</c:if>
 							    	<div style="width: 5%;">&nbsp;</div>
 							        <div class="middle ui button" id="M-modify-cancel" style="width: 30%;">취소</div>
 							    </div>
-							    <br><span class="M-modify-result-Span"></span>
-								<div style="margin-top: 40px;"></div>	
-								
-									<!-- 숨어있다 -->
-									<div class="ui modal3">
-										  <div class="content">
-										    <p>탈퇴하시겠습니까?</p>
-										  </div>
-										  <div class="actions">
-										    <div class="ui red basic cancel inverted button" id="out-no">
-										      <i class="remove icon"></i>
-										      	아니오
-										    </div>
-										    <div class="ui green submit inverted button" id="out-yes">
-										      <i class="checkmark icon"></i>
-										      	네
-										    </div>
-										  </div>
-									</div><!-- 숨어있다 -->
+								<div style="margin-top: 40px;"></div>
 									<jsp:include page="memberOut.jsp"/>
 				    		</div><!--수정영역 텍스트필드-->
 				  		</div><!--class="description"  -->
@@ -192,6 +178,7 @@ div#uiStatistics {
 				</div><!--class="ui card"-->
 			</div><!--align="center"  -->
 		</div><!--id="modify-Div"  -->
+	<c:if test="${code != 3 }">	
 	<div id="memberTicketInformation" style="display: inline-block; border: 1px solid; margin-top:80px; width: 465px; height: 385px; overflow: scroll;">
 		
 		
@@ -236,17 +223,15 @@ div#uiStatistics {
 	
 	
 	</div><!--id="memberTicketInformation"-->
+	</c:if>
 </div>
 </div><!-- 전체 -->
-
 <!--예매 취소하기 위해 필요한 값들-->	
 <input type="hidden" id="hiddenImageName" value="${imageName }">
 <input type="hidden" id="hiddenPlayDate" value="${playDate }">
 <input type="hidden" id="hiddenTicketQty" value="${ticketQty }">
+<input type="hidden" id="code" value="${code }">
 
-
-
-<script src="../js/memberMypage.js?ver=1"></script>
 <script>
 /*페이징 */
 function MemberTicketListPaging(pg){
@@ -286,7 +271,6 @@ function MemberTicketListPaging(pg){
 /*페이징 */
 function TicketHistoryListPaging(pg){
 	$('.tr').remove();	//예매리스트 내용 초기화
-	
 	//과거 예매 내역 불러오는 ajax
 	$.ajax({
 		type : 'GET',
@@ -321,3 +305,4 @@ function TicketHistoryListPaging(pg){
 	//location.href="/exhibition/login/mypage.do?pg="+pg;
 }
 </script>
+<script src="../js/memberMypage.js?ver=1"></script>

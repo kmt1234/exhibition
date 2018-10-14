@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE">
+<!DOCTYPE>
 <head>
 </head>
 <body>
@@ -36,9 +36,9 @@
 		
 		<tr>
 			<td width="70" align="center" height="200" style=" background-color: #f7f6e6;text-align: center;">내용</td>
-			<td colspan="3">
-				<div align="center" id="content" >
-					${customerServiceDTO.content }
+			<td colspan="3" width="810px;" >
+				<div id="content" style="width: 810px;"   >
+					<pre style="white-space: pre-wrap;">${customerServiceDTO.content }</pre>
 					<div id="contentDiv"></div>
 				</div>
 			</td>
@@ -46,14 +46,14 @@
 	</table>
 	<div>
 		<div style="float:left; margin-left: 20px; height: 50px;" align="center" >
-			<%-- <c:if test="${code=='3' }"> --%>
+			<c:if test="${code=='3' }">
 				<button class="middle ui button" id="C_notice_modifyBtn" >글수정</button>
 				<button class="middle ui button" id="C_notice_deleteBtn" >글삭제</button>
-		<%-- 	</c:if> --%>
+			</c:if>
 			<button class="middle ui button" id="C_notice_ListBtn" >목록</button>
 			<input type="hidden" id="putSeq" value="${customerServiceDTO.seq}">
 			<input type="hidden" id="pg" value="${pg}">
-			<input type="hidden" id="keyword" value="${keyword}">
+			<input type="hidden" id="keyword" value="${index_keyword}">
 		</div>
 	</div>
 	<div style="height: 80px;"></div>

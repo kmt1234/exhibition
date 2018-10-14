@@ -9,6 +9,7 @@
 <link href='../calendar2/fullcalendar.print.css' rel='stylesheet' media='print' />
 <script src='../calendar2/lib/moment.min.js'></script>
 <script src='../calendar2/fullcalendar.min.js'></script>
+<script src='../js/introduction.js'></script>
 <script type="text/javascript">
 var date = new Date(); 
 var year = date.getFullYear(); 
@@ -87,6 +88,10 @@ body {
 	max-width: 880px;
 	margin: 0 auto;
 }
+#houseImg{
+	margin:-3px;
+	cursor: pointer;
+}
 </style>
 </head>
 
@@ -128,4 +133,5 @@ body {
 		<br><br><br><br>
 		<div  id='calendar'></div>
 </body>
+<script src="../js/traffic.js"></script>
 </html>

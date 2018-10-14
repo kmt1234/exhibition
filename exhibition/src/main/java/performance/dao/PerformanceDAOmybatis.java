@@ -156,27 +156,27 @@ public class PerformanceDAOmybatis implements PerformanceDAO {
 	}
 	
 	//전체 리스트 총글 구하기
-	public int getAllListTotalA(Map<String, Integer> map) {
-		return sqlSession.selectOne("performanceSQL.getAllListTotalA",map);
+	public int getAllListTotalA() {
+		return sqlSession.selectOne("performanceSQL.getAllListTotalA");
 	}
 	
 	//전체 리스트 총글 구하기 3개월 이전
-	public int getAllListTotalA_Prev(Map<String, Integer> map) {
+	public int getAllListTotalA_Prev(Map<String, String> map) {
 		return sqlSession.selectOne("performanceSQL.getAllListTotalA_Prev",map);
 	}
 	
 	//전체-리스트 전체일정 3개월 이전 가져오기
-	public List<EventboardDTO> getAllExhibitionList_Prev(Map<String, Integer> map) {
+	public List<EventboardDTO> getAllExhibitionList_Prev(Map<String, String> map) {
 		return sqlSession.selectList("performanceSQL.getAllExhibitionList_Prev",map);
 	}
 	
 	//전체 리스트 총글 구하기 3개월 이후
-	public int getAllListTotalA_After(Map<String, Integer> map) {
-		return sqlSession.selectOne("performanceSQL.getAllListTotalA_After",map);
+	public int getAllListTotalA_After() {
+		return sqlSession.selectOne("performanceSQL.getAllListTotalA_After");
 	}
 	
 	//전체-리스트 전체일정 3개월 이후 가져오기
-	public List<EventboardDTO> getAllExhibitionList_After(Map<String, Integer> map) {
+	public List<EventboardDTO> getAllExhibitionList_After(Map<String, String> map) {
 		return sqlSession.selectList("performanceSQL.getAllExhibitionList_After",map);
 	}
 	

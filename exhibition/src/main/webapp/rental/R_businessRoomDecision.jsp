@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <head>
 <link href='../calendar2/fullcalendar.css' rel='stylesheet' />
 <link href='../calendar2/fullcalendar.print.css' rel='stylesheet' media='print' />
@@ -31,38 +30,9 @@ div{
       <span id="timeListTitleSecond"></span>
    </h3>
    <form id="businessRoomForm" method="post" action="/exhibition/rental/rentalBusinessRoom.do">
-      <!-- <div style="height: 110px  auto;">
-         <div style="display: inline-block; ">
-            <div style="width: 50px; height:25px; float:left; display: inline-block;">
-               <input type="checkbox" id="checkAll" style="margin-top:5px;">
-               <div id="chechboxDiv" style="width: 50px; height:25px; "></div>
-            </div>
-            <div style="width: 230px; height:25px; float:left;  display: inline-block;">
-               이용 시간
-               <div id="hours_of_useDiv" style="width: 230px; height:25px; display: inline-block;"></div>
-            </div>
-            <div style="width: 70px; height:25px; float:left;  display: inline-block; ">
-               상태
-               <div id="stateDiv" style="width: 70px; height:25px; display: inline-block;"></div>
-            </div>
-         </div>
-
-         <div id="peopleDiv">인원 :
-         <select name="numberPeople">
-               <option value="1">1</option>
-               <option value="2">2</option>
-               <option value="3">3</option>
-               <option value="4">4</option>
-         </select>
-         </div>
-         <div id="numberPeopleDiv">
-
-
-         </div>
-      </div> -->
       <table class="ui striped table" id="businessRoomTable">
         <thead>
-          <tr  align="center">
+          <tr align="center">
              <th>선택</th>
              <th>이용일자</th>
              <th>금액</th>
@@ -74,8 +44,6 @@ div{
            </tbody>
        </table>
        <span id="timeListTitle">비즈니스룸 이용 일자를 선택하세요</span>
-
-
          <c:if test="${code == '1'}">
             <input type="hidden" name="M_Id" value="${homepageMember.getM_Id()}">
             <input type="hidden" name="M_Email" value="${homepageMember.getM_Email()}">

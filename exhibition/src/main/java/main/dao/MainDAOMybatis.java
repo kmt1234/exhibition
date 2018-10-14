@@ -45,8 +45,8 @@ public class MainDAOMybatis implements MainDAO {
 		return sqlSession.selectList("mainSQL.index_exSlider");
 	}
 
-	public void inputMainSlideDB(String string) {
-		sqlSession.insert("mainSQL.inputMainSlideDB", string); //mainSlideDB에 저장
+	public void inputMainSlideDB(MainSlideDTO mainSlideDTO) {
+		sqlSession.insert("mainSQL.inputMainSlideDB", mainSlideDTO); //mainSlideDB에 저장
 		
 	}
 	

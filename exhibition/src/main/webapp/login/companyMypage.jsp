@@ -46,7 +46,6 @@
 	<div style="width: 100%;">
 		<!-- 맨위 메뉴 텝 -->
 		<div style=" width:880px; float: left; text-align: left;">
-			<a class="middle ui button" class="active item" id="company-info-modify" style="margin-left:20px; width:150px; float: left;">수정</a>
 			<a class="middle ui button" class="item"id="rental-list"  style=" width:150px; float: left;">임대리스트</a>
 			<a class="middle ui button" class="item"id="rental-history"  style=" width:150px; float: left;">지난 임대 내역</a>
 		</div>
@@ -61,7 +60,7 @@
 						    	<input type="hidden" id="C-modify-password-hidden" value="${DTO.getC_password()}">
 			  				</div>
 			  				<!-- 회사정보들 -->
-			  				<div style="width: 100%;">
+			  				<div style="width: 405px;">
 			  					<br>
 			  					<!-- 사업자명 -->
 			  					<div style="width: 100%; text-align: left; margin-top: 20px;display: inline-block; ">
@@ -234,22 +233,6 @@
 							        <div class="middle ui button" id="C-modify-cancel" style="width: 30%;">취소</div>
 							    </div>
 						  		<div style="margin-top: 40px;"></div>
-								<!-- 숨어있다 -->
-								<div class="ui modal3">
-								  <div class="content">
-								    <p>탈퇴하시겠습니까?</p>
-								  </div>
-								  <div class="actions">
-								    <div class="ui red basic cancel inverted button" id="out-no">
-								      <i class="remove icon"></i>
-								      아니오
-								    </div>
-								    <div class="ui green submit inverted button" id="out-yes">
-								      <i class="checkmark icon"></i>
-								      네
-								    </div>
-								  </div>
-								</div><!-- 숨어있다 -->
 							</div><!--회사정보들-->
 						</div>
 				</div>
@@ -290,7 +273,7 @@
 	 </div>
 	 <div id="renrenhistory">
 	 	<div class="ui rental All" id="Ticket-History-Div">
-	 	<div class="header" id="exhibitionHeader" style="text-align:left;font-size:20px;font-weight: bold;">지난 내역</div>
+	 	<div class="header" id="exhibitionHeader" style="text-align:left;font-size:20px;font-weight: bold;margin-top:10px;">지난 내역</div>
 			<table class="ui striped table">
 		  <thead>
 		  	<tr align="center">
@@ -298,7 +281,7 @@
 			  	<th>행사명</th>
 			  	<th>행사시작일</th>
 			  	<th>행사종료일</th>
-			  	<th>진행사항</th>
+			  	<th>진행상황</th>
 		  	</tr></thead>
 		  	<tbody id="rental_All" align="center">
 	  		<c:if test="${listSize eq '0'}">

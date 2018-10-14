@@ -50,8 +50,8 @@
 		<tr>
 			<td width="70" align="center" height="200" style=" background-color: #f7f6e6;text-align: center;">내용</td>
 			<td colspan="3">
-				<div align="center" id="content" >
-					${customerServiceDTO.content }
+				<div id="content" >
+					<pre>${customerServiceDTO.content }</pre>
 					<div id="contentDiv"></div>
 				</div>
 			</td>
@@ -60,11 +60,14 @@
 	<input type="hidden" name="seq" id="seq" value="${customerServiceDTO.seq }">
 	<input type="hidden" name="email" id="email" value="${customerServiceDTO.email }">
 	<c:if test="${customerServiceDTO.reply<'1' || customerServiceDTO.lev=='0'}">
-		<input type="button" id="C_inquire_replyBtn" class="middle ui button" value="문의 답하기">
+		<c:if test="${customerServiceDTO.name !='관리자'}">
+			<input type="button" id="C_inquire_replyBtn" class="middle ui button" value="문의 답하기">
+		</c:if>
 	</c:if>
 	<input type="button" class="middle ui button" id="C_inquire_ListBtn" value="목록">
 	<input type="hidden" name="pg" id="pg" value="${pg}">
 	<input type="hidden" id="keyword" value="${keyword}">
+	<input type="hidden" name="name" value="${customerServiceDTO.name}">
 	<input type="hidden" name="pseq" id="pseq" value="${customerServiceDTO.seq }">
 </form>
 <script src="../js/C_inquire_js.js?ver=1"></script>

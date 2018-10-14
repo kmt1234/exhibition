@@ -85,12 +85,10 @@
 				
 			</c:forEach>	
 		</div>
-			<div id="hotelPaging3" style="margin-top: 30px; display: inline-block; ">${imageboardPaging.pagingHTML }</div>
+		<div id="hotelPaging3" style="margin-top: 30px; ">${imageboardPaging.pagingHTML }</div>
 		</div>
 	</div>
-		
 	</div>
-	
 	<!-- footer -->
 	<div class="ui container" style="margin-top: 20px; min-width:1170px; position: relative; ">
 		<jsp:include page="../main/I_footer.jsp" ></jsp:include>

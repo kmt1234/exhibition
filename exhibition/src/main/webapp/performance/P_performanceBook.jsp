@@ -41,7 +41,7 @@
 <!--내용 : 예매하기-->
 <div class="ui compact menu" style="width: 880px; display: inline-block; text-align: left;">
 	<div class="playContentHeader" style="border: 1px solid; ">
-		<div><img style="width: 350px;height: 400px; border-radius: 10px;" src="../storage/${eventboardDTO.image1}"></div>
+		<div><img style="width: 350px; height: 400px; border-radius: 10px;" src="../storage/${eventboardDTO.image1}"></div>
 	</div>
 	<!--날짜 비교(기본 : 오늘날짜)-->
 	<jsp:useBean id="now" class="java.util.Date"/> 
@@ -80,12 +80,6 @@
 				<select id="selectEventDate">
 					<option value="2000-01-01">날짜선택</option>
 					<!--오늘날짜와 비교 후, 기간 지났으면 날짜 선택 비활성화  -->
-					<c:forEach items="${listDate}" var="eventPeriod">
-						<c:if test="${eventPeriod < now}">
-							<option disabled="disabled" value="${eventPeriod}"><fmt:formatDate value="${eventPeriod}" pattern="yyyy년-MM월-dd일"/></option>
-						</c:if>
-					</c:forEach>
-				
 					<c:forEach items="${listDate}" var="eventPeriod">
 						<c:if test="${eventPeriod > now}">
 							<option value="${eventPeriod}"><fmt:formatDate value="${eventPeriod}" pattern="yyyy년-MM월-dd일"/></option>
@@ -192,37 +186,49 @@
 $(document).ready(function(){
 	//페이지 호출 시(기본),
 	$('#BookEventBtn').show();	//매진 시, 버튼 숨기고 아닐 시, 보이기
+	$('#hiddenDate').val($('#selectEventDate :selected').text());
+	
+	if($('#selectEventDate :selected').val()=='2000-01-01' || $('#hiddenId').val()=='manager'){
+		$('#BookEventBtn').hide();
+	}
+	
 	//로그인 아닐 시, 예매버튼 없애버림
 	if($('#hiddenId').val()==''){
 		$('#BookEventBtn').hide(); //예매버튼 숨김
 		$('#bookConfirmHeader').text('로그인 후 예매가능합니다');
 	}
-	if($('#selectEventDate :selected').val()=='2000-01-01'){
-		$('#BookEventBtn').hide();
-	}
+	
 	//잔여좌석 보다 구매티켓이 높을 경우 구매 못하게 막음
 	$('#selectPlayTicket').change(function(){
-		$.ajax({
-			type : 'POST',
-			url : '/exhibition/performance/book_play_checkBuy.do',
-			data : {'wantTicket':$('#selectPlayTicket :selected').val(),'imageName' : $('#imageName').val(), 'playDate' : $('#selectEventDate :selected').text()},
-			dataType : 'text',
-			success : function(data){
-				if(data=='ok'){
-					$('#BookEventBtn').show();
-				}else if(data=='no'){
-					alert('예매 가능한 티켓이 충분하지 않습니다. 죄솧합니다.');
-					$('#BookEventBtn').hide();
-				}
-			}//success
-		});//ajax
+		if($('#selectEventDate :selected').val()=='2000-01-01'){
+			alert('날짜를 먼저 선택해주세요');
+		}else{
+			$.ajax({
+				type : 'POST',
+				url : '/exhibition/performance/book_play_checkBuy.do',
+				data : {'wantTicket':$('#selectPlayTicket :selected').val(),'imageName' : $('#imageName').val(), 'playDate' : $('#selectEventDate :selected').text()},
+				dataType : 'text',
+				success : function(data){
+					if(data=='ok'){
+						if($('#hiddenId').val()=='manager'){
+							$('#BookEventBtn').hide();
+						}else{
+							$('#BookEventBtn').show();
+						}
+					}else if(data=='no'){
+						alert('예매 가능한 티켓이 충분하지 않습니다. 죄솧합니다.');
+						$('#BookEventBtn').hide();
+					}
+				}//success
+			});//ajax	
+		}		
 	});
 	//날짜 변경 시, 히든 태그에 날짜 값 넣기
 	$("#selectEventDate").change(function() {
 		$('#BookEventBtn').show();
 		$('#hiddenDate').val($('#selectEventDate :selected').text());
 		
-		if($('#selectEventDate :selected').val()=='2000-01-01'){
+		if($('#selectEventDate :selected').val()=='2000-01-01' || $('#hiddenId').val()=='manager'){
 			$('#BookEventBtn').hide();
 		}
 		//로그인 아닐 시, 예매버튼 없애버림

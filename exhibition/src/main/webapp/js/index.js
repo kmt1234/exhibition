@@ -9,6 +9,7 @@ $(document).ready(function(){
 			closable : false,
             duration : 460,
 		}).modal('show');
+		$('.bx-wrapper .bx-controls-direction a').hide();
 	});
 	//법인 회원가입 클릭 시,
 	$('#C_company').click(function(){
@@ -16,6 +17,7 @@ $(document).ready(function(){
 			closable : false,
             duration : 460,
 		}).modal('show');
+		$('.bx-wrapper .bx-controls-direction a').hide();
 	});
 	
 	/*로그인 클릭시 2가지로 분류(개인&사업자)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -25,11 +27,19 @@ $(document).ready(function(){
 	});
 	//개인회원 로그인 클릭 시,
 	$('#M_individual_L').click(function(){
-		$('.ui.modal-Login-Member.modal').modal('show');
+		$('.ui.modal-Login-Member.modal').modal({
+			closable : false,
+            duration : 460,
+		}).modal('show');
+		$('.bx-wrapper .bx-controls-direction a').hide();
 	});
 	//법인회원 로그인 클릭 시,
 	$('#C_company_L').click(function(){
-		$('.ui.modal-Login-Company.modal').modal('show');
+		$('.ui.modal-Login-Company.modal').modal({
+			closable : false,
+            duration : 460,
+		}).modal('show');
+		$('.bx-wrapper .bx-controls-direction a').hide();
 	});
 	
 	/*일정정보(일정설명&전체일정&박람회일정&공연일정)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -95,7 +105,7 @@ $(document).ready(function(){
 	});
 	//자주묻는 질문
 	$('#C_QnA').click(function(){
-		location.href="/exhibition/customerService/C_QnA.do";
+		location.href="/exhibition/customerService/C_QnA.do?classify=위치/교통";
 	});
 	//주요시설 연락처
 	$('#C_contactList').click(function(){
@@ -170,127 +180,6 @@ $(document).ready(function(){
 			alert("검색어를 입력하세요");
 		else location.href="/exhibition/main/index_Search.do?index_keyword="+index_keyword;
 		
-	});
-	//일정 달력 만들어주기
-	$('#mainCal').datepicker({
-		dateFormat : "yy/mm/dd",
-	    prevText: '이전 달',
-	    nextText: '다음 달',
-	    monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-	    monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-	    dayNames: ['일', '월', '화', '수', '목', '금', '토'],
-	    dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
-	    dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-	    showMonthAfterYear: true,
-	    yearSuffix: '년',
-	    onSelect: function (date) {
-	    	$.ajax({
-	    		type : 'POST',
-				url : '/exhibition/performance/searchAllList.do',
-				data : {'date' : date},
-				async: false,
-				dataType: 'json',
-				success : function(data) {
-					$('#today_list ul li').remove();
-					$.each(data.list, function(index, item){
-						if(item.postSelect=='1') {
-							if(item.start==1) {
-								$('<li/>',{
-									class : 'ex_item',
-									html : '<br>'
-								}).append($('<span/>',{
-									class : 'calSubject',
-									style : 'width = 220px',
-									html : '<img id="ex_img" width="20px" height="20px" src="../img/Ex.png">'+item.imageName+'</img>',
-									style : 'display : block'
-								})).append($('<span/>',{
-									text : item.startDate.substring(0,10) + ' ~ ' + item.endDate.substring(0,10),
-									style : 'display : block'
-								})).append($('<span/>',{
-									text : item.eventPlace,
-									style : 'display : block'
-								})).appendTo($('#total_list'));
-							} else if(item.start==10) {
-								$('<li/>',{
-									class : 'ex_item',
-									html : '<br>'
-								}).append($('<span/>',{
-									style : 'width = 220px',
-									html : '<img  id="ex_img" width="20px" height="20px" src="../img/Ex.png">'+'일정이 없습니다.'+'</img>',
-									style : 'display : block'
-								})).appendTo($('#total_list'));
-							} else {
-								$('<li/>',{
-									style: 'display: none',
-									class : 'ex_item',
-									html : '<br>'
-								}).append($('<span/>',{
-									class : 'calSubject',
-									style : 'width = 220px',
-									html : '<img id="ex_img" width="20px" height="20px" src="../img/Ex.png">'+item.imageName+'</img>',
-									style : 'display : block'
-								})).append($('<span/>',{
-									text : item.startDate.substring(0,10) + ' ~ ' + item.endDate.substring(0,10),
-									style : 'display : block'
-								})).append($('<span/>',{
-									text : item.eventPlace,
-									style : 'display : block'
-								})).appendTo($('#total_list'));
-							}
-						} else if(item.postSelect=='2') {
-							if(item.start==2) {
-								$('<li/>',{
-									class : 'co_item',
-									html : '<br>'
-								}).append($('<span/>',{
-									class : 'calSubject',
-									html : '<img  id="co_img" width="20px" height="20px" src="../img/Ev.png">'+item.imageName+'</img>',
-									style : 'display : block'
-								})).append($('<span/>',{
-									class : 't-tit ellipsis',
-									text : item.startDate.substring(0,10) + ' ~ ' + item.endDate.substring(0,10),
-									style : 'display : block'
-								})).append($('<span/>',{
-									class : 't-tit ellipsis',
-									text : item.eventPlace,
-									style : 'display : block'
-								})).appendTo($('#total_list'));
-							} else if(item.start==10) {
-								$('<li/>',{
-									class : 'co_item',
-									html : '<br>'
-								}).append($('<span/>',{
-									style : 'width = 220px',
-									html : '<img id="co_img" width="20px" height="20px" src="../img/Ev.png">'+'일정이 없습니다.'+'</img>',
-									style : 'display : block'
-								})).appendTo($('#total_list'));
-							} else {
-								$('<li/>',{
-									style: 'display: none',
-									class : 'co_item',
-									html : '<br>'
-								}).append($('<span/>',{
-									class : 'calSubject',
-									html : '<img  id="co_img" width="20px" height="20px" src="../img/Ev.png">'+item.imageName+'</img>',
-									style : 'display : block'
-								})).append($('<span/>',{
-									class : 't-tit ellipsis',
-									text : item.startDate.substring(0,10) + ' ~ ' + item.endDate.substring(0,10),
-									style : 'display : block'
-								})).append($('<span/>',{
-									class : 't-tit ellipsis',
-									text : item.eventPlace,
-									style : 'display : block'
-								})).appendTo($('#total_list'));
-							}
-							
-						}
-
-					});
-				}
-	    		
-	    	});
-	    }
 	});
 	
 	//달력에 내용 문자열로 보내주기

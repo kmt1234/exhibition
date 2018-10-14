@@ -184,7 +184,7 @@ $(document).ready(function(){
 			$('#telConfirm').text("전화번호를 입력하세요").css("font-size","11px").css("color","white");
 			$('#Cw_tel').css({'border':'1px solid red', 'background-color':'#f4d2d2'});
 		}else if(!Cw_regPhone.test($('#Cw_tel').val())){
-			$('#telConfirm').text("전화번호 양식에 맞지 않습니다. ex) 01XXXXXXXXX").css("font-size","11px").css("color","white");
+			$('#telConfirm').text("전화번호 양식에 맞지 않습니다.").css("font-size","11px").css("color","white");
 			$('#Cw_tel').css({'border':'1px solid red', 'background-color':'#f4d2d2'});
 		}else {
 			$('#telConfirm').text('');

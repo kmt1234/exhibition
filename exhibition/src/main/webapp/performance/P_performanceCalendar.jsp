@@ -73,16 +73,20 @@ var dataSet = [
 	 });
 </script>
 <style>
-	body {
-		margin: 40px 10px;
-		padding: 0;
-		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
-		font-size: 14px;
-	}
-	#calendar {
-		max-width: 880px;
-		margin: 0 auto;
-	}
+body {
+	margin: 40px 10px;
+	padding: 0;
+	font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+	font-size: 14px;
+}
+#calendar {
+	max-width: 880px;
+	margin: 0 auto;
+}
+#houseImg{
+	margin:-3px;
+	cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -113,7 +117,7 @@ var dataSet = [
 			</tr>
 		</table>
 		 <span style="float: right; margin-right:30px; ">
-		 <img src="../img/Ex.png" style="width:25px; height: 25px; " align='absmiddle'> 전시회
+		 <img src="../img/Ex.png" style="width:25px; height: 25px; " align='absmiddle'> 박람회
 		 </span>
 		 
 		 <span style="float: right;  ">

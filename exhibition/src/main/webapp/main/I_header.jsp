@@ -50,8 +50,8 @@
 			<div  style="width: 49%;  display: inline-block;">
 				<div class="ui input" style="width: 100%; ">
 					<div class="ui action input"  style="width: 100%; ">
-						<input type="text" id="index_keyword" placeholder="Search..." style="width: 30%;" >
-						<input type="hidden" id="indexkeyword" value="${index_keyword}">
+						<input type="text" id="index_keyword" placeholder="Search..." style="width: 30%;" value="${index_keyword}">
+						<input type="hidden" id="index_keyword" value="${index_keyword}">
 						<button class="ui icon button" id="index_searchBtn">
 							<i class="search icon"></i>
 						</button>
@@ -89,20 +89,14 @@
 			
 			<c:if test="${homepageMember != null}">
 				<div align="center" style="text-align: right;">
-				<div>${homepageMemberName} 님 접속중입니다</div>
+				<%-- <div>${homepageMemberName} 님 접속중입니다</div> --%>
 					<div class="circular ui icon button" id="logout">
 						<i class="power off icon"></i>로그아웃
 					</div>
-					<c:if test="${homepageMemberName != 'master'}">
 					<div class="circular ui icon button" id="mypage">
 						<i class="user circle icon"></i>마이페이지
 					</div>
-					</c:if>
-					<c:if test="${homepageMemberName == 'master'}">
-					<div class="circular ui icon button" id="memberList">
-						<i class="user circle icon"></i>회원리스트
-					</div>
-					</c:if>
+					
 				</div>
 			</c:if>				
 				

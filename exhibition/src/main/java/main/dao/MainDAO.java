@@ -50,7 +50,7 @@ public interface MainDAO {
 
 	public List<EventboardDTO> index_exSlider();
 
-	public void inputMainSlideDB(String string);	//mainSlideDB에 저장
+	public void inputMainSlideDB(MainSlideDTO mainSlideDTO);	//mainSlideDB에 저장
 
 	public List<MainSlideDTO> getMainSlideDB();	//mainSlideDB에 불러오기
 

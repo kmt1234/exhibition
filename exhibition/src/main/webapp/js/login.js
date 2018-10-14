@@ -319,18 +319,29 @@ $(document).ready(function(){
 		}else if(confirmEmail == 'not_exist' || confirmId == 'not_exist'){
 			$('#find-M-Result').text('아이디 또는 이메일 확인바랍니다').css('color','red');
 		}else{
-			$('#find-M-Result').text('이메일을 발송했습니다').css('color','blue');
 			$.ajax({
 				type : 'POST',
-				url : '/exhibition/customerService/sendEmail.do',
-				data : {'email': $('#verify-Email').val()},
+				url : '/exhibition/member/verifyNumEmailCheck.do',
+				data : {'M_Id':$('#verify-M-Id').val(), 'M_Email':$('#verify-Email').val()},
 				dataType : 'text',
 				success : function(data){
-					verifyNum = data;
-					$('.verify-Number-hidden').val(verifyNum);
-				}//success
-			});//ajax
-			
+					if(data=='not_exist'){
+						$('#find-M-Result').text('가입한 이메일 또는 아이디가 아닙니다').css('color','red');
+					}else if(data=='exist'){
+						$('#find-M-Result').text('이메일을 발송했습니다').css('color','blue');
+						$.ajax({
+							type : 'POST',
+							url : '/exhibition/customerService/sendEmail.do',
+							data : {'email': $('#verify-Email').val()},
+							dataType : 'text',
+							success : function(data){
+								verifyNum = data;
+								$('.verify-Number-hidden').val(verifyNum);
+							}//success
+						});//ajax
+					}//else if
+				}//succcess
+			});//ajax		
 		}//else
 	});
 	

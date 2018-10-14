@@ -76,6 +76,5 @@
 <input type="hidden" name="email" value="${email}">
 </form>
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="../js/C_inquire_js.js?ver=1"></script>
 </body>
 </html>

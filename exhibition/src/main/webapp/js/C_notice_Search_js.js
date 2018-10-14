@@ -25,6 +25,7 @@ $(document).ready(function(){
 		+'&keyword='+encodeURI($('#keyword').val()),
 		dataType : 'json',
 		success : function(data){
+			
 			if(data.totalA=='0'){
 				$('<tr/>',{
 					align: 'center'
@@ -38,11 +39,14 @@ $(document).ready(function(){
 			}else if(data.tataA!='0'){
 				$('#C_notice_SearchPagingDiv').show();
 				$.each(data.list, function(index, item){
-				$('<tr/>').append($('<td/>',{
+					var search = item.subject
+					var k = search.match($('#keyword').val())
+ 				$('<tr/>').append($('<td/>',{
 						align : 'center',
 						style: 'width: 20%; height: 9%; text-align: center;',
 						text : item.seq,
-						id : 'seqA'
+						id : 'seqA',
+						
 					})).append($('<td/>',{
 						align : 'center',
 						id : 'subjectA',

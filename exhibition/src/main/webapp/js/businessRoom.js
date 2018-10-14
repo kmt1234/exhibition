@@ -48,13 +48,18 @@ $(document).ready(function(){
 		location.href="/exhibition/rental/R_businessRoomDecision.do?businessRoom="+$('#Room6').text();
 	});
 	
+	$('#roomRate').keyup(function(){$(this).val($(this).val().replace(/[^0-9]/g,"") );});
+	
 	$('#modifyRoomRateBtn').click(function(){
+		
 		if($('#roomRate').val()=='') {
 			alert('평당 가격을 입력하세요');
 			return;
 		} else {
 			$('#modifyRateBusinessRoomForm').submit();
+			alert('수정되었습니다.');
 		}
+		
 	});
 	
 	

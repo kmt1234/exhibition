@@ -51,18 +51,20 @@ ul{
 	</div>
 	<div class="ui divider"></div>
 </h2>
-<table style="margin-left:20px; width: 40%;">
+<div id="Layer1" style="position:absolute; left:237px; top:140px; width:164px; height:104px; z-index:1">
+<table style="width: 50%; display: inline-block;">
 	<tr>
 		<td>
-			<button class="middle ui button" style="width: 50%;" id="3F">
+			<button class="middle ui button" style="width: 180px;" id="3F">
 				3층
 			</button> 
 		</td>
 	</tr>
 </table>
+</div>
 
 <c:if test="${code == '3'}">
-<div style="position:absolute; width: 500px; margin-left: 360px; margin-top: 5px;">
+<div style="position:absolute; width: 500px; margin-left: 180px; margin-top: 5px;">
 	<form id="modifyRateBusinessRoomForm" action="/exhibition/rental/modifyRateBusinessRoom.do" method="post">
 		<select id="roomNameSel" name="roomNameSel">
 			<option value="Room1">Room1</option>
@@ -73,7 +75,7 @@ ul{
 			<option value="Room6">Room6</option>
 		</select>
 		<input type="text" name="roomRate" id="roomRate">
-		<button id="modifyRoomRateBtn">방 별 가격 수정</button>
+		<button type="button" id="modifyRoomRateBtn">방 별 가격 수정</button>
 	</form>
 </div>
 </c:if>
@@ -124,6 +126,10 @@ ul{
 		<div class="absol" id="Room6" style="font-size: 25px; cursor:pointer;">Room6</div>
 	</div>
 </div>
+
+
+
+
 <script src="../js/businessRoom.js?ver=1"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="../js/introduction.js"></script>

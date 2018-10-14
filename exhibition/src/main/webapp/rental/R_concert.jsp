@@ -62,18 +62,20 @@ ul{
 	</div>
 	<div class="ui divider"></div>
 </h2>
-<table style=" width: 40%;">
+<div id="Layer1" style="position:absolute; left:237px; top:140px; width:164px; height:104px; z-index:1">
+<table style=" width: 50%; display: inline-block;">
 	<tr>
 		<td>
-			<button class="middle ui button" style="width: 50%;" id="3F">
+			<button class="middle ui button" style="width: 180px;" id="3F">
 				지하1층
 			</button> 
 		</td>
 	</tr>
 </table>
+</div>
 
 <c:if test="${code == '3'}">
-<div style="position:absolute; width: 500px; margin-left: 360px; margin-top: 5px;">
+<div style="position:absolute; width: 500px; margin-left: 180px; margin-top: 5px;">
 	<form id="modifyRateConcertHallForm" action="/exhibition/rental/modifyRateConcertHall.do" method="post">
 		<select id="hallNameSel" name="hallNameSel">
 			<option value="P_Room1">P_Room1</option>
@@ -82,7 +84,7 @@ ul{
 			<option value="P_Room4">P_Room4</option>
 		</select>
 		<input type="text" name="hallRate" id="hallRate">
-		<button id="modifyHallRateBtn">평당 가격 수정</button>
+		<button type="button" id="modifyHallRateBtn">평당 가격 수정</button>
 	</form>
 </div>
 </c:if>

@@ -73,16 +73,20 @@ var dataSet = [
 	 });
 </script>
 <style>
-	body {
-		margin: 40px 10px;
-		padding: 0;
-		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
-		font-size: 14px;
-	}
-	#calendar {
-		max-width: 880px;
-		margin: 0 auto;
-	}
+body {
+	margin: 40px 10px;
+	padding: 0;
+	font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+	font-size: 14px;
+}
+#calendar {
+	max-width: 880px;
+	margin: 0 auto;
+}
+#houseImg{
+	margin:-3px;
+	cursor: pointer;
+}
 </style>
 </head>
 
@@ -91,6 +95,11 @@ var dataSet = [
 	<h2 class="box-container" style="float: center; width: 100%; text-align: left;">
 		박람회
 		<span class="h-light">일정</span>
+		<div style="font-size:13px; float:right; height: 50px; margin-top:30px ">
+		<img src="../img/house.png" width="15px" height="16px" style="cursor: pointer;" id="houseImg"></img>
+		> 일정 > 박람회일정
+	</div>
+	<div class="ui divider"></div> 
 	</h2>
 	
 	<!-- 버튼 -->
@@ -110,7 +119,7 @@ var dataSet = [
 			</tr>
 		</table>
 		 <span style="float: right; margin-right:30px; ">
-		 <img src="../img/Ex.png" style="width:25px; height: 25px; " align='absmiddle'> 전시회
+		 <img src="../img/Ex.png" style="width:25px; height: 25px; " align='absmiddle'> 박람회
 		 </span>
 		 
 		 <span style="float: right; margin-right:30px; ">

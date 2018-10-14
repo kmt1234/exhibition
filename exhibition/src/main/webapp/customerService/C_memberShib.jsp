@@ -18,6 +18,10 @@
 	color: red;
 	cursor: pointer;
 }
+#houseImg{
+	margin:-3px;
+	cursor: pointer;
+}
 </style>
 <script type="text/javascript">
 //사업자 페이지
@@ -50,7 +54,12 @@ function memberSearch(pg){
 <input type="hidden" id="PG" value="${pg}">
 <h2 class="box-container" style="float: center; width: 100%; text-align: left;">
 	회원 
-	<span class="h-light">사항</span>
+	<span class="h-light">리스트</span>
+	<div style="font-size:13px; float:right; margin-top: 29px;">
+	<img src="../img/house.png" width="15px" height="16px" id="houseImg">
+	> 고객센터 > 회원리스트
+	</div>
+	<div class="ui divider"></div>
 </h2>
 <div style="width: 100%; ">
 	<!-- 맨위 메뉴 텝 -->
@@ -64,16 +73,7 @@ function memberSearch(pg){
 	 	</a>
 	 </div>
 </div><br><br>
-<!-- <div id="labelList" class="ui labeled" style="width: 700px; margin-left: 20px; margin-top: 60px;">
-	<div  style="float: left; width: 870px;" >
-		<div  style="float: left; width: 180px; display: inline-block;">이름(사업자명)</div>
-		<div  style="float: left; width: 180px; display: inline-block;">아이디(사업자번호)</div>
-		<div  style="float: left; width: 180px; display: inline-block;">이메일</div>
-		<div  style="float: left; width: 180px; display: inline-block;">핸드폰(대표번호)</div>
-		<div  style="float: left; width: 100px; display: inline-block;">비고</div>
-		<div id="C_memberListFrom" style="margin-top: 35px;"></div>
-	</div>
-</div> -->
+
 <table class="ui striped table">
   <thead>
     <tr  align="center">

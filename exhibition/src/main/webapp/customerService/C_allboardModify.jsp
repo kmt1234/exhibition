@@ -48,17 +48,17 @@ left: 0px;
 		<!-- 사이드바 메뉴 -->
 		<div style="width:230px; height:900px auto; display: inline-block;">
 			<div class="ui compact menu" id="slidbar" style="display: inline-block;">
-				<a class="item" style="border: none; width: 227px;" href="C_notice.do">공지사항</a> 
-				<a class="item" href="C_emailConfirm.do">고객의 소리</a> 
-				<a class="item" href="C_QnA.do">자주묻는 질문</a>
-				<a class="item" href="C_contactList.do">주요시설 연락처</a>
+				<a class="item" style="border: none; width: 227px;" href="/exhibition/customerService/C_notice.do">공지사항</a> 
+				<a class="item" href="/exhibition/customerService/C_emailConfirm.do">고객의 소리</a> 
+				<a class="item" href="/exhibition/customerService/C_QnA.do">자주묻는 질문</a>
+				<a class="item" href="/exhibition/customerService/C_contactList.do">주요시설 연락처</a>
 			<c:if test="${code == '1' || code == '2' }">
             	<a class="item" href="/exhibition/login/mypage.do">마이페이지</a>
             </c:if>
             <c:if test="${code == '3' }">
-              	<a class="item" href="C_mainImageboardForm.do?postSelect=0">게시판 추가</a>
-           		<a class="item" href="C_salesExhibitionView.do">매출 현황</a>
-           		<a class="item" href="C_memberShib.do">회원리스트</a>
+              	<a class="item" href="/exhibition/customerService/C_mainImageboardForm.do?postSelect=0">게시판 추가</a>
+           		<a class="item" href="/exhibition/customerService/C_salesExhibitionView.do">매출 현황</a>
+           		<a class="item" href="/exhibition/customerService/C_memberShib.do">회원리스트</a>
            	</c:if>	
 			</div>
 		</div>

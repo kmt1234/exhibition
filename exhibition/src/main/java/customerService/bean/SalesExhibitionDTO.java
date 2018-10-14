@@ -1,7 +1,10 @@
 package customerService.bean;
+import org.springframework.stereotype.Component;
+
 import lombok.Data;
 
 @Data
+@Component
 public class SalesExhibitionDTO {
 	private String boothName;
 	private String C_license;
