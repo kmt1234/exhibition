@@ -67,7 +67,7 @@ $(document).ready(function() {
 	//비밀번호 입력 시,
 	$('#Mw_Pwd').blur(function(){
 		if(!Mw_regPwd.test($('#Mw_Pwd').val())){
-			$('#pwdConfirm').text("비밀번호는 6-24자리 입니다").css("font-size","11px").css("color","white");
+			$('#pwdConfirm').text("비밀번호는 숫자와 문자를 포함, 6-24자리 입니다").css("font-size","11px").css("color","white");
 			$('#Mw_Pwd').css({'border':'1px solid red', 'background-color':'#f4d2d2'});
 		}else{
 			$('#pwdConfirm').text('');

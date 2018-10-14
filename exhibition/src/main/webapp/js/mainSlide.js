@@ -16,8 +16,8 @@
 												style : 'display: inline-block'
 												})
 							   					.append($('<a/>',{
+							   						href : item.eventLink,
 							   						class : 'a_Link',
-							   						href : item.eventLink+'',
 							   						target : '_blank'
 							   					}).append($('<img>',{
 																	src : '../storage/'+item.image1+'',
@@ -32,10 +32,9 @@
 					console.log(link);
 					
 					//메인 이미지의 링크가 없으면 클릭 사라짐
-					if(link == 'http://localhost:8080/exhibition/main/index.do'){
-						$('.a_Link').removeAttr("href");						
+					if(link=="http://localhost:8080/exhibition/main/index.do"){
+						$('.a_Link').removeAttr('href');						
 					}
-					
 					
 				});//each
 				

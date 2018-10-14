@@ -23,9 +23,9 @@ div{
    ${businessRoom}
 </h2>
 <div>
-   <div id='calendar' style="width: 520px; display: inline-block; float: left; margin-left: 20px;"></div>
+   <div id='calendar' style="width: 490px; display: inline-block; float: left; margin-left: 20px;"></div>
 </div>
-<div style="width: 350px; height: 500; float: left;display: inline-block; margin-top: 70px; margin-left: 10px">
+<div style="width: 380px; height: 500; float: left;display: inline-block; margin-top: 70px; margin-left: 10px">
    <h3  style="text-align: left;">
       <span id="timeListTitleSecond"></span>
    </h3>
@@ -384,7 +384,6 @@ div{
          //예약하기 버튼
          $('#rentalBusinessRoomBtn').on('click', function(){
         	var count = $('[name="checkRow"]:checked').length;
-			alert(count);
      		if(count==0) {
      			alert("항목을 선택해주세요");
      		} else {

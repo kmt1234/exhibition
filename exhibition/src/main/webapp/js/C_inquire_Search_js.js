@@ -36,24 +36,24 @@ $(document).ready(function(){
 				$.each(data.list, function(index, item){
 					$('<tr/>').append($('<td/>',{
 						text : item.seq,
-						style: 'width: 50px; height: 44px; text-align: center;'
+						style: 'width: 50px; height: 62px; text-align: center;'
 					})).append($('<td/>',{
 						class : item.seq+"",
-						style: 'width: 50px; height: 44px; text-align: center;'
+						style: 'width: 50px; height: 62px; text-align: center;'
 					})).append($('<td/>',{
 						id : 'subjectA',
-						style: 'width: 360px; height: 44px; text-align: center;',
+						style: 'width: 360px; height: 62px; text-align: center;',
 						html : item.subject.replaceAll(keyword, PointKeyword)
 					})).append($('<td/>',{
-						style: 'width: 100px; height: 44px; text-align: center;',
+						style: 'width: 100px; height: 62px; text-align: center;',
 						text : item.name,
 						id : 'nameA'
 					})).append($('<td/>',{
 						text : item.email,
-						style: 'width: 200px; height: 44px; text-align: center;',
+						style: 'width: 200px; height: 62px; text-align: center;',
 					})).append($('<td/>',{
 						text : item.logtime,
-						style: 'width: 120px; height: 44px; text-align: center;',
+						style: 'width: 120px; height: 62px; text-align: center;',
 				})).appendTo($('#C_inquire_SearchList'));
 				
 				
@@ -72,24 +72,24 @@ $(document).ready(function(){
 					$.each(data.list, function(index, item){
 						$('<tr/>').append($('<td/>',{
 							text : item.seq,
-							style: 'width: 50px; height: 44px; text-align: center;'
+							style: 'width: 50px; height: 62px; text-align: center;'
 						})).append($('<td/>',{
 							class : item.seq+"",
-							style: 'width: 50px; height: 44px; text-align: center;'
+							style: 'width: 50px; height: 62px; text-align: center;'
 						})).append($('<td/>',{
 							id : 'subjectA',
-							style: 'width: 360px; height: 44px; text-align: center;',
+							style: 'width: 360px; height: 62px; text-align: center;',
 							text : item.subject
 						})).append($('<td/>',{
-							style: 'width: 100px; height: 44px; text-align: center;',
+							style: 'width: 100px; height: 62px; text-align: center;',
 							html : item.name.replaceAll(keyword, PointKeyword),
 							id : 'nameA'
 						})).append($('<td/>',{
 							text : item.email,
-							style: 'width: 200px; height: 44px; text-align: center;',
+							style: 'width: 200px; height: 62px; text-align: center;',
 						})).append($('<td/>',{
 							text : item.logtime,
-							style: 'width: 120px; height: 44px; text-align: center;',
+							style: 'width: 120px; height: 62px; text-align: center;',
 					})).appendTo($('#C_inquire_SearchList'));
 					
 					

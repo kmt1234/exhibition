@@ -127,7 +127,7 @@ public class LoginController {
 				final MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
 
 				String subject = "임시비밀번호입니다";
-				String content = "안녕하세요 IPEC 전시회 관계자 입니다./n" + "해당 이메일 인증 번호는 아래와 같습니다./n" + "인증번호 : " + temPwd;
+				String content = "안녕하세요 IPEC 전시회 관계자 입니다." + "해당 이메일 인증 번호는 아래와 같습니다." + "인증번호 : " + temPwd+123;
 
 				helper.setFrom("jbi8045@gmail.com");
 				helper.setTo(email);
@@ -137,7 +137,7 @@ public class LoginController {
 		};
 
 		emailSender.send(preparator);
-		return temPwd;
+		return temPwd+123;
 	}
 
 	// 임시비밀번호 생성하는 메소드
