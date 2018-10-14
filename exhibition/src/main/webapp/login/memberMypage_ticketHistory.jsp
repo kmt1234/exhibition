@@ -167,23 +167,6 @@ div#uiStatistics {
                          </div>
                          <br><span class="M-modify-result-Span"></span>
                         <div style="margin-top: 40px;"></div>   
-                        
-                           <!-- 숨어있다 -->
-                           <div class="ui modal3">
-                                <div class="content">
-                                  <p>탈퇴하시겠습니까?</p>
-                                </div>
-                                <div class="actions">
-                                  <div class="ui negative button" id="out-no">
-                                    <i class="remove icon"></i>
-                                       아니오
-                                  </div>
-                                  <div class="ui positive right labeled icon button" id="out-yes">
-                                    <i class="checkmark icon"></i>
-                                       네
-                                  </div>
-                                </div>
-                           </div><!-- 숨어있다 -->
                            <jsp:include page="memberOut.jsp"/>
                       </div><!--수정영역 텍스트필드-->
                     </div><!--class="description"  -->
@@ -321,7 +304,7 @@ $(document).ready(function(){
             $('#paging').html(data.TicketHistoryListPaging.pagingHTML);
             
             $('#ticketList').on('click','.imageName1',function(){
-                $.alertable.alert('당일 취소 불가능합니다(지난 이벤트 포함)', {
+                $.alertable.alert('예매취소가 불가능합니다.', {
                      show: function() {
                        $(this.overlay).velocity('transition.fadeIn', 300);        
                        $(this.modal).velocity('transition.shrinkIn', 300);
@@ -484,16 +467,7 @@ $(document).ready(function(){
 	
 	
 	//회원탈퇴버튼
-	$('.ui.modal3').hide();
 	$('#member-out').click(function(){
-		$('#M-modify-modify').hide();
-		$('.ui.modal3').show();
-	});
-	$('#out-no').click(function(){//아니오 클릭시
-		$('.ui.modal3').hide();
-		$('#M-modify-modify').show();
-	});
-	$('#out-yes').click(function(){//네 클릭시
 		$('.ui.basic.modal').modal({
 			closable : false,
             duration : 460,
@@ -509,6 +483,8 @@ $(document).ready(function(){
 				success : function(data){
 					if(data=='exist'){
 						location.href='/exhibition/member/outComplete.do';
+					}else if(data=='exist_book'){
+						swal( "Warnning!!" ,  "예매내역을 모두 취소 후, 회원탈퇴 가능합니다.",  "error" );
 					}else if(data=='not_exist'){
 						$('#del_check').text("비밀번호가 틀렸습니다.").css("font-size","12px").css("color","red").css("margin-left","24%").css("margin-top","2%");
 						$('.ui.basic.modal').modal('show');

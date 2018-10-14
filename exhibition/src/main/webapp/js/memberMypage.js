@@ -96,7 +96,7 @@ $(document).ready(function(){
 				$('#paging').html(data.TicketHistoryListPaging.pagingHTML);
 				
 				$('#ticketList').on('click','.imageName1',function(){
-					 $.alertable.alert('당일 취소 불가능합니다(지난 이벤트 포함)', {
+					 $.alertable.alert('예매취소가 불가능합니다.', {
 					      show: function() {
 					        $(this.overlay).velocity('transition.fadeIn', 300);        
 					        $(this.modal).velocity('transition.shrinkIn', 300);
