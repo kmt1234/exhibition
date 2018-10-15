@@ -4,13 +4,6 @@ $(document).ready(function(){
 		location.href="/exhibition/performance/P_performanceSchedule.do";
 	});
 	
-	//예약하기 버튼
-	$('.performance_bookBtn').click(function(){
-		//시퀀스 번호 얻기 
-		var seq = $('#seqID').val();
-		location.href="/exhibition/performance/performanceBook.do?seq="+seq;
-	});
-	
 	//이전 공연
 	$('#prevEvent').click(function(){
 		location.href="/exhibition/performance/P_prev_performanceList.do";

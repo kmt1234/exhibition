@@ -39,7 +39,7 @@
 		<div style="width: 100px; display: inline-block;">
 			<p id="P_allLsintBtn_Prev">◀ 지난 리스트	</p> 
 		</div>
-			<div style="width: 100px; display: inline-block; ">
+			<div style="width: 100px; display: inline-block; margin-right:11px;">
 			<p id="P_allLsintBtn_Now">진행중인 리스트</p> 
 		</div>
 			<div style="width: 100px; display: inline-block; ">

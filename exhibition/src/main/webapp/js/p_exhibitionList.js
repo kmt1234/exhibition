@@ -3,12 +3,6 @@ $(document).ready(function(){
 	$('#P_exhibitionCalendarBtn').click(function(){
 		location.href="/exhibition/performance/P_exhibitionSchedule.do";
 	});
-	//예약하기 
-	$('.exhibitionBookBtn').click(function(){
-		//시퀀스 번호 얻기 
-		var seq = $('#seqId').val();
-		location.href="/exhibition/performance/exhibitionBook.do?seq="+seq;
-	});
 	//이전 전시회
 	$('#prevEvent').click(function(){
 		location.href="/exhibition/performance/P_prev_exhibitionList.do";

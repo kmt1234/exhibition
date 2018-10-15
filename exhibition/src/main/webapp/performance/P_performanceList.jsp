@@ -66,7 +66,7 @@ pre{
 		<div style="width: 100px; display: inline-block;">
 			<p id="prevEvent">◀ 지난 리스트	</p> 
 		</div>
-			<div style="width: 100px; display: inline-block; ">
+			<div style="width: 100px; display: inline-block; margin-right:11px; ">
 			<p id="currEvent">진행중인 리스트</p> 
 		</div>
 			<div style="width: 100px; display: inline-block; ">
@@ -83,7 +83,6 @@ pre{
 		</c:if>
 		<c:forEach items="${list}" var="list">	
 			<div  style="width:auto;height:auto; border-top:1px ridge rgb(155,155,155,.6); display: inline-block;">
-				<input type="hidden" id="seqID" value="${list.seq }">
 				<div style="display: inline-block; float:left; width: 880px; height:20px; "></div>
 				<div style="display: inline-block; float: left; border: 1px ridge rgb(155,155,155,.6);">
 					<a target="_blank" href="${list.eventLink}"><img class="play_img" src="../storage/${list.image1}" width="200px;" height="200px;"></a>
@@ -110,7 +109,9 @@ pre{
 					<div class="content1"><a target="_blank" href="${list.eventLink}">${list.eventLink}</a></div>
 				</div>
 				<div style="float: left; margin-left: 20px;">
-					<button class="middle ui button performance_bookBtn" >예약하기</button>
+					<input type="hidden" class="seqId" value="${list.seq }">
+					<button class="middle ui button performance_bookBtn"
+					onclick="location.href='/exhibition/performance/performanceBook.do?seq='+'${list.seq}'">예약하기</button>
 				</div>
 				<div style="display: inline-block; float:left; width: 880px; height:20px;"></div>
 			</div>
